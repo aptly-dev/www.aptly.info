@@ -1,0 +1,26 @@
+body {
+  padding-top: 70px;
+}
+
+.footer {
+  padding-top: 19px;
+  color: #777;
+  border-top: 1px solid #e5e5e5;
+}
+
+pre {
+    background-color: #202020;
+    color: #e0e0e0;
+}
+
+pre span.greeting {
+    color: #7cff00;
+}
+
+pre span.command {
+    color: #fff;
+}
+
+div.target-spacer {
+    margin-bottom: 40px;
+}

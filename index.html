@@ -1,0 +1,977 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>aptly - Debian repository management tool</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/aptly.css" rel="stylesheet">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body data-spy="scroll" data-target=".navbar-default">
+    <!-- Fixed navbar -->
+    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">aptly</a>
+        </div>
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="https://github.com/smira/aptly/">GitHub</a></li>
+            <li><a href="#examples">Examples</a></li>
+            <li><a href="#download">Download</a></li>
+            <li><a href="#support">Support</a></li>
+            <li><a href="#configuration">Configuration</a></li>
+            <li><a href="#usage">Usage</a></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Commands <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li class="dropdown-header">mirror</li>
+                <li><a href="#aptly-mirror-create">aptly mirror create</a></li>
+                <li><a href="#aptly-mirror-update">aptly mirror update</a></li>
+                <li><a href="#aptly-mirror-list">aptly mirror list</a></li>
+                <li><a href="#aptly-mirror-show">aptly mirror show</a></li>
+                <li class="divider"></li>
+                <li class="dropdown-header">snapshot</li>
+                <li><a href="#aptly-snapshot-create">aptly snapshot create</a></li>
+                <li><a href="#aptly-snapshot-list">aptly snapshot list</a></li>
+                <li><a href="#aptly-snapshot-show">aptly snapshot show</a></li>
+                <li><a href="#aptly-snapshot-verify">aptly snapshot verify</a></li>
+                <li><a href="#aptly-snapshot-pull">aptly snapshot pull</a></li>
+                <li><a href="#aptly-snapshot-diff">aptly snapshot diff</a></li>
+                <li><a href="#aptly-snapshot-merge">aptly snapshot merge</a></li>
+                <li class="divider"></li>
+                <li class="dropdown-header">publish</li>
+                <li><a href="#aptly-publish-snapshot">aptly publish snapshot</a></li>
+                <li><a href="#aptly-publish-list">aptly publish list</a></li>
+                <li><a href="#aptly-publish-drop">aptly publish drop</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </div>
+
+    <div class="container">
+
+
+      <div class="jumbotron">
+        <h1>aptly</h1>
+        <p>aptly is a swiss army knife for Debian repository management: it allows to mirror remote
+        repositories, take snapshots, pull new versions of packages along with dependencies,
+        publish snapshots.</p>
+
+        <div id="carousel-ss" class="carousel slide" data-ride="carousel">
+          <!-- Indicators -->
+          <ol class="carousel-indicators">
+            <li data-target="#carousel-ss" data-slide-to="0" class="active"></li>
+            <li data-target="#carousel-ss" data-slide-to="1"></li>
+            <li data-target="#carousel-ss" data-slide-to="2"></li>
+          </ol>
+
+          <!-- Wrapper for slides -->
+          <div class="carousel-inner">
+            <div class="item active">
+              <img src="1.png" class="img-responsive" alt="aptly snapshot diff">
+              <div class="carousel-caption">
+                <h3>Difference between snapshots</h3>
+                <p>aptly snapshot diff matches package versions in snapshots</p>
+              </div>
+            </div>
+            <div class="item">
+              <img src="2.png" class="img-responsive" alt="aptly snapshot pull">
+              <div class="carousel-caption">
+                <h3>Pulling packages</h3>
+                <p>Pull from snapshot to selectively upgrade packages</p>
+              </div>
+            </div>
+            <div class="item">
+              <img src="3.png" class="img-responsive" alt="aptly mirror update">
+              <div class="carousel-caption">
+                <h3>Mirroring remote repos</h3>
+                <p>Download packages from remote mirror to take stable snapshot</p>
+              </div>
+            </div>
+          </div>
+          <!-- Controls -->
+          <a class="left carousel-control" href="#carousel-ss" data-slide="prev">
+            <span class="glyphicon glyphicon-chevron-left"></span>
+          </a>
+          <a class="right carousel-control" href="#carousel-ss" data-slide="next">
+            <span class="glyphicon glyphicon-chevron-right"></span>
+          </a>
+        </div>
+
+        <p></p>
+        <p><a class="btn btn-primary btn-lg" href="#download">Download &rarr;</a></p>
+      </div>
+
+      <h2>Features <small><span class="glyphicon glyphicon-asterisk"></span> means planned features</small></h2>
+
+      <div class="row">
+        <div class="col-lg-6">
+          <h4>Mirror repository</h4>
+          <p>Take and update mirrors of any Debian/Ubuntu remote repository.</p>
+
+          <h4>Take snapshot</h4>
+          <p>At any point in time, take snapshot of the mirror to fix current set of packages.</p>
+
+          <h4>Merge snapshots</h4>
+          <p>Merge two or more snapshots into one snapshot: e.g. merge wheezy and wheezy-updates.</p>
+
+          <h4>Publish your packages <span class="glyphicon glyphicon-asterisk"></span></h4>
+          <p>Manage your own repositories of packages, merge them with offical and publish the result.</p>
+        </div>
+        <div class="col-lg-6">
+          <h4>Publish snapshot</h4>
+          <p>Any snapshot could be published back as repository (only HTTP server is required).</p>
+
+          <h4>Upgrade package versions</h4>
+          <p>New package version available in backports? Pull only single package with dependencies from
+          backports into snapshot of stable repository.</p>
+
+          <h4>Filter repository <span class="glyphicon glyphicon-asterisk"></span></h4>
+          <p>Remove packages that are not required, controlling dependencies between packages.</p>
+
+          <h4>Package search <span class="glyphicon glyphicon-asterisk"></span></h4>
+          <p>Search for specific packages, their inclusion into snapshots, etc.</p>
+        </div>
+      </div>
+
+      <div class="alert alert-danger">
+        <strong>aptly is under heavy development right now</strong>, some essential things don't work yet:
+        <ul>
+          <li>source packages, debian-installer and translations not supported yet</li>
+          <li>checksums and signature are not verified while downloading</li>
+          <li>deleting created items is not implemented</li>
+          <li>cleaning up stale files is not implemented</li>
+        </ul>
+      </div>
+
+
+<!-- ================ examples ============== -->
+<div class="target-spacer" id="examples"><a name="examples"></a>&nbsp;</div>
+<h2>Examples</h2>
+
+      <p class="lead">Mirror main Debian repository for distribution squeeze only for architectures <code>i386</code>,
+      <code>amd64</code> and publish the result.</p>
+
+      <p>Create mirror:</p>
+
+<pre><span class="greeting">$</span> <span class="command">aptly -architectures="amd64,i386"  mirror create debian-main http://ftp.ru.debian.org/debian/ squeeze main</span>
+2013/12/28 19:44:45 Downloading http://ftp.ru.debian.org/debian/dists/squeeze/Release...
+...
+
+Mirror [debian-main]: http://ftp.ru.debian.org/debian/ squeeze successfully added.
+You can run 'aptly mirror update debian-main' to download repository contents.
+</pre>
+
+      <p>Download mirror contents:</p>
+<pre><span class="greeting">$</span> <span class="command">aptly mirror update debian-main</span>
+2014/01/15 16:50:50 Downloading http://ftp.ru.debian.org/debian/dists/squeeze/Release...
+Downloading &amp; parsing release files...
+2014/01/15 16:50:50 Downloading http://ftp.ru.debian.org/debian/dists/squeeze/main/binary-amd64/Packages.bz2...
+Saving packages to database...
+Building download queue...
+Download queue: 27960 items, 30.68 GiB size</pre>
+
+      <p>Take snapshot:</p>
+
+<pre><span class="greeting">$</span> <span class="command">aptly snapshot create debian-3112 from mirror debian-main</span>
+
+Snapshot debian-3112 successfully created.
+You can run 'aptly publish snapshot debian-3112' to publish snapshot as Debian repository.
+</pre>
+
+    <p>Publish snapshot (requires generated GPG key):</p>
+
+<pre><span class="greeting">$</span> <span class="command">aptly publish snapshot debian-3112</span>
+
+...
+
+Snapshot back has been successfully published.
+Please setup your webserver to serve directory '/var/aptly/public' with autoindexing.
+Now you can add following line to apt sources:
+  deb http://your-server/ squeeze main
+Don't forget to add your GPG key to apt with apt-key.
+</pre>
+
+      <p>Set up webserver (e.g. nginx):</p>
+
+<pre>server {
+      root /home/example/.aptly/public;
+      server_name mirror.local;
+
+      location / {
+              autoindex on;
+      }
+}
+</pre>
+
+      <p>Add new repository to apt's sources:</p>
+
+<pre>deb http://mirror.local/ squeeze main
+</pre>
+
+  <p>Run apt-get to fetch repository metadata:</p>
+
+<pre><span class="greeting">$</span> <span class="command">apt-get update</span></pre>
+
+  <p class="lead">Pulling new version of <code>nginx</code> from <code>backports</code>.</p>
+
+  <p>Create <code>backports</code> mirror, download it and take snapshot:</p>
+<pre><span class="greeting">$</span> <span class="command">aptly -architectures="amd64,i386"  mirror create backports http://mirror.yandex.ru/backports.org/ squeeze-backports</span>
+...
+
+<span class="greeting">$</span> <span class="command">aptly mirror update backports</span>
+...
+
+<span class="greeting">$</span> <span class="command">aptly snapshot create back from mirror backports</span>
+...
+</pre>
+
+    <p>Pull new version of <code>nginx</code> from <code>backports</code> to main Debian snapshot and save result as <code>snap-deb-w-nginx</code>.</p>
+
+<pre><span class="greeting">$</span> <span class="command">aptly snapshot pull debian-3112 back snap-deb-w-nginx nginx</span>
+Dependencies would be pulled into snapshot:
+    [debian-3112]: Snapshot from mirror [debian-main]: http://ftp.ru.debian.org/debian/ squeeze
+from snapshot:
+    [back]: Snapshot from mirror [backports]: http://mirror.yandex.ru/backports.org/ squeeze-backports
+and result would be saved as new snapshot snap-deb-w-nginx.
+Loading packages (49476)...
+Building indexes...
+[-] nginx-0.7.67-3+squeeze3_i386 removed
+[+] nginx-1.2.1-2.2~bpo60+2_all added
+[+] nginx-full-1.2.1-2.2~bpo60+2_i386 added
+[+] nginx-light-1.2.1-2.2~bpo60+2_i386 added
+[+] nginx-common-1.2.1-2.2~bpo60+2_all added
+[-] nginx-1.2.1-2.2~bpo60+2_all removed
+[-] nginx-0.7.67-3+squeeze3_amd64 removed
+[+] nginx-1.2.1-2.2~bpo60+2_all added
+[+] nginx-full-1.2.1-2.2~bpo60+2_amd64 added
+[+] nginx-light-1.2.1-2.2~bpo60+2_amd64 added
+
+Snapshot snap-deb-w-nginx successfully created.
+You can run 'aptly publish snapshot snap-deb-w-nginx' to publish snapshot as Debian repository.
+</pre>
+
+    <p>Snapshot <code>snap-deb-w-nginx</code> can be published as separate repository.</p>
+
+<!-- ================ download ============== -->
+<div class="target-spacer" id="download"><a name="download"></a>&nbsp;</div>
+<h2>Download</h2>
+
+    <p>Currently released aptly version is <strong>0.1</strong>, which is considered to be pre-alpha.
+    </p>
+
+    <p>Roadmap:</p>
+
+    <ul>
+      <li>0.2 (Jan 25): snapshot pull, verify, diff &amp; merge</li>
+      <li>0.3 (Feb 17): repositories of self-made packages, verifying crypto signatures, hashes when downloading, support
+          for source packages &amp; translations</li>
+    </ul>
+
+    <p><strong>Binary</strong> executables (depends almost only on libc) for Debian, CentOS, MacOS X &amp; FreeBSD are available for
+    download from <a href="https://bintray.com/smira/generic/aptly">Bintray</a>. Just copy them to your machine
+    and run:</p>
+
+    <pre><span class="greeting">$</span> <span class="command">./aptly</span></pre>
+
+    <p>If you have Go environment set up (go 1.1+ required), you can build aptly from <strong>source</strong> by
+    running:</p>
+
+<pre><span class="greeting">$</span> <span class="command">go get -d -v github.com/smira/aptly</span>
+<span class="greeting">$</span> <span class="command">go install github.com/smira/aptly</span>
+</pre>
+
+<!-- ================ support ============== -->
+<div class="target-spacer" id="support"><a name="support"></a>&nbsp;</div>
+<h2>Support</h2>
+
+  <p>If you have trouble using aptly, you can find community support from
+  <a href="https://groups.google.com/forum/#!forum/aptly-discuss">aptly-discuss mailing list</a> or file
+  an <a href="https://github.com/smira/aptly/issues">issue on GitHub</a>.</p>
+
+  <p>Also consider following me <a href="https://twitter.com/smira/">@smira</a> to get updates about aptly.
+
+
+<!-- ================ configuration ============== -->
+<div class="target-spacer" id="configuration"><a name="configuration"></a>&nbsp;</div>
+<h2>Configuration</h2>
+
+    <p>aptly looks for configuration file in <code>/etc/aptly.conf</code> and
+    <code>~/.aptly.conf</code>, if no config file found, new one is created. Also aptly
+    needs root directory for database, package and published repository
+    storage. If not specified, directory defaults to <code>~/.aptly</code>, it will be
+    created if missing.</p>
+
+    <p>Configuration file is stored in JSON format (default values shown below):</p>
+
+<pre>{
+  "rootDir": "$HOME/.aptly",
+  "downloadConcurrency": 4,
+  "architectures": [],
+  "dependencyFollowSuggests": false,
+  "dependencyFollowRecommends": false,
+  "dependencyFollowAllVariants": false
+}
+</pre>
+
+    <p>Options:</p>
+
+    <ul>
+      <li>  <code>rootDir</code> is root of directory storage to store database
+      (<code>rootDir/db</code>), downloaded packages (<code>rootDir/pool</code>) and published
+      repositories (<code>rootDir/public</code>)</li>
+      <li>  <code>downloadConcurrency</code> is a number of parallel download threads to
+      use when downloading packages</li>
+      <li>  <code>architectures</code> is a list of architectures to process; if left empty
+      defaults to all available architectures; could be overridden with
+      option <code>-architectures</code>
+      </li>
+      <li>  <code>dependencyFollowSuggests</code>: follow contents of <code>Suggests:</code> field
+      when processing dependencies for the package</li>
+      <li>  <code>dependencyFollowRecommends</code>: follow contents of <code>Recommends:</code> field
+      when processing dependencies for the package</li>
+      <li>  <code>dependencyFollowAllVariants</code>: when dependency looks like
+      <code>package-a | package-b</code>, follow both variants always</li>
+    </ul>
+
+    <div class="alert alert-warning"><strong>Warning:</strong> <code>rootDir</code> contains all the downloaded packages from remote mirrors,
+      so it should have enough space for that. For example mirror of Debian wheezy on amd64 and i386 requires 70G of disk space.
+    </div>
+
+
+<!-- ================ usage ============== -->
+<div class="target-spacer" id="usage"><a name="usage"></a>&nbsp;</div>
+<h2>Usage</h2>
+
+      <p>Aptly supports commands in three basic categories:</p>
+
+      <ul>
+      <li>  <code>mirror</code>: manage, update mirrors of remote repositories
+      </li>
+      <li>  <code>snapshot</code>: create, merge, manage snapshots
+      </li>
+      <li>  <code>publish</code>: publish snapshot as remote repo
+      </li>
+      </ul>
+
+
+  <!-- ================ common options ============== -->
+  <div class="target-spacer" id="common-options"><a name="common-options"></a>&nbsp;</div>
+  <h3>Common Options</h3>
+
+      <p>There are several options that should be specfied right before command
+      name:</p>
+
+        <pre><span class="greeting">$</span> <span class="command">aptly --option1 command ...</span></pre>
+
+      <p>These options are:</p>
+
+        <ul>
+        <li>  <code>-architectures=""</code>: list of architectures to consider during
+        (comma-separated), default to all available</li>
+        <li>  <code>-dep-follow-all-variants=false</code>: when processing dependencies,
+        follow a &amp; b if depdency is 'a|b'</li>
+        <li>  <code>-dep-follow-recommends=false</code>: when processing dependencies, follow
+        Recommends</li>
+        <li>  <code>-dep-follow-suggests=false</code>: when processing dependencies, follow
+        Suggests</li>
+        </ul>
+
+      <p>Common options override configuration parameters with similar names.</p>
+
+<!-- ================ aptly mirror ============== -->
+<div class="target-spacer" id="aptly-mirror"><a name="aptly-mirror"></a>&nbsp;</div>
+<h3>Command <code>mirror</code></h3>
+
+      <p>Mirror subcommands manage mirrors of remote Debian repositories.</p>
+
+  <!-- ================ aptly mirror create ============== -->
+  <div class="target-spacer" id="aptly-mirror-create"><a name="aptly-mirror-create"></a>&nbsp;</div>
+  <h4>Command <code>aptly mirror create</code></h4>
+
+    <p>Creates mirror of remote repository. It supports only HTTP repositories.</p>
+
+    <p>Usage:</p>
+
+    <pre><span class="greeting">$</span> <span class="command"> aptly mirror create &lt;name&gt; &lt;archive url&gt; &lt;distribution&gt; [&lt;component1&gt; ...]</span></pre>
+
+    <p>Params are:</p>
+
+    <ul>
+    <li>  <code>name</code> is a name that would be used in aptly to reference this
+    mirror</li>
+    <li>  <code>archive url</code> is a root of archive, e.g.
+    <a href="http://ftp.ru.debian.org/debian/">http://ftp.ru.debian.org/debian/</a>
+    </li>
+    <li>  <code>distribution</code> is a distribution name, e.g. <code>squeeze</code>
+    </li>
+    <li>  <code>component1</code> is an optional list of components to download, if not
+    specified aptly would fetch all components, e.g. <code>main</code>
+    </li>
+    </ul>
+
+    <p>By default aptly would download packages for all available architectures.
+    If architectures are limited (with config <code>architectures</code> or option
+    <code>-architectures</code>), only packages for those architectures are downloaded</p>
+
+    <div class="alert alert-info">If components are not specified, aptly will download packages from all
+    components and merge it into one when publishing. If components should be left separate, please
+    create separate mirror for each component.</div>
+
+    <p>Example:</p>
+
+<pre><span class="greeting">$</span> <span class="command">aptly -architectures="amd64" mirror create debian-main http://ftp.ru.debian.org/debian/ squeeze main</span>
+2013/12/28 19:44:45 Downloading http://ftp.ru.debian.org/debian/dists/squeeze/Release...
+...
+
+Mirror [debian-main]: http://ftp.ru.debian.org/debian/ squeeze successfully added.
+You can run 'aptly mirror update debian-main' to download repository contents.
+</pre>
+
+  <!-- ================ aptly mirror update ============== -->
+  <div class="target-spacer" id="aptly-mirror-update"><a name="aptly-mirror-update"></a>&nbsp;</div>
+  <h4>Command <code>aptly mirror update</code></h4>
+
+    <p>Updates remote mirror (downloads package files and meta information). When mirror is
+    created, this command should be run for the first time to fetch mirror contents.
+    This command could be run many times to get updated repository contents.
+    If interrupted, command could be restarted safely.</p>
+
+    <p>Usage:</p>
+
+    <pre><span class="greeting">$</span> <span class="command">aptly mirror update &lt;name&gt;</span></pre>
+
+    <p>Params are:</p>
+
+    <ul>
+    <li>  <code>name</code> is a mirror name (given when mirror was created)</li>
+    </ul><p>All packages would be stored under aptly's root dir (see section on
+    <a href="#configuration">Configuration</a>).</p>
+
+    <p>Example:</p>
+
+<pre><span class="greeting">$</span> <span class="command">aptly mirror update debian-main</span>
+
+2013/12/29 18:32:34 Downloading http://ftp.ru.debian.org/debian/dists/squeeze/Release...
+2013/12/29 18:32:37 Downloading http://ftp.ru.debian.org/debian/dists/squeeze/main/binary-amd64/Packages.bz2...
+2013/12/29 18:37:19 Downloading http://ftp.ru.debian.org/debian/pool/main/libg/libgwenhywfar/libgwenhywfar47-dev_3.11.3-1_amd64.deb...
+....
+</pre>
+
+  <!-- ================ aptly mirror list ============== -->
+  <div class="target-spacer" id="aptly-mirror-list"><a name="aptly-mirror-list"></a>&nbsp;</div>
+  <h4>Command <code>aptly mirror list</code></h4>
+
+    <p>Shows list of registered repository mirrors.</p>
+
+    <p>Usage:</p>
+
+    <pre><span class="greeting">$</span> <span class="command">aptly mirror list</span></pre>
+
+    <p>Example:</p>
+
+<pre><span class="greeting">$</span> <span class="command">aptly mirror list</span>
+List of mirrors:
+ * [backports]: http://mirror.yandex.ru/backports.org/ squeeze-backports
+ * [debian-main]: http://ftp.ru.debian.org/debian/ squeeze
+
+To get more information about repository, run `aptly mirror show &lt;name&gt;`.
+</pre>
+
+  <!-- ================ aptly mirror show ============== -->
+  <div class="target-spacer"  id="aptly-mirror-show"><a name="aptly-mirror-show"></a>&nbsp;</div>
+  <h4>Command <code>aptly mirror show</code></h4>
+
+    <p>Shows detailed information about mirror.</p>
+
+    <p>Usage:</p>
+
+    <pre><span class="greeting">$</span> <span class="command">aptly mirror show &lt;name&gt;</span></pre>
+
+    <p>Params are:</p>
+
+    <ul>
+    <li>  <code>name</code> is a mirror name (given when mirror was created)</li>
+    </ul>
+
+    <p>Example:</p>
+
+<pre><span class="greeting">$</span> <span class="command">aptly mirror show backports2</span>
+Name: backports2
+Archive Root URL: http://mirror.yandex.ru/backports.org/
+Distribution: squeeze-backports
+Components: main, contrib, non-free
+Architectures: i386, amd64
+Last update: 2013-12-27 19:30:19 MSK
+Number of packages: 3898
+
+Information from release file:
+...
+</pre>
+
+    <p>In detailed information basiс information about mirror is displayed:
+    filters by component &amp; architecture, timestamp of last successful
+    repository fetch and number of packages.</p>
+
+<!-- ================ aptly snapshot ============== -->
+<div class="target-spacer" id="aptly-snapshot"><a name="aptly-snapshot"></a>&nbsp;</div>
+<h3>Command <code>snapshot</code></h3>
+
+    <p>Snapshot is a fixed state of remote repository. Internally snapshot is
+    list of packages with explicit version. Snapshot is immutable, i.e. it
+    can't change since it has been created.</p>
+
+  <!-- ================ aptly snapshot create ============== -->
+  <div class="target-spacer" id="aptly-snapshot-create"><a name="aptly-snapshot-create"></a>&nbsp;</div>
+  <h4>Command <code>aptly snapshot create .. from mirror</code></h4>
+
+    <p>Creates snapshot from current state of remote mirror. Mirros should be
+    updated at least once before using this command.</p>
+
+    <p>Usage:</p>
+
+    <pre><span class="greeting">$</span> <span class="command">aptly snapshot create &lt;name&gt; from mirror &lt;mirror-name&gt;</span></pre>
+
+    <p>Params are:</p>
+
+    <ul>
+    <li>  <code>name</code> is a name for the snapshot to be created</li>
+    <li>  <code>mirror-name</code> is a mirror name (given when mirror was created)</li>
+    </ul>
+
+    <p>Example:</p>
+
+<pre><span class="greeting">$</span> <span class="command">aptly snapshot create monday-updates from mirror backports2
+
+Snapshot monday-updates successfully created.
+You can run 'aptly publish snapshot monday-updates' to publish snapshot as Debian repository.
+</pre>
+
+  <!-- ================ aptly snapshot list ============== -->
+  <div class="target-spacer" id="aptly-snapshot-list"><a name="aptly-snapshot-list"></a>&nbsp;</div>
+  <h4>Command <code>aptly snapshot list</code></h4>
+
+    <p>Displays list of all created snapshots.</p>
+
+    <p>Usage:</p>
+
+    <pre><span class="greeting">$</span> <span class="command">aptly snapshot list</span></pre>
+
+    <p>Example:</p>
+
+<pre><span class="greeting">$</span> <span class="command">aptly snapshot list</span>
+List of snapshots:
+ * [monday-updates]: Snapshot from mirror [backports2]: http://mirror.yandex.ru/backports.org/ squeeze-backports
+ * [back]: Snapshot from mirror [backports2]: http://mirror.yandex.ru/backports.org/ squeeze-backports
+
+To get more information about snapshot, run `aptly snapshot show &lt;name&gt;`.
+</pre>
+
+    <p>In snapshot list, basic information on snapshot creation procedure is recorded.</p>
+
+  <!-- ================ aptly snapshot show ============== -->
+  <div class="target-spacer" id="aptly-snapshot-show"><a name="aptly-snapshot-show"></a>&nbsp;</div>
+  <h4>Command <code>aptly snapshot show</code></h4>
+
+    <p>Shows detailed information about snapshot. Full list of packages in the
+    snapshot is displayed as well.</p>
+
+    <p>Usage:</p>
+
+    <pre><span class="greeting">$</span> <span class="command">aptly snapshot show &lt;name&gt;</span></pre>
+
+    <p>Params:</p>
+
+    <ul>
+    <li>  <code>name</code> is snapshot name which has been given during snapshot
+    creation</li>
+    </ul>
+
+    <p>Example:</p>
+
+<pre><span class="greeting">$</span> <span class="command">aptly snapshot show back</span>
+Name: back
+Created At: 2013-12-24 15:39:29 MSK
+Description: Snapshot from mirror [backports2]: http://mirror.yandex.ru/backports.org/ squeeze-backports
+Number of packages: 3898
+Packages:
+  altos-1.0.3~bpo60+1_i386
+  amanda-client-1:3.3.1-3~bpo60+1_amd64
+  ...
+</pre>
+
+  <!-- ================ aptly snapshot verify ============== -->
+  <div class="target-spacer" id="aptly-snapshot-verify"><a name="aptly-snapshot-verify"></a>&nbsp;</div>
+  <h4>Command <code>aptly snapshot verify</code></h4>
+
+    <p>Verifies dependencies between packages in snapshot <code>&lt;name&gt;</code> and reports
+    unsatisfied dependencies. Command might take additional snapshots as dependency
+    sources.</p>
+
+    <p>Usage:</p>
+
+    <pre><span class="greeting">$</span> <span class="command">aptly snapshot verify &lt;name&gt; [&lt;source&gt; ...]</span></pre>
+
+    <p>Params:</p>
+
+    <ul>
+    <li>  <code>name</code> is snapshot name which has been given during snapshot
+    creation</li>
+    <li>  <code>source</code> is a optional list of snapshot names which would be used as
+    additional sources</li>
+    </ul>
+
+    <p>If architectures are limited (with config <code>architectures</code> or option
+    <code>-architectures</code>), only mentioned architectures are checked for internal
+    dependencies, otherwise <code>aptly</code> will check all architectures in the
+    snapshot.</p>
+
+    <p>Example:</p>
+
+<pre><span class="greeting">$</span> <span class="command">aptly snapshot verify snap-deb2-main</span>
+Missing dependencies (7):
+  oracle-instantclient11.2-basic [i386]
+  scsh-0.6 [amd64]
+  fenix [amd64]
+  fenix-plugins-system [amd64]
+  mozart (&gt;= 1.4.0) [amd64]
+  scsh-0.6 (&gt;= 0.6.6) [amd64]
+  oracle-instantclient11.2-basic [amd64]
+</pre>
+
+  <!-- ================ aptly snapshot pull ============== -->
+  <div class="target-spacer" id="aptly-snapshot-pull"><a name="aptly-snapshot-pull"></a>&nbsp;</div>
+  <h4>Command <code>aptly snapshot pull</code></h4>
+
+    <p>Pulls new packages along with its dependencies in <code>name</code> snapshot from
+    <code>source</code> snapshot. Also can upgrade package version from one snapshot
+    into another, once again along with dependencies. New snapshot
+    <code>destination</code> is created as result of this process.</p>
+
+    <p>Usage:</p>
+
+    <pre><span class="greeting">$</span> <span class="command">aptly snapshot pull &lt;name&gt; &lt;source&gt; &lt;destination&gt; &lt;package-name&gt; ...</span></pre>
+
+    <p>Params:</p>
+
+    <ul>
+    <li>  <code>name</code> is snapshot name which has been given during snapshot
+    creation</li>
+    <li>  <code>source</code> is a snapshot name where packages and dependencies would be
+    searched</li>
+    <li>  <code>destination</code> is a name of the snapshot that would be created</li>
+    <li>  <code>package-name</code> is a name of package to be pulled from <code>source</code>,
+    could be specified as Debian dependency, e.g. <code>package (&gt;= 1.3.5)</code>
+    to restrict search to specific version</li>
+    </ul>
+
+    <p>Options:</p>
+
+    <ul>
+    <li>  <code>-dry-run=false</code>: don't create destination snapshot, just show what
+    would be pulled</li>
+    <li>  <code>-no-deps=false</code>: don't process dependencies, just pull listed
+    packages</li>
+    </ul>
+
+    <p>If architectures are limited (with config <code>architectures</code> or option
+    <code>-architectures</code>), only mentioned architectures are processed, otherwise
+    <code>aptly</code> will process all architectures in the snapshot.</p>
+
+    <p>Example:</p>
+
+<pre><span class="greeting">$</span> <span class="command">aptly snapshot pull snap-deb2-main back snap-deb-main-w-xorg xserver-xorg</span>
+Dependencies would be pulled into snapshot:
+    [snap-deb2-main]: Snapshot from mirror [deb2-main]: http://ftp.ru.debian.org/debian/ squeeze
+from snapshot:
+    [back]: Snapshot from mirror [backports2]: http://mirror.yandex.ru/backports.org/ squeeze-backports
+and result would be saved as new snapshot snap-deb-main-w-xorg.
+Loading packages (49476)...
+Building indexes...
+[-] xserver-xorg-1:7.5+8+squeeze1_amd64 removed
+[+] xserver-xorg-1:7.6+8~bpo60+1_amd64 added
+[-] xserver-xorg-core-2:1.7.7-16_amd64 removed
+[+] xserver-xorg-core-2:1.10.4-1~bpo60+2_amd64 added
+[-] xserver-common-2:1.7.7-16_all removed
+[+] xserver-common-2:1.10.4-1~bpo60+2_all added
+[-] libxfont1-1:1.4.1-3_amd64 removed
+[+] libxfont1-1:1.4.4-1~bpo60+1_amd64 added
+[-] xserver-xorg-1:7.5+8+squeeze1_i386 removed
+[+] xserver-xorg-1:7.6+8~bpo60+1_i386 added
+[-] xserver-xorg-core-2:1.7.7-16_i386 removed
+[+] xserver-xorg-core-2:1.10.4-1~bpo60+2_i386 added
+[-] libxfont1-1:1.4.1-3_i386 removed
+[+] libxfont1-1:1.4.4-1~bpo60+1_i386 added
+
+Snapshot snap-deb-main-w-xorg successfully created.
+You can run 'aptly publish snapshot snap-deb-main-w-xorg' to publish snapshot as Debian repository.
+</pre>
+
+  <!-- ================ aptly snapshot diff ============== -->
+  <div class="target-spacer" id="aptly-snapshot-diff"><a name="aptly-snapshot-diff"></a>&nbsp;</div>
+  <h4>Command <code>aptly snapshot diff</code></h4>
+
+    <p>Displays difference in packages between two snapshots. Snapshot is a
+    list of packages, so difference between snapshots is a difference
+    between package lists. Package could be either completely missing in one
+    snapshot, or package is present in both snapshots with different
+    versions.</p>
+
+    <p>Usage:</p>
+
+    <pre><span class="greeting">$</span> <span class="command">aptly snapshot diff &lt;name-a&gt; &lt;name-b&gt;</span></pre>
+
+    <p>Options:</p>
+
+    <ul>
+    <li>  <code>-only-matching=false</code>: display diff only for matching packages
+    (don't display missing packages)</li>
+    </ul>
+
+    <p>Example:</p>
+
+<pre><span class="greeting">$</span> <span class="command">aptly snapshot diff snap-deb2-main snap-deb-main-w-xorg</span>
+  Arch   | Package                                  | Version in A                             | Version in B
+! amd64  | libxfont1                                | 1:1.4.1-3                                | 1:1.4.4-1~bpo60+1
+! i386   | libxfont1                                | 1:1.4.1-3                                | 1:1.4.4-1~bpo60+1
+! all    | xserver-common                           | 2:1.7.7-16                               | 2:1.10.4-1~bpo60+2
+! amd64  | xserver-xorg                             | 1:7.5+8+squeeze1                         | 1:7.6+8~bpo60+1
+! i386   | xserver-xorg                             | 1:7.5+8+squeeze1                         | 1:7.6+8~bpo60+1
+! amd64  | xserver-xorg-core                        | 2:1.7.7-16                               | 2:1.10.4-1~bpo60+2
+! i386   | xserver-xorg-core                        | 2:1.7.7-16                               | 2:1.10.4-1~bpo60+2
+</pre>
+
+  <!-- ================ aptly snapshot merge ============== -->
+  <div class="target-spacer" id="aptly-snapshot-merge"><a name="aptly-snapshot-merge"></a>&nbsp;</div>
+  <h4>Command <code>aptly snapshot merge</code></h4>
+
+    <p>Merge merges several snapshots into one. Merge happens from left to right. Packages with the same
+    name-architecture pair are replaced during merge (package from latest snapshot on the list wins).
+    If only one snapshot is specified, merge copies <code>source</code> into <code>destination</code>.</p>
+
+    <p>Usage:</p>
+
+    <pre><span class="greeting">$</span> <span class="command">aptly snapshot merge &lt;destination&gt; &lt;source&gt; [&lt;source&gt;...]</span></pre>
+
+    <p>Example:</p>
+
+<pre><span class="greeting">$</span> <span class="command">aptly snapshot merge debian-w-backports debian-main debian-backports</span>
+
+Snapshot debian-w-backports successfully created.
+You can run 'aptly publish snapshot debian-w-backports' to publish snapshot as Debian repository.
+</pre>
+
+<!-- ================ aptly publish ============== -->
+<div class="target-spacer" id="aptly-publish"><a name="aptly-publish"></a>&nbsp;</div>
+<h3>Command <code>publish</code></h3>
+
+  <p>Publishing snapshot as Debian repository which could be served by
+  HTTP/FTP/rsync server. Repository is signed by user's key with GnuPG.
+  Key should be created beforehand (see section GPG Keys). Published
+  repository could be consumed directly by apt.</p>
+
+  <!-- ================ GPG Keys ============== -->
+  <div class="target-spacer" id="gpg-keys"><a name="gpg-keys"></a>&nbsp;</div>
+  <h4>GPG Keys</h4>
+
+    <p>GPG key is required to sign any published repository. Key should be
+    generated before publishing first repository.</p>
+
+    <p>Key generation, storage, backup and revocation is out of scope of this
+    document, there are many tutorials available, e.g. <a href="http://fedoraproject.org/wiki/Creating_GPG_Keys">this
+    one</a>.</p>
+
+    <p>Publiс part of the key should be exported (<code>gpg --export --armor</code>) and
+    imported into apt keyring on all machines that would be using published
+    repositories using <code>apt-key</code>.</p>
+
+
+  <!-- ================ aptly publish shapshot ============== -->
+  <div class="target-spacer" id="aptly-publish-snapshot"><a name="aptly-publish-snapshot"></a>&nbsp;</div>
+  <h4>Command <code>aptly publish snapshot</code></h4>
+
+    <p>Publishes repository to be consumed by <code>apt</code>. Published repostiories
+     appear under <code>rootDir/public</code> directory. Valid <a href="#gpg-keys">GPG key</a> is required
+     for publishing.</p>
+
+    <p>Usage:</p>
+
+    <pre><span class="greeting">$</span> <span class="command">aptly publish snapshot &lt;name&gt; [&lt;prefix&gt;]</span></pre>
+
+    <p>Params:</p>
+
+    <ul>
+    <li>  <code>name</code> is a snapshot name that snould be published</li>
+    <li>  <code>prefix</code> is an optional prefix for publishing, if not specified,
+    repository would be published to the root of publiс directory. <code>prefix</code> could be single directory like
+    <code>ppa</code> or part of the tree like <code>ppa/android</code>. <code>prefix</code> shouldn't contain
+    <code>..</code>, and names <code>dists</code> and <code>pool</code> are not accepted. Empty <code>prefix</code>
+    would be converted to <code>.</code>.</li>
+    </ul>
+
+    <p>Options:</p>
+
+    <ul>
+    <li>  <code>-component=""</code>: component name to publish; guessed from original
+    repository (if any), or defaults to <code>main</code></li>
+    <li>  <code>-distribution=""</code>: distribution name to publish; guessed from
+    original repository distribution</li>
+    <li>  <code>-gpg-key=""</code>: GPG key ID to use when signing the release, if not
+    specified default key is used</li>
+    </ul>
+
+    <p>If architectures are limited (with config <code>architectures</code> or option
+    <code>-architectures</code>), only mentioned architectures would ne published,
+    otherwise <code>aptly</code> will publish all architectures in the snapshot.</p>
+
+    <div class="alert alert-info">It is not allowed to publish two snapshots to the same
+    <code>prefix</code> and <code>distribution</code>.</div>
+
+
+    <p>Example:</p>
+
+<pre><span class="greeting">$</span> <span class="command">aptly publish snapshot back</span>
+Signing file '/var/aptly/public/dists/squeeze-backports/Release' with gpg, please enter your passphrase when prompted:
+
+&lt;&lt;gpg asks for passphrase&gt;&gt;
+
+Clearsigning file '/var/aptly/public/dists/squeeze-backports/Release' with gpg, please enter your passphrase when prompted:
+
+&lt;&lt;gpg asks for passphrase&gt;&gt;
+
+Snapshot back has been successfully published.
+Please setup your webserver to serve directory '/var/aptly/public' with autoindexing.
+Now you can add following line to apt sources:
+  deb http://your-server/ squeeze-backports main
+Don't forget to add your GPG key to apt with apt-key.
+</pre>
+
+<p>Directory structure for published repositories:</p>
+
+<ul>
+  <li>
+    <code>&lt;rootDir&gt;</code>: <a href="#configuration">configuration</a> parameter, defaults to <code>~/.aptly</code>
+    <ul>
+      <li>
+        <code>public/</code>: root of published tree (root for webserver)
+        <ul>
+          <li>
+            <code>dists/</code>
+            <ul>
+              <li>
+                <code>squeeze/</code>: distribution name
+                <ul>
+                  <li><code>Release</code>: raw file</li>
+                  <li><code>InRelease</code>: clearsigned version</li>
+                  <li><code>Release.gpg</code>: detached <code>Release</code> signature</li>
+                  <li>
+                    <code>binary-i386</code>: binary packages for architecture <code>i386</code>
+                    <ul>
+                      <li><code>Packages</code>: package metadata</li>
+                      <li><code>Packages.gz</code></li>
+                      <li><code>Packages.bz2</code></li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <code>pool</code>
+            <ul>
+              <li>
+                <code>main/</code>: component main
+                <ul>
+                  <li>
+                    <code>m/</code>
+                    <ul>
+                      <li>
+                        <code>mars-invaders/</code>
+                        <ul>
+                          <li><code>mars-invaders_1.0.3_i386.deb</code>: package file (hard link to package from main pool)
+                        </ul>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+  <!-- ================ aptly publish list ============== -->
+  <div class="target-spacer" id="aptly-publish-list"><a name="aptly-publish-list"></a>&nbsp;</div>
+  <h4>Command <code>aptly publish list</code></h4>
+
+    <p>Lists repositories that have been published with <code>aptly publish snapshot</code>. For each
+    repository information about <code>prefix</code> and <code>distribution</code> is listed along
+    with <code>component</code> and architecture list. Information about snapshot published is appended
+    to published repository description.</p>
+
+    <p>Usage:</p>
+
+    <pre><span class="greeting">$</span> <span class="command">aptly publish list</span></pre>
+
+    <p>Example:</p>
+
+<pre><span class="greeting">$</span> <span class="command">aptly publish list</span>
+Published repositories:
+  * ./sq-b (main) [amd64, i386] publishes [back3]: Snapshot from mirror [backports2]: http://mirror.yandex.ru/backports.org/ squeeze-backports
+  * ./squeeze-backports (contrib) [amd64, i386] publishes [back3]: Snapshot from mirror [backports2]: http://mirror.yandex.ru/backports.org/ squeeze-backports
+</pre>
+
+  <!-- ================ aptly publish drop ============== -->
+  <div class="target-spacer" id="aptly-publish-drop"><a name="aptly-publish-drop"></a>&nbsp;</div>
+  <h4>Command <code>aptly publish drop</code></h4>
+
+    <p>Remove files belonging to published repository. aptly would try to remove as many files
+    belonging to this repository as possible. For example, if no other published repositories share
+    the same prefix, all files inside prefix would be removed.</p>
+
+    <p>Usage:</p>
+
+    <pre><span class="greeting">$</span> <span class="command">aptly publish drop &lt;distribution&gt; [&lt;prefix&gt;]</span></pre>
+
+    <ul>
+    <li>  <code>distribution</code> is a distribution name for published repository (as displayed by <code>aptly publish list</code>).</li>
+    <li>  <code>prefix</code> is an optional prefix for publishing, if not specified,
+    prefix is considered to be <code>.</code>.</li>
+    </ul>
+
+    <p>Example:</p>
+
+<pre><span class="greeting">$</span> <span class="command">aptly publish drop squeeze-backports</span>
+Removing /var/aptly/public/dists/squeeze-backports...
+Removing /var/aptly/public/pool/contrib...
+</pre>
+
+        <div class="footer">
+           <p>&copy; Andrey Smirnov 2014</p>
+       </div>
+    </div>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
+  </body>
+</html>
