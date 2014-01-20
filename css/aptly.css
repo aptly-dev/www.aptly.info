@@ -24,3 +24,7 @@ pre span.command {
 div.target-spacer {
     margin-bottom: 40px;
 }
+
+img.logo {
+    padding: 8px;
+}
