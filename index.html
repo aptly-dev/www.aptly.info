@@ -407,6 +407,41 @@ You can run 'aptly publish snapshot snap-deb-w-nginx' to publish snapshot as Deb
 <div class="target-spacer" id="usage"><a name="usage"></a>&nbsp;</div>
 <h2>Usage</h2>
 
+
+  <p>
+  aptly goal is to establish repeatiblity and controlled changes in package environment. aptly allows
+  to fix set of packages in repository, so that package installation and upgrade becomes deterministic.
+  At the same time aptly allows to perform controlled, fine-grained changes in repository contents to
+  transition your package environment to new version.</p>
+
+  <div class="target-spacer" id="usage"><a name="usage"></a>&nbsp;</div>
+  <h3>Core Concepts</h3>
+
+  <dl class="dl-horizontal">
+    <dt>mirror</dt>
+    <dd>mirror of remote repository, consists of metadata, list of packages and package files</dd>
+
+    <dt>snapshot</dt>
+    <dd>immutable list of packages, basic block to implement repeatability and controlled changes</dd>
+
+    <dt>published repository</dt>
+    <dd>published representation of snapshot, ready to be consumed by apt tools</dd>
+  </dl>
+
+  <p>The schema of aptly's commands and transitions between entities:</p>
+
+  <p><img src="schema.png" class="img-responsive" alt="aptly snapshot diff"></p>
+  <p class="text-muted">* local repo hasn't been implemented yet</p>
+
+  <p>First, mirrors of remote repositories should be <a href="#aptly-mirror-create">set up</a>.
+  Snapshot is being <a href="#aptly-snapshot-create">created</a> from remote repository
+  (official Debain repositories, backports, 3rd party repos, etc.). Snapshots
+  can be changed by <a href="#aptly-snapshot-pull">pulling</a> packages with dependencies between snapshots,
+  <a href="#aptly-snapshot-merge">merging</a> snapshots. Any snapshot can be
+  <a href="#aptly-publish-snapshot">published</a> to any location
+  (distribution name, prefix) and consumed by <code>apt</code> tools.</p>
+
+  <h3>Commands</h3>
       <p>Aptly supports commands in three basic categories:</p>
 
       <ul>
