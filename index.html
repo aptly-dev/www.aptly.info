@@ -414,7 +414,7 @@ You can run 'aptly publish snapshot snap-deb-w-nginx' to publish snapshot as Deb
   At the same time aptly allows to perform controlled, fine-grained changes in repository contents to
   transition your package environment to new version.</p>
 
-  <div class="target-spacer" id="core-concepts"><a name="core-concepts"></a>&nbsp;</div>
+  <div class="target-spacer" id="usage"><a name="core-concepts"></a>&nbsp;</div>
   <h3>Core Concepts</h3>
 
   <dl class="dl-horizontal">
@@ -441,7 +441,7 @@ You can run 'aptly publish snapshot snap-deb-w-nginx' to publish snapshot as Deb
   <a href="#aptly-publish-snapshot">published</a> to any location
   (distribution name, prefix) and consumed by <code>apt</code> tools.</p>
 
-  <div class="target-spacer" id="commands"><a name="commands"></a>&nbsp;</div>
+  <div class="target-spacer" id="usage"><a name="commands"></a>&nbsp;</div>
   <h3>Commands</h3>
       <p>Aptly supports commands in three basic categories:</p>
 
@@ -594,12 +594,6 @@ To get more information about repository, run `aptly mirror show &lt;name&gt;`.
     <li>  <code>name</code> is a mirror name (given when mirror was created)</li>
     </ul>
 
-    <p>Options:</p>
-
-    <ul>
-    <li>  <code>-with-packages=false</code>: show detailed list of packages and versions stored in the mirror</li>
-    </ul>
-
     <p>Example:</p>
 
 <pre><span class="greeting">$</span> <span class="command">aptly mirror show backports2</span>
@@ -691,12 +685,6 @@ To get more information about snapshot, run `aptly snapshot show &lt;name&gt;`.
     <ul>
     <li>  <code>name</code> is snapshot name which has been given during snapshot
     creation</li>
-    </ul>
-
-    <p>Options:</p>
-
-    <ul>
-    <li>  <code>-with-packages=false</code>: show detailed list of packages and versions stored in the mirror</li>
     </ul>
 
     <p>Example:</p>
@@ -1060,18 +1048,6 @@ Published repositories:
 Removing /var/aptly/public/dists/squeeze-backports...
 Removing /var/aptly/public/pool/contrib...
 </pre>
-
-<!-- ================ history ============== -->
-<div class="target-spacer" id="history"><a name="history"></a>&nbsp;</div>
-<h2>History</h2>
-
-  <h3>Version 0.3</h3>
-
-  <ul>
-    <li><code>aptly snapshot show</code> doesn't show list of packages by default</li>
-    <li>option <code>-with-packages</code> to show list of packages stored in mirror and snapshot</li>
-  </ul>
-
 
         <div class="footer">
            <p>&copy; Andrey Smirnov 2014</p>
