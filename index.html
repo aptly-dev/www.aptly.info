@@ -336,9 +336,12 @@ You can run 'aptly publish snapshot snap-deb-w-nginx' to publish snapshot as Deb
         </div>
       </div>
 
-    <p>Just copy binary to your machine and run it:</p>
+    <p>Just copy binary to your machine, make it executable and run it:</p>
 
-    <pre><span class="greeting">$</span> <span class="command">./aptly</span></pre>
+<pre><span class="greeting">$</span> <span class="command">chmod +x aptly</span>
+<span class="greeting">$</span> <span class="command">./aptly</span></pre>
+
+    <p><strong>Bash completion</strong> for aptly is available as <a href="https://github.com/aptly-dev/aptly-bash-completion">separate repo</a>.</p>
 
     <p>If you have Go environment set up (go 1.1+ required), you can build aptly from <strong>source</strong> by
     running:</p>
@@ -1070,6 +1073,7 @@ Removing /var/aptly/public/pool/contrib...
   <ul>
     <li><code>aptly snapshot show</code> doesn't show list of packages by default</li>
     <li>option <code>-with-packages</code> to show list of packages stored in mirror and snapshot</li>
+    <li><a href="https://github.com/aptly-dev/aptly-bash-completion">bash completion</a> is now available for aptly</li>
   </ul>
 
 
