@@ -43,6 +43,7 @@
                 <li><a href="#aptly-mirror-update">aptly mirror update</a></li>
                 <li><a href="#aptly-mirror-list">aptly mirror list</a></li>
                 <li><a href="#aptly-mirror-show">aptly mirror show</a></li>
+                <li><a href="#aptly-mirror-drop">aptly mirror drop</a></li>
                 <li class="divider"></li>
                 <li class="dropdown-header">snapshot</li>
                 <li><a href="#aptly-snapshot-create">aptly snapshot create</a></li>
@@ -52,6 +53,7 @@
                 <li><a href="#aptly-snapshot-pull">aptly snapshot pull</a></li>
                 <li><a href="#aptly-snapshot-diff">aptly snapshot diff</a></li>
                 <li><a href="#aptly-snapshot-merge">aptly snapshot merge</a></li>
+                <li><a href="#aptly-snapshot-drop">aptly snapshot drop</a></li>
                 <li class="divider"></li>
                 <li class="dropdown-header">publish</li>
                 <li><a href="#aptly-publish-snapshot">aptly publish snapshot</a></li>
@@ -155,7 +157,6 @@
         <ul>
           <li>source packages, debian-installer and translations not supported yet</li>
           <li>checksums and signature are not verified while downloading</li>
-          <li>deleting created items is not implemented</li>
           <li>cleaning up stale files is not implemented</li>
         </ul>
       </div>
@@ -622,6 +623,37 @@ Information from release file:
     filters by component &amp; architecture, timestamp of last successful
     repository fetch and number of packages.</p>
 
+  <!-- ================ aptly mirror drop ============== -->
+  <div class="target-spacer" id="aptly-mirror-drop"><a name="aptly-mirror-drop"></a>&nbsp;</div>
+  <h4>Command <code>aptly mirror drop</code></h4>
+
+    <p>Drop deletes information about remote repository mirror. Package data is not deleted
+      (it could be still used by other mirrors or snapshots). If mirror is used as source to create a snapshot,
+      aptly would refuse to delete such mirror, use flag <code>-force</code> to override.
+    </p>
+
+    <p>Usage:</p>
+
+    <pre><span class="greeting">$</span> <span class="command">aptly mirror drop &lt;name&gt;</span></pre>
+
+    <p>Params:</p>
+
+    <ul>
+    <li>  <code>name</code> is mirror name which has been given during mirror
+    creation</li>
+    </ul>
+
+    <p>Options:</p>
+
+    <ul>
+    <li>  <code>-force=false</code>: drop mirror even if it used as source of some snapshot</li>
+    </ul>
+
+    <p>Example:</p>
+
+<pre><span class="greeting">$</span> <span class="command">mirror drop -force wheezy-main</span>
+Mirror `wheezy-main` has been removed.</pre>
+
 <!-- ================ aptly snapshot ============== -->
 <div class="target-spacer" id="aptly-snapshot"><a name="aptly-snapshot"></a>&nbsp;</div>
 <h3>Command <code>snapshot</code></h3>
@@ -836,6 +868,14 @@ You can run 'aptly publish snapshot snap-deb-main-w-xorg' to publish snapshot as
 
     <pre><span class="greeting">$</span> <span class="command">aptly snapshot diff &lt;name-a&gt; &lt;name-b&gt;</span></pre>
 
+    <p>Params:</p>
+
+    <ul>
+    <li>  <code>name-a</code> is snapshot name which is "on the left" during comparison</li>
+    <li>  <code>name-b</code> is snapshot name which is "on the right" during comparison</li>
+    </ul>
+
+
     <p>Options:</p>
 
     <ul>
@@ -868,6 +908,13 @@ You can run 'aptly publish snapshot snap-deb-main-w-xorg' to publish snapshot as
 
     <pre><span class="greeting">$</span> <span class="command">aptly snapshot merge &lt;destination&gt; &lt;source&gt; [&lt;source&gt;...]</span></pre>
 
+    <p>Params:</p>
+
+    <ul>
+    <li>  <code>destination</code> is a name of the snapshot that would be created</li>
+    <li>  <code>source</code> is a list of snapshot names that would be merged together</li>
+    </ul>
+
     <p>Example:</p>
 
 <pre><span class="greeting">$</span> <span class="command">aptly snapshot merge debian-w-backports debian-main debian-backports</span>
@@ -875,6 +922,37 @@ You can run 'aptly publish snapshot snap-deb-main-w-xorg' to publish snapshot as
 Snapshot debian-w-backports successfully created.
 You can run 'aptly publish snapshot debian-w-backports' to publish snapshot as Debian repository.
 </pre>
+
+  <!-- ================ aptly snapshot drop ============== -->
+  <div class="target-spacer" id="aptly-snapshot-drop"><a name="aptly-snapshot-drop"></a>&nbsp;</div>
+  <h4>Command <code>aptly snapshot drop</code></h4>
+
+    <p>Drop removes information about snapshot. If snapshot is published, it can't be dropped (first remove publishing for snapshot).
+    If snapshot is used as source for other snapshots (using merge or pull), aptly would refuse to drop such snapshot, use flag
+    <code>-force</code> to override this check.
+    </p>
+
+    <p>Usage:</p>
+
+    <pre><span class="greeting">$</span> <span class="command">aptly snapshot drop &lt;name&gt;</span></pre>
+
+    <p>Params:</p>
+
+    <ul>
+    <li>  <code>name</code> is snapshot name which has been given during snapshot
+    creation</li>
+    </ul>
+
+    <p>Options:</p>
+
+    <ul>
+    <li>  <code>-force=false</code>: drop snapshot even if it used as source in other snapshots</li>
+    </ul>
+
+    <p>Example:</p>
+
+<pre><span class="greeting">$</span> <span class="command">snapshot drop snap-wheezy</span>
+Snapshot `snap-wheezy` has been dropped.</pre>
 
 <!-- ================ aptly publish ============== -->
 <div class="target-spacer" id="aptly-publish"><a name="aptly-publish"></a>&nbsp;</div>
@@ -1074,6 +1152,7 @@ Removing /var/aptly/public/pool/contrib...
     <li><code>aptly snapshot show</code> doesn't show list of packages by default</li>
     <li>option <code>-with-packages</code> to show list of packages stored in mirror and snapshot</li>
     <li><a href="https://github.com/aptly-dev/aptly-bash-completion">bash completion</a> is now available for aptly</li>
+    <li>dropping snapshots and mirrors is supported</li>
   </ul>
 
 
