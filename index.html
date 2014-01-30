@@ -59,6 +59,9 @@
                 <li><a href="#aptly-publish-snapshot">aptly publish snapshot</a></li>
                 <li><a href="#aptly-publish-list">aptly publish list</a></li>
                 <li><a href="#aptly-publish-drop">aptly publish drop</a></li>
+                <li class="divider"></li>
+                <li class="dropdown-header">serve</li>
+                <li><a href="#aptly-serve">aptly serve</a></li>
               </ul>
             </li>
           </ul>
@@ -169,7 +172,7 @@
       <p class="lead">Mirror main Debian repository for distribution squeeze only for architectures <code>i386</code>,
       <code>amd64</code> and publish the result.</p>
 
-      <p>Create mirror:</p>
+      <p><a href="#aptly-mirror-create">Create</a> mirror:</p>
 
 <pre><span class="greeting">$</span> <span class="command">aptly -architectures="amd64,i386"  mirror create debian-main http://ftp.ru.debian.org/debian/ squeeze main</span>
 2013/12/28 19:44:45 Downloading http://ftp.ru.debian.org/debian/dists/squeeze/Release...
@@ -179,7 +182,7 @@ Mirror [debian-main]: http://ftp.ru.debian.org/debian/ squeeze successfully adde
 You can run 'aptly mirror update debian-main' to download repository contents.
 </pre>
 
-      <p>Download mirror contents:</p>
+      <p><a href="#aptly-mirror-update">Download</a> mirror contents:</p>
 <pre><span class="greeting">$</span> <span class="command">aptly mirror update debian-main</span>
 2014/01/15 16:50:50 Downloading http://ftp.ru.debian.org/debian/dists/squeeze/Release...
 Downloading &amp; parsing release files...
@@ -188,7 +191,7 @@ Saving packages to database...
 Building download queue...
 Download queue: 27960 items, 30.68 GiB size</pre>
 
-      <p>Take snapshot:</p>
+      <p><a href="#aptly-snapshot-create">Take</a> snapshot:</p>
 
 <pre><span class="greeting">$</span> <span class="command">aptly snapshot create debian-3112 from mirror debian-main</span>
 
@@ -196,14 +199,14 @@ Snapshot debian-3112 successfully created.
 You can run 'aptly publish snapshot debian-3112' to publish snapshot as Debian repository.
 </pre>
 
-    <p>Publish snapshot (requires generated GPG key):</p>
+    <p><a href="#aptly-publish-snapshot">Publish</a> snapshot (requires generated GPG key):</p>
 
 <pre><span class="greeting">$</span> <span class="command">aptly publish snapshot debian-3112</span>
 
 ...
 
-Snapshot back has been successfully published.
-Please setup your webserver to serve directory '/var/aptly/public' with autoindexing.
+Snapshot debian-3112 has been successfully published.
+Please setup your webserver to serve directory '/home/example/.aptly/public' with autoindexing.
 Now you can add following line to apt sources:
   deb http://your-server/ squeeze main
 Don't forget to add your GPG key to apt with apt-key.
@@ -226,13 +229,25 @@ Don't forget to add your GPG key to apt with apt-key.
 <pre>deb http://mirror.local/ squeeze main
 </pre>
 
+    <p>Alternatively, you can <a href="#aptly-serve">serve</a> published repositories with aptly itself:</p>
+
+<pre><span class="greeting">$</span> <span class="command">aptly serve</span>
+Serving published repositories, recommended apt sources list:
+
+# ./squeeze (main) [amd64, i386] publishes [debian-3112]: Snapshot from mirror [debian-main]: http://ftp.ru.debian.org/debian/ squeeze
+deb http://localhost:8080/ squeeze main
+
+Starting web server at: :8080 (press Ctrl+C to quit)...
+</pre>
+
   <p>Run apt-get to fetch repository metadata:</p>
 
 <pre><span class="greeting">$</span> <span class="command">apt-get update</span></pre>
 
   <p class="lead">Pulling new version of <code>nginx</code> from <code>backports</code>.</p>
 
-  <p>Create <code>backports</code> mirror, download it and take snapshot:</p>
+  <p><a href="#aptly-mirror-create">Create</a> <code>backports</code> mirror, <a href="#aptly-mirror-update">download</a> it
+      and <a href="#aplty-snapshot-create">take</a> snapshot:</p>
 <pre><span class="greeting">$</span> <span class="command">aptly -architectures="amd64,i386"  mirror create backports http://mirror.yandex.ru/backports.org/ squeeze-backports</span>
 ...
 
@@ -243,7 +258,7 @@ Don't forget to add your GPG key to apt with apt-key.
 ...
 </pre>
 
-    <p>Pull new version of <code>nginx</code> from <code>backports</code> to main Debian snapshot and save result as <code>snap-deb-w-nginx</code>.</p>
+    <p><a href="#aptly-snapshot-pull">Pull</a> new version of <code>nginx</code> from <code>backports</code> to main Debian snapshot and save result as <code>snap-deb-w-nginx</code>.</p>
 
 <pre><span class="greeting">$</span> <span class="command">aptly snapshot pull debian-3112 back snap-deb-w-nginx nginx</span>
 Dependencies would be pulled into snapshot:
@@ -268,7 +283,7 @@ Snapshot snap-deb-w-nginx successfully created.
 You can run 'aptly publish snapshot snap-deb-w-nginx' to publish snapshot as Debian repository.
 </pre>
 
-    <p>Snapshot <code>snap-deb-w-nginx</code> can be published as separate repository.</p>
+    <p>Snapshot <code>snap-deb-w-nginx</code> can be <a href="#aptly-publish-snapshot">published</a> as a separate repository.</p>
 
 <!-- ================ download ============== -->
 <div class="target-spacer" id="download"><a name="download"></a>&nbsp;</div>
@@ -1142,6 +1157,45 @@ Removing /var/aptly/public/dists/squeeze-backports...
 Removing /var/aptly/public/pool/contrib...
 </pre>
 
+<!-- ================ aptly serve ============== -->
+<div class="target-spacer" id="aptly-serve"><a name="aptly-serve"></a>&nbsp;</div>
+<h3>Command <code>serve</code></h3>
+
+  <p>aptly can serve published repositories using its own embedded webserver. This is not recommended for production
+     use, but is a quick way to try out published repository.</p>
+
+  <!-- ================ aptly serve ============== -->
+  <div class="target-spacer" id="aptly-serve-cmd"><a name="aptly-serve-cmd"></a>&nbsp;</div>
+  <h4>Command <code>aptly serve</code></h4>
+
+    <p>Command serve starts embedded HTTP server (not suitable for real production usage) to serve
+    contents of public/ subdirectory of aptly's root that contains published repositories. aptly would
+    print recommended <code>apt-sources</code> for the currently published repositories. By default aptly
+    would listen on port 8080, but this can be changed with flag <code>-listen</code>.</p>
+
+    <p>Usage:</p>
+
+    <pre><span class="greeting">$</span> <span class="command">aptly serve -listen=:8080</span></pre>
+
+    <p>Options:</p>
+
+    <ul>
+    <li>  <code>-listen=":8080"</code>: host:port for HTTP listening</li>
+    </ul>
+
+    <p>Example:</p>
+
+<pre><span class="greeting">$</span> <span class="command">aptly serve -listen=127.0.0.1:8765</span>
+Serving published repositories, recommended apt sources list:
+
+# ./maverick (main) [amd64, i386] publishes [snap1]: Snapshot from mirror [gnuplot-maverick]: http://ppa.launchpad.net/gladky-anton/gnuplot/ubuntu/ maverick
+deb http://127.0.0.1:8765/ maverick main
+# debian/maverick (main) [amd64, i386] publishes [snap2]: Snapshot from mirror [gnuplot-maverick]: http://ppa.launchpad.net/gladky-anton/gnuplot/ubuntu/ maverick
+deb http://127.0.0.1:8765/debian/ maverick main
+
+Starting web server at: 127.0.0.1:8765 (press Ctrl+C to quit)...
+</pre>
+
 <!-- ================ history ============== -->
 <div class="target-spacer" id="history"><a name="history"></a>&nbsp;</div>
 <h2>History</h2>
@@ -1152,7 +1206,8 @@ Removing /var/aptly/public/pool/contrib...
     <li><code>aptly snapshot show</code> doesn't show list of packages by default</li>
     <li>option <code>-with-packages</code> to show list of packages stored in mirror and snapshot</li>
     <li><a href="https://github.com/aptly-dev/aptly-bash-completion">bash completion</a> is now available for aptly</li>
-    <li>dropping snapshots and mirrors is supported</li>
+    <li>dropping <a href="#aptly-snapshot-drop">snapshots</a> and <a href="#aptly-mirror-drop">mirrors</a> is supported</li>
+    <li><a href="#aptly-serve">serving</a> published repositories</li>
   </ul>
 
 
