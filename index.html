@@ -159,7 +159,7 @@
         <strong>aptly is under heavy development right now</strong>, some essential things don't work yet:
         <ul>
           <li>source packages, debian-installer and translations not supported yet</li>
-          <li>checksums and signature are not verified while downloading</li>
+          <li>signature is not verified while downloading</li>
           <li>cleaning up stale files is not implemented</li>
         </ul>
       </div>
@@ -566,6 +566,13 @@ You can run 'aptly mirror update debian-main' to download repository contents.
     <li>  <code>name</code> is a mirror name (given when mirror was created)</li>
     </ul><p>All packages would be stored under aptly's root dir (see section on
     <a href="#configuration">Configuration</a>).</p>
+
+    <p>Options:</p>
+
+    <ul>
+    <li>  <code>-ignore-checksums=false</code>: ignore checksum mismatches for downloaded items (packages file, metadata)</li>
+    </ul>
+
 
     <p>Example:</p>
 
