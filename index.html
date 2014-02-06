@@ -417,9 +417,9 @@ You can run 'aptly publish snapshot snap-deb-w-nginx' to publish snapshot as Deb
       <li>  <code>dependencyFollowAllVariants</code>: when dependency looks like
       <code>package-a | package-b</code>, follow both variants always</li>
       <li>  <code>gpgDisableSign</code>: don't sign published repositories with <code>gpg</code>, also can be
-      disabled on per-repo basis using <code>--skip-signing</code> flag when publishing</li>
+      disabled on per-repo basis using <code>-skip-signing</code> flag when publishing</li>
       <li>  <code>gpgDisableVerify</code>: don't verify remote mirrors with <code>gpg</code>, also can be
-      disabled on per-mirror basis using <code>--ignore-signature</code> flag when creating and updating mirrors</li>
+      disabled on per-mirror basis using <code>-ignore-signatures</code> flag when creating and updating mirrors</li>
     </ul>
 
     <div class="alert alert-warning"><strong>Warning:</strong> <code>rootDir</code> contains all the downloaded packages from remote mirrors,
@@ -476,6 +476,8 @@ You can run 'aptly publish snapshot snap-deb-w-nginx' to publish snapshot as Deb
       </li>
       <li>  <code>publish</code>: publish snapshot as remote repo
       </li>
+      <li>  <code>serve</code>: quickly export published repositories via HTTP
+      </li>
       </ul>
 
 
@@ -513,7 +515,8 @@ You can run 'aptly publish snapshot snap-deb-w-nginx' to publish snapshot as Deb
   <div class="target-spacer" id="aptly-mirror-create"><a name="aptly-mirror-create"></a>&nbsp;</div>
   <h4>Command <code>aptly mirror create</code></h4>
 
-    <p>Creates mirror of remote repository. It supports only HTTP repositories.</p>
+    <p>Creates mirror of remote repository, only HTTP repositories are supported. aptly would try download
+    Release file from remote repository and verify its signature.</p>
 
     <p>Usage:</p>
 
@@ -534,6 +537,17 @@ You can run 'aptly publish snapshot snap-deb-w-nginx' to publish snapshot as Deb
     </li>
     </ul>
 
+    <p>Options:</p>
+
+    <ul>
+      <li>
+        <code>-ignore-signatures=false</code>: disable verification of Release file signatures
+      </li>
+      <li>
+        <code>-keyring=trustedkeys.gpg</code> gpg keyring to use when verifying Release file (could be specified multiple times)
+      </li>
+    </ul>
+
     <p>By default aptly would download packages for all available architectures.
     If architectures are limited (with config <code>architectures</code> or option
     <code>-architectures</code>), only packages for those architectures are downloaded</p>
@@ -541,6 +555,27 @@ You can run 'aptly publish snapshot snap-deb-w-nginx' to publish snapshot as Deb
     <div class="alert alert-info">If components are not specified, aptly will download packages from all
     components and merge it into one when publishing. If components should be left separate, please
     create separate mirror for each component.</div>
+
+    <p>aptly would try to verify signature of Release files using GnuPG. By default, keyring <code>~/.gnupg/trustedkeys.gpg</code>
+    would be used. If you would like to use different keyring(s), specify them using <code>-keyring</code> flag. aptly would
+    advise <code>gpg</code> commands to import keys into trusted keys keyring in order to successfully verify repository signature.
+    </p>
+
+    <p>If aptly is running on Debian/Ubuntu machine, it would be good to import archive signing keys shipped with the operating system:</p>
+
+<pre><span class="greeting">$</span> <span class="command">gpg --keyring /usr/share/keyrings/debian-archive-keyring.gpg --export | gpg --no-default-keyring --keyring trustedkeys.gpg --import</span></pre>
+
+    <p class="small">If you're running Ubuntu, use <code>/usr/share/keyrings/ubuntu-archive-keyring.gpg</code></p>
+
+    <p>If GnuPG is complaining that required key to verify signature is missing, it would report key ID, e.g. <code>46925553</code>. Keys
+    could be downloaded from public keyserver and imported into trusted keyring using command:</p>
+
+    <pre><span class="greeting">$</span> <span class="command">gpg --no-default-keyring --keyring trustedkeys.gpg --keyserver keys.gnupg.net --recv-keys 46925553</span></pre>
+
+    <p class="small">Replace <code>46925553</code> with the key ID GnuPG is complaining about.</p>
+
+    <p>You can learn about signed Debian repositories in <a href="https://wiki.debian.org/SecureApt">Debian wiki</a>. If you would like to disable
+    signature checks, you can use flag <code>-ignore-signatures</code> or configuration setting <code>gpgDisableVerify</code>.</p>
 
     <p>Example:</p>
 
@@ -575,8 +610,19 @@ You can run 'aptly mirror update debian-main' to download repository contents.
     <p>Options:</p>
 
     <ul>
-    <li>  <code>-ignore-checksums=false</code>: ignore checksum mismatches for downloaded items (packages file, metadata)</li>
+      <li>
+        <code>-ignore-checksums=false</code>: ignore checksum mismatches for downloaded items (packages file, metadata)
+      </li>
+      <li>
+        <code>-ignore-signatures=false</code>: disable verification of Release file signatures
+      </li>
+      <li>
+        <code>-keyring=trustedkeys.gpg</code> gpg keyring to use when verifying Release file (could be specified multiple times)
+      </li>
     </ul>
+
+    <p>While updating mirror, aptly would verify signature of Release file using GnuPG. Please read information about signature verification
+    in <a href="#aptly-mirror-create">aptly mirror create</a> command description.</p>
 
 
     <p>Example:</p>
