@@ -158,8 +158,7 @@
       <div class="alert alert-danger">
         <strong>aptly is under heavy development right now</strong>, some essential things don't work yet:
         <ul>
-          <li>source packages, debian-installer and translations not supported yet</li>
-          <li>signature is not verified while downloading</li>
+          <li>flat repos, source packages, debian-installer and translations not supported yet</li>
           <li>cleaning up stale files is not implemented</li>
         </ul>
       </div>
@@ -392,8 +391,10 @@ You can run 'aptly publish snapshot snap-deb-w-nginx' to publish snapshot as Deb
   "downloadConcurrency": 4,
   "architectures": [],
   "dependencyFollowSuggests": false,
-  "dependencyFollowRecommends": false,
-  "dependencyFollowAllVariants": false
+  "dependencyFollowRecommends": false
+  "dependencyFollowAllVariants": false,
+  "gpgDisableSign": false,
+  "gpgDisableVerify": false
 }
 </pre>
 
@@ -415,6 +416,10 @@ You can run 'aptly publish snapshot snap-deb-w-nginx' to publish snapshot as Deb
       when processing dependencies for the package</li>
       <li>  <code>dependencyFollowAllVariants</code>: when dependency looks like
       <code>package-a | package-b</code>, follow both variants always</li>
+      <li>  <code>gpgDisableSign</code>: don't sign published repositories with <code>gpg</code>, also can be
+      disabled on per-repo basis using <code>--skip-signing</code> flag when publishing</li>
+      <li>  <code>gpgDisableVerify</code>: don't verify remote mirrors with <code>gpg</code>, also can be
+      disabled on per-mirror basis using <code>--ignore-signature</code> flag when creating and updating mirrors</li>
     </ul>
 
     <div class="alert alert-warning"><strong>Warning:</strong> <code>rootDir</code> contains all the downloaded packages from remote mirrors,
@@ -1000,6 +1005,9 @@ Snapshot `snap-wheezy` has been dropped.</pre>
     imported into apt keyring on all machines that would be using published
     repositories using <code>apt-key</code>.</p>
 
+    <p>Signing releases is highly recommended, but if you want to skip it, you can either use
+    <code>gpgDisableSign</code> configuration option or <code>--skip-signing</code> flag.</p>
+
 
   <!-- ================ aptly publish shapshot ============== -->
   <div class="target-spacer" id="aptly-publish-snapshot"><a name="aptly-publish-snapshot"></a>&nbsp;</div>
@@ -1033,6 +1041,7 @@ Snapshot `snap-wheezy` has been dropped.</pre>
     original repository distribution</li>
     <li>  <code>-gpg-key=""</code>: GPG key ID to use when signing the release, if not
     specified default key is used</li>
+    <li>  <code>-skip-signing=false</code>: don't sign Release files with GPG
     </ul>
 
     <p>If architectures are limited (with config <code>architectures</code> or option
@@ -1215,6 +1224,8 @@ Starting web server at: 127.0.0.1:8765 (press Ctrl+C to quit)...
     <li><a href="https://github.com/aptly-dev/aptly-bash-completion">bash completion</a> is now available for aptly</li>
     <li>dropping <a href="#aptly-snapshot-drop">snapshots</a> and <a href="#aptly-mirror-drop">mirrors</a> is supported</li>
     <li><a href="#aptly-serve">serving</a> published repositories</li>
+    <li>aptly does checksum validation when downloading from remote mirrors</li>
+    <li>aptly verifies crypto signature on Release files</li>
   </ul>
 
 
