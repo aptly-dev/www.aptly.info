@@ -761,6 +761,30 @@ Snapshot monday-updates successfully created.
 You can run 'aptly publish snapshot monday-updates' to publish snapshot as Debian repository.
 </pre>
 
+  <div class="target-spacer">&nbsp;</div>
+  <h4>Command <code>aptly snapshot create .. empty</code></h4>
+
+    <p>Creates empty snapshot. As snapshots are immutable, creating one empty snapshot should be enough. Empty snapshots
+    could be used as first snapshot while pulling packages to create completely defined set of packages.</p>
+
+    <p>Usage:</p>
+
+    <pre><span class="greeting">$</span> <span class="command">aptly snapshot create &lt;name&gt; empty</span></pre>
+
+    <p>Params are:</p>
+
+    <ul>
+    <li>  <code>name</code> is a name for the snapshot to be created</li>
+    </ul>
+
+    <p>Example:</p>
+
+<pre><span class="greeting">$</span> <span class="command">aptly snapshot create empty-snapshot empty</span>
+
+Snapshot empty-snapshot successfully created.
+You can run 'aptly publish snapshot empty-snapshot' to publish snapshot as Debian repository.
+</pre>
+
   <!-- ================ aptly snapshot list ============== -->
   <div class="target-spacer" id="aptly-snapshot-list"><a name="aptly-snapshot-list"></a>&nbsp;</div>
   <h4>Command <code>aptly snapshot list</code></h4>
@@ -1272,6 +1296,7 @@ Starting web server at: 127.0.0.1:8765 (press Ctrl+C to quit)...
     <li><a href="#aptly-serve">serving</a> published repositories</li>
     <li>aptly does checksum validation when downloading from remote mirrors</li>
     <li>aptly verifies crypto signature on Release files</li>
+    <li>aptly can create empty snapshots</li>
   </ul>
 
 
