@@ -379,7 +379,8 @@ You can run 'aptly publish snapshot snap-deb-w-nginx' to publish snapshot as Deb
 <h2>Configuration</h2>
 
     <p>aptly looks for configuration file in <code>/etc/aptly.conf</code> and
-    <code>~/.aptly.conf</code>, if no config file found, new one is created. Also aptly
+    <code>~/.aptly.conf</code>, if no config file found, new one is created. If <code>-config=</code> flag is
+    specified, aptly would use config file at specified location. Also aptly
     needs root directory for database, package and published repository
     storage. If not specified, directory defaults to <code>~/.aptly</code>, it will be
     created if missing.</p>
@@ -483,27 +484,38 @@ You can run 'aptly publish snapshot snap-deb-w-nginx' to publish snapshot as Deb
 
   <!-- ================ common options ============== -->
   <div class="target-spacer" id="common-options"><a name="common-options"></a>&nbsp;</div>
-  <h3>Common Options</h3>
+  <h3>Global Flags</h3>
 
-      <p>There are several options that should be specfied right before command
+      <p>There are several flags that should be specfied right before command
       name:</p>
 
         <pre><span class="greeting">$</span> <span class="command">aptly --option1 command ...</span></pre>
 
-      <p>These options are:</p>
+      <p>These flags are:</p>
 
         <ul>
-        <li>  <code>-architectures=""</code>: list of architectures to consider during
-        (comma-separated), default to all available</li>
-        <li>  <code>-dep-follow-all-variants=false</code>: when processing dependencies,
-        follow a &amp; b if depdency is 'a|b'</li>
-        <li>  <code>-dep-follow-recommends=false</code>: when processing dependencies, follow
-        Recommends</li>
-        <li>  <code>-dep-follow-suggests=false</code>: when processing dependencies, follow
-        Suggests</li>
+        <li>
+          <code>-architectures=""</code>: list of architectures to consider during
+          (comma-separated), default to all available
+        </li>
+        <li>
+          <code>-config=""</code>: location of configuration file (default locations are
+          <code>/etc/aptly.conf</code>, <code>~/.aptly.conf</code>)
+        </li>
+        <li>
+          <code>-dep-follow-all-variants=false</code>: when processing dependencies,
+          follow a &amp; b if depdency is 'a|b'
+        </li>
+        <li>
+          <code>-dep-follow-recommends=false</code>: when processing dependencies, follow
+            Recommends
+        </li>
+        <li>
+          <code>-dep-follow-suggests=false</code>: when processing dependencies, follow
+          Suggests</li>
         </ul>
 
-      <p>Common options override configuration parameters with similar names.</p>
+      <p>Global flags override configuration parameters with similar names.</p>
 
 <!-- ================ aptly mirror ============== -->
 <div class="target-spacer" id="aptly-mirror"><a name="aptly-mirror"></a>&nbsp;</div>
@@ -537,7 +549,7 @@ You can run 'aptly publish snapshot snap-deb-w-nginx' to publish snapshot as Deb
     </li>
     </ul>
 
-    <p>Options:</p>
+    <p>Flags:</p>
 
     <ul>
       <li>
@@ -607,7 +619,7 @@ You can run 'aptly mirror update debian-main' to download repository contents.
     </ul><p>All packages would be stored under aptly's root dir (see section on
     <a href="#configuration">Configuration</a>).</p>
 
-    <p>Options:</p>
+    <p>Flags:</p>
 
     <ul>
       <li>
@@ -671,7 +683,7 @@ To get more information about repository, run `aptly mirror show &lt;name&gt;`.
     <li>  <code>name</code> is a mirror name (given when mirror was created)</li>
     </ul>
 
-    <p>Options:</p>
+    <p>Flags:</p>
 
     <ul>
     <li>  <code>-with-packages=false</code>: show detailed list of packages and versions stored in the mirror</li>
@@ -716,7 +728,7 @@ Information from release file:
     creation</li>
     </ul>
 
-    <p>Options:</p>
+    <p>Flags:</p>
 
     <ul>
     <li>  <code>-force=false</code>: drop mirror even if it used as source of some snapshot</li>
@@ -825,7 +837,7 @@ To get more information about snapshot, run `aptly snapshot show &lt;name&gt;`.
     creation</li>
     </ul>
 
-    <p>Options:</p>
+    <p>Flags:</p>
 
     <ul>
     <li>  <code>-with-packages=false</code>: show detailed list of packages and versions stored in the mirror</li>
@@ -909,7 +921,7 @@ Missing dependencies (7):
     to restrict search to specific version</li>
     </ul>
 
-    <p>Options:</p>
+    <p>Flags:</p>
 
     <ul>
     <li>  <code>-dry-run=false</code>: don't create destination snapshot, just show what
@@ -973,7 +985,7 @@ You can run 'aptly publish snapshot snap-deb-main-w-xorg' to publish snapshot as
     </ul>
 
 
-    <p>Options:</p>
+    <p>Flags:</p>
 
     <ul>
     <li>  <code>-only-matching=false</code>: display diff only for matching packages
@@ -1040,7 +1052,7 @@ You can run 'aptly publish snapshot debian-w-backports' to publish snapshot as D
     creation</li>
     </ul>
 
-    <p>Options:</p>
+    <p>Flags:</p>
 
     <ul>
     <li>  <code>-force=false</code>: drop snapshot even if it used as source in other snapshots</li>
@@ -1102,7 +1114,7 @@ Snapshot `snap-wheezy` has been dropped.</pre>
     would be converted to <code>.</code>.</li>
     </ul>
 
-    <p>Options:</p>
+    <p>Flags:</p>
 
     <ul>
     <li>  <code>-component=""</code>: component name to publish; guessed from original
@@ -1263,7 +1275,7 @@ Removing /var/aptly/public/pool/contrib...
 
     <pre><span class="greeting">$</span> <span class="command">aptly serve -listen=:8080</span></pre>
 
-    <p>Options:</p>
+    <p>Flags:</p>
 
     <ul>
     <li>  <code>-listen=":8080"</code>: host:port for HTTP listening</li>
@@ -1297,6 +1309,7 @@ Starting web server at: 127.0.0.1:8765 (press Ctrl+C to quit)...
     <li>aptly does checksum validation when downloading from remote mirrors</li>
     <li>aptly verifies crypto signature on Release files</li>
     <li>aptly can create empty snapshots</li>
+    <li>new global flag <code>-config</code> to override default config location</li>
   </ul>
 
 
