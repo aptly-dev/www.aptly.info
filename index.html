@@ -158,7 +158,7 @@
       <div class="alert alert-danger">
         <strong>aptly is under heavy development right now</strong>, some essential things don't work yet:
         <ul>
-          <li>flat repos, source packages, debian-installer and translations not supported yet</li>
+          <li>source packages, debian-installer and translations not supported yet</li>
           <li>cleaning up stale files is not implemented</li>
         </ul>
       </div>
@@ -527,7 +527,7 @@ You can run 'aptly publish snapshot snap-deb-w-nginx' to publish snapshot as Deb
   <div class="target-spacer" id="aptly-mirror-create"><a name="aptly-mirror-create"></a>&nbsp;</div>
   <h4>Command <code>aptly mirror create</code></h4>
 
-    <p>Creates mirror of remote repository, only HTTP repositories are supported. aptly would try download
+    <p>Creates mirror of remote repository, aptly supports both regular and flat Debian repositories exported via HTTP. aptly would try download
     Release file from remote repository and verify its signature.</p>
 
     <p>Usage:</p>
@@ -542,7 +542,7 @@ You can run 'aptly publish snapshot snap-deb-w-nginx' to publish snapshot as Deb
     <li>  <code>archive url</code> is a root of archive, e.g.
     <a href="http://ftp.ru.debian.org/debian/">http://ftp.ru.debian.org/debian/</a>
     </li>
-    <li>  <code>distribution</code> is a distribution name, e.g. <code>squeeze</code>
+    <li>  <code>distribution</code> is a distribution name, e.g. <code>squeeze</code>, for flat repositories use <code>./</code> instead of distribution name
     </li>
     <li>  <code>component1</code> is an optional list of components to download, if not
     specified aptly would fetch all components, e.g. <code>main</code>
@@ -585,6 +585,11 @@ You can run 'aptly publish snapshot snap-deb-w-nginx' to publish snapshot as Deb
     <pre><span class="greeting">$</span> <span class="command">gpg --no-default-keyring --keyring trustedkeys.gpg --keyserver keys.gnupg.net --recv-keys 46925553</span></pre>
 
     <p class="small">Replace <code>46925553</code> with the key ID GnuPG is complaining about.</p>
+
+    <p>If you're mirroring flat repository, sometimes repository key is located near release files, so you can download it and import into
+    your trusted keychain:</p>
+
+    <pre><span class="greeting">$</span> <span class="command">wget -O - http://some.repo/repository/Release.key | gpg --no-default-keyring --keyring trustedkeys.gpg --import</span></pre>
 
     <p>You can learn about signed Debian repositories in <a href="https://wiki.debian.org/SecureApt">Debian wiki</a>. If you would like to disable
     signature checks, you can use flag <code>-ignore-signatures</code> or configuration setting <code>gpgDisableVerify</code>.</p>
@@ -1310,6 +1315,7 @@ Starting web server at: 127.0.0.1:8765 (press Ctrl+C to quit)...
     <li>aptly verifies crypto signature on Release files</li>
     <li>aptly can create empty snapshots</li>
     <li>new global flag <code>-config</code> to override default config location</li>
+    <li>Debian flat repositories are now supported</li>
   </ul>
 
 
