@@ -60,8 +60,9 @@
                 <li><a href="#aptly-publish-list">aptly publish list</a></li>
                 <li><a href="#aptly-publish-drop">aptly publish drop</a></li>
                 <li class="divider"></li>
-                <li class="dropdown-header">serve</li>
+                <li class="dropdown-header">misc</li>
                 <li><a href="#aptly-serve">aptly serve</a></li>
+                <li><a href="#aptly-graph">aptly graph</a></li>
               </ul>
             </li>
           </ul>
@@ -1299,6 +1300,32 @@ deb http://127.0.0.1:8765/debian/ maverick main
 Starting web server at: 127.0.0.1:8765 (press Ctrl+C to quit)...
 </pre>
 
+
+<!-- ================ aptly graph ============== -->
+<div class="target-spacer" id="aptly-graph"><a name="aptly-graph"></a>&nbsp;</div>
+<h3>Command <code>graph</code></h3>
+
+  <p>aptly generates graph showing depedencies between mirrors, snapshots and published repositories.</p>
+
+  <!-- ================ aptly graph ============== -->
+  <div class="target-spacer" id="aptly-graph-cmd"><a name="aptly-graph-cmd"></a>&nbsp;</div>
+  <h4>Command <code>aptly graph</code></h4>
+
+    <p>Command graph generates graph of dependencies between snapshots and (what mirrors were used
+    to create each snapshots), between snapshots (pulling, merging, etc.) and between snapshots and
+    published repositories (how snapshots were published). Graph is rendered to PNG file using
+    graphviz package.</p>
+
+    <p>Usage:</p>
+
+    <pre><span class="greeting">$</span> <span class="command">aptly graph</span></pre>
+
+
+    <p>Example:</p>
+
+    <p><a href="graphfull.png"><img class="img-responsive" alt="Example graph from aptly graph" src="graph.png"></a></p>
+
+
 <!-- ================ history ============== -->
 <div class="target-spacer" id="history"><a name="history"></a>&nbsp;</div>
 <h2>History</h2>
@@ -1316,6 +1343,7 @@ Starting web server at: 127.0.0.1:8765 (press Ctrl+C to quit)...
     <li>aptly can create empty snapshots</li>
     <li>new global flag <code>-config</code> to override default config location</li>
     <li>Debian flat repositories are now supported</li>
+    <li>command <a href="#aptly-graph">aptly graph</a> can generate graph of dependencies</li>
   </ul>
 
 
