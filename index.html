@@ -43,6 +43,7 @@
                 <li><a href="#aptly-mirror-update">aptly mirror update</a></li>
                 <li><a href="#aptly-mirror-list">aptly mirror list</a></li>
                 <li><a href="#aptly-mirror-show">aptly mirror show</a></li>
+                <li><a href="#aptly-mirror-drop">aptly mirror drop</a></li>
                 <li class="divider"></li>
                 <li class="dropdown-header">snapshot</li>
                 <li><a href="#aptly-snapshot-create">aptly snapshot create</a></li>
@@ -52,11 +53,16 @@
                 <li><a href="#aptly-snapshot-pull">aptly snapshot pull</a></li>
                 <li><a href="#aptly-snapshot-diff">aptly snapshot diff</a></li>
                 <li><a href="#aptly-snapshot-merge">aptly snapshot merge</a></li>
+                <li><a href="#aptly-snapshot-drop">aptly snapshot drop</a></li>
                 <li class="divider"></li>
                 <li class="dropdown-header">publish</li>
                 <li><a href="#aptly-publish-snapshot">aptly publish snapshot</a></li>
                 <li><a href="#aptly-publish-list">aptly publish list</a></li>
                 <li><a href="#aptly-publish-drop">aptly publish drop</a></li>
+                <li class="divider"></li>
+                <li class="dropdown-header">misc</li>
+                <li><a href="#aptly-serve">aptly serve</a></li>
+                <li><a href="#aptly-graph">aptly graph</a></li>
               </ul>
             </li>
           </ul>
@@ -154,8 +160,6 @@
         <strong>aptly is under heavy development right now</strong>, some essential things don't work yet:
         <ul>
           <li>source packages, debian-installer and translations not supported yet</li>
-          <li>checksums and signature are not verified while downloading</li>
-          <li>deleting created items is not implemented</li>
           <li>cleaning up stale files is not implemented</li>
         </ul>
       </div>
@@ -168,7 +172,7 @@
       <p class="lead">Mirror main Debian repository for distribution squeeze only for architectures <code>i386</code>,
       <code>amd64</code> and publish the result.</p>
 
-      <p>Create mirror:</p>
+      <p><a href="#aptly-mirror-create">Create</a> mirror:</p>
 
 <pre><span class="greeting">$</span> <span class="command">aptly -architectures="amd64,i386"  mirror create debian-main http://ftp.ru.debian.org/debian/ squeeze main</span>
 2013/12/28 19:44:45 Downloading http://ftp.ru.debian.org/debian/dists/squeeze/Release...
@@ -178,7 +182,7 @@ Mirror [debian-main]: http://ftp.ru.debian.org/debian/ squeeze successfully adde
 You can run 'aptly mirror update debian-main' to download repository contents.
 </pre>
 
-      <p>Download mirror contents:</p>
+      <p><a href="#aptly-mirror-update">Download</a> mirror contents:</p>
 <pre><span class="greeting">$</span> <span class="command">aptly mirror update debian-main</span>
 2014/01/15 16:50:50 Downloading http://ftp.ru.debian.org/debian/dists/squeeze/Release...
 Downloading &amp; parsing release files...
@@ -187,7 +191,7 @@ Saving packages to database...
 Building download queue...
 Download queue: 27960 items, 30.68 GiB size</pre>
 
-      <p>Take snapshot:</p>
+      <p><a href="#aptly-snapshot-create">Take</a> snapshot:</p>
 
 <pre><span class="greeting">$</span> <span class="command">aptly snapshot create debian-3112 from mirror debian-main</span>
 
@@ -195,14 +199,14 @@ Snapshot debian-3112 successfully created.
 You can run 'aptly publish snapshot debian-3112' to publish snapshot as Debian repository.
 </pre>
 
-    <p>Publish snapshot (requires generated GPG key):</p>
+    <p><a href="#aptly-publish-snapshot">Publish</a> snapshot (requires generated GPG key):</p>
 
 <pre><span class="greeting">$</span> <span class="command">aptly publish snapshot debian-3112</span>
 
 ...
 
-Snapshot back has been successfully published.
-Please setup your webserver to serve directory '/var/aptly/public' with autoindexing.
+Snapshot debian-3112 has been successfully published.
+Please setup your webserver to serve directory '/home/example/.aptly/public' with autoindexing.
 Now you can add following line to apt sources:
   deb http://your-server/ squeeze main
 Don't forget to add your GPG key to apt with apt-key.
@@ -225,13 +229,25 @@ Don't forget to add your GPG key to apt with apt-key.
 <pre>deb http://mirror.local/ squeeze main
 </pre>
 
+    <p>Alternatively, you can <a href="#aptly-serve">serve</a> published repositories with aptly itself:</p>
+
+<pre><span class="greeting">$</span> <span class="command">aptly serve</span>
+Serving published repositories, recommended apt sources list:
+
+# ./squeeze (main) [amd64, i386] publishes [debian-3112]: Snapshot from mirror [debian-main]: http://ftp.ru.debian.org/debian/ squeeze
+deb http://localhost:8080/ squeeze main
+
+Starting web server at: :8080 (press Ctrl+C to quit)...
+</pre>
+
   <p>Run apt-get to fetch repository metadata:</p>
 
 <pre><span class="greeting">$</span> <span class="command">apt-get update</span></pre>
 
   <p class="lead">Pulling new version of <code>nginx</code> from <code>backports</code>.</p>
 
-  <p>Create <code>backports</code> mirror, download it and take snapshot:</p>
+  <p><a href="#aptly-mirror-create">Create</a> <code>backports</code> mirror, <a href="#aptly-mirror-update">download</a> it
+      and <a href="#aplty-snapshot-create">take</a> snapshot:</p>
 <pre><span class="greeting">$</span> <span class="command">aptly -architectures="amd64,i386"  mirror create backports http://mirror.yandex.ru/backports.org/ squeeze-backports</span>
 ...
 
@@ -242,7 +258,7 @@ Don't forget to add your GPG key to apt with apt-key.
 ...
 </pre>
 
-    <p>Pull new version of <code>nginx</code> from <code>backports</code> to main Debian snapshot and save result as <code>snap-deb-w-nginx</code>.</p>
+    <p><a href="#aptly-snapshot-pull">Pull</a> new version of <code>nginx</code> from <code>backports</code> to main Debian snapshot and save result as <code>snap-deb-w-nginx</code>.</p>
 
 <pre><span class="greeting">$</span> <span class="command">aptly snapshot pull debian-3112 back snap-deb-w-nginx nginx</span>
 Dependencies would be pulled into snapshot:
@@ -267,25 +283,24 @@ Snapshot snap-deb-w-nginx successfully created.
 You can run 'aptly publish snapshot snap-deb-w-nginx' to publish snapshot as Debian repository.
 </pre>
 
-    <p>Snapshot <code>snap-deb-w-nginx</code> can be published as separate repository.</p>
+    <p>Snapshot <code>snap-deb-w-nginx</code> can be <a href="#aptly-publish-snapshot">published</a> as a separate repository.</p>
 
 <!-- ================ download ============== -->
 <div class="target-spacer" id="download"><a name="download"></a>&nbsp;</div>
 <h2>Download</h2>
 
-    <p class="lead">Currently released aptly version is <strong>0.2</strong>, which is considered to be alpha quality.
+    <p class="lead">Currently released aptly version is <strong>0.3</strong>, which is considered to be beta quality.
     </p>
 
     <p>Roadmap:</p>
 
     <ul>
-      <li>0.3 (Feb 17th): deletion of mirrors and snapshots, verifying crypto signatures, hashes when downloading
-      <li>0.4 (end of Feb): repositories of self-made packages, support
-          for source packages &amp; translations</li>
+      <li>0.4 (end of Feb): repositories of self-made packages, support for source packages &amp; translations</li>
+      <li>0.5 (mid-March): searching &amp; filtering</li>
     </ul>
 
     <p><strong>Binary</strong> executables (depends almost only on libc) for Debian, CentOS, MacOS X &amp; FreeBSD are available for
-    download from <a href="http://dl.bintray.com/smira/aptly/0.2/">Bintray</a>.</p>
+    download from <a href="http://dl.bintray.com/smira/aptly/0.3/">Bintray</a>.</p>
 
       <div class="row">
         <div class="col-lg-6">
@@ -293,16 +308,16 @@ You can run 'aptly publish snapshot snap-deb-w-nginx' to publish snapshot as Deb
             <img src="debian.png" alt="Debian" class="logo">
           </div>
           <h4>Debian (Ubuntu)</h4>
-          <p>squeeze: <a href="http://dl.bintray.com/smira/aptly/0.2/debian-squeeze-x32/aptly">32-bit</a> |
-                      <a href="http://dl.bintray.com/smira/aptly/0.2/debian-squeeze-x64/aptly">64-bit</a></p>
+          <p>squeeze: <a href="http://dl.bintray.com/smira/aptly/0.3/debian-squeeze-x32/aptly">32-bit</a> |
+                      <a href="http://dl.bintray.com/smira/aptly/0.3/debian-squeeze-x64/aptly">64-bit</a></p>
         </div>
         <div class="col-lg-6">
           <div class="pull-left">
             <img src="centos.png" alt="CentOS" class="logo">
           </div>
           <h4>CentOS (RedHat, Fedora)</h4>
-          <p>6.5: <a href="http://dl.bintray.com/smira/aptly/0.2/centos-6.5-x32/aptly">32-bit</a> |
-                  <a href="http://dl.bintray.com/smira/aptly/0.2/centos-6.5-x64/aptly">64-bit</a></p>
+          <p>6.5: <a href="http://dl.bintray.com/smira/aptly/0.3/centos-6.5-x32/aptly">32-bit</a> |
+                  <a href="http://dl.bintray.com/smira/aptly/0.3/centos-6.5-x64/aptly">64-bit</a></p>
         </div>
       </div>
       <div class="row">
@@ -311,15 +326,15 @@ You can run 'aptly publish snapshot snap-deb-w-nginx' to publish snapshot as Deb
             <img src="freebsd.png" alt="FreeBSD" class="logo">
           </div>
           <h4>FreeBSD</h4>
-          <p>9.2: <a href="http://dl.bintray.com/smira/aptly/0.2/freebsd-9.2-x32/aptly">32-bit</a> |
-                  <a href="http://dl.bintray.com/smira/aptly/0.2/freebsd-9.2-x64/aptly">64-bit</a></p>
+          <p>9.2: <a href="http://dl.bintray.com/smira/aptly/0.3/freebsd-9.2-x32/aptly">32-bit</a> |
+                  <a href="http://dl.bintray.com/smira/aptly/0.3/freebsd-9.2-x64/aptly">64-bit</a></p>
         </div>
         <div class="col-lg-6">
           <div class="pull-left">
             <img src="macosx.png" alt="Mac OS X" class="logo">
           </div>
           <h4>Mac OS X</h4>
-          <p>10.9: <a href="http://dl.bintray.com/smira/aptly/0.2/osx/aptly">64-bit</a></p>
+          <p>10.9: <a href="http://dl.bintray.com/smira/aptly/0.3/osx/aptly">64-bit</a></p>
         </div>
       </div>
       <div class="row">
@@ -328,7 +343,7 @@ You can run 'aptly publish snapshot snap-deb-w-nginx' to publish snapshot as Deb
         <div class="col-lg-4">
           <p>
             <a href='http://www.bintray.com/smira/aptly/aptly'>
-              <img src='http://www.bintray.com/docs/images/poweredByBintray_ColorTransparent.png' width="100" height="55">
+              <img src='http://www.bintray.com/docs/images/poweredByBintray_ColorTransparent.png' width="100" height="55" alt="BinTray logo">
             </a>
           </p>
         </div>
@@ -336,9 +351,12 @@ You can run 'aptly publish snapshot snap-deb-w-nginx' to publish snapshot as Deb
         </div>
       </div>
 
-    <p>Just copy binary to your machine and run it:</p>
+    <p>Just copy binary to your machine, make it executable and run it:</p>
 
-    <pre><span class="greeting">$</span> <span class="command">./aptly</span></pre>
+<pre><span class="greeting">$</span> <span class="command">chmod +x aptly</span>
+<span class="greeting">$</span> <span class="command">./aptly</span></pre>
+
+    <p><strong>Bash completion</strong> for aptly is available as <a href="https://github.com/aptly-dev/aptly-bash-completion">separate repo</a>.</p>
 
     <p>If you have Go environment set up (go 1.1+ required), you can build aptly from <strong>source</strong> by
     running:</p>
@@ -361,7 +379,8 @@ You can run 'aptly publish snapshot snap-deb-w-nginx' to publish snapshot as Deb
 <h2>Configuration</h2>
 
     <p>aptly looks for configuration file in <code>/etc/aptly.conf</code> and
-    <code>~/.aptly.conf</code>, if no config file found, new one is created. Also aptly
+    <code>~/.aptly.conf</code>, if no config file found, new one is created. If <code>-config=</code> flag is
+    specified, aptly would use config file at specified location. Also aptly
     needs root directory for database, package and published repository
     storage. If not specified, directory defaults to <code>~/.aptly</code>, it will be
     created if missing.</p>
@@ -373,8 +392,10 @@ You can run 'aptly publish snapshot snap-deb-w-nginx' to publish snapshot as Deb
   "downloadConcurrency": 4,
   "architectures": [],
   "dependencyFollowSuggests": false,
-  "dependencyFollowRecommends": false,
-  "dependencyFollowAllVariants": false
+  "dependencyFollowRecommends": false
+  "dependencyFollowAllVariants": false,
+  "gpgDisableSign": false,
+  "gpgDisableVerify": false
 }
 </pre>
 
@@ -396,6 +417,10 @@ You can run 'aptly publish snapshot snap-deb-w-nginx' to publish snapshot as Deb
       when processing dependencies for the package</li>
       <li>  <code>dependencyFollowAllVariants</code>: when dependency looks like
       <code>package-a | package-b</code>, follow both variants always</li>
+      <li>  <code>gpgDisableSign</code>: don't sign published repositories with <code>gpg</code>, also can be
+      disabled on per-repo basis using <code>-skip-signing</code> flag when publishing</li>
+      <li>  <code>gpgDisableVerify</code>: don't verify remote mirrors with <code>gpg</code>, also can be
+      disabled on per-mirror basis using <code>-ignore-signatures</code> flag when creating and updating mirrors</li>
     </ul>
 
     <div class="alert alert-warning"><strong>Warning:</strong> <code>rootDir</code> contains all the downloaded packages from remote mirrors,
@@ -452,32 +477,45 @@ You can run 'aptly publish snapshot snap-deb-w-nginx' to publish snapshot as Deb
       </li>
       <li>  <code>publish</code>: publish snapshot as remote repo
       </li>
+      <li>  <code>serve</code>: quickly export published repositories via HTTP
+      </li>
       </ul>
 
 
   <!-- ================ common options ============== -->
   <div class="target-spacer" id="common-options"><a name="common-options"></a>&nbsp;</div>
-  <h3>Common Options</h3>
+  <h3>Global Flags</h3>
 
-      <p>There are several options that should be specfied right before command
+      <p>There are several flags that should be specfied right before command
       name:</p>
 
         <pre><span class="greeting">$</span> <span class="command">aptly --option1 command ...</span></pre>
 
-      <p>These options are:</p>
+      <p>These flags are:</p>
 
         <ul>
-        <li>  <code>-architectures=""</code>: list of architectures to consider during
-        (comma-separated), default to all available</li>
-        <li>  <code>-dep-follow-all-variants=false</code>: when processing dependencies,
-        follow a &amp; b if depdency is 'a|b'</li>
-        <li>  <code>-dep-follow-recommends=false</code>: when processing dependencies, follow
-        Recommends</li>
-        <li>  <code>-dep-follow-suggests=false</code>: when processing dependencies, follow
-        Suggests</li>
+        <li>
+          <code>-architectures=""</code>: list of architectures to consider during
+          (comma-separated), default to all available
+        </li>
+        <li>
+          <code>-config=""</code>: location of configuration file (default locations are
+          <code>/etc/aptly.conf</code>, <code>~/.aptly.conf</code>)
+        </li>
+        <li>
+          <code>-dep-follow-all-variants=false</code>: when processing dependencies,
+          follow a &amp; b if depdency is 'a|b'
+        </li>
+        <li>
+          <code>-dep-follow-recommends=false</code>: when processing dependencies, follow
+            Recommends
+        </li>
+        <li>
+          <code>-dep-follow-suggests=false</code>: when processing dependencies, follow
+          Suggests</li>
         </ul>
 
-      <p>Common options override configuration parameters with similar names.</p>
+      <p>Global flags override configuration parameters with similar names.</p>
 
 <!-- ================ aptly mirror ============== -->
 <div class="target-spacer" id="aptly-mirror"><a name="aptly-mirror"></a>&nbsp;</div>
@@ -489,7 +527,8 @@ You can run 'aptly publish snapshot snap-deb-w-nginx' to publish snapshot as Deb
   <div class="target-spacer" id="aptly-mirror-create"><a name="aptly-mirror-create"></a>&nbsp;</div>
   <h4>Command <code>aptly mirror create</code></h4>
 
-    <p>Creates mirror of remote repository. It supports only HTTP repositories.</p>
+    <p>Creates mirror of remote repository, aptly supports both regular and flat Debian repositories exported via HTTP. aptly would try download
+    Release file from remote repository and verify its signature.</p>
 
     <p>Usage:</p>
 
@@ -503,11 +542,22 @@ You can run 'aptly publish snapshot snap-deb-w-nginx' to publish snapshot as Deb
     <li>  <code>archive url</code> is a root of archive, e.g.
     <a href="http://ftp.ru.debian.org/debian/">http://ftp.ru.debian.org/debian/</a>
     </li>
-    <li>  <code>distribution</code> is a distribution name, e.g. <code>squeeze</code>
+    <li>  <code>distribution</code> is a distribution name, e.g. <code>squeeze</code>, for flat repositories use <code>./</code> instead of distribution name
     </li>
     <li>  <code>component1</code> is an optional list of components to download, if not
     specified aptly would fetch all components, e.g. <code>main</code>
     </li>
+    </ul>
+
+    <p>Flags:</p>
+
+    <ul>
+      <li>
+        <code>-ignore-signatures=false</code>: disable verification of Release file signatures
+      </li>
+      <li>
+        <code>-keyring=trustedkeys.gpg</code> gpg keyring to use when verifying Release file (could be specified multiple times)
+      </li>
     </ul>
 
     <p>By default aptly would download packages for all available architectures.
@@ -517,6 +567,32 @@ You can run 'aptly publish snapshot snap-deb-w-nginx' to publish snapshot as Deb
     <div class="alert alert-info">If components are not specified, aptly will download packages from all
     components and merge it into one when publishing. If components should be left separate, please
     create separate mirror for each component.</div>
+
+    <p>aptly would try to verify signature of Release files using GnuPG. By default, keyring <code>~/.gnupg/trustedkeys.gpg</code>
+    would be used. If you would like to use different keyring(s), specify them using <code>-keyring</code> flag. aptly would
+    advise <code>gpg</code> commands to import keys into trusted keys keyring in order to successfully verify repository signature.
+    </p>
+
+    <p>If aptly is running on Debian/Ubuntu machine, it would be good to import archive signing keys shipped with the operating system:</p>
+
+<pre><span class="greeting">$</span> <span class="command">gpg --keyring /usr/share/keyrings/debian-archive-keyring.gpg --export | gpg --no-default-keyring --keyring trustedkeys.gpg --import</span></pre>
+
+    <p class="small">If you're running Ubuntu, use <code>/usr/share/keyrings/ubuntu-archive-keyring.gpg</code></p>
+
+    <p>If GnuPG is complaining that required key to verify signature is missing, it would report key ID, e.g. <code>46925553</code>. Keys
+    could be downloaded from public keyserver and imported into trusted keyring using command:</p>
+
+    <pre><span class="greeting">$</span> <span class="command">gpg --no-default-keyring --keyring trustedkeys.gpg --keyserver keys.gnupg.net --recv-keys 46925553</span></pre>
+
+    <p class="small">Replace <code>46925553</code> with the key ID GnuPG is complaining about.</p>
+
+    <p>If you're mirroring flat repository, sometimes repository key is located near release files, so you can download it and import into
+    your trusted keychain:</p>
+
+    <pre><span class="greeting">$</span> <span class="command">wget -O - http://some.repo/repository/Release.key | gpg --no-default-keyring --keyring trustedkeys.gpg --import</span></pre>
+
+    <p>You can learn about signed Debian repositories in <a href="https://wiki.debian.org/SecureApt">Debian wiki</a>. If you would like to disable
+    signature checks, you can use flag <code>-ignore-signatures</code> or configuration setting <code>gpgDisableVerify</code>.</p>
 
     <p>Example:</p>
 
@@ -547,6 +623,24 @@ You can run 'aptly mirror update debian-main' to download repository contents.
     <li>  <code>name</code> is a mirror name (given when mirror was created)</li>
     </ul><p>All packages would be stored under aptly's root dir (see section on
     <a href="#configuration">Configuration</a>).</p>
+
+    <p>Flags:</p>
+
+    <ul>
+      <li>
+        <code>-ignore-checksums=false</code>: ignore checksum mismatches for downloaded items (packages file, metadata)
+      </li>
+      <li>
+        <code>-ignore-signatures=false</code>: disable verification of Release file signatures
+      </li>
+      <li>
+        <code>-keyring=trustedkeys.gpg</code> gpg keyring to use when verifying Release file (could be specified multiple times)
+      </li>
+    </ul>
+
+    <p>While updating mirror, aptly would verify signature of Release file using GnuPG. Please read information about signature verification
+    in <a href="#aptly-mirror-create">aptly mirror create</a> command description.</p>
+
 
     <p>Example:</p>
 
@@ -594,6 +688,12 @@ To get more information about repository, run `aptly mirror show &lt;name&gt;`.
     <li>  <code>name</code> is a mirror name (given when mirror was created)</li>
     </ul>
 
+    <p>Flags:</p>
+
+    <ul>
+    <li>  <code>-with-packages=false</code>: show detailed list of packages and versions stored in the mirror</li>
+    </ul>
+
     <p>Example:</p>
 
 <pre><span class="greeting">$</span> <span class="command">aptly mirror show backports2</span>
@@ -612,6 +712,37 @@ Information from release file:
     <p>In detailed information basiс information about mirror is displayed:
     filters by component &amp; architecture, timestamp of last successful
     repository fetch and number of packages.</p>
+
+  <!-- ================ aptly mirror drop ============== -->
+  <div class="target-spacer" id="aptly-mirror-drop"><a name="aptly-mirror-drop"></a>&nbsp;</div>
+  <h4>Command <code>aptly mirror drop</code></h4>
+
+    <p>Drop deletes information about remote repository mirror. Package data is not deleted
+      (it could be still used by other mirrors or snapshots). If mirror is used as source to create a snapshot,
+      aptly would refuse to delete such mirror, use flag <code>-force</code> to override.
+    </p>
+
+    <p>Usage:</p>
+
+    <pre><span class="greeting">$</span> <span class="command">aptly mirror drop &lt;name&gt;</span></pre>
+
+    <p>Params:</p>
+
+    <ul>
+    <li>  <code>name</code> is mirror name which has been given during mirror
+    creation</li>
+    </ul>
+
+    <p>Flags:</p>
+
+    <ul>
+    <li>  <code>-force=false</code>: drop mirror even if it used as source of some snapshot</li>
+    </ul>
+
+    <p>Example:</p>
+
+<pre><span class="greeting">$</span> <span class="command">mirror drop -force wheezy-main</span>
+Mirror `wheezy-main` has been removed.</pre>
 
 <!-- ================ aptly snapshot ============== -->
 <div class="target-spacer" id="aptly-snapshot"><a name="aptly-snapshot"></a>&nbsp;</div>
@@ -641,10 +772,34 @@ Information from release file:
 
     <p>Example:</p>
 
-<pre><span class="greeting">$</span> <span class="command">aptly snapshot create monday-updates from mirror backports2
+<pre><span class="greeting">$</span> <span class="command">aptly snapshot create monday-updates from mirror backports2</span>
 
 Snapshot monday-updates successfully created.
 You can run 'aptly publish snapshot monday-updates' to publish snapshot as Debian repository.
+</pre>
+
+  <div class="target-spacer">&nbsp;</div>
+  <h4>Command <code>aptly snapshot create .. empty</code></h4>
+
+    <p>Creates empty snapshot. As snapshots are immutable, creating one empty snapshot should be enough. Empty snapshots
+    could be used as first snapshot while pulling packages to create completely defined set of packages.</p>
+
+    <p>Usage:</p>
+
+    <pre><span class="greeting">$</span> <span class="command">aptly snapshot create &lt;name&gt; empty</span></pre>
+
+    <p>Params are:</p>
+
+    <ul>
+    <li>  <code>name</code> is a name for the snapshot to be created</li>
+    </ul>
+
+    <p>Example:</p>
+
+<pre><span class="greeting">$</span> <span class="command">aptly snapshot create empty-snapshot empty</span>
+
+Snapshot empty-snapshot successfully created.
+You can run 'aptly publish snapshot empty-snapshot' to publish snapshot as Debian repository.
 </pre>
 
   <!-- ================ aptly snapshot list ============== -->
@@ -685,6 +840,12 @@ To get more information about snapshot, run `aptly snapshot show &lt;name&gt;`.
     <ul>
     <li>  <code>name</code> is snapshot name which has been given during snapshot
     creation</li>
+    </ul>
+
+    <p>Flags:</p>
+
+    <ul>
+    <li>  <code>-with-packages=false</code>: show detailed list of packages and versions stored in the mirror</li>
     </ul>
 
     <p>Example:</p>
@@ -765,7 +926,7 @@ Missing dependencies (7):
     to restrict search to specific version</li>
     </ul>
 
-    <p>Options:</p>
+    <p>Flags:</p>
 
     <ul>
     <li>  <code>-dry-run=false</code>: don't create destination snapshot, just show what
@@ -821,7 +982,15 @@ You can run 'aptly publish snapshot snap-deb-main-w-xorg' to publish snapshot as
 
     <pre><span class="greeting">$</span> <span class="command">aptly snapshot diff &lt;name-a&gt; &lt;name-b&gt;</span></pre>
 
-    <p>Options:</p>
+    <p>Params:</p>
+
+    <ul>
+    <li>  <code>name-a</code> is snapshot name which is "on the left" during comparison</li>
+    <li>  <code>name-b</code> is snapshot name which is "on the right" during comparison</li>
+    </ul>
+
+
+    <p>Flags:</p>
 
     <ul>
     <li>  <code>-only-matching=false</code>: display diff only for matching packages
@@ -853,6 +1022,13 @@ You can run 'aptly publish snapshot snap-deb-main-w-xorg' to publish snapshot as
 
     <pre><span class="greeting">$</span> <span class="command">aptly snapshot merge &lt;destination&gt; &lt;source&gt; [&lt;source&gt;...]</span></pre>
 
+    <p>Params:</p>
+
+    <ul>
+    <li>  <code>destination</code> is a name of the snapshot that would be created</li>
+    <li>  <code>source</code> is a list of snapshot names that would be merged together</li>
+    </ul>
+
     <p>Example:</p>
 
 <pre><span class="greeting">$</span> <span class="command">aptly snapshot merge debian-w-backports debian-main debian-backports</span>
@@ -860,6 +1036,37 @@ You can run 'aptly publish snapshot snap-deb-main-w-xorg' to publish snapshot as
 Snapshot debian-w-backports successfully created.
 You can run 'aptly publish snapshot debian-w-backports' to publish snapshot as Debian repository.
 </pre>
+
+  <!-- ================ aptly snapshot drop ============== -->
+  <div class="target-spacer" id="aptly-snapshot-drop"><a name="aptly-snapshot-drop"></a>&nbsp;</div>
+  <h4>Command <code>aptly snapshot drop</code></h4>
+
+    <p>Drop removes information about snapshot. If snapshot is published, it can't be dropped (first remove publishing for snapshot).
+    If snapshot is used as source for other snapshots (using merge or pull), aptly would refuse to drop such snapshot, use flag
+    <code>-force</code> to override this check.
+    </p>
+
+    <p>Usage:</p>
+
+    <pre><span class="greeting">$</span> <span class="command">aptly snapshot drop &lt;name&gt;</span></pre>
+
+    <p>Params:</p>
+
+    <ul>
+    <li>  <code>name</code> is snapshot name which has been given during snapshot
+    creation</li>
+    </ul>
+
+    <p>Flags:</p>
+
+    <ul>
+    <li>  <code>-force=false</code>: drop snapshot even if it used as source in other snapshots</li>
+    </ul>
+
+    <p>Example:</p>
+
+<pre><span class="greeting">$</span> <span class="command">snapshot drop snap-wheezy</span>
+Snapshot `snap-wheezy` has been dropped.</pre>
 
 <!-- ================ aptly publish ============== -->
 <div class="target-spacer" id="aptly-publish"><a name="aptly-publish"></a>&nbsp;</div>
@@ -885,6 +1092,9 @@ You can run 'aptly publish snapshot debian-w-backports' to publish snapshot as D
     imported into apt keyring on all machines that would be using published
     repositories using <code>apt-key</code>.</p>
 
+    <p>Signing releases is highly recommended, but if you want to skip it, you can either use
+    <code>gpgDisableSign</code> configuration option or <code>--skip-signing</code> flag.</p>
+
 
   <!-- ================ aptly publish shapshot ============== -->
   <div class="target-spacer" id="aptly-publish-snapshot"><a name="aptly-publish-snapshot"></a>&nbsp;</div>
@@ -909,7 +1119,7 @@ You can run 'aptly publish snapshot debian-w-backports' to publish snapshot as D
     would be converted to <code>.</code>.</li>
     </ul>
 
-    <p>Options:</p>
+    <p>Flags:</p>
 
     <ul>
     <li>  <code>-component=""</code>: component name to publish; guessed from original
@@ -918,6 +1128,7 @@ You can run 'aptly publish snapshot debian-w-backports' to publish snapshot as D
     original repository distribution</li>
     <li>  <code>-gpg-key=""</code>: GPG key ID to use when signing the release, if not
     specified default key is used</li>
+    <li>  <code>-skip-signing=false</code>: don't sign Release files with GPG
     </ul>
 
     <p>If architectures are limited (with config <code>architectures</code> or option
@@ -1048,6 +1259,92 @@ Published repositories:
 Removing /var/aptly/public/dists/squeeze-backports...
 Removing /var/aptly/public/pool/contrib...
 </pre>
+
+<!-- ================ aptly serve ============== -->
+<div class="target-spacer" id="aptly-serve"><a name="aptly-serve"></a>&nbsp;</div>
+<h3>Command <code>serve</code></h3>
+
+  <p>aptly can serve published repositories using its own embedded webserver. This is not recommended for production
+     use, but is a quick way to try out published repository.</p>
+
+  <!-- ================ aptly serve ============== -->
+  <div class="target-spacer" id="aptly-serve-cmd"><a name="aptly-serve-cmd"></a>&nbsp;</div>
+  <h4>Command <code>aptly serve</code></h4>
+
+    <p>Command serve starts embedded HTTP server (not suitable for real production usage) to serve
+    contents of public/ subdirectory of aptly's root that contains published repositories. aptly would
+    print recommended <code>apt-sources</code> for the currently published repositories. By default aptly
+    would listen on port 8080, but this can be changed with flag <code>-listen</code>.</p>
+
+    <p>Usage:</p>
+
+    <pre><span class="greeting">$</span> <span class="command">aptly serve -listen=:8080</span></pre>
+
+    <p>Flags:</p>
+
+    <ul>
+    <li>  <code>-listen=":8080"</code>: host:port for HTTP listening</li>
+    </ul>
+
+    <p>Example:</p>
+
+<pre><span class="greeting">$</span> <span class="command">aptly serve -listen=127.0.0.1:8765</span>
+Serving published repositories, recommended apt sources list:
+
+# ./maverick (main) [amd64, i386] publishes [snap1]: Snapshot from mirror [gnuplot-maverick]: http://ppa.launchpad.net/gladky-anton/gnuplot/ubuntu/ maverick
+deb http://127.0.0.1:8765/ maverick main
+# debian/maverick (main) [amd64, i386] publishes [snap2]: Snapshot from mirror [gnuplot-maverick]: http://ppa.launchpad.net/gladky-anton/gnuplot/ubuntu/ maverick
+deb http://127.0.0.1:8765/debian/ maverick main
+
+Starting web server at: 127.0.0.1:8765 (press Ctrl+C to quit)...
+</pre>
+
+
+<!-- ================ aptly graph ============== -->
+<div class="target-spacer" id="aptly-graph"><a name="aptly-graph"></a>&nbsp;</div>
+<h3>Command <code>graph</code></h3>
+
+  <p>aptly generates graph showing depedencies between mirrors, snapshots and published repositories.</p>
+
+  <!-- ================ aptly graph ============== -->
+  <div class="target-spacer" id="aptly-graph-cmd"><a name="aptly-graph-cmd"></a>&nbsp;</div>
+  <h4>Command <code>aptly graph</code></h4>
+
+    <p>Command graph generates graph of dependencies between snapshots and (what mirrors were used
+    to create each snapshots), between snapshots (pulling, merging, etc.) and between snapshots and
+    published repositories (how snapshots were published). Graph is rendered to PNG file using
+    graphviz package.</p>
+
+    <p>Usage:</p>
+
+    <pre><span class="greeting">$</span> <span class="command">aptly graph</span></pre>
+
+
+    <p>Example:</p>
+
+    <p><a href="graphfull.png"><img class="img-responsive" alt="Example graph from aptly graph" src="graph.png"></a></p>
+
+
+<!-- ================ history ============== -->
+<div class="target-spacer" id="history"><a name="history"></a>&nbsp;</div>
+<h2>History</h2>
+
+  <h3>Version 0.3</h3>
+
+  <ul>
+    <li><code>aptly snapshot show</code> doesn't show list of packages by default</li>
+    <li>option <code>-with-packages</code> to show list of packages stored in mirror and snapshot</li>
+    <li><a href="https://github.com/aptly-dev/aptly-bash-completion">bash completion</a> is now available for aptly</li>
+    <li>dropping <a href="#aptly-snapshot-drop">snapshots</a> and <a href="#aptly-mirror-drop">mirrors</a> is supported</li>
+    <li><a href="#aptly-serve">serving</a> published repositories</li>
+    <li>aptly does checksum validation when downloading from remote mirrors</li>
+    <li>aptly verifies crypto signature on Release files</li>
+    <li>aptly can create empty snapshots</li>
+    <li>new global flag <code>-config</code> to override default config location</li>
+    <li>Debian flat repositories are now supported</li>
+    <li>command <a href="#aptly-graph">aptly graph</a> can generate graph of dependencies</li>
+  </ul>
+
 
         <div class="footer">
            <p>&copy; Andrey Smirnov 2014</p>
