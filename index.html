@@ -60,6 +60,9 @@
                 <li><a href="#aptly-publish-list">aptly publish list</a></li>
                 <li><a href="#aptly-publish-drop">aptly publish drop</a></li>
                 <li class="divider"></li>
+                <li class="dropdown-header">db</li>
+                <li><a href="#aptly-db-cleanup">aptly db cleanup</a></li>
+                <li class="divider"></li>
                 <li class="dropdown-header">misc</li>
                 <li><a href="#aptly-serve">aptly serve</a></li>
                 <li><a href="#aptly-graph">aptly graph</a></li>
@@ -160,7 +163,6 @@
         <strong>aptly is under heavy development right now</strong>, some essential things don't work yet:
         <ul>
           <li>source packages, debian-installer and translations not supported yet</li>
-          <li>cleaning up stale files is not implemented</li>
         </ul>
       </div>
 
@@ -739,6 +741,9 @@ Information from release file:
     <li>  <code>-force=false</code>: drop mirror even if it used as source of some snapshot</li>
     </ul>
 
+    <div class="alert alert-info">Dropping mirror only removes metadata about the mirror, in order to cleanup the disk
+    space occupied by package files you might need to run <a href="#aptly-db-cleanup"><code>aptly db cleanup</code></a> command.</div>
+
     <p>Example:</p>
 
 <pre><span class="greeting">$</span> <span class="command">mirror drop -force wheezy-main</span>
@@ -1063,6 +1068,10 @@ You can run 'aptly publish snapshot debian-w-backports' to publish snapshot as D
     <li>  <code>-force=false</code>: drop snapshot even if it used as source in other snapshots</li>
     </ul>
 
+    <div class="alert alert-info">Dropping snapshot only removes metadata, in order to cleanup the disk
+    space occupied by package files you might need to run <a href="#aptly-db-cleanup"><code>aptly db cleanup</code></a> command
+    (package files would be removed only if they're not referenced by mirrors and other snapshots anymore).</div>
+
     <p>Example:</p>
 
 <pre><span class="greeting">$</span> <span class="command">snapshot drop snap-wheezy</span>
@@ -1258,6 +1267,37 @@ Published repositories:
 <pre><span class="greeting">$</span> <span class="command">aptly publish drop squeeze-backports</span>
 Removing /var/aptly/public/dists/squeeze-backports...
 Removing /var/aptly/public/pool/contrib...
+</pre>
+
+<!-- ================ aptly db ============== -->
+<div class="target-spacer" id="aptly-db"><a name="aptly-db"></a>&nbsp;</div>
+<h3>Command <code>db</code></h3>
+
+  <p>aptly db subcommands manage aptly's internal metadata database and package pool.</p>
+
+  <!-- ================ aptly db cleanup ============== -->
+  <div class="target-spacer" id="aptly-db-cleanup"><a name="aptly-db-cleanup"></a>&nbsp;</div>
+  <h4>Command <code>aptly db cleanup</code></h4>
+
+    <p>Database cleanup removes information about unreferenced packages and deletes
+    files in the package pool that aren't used by packages anymore. It is a good idea to run this
+    command after massive deletion of mirrors/snapshots.</p>
+
+    <p>Usage:</p>
+
+    <pre><span class="greeting">$</span> <span class="command">aptly db cleanup</span></pre>
+
+
+    <p>Example:</p>
+
+<pre><span class="greeting">$</span> <span class="command">aptly db cleanup</span>
+Loading mirrors and snapshots...
+Loading list of all packages...
+Deleting unreferenced packages (325)...
+Building list of files referenced by packages...
+Building list of files in package pool...
+Deleting unreferenced files (325)...
+Disk space freed: 0.27 GiB...
 </pre>
 
 <!-- ================ aptly serve ============== -->
