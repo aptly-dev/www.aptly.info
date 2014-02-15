@@ -159,11 +159,9 @@
         </div>
       </div>
 
-      <div class="alert alert-danger">
-        <strong>aptly is under heavy development right now</strong>, some essential things don't work yet:
-        <ul>
-          <li>source packages, debian-installer and translations not supported yet</li>
-        </ul>
+      <div class="alert alert-warning">
+        aptly doesn't yet support
+         debian-installer and translations
       </div>
 
 
@@ -302,7 +300,8 @@ You can run 'aptly publish snapshot snap-deb-w-nginx' to publish snapshot as Deb
     </ul>
 
     <p><strong>Binary</strong> executables (depends almost only on libc) for Debian, CentOS, MacOS X &amp; FreeBSD are available for
-    download from <a href="http://dl.bintray.com/smira/aptly/0.3/">Bintray</a>.</p>
+    download from <a href="http://dl.bintray.com/smira/aptly/0.3/">Bintray</a>. Linux executables should run on almost any
+    recent Linux distribution.</p>
 
       <div class="row">
         <div class="col-lg-6">
@@ -310,7 +309,7 @@ You can run 'aptly publish snapshot snap-deb-w-nginx' to publish snapshot as Deb
             <img src="debian.png" alt="Debian" class="logo">
           </div>
           <h4>Debian (Ubuntu)</h4>
-          <p>squeeze: <a href="http://dl.bintray.com/smira/aptly/0.3/debian-squeeze-x32/aptly">32-bit</a> |
+          <p>squeeze+: <a href="http://dl.bintray.com/smira/aptly/0.3/debian-squeeze-x32/aptly">32-bit</a> |
                       <a href="http://dl.bintray.com/smira/aptly/0.3/debian-squeeze-x64/aptly">64-bit</a></p>
         </div>
         <div class="col-lg-6">
@@ -318,7 +317,7 @@ You can run 'aptly publish snapshot snap-deb-w-nginx' to publish snapshot as Deb
             <img src="centos.png" alt="CentOS" class="logo">
           </div>
           <h4>CentOS (RedHat, Fedora)</h4>
-          <p>6.5: <a href="http://dl.bintray.com/smira/aptly/0.3/centos-6.5-x32/aptly">32-bit</a> |
+          <p>6.5+: <a href="http://dl.bintray.com/smira/aptly/0.3/centos-6.5-x32/aptly">32-bit</a> |
                   <a href="http://dl.bintray.com/smira/aptly/0.3/centos-6.5-x64/aptly">64-bit</a></p>
         </div>
       </div>
@@ -328,7 +327,7 @@ You can run 'aptly publish snapshot snap-deb-w-nginx' to publish snapshot as Deb
             <img src="freebsd.png" alt="FreeBSD" class="logo">
           </div>
           <h4>FreeBSD</h4>
-          <p>9.2: <a href="http://dl.bintray.com/smira/aptly/0.3/freebsd-9.2-x32/aptly">32-bit</a> |
+          <p>9.2+: <a href="http://dl.bintray.com/smira/aptly/0.3/freebsd-9.2-x32/aptly">32-bit</a> |
                   <a href="http://dl.bintray.com/smira/aptly/0.3/freebsd-9.2-x64/aptly">64-bit</a></p>
         </div>
         <div class="col-lg-6">
@@ -397,7 +396,8 @@ You can run 'aptly publish snapshot snap-deb-w-nginx' to publish snapshot as Deb
   "dependencyFollowRecommends": false
   "dependencyFollowAllVariants": false,
   "gpgDisableSign": false,
-  "gpgDisableVerify": false
+  "gpgDisableVerify": false,
+  "downloadSourcePackages": false
 }
 </pre>
 
@@ -423,6 +423,11 @@ You can run 'aptly publish snapshot snap-deb-w-nginx' to publish snapshot as Deb
       disabled on per-repo basis using <code>-skip-signing</code> flag when publishing</li>
       <li>  <code>gpgDisableVerify</code>: don't verify remote mirrors with <code>gpg</code>, also can be
       disabled on per-mirror basis using <code>-ignore-signatures</code> flag when creating and updating mirrors</li>
+      <li>
+        <code>downloadSourcePackages</code>:
+        if enabled, all mirrors created would have flag set to download source packages; this setting could be controlled
+        on per-mirror basis with <code>-with-sources</code> flag
+      </li>
     </ul>
 
     <div class="alert alert-warning"><strong>Warning:</strong> <code>rootDir</code> contains all the downloaded packages from remote mirrors,
@@ -558,7 +563,11 @@ You can run 'aptly publish snapshot snap-deb-w-nginx' to publish snapshot as Deb
         <code>-ignore-signatures=false</code>: disable verification of Release file signatures
       </li>
       <li>
-        <code>-keyring=trustedkeys.gpg</code> gpg keyring to use when verifying Release file (could be specified multiple times)
+        <code>-keyring=trustedkeys.gpg</code>: gpg keyring to use when verifying Release file (could be specified multiple times)
+      </li>
+      <li>
+        <code>-with-sources=false</code>: download source packages in addition to binary packages (could be enabled by default with config
+        option <code>downloadSourcePackages</code>)
       </li>
     </ul>
 
@@ -595,6 +604,10 @@ You can run 'aptly publish snapshot snap-deb-w-nginx' to publish snapshot as Deb
 
     <p>You can learn about signed Debian repositories in <a href="https://wiki.debian.org/SecureApt">Debian wiki</a>. If you would like to disable
     signature checks, you can use flag <code>-ignore-signatures</code> or configuration setting <code>gpgDisableVerify</code>.</p>
+
+    <div class="alert alert-info">aplty deduplicates all downloaded files, so if two mirrors are created one with source packages enabled
+    and another with source packages disabled, they would consume only space required to store all binary and source packages (not twice
+    the space required to store binary packages).</div>
 
     <p>Example:</p>
 
@@ -1376,6 +1389,9 @@ Starting web server at: 127.0.0.1:8765 (press Ctrl+C to quit)...
   <ul>
     <li>new command: <a href="#aptly-db-cleanup">aptly db cleanup</a> to remove unreferenced DB entries and files</li>
     <li>new flags: <code>-keyring</code> &amp; <code>-secret-keyring</code> for <a href="#aptly-snapshot-publish">aptly snapshot publish</a> command</li>
+    <li>aptly supports mirroring remote repos with source packages and publishing repositories with sources</li>
+    <li>new config: <code>downloadSourcePackages</code> to enable source package downloading</li>
+    <li>new flag: <code>-with-sources</code> for <a href="#aptly-mirror-create">aptly mirror create</a> command</li>
   </ul>
 
   <h3>Version 0.3</h3>
