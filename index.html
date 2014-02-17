@@ -780,8 +780,12 @@ Mirror `wheezy-main` has been removed.</pre>
   <div class="target-spacer" id="aptly-snapshot-create"><a name="aptly-snapshot-create"></a>&nbsp;</div>
   <h4>Command <code>aptly snapshot create .. from mirror</code></h4>
 
-    <p>Creates snapshot from current state of remote mirror. Mirros should be
-    updated at least once before using this command.</p>
+    <p>Creates snapshot from current state of remote mirror. Mirror should be
+    updated at least once before running this command.</p>
+
+    <p>Snapshot would contain exactly the same set of packages as mirror currently does.
+    Snapshot is immutable, so if mirror is updated, snapshot contents won't change. If mirror
+    contains source packages, snapshot would also contain source packages.</p>
 
     <p>Usage:</p>
 
@@ -911,6 +915,9 @@ Packages:
     dependencies, otherwise <code>aptly</code> will check all architectures in the
     snapshot.</p>
 
+    <p>By using <code>-dep-follow-source</code> global flag you can verify that snapshot has all source packages
+    available to re-build packages from source.</p>
+
     <p>Example:</p>
 
 <pre><span class="greeting">$</span> <span class="command">aptly snapshot verify snap-deb2-main</span>
@@ -962,6 +969,9 @@ Missing dependencies (7):
     <p>If architectures are limited (with config <code>architectures</code> or option
     <code>-architectures</code>), only mentioned architectures are processed, otherwise
     <code>aptly</code> will process all architectures in the snapshot.</p>
+
+    <p>If following dependencies by source is enabled (using either <code>dependencyFollowSource</code> config option or
+    flag <code>-dep-follow-source</code>), pulling binary packages would also pull corresponding source packages as well.</p>
 
     <p>Example:</p>
 
