@@ -395,6 +395,7 @@ You can run 'aptly publish snapshot snap-deb-w-nginx' to publish snapshot as Deb
   "dependencyFollowSuggests": false,
   "dependencyFollowRecommends": false
   "dependencyFollowAllVariants": false,
+  "dependencyFollowSource": false,
   "gpgDisableSign": false,
   "gpgDisableVerify": false,
   "downloadSourcePackages": false
@@ -419,6 +420,7 @@ You can run 'aptly publish snapshot snap-deb-w-nginx' to publish snapshot as Deb
       when processing dependencies for the package</li>
       <li>  <code>dependencyFollowAllVariants</code>: when dependency looks like
       <code>package-a | package-b</code>, follow both variants always</li>
+      <li>  <code>dependencyFollowSource</code>: follow dependency from binary package to source package</li>
       <li>  <code>gpgDisableSign</code>: don't sign published repositories with <code>gpg</code>, also can be
       disabled on per-repo basis using <code>-skip-signing</code> flag when publishing</li>
       <li>  <code>gpgDisableVerify</code>: don't verify remote mirrors with <code>gpg</code>, also can be
@@ -516,6 +518,10 @@ You can run 'aptly publish snapshot snap-deb-w-nginx' to publish snapshot as Deb
         <li>
           <code>-dep-follow-recommends=false</code>: when processing dependencies, follow
             Recommends
+        </li>
+        <li>
+          <code>-dep-follow-source=false</code>: when processing dependencies, follow
+            from binary package to source package
         </li>
         <li>
           <code>-dep-follow-suggests=false</code>: when processing dependencies, follow
@@ -1200,11 +1206,19 @@ Don't forget to add your GPG key to apt with apt-key.
                   <li><code>InRelease</code>: clearsigned version</li>
                   <li><code>Release.gpg</code>: detached <code>Release</code> signature</li>
                   <li>
-                    <code>binary-i386</code>: binary packages for architecture <code>i386</code>
+                    <code>binary-i386</code>: binary packages index for architecture <code>i386</code>
                     <ul>
                       <li><code>Packages</code>: package metadata</li>
                       <li><code>Packages.gz</code></li>
                       <li><code>Packages.bz2</code></li>
+                    </ul>
+                  </li>
+                  <li>
+                    <code>source</code>: source packages index (generated only if source packages are available)
+                    <ul>
+                      <li><code>Sources</code>: package metadata</li>
+                      <li><code>Sources.gz</code></li>
+                      <li><code>Sources.bz2</code></li>
                     </ul>
                   </li>
                 </ul>
@@ -1392,6 +1406,7 @@ Starting web server at: 127.0.0.1:8765 (press Ctrl+C to quit)...
     <li>aptly supports mirroring remote repos with source packages and publishing repositories with sources</li>
     <li>new config: <code>downloadSourcePackages</code> to enable source package downloading</li>
     <li>new flag: <code>-with-sources</code> for <a href="#aptly-mirror-create">aptly mirror create</a> command</li>
+    <li>new config &amp; flag: <code>dependencyFollowSource</code> &amp; <code>-dep-follow-source</code> to follow <code>Source:</code> dependencies</li>
   </ul>
 
   <h3>Version 0.3</h3>
