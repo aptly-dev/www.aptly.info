@@ -32,20 +32,34 @@
             <li><a href="https://github.com/smira/aptly/">GitHub</a></li>
             <li><a href="#examples">Examples</a></li>
             <li><a href="#download">Download</a></li>
-            <li><a href="#support">Support</a></li>
-            <li><a href="#configuration">Configuration</a></li>
             <li><a href="#usage">Usage</a></li>
             <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Commands <b class="caret"></b></a>
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">mirror <b class="caret"></b></a>
               <ul class="dropdown-menu">
-                <li class="dropdown-header">mirror</li>
                 <li><a href="#aptly-mirror-create">aptly mirror create</a></li>
                 <li><a href="#aptly-mirror-update">aptly mirror update</a></li>
                 <li><a href="#aptly-mirror-list">aptly mirror list</a></li>
                 <li><a href="#aptly-mirror-show">aptly mirror show</a></li>
                 <li><a href="#aptly-mirror-drop">aptly mirror drop</a></li>
-                <li class="divider"></li>
-                <li class="dropdown-header">snapshot</li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">repo <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><a href="#aptly-repo-create">aptly repo create</a></li>
+                <li><a href="#aptly-repo-add">aptly repo add</a></li>
+                <li><a href="#aptly-repo-import">aptly repo import</a></li>
+                <li><a href="#aptly-repo-show">aptly repo show</a></li>
+                <li><a href="#aptly-repo-list">aptly repo list</a></li>
+                <li><a href="#aptly-repo-copy">aptly repo copy</a></li>
+                <li><a href="#aptly-repo-move">aptly repo move</a></li>
+                <li><a href="#aptly-repo-remove">aptly repo remove</a></li>
+                <li><a href="#aptly-repo-drop">aptly repo drop</a></li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">snapshot  <b class="caret"></b></a>
+              <ul class="dropdown-menu">
                 <li><a href="#aptly-snapshot-create">aptly snapshot create</a></li>
                 <li><a href="#aptly-snapshot-list">aptly snapshot list</a></li>
                 <li><a href="#aptly-snapshot-show">aptly snapshot show</a></li>
@@ -54,12 +68,19 @@
                 <li><a href="#aptly-snapshot-diff">aptly snapshot diff</a></li>
                 <li><a href="#aptly-snapshot-merge">aptly snapshot merge</a></li>
                 <li><a href="#aptly-snapshot-drop">aptly snapshot drop</a></li>
-                <li class="divider"></li>
-                <li class="dropdown-header">publish</li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">publish <b class="caret"></b></a>
+              <ul class="dropdown-menu">
                 <li><a href="#aptly-publish-snapshot">aptly publish snapshot</a></li>
                 <li><a href="#aptly-publish-list">aptly publish list</a></li>
                 <li><a href="#aptly-publish-drop">aptly publish drop</a></li>
-                <li class="divider"></li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">other <b class="caret"></b></a>
+              <ul class="dropdown-menu">
                 <li class="dropdown-header">db</li>
                 <li><a href="#aptly-db-cleanup">aptly db cleanup</a></li>
                 <li class="divider"></li>
@@ -79,8 +100,10 @@
       <div class="jumbotron">
         <h1>aptly</h1>
         <p>aptly is a swiss army knife for Debian repository management: it allows to mirror remote
-        repositories, take snapshots, pull new versions of packages along with dependencies,
-        publish snapshots.</p>
+        repositories, manage local package repositories, take snapshots, pull new versions of packages
+        along with dependencies, publish as Debian repository.</p>
+
+        <p>aptly is free <a href="https://github.com/smira/aptly">open-source</a> software licensed under MIT license.</p>
 
         <div id="carousel-ss" class="carousel slide" data-ride="carousel">
           <!-- Indicators -->
@@ -140,8 +163,11 @@
           <h4>Merge snapshots</h4>
           <p>Merge two or more snapshots into one snapshot: e.g. merge wheezy and wheezy-updates.</p>
 
-          <h4>Publish your packages <span class="glyphicon glyphicon-asterisk"></span></h4>
+          <h4>Publish your packages</h4>
           <p>Manage your own repositories of packages, merge them with offical and publish the result.</p>
+
+          <h4>Mirror repositories as-is <span class="glyphicon glyphicon-asterisk"></span></h4>
+          <p>Mirror official Debian repositories (as snapshots) without resigning by your own key.</p>
         </div>
         <div class="col-lg-6">
           <h4>Publish snapshot</h4>
@@ -156,6 +182,9 @@
 
           <h4>Package search <span class="glyphicon glyphicon-asterisk"></span></h4>
           <p>Search for specific packages, their inclusion into snapshots, etc.</p>
+
+          <h4>Support for yum repositories <span class="glyphicon glyphicon-asterisk"></span></h4>
+          <p>Manage packages for CentOS, RHEL, Fedora.</p>
         </div>
       </div>
 
@@ -169,8 +198,8 @@
 <div class="target-spacer" id="examples"><a name="examples"></a>&nbsp;</div>
 <h2>Examples</h2>
 
-      <p class="lead">Mirror main Debian repository for distribution squeeze only for architectures <code>i386</code>,
-      <code>amd64</code> and publish the result.</p>
+      <p class="lead">Mirror Debian repository distribution squeeze only for architectures <code>i386</code>,
+      <code>amd64</code> and publish the result:</p>
 
       <p><a href="#aptly-mirror-create">Create</a> mirror:</p>
 
@@ -244,7 +273,7 @@ Starting web server at: :8080 (press Ctrl+C to quit)...
 
 <pre><span class="greeting">$</span> <span class="command">apt-get update</span></pre>
 
-  <p class="lead">Pulling new version of <code>nginx</code> from <code>backports</code>.</p>
+  <p class="lead">Pulling new version of <code>nginx</code> from <code>backports</code>:</p>
 
   <p><a href="#aptly-mirror-create">Create</a> <code>backports</code> mirror, <a href="#aptly-mirror-update">download</a> it
       and <a href="#aplty-snapshot-create">take</a> snapshot:</p>
@@ -360,9 +389,15 @@ You can run 'aptly publish snapshot snap-deb-w-nginx' to publish snapshot as Deb
     <p><strong>Bash completion</strong> for aptly is available as <a href="https://github.com/aptly-dev/aptly-bash-completion">separate repo</a>.</p>
 
     <p>If you have Go environment set up (go 1.1+ required), you can build aptly from <strong>source</strong> by
-    running:</p>
+    cloning it and building with gom:</p>
 
-<pre><span class="greeting">$</span> <span class="command">go get github.com/smira/aptly</span></pre>
+<pre><span class="greeting">$</span> <span class="command">go get github.com/mattn/gom</span>
+<span class="greeting">$</span> <span class="command">git clone https://github.com/smira/aptly.git</span>
+<span class="greeting">$</span> <span class="command">cd aptly</span>
+<span class="greeting">$</span> <span class="command">git checkout v0.3</span>
+<span class="greeting">$</span> <span class="command">gom build -o ~/bin/aptly</span>
+<span class="greeting">$</span> <span class="command">~/bin/aptly</span>
+</pre>
 
 <!-- ================ support ============== -->
 <div class="target-spacer" id="support"><a name="support"></a>&nbsp;</div>
@@ -372,12 +407,74 @@ You can run 'aptly publish snapshot snap-deb-w-nginx' to publish snapshot as Deb
   <a href="https://groups.google.com/forum/#!forum/aptly-discuss">aptly-discuss mailing list</a> or file
   an <a href="https://github.com/smira/aptly/issues">issue on GitHub</a>.</p>
 
-  <p>Also consider following me <a href="https://twitter.com/smira/">@smira</a> to get updates about aptly.
+  <p>Please following me (<a href="https://twitter.com/smira/">@smira</a>) to get updates about aptly.
 
 
-<!-- ================ configuration ============== -->
-<div class="target-spacer" id="configuration"><a name="configuration"></a>&nbsp;</div>
-<h2>Configuration</h2>
+
+<!-- ================ usage ============== -->
+<div class="target-spacer" id="usage"><a name="usage"></a>&nbsp;</div>
+<h2>Usage</h2>
+
+
+  <p>
+  aptly goal is to establish repeatiblity and controlled changes in package environment. aptly allows
+  to fix set of packages in repository, so that package installation and upgrade becomes deterministic.
+  At the same time aptly allows to perform controlled, fine-grained changes in repository contents to
+  transition your package environment to new version.</p>
+
+  <div class="target-spacer" id="usage"><a name="core-concepts"></a>&nbsp;</div>
+  <h3>Core Concepts</h3>
+
+  <dl class="dl-horizontal">
+    <dt>mirror</dt>
+    <dd>mirror of remote repository, consists of metadata, list of packages and package files</dd>
+
+    <dt>local repo</dt>
+    <dd>local package repository, consists of metadata, packages and files, packages could be easily added and removed</dd>
+
+    <dt>snapshot</dt>
+    <dd>immutable list of packages, basic block to implement repeatability and controlled changes</dd>
+
+    <dt>published repository</dt>
+    <dd>published representation of snapshot, ready to be consumed by apt tools</dd>
+  </dl>
+
+  <p>The schema of aptly's commands and transitions between entities:</p>
+
+  <p><img src="schema.png" class="img-responsive" alt="aptly snapshot diff"></p>
+
+  <p>We can start with creating <a href="#aptly-mirror-create">mirrors of remote repositories</a>. Also
+  you can create <a href="#aptly-repo-create">local package repositories</a> and import there packages
+  as files. Local repos could be modified by <a href="#aptly-repo-copy">copying</a> and <a href="#aptly-repo-move">moving</a>
+  packages between local repositories and <a href="#aptly-repo-import">importing</a> them from mirrors.
+  Snapshot could be <a href="#aptly-snapshot-create">created</a> from remote repository
+  (official Debain repositories, backports, 3rd party repos, etc.) or your local repository (custom built
+  packages, your own software). Snapshots
+  can be used to produce new snapshots by <a href="#aptly-snapshot-pull">pulling</a> packages with dependencies between snapshots
+  and by <a href="#aptly-snapshot-merge">merging</a> snapshots. Any snapshot can be
+  <a href="#aptly-publish-snapshot">published</a> to any location
+  (distribution name, prefix) and consumed by <code>apt</code> tools on your Debian systems.</p>
+
+  <div class="target-spacer" id="usage"><a name="commands"></a>&nbsp;</div>
+  <h3>Commands</h3>
+      <p>Aptly supports commands in three basic categories:</p>
+
+      <ul>
+      <li>  <code>mirror</code>: manage, update mirrors of remote repositories
+      </li>
+      <li>  <code>repo</code>: manage local package repositories, add, remove, move, copy packages
+      </li>
+      <li>  <code>snapshot</code>: create, merge, manage snapshots
+      </li>
+      <li>  <code>publish</code>: publish snapshot as remote repo
+      </li>
+      <li>  <code>serve</code>: quickly export published repositories via HTTP
+      </li>
+      </ul>
+
+  <!-- ================ configuration ============== -->
+  <div class="target-spacer" id="configuration"><a name="configuration"></a>&nbsp;</div>
+  <h3>Configuration</h3>
 
     <p>aptly looks for configuration file in <code>/etc/aptly.conf</code> and
     <code>~/.aptly.conf</code>, if no config file found, new one is created. If <code>-config=</code> flag is
@@ -433,63 +530,8 @@ You can run 'aptly publish snapshot snap-deb-w-nginx' to publish snapshot as Deb
     </ul>
 
     <div class="alert alert-warning"><strong>Warning:</strong> <code>rootDir</code> contains all the downloaded packages from remote mirrors,
-      so it should have enough space for that. For example mirror of Debian wheezy on amd64 and i386 requires 70G of disk space.
+      so it should have enough space. For example. mirror of Debian wheezy (amd64 and i386) requires 70 GiB of disk space.
     </div>
-
-
-<!-- ================ usage ============== -->
-<div class="target-spacer" id="usage"><a name="usage"></a>&nbsp;</div>
-<h2>Usage</h2>
-
-
-  <p>
-  aptly goal is to establish repeatiblity and controlled changes in package environment. aptly allows
-  to fix set of packages in repository, so that package installation and upgrade becomes deterministic.
-  At the same time aptly allows to perform controlled, fine-grained changes in repository contents to
-  transition your package environment to new version.</p>
-
-  <div class="target-spacer" id="usage"><a name="core-concepts"></a>&nbsp;</div>
-  <h3>Core Concepts</h3>
-
-  <dl class="dl-horizontal">
-    <dt>mirror</dt>
-    <dd>mirror of remote repository, consists of metadata, list of packages and package files</dd>
-
-    <dt>snapshot</dt>
-    <dd>immutable list of packages, basic block to implement repeatability and controlled changes</dd>
-
-    <dt>published repository</dt>
-    <dd>published representation of snapshot, ready to be consumed by apt tools</dd>
-  </dl>
-
-  <p>The schema of aptly's commands and transitions between entities:</p>
-
-  <p><img src="schema.png" class="img-responsive" alt="aptly snapshot diff"></p>
-  <p class="text-muted">* local repo hasn't been implemented yet</p>
-
-  <p>First, mirrors of remote repositories should be <a href="#aptly-mirror-create">set up</a>.
-  Snapshot is being <a href="#aptly-snapshot-create">created</a> from remote repository
-  (official Debain repositories, backports, 3rd party repos, etc.). Snapshots
-  can be changed by <a href="#aptly-snapshot-pull">pulling</a> packages with dependencies between snapshots,
-  <a href="#aptly-snapshot-merge">merging</a> snapshots. Any snapshot can be
-  <a href="#aptly-publish-snapshot">published</a> to any location
-  (distribution name, prefix) and consumed by <code>apt</code> tools.</p>
-
-  <div class="target-spacer" id="usage"><a name="commands"></a>&nbsp;</div>
-  <h3>Commands</h3>
-      <p>Aptly supports commands in three basic categories:</p>
-
-      <ul>
-      <li>  <code>mirror</code>: manage, update mirrors of remote repositories
-      </li>
-      <li>  <code>snapshot</code>: create, merge, manage snapshots
-      </li>
-      <li>  <code>publish</code>: publish snapshot as remote repo
-      </li>
-      <li>  <code>serve</code>: quickly export published repositories via HTTP
-      </li>
-      </ul>
-
 
   <!-- ================ common options ============== -->
   <div class="target-spacer" id="common-options"><a name="common-options"></a>&nbsp;</div>
@@ -805,6 +847,35 @@ Mirror `wheezy-main` has been removed.</pre>
 Snapshot monday-updates successfully created.
 You can run 'aptly publish snapshot monday-updates' to publish snapshot as Debian repository.
 </pre>
+
+  <div class="target-spacer">&nbsp;</div>
+  <h4>Command <code>aptly snapshot create .. from repo</code></h4>
+
+    <p>Creates snapshot from current state of local package repository. Repository
+    should contain at least one package.</p>
+
+    <p>Snapshot would contain exactly the same set of packages as local repositorory currently does.
+    Snapshot is immutable, so if local repository is changed in any way, snapshot contents won't change.</p>
+
+    <p>Usage:</p>
+
+    <pre><span class="greeting">$</span> <span class="command">aptly snapshot create &lt;name&gt; from repo &lt;repo-name&gt;</span></pre>
+
+    <p>Params are:</p>
+
+    <ul>
+    <li>  <code>name</code> is a name for the snapshot to be created</li>
+    <li>  <code>repo-name</code> is a local repository name</li>
+    </ul>
+
+    <p>Example:</p>
+
+<pre><span class="greeting">$</span> <span class="command">aptly snapshot create snap-stable from repo stable</span>
+
+Snapshot snap-stable successfully created.
+You can run 'aptly publish snapshot snap-stable' to publish snapshot as Debian repository.
+</pre>
+
 
   <div class="target-spacer">&nbsp;</div>
   <h4>Command <code>aptly snapshot create .. empty</code></h4>
@@ -1417,6 +1488,10 @@ Starting web server at: 127.0.0.1:8765 (press Ctrl+C to quit)...
     <li>new config: <code>downloadSourcePackages</code> to enable source package downloading</li>
     <li>new flag: <code>-with-sources</code> for <a href="#aptly-mirror-create">aptly mirror create</a> command</li>
     <li>new config &amp; flag: <code>dependencyFollowSource</code> &amp; <code>-dep-follow-source</code> to follow <code>Source:</code> dependencies</li>
+    <li>packages are printed in lists with underscores instead of dashes, e.g. <code>pkg_1.3-3_amd64</code> instead of <code>pkg-1.3-3-amd64</code></li>
+    <li>local package repositories are supported</li>
+    <li>new commands in <code>aptly repo</code> family: <a href="#aptly-repo-add">add</a>, <a href="#aptly-repo-copy">copy</a>, <a href="#aptly-repo-create">create</a>, <a href="#aptly-repo-drop">drop</a>, <a href="#aptly-repo-import">import</a>, <a href="#aptly-repo-list">list</a>, <a href="#aptly-repo-move">move</a>, <a href="#aptly-repo-remove">remove</a> and <a href="#aptly-repo-show">show</a></li>
+    <li>command <a href="#aptly-snapshot-create">aptly snapshot create</a> supports creation of snapshots from local repos</li>
   </ul>
 
   <h3>Version 0.3</h3>
