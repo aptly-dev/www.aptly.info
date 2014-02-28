@@ -572,6 +572,42 @@ You can run 'aptly publish snapshot snap-deb-w-nginx' to publish snapshot as Deb
 
       <p>Global flags override configuration parameters with similar names.</p>
 
+  <!-- ================ package-spec ============== -->
+  <div class="target-spacer" id="package-spec"><a name="package-spec"></a>&nbsp;</div>
+  <h3>Package Spec</h3>
+
+  <p>Some commands accept package specs to identify list of packages to process. Package spec is a list of
+  following search conditions:</p>
+
+  <ul>
+    <li><strong>direct package reference</strong>: reference to exaclty one package. Format is identical to the way
+    aptly lists packages in <code>show</code> commands with <code>-with-packages</code> flag: <code>name_version_arch</code>, e.g.:
+    <code>libmysqlclient18_5.5.35-rel33.0-611.squeeze_amd64</code> </li>
+    <li><strong>dependency condition</strong>: syntax follows Debian dependency specification: <code>package_name</code> followed by
+    optional version specification and architecture limit.<br/> Examples:
+    <ul>
+      <li>
+        <code>mysql-client</code>: matches package <code>mysql-client</code> of any version and
+        architecture (including <code>source</code>)
+      </li>
+      <li>
+        <code>mysql-client (&gt;= 3.6)</code>: matches package <code>mysql-client</code> with version greater or equal to <code>3.6</code>.
+        Valid operators for version are: <code>&gt;=</code>, <code>&lt;=</code>, <code>=</code>, <code>&gt;&gt;</code> (strictly greater),
+        <code>&lt;&lt;</code> (strictly less).
+      </li>
+      <li>
+        <code>mysql-client {i386}</code>: matches package <code>mysql-client</code> on architecture <code>i386</code>, architecture
+        <code>all</code> matches all architectures but source.
+      </li>
+      <li>
+        <code>mysql-client (&gt;= 3.6) {i386}</code>: version and architecture conditions combined.
+      </li>
+    </ul>
+    When specified on command line, condition may have to be quoted according to shell rules, so that it stays single argument:
+    <code>aptly repo import percona stable 'mysql-client (&gt;= 3.6)'</code>.
+    </li>
+  </ul>
+
 <!-- ================ aptly mirror ============== -->
 <div class="target-spacer" id="aptly-mirror"><a name="aptly-mirror"></a>&nbsp;</div>
 <h3>Command <code>mirror</code></h3>
@@ -807,8 +843,318 @@ Information from release file:
 
     <p>Example:</p>
 
-<pre><span class="greeting">$</span> <span class="command">mirror drop -force wheezy-main</span>
+<pre><span class="greeting">$</span> <span class="command">aptly mirror drop -force wheezy-main</span>
 Mirror `wheezy-main` has been removed.</pre>
+
+<!-- ================ aptly repo ============== -->
+<div class="target-spacer" id="aptly-repo"><a name="aptly-repo"></a>&nbsp;</div>
+<h3>Command <code>repo</code></h3>
+
+      <p>Repo subcommands manage local package repositories.</p>
+
+  <!-- ================ aptly repo create ============== -->
+  <div class="target-spacer" id="aptly-repo-create"><a name="aptly-repo-create"></a>&nbsp;</div>
+  <h4>Command <code>aptly repo create</code></h4>
+
+    <p>Create local package repository. Repository would be empty when created, packages could be added from files,
+    copied or moved from another local repository or imported from the mirror.</p>
+
+    <p>Usage:</p>
+
+    <pre><span class="greeting">$</span> <span class="command"> aptly repo create &lt;name&gt;</span></pre>
+
+    <p>Params are:</p>
+
+    <ul>
+    <li>  <code>name</code> is a name that would be used in aptly to reference this
+    repository</li>
+    </ul>
+
+    <p>Flags:</p>
+
+    <ul>
+      <li>
+        <code>-comment=""</code>: any text that would be used to described local repository
+      </li>
+    </ul>
+
+
+    <p>Example:</p>
+
+<pre><span class="greeting">$</span> <span class="command">aptly repo create -comment="Nightly builds" testing</span>
+
+Local repo [stable] successfully added.
+You can run 'aptly repo add stable ...' to add packages to repository.
+</pre>
+
+  <!-- ================ aptly repo add ============== -->
+  <div class="target-spacer" id="aptly-repo-add"><a name="aptly-repo-add"></a>&nbsp;</div>
+  <h4>Command <code>aptly repo add</code></h4>
+
+    <p>Command adds packages to local repository from <code>.deb</code> (binary packages) and
+    <code>.dsc</code> (source packages) files. When importing from directory aptly would do
+    recursive scan looking for all files matching <code>*.deb</code> or <code>*.dsc</code>
+    patterns. Every file discovered would be analyzed to extract metadata, package would be
+    created and added to database. Files would be imported to internal package pool. For source packages,
+    all required files are added as well automatically. Extra files for source package should be
+    in the same directory as <code>*.dsc</code> file.</p>
+
+    <p>Usage:</p>
+
+    <pre><span class="greeting">$</span> <span class="command"> aptly repo add &lt;name&gt; &lt;package file&gt;|&lt;directory&gt; ...</span></pre>
+
+    <p>Params are:</p>
+
+    <ul>
+    <li>  <code>name</code> is local repository name </li>
+    </ul>
+
+    <p>Flags:</p>
+
+    <ul>
+      <li>
+        <code>-remove-files=false</code>: remove files that have been imported successfully into repository
+      </li>
+    </ul>
+
+    <p>Local repositories work best for distribution of in-house software or for custom-built upstream packages.
+    Command <code>aptly repo add</code> allows to add source packages and built binary package to local repository.
+    Local repository could be snapshotted, possibly mixed with snapshots of official repositories and published
+    for cunsumption.</p>
+
+    <p>aptly won't complain if package is added to the repo which is complete duplicate. However it is forbidden to
+    have two packages with identical triples (architecture, name, version) that have different metadata or files.
+    All files added to package pool would be deduplicated, as it happens with files coming from mirrors, so exactly one
+    copy of each file would be stored in aptly pool.
+    </p>
+
+    <p>Flag <code>-remove-files</code> allows to implement concept <code>incoming/</code> directory where packages
+    are removed as soon as they're imported into database.</p>
+
+    <p>Example:</p>
+
+<pre><span class="greeting">$</span> <span class="command">aptly repo add testing files/libboost-program-options-dev_1.49.0.1_i386.deb</span>
+Loading packages...
+[+] libboost-program-options-dev_1.49.0.1_i386 added
+</pre>
+
+<!-- ================ aptly repo show ============== -->
+  <div class="target-spacer" id="aptly-repo-show"><a name="aptly-repo-show"></a>&nbsp;</div>
+  <h4>Command <code>aptly repo show</code></h4>
+
+    <p>Commands show displays information about local repository, possibly listing all packages in the repository.</p>
+
+    <p>Usage:</p>
+
+    <pre><span class="greeting">$</span> <span class="command"> aptly repo show &lt;name&gt;</span></pre>
+
+    <p>Params are:</p>
+
+    <ul>
+    <li>  <code>name</code> local repository name</li>
+    </ul>
+
+    <p>Flags:</p>
+
+    <ul>
+    <li>  <code>-with-packages=false</code>: show detailed list of packages and versions stored in the mirror</li>
+    </ul>
+
+    <p>Example:</p>
+
+<pre><span class="greeting">$</span> <span class="command">aptly repo show -with-packages stable</span>
+Name: stable
+Comment: Stable packages for project Foo
+Number of packages: 10
+Packages:
+  libmysqlclient18_5.5.35-rel33.0-611.squeeze_amd64
+  percona-server-client-5.5_5.5.35-rel33.0-611.squeeze_amd64
+  percona-server-common-5.5_5.5.35-rel33.0-611.squeeze_amd64
+  percona-server-server_5.5.35-rel33.0-611.squeeze_amd64
+  percona-server-server-5.5_5.5.35-rel33.0-611.squeeze_amd64
+  libmysqlclient18_5.5.35-rel33.0-611.squeeze_i386
+  percona-server-client-5.5_5.5.35-rel33.0-611.squeeze_i386
+  percona-server-common-5.5_5.5.35-rel33.0-611.squeeze_i386
+  percona-server-server_5.5.35-rel33.0-611.squeeze_i386
+  percona-server-server-5.5_5.5.35-rel33.0-611.squeeze_i386
+</pre>
+
+<!-- ================ aptly repo list ============== -->
+  <div class="target-spacer" id="aptly-repo-list"><a name="aptly-repo-list"></a>&nbsp;</div>
+  <h4>Command <code>aptly repo list</code></h4>
+
+    <p>Commands list shows list of all local package repositories.</p>
+
+    <p>Usage:</p>
+
+    <pre><span class="greeting">$</span> <span class="command"> aptly repo list</span></pre>
+
+
+    <p>Example:</p>
+
+<pre><span class="greeting">$</span> <span class="command">aptly repo list</span>
+List of mirrors:
+ * [stable]: Stable packages for project Foo (packages: 10)
+ * [testing] (packages: 1)
+
+To get more information about local repository, run `aptly repo show &lt;name&gt;`.
+</pre>
+
+  <!-- ================ aptly repo copy ============== -->
+  <div class="target-spacer" id="aptly-repo-copy"><a name="aptly-repo-copy"></a>&nbsp;</div>
+  <h4>Command <code>aptly repo copy</code></h4>
+
+    <p>Commands copy copies packages matching <a href="#package-spec">package spec</a> from local repo <code>src-name</code>
+    to local repo <code>dst-name</code>. If dependency following is enabled, aptly would try to copy
+    missing dependencies from <code>src-name</code> as well.</p>
+
+    <p>Usage:</p>
+
+    <pre><span class="greeting">$</span> <span class="command"> aptly repo copy &lt;src-name&gt; &lt;dst-name&gt; &lt;package-spec&gt; ...</span></pre>
+
+    <p>Params are:</p>
+
+    <ul>
+    <li>  <code>src-name</code> packages would be searched in this local repository</li>
+    <li>  <code>dst-name</code> packages would be copied to this local repository</li>
+    <li>  <code>package-spec</code> list of <a href="#package-spec">package search conditions</a></li>
+    </ul>
+
+    <p>Flags:</p>
+
+    <ul>
+      <li>
+        <code>-dry-run=false</code>: don't copy, just show what would be copied
+      </li>
+      <li>
+        <code>-with-deps=false</code>: follow dependencies when processing package-spec
+      </li>
+    </ul>
+
+    <p>When copying with dependencies, global dependency options are used. For example, to copy source packages, use
+    <code>-dep-follow-source</code>. If aptly won't be able to guess list of architectures from contents of local repository
+    <code>dst-name</code>, architectures should be specified with <code>-architectures</code> flag.</p>
+
+    <p>Example:</p>
+
+<pre><span class="greeting">$</span> <span class="command">aptly repo copy stable testing percona-server-client-5.5</span>
+Loading packages...
+[o] percona-server-client-5.5_5.5.35-rel33.0-611.squeeze_i386 copied
+[o] percona-server-client-5.5_5.5.35-rel33.0-611.squeeze_amd64 copied
+</pre>
+
+  <!-- ================ aptly repo move ============== -->
+  <div class="target-spacer" id="aptly-repo-move"><a name="aptly-repo-move"></a>&nbsp;</div>
+  <h4>Command <code>aptly repo move</code></h4>
+
+    <p>Commands move moves packages matching <a href="#package-spec">package spec</a> from local repo <code>src-repo</code>
+    to local repo <code>dst-name</code>. If dependency following is enabled, aptly would try to move
+    dependencies from <code>src-name</code> as well.</p>
+
+    <p>Usage:</p>
+
+    <pre><span class="greeting">$</span> <span class="command"> aptly repo move &lt;src-name&gt; &lt;dst-name&gt; &lt;package-spec&gt; ...</span></pre>
+
+    <p>Params are:</p>
+
+    <ul>
+    <li>  <code>src-name</code> packages would be searched in this local repository</li>
+    <li>  <code>dst-name</code> packages would be moved to this local repository</li>
+    <li>  <code>package-spec</code> list of <a href="#package-spec">package search conditions</a></li>
+    </ul>
+
+    <p>Flags:</p>
+
+    <ul>
+      <li>
+        <code>-dry-run=false</code>: don't move, just show what would be moved
+      </li>
+      <li>
+        <code>-with-deps=false</code>: follow dependencies when processing package-spec
+      </li>
+    </ul>
+
+    <p>When moving with dependencies, global dependency options are used. For example, to move source packages, use
+    <code>-dep-follow-source</code>. If aptly won't be able to guess list of architectures from contents of local repository
+    <code>dst-name</code>, architectures should be specified with <code>-architectures</code> flag.</p>
+
+    <p>Example:</p>
+
+<pre><span class="greeting">$</span> <span class="command">aptly repo move stable testing percona-server-client-5.5</span>
+Loading packages...
+[o] percona-server-client-5.5_5.5.35-rel33.0-611.squeeze_i386 moved
+[o] percona-server-client-5.5_5.5.35-rel33.0-611.squeeze_amd64 moved
+</pre>
+
+  <!-- ================ aptly repo remove ============== -->
+  <div class="target-spacer" id="aptly-repo-remove"><a name="aptly-repo-remove"></a>&nbsp;</div>
+  <h4>Command <code>aptly repo remove</code></h4>
+
+    <p>Commands remove deletes packages matching <a href="#package-spec">package spec</a> from local repo <code>name</code>.</p>
+
+    <p>Usage:</p>
+
+    <pre><span class="greeting">$</span> <span class="command"> aptly repo remove &lt;name&gt; &lt;package-spec&gt; ...</span></pre>
+
+    <p>Params are:</p>
+
+    <ul>
+    <li>  <code>name</code> packages would be removed in this local repository</li>
+    <li>  <code>package-spec</code> list of <a href="#package-spec">package search conditions</a></li>
+    </ul>
+
+    <p>Flags:</p>
+
+    <ul>
+      <li>
+        <code>-dry-run=false</code>: don't revmove, just show what would be removed
+      </li>
+    </ul>
+
+    <p>When packages are removed from local repository, only references to those packages are removed. If packages are part
+    of any snapshot, this action won't remove them from snapshot. If there are no references to the packages, package files
+    and metadata could be cleaned up by running command <a href="#aptly-db-cleanup">aptly db cleanup</a>.</p>
+
+    <p>Example:</p>
+
+<pre><span class="greeting">$</span> <span class="command">aptly repo remove stable percona-server-client-5.5</span>
+Loading packages...
+[-] percona-server-client-5.5_5.5.35-rel33.0-611.squeeze_i386 removed
+[-] percona-server-client-5.5_5.5.35-rel33.0-611.squeeze_amd64 removed
+</pre>
+
+  <!-- ================ aptly repo drop ============== -->
+  <div class="target-spacer" id="aptly-repo-drop"><a name="aptly-repo-drop"></a>&nbsp;</div>
+  <h4>Command <code>aptly repo drop</code></h4>
+
+    <p>Drop deletes information about local package repository. Package data is not deleted
+      (it could be still used by other mirrors or snapshots). If snapshot has been created from local repository,
+      aptly would refuse to delete such repository, use flag <code>-force</code> to override.
+    </p>
+
+    <p>Usage:</p>
+
+    <pre><span class="greeting">$</span> <span class="command">aptly repo drop &lt;name&gt;</span></pre>
+
+    <p>Params:</p>
+
+    <ul>
+    <li>  <code>name</code> is local repository name</li>
+    </ul>
+
+    <p>Flags:</p>
+
+    <ul>
+    <li>  <code>-force=false</code>: drop repository even if it used as source of some snapshot</li>
+    </ul>
+
+    <div class="alert alert-info">Dropping local repository only removes metadata, in order to cleanup the disk
+    space occupied by package files you might need to run <a href="#aptly-db-cleanup"><code>aptly db cleanup</code></a> command.</div>
+
+    <p>Example:</p>
+
+<pre><span class="greeting">$</span> <span class="command">aptly repo drop stable</span>
+Local repo `stable` has been removed.</pre>
 
 <!-- ================ aptly snapshot ============== -->
 <div class="target-spacer" id="aptly-snapshot"><a name="aptly-snapshot"></a>&nbsp;</div>
