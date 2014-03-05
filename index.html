@@ -419,6 +419,7 @@ You can run 'aptly publish snapshot snap-deb-w-nginx' to publish snapshot as Deb
 <span class="greeting">$</span> <span class="command">git clone https://github.com/smira/aptly.git</span>
 <span class="greeting">$</span> <span class="command">cd aptly</span>
 <span class="greeting">$</span> <span class="command">git checkout v0.3</span>
+<span class="greeting">$</span> <span class="command">gom install</span>
 <span class="greeting">$</span> <span class="command">gom build -o ~/bin/aptly</span>
 <span class="greeting">$</span> <span class="command">~/bin/aptly</span>
 </pre>
@@ -556,6 +557,8 @@ You can run 'aptly publish snapshot snap-deb-w-nginx' to publish snapshot as Deb
     <div class="alert alert-warning"><strong>Warning:</strong> <code>rootDir</code> contains all the downloaded packages from remote mirrors,
       so it should have enough space. For example. mirror of Debian wheezy (amd64 and i386) requires 70 GiB of disk space.
     </div>
+
+    <p>aptly would use HTTP proxy configured in <code>HTTP_PROXY</code> environment variable automatically.</p>
 
   <!-- ================ common options ============== -->
   <div class="target-spacer" id="common-options"><a name="common-options"></a>&nbsp;</div>
@@ -1862,6 +1865,7 @@ Starting web server at: 127.0.0.1:8765 (press Ctrl+C to quit)...
     <li>local package repositories are supported</li>
     <li>new commands in <code>aptly repo</code> family: <a href="#aptly-repo-add">add</a>, <a href="#aptly-repo-copy">copy</a>, <a href="#aptly-repo-create">create</a>, <a href="#aptly-repo-drop">drop</a>, <a href="#aptly-repo-import">import</a>, <a href="#aptly-repo-list">list</a>, <a href="#aptly-repo-move">move</a>, <a href="#aptly-repo-remove">remove</a> and <a href="#aptly-repo-show">show</a></li>
     <li>command <a href="#aptly-snapshot-create">aptly snapshot create</a> supports creation of snapshots from local repos</li>
+    <li>aptly peak memory usage has been reduced by factor of 3x</li>
   </ul>
 
   <h3>Version 0.3</h3>
