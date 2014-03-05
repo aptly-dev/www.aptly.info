@@ -17,6 +17,18 @@ pre span.greeting {
     color: #7cff00;
 }
 
+pre span.green {
+    color: #7cbf00;
+}
+
+pre span.yellow {
+    color: #ecef00;
+}
+
+pre span.red {
+    color: #df0000;
+}
+
 pre span.command {
     color: #fff;
 }
