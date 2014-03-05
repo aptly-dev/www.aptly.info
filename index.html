@@ -965,6 +965,50 @@ Loading packages...
 <span class="green">[+]</span> libboost-program-options-dev_1.49.0.1_i386 added
 </pre>
 
+  <!-- ================ aptly repo import ============== -->
+  <div class="target-spacer" id="aptly-repo-import"><a name="aptly-repo-import"></a>&nbsp;</div>
+  <h4>Command <code>aptly repo import</code></h4>
+
+    <p>Commands import copies packages matching <a href="#package-spec">package spec</a> from mirror <code>src-name</code>
+    to local repo <code>dst-repo</code>. If dependency following is enabled, aptly would try to copy
+    missing dependencies from <code>src-mirror</code> as well.</p>
+
+    <p>Usage:</p>
+
+    <pre><span class="greeting">$</span> <span class="command"> aptly repo import &lt;src-mirror&gt; &lt;dst-repo&gt; &lt;package-spec&gt; ...</span></pre>
+
+    <p>Params are:</p>
+
+    <ul>
+    <li>  <code>src-mirror</code> packages would be searched in this mirror</li>
+    <li>  <code>dst-repo</code> packages would be copied to this local repository</li>
+    <li>  <code>package-spec</code> list of <a href="#package-spec">package search conditions</a></li>
+    </ul>
+
+    <p>Flags:</p>
+
+    <ul>
+      <li>
+        <code>-dry-run=false</code>: don't import, just show what would be imported
+      </li>
+      <li>
+        <code>-with-deps=false</code>: follow dependencies when processing package-spec
+      </li>
+    </ul>
+
+    <p>When copying with dependencies, global dependency options are used. For example, to copy source packages, use
+    <code>-dep-follow-source</code>. If aptly won't be able to guess list of architectures from contents of local repository
+    <code>dst-repo</code>, architectures should be specified with <code>-architectures</code> flag.</p>
+
+    <p>Example:</p>
+
+<pre><span class="greeting">$</span> <span class="command">aptly repo import percona testing percona-server-client-5.5</span>
+Loading packages...
+<span class="green">[o]</span> percona-server-client-5.5_5.5.35-rel33.0-611.squeeze_i386 imported
+<span class="green">[o]</span> percona-server-client-5.5_5.5.35-rel33.0-611.squeeze_amd64 imported
+</pre>
+
+
 <!-- ================ aptly repo show ============== -->
   <div class="target-spacer" id="aptly-repo-show"><a name="aptly-repo-show"></a>&nbsp;</div>
   <h4>Command <code>aptly repo show</code></h4>
