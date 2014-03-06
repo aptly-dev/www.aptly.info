@@ -331,16 +331,16 @@ from snapshot:
 and result would be saved as new snapshot snap-deb-w-nginx.
 Loading packages (49476)...
 Building indexes...
-[-] nginx-0.7.67-3+squeeze3_i386 removed
-[+] nginx-1.2.1-2.2~bpo60+2_all added
-[+] nginx-full-1.2.1-2.2~bpo60+2_i386 added
-[+] nginx-light-1.2.1-2.2~bpo60+2_i386 added
-[+] nginx-common-1.2.1-2.2~bpo60+2_all added
-[-] nginx-1.2.1-2.2~bpo60+2_all removed
-[-] nginx-0.7.67-3+squeeze3_amd64 removed
-[+] nginx-1.2.1-2.2~bpo60+2_all added
-[+] nginx-full-1.2.1-2.2~bpo60+2_amd64 added
-[+] nginx-light-1.2.1-2.2~bpo60+2_amd64 added
+<span class="red">[-]</span> nginx-0.7.67-3+squeeze3_i386 removed
+<span class="green">[+]</span> nginx-1.2.1-2.2~bpo60+2_all added
+<span class="green">[+]</span> nginx-full-1.2.1-2.2~bpo60+2_i386 added
+<span class="green">[+]</span> nginx-light-1.2.1-2.2~bpo60+2_i386 added
+<span class="green">[+]</span> nginx-common-1.2.1-2.2~bpo60+2_all added
+<span class="red">[-]</span> nginx-1.2.1-2.2~bpo60+2_all removed
+<span class="red">[-]</span> nginx-0.7.67-3+squeeze3_amd64 removed
+<span class="green">[+]</span> nginx-1.2.1-2.2~bpo60+2_all added
+<span class="green">[+]</span> nginx-full-1.2.1-2.2~bpo60+2_amd64 added
+<span class="green">[+]</span> nginx-light-1.2.1-2.2~bpo60+2_amd64 added
 
 Snapshot snap-deb-w-nginx successfully created.
 You can run 'aptly publish snapshot snap-deb-w-nginx' to publish snapshot as Debian repository.
@@ -530,7 +530,9 @@ You can run 'aptly publish snapshot snap-deb-w-nginx' to publish snapshot as Deb
   "dependencyFollowSource": false,
   "gpgDisableSign": false,
   "gpgDisableVerify": false,
-  "downloadSourcePackages": false
+  "downloadSourcePackages": false,
+  "ppaDistributorID": "ubuntu",
+  "ppaCodename": ""
 }
 </pre>
 
@@ -562,6 +564,8 @@ You can run 'aptly publish snapshot snap-deb-w-nginx' to publish snapshot as Deb
         if enabled, all mirrors created would have flag set to download source packages; this setting could be controlled
         on per-mirror basis with <code>-with-sources</code> flag
       </li>
+      <li><code>ppaDistributorID</code> &amp; <code>ppaCodename</code> specifies paramaters for short PPA url expansion,
+          if left blank they default to output of <code>lsb_release</code> command
     </ul>
 
     <div class="alert alert-warning"><strong>Warning:</strong> <code>rootDir</code> contains all the downloaded packages from remote mirrors,
@@ -662,6 +666,10 @@ You can run 'aptly publish snapshot snap-deb-w-nginx' to publish snapshot as Deb
 
     <pre><span class="greeting">$</span> <span class="command"> aptly mirror create &lt;name&gt; &lt;archive url&gt; &lt;distribution&gt; [&lt;component1&gt; ...]</span></pre>
 
+    <p>For Launchpad PPAs:</p>
+
+    <pre><span class="greeting">$</span> <span class="command"> aptly mirror create &lt;name&gt; &lt;ppa:user/project&gt;</span></pre>
+
     <p>Params are:</p>
 
     <ul>
@@ -699,6 +707,10 @@ You can run 'aptly publish snapshot snap-deb-w-nginx' to publish snapshot as Deb
     <div class="alert alert-info">If components are not specified, aptly will download packages from all
     components and merge it into one when publishing. If components should be left separate, please
     create separate mirror for each component.</div>
+
+    <p>If PPA url is specified, aptly would expand it to HTTP url using configuration options <code>ppaDistributorID</code> &amp;
+    <code>ppaCodename</code>. If you're running aptly on Ubuntu, defaults should work (aptly would figure out codename using
+    <code>lsb_release</code> command).</p>
 
     <p>aptly would try to verify signature of Release files using GnuPG. By default, keyring <code>~/.gnupg/trustedkeys.gpg</code>
     would be used. If you would like to use different keyring(s), specify them using <code>-keyring</code> flag. aptly would
@@ -1927,6 +1939,8 @@ Starting web server at: 127.0.0.1:8765 (press Ctrl+C to quit)...
     <li>aptly peak memory usage has been reduced by factor of 3x</li>
     <li>new flag <code>-no-remove</code> for <a href="#aptly-snapshot-pull">aptly snapshot pull</a>: don't remove other version of packages
         when pulling (e.g. keep old versions)</li>
+    <li>command <a href="#aptly-mirror-create">aptly mirror create</a> supports shorthand PPA url: <code>ppa:user/project</code></li>
+    <li>new config: <code>ppaDistributorID</code> &amp; <code>ppaCodename</code> to specify PPA url expansion rules</li>
   </ul>
 
   <h3>Version 0.3</h3>
