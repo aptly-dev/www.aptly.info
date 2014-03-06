@@ -40,3 +40,7 @@ div.target-spacer {
 img.logo {
     padding: 8px;
 }
+
+#sharing-links {
+  line-height: 10px;
+}
