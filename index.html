@@ -174,6 +174,13 @@
         <p><a class="btn btn-primary btn-lg" href="#download">Download &rarr;</a></p>
       </div>
 
+      <a href="https://twitter.com/share" class="twitter-share-button" data-count="horizontal">Tweet</a>
+
+      <div class="g-plusone" data-size="medium" data-count="true"></div>
+
+      <div id="fb-root"></div>
+      <div class="fb-share-button" data-type="button_count"></div>
+
       <h2>Features <small><span class="glyphicon glyphicon-asterisk"></span> means planned features</small></h2>
 
       <div class="row">
@@ -1957,23 +1964,28 @@ Starting web server at: 127.0.0.1:8765 (press Ctrl+C to quit)...
 
     </script>
 
-    <!-- AddThis Smart Layers BEGIN -->
-    <!-- Go to http://www.addthis.com/get/smart-layers to customize -->
-    <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-529316993671801f"></script>
     <script type="text/javascript">
-      addthis.layers({
-        'theme' : 'transparent',
-        'share' : {
-          'position' : 'left',
-          'numPreferredServices' : 5
-        },
-        'follow' : {
-          'services' : [
-            {'service': 'twitter', 'id': 'smira'}
-          ]
-        }
-      });
+    (function(doc, script) {
+      var js,
+          fjs = doc.getElementsByTagName(script)[0],
+          frag = doc.createDocumentFragment(),
+          add = function(url, id) {
+              if (doc.getElementById(id)) {return;}
+              js = doc.createElement(script);
+              js.src = url;
+              id && (js.id = id);
+              frag.appendChild( js );
+          };
+
+        // Google+ button
+        add('http://apis.google.com/js/plusone.js');
+        // Facebook SDK
+        add('//connect.facebook.net/en_US/all.js#xfbml=1', 'facebook-jssdk');
+        // Twitter SDK
+        add('//platform.twitter.com/widgets.js');
+
+        fjs.parentNode.insertBefore(frag, fjs);
+    }(document, 'script'));
     </script>
-    <!-- AddThis Smart Layers END -->
   </body>
 </html>
