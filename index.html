@@ -182,6 +182,8 @@
         <div class="g-plusone" data-size="medium" data-count="true"></div>
 
         <div class="fb-share-button" data-type="button_count"></div>
+
+        <iframe src="http://ghbtns.com/github-btn.html?user=smira&repo=aptly&type=watch&count=true" height="30" width="118" frameborder="0" scrolling="0" style="width:118px; height: 30px;" allowTransparency="true"></iframe>
       </div>
 
       <h2>Features <small><span class="glyphicon glyphicon-asterisk"></span> means planned features</small></h2>
@@ -352,18 +354,18 @@ You can run 'aptly publish snapshot snap-deb-w-nginx' to publish snapshot as Deb
 <div class="target-spacer" id="download"><a name="download"></a>&nbsp;</div>
 <h2>Download</h2>
 
-    <p class="lead">Currently released aptly version is <strong>0.3</strong>, which is considered to be beta quality.
+    <p class="lead">Currently released aptly version is <strong>0.4</strong>.
     </p>
 
     <p>Roadmap:</p>
 
     <ul>
-      <li>0.4 (end of Feb): repositories of self-made packages, support for source packages &amp; translations</li>
-      <li>0.5 (mid-March): searching &amp; filtering</li>
+      <li>0.5 (end of March): searching &amp; filtering</li>
+      <li>0.6 (end of April): mirroring as is, yum repositories support</li>
     </ul>
 
     <p><strong>Binary</strong> executables (depends almost only on libc) for Debian, CentOS, MacOS X &amp; FreeBSD are available for
-    download from <a href="http://dl.bintray.com/smira/aptly/0.3/">Bintray</a>. Linux executables should run on almost any
+    download from <a href="http://dl.bintray.com/smira/aptly/0.4/">Bintray</a>. Linux executables should run on almost any
     recent Linux distribution.</p>
 
       <div class="row">
@@ -372,16 +374,16 @@ You can run 'aptly publish snapshot snap-deb-w-nginx' to publish snapshot as Deb
             <img src="debian.png" alt="Debian" class="logo">
           </div>
           <h4>Debian (Ubuntu)</h4>
-          <p>squeeze+: <a href="http://dl.bintray.com/smira/aptly/0.3/debian-squeeze-x32/aptly">32-bit</a> |
-                      <a href="http://dl.bintray.com/smira/aptly/0.3/debian-squeeze-x64/aptly">64-bit</a></p>
+          <p>squeeze+: <a href="http://dl.bintray.com/smira/aptly/0.4/debian-squeeze-x32/aptly">32-bit</a> |
+                      <a href="http://dl.bintray.com/smira/aptly/0.4/debian-squeeze-x64/aptly">64-bit</a></p>
         </div>
         <div class="col-lg-6">
           <div class="pull-left">
             <img src="centos.png" alt="CentOS" class="logo">
           </div>
           <h4>CentOS (RedHat, Fedora)</h4>
-          <p>6.5+: <a href="http://dl.bintray.com/smira/aptly/0.3/centos-6.5-x32/aptly">32-bit</a> |
-                  <a href="http://dl.bintray.com/smira/aptly/0.3/centos-6.5-x64/aptly">64-bit</a></p>
+          <p>6.5+: <a href="http://dl.bintray.com/smira/aptly/0.4/centos-6.5-x32/aptly">32-bit</a> |
+                  <a href="http://dl.bintray.com/smira/aptly/0.4/centos-6.5-x64/aptly">64-bit</a></p>
         </div>
       </div>
       <div class="row">
@@ -390,15 +392,15 @@ You can run 'aptly publish snapshot snap-deb-w-nginx' to publish snapshot as Deb
             <img src="freebsd.png" alt="FreeBSD" class="logo">
           </div>
           <h4>FreeBSD</h4>
-          <p>9.2+: <a href="http://dl.bintray.com/smira/aptly/0.3/freebsd-9.2-x32/aptly">32-bit</a> |
-                  <a href="http://dl.bintray.com/smira/aptly/0.3/freebsd-9.2-x64/aptly">64-bit</a></p>
+          <p>9.2+: <a href="http://dl.bintray.com/smira/aptly/0.4/freebsd-9.2-x32/aptly">32-bit</a> |
+                  <a href="http://dl.bintray.com/smira/aptly/0.4/freebsd-9.2-x64/aptly">64-bit</a></p>
         </div>
         <div class="col-lg-6">
           <div class="pull-left">
             <img src="macosx.png" alt="Mac OS X" class="logo">
           </div>
           <h4>Mac OS X</h4>
-          <p>10.9: <a href="http://dl.bintray.com/smira/aptly/0.3/osx/aptly">64-bit</a></p>
+          <p>10.9: <a href="http://dl.bintray.com/smira/aptly/0.4/osx/aptly">64-bit</a></p>
         </div>
       </div>
       <div class="row">
@@ -425,13 +427,13 @@ You can run 'aptly publish snapshot snap-deb-w-nginx' to publish snapshot as Deb
     <p>If you have Go environment set up (go 1.1+ required), you can build aptly from <strong>source</strong> by
     cloning it and building with gom:</p>
 
-<pre><span class="greeting">$</span> <span class="command">go get github.com/mattn/gom</span>
-<span class="greeting">$</span> <span class="command">git clone https://github.com/smira/aptly.git</span>
-<span class="greeting">$</span> <span class="command">cd aptly</span>
-<span class="greeting">$</span> <span class="command">git checkout v0.3</span>
+<pre><span class="greeting">$</span> <span class="command">go get -u github.com/mattn/gom</span>
+<span class="greeting">$</span> <span class="command">mkdir -p $GOPATH/src/github.com/smira/aptly</span>
+<span class="greeting">$</span> <span class="command">git clone https://github.com/smira/aptly $GOPATH/src/github.com/smira/aptly</span>
+<span class="greeting">$</span> <span class="command">cd $GOPATH/src/github.com/smira/aptly</span>
 <span class="greeting">$</span> <span class="command">gom install</span>
-<span class="greeting">$</span> <span class="command">gom build -o ~/bin/aptly</span>
-<span class="greeting">$</span> <span class="command">~/bin/aptly</span>
+<span class="greeting">$</span> <span class="command">gom build -o $GOPATH/bin/aptly</span>
+<span class="greeting">$</span> <span class="command">aptly</span>
 </pre>
 
 <!-- ================ support ============== -->
