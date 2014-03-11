@@ -32,20 +32,34 @@
             <li><a href="https://github.com/smira/aptly/">GitHub</a></li>
             <li><a href="#examples">Examples</a></li>
             <li><a href="#download">Download</a></li>
-            <li><a href="#support">Support</a></li>
-            <li><a href="#configuration">Configuration</a></li>
             <li><a href="#usage">Usage</a></li>
             <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Commands <b class="caret"></b></a>
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">mirror <b class="caret"></b></a>
               <ul class="dropdown-menu">
-                <li class="dropdown-header">mirror</li>
                 <li><a href="#aptly-mirror-create">aptly mirror create</a></li>
                 <li><a href="#aptly-mirror-update">aptly mirror update</a></li>
                 <li><a href="#aptly-mirror-list">aptly mirror list</a></li>
                 <li><a href="#aptly-mirror-show">aptly mirror show</a></li>
                 <li><a href="#aptly-mirror-drop">aptly mirror drop</a></li>
-                <li class="divider"></li>
-                <li class="dropdown-header">snapshot</li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">repo <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><a href="#aptly-repo-create">aptly repo create</a></li>
+                <li><a href="#aptly-repo-add">aptly repo add</a></li>
+                <li><a href="#aptly-repo-import">aptly repo import</a></li>
+                <li><a href="#aptly-repo-show">aptly repo show</a></li>
+                <li><a href="#aptly-repo-list">aptly repo list</a></li>
+                <li><a href="#aptly-repo-copy">aptly repo copy</a></li>
+                <li><a href="#aptly-repo-move">aptly repo move</a></li>
+                <li><a href="#aptly-repo-remove">aptly repo remove</a></li>
+                <li><a href="#aptly-repo-drop">aptly repo drop</a></li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">snapshot  <b class="caret"></b></a>
+              <ul class="dropdown-menu">
                 <li><a href="#aptly-snapshot-create">aptly snapshot create</a></li>
                 <li><a href="#aptly-snapshot-list">aptly snapshot list</a></li>
                 <li><a href="#aptly-snapshot-show">aptly snapshot show</a></li>
@@ -54,11 +68,21 @@
                 <li><a href="#aptly-snapshot-diff">aptly snapshot diff</a></li>
                 <li><a href="#aptly-snapshot-merge">aptly snapshot merge</a></li>
                 <li><a href="#aptly-snapshot-drop">aptly snapshot drop</a></li>
-                <li class="divider"></li>
-                <li class="dropdown-header">publish</li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">publish <b class="caret"></b></a>
+              <ul class="dropdown-menu">
                 <li><a href="#aptly-publish-snapshot">aptly publish snapshot</a></li>
                 <li><a href="#aptly-publish-list">aptly publish list</a></li>
                 <li><a href="#aptly-publish-drop">aptly publish drop</a></li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">other <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li class="dropdown-header">db</li>
+                <li><a href="#aptly-db-cleanup">aptly db cleanup</a></li>
                 <li class="divider"></li>
                 <li class="dropdown-header">misc</li>
                 <li><a href="#aptly-serve">aptly serve</a></li>
@@ -76,8 +100,10 @@
       <div class="jumbotron">
         <h1>aptly</h1>
         <p>aptly is a swiss army knife for Debian repository management: it allows to mirror remote
-        repositories, take snapshots, pull new versions of packages along with dependencies,
-        publish snapshots.</p>
+        repositories, manage local package repositories, take snapshots, pull new versions of packages
+        along with dependencies, publish as Debian repository.</p>
+
+        <p>aptly is free <a href="https://github.com/smira/aptly">open-source</a> software licensed under MIT license.</p>
 
         <div id="carousel-ss" class="carousel slide" data-ride="carousel">
           <!-- Indicators -->
@@ -85,6 +111,9 @@
             <li data-target="#carousel-ss" data-slide-to="0" class="active"></li>
             <li data-target="#carousel-ss" data-slide-to="1"></li>
             <li data-target="#carousel-ss" data-slide-to="2"></li>
+            <li data-target="#carousel-ss" data-slide-to="3"></li>
+            <li data-target="#carousel-ss" data-slide-to="4"></li>
+            <li data-target="#carousel-ss" data-slide-to="5"></li>
           </ol>
 
           <!-- Wrapper for slides -->
@@ -110,6 +139,27 @@
                 <p>Download packages from remote mirror to take stable snapshot</p>
               </div>
             </div>
+            <div class="item">
+              <img src="aptlylocal.png" class="img-responsive" alt="aptly repo">
+              <div class="carousel-caption">
+                <h3>Managing local repos</h3>
+                <p>Create, import and move packages in local package repositories</p>
+              </div>
+            </div>
+            <div class="item">
+              <img src="aptlyserve.png" class="img-responsive" alt="aptly repo">
+              <div class="carousel-caption">
+                <h3>Serving published repositories</h3>
+                <p>Quickly serve published snapshots over HTTP</p>
+              </div>
+            </div>
+            <div class="item">
+              <img src="aptlygraph.png" class="img-responsive" alt="aptly repo">
+              <div class="carousel-caption">
+                <h3>Visalize dependencies</h3>
+                <p>Render relationships between mirrors, repos, snapshots and published repositories</p>
+              </div>
+            </div>
           </div>
           <!-- Controls -->
           <a class="left carousel-control" href="#carousel-ss" data-slide="prev">
@@ -132,6 +182,8 @@
         <div class="g-plusone" data-size="medium" data-count="true"></div>
 
         <div class="fb-share-button" data-type="button_count"></div>
+
+        <iframe src="http://ghbtns.com/github-btn.html?user=smira&repo=aptly&type=watch&count=true" height="30" width="118" frameborder="0" scrolling="0" style="width:118px; height: 30px;" allowTransparency="true"></iframe>
       </div>
 
       <h2>Features <small><span class="glyphicon glyphicon-asterisk"></span> means planned features</small></h2>
@@ -147,8 +199,11 @@
           <h4>Merge snapshots</h4>
           <p>Merge two or more snapshots into one snapshot: e.g. merge wheezy and wheezy-updates.</p>
 
-          <h4>Publish your packages <span class="glyphicon glyphicon-asterisk"></span></h4>
+          <h4>Publish your packages</h4>
           <p>Manage your own repositories of packages, merge them with offical and publish the result.</p>
+
+          <h4>Mirror repositories as-is <span class="glyphicon glyphicon-asterisk"></span></h4>
+          <p>Mirror official Debian repositories (as snapshots) without resigning by your own key.</p>
         </div>
         <div class="col-lg-6">
           <h4>Publish snapshot</h4>
@@ -163,15 +218,15 @@
 
           <h4>Package search <span class="glyphicon glyphicon-asterisk"></span></h4>
           <p>Search for specific packages, their inclusion into snapshots, etc.</p>
+
+          <h4>Support for yum repositories <span class="glyphicon glyphicon-asterisk"></span></h4>
+          <p>Manage packages for CentOS, RHEL, Fedora.</p>
         </div>
       </div>
 
-      <div class="alert alert-danger">
-        <strong>aptly is under heavy development right now</strong>, some essential things don't work yet:
-        <ul>
-          <li>source packages, debian-installer and translations not supported yet</li>
-          <li>cleaning up stale files is not implemented</li>
-        </ul>
+      <div class="alert alert-warning">
+        aptly doesn't yet support
+         debian-installer and translations
       </div>
 
 
@@ -179,8 +234,8 @@
 <div class="target-spacer" id="examples"><a name="examples"></a>&nbsp;</div>
 <h2>Examples</h2>
 
-      <p class="lead">Mirror main Debian repository for distribution squeeze only for architectures <code>i386</code>,
-      <code>amd64</code> and publish the result.</p>
+      <p class="lead">Mirror Debian repository distribution squeeze only for architectures <code>i386</code>,
+      <code>amd64</code> and publish the result:</p>
 
       <p><a href="#aptly-mirror-create">Create</a> mirror:</p>
 
@@ -254,7 +309,7 @@ Starting web server at: :8080 (press Ctrl+C to quit)...
 
 <pre><span class="greeting">$</span> <span class="command">apt-get update</span></pre>
 
-  <p class="lead">Pulling new version of <code>nginx</code> from <code>backports</code>.</p>
+  <p class="lead">Pulling new version of <code>nginx</code> from <code>backports</code>:</p>
 
   <p><a href="#aptly-mirror-create">Create</a> <code>backports</code> mirror, <a href="#aptly-mirror-update">download</a> it
       and <a href="#aplty-snapshot-create">take</a> snapshot:</p>
@@ -278,16 +333,16 @@ from snapshot:
 and result would be saved as new snapshot snap-deb-w-nginx.
 Loading packages (49476)...
 Building indexes...
-[-] nginx-0.7.67-3+squeeze3_i386 removed
-[+] nginx-1.2.1-2.2~bpo60+2_all added
-[+] nginx-full-1.2.1-2.2~bpo60+2_i386 added
-[+] nginx-light-1.2.1-2.2~bpo60+2_i386 added
-[+] nginx-common-1.2.1-2.2~bpo60+2_all added
-[-] nginx-1.2.1-2.2~bpo60+2_all removed
-[-] nginx-0.7.67-3+squeeze3_amd64 removed
-[+] nginx-1.2.1-2.2~bpo60+2_all added
-[+] nginx-full-1.2.1-2.2~bpo60+2_amd64 added
-[+] nginx-light-1.2.1-2.2~bpo60+2_amd64 added
+<span class="red">[-]</span> nginx-0.7.67-3+squeeze3_i386 removed
+<span class="green">[+]</span> nginx-1.2.1-2.2~bpo60+2_all added
+<span class="green">[+]</span> nginx-full-1.2.1-2.2~bpo60+2_i386 added
+<span class="green">[+]</span> nginx-light-1.2.1-2.2~bpo60+2_i386 added
+<span class="green">[+]</span> nginx-common-1.2.1-2.2~bpo60+2_all added
+<span class="red">[-]</span> nginx-1.2.1-2.2~bpo60+2_all removed
+<span class="red">[-]</span> nginx-0.7.67-3+squeeze3_amd64 removed
+<span class="green">[+]</span> nginx-1.2.1-2.2~bpo60+2_all added
+<span class="green">[+]</span> nginx-full-1.2.1-2.2~bpo60+2_amd64 added
+<span class="green">[+]</span> nginx-light-1.2.1-2.2~bpo60+2_amd64 added
 
 Snapshot snap-deb-w-nginx successfully created.
 You can run 'aptly publish snapshot snap-deb-w-nginx' to publish snapshot as Debian repository.
@@ -299,18 +354,19 @@ You can run 'aptly publish snapshot snap-deb-w-nginx' to publish snapshot as Deb
 <div class="target-spacer" id="download"><a name="download"></a>&nbsp;</div>
 <h2>Download</h2>
 
-    <p class="lead">Currently released aptly version is <strong>0.3</strong>, which is considered to be beta quality.
+    <p class="lead">Currently released aptly version is <strong>0.4</strong>.
     </p>
 
     <p>Roadmap:</p>
 
     <ul>
-      <li>0.4 (end of Feb): repositories of self-made packages, support for source packages &amp; translations</li>
-      <li>0.5 (mid-March): searching &amp; filtering</li>
+      <li>0.5 (end of March): searching &amp; filtering</li>
+      <li>0.6 (end of April): mirroring as is, yum repositories support</li>
     </ul>
 
     <p><strong>Binary</strong> executables (depends almost only on libc) for Debian, CentOS, MacOS X &amp; FreeBSD are available for
-    download from <a href="http://dl.bintray.com/smira/aptly/0.3/">Bintray</a>.</p>
+    download from <a href="http://dl.bintray.com/smira/aptly/0.4/">Bintray</a>. Linux executables should run on almost any
+    recent Linux distribution.</p>
 
       <div class="row">
         <div class="col-lg-6">
@@ -318,16 +374,16 @@ You can run 'aptly publish snapshot snap-deb-w-nginx' to publish snapshot as Deb
             <img src="debian.png" alt="Debian" class="logo">
           </div>
           <h4>Debian (Ubuntu)</h4>
-          <p>squeeze: <a href="http://dl.bintray.com/smira/aptly/0.3/debian-squeeze-x32/aptly">32-bit</a> |
-                      <a href="http://dl.bintray.com/smira/aptly/0.3/debian-squeeze-x64/aptly">64-bit</a></p>
+          <p>squeeze+: <a href="http://dl.bintray.com/smira/aptly/0.4/debian-squeeze-x32/aptly">32-bit</a> |
+                      <a href="http://dl.bintray.com/smira/aptly/0.4/debian-squeeze-x64/aptly">64-bit</a></p>
         </div>
         <div class="col-lg-6">
           <div class="pull-left">
             <img src="centos.png" alt="CentOS" class="logo">
           </div>
           <h4>CentOS (RedHat, Fedora)</h4>
-          <p>6.5: <a href="http://dl.bintray.com/smira/aptly/0.3/centos-6.5-x32/aptly">32-bit</a> |
-                  <a href="http://dl.bintray.com/smira/aptly/0.3/centos-6.5-x64/aptly">64-bit</a></p>
+          <p>6.5+: <a href="http://dl.bintray.com/smira/aptly/0.4/centos-6.5-x32/aptly">32-bit</a> |
+                  <a href="http://dl.bintray.com/smira/aptly/0.4/centos-6.5-x64/aptly">64-bit</a></p>
         </div>
       </div>
       <div class="row">
@@ -336,15 +392,15 @@ You can run 'aptly publish snapshot snap-deb-w-nginx' to publish snapshot as Deb
             <img src="freebsd.png" alt="FreeBSD" class="logo">
           </div>
           <h4>FreeBSD</h4>
-          <p>9.2: <a href="http://dl.bintray.com/smira/aptly/0.3/freebsd-9.2-x32/aptly">32-bit</a> |
-                  <a href="http://dl.bintray.com/smira/aptly/0.3/freebsd-9.2-x64/aptly">64-bit</a></p>
+          <p>9.2+: <a href="http://dl.bintray.com/smira/aptly/0.4/freebsd-9.2-x32/aptly">32-bit</a> |
+                  <a href="http://dl.bintray.com/smira/aptly/0.4/freebsd-9.2-x64/aptly">64-bit</a></p>
         </div>
         <div class="col-lg-6">
           <div class="pull-left">
             <img src="macosx.png" alt="Mac OS X" class="logo">
           </div>
           <h4>Mac OS X</h4>
-          <p>10.9: <a href="http://dl.bintray.com/smira/aptly/0.3/osx/aptly">64-bit</a></p>
+          <p>10.9: <a href="http://dl.bintray.com/smira/aptly/0.4/osx/aptly">64-bit</a></p>
         </div>
       </div>
       <div class="row">
@@ -369,9 +425,16 @@ You can run 'aptly publish snapshot snap-deb-w-nginx' to publish snapshot as Deb
     <p><strong>Bash completion</strong> for aptly is available as <a href="https://github.com/aptly-dev/aptly-bash-completion">separate repo</a>.</p>
 
     <p>If you have Go environment set up (go 1.1+ required), you can build aptly from <strong>source</strong> by
-    running:</p>
+    cloning it and building with gom:</p>
 
-<pre><span class="greeting">$</span> <span class="command">go get github.com/smira/aptly</span></pre>
+<pre><span class="greeting">$</span> <span class="command">go get -u github.com/mattn/gom</span>
+<span class="greeting">$</span> <span class="command">mkdir -p $GOPATH/src/github.com/smira/aptly</span>
+<span class="greeting">$</span> <span class="command">git clone https://github.com/smira/aptly $GOPATH/src/github.com/smira/aptly</span>
+<span class="greeting">$</span> <span class="command">cd $GOPATH/src/github.com/smira/aptly</span>
+<span class="greeting">$</span> <span class="command">gom install</span>
+<span class="greeting">$</span> <span class="command">gom build -o $GOPATH/bin/aptly</span>
+<span class="greeting">$</span> <span class="command">aptly</span>
+</pre>
 
 <!-- ================ support ============== -->
 <div class="target-spacer" id="support"><a name="support"></a>&nbsp;</div>
@@ -381,12 +444,74 @@ You can run 'aptly publish snapshot snap-deb-w-nginx' to publish snapshot as Deb
   <a href="https://groups.google.com/forum/#!forum/aptly-discuss">aptly-discuss mailing list</a> or file
   an <a href="https://github.com/smira/aptly/issues">issue on GitHub</a>.</p>
 
-  <p>Also consider following me <a href="https://twitter.com/smira/">@smira</a> to get updates about aptly.
+  <p>Please following me (<a href="https://twitter.com/smira/">@smira</a>) to get updates about aptly.
 
 
-<!-- ================ configuration ============== -->
-<div class="target-spacer" id="configuration"><a name="configuration"></a>&nbsp;</div>
-<h2>Configuration</h2>
+
+<!-- ================ usage ============== -->
+<div class="target-spacer" id="usage"><a name="usage"></a>&nbsp;</div>
+<h2>Usage</h2>
+
+
+  <p>
+  aptly goal is to establish repeatiblity and controlled changes in package environment. aptly allows
+  to fix set of packages in repository, so that package installation and upgrade becomes deterministic.
+  At the same time aptly allows to perform controlled, fine-grained changes in repository contents to
+  transition your package environment to new version.</p>
+
+  <div class="target-spacer" id="usage"><a name="core-concepts"></a>&nbsp;</div>
+  <h3>Core Concepts</h3>
+
+  <dl class="dl-horizontal">
+    <dt>mirror</dt>
+    <dd>mirror of remote repository, consists of metadata, list of packages and package files</dd>
+
+    <dt>local repo</dt>
+    <dd>local package repository, consists of metadata, packages and files, packages could be easily added and removed</dd>
+
+    <dt>snapshot</dt>
+    <dd>immutable list of packages, basic block to implement repeatability and controlled changes</dd>
+
+    <dt>published repository</dt>
+    <dd>published representation of snapshot, ready to be consumed by apt tools</dd>
+  </dl>
+
+  <p>The schema of aptly's commands and transitions between entities:</p>
+
+  <p><img src="schema.png" class="img-responsive" alt="aptly snapshot diff"></p>
+
+  <p>We can start with creating <a href="#aptly-mirror-create">mirrors of remote repositories</a>. Also
+  you can create <a href="#aptly-repo-create">local package repositories</a> and import there packages
+  as files. Local repos could be modified by <a href="#aptly-repo-copy">copying</a> and <a href="#aptly-repo-move">moving</a>
+  packages between local repositories and <a href="#aptly-repo-import">importing</a> them from mirrors.
+  Snapshot could be <a href="#aptly-snapshot-create">created</a> from remote repository
+  (official Debain repositories, backports, 3rd party repos, etc.) or your local repository (custom built
+  packages, your own software). Snapshots
+  can be used to produce new snapshots by <a href="#aptly-snapshot-pull">pulling</a> packages with dependencies between snapshots
+  and by <a href="#aptly-snapshot-merge">merging</a> snapshots. Any snapshot can be
+  <a href="#aptly-publish-snapshot">published</a> to any location
+  (distribution name, prefix) and consumed by <code>apt</code> tools on your Debian systems.</p>
+
+  <div class="target-spacer" id="usage"><a name="commands"></a>&nbsp;</div>
+  <h3>Commands</h3>
+      <p>Aptly supports commands in three basic categories:</p>
+
+      <ul>
+      <li>  <code>mirror</code>: manage, update mirrors of remote repositories
+      </li>
+      <li>  <code>repo</code>: manage local package repositories, add, remove, move, copy packages
+      </li>
+      <li>  <code>snapshot</code>: create, merge, manage snapshots
+      </li>
+      <li>  <code>publish</code>: publish snapshot as remote repo
+      </li>
+      <li>  <code>serve</code>: quickly export published repositories via HTTP
+      </li>
+      </ul>
+
+  <!-- ================ configuration ============== -->
+  <div class="target-spacer" id="configuration"><a name="configuration"></a>&nbsp;</div>
+  <h3>Configuration</h3>
 
     <p>aptly looks for configuration file in <code>/etc/aptly.conf</code> and
     <code>~/.aptly.conf</code>, if no config file found, new one is created. If <code>-config=</code> flag is
@@ -404,8 +529,12 @@ You can run 'aptly publish snapshot snap-deb-w-nginx' to publish snapshot as Deb
   "dependencyFollowSuggests": false,
   "dependencyFollowRecommends": false
   "dependencyFollowAllVariants": false,
+  "dependencyFollowSource": false,
   "gpgDisableSign": false,
-  "gpgDisableVerify": false
+  "gpgDisableVerify": false,
+  "downloadSourcePackages": false,
+  "ppaDistributorID": "ubuntu",
+  "ppaCodename": ""
 }
 </pre>
 
@@ -427,70 +556,25 @@ You can run 'aptly publish snapshot snap-deb-w-nginx' to publish snapshot as Deb
       when processing dependencies for the package</li>
       <li>  <code>dependencyFollowAllVariants</code>: when dependency looks like
       <code>package-a | package-b</code>, follow both variants always</li>
+      <li>  <code>dependencyFollowSource</code>: follow dependency from binary package to source package</li>
       <li>  <code>gpgDisableSign</code>: don't sign published repositories with <code>gpg</code>, also can be
       disabled on per-repo basis using <code>-skip-signing</code> flag when publishing</li>
       <li>  <code>gpgDisableVerify</code>: don't verify remote mirrors with <code>gpg</code>, also can be
       disabled on per-mirror basis using <code>-ignore-signatures</code> flag when creating and updating mirrors</li>
+      <li>
+        <code>downloadSourcePackages</code>:
+        if enabled, all mirrors created would have flag set to download source packages; this setting could be controlled
+        on per-mirror basis with <code>-with-sources</code> flag
+      </li>
+      <li><code>ppaDistributorID</code> &amp; <code>ppaCodename</code> specifies paramaters for short PPA url expansion,
+          if left blank they default to output of <code>lsb_release</code> command
     </ul>
 
     <div class="alert alert-warning"><strong>Warning:</strong> <code>rootDir</code> contains all the downloaded packages from remote mirrors,
-      so it should have enough space for that. For example mirror of Debian wheezy on amd64 and i386 requires 70G of disk space.
+      so it should have enough space. For example. mirror of Debian wheezy (amd64 and i386) requires 70 GiB of disk space.
     </div>
 
-
-<!-- ================ usage ============== -->
-<div class="target-spacer" id="usage"><a name="usage"></a>&nbsp;</div>
-<h2>Usage</h2>
-
-
-  <p>
-  aptly goal is to establish repeatiblity and controlled changes in package environment. aptly allows
-  to fix set of packages in repository, so that package installation and upgrade becomes deterministic.
-  At the same time aptly allows to perform controlled, fine-grained changes in repository contents to
-  transition your package environment to new version.</p>
-
-  <div class="target-spacer" id="usage"><a name="core-concepts"></a>&nbsp;</div>
-  <h3>Core Concepts</h3>
-
-  <dl class="dl-horizontal">
-    <dt>mirror</dt>
-    <dd>mirror of remote repository, consists of metadata, list of packages and package files</dd>
-
-    <dt>snapshot</dt>
-    <dd>immutable list of packages, basic block to implement repeatability and controlled changes</dd>
-
-    <dt>published repository</dt>
-    <dd>published representation of snapshot, ready to be consumed by apt tools</dd>
-  </dl>
-
-  <p>The schema of aptly's commands and transitions between entities:</p>
-
-  <p><img src="schema.png" class="img-responsive" alt="aptly snapshot diff"></p>
-  <p class="text-muted">* local repo hasn't been implemented yet</p>
-
-  <p>First, mirrors of remote repositories should be <a href="#aptly-mirror-create">set up</a>.
-  Snapshot is being <a href="#aptly-snapshot-create">created</a> from remote repository
-  (official Debain repositories, backports, 3rd party repos, etc.). Snapshots
-  can be changed by <a href="#aptly-snapshot-pull">pulling</a> packages with dependencies between snapshots,
-  <a href="#aptly-snapshot-merge">merging</a> snapshots. Any snapshot can be
-  <a href="#aptly-publish-snapshot">published</a> to any location
-  (distribution name, prefix) and consumed by <code>apt</code> tools.</p>
-
-  <div class="target-spacer" id="usage"><a name="commands"></a>&nbsp;</div>
-  <h3>Commands</h3>
-      <p>Aptly supports commands in three basic categories:</p>
-
-      <ul>
-      <li>  <code>mirror</code>: manage, update mirrors of remote repositories
-      </li>
-      <li>  <code>snapshot</code>: create, merge, manage snapshots
-      </li>
-      <li>  <code>publish</code>: publish snapshot as remote repo
-      </li>
-      <li>  <code>serve</code>: quickly export published repositories via HTTP
-      </li>
-      </ul>
-
+    <p>aptly would use HTTP proxy configured in <code>HTTP_PROXY</code> environment variable automatically.</p>
 
   <!-- ================ common options ============== -->
   <div class="target-spacer" id="common-options"><a name="common-options"></a>&nbsp;</div>
@@ -521,11 +605,51 @@ You can run 'aptly publish snapshot snap-deb-w-nginx' to publish snapshot as Deb
             Recommends
         </li>
         <li>
+          <code>-dep-follow-source=false</code>: when processing dependencies, follow
+            from binary package to source package
+        </li>
+        <li>
           <code>-dep-follow-suggests=false</code>: when processing dependencies, follow
           Suggests</li>
         </ul>
 
       <p>Global flags override configuration parameters with similar names.</p>
+
+  <!-- ================ package-spec ============== -->
+  <div class="target-spacer" id="package-spec"><a name="package-spec"></a>&nbsp;</div>
+  <h3>Package Spec</h3>
+
+  <p>Some commands accept package specs to identify list of packages to process. Package spec is a list of
+  following search conditions:</p>
+
+  <ul>
+    <li><strong>direct package reference</strong>: reference to exaclty one package. Format is identical to the way
+    aptly lists packages in <code>show</code> commands with <code>-with-packages</code> flag: <code>name_version_arch</code>, e.g.:
+    <code>libmysqlclient18_5.5.35-rel33.0-611.squeeze_amd64</code> </li>
+    <li><strong>dependency condition</strong>: syntax follows Debian dependency specification: <code>package_name</code> followed by
+    optional version specification and architecture limit.<br/> Examples:
+    <ul>
+      <li>
+        <code>mysql-client</code>: matches package <code>mysql-client</code> of any version and
+        architecture (including <code>source</code>)
+      </li>
+      <li>
+        <code>mysql-client (&gt;= 3.6)</code>: matches package <code>mysql-client</code> with version greater or equal to <code>3.6</code>.
+        Valid operators for version are: <code>&gt;=</code>, <code>&lt;=</code>, <code>=</code>, <code>&gt;&gt;</code> (strictly greater),
+        <code>&lt;&lt;</code> (strictly less).
+      </li>
+      <li>
+        <code>mysql-client {i386}</code>: matches package <code>mysql-client</code> on architecture <code>i386</code>, architecture
+        <code>all</code> matches all architectures but source.
+      </li>
+      <li>
+        <code>mysql-client (&gt;= 3.6) {i386}</code>: version and architecture conditions combined.
+      </li>
+    </ul>
+    When specified on command line, condition may have to be quoted according to shell rules, so that it stays single argument:
+    <code>aptly repo import percona stable 'mysql-client (&gt;= 3.6)'</code>.
+    </li>
+  </ul>
 
 <!-- ================ aptly mirror ============== -->
 <div class="target-spacer" id="aptly-mirror"><a name="aptly-mirror"></a>&nbsp;</div>
@@ -543,6 +667,10 @@ You can run 'aptly publish snapshot snap-deb-w-nginx' to publish snapshot as Deb
     <p>Usage:</p>
 
     <pre><span class="greeting">$</span> <span class="command"> aptly mirror create &lt;name&gt; &lt;archive url&gt; &lt;distribution&gt; [&lt;component1&gt; ...]</span></pre>
+
+    <p>For Launchpad PPAs:</p>
+
+    <pre><span class="greeting">$</span> <span class="command"> aptly mirror create &lt;name&gt; &lt;ppa:user/project&gt;</span></pre>
 
     <p>Params are:</p>
 
@@ -566,7 +694,11 @@ You can run 'aptly publish snapshot snap-deb-w-nginx' to publish snapshot as Deb
         <code>-ignore-signatures=false</code>: disable verification of Release file signatures
       </li>
       <li>
-        <code>-keyring=trustedkeys.gpg</code> gpg keyring to use when verifying Release file (could be specified multiple times)
+        <code>-keyring=trustedkeys.gpg</code>: gpg keyring to use when verifying Release file (could be specified multiple times)
+      </li>
+      <li>
+        <code>-with-sources=false</code>: download source packages in addition to binary packages (could be enabled by default with config
+        option <code>downloadSourcePackages</code>)
       </li>
     </ul>
 
@@ -577,6 +709,10 @@ You can run 'aptly publish snapshot snap-deb-w-nginx' to publish snapshot as Deb
     <div class="alert alert-info">If components are not specified, aptly will download packages from all
     components and merge it into one when publishing. If components should be left separate, please
     create separate mirror for each component.</div>
+
+    <p>If PPA url is specified, aptly would expand it to HTTP url using configuration options <code>ppaDistributorID</code> &amp;
+    <code>ppaCodename</code>. If you're running aptly on Ubuntu, defaults should work (aptly would figure out codename using
+    <code>lsb_release</code> command).</p>
 
     <p>aptly would try to verify signature of Release files using GnuPG. By default, keyring <code>~/.gnupg/trustedkeys.gpg</code>
     would be used. If you would like to use different keyring(s), specify them using <code>-keyring</code> flag. aptly would
@@ -603,6 +739,10 @@ You can run 'aptly publish snapshot snap-deb-w-nginx' to publish snapshot as Deb
 
     <p>You can learn about signed Debian repositories in <a href="https://wiki.debian.org/SecureApt">Debian wiki</a>. If you would like to disable
     signature checks, you can use flag <code>-ignore-signatures</code> or configuration setting <code>gpgDisableVerify</code>.</p>
+
+    <div class="alert alert-info">aplty deduplicates all downloaded files, so if two mirrors are created one with source packages enabled
+    and another with source packages disabled, they would consume only space required to store all binary and source packages (not twice
+    the space required to store binary packages).</div>
 
     <p>Example:</p>
 
@@ -749,10 +889,367 @@ Information from release file:
     <li>  <code>-force=false</code>: drop mirror even if it used as source of some snapshot</li>
     </ul>
 
+    <div class="alert alert-info">Dropping mirror only removes metadata about the mirror, in order to cleanup the disk
+    space occupied by package files you might need to run <a href="#aptly-db-cleanup"><code>aptly db cleanup</code></a> command.</div>
+
     <p>Example:</p>
 
-<pre><span class="greeting">$</span> <span class="command">mirror drop -force wheezy-main</span>
+<pre><span class="greeting">$</span> <span class="command">aptly mirror drop -force wheezy-main</span>
 Mirror `wheezy-main` has been removed.</pre>
+
+<!-- ================ aptly repo ============== -->
+<div class="target-spacer" id="aptly-repo"><a name="aptly-repo"></a>&nbsp;</div>
+<h3>Command <code>repo</code></h3>
+
+      <p>Repo subcommands manage local package repositories.</p>
+
+  <!-- ================ aptly repo create ============== -->
+  <div class="target-spacer" id="aptly-repo-create"><a name="aptly-repo-create"></a>&nbsp;</div>
+  <h4>Command <code>aptly repo create</code></h4>
+
+    <p>Create local package repository. Repository would be empty when created, packages could be added from files,
+    copied or moved from another local repository or imported from the mirror.</p>
+
+    <p>Usage:</p>
+
+    <pre><span class="greeting">$</span> <span class="command"> aptly repo create &lt;name&gt;</span></pre>
+
+    <p>Params are:</p>
+
+    <ul>
+    <li>  <code>name</code> is a name that would be used in aptly to reference this
+    repository</li>
+    </ul>
+
+    <p>Flags:</p>
+
+    <ul>
+      <li>
+        <code>-comment=""</code>: any text that would be used to described local repository
+      </li>
+    </ul>
+
+
+    <p>Example:</p>
+
+<pre><span class="greeting">$</span> <span class="command">aptly repo create -comment="Nightly builds" testing</span>
+
+Local repo [stable] successfully added.
+You can run 'aptly repo add stable ...' to add packages to repository.
+</pre>
+
+  <!-- ================ aptly repo add ============== -->
+  <div class="target-spacer" id="aptly-repo-add"><a name="aptly-repo-add"></a>&nbsp;</div>
+  <h4>Command <code>aptly repo add</code></h4>
+
+    <p>Command adds packages to local repository from <code>.deb</code> (binary packages) and
+    <code>.dsc</code> (source packages) files. When importing from directory aptly would do
+    recursive scan looking for all files matching <code>*.deb</code> or <code>*.dsc</code>
+    patterns. Every file discovered would be analyzed to extract metadata, package would be
+    created and added to database. Files would be imported to internal package pool. For source packages,
+    all required files are added as well automatically. Extra files for source package should be
+    in the same directory as <code>*.dsc</code> file.</p>
+
+    <p>Usage:</p>
+
+    <pre><span class="greeting">$</span> <span class="command"> aptly repo add &lt;name&gt; &lt;package file&gt;|&lt;directory&gt; ...</span></pre>
+
+    <p>Params are:</p>
+
+    <ul>
+    <li>  <code>name</code> is local repository name </li>
+    </ul>
+
+    <p>Flags:</p>
+
+    <ul>
+      <li>
+        <code>-remove-files=false</code>: remove files that have been imported successfully into repository
+      </li>
+    </ul>
+
+    <p>Local repositories work best for distribution of in-house software or for custom-built upstream packages.
+    Command <code>aptly repo add</code> allows to add source packages and built binary package to local repository.
+    Local repository could be snapshotted, possibly mixed with snapshots of official repositories and published
+    for cunsumption.</p>
+
+    <p>aptly won't complain if package is added to the repo which is complete duplicate. However it is forbidden to
+    have two packages with identical triples (architecture, name, version) that have different metadata or files.
+    All files added to package pool would be deduplicated, as it happens with files coming from mirrors, so exactly one
+    copy of each file would be stored in aptly pool.
+    </p>
+
+    <p>Flag <code>-remove-files</code> allows to implement concept <code>incoming/</code> directory where packages
+    are removed as soon as they're imported into database.</p>
+
+    <p>Example:</p>
+
+<pre><span class="greeting">$</span> <span class="command">aptly repo add testing files/libboost-program-options-dev_1.49.0.1_i386.deb</span>
+Loading packages...
+<span class="green">[+]</span> libboost-program-options-dev_1.49.0.1_i386 added
+</pre>
+
+  <!-- ================ aptly repo import ============== -->
+  <div class="target-spacer" id="aptly-repo-import"><a name="aptly-repo-import"></a>&nbsp;</div>
+  <h4>Command <code>aptly repo import</code></h4>
+
+    <p>Commands import copies packages matching <a href="#package-spec">package spec</a> from mirror <code>src-name</code>
+    to local repo <code>dst-repo</code>. If dependency following is enabled, aptly would try to copy
+    missing dependencies from <code>src-mirror</code> as well.</p>
+
+    <p>Usage:</p>
+
+    <pre><span class="greeting">$</span> <span class="command"> aptly repo import &lt;src-mirror&gt; &lt;dst-repo&gt; &lt;package-spec&gt; ...</span></pre>
+
+    <p>Params are:</p>
+
+    <ul>
+    <li>  <code>src-mirror</code> packages would be searched in this mirror</li>
+    <li>  <code>dst-repo</code> packages would be copied to this local repository</li>
+    <li>  <code>package-spec</code> list of <a href="#package-spec">package search conditions</a></li>
+    </ul>
+
+    <p>Flags:</p>
+
+    <ul>
+      <li>
+        <code>-dry-run=false</code>: don't import, just show what would be imported
+      </li>
+      <li>
+        <code>-with-deps=false</code>: follow dependencies when processing package-spec
+      </li>
+    </ul>
+
+    <p>When copying with dependencies, global dependency options are used. For example, to copy source packages, use
+    <code>-dep-follow-source</code>. If aptly won't be able to guess list of architectures from contents of local repository
+    <code>dst-repo</code>, architectures should be specified with <code>-architectures</code> flag.</p>
+
+    <p>Example:</p>
+
+<pre><span class="greeting">$</span> <span class="command">aptly repo import percona testing percona-server-client-5.5</span>
+Loading packages...
+<span class="green">[o]</span> percona-server-client-5.5_5.5.35-rel33.0-611.squeeze_i386 imported
+<span class="green">[o]</span> percona-server-client-5.5_5.5.35-rel33.0-611.squeeze_amd64 imported
+</pre>
+
+
+<!-- ================ aptly repo show ============== -->
+  <div class="target-spacer" id="aptly-repo-show"><a name="aptly-repo-show"></a>&nbsp;</div>
+  <h4>Command <code>aptly repo show</code></h4>
+
+    <p>Commands show displays information about local repository, possibly listing all packages in the repository.</p>
+
+    <p>Usage:</p>
+
+    <pre><span class="greeting">$</span> <span class="command"> aptly repo show &lt;name&gt;</span></pre>
+
+    <p>Params are:</p>
+
+    <ul>
+    <li>  <code>name</code> local repository name</li>
+    </ul>
+
+    <p>Flags:</p>
+
+    <ul>
+    <li>  <code>-with-packages=false</code>: show detailed list of packages and versions stored in the mirror</li>
+    </ul>
+
+    <p>Example:</p>
+
+<pre><span class="greeting">$</span> <span class="command">aptly repo show -with-packages stable</span>
+Name: stable
+Comment: Stable packages for project Foo
+Number of packages: 10
+Packages:
+  libmysqlclient18_5.5.35-rel33.0-611.squeeze_amd64
+  percona-server-client-5.5_5.5.35-rel33.0-611.squeeze_amd64
+  percona-server-common-5.5_5.5.35-rel33.0-611.squeeze_amd64
+  percona-server-server_5.5.35-rel33.0-611.squeeze_amd64
+  percona-server-server-5.5_5.5.35-rel33.0-611.squeeze_amd64
+  libmysqlclient18_5.5.35-rel33.0-611.squeeze_i386
+  percona-server-client-5.5_5.5.35-rel33.0-611.squeeze_i386
+  percona-server-common-5.5_5.5.35-rel33.0-611.squeeze_i386
+  percona-server-server_5.5.35-rel33.0-611.squeeze_i386
+  percona-server-server-5.5_5.5.35-rel33.0-611.squeeze_i386
+</pre>
+
+<!-- ================ aptly repo list ============== -->
+  <div class="target-spacer" id="aptly-repo-list"><a name="aptly-repo-list"></a>&nbsp;</div>
+  <h4>Command <code>aptly repo list</code></h4>
+
+    <p>Commands list shows list of all local package repositories.</p>
+
+    <p>Usage:</p>
+
+    <pre><span class="greeting">$</span> <span class="command"> aptly repo list</span></pre>
+
+
+    <p>Example:</p>
+
+<pre><span class="greeting">$</span> <span class="command">aptly repo list</span>
+List of mirrors:
+ * [stable]: Stable packages for project Foo (packages: 10)
+ * [testing] (packages: 1)
+
+To get more information about local repository, run `aptly repo show &lt;name&gt;`.
+</pre>
+
+  <!-- ================ aptly repo copy ============== -->
+  <div class="target-spacer" id="aptly-repo-copy"><a name="aptly-repo-copy"></a>&nbsp;</div>
+  <h4>Command <code>aptly repo copy</code></h4>
+
+    <p>Commands copy copies packages matching <a href="#package-spec">package spec</a> from local repo <code>src-name</code>
+    to local repo <code>dst-name</code>. If dependency following is enabled, aptly would try to copy
+    missing dependencies from <code>src-name</code> as well.</p>
+
+    <p>Usage:</p>
+
+    <pre><span class="greeting">$</span> <span class="command"> aptly repo copy &lt;src-name&gt; &lt;dst-name&gt; &lt;package-spec&gt; ...</span></pre>
+
+    <p>Params are:</p>
+
+    <ul>
+    <li>  <code>src-name</code> packages would be searched in this local repository</li>
+    <li>  <code>dst-name</code> packages would be copied to this local repository</li>
+    <li>  <code>package-spec</code> list of <a href="#package-spec">package search conditions</a></li>
+    </ul>
+
+    <p>Flags:</p>
+
+    <ul>
+      <li>
+        <code>-dry-run=false</code>: don't copy, just show what would be copied
+      </li>
+      <li>
+        <code>-with-deps=false</code>: follow dependencies when processing package-spec
+      </li>
+    </ul>
+
+    <p>When copying with dependencies, global dependency options are used. For example, to copy source packages, use
+    <code>-dep-follow-source</code>. If aptly won't be able to guess list of architectures from contents of local repository
+    <code>dst-name</code>, architectures should be specified with <code>-architectures</code> flag.</p>
+
+    <p>Example:</p>
+
+<pre><span class="greeting">$</span> <span class="command">aptly repo copy stable testing percona-server-client-5.5</span>
+Loading packages...
+<span class="green">[o]</span> percona-server-client-5.5_5.5.35-rel33.0-611.squeeze_i386 copied
+<span class="green">[o]</span> percona-server-client-5.5_5.5.35-rel33.0-611.squeeze_amd64 copied
+</pre>
+
+  <!-- ================ aptly repo move ============== -->
+  <div class="target-spacer" id="aptly-repo-move"><a name="aptly-repo-move"></a>&nbsp;</div>
+  <h4>Command <code>aptly repo move</code></h4>
+
+    <p>Commands move moves packages matching <a href="#package-spec">package spec</a> from local repo <code>src-repo</code>
+    to local repo <code>dst-name</code>. If dependency following is enabled, aptly would try to move
+    dependencies from <code>src-name</code> as well.</p>
+
+    <p>Usage:</p>
+
+    <pre><span class="greeting">$</span> <span class="command"> aptly repo move &lt;src-name&gt; &lt;dst-name&gt; &lt;package-spec&gt; ...</span></pre>
+
+    <p>Params are:</p>
+
+    <ul>
+    <li>  <code>src-name</code> packages would be searched in this local repository</li>
+    <li>  <code>dst-name</code> packages would be moved to this local repository</li>
+    <li>  <code>package-spec</code> list of <a href="#package-spec">package search conditions</a></li>
+    </ul>
+
+    <p>Flags:</p>
+
+    <ul>
+      <li>
+        <code>-dry-run=false</code>: don't move, just show what would be moved
+      </li>
+      <li>
+        <code>-with-deps=false</code>: follow dependencies when processing package-spec
+      </li>
+    </ul>
+
+    <p>When moving with dependencies, global dependency options are used. For example, to move source packages, use
+    <code>-dep-follow-source</code>. If aptly won't be able to guess list of architectures from contents of local repository
+    <code>dst-name</code>, architectures should be specified with <code>-architectures</code> flag.</p>
+
+    <p>Example:</p>
+
+<pre><span class="greeting">$</span> <span class="command">aptly repo move stable testing percona-server-client-5.5</span>
+Loading packages...
+<span class="green">[o]</span> percona-server-client-5.5_5.5.35-rel33.0-611.squeeze_i386 moved
+<span class="green">[o]</span> percona-server-client-5.5_5.5.35-rel33.0-611.squeeze_amd64 moved
+</pre>
+
+  <!-- ================ aptly repo remove ============== -->
+  <div class="target-spacer" id="aptly-repo-remove"><a name="aptly-repo-remove"></a>&nbsp;</div>
+  <h4>Command <code>aptly repo remove</code></h4>
+
+    <p>Commands remove deletes packages matching <a href="#package-spec">package spec</a> from local repo <code>name</code>.</p>
+
+    <p>Usage:</p>
+
+    <pre><span class="greeting">$</span> <span class="command"> aptly repo remove &lt;name&gt; &lt;package-spec&gt; ...</span></pre>
+
+    <p>Params are:</p>
+
+    <ul>
+    <li>  <code>name</code> packages would be removed in this local repository</li>
+    <li>  <code>package-spec</code> list of <a href="#package-spec">package search conditions</a></li>
+    </ul>
+
+    <p>Flags:</p>
+
+    <ul>
+      <li>
+        <code>-dry-run=false</code>: don't revmove, just show what would be removed
+      </li>
+    </ul>
+
+    <p>When packages are removed from local repository, only references to those packages are removed. If packages are part
+    of any snapshot, this action won't remove them from snapshot. If there are no references to the packages, package files
+    and metadata could be cleaned up by running command <a href="#aptly-db-cleanup">aptly db cleanup</a>.</p>
+
+    <p>Example:</p>
+
+<pre><span class="greeting">$</span> <span class="command">aptly repo remove stable percona-server-client-5.5</span>
+Loading packages...
+<span class="red">[-]</span> percona-server-client-5.5_5.5.35-rel33.0-611.squeeze_i386 removed
+<span class="red">[-]</span> percona-server-client-5.5_5.5.35-rel33.0-611.squeeze_amd64 removed
+</pre>
+
+  <!-- ================ aptly repo drop ============== -->
+  <div class="target-spacer" id="aptly-repo-drop"><a name="aptly-repo-drop"></a>&nbsp;</div>
+  <h4>Command <code>aptly repo drop</code></h4>
+
+    <p>Drop deletes information about local package repository. Package data is not deleted
+      (it could be still used by other mirrors or snapshots). If snapshot has been created from local repository,
+      aptly would refuse to delete such repository, use flag <code>-force</code> to override.
+    </p>
+
+    <p>Usage:</p>
+
+    <pre><span class="greeting">$</span> <span class="command">aptly repo drop &lt;name&gt;</span></pre>
+
+    <p>Params:</p>
+
+    <ul>
+    <li>  <code>name</code> is local repository name</li>
+    </ul>
+
+    <p>Flags:</p>
+
+    <ul>
+    <li>  <code>-force=false</code>: drop repository even if it used as source of some snapshot</li>
+    </ul>
+
+    <div class="alert alert-info">Dropping local repository only removes metadata, in order to cleanup the disk
+    space occupied by package files you might need to run <a href="#aptly-db-cleanup"><code>aptly db cleanup</code></a> command.</div>
+
+    <p>Example:</p>
+
+<pre><span class="greeting">$</span> <span class="command">aptly repo drop stable</span>
+Local repo `stable` has been removed.</pre>
 
 <!-- ================ aptly snapshot ============== -->
 <div class="target-spacer" id="aptly-snapshot"><a name="aptly-snapshot"></a>&nbsp;</div>
@@ -766,8 +1263,12 @@ Mirror `wheezy-main` has been removed.</pre>
   <div class="target-spacer" id="aptly-snapshot-create"><a name="aptly-snapshot-create"></a>&nbsp;</div>
   <h4>Command <code>aptly snapshot create .. from mirror</code></h4>
 
-    <p>Creates snapshot from current state of remote mirror. Mirros should be
-    updated at least once before using this command.</p>
+    <p>Creates snapshot from current state of remote mirror. Mirror should be
+    updated at least once before running this command.</p>
+
+    <p>Snapshot would contain exactly the same set of packages as mirror currently does.
+    Snapshot is immutable, so if mirror is updated, snapshot contents won't change. If mirror
+    contains source packages, snapshot would also contain source packages.</p>
 
     <p>Usage:</p>
 
@@ -787,6 +1288,35 @@ Mirror `wheezy-main` has been removed.</pre>
 Snapshot monday-updates successfully created.
 You can run 'aptly publish snapshot monday-updates' to publish snapshot as Debian repository.
 </pre>
+
+  <div class="target-spacer">&nbsp;</div>
+  <h4>Command <code>aptly snapshot create .. from repo</code></h4>
+
+    <p>Creates snapshot from current state of local package repository. Repository
+    should contain at least one package.</p>
+
+    <p>Snapshot would contain exactly the same set of packages as local repositorory currently does.
+    Snapshot is immutable, so if local repository is changed in any way, snapshot contents won't change.</p>
+
+    <p>Usage:</p>
+
+    <pre><span class="greeting">$</span> <span class="command">aptly snapshot create &lt;name&gt; from repo &lt;repo-name&gt;</span></pre>
+
+    <p>Params are:</p>
+
+    <ul>
+    <li>  <code>name</code> is a name for the snapshot to be created</li>
+    <li>  <code>repo-name</code> is a local repository name</li>
+    </ul>
+
+    <p>Example:</p>
+
+<pre><span class="greeting">$</span> <span class="command">aptly snapshot create snap-stable from repo stable</span>
+
+Snapshot snap-stable successfully created.
+You can run 'aptly publish snapshot snap-stable' to publish snapshot as Debian repository.
+</pre>
+
 
   <div class="target-spacer">&nbsp;</div>
   <h4>Command <code>aptly snapshot create .. empty</code></h4>
@@ -897,6 +1427,9 @@ Packages:
     dependencies, otherwise <code>aptly</code> will check all architectures in the
     snapshot.</p>
 
+    <p>By using <code>-dep-follow-source</code> global flag you can verify that snapshot has all source packages
+    available to re-build packages from source.</p>
+
     <p>Example:</p>
 
 <pre><span class="greeting">$</span> <span class="command">aptly snapshot verify snap-deb2-main</span>
@@ -943,11 +1476,19 @@ Missing dependencies (7):
     would be pulled</li>
     <li>  <code>-no-deps=false</code>: don't process dependencies, just pull listed
     packages</li>
+    <li>  -no-remove=false: don't remove other package versions when pulling package</li>
     </ul>
 
     <p>If architectures are limited (with config <code>architectures</code> or option
     <code>-architectures</code>), only mentioned architectures are processed, otherwise
     <code>aptly</code> will process all architectures in the snapshot.</p>
+
+    <p>If following dependencies by source is enabled (using either <code>dependencyFollowSource</code> config option or
+    flag <code>-dep-follow-source</code>), pulling binary packages would also pull corresponding source packages as well.</p>
+
+    <p>By default aptly would remove packages matching name and architecture while importing: e.g. when importing
+    <code>software_1.3_amd64</code>, package <code>software_1.2.9_amd64</code>  would be removed. With flag <code>-no-remove</code>
+    both package versions would stay in the snapshot.</p>
 
     <p>Example:</p>
 
@@ -959,20 +1500,20 @@ from snapshot:
 and result would be saved as new snapshot snap-deb-main-w-xorg.
 Loading packages (49476)...
 Building indexes...
-[-] xserver-xorg-1:7.5+8+squeeze1_amd64 removed
-[+] xserver-xorg-1:7.6+8~bpo60+1_amd64 added
-[-] xserver-xorg-core-2:1.7.7-16_amd64 removed
-[+] xserver-xorg-core-2:1.10.4-1~bpo60+2_amd64 added
-[-] xserver-common-2:1.7.7-16_all removed
-[+] xserver-common-2:1.10.4-1~bpo60+2_all added
-[-] libxfont1-1:1.4.1-3_amd64 removed
-[+] libxfont1-1:1.4.4-1~bpo60+1_amd64 added
-[-] xserver-xorg-1:7.5+8+squeeze1_i386 removed
-[+] xserver-xorg-1:7.6+8~bpo60+1_i386 added
-[-] xserver-xorg-core-2:1.7.7-16_i386 removed
-[+] xserver-xorg-core-2:1.10.4-1~bpo60+2_i386 added
-[-] libxfont1-1:1.4.1-3_i386 removed
-[+] libxfont1-1:1.4.4-1~bpo60+1_i386 added
+<span class="red">[-]</span> xserver-xorg-1:7.5+8+squeeze1_amd64 removed
+<span class="green">[+]</span> xserver-xorg-1:7.6+8~bpo60+1_amd64 added
+<span class="red">[-]</span> xserver-xorg-core-2:1.7.7-16_amd64 removed
+<span class="green">[+]</span> xserver-xorg-core-2:1.10.4-1~bpo60+2_amd64 added
+<span class="red">[-]</span> xserver-common-2:1.7.7-16_all removed
+<span class="green">[+]</span> xserver-common-2:1.10.4-1~bpo60+2_all added
+<span class="red">[-]</span> libxfont1-1:1.4.1-3_amd64 removed
+<span class="green">[+]</span> libxfont1-1:1.4.4-1~bpo60+1_amd64 added
+<span class="red">[-]</span> xserver-xorg-1:7.5+8+squeeze1_i386 removed
+<span class="green">[+]</span> xserver-xorg-1:7.6+8~bpo60+1_i386 added
+<span class="red">[-]</span> xserver-xorg-core-2:1.7.7-16_i386 removed
+<span class="green">[+]</span> xserver-xorg-core-2:1.10.4-1~bpo60+2_i386 added
+<span class="red">[-]</span> libxfont1-1:1.4.1-3_i386 removed
+<span class="green">[+]</span> libxfont1-1:1.4.4-1~bpo60+1_i386 added
 
 Snapshot snap-deb-main-w-xorg successfully created.
 You can run 'aptly publish snapshot snap-deb-main-w-xorg' to publish snapshot as Debian repository.
@@ -1011,13 +1552,13 @@ You can run 'aptly publish snapshot snap-deb-main-w-xorg' to publish snapshot as
 
 <pre><span class="greeting">$</span> <span class="command">aptly snapshot diff snap-deb2-main snap-deb-main-w-xorg</span>
   Arch   | Package                                  | Version in A                             | Version in B
-! amd64  | libxfont1                                | 1:1.4.1-3                                | 1:1.4.4-1~bpo60+1
-! i386   | libxfont1                                | 1:1.4.1-3                                | 1:1.4.4-1~bpo60+1
-! all    | xserver-common                           | 2:1.7.7-16                               | 2:1.10.4-1~bpo60+2
-! amd64  | xserver-xorg                             | 1:7.5+8+squeeze1                         | 1:7.6+8~bpo60+1
-! i386   | xserver-xorg                             | 1:7.5+8+squeeze1                         | 1:7.6+8~bpo60+1
-! amd64  | xserver-xorg-core                        | 2:1.7.7-16                               | 2:1.10.4-1~bpo60+2
-! i386   | xserver-xorg-core                        | 2:1.7.7-16                               | 2:1.10.4-1~bpo60+2
+<span class="yellow">!</span> amd64  | libxfont1                                | 1:1.4.1-3                                | 1:1.4.4-1~bpo60+1
+<span class="yellow">!</span> i386   | libxfont1                                | 1:1.4.1-3                                | 1:1.4.4-1~bpo60+1
+<span class="yellow">!</span> all    | xserver-common                           | 2:1.7.7-16                               | 2:1.10.4-1~bpo60+2
+<span class="yellow">!</span> amd64  | xserver-xorg                             | 1:7.5+8+squeeze1                         | 1:7.6+8~bpo60+1
+<span class="yellow">!</span> i386   | xserver-xorg                             | 1:7.5+8+squeeze1                         | 1:7.6+8~bpo60+1
+<span class="yellow">!</span> amd64  | xserver-xorg-core                        | 2:1.7.7-16                               | 2:1.10.4-1~bpo60+2
+<span class="yellow">!</span> i386   | xserver-xorg-core                        | 2:1.7.7-16                               | 2:1.10.4-1~bpo60+2
 </pre>
 
   <!-- ================ aptly snapshot merge ============== -->
@@ -1072,6 +1613,10 @@ You can run 'aptly publish snapshot debian-w-backports' to publish snapshot as D
     <ul>
     <li>  <code>-force=false</code>: drop snapshot even if it used as source in other snapshots</li>
     </ul>
+
+    <div class="alert alert-info">Dropping snapshot only removes metadata, in order to cleanup the disk
+    space occupied by package files you might need to run <a href="#aptly-db-cleanup"><code>aptly db cleanup</code></a> command
+    (package files would be removed only if they're not referenced by mirrors and other snapshots anymore).</div>
 
     <p>Example:</p>
 
@@ -1138,6 +1683,8 @@ Snapshot `snap-wheezy` has been dropped.</pre>
     original repository distribution</li>
     <li>  <code>-gpg-key=""</code>: GPG key ID to use when signing the release, if not
     specified default key is used</li>
+    <li>  <code>-keyring=""</code>: GPG keyring to use (instead of default)</li>
+    <li>  <code>-secret-keyring=""</code>: GPG secret keyring to use (instead of default)</li>
     <li>  <code>-skip-signing=false</code>: don't sign Release files with GPG
     </ul>
 
@@ -1186,11 +1733,19 @@ Don't forget to add your GPG key to apt with apt-key.
                   <li><code>InRelease</code>: clearsigned version</li>
                   <li><code>Release.gpg</code>: detached <code>Release</code> signature</li>
                   <li>
-                    <code>binary-i386</code>: binary packages for architecture <code>i386</code>
+                    <code>binary-i386</code>: binary packages index for architecture <code>i386</code>
                     <ul>
                       <li><code>Packages</code>: package metadata</li>
                       <li><code>Packages.gz</code></li>
                       <li><code>Packages.bz2</code></li>
+                    </ul>
+                  </li>
+                  <li>
+                    <code>source</code>: source packages index (generated only if source packages are available)
+                    <ul>
+                      <li><code>Sources</code>: package metadata</li>
+                      <li><code>Sources.gz</code></li>
+                      <li><code>Sources.bz2</code></li>
                     </ul>
                   </li>
                 </ul>
@@ -1270,6 +1825,37 @@ Removing /var/aptly/public/dists/squeeze-backports...
 Removing /var/aptly/public/pool/contrib...
 </pre>
 
+<!-- ================ aptly db ============== -->
+<div class="target-spacer" id="aptly-db"><a name="aptly-db"></a>&nbsp;</div>
+<h3>Command <code>db</code></h3>
+
+  <p>aptly db subcommands manage aptly's internal metadata database and package pool.</p>
+
+  <!-- ================ aptly db cleanup ============== -->
+  <div class="target-spacer" id="aptly-db-cleanup"><a name="aptly-db-cleanup"></a>&nbsp;</div>
+  <h4>Command <code>aptly db cleanup</code></h4>
+
+    <p>Database cleanup removes information about unreferenced packages and deletes
+    files in the package pool that aren't used by packages anymore. It is a good idea to run this
+    command after massive deletion of mirrors/snapshots.</p>
+
+    <p>Usage:</p>
+
+    <pre><span class="greeting">$</span> <span class="command">aptly db cleanup</span></pre>
+
+
+    <p>Example:</p>
+
+<pre><span class="greeting">$</span> <span class="command">aptly db cleanup</span>
+Loading mirrors and snapshots...
+Loading list of all packages...
+Deleting unreferenced packages (325)...
+Building list of files referenced by packages...
+Building list of files in package pool...
+Deleting unreferenced files (325)...
+Disk space freed: 0.27 GiB...
+</pre>
+
 <!-- ================ aptly serve ============== -->
 <div class="target-spacer" id="aptly-serve"><a name="aptly-serve"></a>&nbsp;</div>
 <h3>Command <code>serve</code></h3>
@@ -1338,6 +1924,26 @@ Starting web server at: 127.0.0.1:8765 (press Ctrl+C to quit)...
 <!-- ================ history ============== -->
 <div class="target-spacer" id="history"><a name="history"></a>&nbsp;</div>
 <h2>History</h2>
+
+  <h3>Version 0.4</h3>
+
+  <ul>
+    <li>new command: <a href="#aptly-db-cleanup">aptly db cleanup</a> to remove unreferenced DB entries and files</li>
+    <li>new flags: <code>-keyring</code> &amp; <code>-secret-keyring</code> for <a href="#aptly-snapshot-publish">aptly snapshot publish</a> command</li>
+    <li>aptly supports mirroring remote repos with source packages and publishing repositories with sources</li>
+    <li>new config: <code>downloadSourcePackages</code> to enable source package downloading</li>
+    <li>new flag: <code>-with-sources</code> for <a href="#aptly-mirror-create">aptly mirror create</a> command</li>
+    <li>new config &amp; flag: <code>dependencyFollowSource</code> &amp; <code>-dep-follow-source</code> to follow <code>Source:</code> dependencies</li>
+    <li>packages are printed in lists with underscores instead of dashes, e.g. <code>pkg_1.3-3_amd64</code> instead of <code>pkg-1.3-3-amd64</code></li>
+    <li>local package repositories are supported</li>
+    <li>new commands in <code>aptly repo</code> family: <a href="#aptly-repo-add">add</a>, <a href="#aptly-repo-copy">copy</a>, <a href="#aptly-repo-create">create</a>, <a href="#aptly-repo-drop">drop</a>, <a href="#aptly-repo-import">import</a>, <a href="#aptly-repo-list">list</a>, <a href="#aptly-repo-move">move</a>, <a href="#aptly-repo-remove">remove</a> and <a href="#aptly-repo-show">show</a></li>
+    <li>command <a href="#aptly-snapshot-create">aptly snapshot create</a> supports creation of snapshots from local repos</li>
+    <li>aptly peak memory usage has been reduced by factor of 3x</li>
+    <li>new flag <code>-no-remove</code> for <a href="#aptly-snapshot-pull">aptly snapshot pull</a>: don't remove other version of packages
+        when pulling (e.g. keep old versions)</li>
+    <li>command <a href="#aptly-mirror-create">aptly mirror create</a> supports shorthand PPA url: <code>ppa:user/project</code></li>
+    <li>new config: <code>ppaDistributorID</code> &amp; <code>ppaCodename</code> to specify PPA url expansion rules</li>
+  </ul>
 
   <h3>Version 0.3</h3>
 
