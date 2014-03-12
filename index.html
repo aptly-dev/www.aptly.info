@@ -364,6 +364,24 @@ You can run 'aptly publish snapshot snap-deb-w-nginx' to publish snapshot as Deb
       <li>0.6 (end of April): mirroring as is, yum repositories support</li>
     </ul>
 
+    <p><strong>For Debian/Ubuntu</strong> aptly could be installed from by adding new repository
+    to <code>/etc/apt/sources.list</code>:</p>
+
+    <pre>deb http://repo.aptly.info/ squeeze main</pre>
+
+    <p>And importing key that is used to sign the release:</p>
+
+    <pre><span class="greeting">$</span> <span class="command">gpg --keyserver keys.gnupg.net --recv-keys 2A194991</span>
+<span class="greeting">$</span> <span class="command">gpg -a --export 2A194991 | sudo apt-key add -</span></pre>
+
+    <p>After that you can install aptly as any other software package:</p>
+
+    <pre><span class="greeting">$</span> <span class="command">apt-get update</span>
+<span class="greeting">$</span> <span class="command">apt-get install aptly</span></pre>
+
+    <p>Don't worry about <code>squeeze</code> part in repo name: aptly package should work on Debian squeeze+, Ubuntu 10.0+. Package
+    contains aptly binary, man page and bash completion.</p>
+
     <p><strong>Binary</strong> executables (depends almost only on libc) for Debian, CentOS, MacOS X &amp; FreeBSD are available for
     download from <a href="http://dl.bintray.com/smira/aptly/0.4.1/">Bintray</a>. Linux executables should run on almost any
     recent Linux distribution.</p>
@@ -374,6 +392,7 @@ You can run 'aptly publish snapshot snap-deb-w-nginx' to publish snapshot as Deb
             <img src="debian.png" alt="Debian" class="logo">
           </div>
           <h4>Debian (Ubuntu)</h4>
+          <p><strong>see part on installation from .deb package above</strong></p>
           <p>squeeze+: <a href="http://dl.bintray.com/smira/aptly/0.4.1/debian-squeeze-x32/aptly">32-bit</a> |
                       <a href="http://dl.bintray.com/smira/aptly/0.4.1/debian-squeeze-x64/aptly">64-bit</a></p>
         </div>
