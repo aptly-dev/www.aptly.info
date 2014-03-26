@@ -74,6 +74,7 @@
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">publish <b class="caret"></b></a>
               <ul class="dropdown-menu">
                 <li><a href="#aptly-publish-snapshot">aptly publish snapshot</a></li>
+                <li><a href="#aptly-publish-repo">aptly publish repo</a></li>
                 <li><a href="#aptly-publish-list">aptly publish list</a></li>
                 <li><a href="#aptly-publish-drop">aptly publish drop</a></li>
               </ul>
@@ -101,7 +102,7 @@
         <h1>aptly</h1>
         <p>aptly is a swiss army knife for Debian repository management: it allows to mirror remote
         repositories, manage local package repositories, take snapshots, pull new versions of packages
-        along with dependencies, publish as Debian repository.</p>
+        along with dependencies, publish snapshots as Debian repositories.</p>
 
         <p>aptly is free <a href="https://github.com/smira/aptly">open-source</a> software licensed under MIT license.</p>
 
@@ -492,7 +493,7 @@ You can run 'aptly publish snapshot snap-deb-w-nginx' to publish snapshot as Deb
     <dd>immutable list of packages, basic block to implement repeatability and controlled changes</dd>
 
     <dt>published repository</dt>
-    <dd>published representation of snapshot, ready to be consumed by apt tools</dd>
+    <dd>published representation of snapshot or local repository, ready to be consumed by apt tools</dd>
   </dl>
 
   <p>The schema of aptly's commands and transitions between entities:</p>
@@ -508,8 +509,9 @@ You can run 'aptly publish snapshot snap-deb-w-nginx' to publish snapshot as Deb
   packages, your own software). Snapshots
   can be used to produce new snapshots by <a href="#aptly-snapshot-pull">pulling</a> packages with dependencies between snapshots
   and by <a href="#aptly-snapshot-merge">merging</a> snapshots. Any snapshot can be
-  <a href="#aptly-publish-snapshot">published</a> to any location
-  (distribution name, prefix) and consumed by <code>apt</code> tools on your Debian systems.</p>
+  <a href="#aptly-publish-snapshot">published</a> to location
+  (distribution name, prefix) and consumed by <code>apt</code> tools on your Debian systems. Local repositories
+  could be <a href="#aptly-publish-repo">published directly</a> bypassing snapshot step.</p>
 
   <div class="target-spacer" id="usage"><a name="commands"></a>&nbsp;</div>
   <h3>Commands</h3>
@@ -522,7 +524,7 @@ You can run 'aptly publish snapshot snap-deb-w-nginx' to publish snapshot as Deb
       </li>
       <li>  <code>snapshot</code>: create, merge, manage snapshots
       </li>
-      <li>  <code>publish</code>: publish snapshot as remote repo
+      <li>  <code>publish</code>: publish snapshot or local repository
       </li>
       <li>  <code>serve</code>: quickly export published repositories via HTTP
       </li>
@@ -1657,7 +1659,7 @@ Snapshot `snap-wheezy` has been dropped.</pre>
 <div class="target-spacer" id="aptly-publish"><a name="aptly-publish"></a>&nbsp;</div>
 <h3>Command <code>publish</code></h3>
 
-  <p>Publishing snapshot as Debian repository which could be served by
+  <p>Publish snapshot or local repo as Debian repository which could be served by
   HTTP/FTP/rsync server. Repository is signed by user's key with GnuPG.
   Key should be created beforehand (see section GPG Keys). Published
   repository could be consumed directly by apt.</p>
@@ -1685,7 +1687,7 @@ Snapshot `snap-wheezy` has been dropped.</pre>
   <div class="target-spacer" id="aptly-publish-snapshot"><a name="aptly-publish-snapshot"></a>&nbsp;</div>
   <h4>Command <code>aptly publish snapshot</code></h4>
 
-    <p>Publishes repository to be consumed by <code>apt</code>. Published repostiories
+    <p>Publishes snapshot as repository to be consumed by <code>apt</code>. Published repostiories
      appear under <code>rootDir/public</code> directory. Valid <a href="#gpg-keys">GPG key</a> is required
      for publishing.</p>
 
@@ -1721,6 +1723,13 @@ Snapshot `snap-wheezy` has been dropped.</pre>
     <p>If architectures are limited (with config <code>architectures</code> or option
     <code>-architectures</code>), only mentioned architectures would ne published,
     otherwise <code>aptly</code> will publish all architectures in the snapshot.</p>
+
+    <p><code>aptly</code> would try to figure out distribution and component from snapshot by going via
+    snapshot source tree down to mirrors and local repositories. If all roots report the same
+    distribution name, it is chosen as default. If there are different distribution names or
+    distribution name is not specfied, <code>aptly</code> would display an error. For component name
+    the same rules apply except in case of not being able to figure out component, aptly would
+    use component <code>main</code>.</p>
 
     <div class="alert alert-info">It is not allowed to publish two snapshots to the same
     <code>prefix</code> and <code>distribution</code>.</div>
@@ -1808,6 +1817,74 @@ Don't forget to add your GPG key to apt with apt-key.
     </ul>
   </li>
 </ul>
+
+  <!-- ================ aptly publish repo ============== -->
+  <div class="target-spacer" id="aptly-publish-repo"><a name="aptly-publish-repo"></a>&nbsp;</div>
+  <h4>Command <code>aptly publish repo</code></h4>
+
+    <p>Publishes local repository directly, bypassing snapshot creation step.
+     Published repositories appear under <code>rootDir/public</code> directory.
+     Valid <a href="#gpg-keys">GPG key</a> is required for publishing.</p>
+
+    <div class="alert alert-warning">It is not advised to publish local repositories directly
+    unless repository is used to host testing versions of packages that change frequently.
+    For production usage please <a href="#aptly-snapshot-create">create snapshot</a> from
+    repository and <a href="#aptly-publish-snapshot">publish it</a>.</div>
+
+    <p>Usage:</p>
+
+    <pre><span class="greeting">$</span> <span class="command">aptly publish repo &lt;name&gt; [&lt;prefix&gt;]</span></pre>
+
+    <p>Params:</p>
+
+    <ul>
+    <li>  <code>name</code> is a local repo name that snould be published</li>
+    <li>  <code>prefix</code> is an optional prefix for publishing, if not specified,
+    repository would be published to the root of publiс directory. <code>prefix</code> could be single directory like
+    <code>ppa</code> or part of the tree like <code>ppa/android</code>. <code>prefix</code> shouldn't contain
+    <code>..</code>, and names <code>dists</code> and <code>pool</code> are not accepted. Empty <code>prefix</code>
+    would be converted to <code>.</code>.</li>
+    </ul>
+
+    <p>Flags:</p>
+
+    <ul>
+    <li>  <code>-component=""</code>: component name to publish; it is taken from local
+    repository default, otherwise it defaults to <code>main</code></li>
+    <li>  <code>-distribution=""</code>: distribution name to publish; guessed from
+    local repository default distribution</li>
+    <li>  <code>-gpg-key=""</code>: GPG key ID to use when signing the release, if not
+    specified default key is used</li>
+    <li>  <code>-keyring=""</code>: GPG keyring to use (instead of default)</li>
+    <li>  <code>-secret-keyring=""</code>: GPG secret keyring to use (instead of default)</li>
+    <li>  <code>-skip-signing=false</code>: don't sign Release files with GPG
+    </ul>
+
+    <p>If architectures are limited (with config <code>architectures</code> or option
+    <code>-architectures</code>), only mentioned architectures would ne published,
+    otherwise <code>aptly</code> will publish all architectures in the snapshot.</p>
+
+    <div class="alert alert-info">It is not allowed to publish two repositories or snapshots to the same
+    <code>prefix</code> and <code>distribution</code>.</div>
+
+
+    <p>Example:</p>
+
+<pre><span class="greeting">$</span> <span class="command">aptly publish repo local-repo</span>
+Signing file '/var/aptly/public/dists/squeeze/Release' with gpg, please enter your passphrase when prompted:
+
+&lt;&lt;gpg asks for passphrase&gt;&gt;
+
+Clearsigning file '/var/aptly/public/dists/squeeze/Release' with gpg, please enter your passphrase when prompted:
+
+&lt;&lt;gpg asks for passphrase&gt;&gt;
+
+Snapshot back has been successfully published.
+Please setup your webserver to serve directory '/var/aptly/public' with autoindexing.
+Now you can add following line to apt sources:
+  deb http://your-server/ squeeze main
+Don't forget to add your GPG key to apt with apt-key.
+</pre>
 
   <!-- ================ aptly publish list ============== -->
   <div class="target-spacer" id="aptly-publish-list"><a name="aptly-publish-list"></a>&nbsp;</div>
@@ -1964,6 +2041,8 @@ Starting web server at: 127.0.0.1:8765 (press Ctrl+C to quit)...
     <li>fixed wrong location of man page in Debian package (<a href="https://github.com/smira/aptly/issues/22">#22</a>)</li>
     <li>new flags: <code>-distribution</code> and <code>-component</code> to specify default publishing options in <a href="#aptly-repo-create">aptly repo create</a> (<a href="https://github.com/smira/aptly/issues/12">#12</a>)</li>
     <li>aptly would try harder to figure out distribution &amp; component automatically when publishing going through the tree of snapshots, mirrors and local repositories</li>
+    <li>aptly supports publishing local repositories, without intermediate snapshot step (<a href="https://github.com/smira/aptly/issues/10">#10</a>)</li>
+    <li>new command: <a href="#aptly-publish-repo">aptly publish repo</a></li>
   </ul>
 
   <h3>Version 0.4.1</h3>
