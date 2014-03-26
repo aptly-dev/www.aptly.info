@@ -946,7 +946,16 @@ Mirror `wheezy-main` has been removed.</pre>
       <li>
         <code>-comment=""</code>: any text that would be used to described local repository
       </li>
+      <li>
+        <code>-component="main"</code>: default component when publishing
+      </li>
+      <li>
+        <code>-distribution=""</code>: default distribution when publishing
+      </li>
     </ul>
+
+    <p>Default distribution and component would be taken as defaults when publishing repository
+    either directly or via snapshots.</p>
 
 
     <p>Example:</p>
@@ -1079,6 +1088,8 @@ Loading packages...
 <pre><span class="greeting">$</span> <span class="command">aptly repo show -with-packages stable</span>
 Name: stable
 Comment: Stable packages for project Foo
+Default Distribution: wheezy
+Default Component: main
 Number of packages: 10
 Packages:
   libmysqlclient18_5.5.35-rel33.0-611.squeeze_amd64
@@ -1951,6 +1962,8 @@ Starting web server at: 127.0.0.1:8765 (press Ctrl+C to quit)...
     <li>internal DB is compacted when calling <a href="#aptly-db-cleanup">aptly db cleanup</a> (<a href="https://github.com/smira/aptly/issues/19">#19</a>)</li>
     <li>size is shown in human-readable format (<a href="https://github.com/smira/aptly/issues/18">#18</a>)</li>
     <li>fixed wrong location of man page in Debian package (<a href="https://github.com/smira/aptly/issues/22">#22</a>)</li>
+    <li>new flags: <code>-distribution</code> and <code>-component</code> to specify default publishing options in <a href="#aptly-repo-create">aptly repo create</a> (<a href="https://github.com/smira/aptly/issues/12">#12</a>)</li>
+    <li>aptly would try harder to figure out distribution &amp; component automatically when publishing going through the tree of snapshots, mirrors and local repositories</li>
   </ul>
 
   <h3>Version 0.4.1</h3>
