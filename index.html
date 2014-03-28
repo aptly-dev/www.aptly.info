@@ -54,6 +54,7 @@
                 <li><a href="#aptly-repo-copy">aptly repo copy</a></li>
                 <li><a href="#aptly-repo-move">aptly repo move</a></li>
                 <li><a href="#aptly-repo-remove">aptly repo remove</a></li>
+                <li><a href="#aptly-repo-edit">aptly repo edit</a></li>
                 <li><a href="#aptly-repo-drop">aptly repo drop</a></li>
               </ul>
             </li>
@@ -1250,6 +1251,47 @@ Loading packages...
 <span class="red">[-]</span> percona-server-client-5.5_5.5.35-rel33.0-611.squeeze_amd64 removed
 </pre>
 
+  <!-- ================ aptly repo edit ============== -->
+  <div class="target-spacer" id="aptly-repo-edit"><a name="aptly-repo-edit"></a>&nbsp;</div>
+  <h4>Command <code>aptly repo edit</code></h4>
+
+    <p>Command edit allows to change metadata of local repository:
+    comment, default distribution and component.</p>
+
+    <p>Usage:</p>
+
+    <pre><span class="greeting">$</span> <span class="command"> aptly repo edit &lt;name&gt;</span></pre>
+
+    <p>Params are:</p>
+
+    <ul>
+    <li>  <code>name</code> is a local repository name</li>
+    </ul>
+
+    <p>Flags:</p>
+
+    <ul>
+      <li>
+        <code>-comment=""</code>: any text that would be used to described local repository
+      </li>
+      <li>
+        <code>-component=""</code>: default component when publishing
+      </li>
+      <li>
+        <code>-distribution=""</code>: default distribution when publishing
+      </li>
+    </ul>
+
+    <p>Default distribution and component would be taken as defaults when publishing repository
+    either directly or via snapshots.</p>
+
+
+    <p>Example:</p>
+
+<pre><span class="greeting">$</span> <span class="command">aptly repo edit -comment="Nightly builds" -distribution=wheezy testing</span>
+Local repo [testing]: Nightly builds successfully updated.
+</pre>
+
   <!-- ================ aptly repo drop ============== -->
   <div class="target-spacer" id="aptly-repo-drop"><a name="aptly-repo-drop"></a>&nbsp;</div>
   <h4>Command <code>aptly repo drop</code></h4>
@@ -2042,7 +2084,8 @@ Starting web server at: 127.0.0.1:8765 (press Ctrl+C to quit)...
     <li>new flags: <code>-distribution</code> and <code>-component</code> to specify default publishing options in <a href="#aptly-repo-create">aptly repo create</a> (<a href="https://github.com/smira/aptly/issues/12">#12</a>)</li>
     <li>aptly would try harder to figure out distribution &amp; component automatically when publishing going through the tree of snapshots, mirrors and local repositories</li>
     <li>aptly supports publishing local repositories, without intermediate snapshot step (<a href="https://github.com/smira/aptly/issues/10">#10</a>)</li>
-    <li>new command: <a href="#aptly-publish-repo">aptly publish repo</a></li>
+    <li>new command: <a href="#aptly-publish-repo">aptly publish repo</a> to publish local repository directly (<a href="https://github.com/smira/aptly/issues/10">#10</a>)</li>
+    <li>new command: <a href="#aptly-repo-edit">aptly publish edit</a> to change defaults for the local repository (<a href="https://github.com/smira/aptly/issues/12">#12</a>)</li>
   </ul>
 
   <h3>Version 0.4.1</h3>
