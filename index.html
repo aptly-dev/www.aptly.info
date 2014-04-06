@@ -85,6 +85,7 @@
               <ul class="dropdown-menu">
                 <li class="dropdown-header">db</li>
                 <li><a href="#aptly-db-cleanup">aptly db cleanup</a></li>
+                <li><a href="#aptly-db-info">aptly db info</a></li>
                 <li class="divider"></li>
                 <li class="dropdown-header">misc</li>
                 <li><a href="#aptly-serve">aptly serve</a></li>
@@ -2006,6 +2007,25 @@ Deleting unreferenced files (325)...
 Disk space freed: 0.27 GiB...
 </pre>
 
+  <!-- ================ aptly db recover ============== -->
+  <div class="target-spacer" id="aptly-db-recover"><a name="aptly-db-recover"></a>&nbsp;</div>
+  <h4>Command <code>aptly db recover</code></h4>
+
+    <p>Database recover does its best to recover database after crash.
+    It is recommended to backup DB before running recover. Recover procedures
+    ignores all index files and tries to reconstruct them from <code>.sst</code> files.</p>
+
+    <p>Usage:</p>
+
+    <pre><span class="greeting">$</span> <span class="command">aptly db recover</span></pre>
+
+
+    <p>Example:</p>
+
+<pre><span class="greeting">$</span> <span class="command">aptly db recover</span>
+Recovering DB...
+</pre>
+
 <!-- ================ aptly serve ============== -->
 <div class="target-spacer" id="aptly-serve"><a name="aptly-serve"></a>&nbsp;</div>
 <h3>Command <code>serve</code></h3>
@@ -2088,7 +2108,8 @@ Starting web server at: 127.0.0.1:8765 (press Ctrl+C to quit)...
     <li>new command: <a href="#aptly-publish-repo">aptly publish repo</a> to publish local repository directly (<a href="https://github.com/smira/aptly/issues/10">#10</a>)</li>
     <li>new command: <a href="#aptly-repo-edit">aptly publish edit</a> to change defaults for the local repository (<a href="https://github.com/smira/aptly/issues/12">#12</a>)</li>
     <li>aptly supports global &amp; command flags placement in any position in command line (before command name, after command name) (<a href="https://github.com/smira/aptly/issues/17">#17</a>)</li>
-  </ul>
+      <li>new command: <a href="#aptly-db-recover">aptly db recover</a> to recover internal DB after crash (<a href="https://github.com/smira/aptly/issues/25">#25</a>)</li>
+</ul>
 
   <h3>Version 0.4.1</h3>
 
