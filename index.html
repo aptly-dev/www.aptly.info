@@ -836,7 +836,15 @@ You can run 'aptly mirror update debian-main' to download repository contents.
 
     <pre><span class="greeting">$</span> <span class="command">aptly mirror list</span></pre>
 
-    <p>Example:</p>
+    <p>Flags:</p>
+
+    <ul>
+      <li>
+        <code>-raw=false</code>: display list in machine-readable format
+      </li>
+    </ul>
+
+    <p>Examples:</p>
 
 <pre><span class="greeting">$</span> <span class="command">aptly mirror list</span>
 List of mirrors:
@@ -844,6 +852,11 @@ List of mirrors:
  * [debian-main]: http://ftp.ru.debian.org/debian/ squeeze
 
 To get more information about repository, run `aptly mirror show &lt;name&gt;`.
+</pre>
+
+<pre><span class="greeting">$</span> <span class="command">aptly mirror list -raw</span>
+backports
+debian-main
 </pre>
 
   <!-- ================ aptly mirror show ============== -->
@@ -1119,8 +1132,15 @@ Packages:
 
     <pre><span class="greeting">$</span> <span class="command"> aptly repo list</span></pre>
 
+    <p>Flags:</p>
 
-    <p>Example:</p>
+    <ul>
+      <li>
+        <code>-raw=false</code>: display list in machine-readable format
+      </li>
+    </ul>
+
+    <p>Examples:</p>
 
 <pre><span class="greeting">$</span> <span class="command">aptly repo list</span>
 List of mirrors:
@@ -1128,6 +1148,11 @@ List of mirrors:
  * [testing] (packages: 1)
 
 To get more information about local repository, run `aptly repo show &lt;name&gt;`.
+</pre>
+
+<pre><span class="greeting">$</span> <span class="command">aptly repo list -raw</span>
+stable
+testing
 </pre>
 
   <!-- ================ aptly repo copy ============== -->
@@ -1428,7 +1453,15 @@ You can run 'aptly publish snapshot empty-snapshot' to publish snapshot as Debia
 
     <pre><span class="greeting">$</span> <span class="command">aptly snapshot list</span></pre>
 
-    <p>Example:</p>
+    <p>Flags:</p>
+
+    <ul>
+      <li>
+        <code>-raw=false</code>: display list in machine-readable format
+      </li>
+    </ul>
+
+    <p>Examples:</p>
 
 <pre><span class="greeting">$</span> <span class="command">aptly snapshot list</span>
 List of snapshots:
@@ -1438,7 +1471,12 @@ List of snapshots:
 To get more information about snapshot, run `aptly snapshot show &lt;name&gt;`.
 </pre>
 
-    <p>In snapshot list, basic information on snapshot creation procedure is recorded.</p>
+    <p>In snapshot list, basic information on snapshot creation way is displayed.</p>
+
+<pre><span class="greeting">$</span> <span class="command">aptly snapshot list -raw</span>
+monday-updates
+back
+</pre>
 
   <!-- ================ aptly snapshot show ============== -->
   <div class="target-spacer" id="aptly-snapshot-show"><a name="aptly-snapshot-show"></a>&nbsp;</div>
@@ -2108,7 +2146,8 @@ Starting web server at: 127.0.0.1:8765 (press Ctrl+C to quit)...
     <li>new command: <a href="#aptly-publish-repo">aptly publish repo</a> to publish local repository directly (<a href="https://github.com/smira/aptly/issues/10">#10</a>)</li>
     <li>new command: <a href="#aptly-repo-edit">aptly publish edit</a> to change defaults for the local repository (<a href="https://github.com/smira/aptly/issues/12">#12</a>)</li>
     <li>aptly supports global &amp; command flags placement in any position in command line (before command name, after command name) (<a href="https://github.com/smira/aptly/issues/17">#17</a>)</li>
-      <li>new command: <a href="#aptly-db-recover">aptly db recover</a> to recover internal DB after crash (<a href="https://github.com/smira/aptly/issues/25">#25</a>)</li>
+    <li>new command: <a href="#aptly-db-recover">aptly db recover</a> to recover internal DB after crash (<a href="https://github.com/smira/aptly/issues/25">#25</a>)</li>
+    <li>new flag: <code>-raw</code> to display list in machine-readable format for commands <a href="#aptly-mirror-list">aptly mirror list</a>, <a href="#aptly-repo-list">aptly repo list</a> and <a href="#aptly-snapshot-list">aptly snapshot list</a> (<a href="https://github.com/smira/aptly/issues/27">#27</a>)</li>
 </ul>
 
   <h3>Version 0.4.1</h3>
