@@ -1985,12 +1985,25 @@ Don't forget to add your GPG key to apt with apt-key.
 
     <pre><span class="greeting">$</span> <span class="command">aptly publish list</span></pre>
 
-    <p>Example:</p>
+    <p>Flags:</p>
+
+    <ul>
+      <li>
+        <code>-raw=false</code>: display list in machine-readable format
+      </li>
+    </ul>
+
+    <p>Examples:</p>
 
 <pre><span class="greeting">$</span> <span class="command">aptly publish list</span>
 Published repositories:
   * ./sq-b (main) [amd64, i386] publishes [back3]: Snapshot from mirror [backports2]: http://mirror.yandex.ru/backports.org/ squeeze-backports
   * ./squeeze-backports (contrib) [amd64, i386] publishes [back3]: Snapshot from mirror [backports2]: http://mirror.yandex.ru/backports.org/ squeeze-backports
+</pre>
+
+<pre><span class="greeting">$</span> <span class="command">aptly publish list -raw</span>
+. sq-b
+. squeeze-backports
 </pre>
 
   <!-- ================ aptly publish drop ============== -->
@@ -2151,7 +2164,7 @@ Starting web server at: 127.0.0.1:8765 (press Ctrl+C to quit)...
     <li>new command: <a href="#aptly-repo-edit">aptly publish edit</a> to change defaults for the local repository (<a href="https://github.com/smira/aptly/issues/12">#12</a>)</li>
     <li>aptly supports global &amp; command flags placement in any position in command line (before command name, after command name) (<a href="https://github.com/smira/aptly/issues/17">#17</a>)</li>
     <li>new command: <a href="#aptly-db-recover">aptly db recover</a> to recover internal DB after crash (<a href="https://github.com/smira/aptly/issues/25">#25</a>)</li>
-    <li>new flag: <code>-raw</code> to display list in machine-readable format for commands <a href="#aptly-mirror-list">aptly mirror list</a>, <a href="#aptly-repo-list">aptly repo list</a> and <a href="#aptly-snapshot-list">aptly snapshot list</a> (<a href="https://github.com/smira/aptly/issues/27">#27</a>)</li>
+    <li>new flag: <code>-raw</code> to display list in machine-readable format for commands <a href="#aptly-mirror-list">aptly mirror list</a>, <a href="#aptly-repo-list">aptly repo list</a>, <a href="#aptly-snapshot-list">aptly snapshot list</a> and <a href="#aptly-publish-list">aptly publish list</a> (<a href="https://github.com/smira/aptly/issues/27">#27</a>, <a href="https://github.com/smira/aptly/issues/31">#31</a>)</li>
     <li>new flags: <code>-origin</code> and <code>-label</code> to customize fields <code>Origin:</code> and <code>Label:</code> in <code>Release</code> files during publishing in commands <a href="#aptly-publish-snapshot">aptly publish snapshot</a> and <a href="#aptly-publish-repo">aptly publish repo</a> (<a href="https://github.com/smira/aptly/issues/29">#29</a>)</li>
 </ul>
 
