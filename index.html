@@ -2166,6 +2166,7 @@ Starting web server at: 127.0.0.1:8765 (press Ctrl+C to quit)...
     <li>new command: <a href="#aptly-db-recover">aptly db recover</a> to recover internal DB after crash (<a href="https://github.com/smira/aptly/issues/25">#25</a>)</li>
     <li>new flag: <code>-raw</code> to display list in machine-readable format for commands <a href="#aptly-mirror-list">aptly mirror list</a>, <a href="#aptly-repo-list">aptly repo list</a>, <a href="#aptly-snapshot-list">aptly snapshot list</a> and <a href="#aptly-publish-list">aptly publish list</a> (<a href="https://github.com/smira/aptly/issues/27">#27</a>, <a href="https://github.com/smira/aptly/issues/31">#31</a>)</li>
     <li>new flags: <code>-origin</code> and <code>-label</code> to customize fields <code>Origin:</code> and <code>Label:</code> in <code>Release</code> files during publishing in commands <a href="#aptly-publish-snapshot">aptly publish snapshot</a> and <a href="#aptly-publish-repo">aptly publish repo</a> (<a href="https://github.com/smira/aptly/issues/29">#29</a>)</li>
+    <li>bug fix: with some HTTP servers aptly might have given "size mismatch" errors due to unnecessary decompression (<a href="https://github.com/smira/aptly/issues/33">#33</a>)</li>
 </ul>
 
   <h3>Version 0.4.1</h3>
