@@ -76,6 +76,7 @@
               <ul class="dropdown-menu">
                 <li><a href="#aptly-publish-snapshot">aptly publish snapshot</a></li>
                 <li><a href="#aptly-publish-repo">aptly publish repo</a></li>
+                <li><a href="#aptly-publish-update">aptly publish update</a></li>
                 <li><a href="#aptly-publish-list">aptly publish list</a></li>
                 <li><a href="#aptly-publish-drop">aptly publish drop</a></li>
               </ul>
@@ -1953,6 +1954,8 @@ Don't forget to add your GPG key to apt with apt-key.
     <div class="alert alert-info">It is not allowed to publish two repositories or snapshots to the same
     <code>prefix</code> and <code>distribution</code>.</div>
 
+    <p>When local repository changes, published repository could be updated in-place
+    using command <a href="#aptly-publish-update">aptly publish update</a>.</p>
 
     <p>Example:</p>
 
@@ -1970,6 +1973,58 @@ Please setup your webserver to serve directory '/var/aptly/public' with autoinde
 Now you can add following line to apt sources:
   deb http://your-server/ squeeze main
 Don't forget to add your GPG key to apt with apt-key.
+</pre>
+
+  <!-- ================ aptly publish update ============== -->
+  <div class="target-spacer" id="aptly-publish-update"><a name="aptly-publish-update"></a>&nbsp;</div>
+  <h4>Command <code>aptly publish update</code></h4>
+
+    <p>Command re-publishes (updates) published local repository. <code>distribution</code>
+    and <code>prefix</code> should be occupied with local repository published
+    using command <a href="#aptly-publish-repo">aptly publish repo</a>. Update happens in-place with
+    minimum possible downtime for published repository.
+    Valid <a href="#gpg-keys">GPG key</a> is required for publishing.</p>
+
+    <div class="alert alert-info">When published repository is updated, all the options are preserved: distribution,
+    component, list of architectures, etc.</div>
+
+    <p>Usage:</p>
+
+    <pre><span class="greeting">$</span> <span class="command">aptly publish update &lt;distribution&gt; [&lt;prefix&gt;]</span></pre>
+
+    <p>Params:</p>
+
+    <ul>
+    <li>  <code>distribution</code> is distribution name of published repository</li>
+    <li>  <code>prefix</code> is publishing prefix, if not specified, it would default to empty prefix (<code>.</code>).</li>
+    </ul>
+
+    <p>Flags:</p>
+
+    <ul>
+    <li>  <code>-gpg-key=""</code>: GPG key ID to use when signing the release, if not
+    specified default key is used</li>
+    <li>  <code>-keyring=""</code>: GPG keyring to use (instead of default)</li>
+    <li>  <code>-secret-keyring=""</code>: GPG secret keyring to use (instead of default)</li>
+    <li>  <code>-skip-signing=false</code>: don't sign Release files with GPG
+    </ul>
+
+    <p>Example:</p>
+
+<pre><span class="greeting">$</span> <span class="command">aptly publish update maverick</span>
+Loading packages...
+Generating metadata files and linking package files...
+Signing file '/var/aptly/public/dists/maverick/Release.tmp' with gpg, please enter your passphrase when prompted:
+
+&lt;&lt;gpg asks for passphrase&gt;&gt;
+
+Clearsigning file '/var/aptly/public/dists/maverick/Release.tmp' with gpg, please enter your passphrase when prompted:
+
+&lt;&lt;gpg asks for passphrase&gt;&gt;
+
+Cleaning up prefix "." component "main"...
+
+Publish for local repo ./maverick (main) [i386, source] publishes [local-repo] has been successfully updated.
 </pre>
 
   <!-- ================ aptly publish list ============== -->
@@ -2167,6 +2222,7 @@ Starting web server at: 127.0.0.1:8765 (press Ctrl+C to quit)...
     <li>new flag: <code>-raw</code> to display list in machine-readable format for commands <a href="#aptly-mirror-list">aptly mirror list</a>, <a href="#aptly-repo-list">aptly repo list</a>, <a href="#aptly-snapshot-list">aptly snapshot list</a> and <a href="#aptly-publish-list">aptly publish list</a> (<a href="https://github.com/smira/aptly/issues/27">#27</a>, <a href="https://github.com/smira/aptly/issues/31">#31</a>)</li>
     <li>new flags: <code>-origin</code> and <code>-label</code> to customize fields <code>Origin:</code> and <code>Label:</code> in <code>Release</code> files during publishing in commands <a href="#aptly-publish-snapshot">aptly publish snapshot</a> and <a href="#aptly-publish-repo">aptly publish repo</a> (<a href="https://github.com/smira/aptly/issues/29">#29</a>)</li>
     <li>bug fix: with some HTTP servers aptly might have given "size mismatch" errors due to unnecessary decompression (<a href="https://github.com/smira/aptly/issues/33">#33</a>)</li>
+    <li>new command: <a href="#aptly-publish-update">aptly publish update</a> updates published repo in-place (<a href="https://github.com/smira/aptly/issues/8">#8</a>)</li>
 </ul>
 
   <h3>Version 0.4.1</h3>
