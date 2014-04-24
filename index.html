@@ -54,6 +54,7 @@
                 <li><a href="#aptly-repo-copy">aptly repo copy</a></li>
                 <li><a href="#aptly-repo-move">aptly repo move</a></li>
                 <li><a href="#aptly-repo-remove">aptly repo remove</a></li>
+                <li><a href="#aptly-repo-edit">aptly repo edit</a></li>
                 <li><a href="#aptly-repo-drop">aptly repo drop</a></li>
               </ul>
             </li>
@@ -74,6 +75,9 @@
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">publish <b class="caret"></b></a>
               <ul class="dropdown-menu">
                 <li><a href="#aptly-publish-snapshot">aptly publish snapshot</a></li>
+                <li><a href="#aptly-publish-repo">aptly publish repo</a></li>
+                <li><a href="#aptly-publish-update">aptly publish update</a></li>
+                <li><a href="#aptly-publish-switch">aptly publish switch</a></li>
                 <li><a href="#aptly-publish-list">aptly publish list</a></li>
                 <li><a href="#aptly-publish-drop">aptly publish drop</a></li>
               </ul>
@@ -83,6 +87,7 @@
               <ul class="dropdown-menu">
                 <li class="dropdown-header">db</li>
                 <li><a href="#aptly-db-cleanup">aptly db cleanup</a></li>
+                <li><a href="#aptly-db-info">aptly db info</a></li>
                 <li class="divider"></li>
                 <li class="dropdown-header">misc</li>
                 <li><a href="#aptly-serve">aptly serve</a></li>
@@ -101,7 +106,7 @@
         <h1>aptly</h1>
         <p>aptly is a swiss army knife for Debian repository management: it allows to mirror remote
         repositories, manage local package repositories, take snapshots, pull new versions of packages
-        along with dependencies, publish as Debian repository.</p>
+        along with dependencies, publish snapshots as Debian repositories.</p>
 
         <p>aptly is free <a href="https://github.com/smira/aptly">open-source</a> software licensed under MIT license.</p>
 
@@ -354,15 +359,14 @@ You can run 'aptly publish snapshot snap-deb-w-nginx' to publish snapshot as Deb
 <div class="target-spacer" id="download"><a name="download"></a>&nbsp;</div>
 <h2>Download</h2>
 
-    <p class="lead">Currently released aptly version is <strong>0.4.1</strong>.
+    <p class="lead">Currently released aptly version is <strong>0.5</strong> (<a href="#history">what's new?</a>).
     </p>
 
     <p>Roadmap:</p>
 
     <ul>
-      <li>0.5 (end of March): local repository publishing, atomic published snapshot switching</li>
-      <li>0.6 (end of April): searching &amp; filtering</li>
-      <li>0.7 (end of May): mirroring as is, yum repositories support</li>
+      <li>0.6 (end of May): searching, S3 publishing, multiple component publishing</li>
+      <li>0.7 (end of June): mirroring as is, yum repositories support</li>
     </ul>
 
     <p><strong>For Debian/Ubuntu</strong> aptly could be installed from by adding new repository
@@ -384,7 +388,7 @@ You can run 'aptly publish snapshot snap-deb-w-nginx' to publish snapshot as Deb
     contains aptly binary, man page and bash completion.</p>
 
     <p><strong>Binary</strong> executables (depends almost only on libc) for Debian, CentOS, MacOS X &amp; FreeBSD are available for
-    download from <a href="http://dl.bintray.com/smira/aptly/0.4.1/">Bintray</a>. Linux executables should run on almost any
+    download from <a href="http://dl.bintray.com/smira/aptly/0.5/">Bintray</a>. Linux executables should run on almost any
     recent Linux distribution.</p>
 
       <div class="row">
@@ -394,16 +398,16 @@ You can run 'aptly publish snapshot snap-deb-w-nginx' to publish snapshot as Deb
           </div>
           <h4>Debian (Ubuntu)</h4>
           <p><strong>see part on installation from .deb package above</strong></p>
-          <p>squeeze+: <a href="http://dl.bintray.com/smira/aptly/0.4.1/debian-squeeze-x32/aptly">32-bit</a> |
-                      <a href="http://dl.bintray.com/smira/aptly/0.4.1/debian-squeeze-x64/aptly">64-bit</a></p>
+          <p>squeeze+: <a href="http://dl.bintray.com/smira/aptly/0.5/debian-squeeze-x32/aptly">32-bit</a> |
+                      <a href="http://dl.bintray.com/smira/aptly/0.5/debian-squeeze-x64/aptly">64-bit</a></p>
         </div>
         <div class="col-lg-6">
           <div class="pull-left">
             <img src="centos.png" alt="CentOS" class="logo">
           </div>
           <h4>CentOS (RedHat, Fedora)</h4>
-          <p>6.5+: <a href="http://dl.bintray.com/smira/aptly/0.4.1/centos-6.5-x32/aptly">32-bit</a> |
-                  <a href="http://dl.bintray.com/smira/aptly/0.4.1/centos-6.5-x64/aptly">64-bit</a></p>
+          <p>6.5+: <a href="http://dl.bintray.com/smira/aptly/0.5/centos-6.5-x32/aptly">32-bit</a> |
+                  <a href="http://dl.bintray.com/smira/aptly/0.5/centos-6.5-x64/aptly">64-bit</a></p>
         </div>
       </div>
       <div class="row">
@@ -412,15 +416,15 @@ You can run 'aptly publish snapshot snap-deb-w-nginx' to publish snapshot as Deb
             <img src="freebsd.png" alt="FreeBSD" class="logo">
           </div>
           <h4>FreeBSD</h4>
-          <p>9.2+: <a href="http://dl.bintray.com/smira/aptly/0.4.1/freebsd-9.2-x32/aptly">32-bit</a> |
-                  <a href="http://dl.bintray.com/smira/aptly/0.4.1/freebsd-9.2-x64/aptly">64-bit</a></p>
+          <p>9.2+: <a href="http://dl.bintray.com/smira/aptly/0.5/freebsd-9.2-x32/aptly">32-bit</a> |
+                  <a href="http://dl.bintray.com/smira/aptly/0.5/freebsd-9.2-x64/aptly">64-bit</a></p>
         </div>
         <div class="col-lg-6">
           <div class="pull-left">
             <img src="macosx.png" alt="Mac OS X" class="logo">
           </div>
           <h4>Mac OS X</h4>
-          <p>10.9: <a href="http://dl.bintray.com/smira/aptly/0.4.1/osx/aptly">64-bit</a></p>
+          <p>10.9: <a href="http://dl.bintray.com/smira/aptly/0.5/osx/aptly">64-bit</a></p>
         </div>
       </div>
       <div class="row">
@@ -451,7 +455,7 @@ You can run 'aptly publish snapshot snap-deb-w-nginx' to publish snapshot as Deb
 <span class="greeting">$</span> <span class="command">mkdir -p $GOPATH/src/github.com/smira/aptly</span>
 <span class="greeting">$</span> <span class="command">git clone https://github.com/smira/aptly $GOPATH/src/github.com/smira/aptly</span>
 <span class="greeting">$</span> <span class="command">cd $GOPATH/src/github.com/smira/aptly</span>
-<span class="greeting">$</span> <span class="command">gom install</span>
+<span class="greeting">$</span> <span class="command">gom -production install</span>
 <span class="greeting">$</span> <span class="command">gom build -o $GOPATH/bin/aptly</span>
 <span class="greeting">$</span> <span class="command">aptly</span>
 </pre>
@@ -493,7 +497,7 @@ You can run 'aptly publish snapshot snap-deb-w-nginx' to publish snapshot as Deb
     <dd>immutable list of packages, basic block to implement repeatability and controlled changes</dd>
 
     <dt>published repository</dt>
-    <dd>published representation of snapshot, ready to be consumed by apt tools</dd>
+    <dd>published representation of snapshot or local repository, ready to be consumed by apt tools</dd>
   </dl>
 
   <p>The schema of aptly's commands and transitions between entities:</p>
@@ -509,8 +513,9 @@ You can run 'aptly publish snapshot snap-deb-w-nginx' to publish snapshot as Deb
   packages, your own software). Snapshots
   can be used to produce new snapshots by <a href="#aptly-snapshot-pull">pulling</a> packages with dependencies between snapshots
   and by <a href="#aptly-snapshot-merge">merging</a> snapshots. Any snapshot can be
-  <a href="#aptly-publish-snapshot">published</a> to any location
-  (distribution name, prefix) and consumed by <code>apt</code> tools on your Debian systems.</p>
+  <a href="#aptly-publish-snapshot">published</a> to location
+  (distribution name, prefix) and consumed by <code>apt</code> tools on your Debian systems. Local repositories
+  could be <a href="#aptly-publish-repo">published directly</a> bypassing snapshot step.</p>
 
   <div class="target-spacer" id="usage"><a name="commands"></a>&nbsp;</div>
   <h3>Commands</h3>
@@ -523,7 +528,7 @@ You can run 'aptly publish snapshot snap-deb-w-nginx' to publish snapshot as Deb
       </li>
       <li>  <code>snapshot</code>: create, merge, manage snapshots
       </li>
-      <li>  <code>publish</code>: publish snapshot as remote repo
+      <li>  <code>publish</code>: publish snapshot or local repository
       </li>
       <li>  <code>serve</code>: quickly export published repositories via HTTP
       </li>
@@ -547,7 +552,7 @@ You can run 'aptly publish snapshot snap-deb-w-nginx' to publish snapshot as Deb
   "downloadConcurrency": 4,
   "architectures": [],
   "dependencyFollowSuggests": false,
-  "dependencyFollowRecommends": false
+  "dependencyFollowRecommends": false,
   "dependencyFollowAllVariants": false,
   "dependencyFollowSource": false,
   "gpgDisableSign": false,
@@ -832,7 +837,15 @@ You can run 'aptly mirror update debian-main' to download repository contents.
 
     <pre><span class="greeting">$</span> <span class="command">aptly mirror list</span></pre>
 
-    <p>Example:</p>
+    <p>Flags:</p>
+
+    <ul>
+      <li>
+        <code>-raw=false</code>: display list in machine-readable format
+      </li>
+    </ul>
+
+    <p>Examples:</p>
 
 <pre><span class="greeting">$</span> <span class="command">aptly mirror list</span>
 List of mirrors:
@@ -840,6 +853,11 @@ List of mirrors:
  * [debian-main]: http://ftp.ru.debian.org/debian/ squeeze
 
 To get more information about repository, run `aptly mirror show &lt;name&gt;`.
+</pre>
+
+<pre><span class="greeting">$</span> <span class="command">aptly mirror list -raw</span>
+backports
+debian-main
 </pre>
 
   <!-- ================ aptly mirror show ============== -->
@@ -947,7 +965,16 @@ Mirror `wheezy-main` has been removed.</pre>
       <li>
         <code>-comment=""</code>: any text that would be used to described local repository
       </li>
+      <li>
+        <code>-component="main"</code>: default component when publishing
+      </li>
+      <li>
+        <code>-distribution=""</code>: default distribution when publishing
+      </li>
     </ul>
+
+    <p>Default distribution and component would be taken as defaults when publishing repository
+    either directly or via snapshots.</p>
 
 
     <p>Example:</p>
@@ -1080,6 +1107,8 @@ Loading packages...
 <pre><span class="greeting">$</span> <span class="command">aptly repo show -with-packages stable</span>
 Name: stable
 Comment: Stable packages for project Foo
+Default Distribution: wheezy
+Default Component: main
 Number of packages: 10
 Packages:
   libmysqlclient18_5.5.35-rel33.0-611.squeeze_amd64
@@ -1104,8 +1133,15 @@ Packages:
 
     <pre><span class="greeting">$</span> <span class="command"> aptly repo list</span></pre>
 
+    <p>Flags:</p>
 
-    <p>Example:</p>
+    <ul>
+      <li>
+        <code>-raw=false</code>: display list in machine-readable format
+      </li>
+    </ul>
+
+    <p>Examples:</p>
 
 <pre><span class="greeting">$</span> <span class="command">aptly repo list</span>
 List of mirrors:
@@ -1113,6 +1149,11 @@ List of mirrors:
  * [testing] (packages: 1)
 
 To get more information about local repository, run `aptly repo show &lt;name&gt;`.
+</pre>
+
+<pre><span class="greeting">$</span> <span class="command">aptly repo list -raw</span>
+stable
+testing
 </pre>
 
   <!-- ================ aptly repo copy ============== -->
@@ -1236,6 +1277,47 @@ Loading packages...
 Loading packages...
 <span class="red">[-]</span> percona-server-client-5.5_5.5.35-rel33.0-611.squeeze_i386 removed
 <span class="red">[-]</span> percona-server-client-5.5_5.5.35-rel33.0-611.squeeze_amd64 removed
+</pre>
+
+  <!-- ================ aptly repo edit ============== -->
+  <div class="target-spacer" id="aptly-repo-edit"><a name="aptly-repo-edit"></a>&nbsp;</div>
+  <h4>Command <code>aptly repo edit</code></h4>
+
+    <p>Command edit allows to change metadata of local repository:
+    comment, default distribution and component.</p>
+
+    <p>Usage:</p>
+
+    <pre><span class="greeting">$</span> <span class="command"> aptly repo edit &lt;name&gt;</span></pre>
+
+    <p>Params are:</p>
+
+    <ul>
+    <li>  <code>name</code> is a local repository name</li>
+    </ul>
+
+    <p>Flags:</p>
+
+    <ul>
+      <li>
+        <code>-comment=""</code>: any text that would be used to described local repository
+      </li>
+      <li>
+        <code>-component=""</code>: default component when publishing
+      </li>
+      <li>
+        <code>-distribution=""</code>: default distribution when publishing
+      </li>
+    </ul>
+
+    <p>Default distribution and component would be taken as defaults when publishing repository
+    either directly or via snapshots.</p>
+
+
+    <p>Example:</p>
+
+<pre><span class="greeting">$</span> <span class="command">aptly repo edit -comment="Nightly builds" -distribution=wheezy testing</span>
+Local repo [testing]: Nightly builds successfully updated.
 </pre>
 
   <!-- ================ aptly repo drop ============== -->
@@ -1372,7 +1454,15 @@ You can run 'aptly publish snapshot empty-snapshot' to publish snapshot as Debia
 
     <pre><span class="greeting">$</span> <span class="command">aptly snapshot list</span></pre>
 
-    <p>Example:</p>
+    <p>Flags:</p>
+
+    <ul>
+      <li>
+        <code>-raw=false</code>: display list in machine-readable format
+      </li>
+    </ul>
+
+    <p>Examples:</p>
 
 <pre><span class="greeting">$</span> <span class="command">aptly snapshot list</span>
 List of snapshots:
@@ -1382,7 +1472,12 @@ List of snapshots:
 To get more information about snapshot, run `aptly snapshot show &lt;name&gt;`.
 </pre>
 
-    <p>In snapshot list, basic information on snapshot creation procedure is recorded.</p>
+    <p>In snapshot list, basic information on snapshot creation way is displayed.</p>
+
+<pre><span class="greeting">$</span> <span class="command">aptly snapshot list -raw</span>
+monday-updates
+back
+</pre>
 
   <!-- ================ aptly snapshot show ============== -->
   <div class="target-spacer" id="aptly-snapshot-show"><a name="aptly-snapshot-show"></a>&nbsp;</div>
@@ -1496,7 +1591,7 @@ Missing dependencies (7):
     would be pulled</li>
     <li>  <code>-no-deps=false</code>: don't process dependencies, just pull listed
     packages</li>
-    <li>  -no-remove=false: don't remove other package versions when pulling package</li>
+    <li>  <code>-no-remove=false</code>: don't remove other package versions when pulling package</li>
     </ul>
 
     <p>If architectures are limited (with config <code>architectures</code> or option
@@ -1585,7 +1680,7 @@ You can run 'aptly publish snapshot snap-deb-main-w-xorg' to publish snapshot as
   <div class="target-spacer" id="aptly-snapshot-merge"><a name="aptly-snapshot-merge"></a>&nbsp;</div>
   <h4>Command <code>aptly snapshot merge</code></h4>
 
-    <p>Merge merges several snapshots into one. Merge happens from left to right. Packages with the same
+    <p>Merge merges several snapshots into one. Merge happens from left to right. By default, packages with the same
     name-architecture pair are replaced during merge (package from latest snapshot on the list wins).
     If only one snapshot is specified, merge copies <code>source</code> into <code>destination</code>.</p>
 
@@ -1598,6 +1693,12 @@ You can run 'aptly publish snapshot snap-deb-main-w-xorg' to publish snapshot as
     <ul>
     <li>  <code>destination</code> is a name of the snapshot that would be created</li>
     <li>  <code>source</code> is a list of snapshot names that would be merged together</li>
+    </ul>
+
+    <p>Flags:</p>
+
+    <ul>
+    <li>  <code>-latest=false</code>: use only the latest version of each package</li>
     </ul>
 
     <p>Example:</p>
@@ -1647,7 +1748,7 @@ Snapshot `snap-wheezy` has been dropped.</pre>
 <div class="target-spacer" id="aptly-publish"><a name="aptly-publish"></a>&nbsp;</div>
 <h3>Command <code>publish</code></h3>
 
-  <p>Publishing snapshot as Debian repository which could be served by
+  <p>Publish snapshot or local repo as Debian repository which could be served by
   HTTP/FTP/rsync server. Repository is signed by user's key with GnuPG.
   Key should be created beforehand (see section GPG Keys). Published
   repository could be consumed directly by apt.</p>
@@ -1675,7 +1776,7 @@ Snapshot `snap-wheezy` has been dropped.</pre>
   <div class="target-spacer" id="aptly-publish-snapshot"><a name="aptly-publish-snapshot"></a>&nbsp;</div>
   <h4>Command <code>aptly publish snapshot</code></h4>
 
-    <p>Publishes repository to be consumed by <code>apt</code>. Published repostiories
+    <p>Publishes snapshot as repository to be consumed by <code>apt</code>. Published repostiories
      appear under <code>rootDir/public</code> directory. Valid <a href="#gpg-keys">GPG key</a> is required
      for publishing.</p>
 
@@ -1704,13 +1805,22 @@ Snapshot `snap-wheezy` has been dropped.</pre>
     <li>  <code>-gpg-key=""</code>: GPG key ID to use when signing the release, if not
     specified default key is used</li>
     <li>  <code>-keyring=""</code>: GPG keyring to use (instead of default)</li>
+    <li>  <code>-label=""</code>: value for <code>Label:</code> field</li>
+    <li>  <code>-origin=""</code>: value for <code>Origin:</code> field</li>
     <li>  <code>-secret-keyring=""</code>: GPG secret keyring to use (instead of default)</li>
     <li>  <code>-skip-signing=false</code>: don't sign Release files with GPG
     </ul>
 
     <p>If architectures are limited (with config <code>architectures</code> or option
-    <code>-architectures</code>), only mentioned architectures would ne published,
+    <code>-architectures</code>), only mentioned architectures would be published,
     otherwise <code>aptly</code> will publish all architectures in the snapshot.</p>
+
+    <p><code>aptly</code> would try to figure out distribution and component from snapshot by going via
+    snapshot source tree down to mirrors and local repositories. If all roots report the same
+    distribution name, it is chosen as default. If there are different distribution names or
+    distribution name is not specfied, <code>aptly</code> would display an error. For component name
+    the same rules apply except in case of not being able to figure out component, aptly would
+    use component <code>main</code>.</p>
 
     <div class="alert alert-info">It is not allowed to publish two snapshots to the same
     <code>prefix</code> and <code>distribution</code>.</div>
@@ -1799,6 +1909,183 @@ Don't forget to add your GPG key to apt with apt-key.
   </li>
 </ul>
 
+  <!-- ================ aptly publish repo ============== -->
+  <div class="target-spacer" id="aptly-publish-repo"><a name="aptly-publish-repo"></a>&nbsp;</div>
+  <h4>Command <code>aptly publish repo</code></h4>
+
+    <p>Publishes local repository directly, bypassing snapshot creation step.
+     Published repositories appear under <code>rootDir/public</code> directory.
+     Valid <a href="#gpg-keys">GPG key</a> is required for publishing.</p>
+
+    <div class="alert alert-warning">It is not advised to publish local repositories directly
+    unless repository is used to host testing versions of packages that change frequently.
+    For production usage please <a href="#aptly-snapshot-create">create snapshot</a> from
+    repository and <a href="#aptly-publish-snapshot">publish it</a>.</div>
+
+    <p>Usage:</p>
+
+    <pre><span class="greeting">$</span> <span class="command">aptly publish repo &lt;name&gt; [&lt;prefix&gt;]</span></pre>
+
+    <p>Params:</p>
+
+    <ul>
+    <li>  <code>name</code> is a local repo name that snould be published</li>
+    <li>  <code>prefix</code> is an optional prefix for publishing, if not specified,
+    repository would be published to the root of publiс directory. <code>prefix</code> could be single directory like
+    <code>ppa</code> or part of the tree like <code>ppa/android</code>. <code>prefix</code> shouldn't contain
+    <code>..</code>, and names <code>dists</code> and <code>pool</code> are not accepted. Empty <code>prefix</code>
+    would be converted to <code>.</code>.</li>
+    </ul>
+
+    <p>Flags:</p>
+
+    <ul>
+    <li>  <code>-component=""</code>: component name to publish; it is taken from local
+    repository default, otherwise it defaults to <code>main</code></li>
+    <li>  <code>-distribution=""</code>: distribution name to publish; guessed from
+    local repository default distribution</li>
+    <li>  <code>-gpg-key=""</code>: GPG key ID to use when signing the release, if not
+    specified default key is used</li>
+    <li>  <code>-keyring=""</code>: GPG keyring to use (instead of default)</li>
+    <li>  <code>-label=""</code>: value for <code>Label:</code> field</li>
+    <li>  <code>-origin=""</code>: value for <code>Origin:</code> field</li>
+    <li>  <code>-secret-keyring=""</code>: GPG secret keyring to use (instead of default)</li>
+    <li>  <code>-skip-signing=false</code>: don't sign Release files with GPG
+    </ul>
+
+    <p>If architectures are limited (with config <code>architectures</code> or option
+    <code>-architectures</code>), only mentioned architectures would be published,
+    otherwise <code>aptly</code> will publish all architectures in the snapshot.</p>
+
+    <div class="alert alert-info">It is not allowed to publish two repositories or snapshots to the same
+    <code>prefix</code> and <code>distribution</code>.</div>
+
+    <p>When local repository changes, published repository could be updated in-place
+    using command <a href="#aptly-publish-update">aptly publish update</a>.</p>
+
+    <p>Example:</p>
+
+<pre><span class="greeting">$</span> <span class="command">aptly publish repo local-repo</span>
+Signing file '/var/aptly/public/dists/squeeze/Release' with gpg, please enter your passphrase when prompted:
+
+&lt;&lt;gpg asks for passphrase&gt;&gt;
+
+Clearsigning file '/var/aptly/public/dists/squeeze/Release' with gpg, please enter your passphrase when prompted:
+
+&lt;&lt;gpg asks for passphrase&gt;&gt;
+
+Snapshot back has been successfully published.
+Please setup your webserver to serve directory '/var/aptly/public' with autoindexing.
+Now you can add following line to apt sources:
+  deb http://your-server/ squeeze main
+Don't forget to add your GPG key to apt with apt-key.
+</pre>
+
+  <!-- ================ aptly publish update ============== -->
+  <div class="target-spacer" id="aptly-publish-update"><a name="aptly-publish-update"></a>&nbsp;</div>
+  <h4>Command <code>aptly publish update</code></h4>
+
+    <p>Command re-publishes (updates) published local repository. <code>distribution</code>
+    and <code>prefix</code> should be occupied with local repository published
+    using command <a href="#aptly-publish-repo">aptly publish repo</a>. Update happens in-place with
+    minimum possible downtime for published repository.
+    Valid <a href="#gpg-keys">GPG key</a> is required for publishing.</p>
+
+    <div class="alert alert-info">When published repository is updated, all the options are preserved: distribution,
+    component, list of architectures, etc.</div>
+
+    <p>Usage:</p>
+
+    <pre><span class="greeting">$</span> <span class="command">aptly publish update &lt;distribution&gt; [&lt;prefix&gt;]</span></pre>
+
+    <p>Params:</p>
+
+    <ul>
+    <li>  <code>distribution</code> is distribution name of published repository</li>
+    <li>  <code>prefix</code> is publishing prefix, if not specified, it would default to empty prefix (<code>.</code>).</li>
+    </ul>
+
+    <p>Flags:</p>
+
+    <ul>
+    <li>  <code>-gpg-key=""</code>: GPG key ID to use when signing the release, if not
+    specified default key is used</li>
+    <li>  <code>-keyring=""</code>: GPG keyring to use (instead of default)</li>
+    <li>  <code>-secret-keyring=""</code>: GPG secret keyring to use (instead of default)</li>
+    <li>  <code>-skip-signing=false</code>: don't sign Release files with GPG
+    </ul>
+
+    <p>Example:</p>
+
+<pre><span class="greeting">$</span> <span class="command">aptly publish update maverick</span>
+Loading packages...
+Generating metadata files and linking package files...
+Signing file '/var/aptly/public/dists/maverick/Release.tmp' with gpg, please enter your passphrase when prompted:
+
+&lt;&lt;gpg asks for passphrase&gt;&gt;
+
+Clearsigning file '/var/aptly/public/dists/maverick/Release.tmp' with gpg, please enter your passphrase when prompted:
+
+&lt;&lt;gpg asks for passphrase&gt;&gt;
+
+Cleaning up prefix "." component "main"...
+
+Publish for local repo ./maverick (main) [i386, source] publishes [local-repo] has been successfully updated.
+</pre>
+
+  <!-- ================ aptly publish switch ============== -->
+  <div class="target-spacer" id="aptly-publish-switch"><a name="aptly-publish-switch"></a>&nbsp;</div>
+  <h4>Command <code>aptly publish switch</code></h4>
+
+    <p>Command switches in-place published repository with new snapshot contents. <code>distribution</code>
+    and <code>prefix</code> should be occupied with snapshot published
+    using command <a href="#aptly-publish-snapshot">aptly publish snapshot</a>. Update happens in-place with
+    minimum possible downtime for published repository.
+    Valid <a href="#gpg-keys">GPG key</a> is required for publishing.</p>
+
+    <div class="alert alert-info">When published repository is updated, all the options are preserved: distribution,
+    component, list of architectures, etc.</div>
+
+    <p>Usage:</p>
+
+    <pre><span class="greeting">$</span> <span class="command">aptly publish switch &lt;distribution&gt; [&lt;prefix&gt;] &lt;new-snapshot&gt;</span></pre>
+
+    <p>Params:</p>
+
+    <ul>
+    <li>  <code>distribution</code> is distribution name of published repository</li>
+    <li>  <code>prefix</code> is publishing prefix, if not specified, it would default to empty prefix (<code>.</code>).</li>
+    <li>  <code>new-snapshot</code> is a snapshot name that snould be re-published</li>
+    </ul>
+
+    <p>Flags:</p>
+
+    <ul>
+    <li>  <code>-gpg-key=""</code>: GPG key ID to use when signing the release, if not
+    specified default key is used</li>
+    <li>  <code>-keyring=""</code>: GPG keyring to use (instead of default)</li>
+    <li>  <code>-secret-keyring=""</code>: GPG secret keyring to use (instead of default)</li>
+    <li>  <code>-skip-signing=false</code>: don't sign Release files with GPG
+    </ul>
+
+    <p>Example:</p>
+
+<pre><span class="greeting">$</span> <span class="command">aptly publish switch wheezy wheezy-7.4</span>
+Loading packages...
+Generating metadata files and linking package files...
+Signing file '/var/aptly/public/dists/wheezy/Release.tmp' with gpg, please enter your passphrase when prompted:
+
+&lt;&lt;gpg asks for passphrase&gt;&gt;
+
+Clearsigning file '/var/aptly/public/dists/wheezy/Release.tmp' with gpg, please enter your passphrase when prompted:
+
+&lt;&lt;gpg asks for passphrase&gt;&gt;
+
+Cleaning up prefix "." component "main"...
+
+Publish for local repo ./wheezy (main) [i386, amd64] publishes [wheezy-7.4]: snapshot from mirror [wheezy]: http://ftp.ru.debian.org/debian/ wheezy has been successfully updated.
+</pre>
+
   <!-- ================ aptly publish list ============== -->
   <div class="target-spacer" id="aptly-publish-list"><a name="aptly-publish-list"></a>&nbsp;</div>
   <h4>Command <code>aptly publish list</code></h4>
@@ -1812,12 +2099,25 @@ Don't forget to add your GPG key to apt with apt-key.
 
     <pre><span class="greeting">$</span> <span class="command">aptly publish list</span></pre>
 
-    <p>Example:</p>
+    <p>Flags:</p>
+
+    <ul>
+      <li>
+        <code>-raw=false</code>: display list in machine-readable format
+      </li>
+    </ul>
+
+    <p>Examples:</p>
 
 <pre><span class="greeting">$</span> <span class="command">aptly publish list</span>
 Published repositories:
   * ./sq-b (main) [amd64, i386] publishes [back3]: Snapshot from mirror [backports2]: http://mirror.yandex.ru/backports.org/ squeeze-backports
   * ./squeeze-backports (contrib) [amd64, i386] publishes [back3]: Snapshot from mirror [backports2]: http://mirror.yandex.ru/backports.org/ squeeze-backports
+</pre>
+
+<pre><span class="greeting">$</span> <span class="command">aptly publish list -raw</span>
+. sq-b
+. squeeze-backports
 </pre>
 
   <!-- ================ aptly publish drop ============== -->
@@ -1874,6 +2174,25 @@ Building list of files referenced by packages...
 Building list of files in package pool...
 Deleting unreferenced files (325)...
 Disk space freed: 0.27 GiB...
+</pre>
+
+  <!-- ================ aptly db recover ============== -->
+  <div class="target-spacer" id="aptly-db-recover"><a name="aptly-db-recover"></a>&nbsp;</div>
+  <h4>Command <code>aptly db recover</code></h4>
+
+    <p>Database recover does its best to recover database after crash.
+    It is recommended to backup DB before running recover. Recover procedures
+    ignores all index files and tries to reconstruct them from <code>.sst</code> files.</p>
+
+    <p>Usage:</p>
+
+    <pre><span class="greeting">$</span> <span class="command">aptly db recover</span></pre>
+
+
+    <p>Example:</p>
+
+<pre><span class="greeting">$</span> <span class="command">aptly db recover</span>
+Recovering DB...
 </pre>
 
 <!-- ================ aptly serve ============== -->
@@ -1945,6 +2264,27 @@ Starting web server at: 127.0.0.1:8765 (press Ctrl+C to quit)...
 <div class="target-spacer" id="history"><a name="history"></a>&nbsp;</div>
 <h2>History</h2>
 
+  <h3>Version 0.5</h3>
+
+  <ul>
+    <li>Debian packages for aptly are <a href="#download">available</a></li>
+    <li>internal DB is compacted when calling <a href="#aptly-db-cleanup">aptly db cleanup</a> (<a href="https://github.com/smira/aptly/issues/19">#19</a>)</li>
+    <li>size is shown in human-readable format (<a href="https://github.com/smira/aptly/issues/18">#18</a>)</li>
+    <li>fixed wrong location of man page in Debian package (<a href="https://github.com/smira/aptly/issues/22">#22</a>)</li>
+    <li>new flags: <code>-distribution</code> and <code>-component</code> to specify default publishing options in <a href="#aptly-repo-create">aptly repo create</a> (<a href="https://github.com/smira/aptly/issues/12">#12</a>)</li>
+    <li>aptly would try harder to figure out distribution &amp; component automatically when publishing going through the tree of snapshots, mirrors and local repositories</li>
+    <li>aptly supports publishing local repositories, without intermediate snapshot step (<a href="https://github.com/smira/aptly/issues/10">#10</a>)</li>
+    <li>new command: <a href="#aptly-publish-repo">aptly publish repo</a> to publish local repository directly (<a href="https://github.com/smira/aptly/issues/10">#10</a>)</li>
+    <li>new command: <a href="#aptly-repo-edit">aptly publish edit</a> to change defaults for the local repository (<a href="https://github.com/smira/aptly/issues/12">#12</a>)</li>
+    <li>aptly supports global &amp; command flags placement in any position in command line (before command name, after command name) (<a href="https://github.com/smira/aptly/issues/17">#17</a>)</li>
+    <li>new command: <a href="#aptly-db-recover">aptly db recover</a> to recover internal DB after crash (<a href="https://github.com/smira/aptly/issues/25">#25</a>)</li>
+    <li>new flag: <code>-raw</code> to display list in machine-readable format for commands <a href="#aptly-mirror-list">aptly mirror list</a>, <a href="#aptly-repo-list">aptly repo list</a>, <a href="#aptly-snapshot-list">aptly snapshot list</a> and <a href="#aptly-publish-list">aptly publish list</a> (<a href="https://github.com/smira/aptly/issues/27">#27</a>, <a href="https://github.com/smira/aptly/issues/31">#31</a>)</li>
+    <li>new flags: <code>-origin</code> and <code>-label</code> to customize fields <code>Origin:</code> and <code>Label:</code> in <code>Release</code> files during publishing in commands <a href="#aptly-publish-snapshot">aptly publish snapshot</a> and <a href="#aptly-publish-repo">aptly publish repo</a> (<a href="https://github.com/smira/aptly/issues/29">#29</a>)</li>
+    <li>bug fix: with some HTTP servers aptly might have given "size mismatch" errors due to unnecessary decompression (<a href="https://github.com/smira/aptly/issues/33">#33</a>)</li>
+    <li>new command: <a href="#aptly-publish-update">aptly publish update</a> updates published repo in-place (<a href="https://github.com/smira/aptly/issues/8">#8</a>)</li>
+    <li>new command: <a href="#aptly-publish-switch">aptly publish switch</a> switches published snapshot in-place (<a href="https://github.com/smira/aptly/issues/8">#8</a>)</li>
+    <li>new flag: <code>-latest</code> for command <a href="#aptly-snapshot-merge">aptly snapshot merge</a> changes merge strategy to "latest version wins" (<a href="https://github.com/smira/aptly/pull/42">#42</a>), thanks to <a href="https://github.com/ryanuber">@ryanuber</a> and <a href="https://github.com/keithchambers">@keithchambers</a></li>
+</ul>
 
   <h3>Version 0.4.1</h3>
 
