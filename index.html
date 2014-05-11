@@ -359,7 +359,7 @@ You can run 'aptly publish snapshot snap-deb-w-nginx' to publish snapshot as Deb
 <div class="target-spacer" id="download"><a name="download"></a>&nbsp;</div>
 <h2>Download</h2>
 
-    <p class="lead">Currently released aptly version is <strong>0.5</strong> (<a href="#history">what's new?</a>).
+    <p class="lead">Currently released aptly version is <strong>0.5.1</strong> (<a href="#history">what's new?</a>).
     </p>
 
     <p>Roadmap:</p>
@@ -388,7 +388,7 @@ You can run 'aptly publish snapshot snap-deb-w-nginx' to publish snapshot as Deb
     contains aptly binary, man page and bash completion.</p>
 
     <p><strong>Binary</strong> executables (depends almost only on libc) for Debian, CentOS, MacOS X &amp; FreeBSD are available for
-    download from <a href="http://dl.bintray.com/smira/aptly/0.5/">Bintray</a>. Linux executables should run on almost any
+    download from <a href="http://dl.bintray.com/smira/aptly/0.5.1/">Bintray</a>. Linux executables should run on almost any
     recent Linux distribution.</p>
 
       <div class="row">
@@ -398,16 +398,16 @@ You can run 'aptly publish snapshot snap-deb-w-nginx' to publish snapshot as Deb
           </div>
           <h4>Debian (Ubuntu)</h4>
           <p><strong>see part on installation from .deb package above</strong></p>
-          <p>squeeze+: <a href="http://dl.bintray.com/smira/aptly/0.5/debian-squeeze-x32/aptly">32-bit</a> |
-                      <a href="http://dl.bintray.com/smira/aptly/0.5/debian-squeeze-x64/aptly">64-bit</a></p>
+          <p>squeeze+: <a href="http://dl.bintray.com/smira/aptly/0.5.1/debian-squeeze-x32/aptly">32-bit</a> |
+                      <a href="http://dl.bintray.com/smira/aptly/0.5.1/debian-squeeze-x64/aptly">64-bit</a></p>
         </div>
         <div class="col-lg-6">
           <div class="pull-left">
             <img src="centos.png" alt="CentOS" class="logo">
           </div>
           <h4>CentOS (RedHat, Fedora)</h4>
-          <p>6.5+: <a href="http://dl.bintray.com/smira/aptly/0.5/centos-6.5-x32/aptly">32-bit</a> |
-                  <a href="http://dl.bintray.com/smira/aptly/0.5/centos-6.5-x64/aptly">64-bit</a></p>
+          <p>6.5+: <a href="http://dl.bintray.com/smira/aptly/0.5.1/centos-6.5-x32/aptly">32-bit</a> |
+                  <a href="http://dl.bintray.com/smira/aptly/0.5.1/centos-6.5-x64/aptly">64-bit</a></p>
         </div>
       </div>
       <div class="row">
@@ -416,15 +416,15 @@ You can run 'aptly publish snapshot snap-deb-w-nginx' to publish snapshot as Deb
             <img src="freebsd.png" alt="FreeBSD" class="logo">
           </div>
           <h4>FreeBSD</h4>
-          <p>9.2+: <a href="http://dl.bintray.com/smira/aptly/0.5/freebsd-9.2-x32/aptly">32-bit</a> |
-                  <a href="http://dl.bintray.com/smira/aptly/0.5/freebsd-9.2-x64/aptly">64-bit</a></p>
+          <p>9.2+: <a href="http://dl.bintray.com/smira/aptly/0.5.1/freebsd-9.2-x32/aptly">32-bit</a> |
+                  <a href="http://dl.bintray.com/smira/aptly/0.5.1/freebsd-9.2-x64/aptly">64-bit</a></p>
         </div>
         <div class="col-lg-6">
           <div class="pull-left">
             <img src="macosx.png" alt="Mac OS X" class="logo">
           </div>
           <h4>Mac OS X</h4>
-          <p>10.9: <a href="http://dl.bintray.com/smira/aptly/0.5/osx/aptly">64-bit</a></p>
+          <p>10.9: <a href="http://dl.bintray.com/smira/aptly/0.5.1/osx/aptly">64-bit</a></p>
         </div>
       </div>
       <div class="row">
@@ -2263,6 +2263,14 @@ Starting web server at: 127.0.0.1:8765 (press Ctrl+C to quit)...
 <!-- ================ history ============== -->
 <div class="target-spacer" id="history"><a name="history"></a>&nbsp;</div>
 <h2>History</h2>
+
+  <h3>Version 0.5.1</h3>
+
+  <ul>
+    <li>bug fix: <code>HTTP_PROXY</code> environment variable has been ignored (<a href="https://github.com/smira/aptly/issues/46">#46</a>)</li>
+    <li>bug fix: support for flat repositories in subdirectory (<a href="https://github.com/smira/aptly/issues/47">#47</a>)</li>
+    <li>bug fix: wrong pool directory name when <code>Source:</code> contains version (<a href="https://github.com/smira/aptly/issues/44">#44</a>)</li>
+  </ul>
 
   <h3>Version 0.5</h3>
 
