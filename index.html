@@ -517,7 +517,7 @@ You can run 'aptly publish snapshot snap-deb-w-nginx' to publish snapshot as Deb
   (distribution name, prefix) and consumed by <code>apt</code> tools on your Debian systems. Local repositories
   could be <a href="#aptly-publish-repo">published directly</a> bypassing snapshot step.</p>
 
-  <div class="target-spacer" id="usage"><a name="commands"></a>&nbsp;</div>
+  <div class="target-spacer" id="commands"><a name="commands"></a>&nbsp;</div>
   <h3>Commands</h3>
       <p>Aptly supports commands in three basic categories:</p>
 
@@ -675,6 +675,28 @@ You can run 'aptly publish snapshot snap-deb-w-nginx' to publish snapshot as Deb
     <code>aptly repo import percona stable 'mysql-client (&gt;= 3.6)'</code>.
     </li>
   </ul>
+
+
+  <!-- ================ duplicate-packages ============== -->
+  <div class="target-spacer" id="duplicate-packages"><a name="duplicate-packages"></a>&nbsp;</div>
+  <h3>On duplicate packages</h3>
+
+  <p>In ideal world, tuple <code>(architecture, name, version)</code> should identify unique package.
+  That holds true (well, almost true) with Debian-based distributions. If two packages with the same
+  architecture, name and version are coming from different sources, they should be identical.</p>
+
+  <p>Debian <a href="https://wiki.debian.org/RepositoryFormat">documentation on repository format</a> explicitly
+  forbids duplicate packages with different content in one repository or in set of repositories for one
+  distribution:</p>
+
+  <blockquote>A repository must not include different packages (different content) with the same package name, version, and architecture. When a repository is meant to be used as a supplement to another repository this should hold for the joint main+supplement repository as well.</blockquote>
+
+  <p>aptly deduplicates packages with identical <code>(architecture, name, version)</code> tuple and contents into
+  one single package record and treats them as single package. But if two packages share architecture, name and version,
+  but have different content, aptly would treat them as different packages. Such packages should never be placed
+  into one list in aptly (into one local repo, snapshot, mirror, etc.) When such thing happens, aptly would
+  complain about conflict in packages. Usually such duplicate packages with different content represent some
+  software packaged for different Debian distribution, so they should never be in the same list.</p>
 
 <!-- ================ aptly mirror ============== -->
 <div class="target-spacer" id="aptly-mirror"><a name="aptly-mirror"></a>&nbsp;</div>
