@@ -1859,6 +1859,10 @@ Snapshot `snap-wheezy` has been dropped.</pre>
     <div class="alert alert-info">It is not allowed to publish two snapshots to the same
     <code>prefix</code> and <code>distribution</code>.</div>
 
+    <p>Empty snapshots could be published as well (as placeholder, for subsequent updates using
+    <a href="#aptly-publish-switch">aptly publish switch</a> command). When publishing empty
+    snapshots it is important to specify complete architectures list (using <code>-architectures</code> flag),
+    as it can't be changed after publishing.</p>
 
     <p>Example:</p>
 
@@ -1996,6 +2000,11 @@ Don't forget to add your GPG key to apt with apt-key.
 
     <p>When local repository changes, published repository could be updated in-place
     using command <a href="#aptly-publish-update">aptly publish update</a>.</p>
+
+    <p>Empty local repos could be published as well (as placeholder, for subsequent updates using
+    <a href="#aptly-publish-update">aptly publish update</a> command). When publishing empty
+    local repos it is important to specify complete architectures list (using <code>-architectures</code> flag),
+    as it can't be changed after publishing.</p>
 
     <p>Example:</p>
 
