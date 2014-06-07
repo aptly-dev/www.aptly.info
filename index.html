@@ -13,6 +13,9 @@
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
     <![endif]-->
+
+    <link rel="icon" type="image/png" href="favicon-16x16.png" sizes="16x16">
+    <link rel="icon" type="image/png" href="favicon-32x32.png" sizes="32x32">
   </head>
   <body data-spy="scroll" data-target=".navbar-default">
     <!-- Fixed navbar -->
@@ -25,7 +28,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">aptly</a>
+          <a class="navbar-brand" href="#"><img src="favicon-16x16.png" alt="aptly logo"> aptly</a>
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
@@ -103,7 +106,8 @@
 
 
       <div class="jumbotron">
-        <h1>aptly</h1>
+        <h1><img src="logo.png" alt="aptly logo">  aptly</h1>
+
         <p>aptly is a swiss army knife for Debian repository management: it allows to mirror remote
         repositories, manage local package repositories, take snapshots, pull new versions of packages
         along with dependencies, publish snapshots as Debian repositories.</p>
@@ -231,7 +235,7 @@
 
       <div class="alert alert-warning">
         aptly doesn't yet support
-         debian-installer and translations
+         debian-installer packages (udebs) and translations
       </div>
 
 
@@ -359,14 +363,14 @@ You can run 'aptly publish snapshot snap-deb-w-nginx' to publish snapshot as Deb
 <div class="target-spacer" id="download"><a name="download"></a>&nbsp;</div>
 <h2>Download</h2>
 
-    <p class="lead">Currently released aptly version is <strong>0.5.1</strong> (<a href="#history">what's new?</a>).
+    <p class="lead">Currently released aptly version is <strong>0.6</strong> (<a href="#history">what's new?</a>).
     </p>
 
     <p>Roadmap:</p>
 
     <ul>
-      <li>0.6 (end of May): searching, S3 publishing, multiple component publishing</li>
-      <li>0.7 (end of June): mirroring as is, yum repositories support</li>
+      <li>0.7 (end of June): searching, S3 publishing</li>
+      <li>0.8 (end of July): mirroring as is, yum repositories support</li>
     </ul>
 
     <p><strong>For Debian/Ubuntu</strong> aptly could be installed from by adding new repository
@@ -388,7 +392,7 @@ You can run 'aptly publish snapshot snap-deb-w-nginx' to publish snapshot as Deb
     contains aptly binary, man page and bash completion.</p>
 
     <p><strong>Binary</strong> executables (depends almost only on libc) for Debian, CentOS, MacOS X &amp; FreeBSD are available for
-    download from <a href="http://dl.bintray.com/smira/aptly/0.5.1/">Bintray</a>. Linux executables should run on almost any
+    download from <a href="http://dl.bintray.com/smira/aptly/0.6/">Bintray</a>. Linux executables should run on almost any
     recent Linux distribution.</p>
 
       <div class="row">
@@ -398,16 +402,16 @@ You can run 'aptly publish snapshot snap-deb-w-nginx' to publish snapshot as Deb
           </div>
           <h4>Debian (Ubuntu)</h4>
           <p><strong>see part on installation from .deb package above</strong></p>
-          <p>squeeze+: <a href="http://dl.bintray.com/smira/aptly/0.5.1/debian-squeeze-x32/aptly">32-bit</a> |
-                      <a href="http://dl.bintray.com/smira/aptly/0.5.1/debian-squeeze-x64/aptly">64-bit</a></p>
+          <p>squeeze+: <a href="http://dl.bintray.com/smira/aptly/0.6/debian-squeeze-x32/aptly">32-bit</a> |
+                      <a href="http://dl.bintray.com/smira/aptly/0.6/debian-squeeze-x64/aptly">64-bit</a></p>
         </div>
         <div class="col-lg-6">
           <div class="pull-left">
             <img src="centos.png" alt="CentOS" class="logo">
           </div>
           <h4>CentOS (RedHat, Fedora)</h4>
-          <p>6.5+: <a href="http://dl.bintray.com/smira/aptly/0.5.1/centos-6.5-x32/aptly">32-bit</a> |
-                  <a href="http://dl.bintray.com/smira/aptly/0.5.1/centos-6.5-x64/aptly">64-bit</a></p>
+          <p>6.5+: <a href="http://dl.bintray.com/smira/aptly/0.6/centos-6.5-x32/aptly">32-bit</a> |
+                  <a href="http://dl.bintray.com/smira/aptly/0.6/centos-6.5-x64/aptly">64-bit</a></p>
         </div>
       </div>
       <div class="row">
@@ -416,15 +420,15 @@ You can run 'aptly publish snapshot snap-deb-w-nginx' to publish snapshot as Deb
             <img src="freebsd.png" alt="FreeBSD" class="logo">
           </div>
           <h4>FreeBSD</h4>
-          <p>9.2+: <a href="http://dl.bintray.com/smira/aptly/0.5.1/freebsd-9.2-x32/aptly">32-bit</a> |
-                  <a href="http://dl.bintray.com/smira/aptly/0.5.1/freebsd-9.2-x64/aptly">64-bit</a></p>
+          <p>9.2+: <a href="http://dl.bintray.com/smira/aptly/0.6/freebsd-9.2-x32/aptly">32-bit</a> |
+                  <a href="http://dl.bintray.com/smira/aptly/0.6/freebsd-9.2-x64/aptly">64-bit</a></p>
         </div>
         <div class="col-lg-6">
           <div class="pull-left">
             <img src="macosx.png" alt="Mac OS X" class="logo">
           </div>
           <h4>Mac OS X</h4>
-          <p>10.9: <a href="http://dl.bintray.com/smira/aptly/0.5.1/osx/aptly">64-bit</a></p>
+          <p>10.9: <a href="http://dl.bintray.com/smira/aptly/0.6/osx/aptly">64-bit</a></p>
         </div>
       </div>
       <div class="row">
@@ -517,7 +521,7 @@ You can run 'aptly publish snapshot snap-deb-w-nginx' to publish snapshot as Deb
   (distribution name, prefix) and consumed by <code>apt</code> tools on your Debian systems. Local repositories
   could be <a href="#aptly-publish-repo">published directly</a> bypassing snapshot step.</p>
 
-  <div class="target-spacer" id="usage"><a name="commands"></a>&nbsp;</div>
+  <div class="target-spacer" id="commands"><a name="commands"></a>&nbsp;</div>
   <h3>Commands</h3>
       <p>Aptly supports commands in three basic categories:</p>
 
@@ -674,6 +678,39 @@ You can run 'aptly publish snapshot snap-deb-w-nginx' to publish snapshot as Deb
     When specified on command line, condition may have to be quoted according to shell rules, so that it stays single argument:
     <code>aptly repo import percona stable 'mysql-client (&gt;= 3.6)'</code>.
     </li>
+  </ul>
+
+
+  <!-- ================ duplicate-packages ============== -->
+  <div class="target-spacer" id="duplicate-packages"><a name="duplicate-packages"></a>&nbsp;</div>
+  <h3>On duplicate packages</h3>
+
+  <p>In ideal world, tuple <code>(architecture, name, version)</code> should identify unique package.
+  That holds true (well, almost true) with Debian-based distributions. If two packages with the same
+  architecture, name and version are coming from different sources, they should be identical.</p>
+
+  <p>Debian <a href="https://wiki.debian.org/RepositoryFormat">documentation on repository format</a> explicitly
+  forbids duplicate packages with different content in one repository or in set of repositories for one
+  distribution:</p>
+
+  <blockquote>A repository must not include different packages (different content) with the same package name, version, and architecture. When a repository is meant to be used as a supplement to another repository this should hold for the joint main+supplement repository as well.</blockquote>
+
+  <p>aptly deduplicates packages with identical <code>(architecture, name, version)</code> tuple and contents into
+  one single package record and treats them as single package. But if two packages share architecture, name and version,
+  but have different content, aptly would treat them as different packages. Such packages should never be placed
+  into one list in aptly (into one local repo, snapshot, mirror, etc.) When such thing happens, aptly would
+  complain about conflict in packages. Usually such duplicate packages with different content represent some
+  software packaged for different Debian distribution, so they should never be in the same list.</p>
+
+  <!-- ================ integrations ============== -->
+  <div class="target-spacer" id="integrations"><a name="integrations"></a>&nbsp;</div>
+  <h3>Integrations</h3>
+
+  <p>With configuration management systems:</p>
+
+  <ul>
+    <li><a href="https://github.com/hw-cookbooks/aptly">Chef cookbook</a> by Aaron Baer (Heavy Water Operations, LLC)</li>
+    <li><a href="https://github.com/alphagov/puppet-aptly">Puppet module</a> by Government Digital Services</li>
   </ul>
 
 <!-- ================ aptly mirror ============== -->
@@ -897,7 +934,7 @@ Information from release file:
 ...
 </pre>
 
-    <p>In detailed information basiс information about mirror is displayed:
+    <p>In detailed information basic information about mirror is displayed:
     filters by component &amp; architecture, timestamp of last successful
     repository fetch and number of packages.</p>
 
@@ -1144,7 +1181,7 @@ Packages:
     <p>Examples:</p>
 
 <pre><span class="greeting">$</span> <span class="command">aptly repo list</span>
-List of mirrors:
+List of local repos:
  * [stable]: Stable packages for project Foo (packages: 10)
  * [testing] (packages: 1)
 
@@ -1263,7 +1300,7 @@ Loading packages...
 
     <ul>
       <li>
-        <code>-dry-run=false</code>: don't revmove, just show what would be removed
+        <code>-dry-run=false</code>: don't remove, just show what would be removed
       </li>
     </ul>
 
@@ -1682,6 +1719,8 @@ You can run 'aptly publish snapshot snap-deb-main-w-xorg' to publish snapshot as
 
     <p>Merge merges several snapshots into one. Merge happens from left to right. By default, packages with the same
     name-architecture pair are replaced during merge (package from latest snapshot on the list wins).
+    With <code>-latest</code>, package with latest version wins.
+    With <code>-no-remove</code> flag, all versions of packages are preserved during merge.
     If only one snapshot is specified, merge copies <code>source</code> into <code>destination</code>.</p>
 
     <p>Usage:</p>
@@ -1699,6 +1738,7 @@ You can run 'aptly publish snapshot snap-deb-main-w-xorg' to publish snapshot as
 
     <ul>
     <li>  <code>-latest=false</code>: use only the latest version of each package</li>
+    <li>  <code>-no-remove=false</code>: don't remove duplicate arch/name packages</li>
     </ul>
 
     <p>Example:</p>
@@ -1799,7 +1839,8 @@ Snapshot `snap-wheezy` has been dropped.</pre>
 
     <ul>
     <li>  <code>-component=""</code>: component name to publish; guessed from original
-    repository (if any), or defaults to <code>main</code></li>
+    repository (if any), or defaults to <code>main</code> (for multi-component publishing,
+    separate components with commas)</li>
     <li>  <code>-distribution=""</code>: distribution name to publish; guessed from
     original repository distribution</li>
     <li>  <code>-gpg-key=""</code>: GPG key ID to use when signing the release, if not
@@ -1825,6 +1866,18 @@ Snapshot `snap-wheezy` has been dropped.</pre>
     <div class="alert alert-info">It is not allowed to publish two snapshots to the same
     <code>prefix</code> and <code>distribution</code>.</div>
 
+    <p>Empty snapshots could be published as well (as placeholder, for subsequent updates using
+    <a href="#aptly-publish-switch">aptly publish switch</a> command). When publishing empty
+    snapshots it is important to specify complete architectures list (using <code>-architectures</code> flag),
+    as it can't be changed after publishing.</p>
+
+    <p>Multiple component repositories should be published from several snapshots, one snapshot
+    per component. In case of multiple component publishing, command accepts several snapshot names:</p>
+
+    <pre><span class="greeting">$</span> <span class="command">aptly publish snapshot -component=main,contrib wheezy-main wheezy-contrib</span></pre>
+
+    <p>When mirroring remote repositories in order to preserve package split by component, create
+    individual mirrors for each component, take snapshots and publish them as multi-component repository.</p>
 
     <p>Example:</p>
 
@@ -1868,6 +1921,7 @@ Don't forget to add your GPG key to apt with apt-key.
                       <li><code>Packages</code>: package metadata</li>
                       <li><code>Packages.gz</code></li>
                       <li><code>Packages.bz2</code></li>
+                      <li><code>Release</code>: used by debian-installer</li>
                     </ul>
                   </li>
                   <li>
@@ -1876,6 +1930,7 @@ Don't forget to add your GPG key to apt with apt-key.
                       <li><code>Sources</code>: package metadata</li>
                       <li><code>Sources.gz</code></li>
                       <li><code>Sources.bz2</code></li>
+                      <li><code>Release</code>: used by debian-installer</li>
                     </ul>
                   </li>
                 </ul>
@@ -1941,7 +1996,8 @@ Don't forget to add your GPG key to apt with apt-key.
 
     <ul>
     <li>  <code>-component=""</code>: component name to publish; it is taken from local
-    repository default, otherwise it defaults to <code>main</code></li>
+    repository default, otherwise it defaults to <code>main</code> (for multi-component publishing,
+    separate components with commas)</li>
     <li>  <code>-distribution=""</code>: distribution name to publish; guessed from
     local repository default distribution</li>
     <li>  <code>-gpg-key=""</code>: GPG key ID to use when signing the release, if not
@@ -1962,6 +2018,16 @@ Don't forget to add your GPG key to apt with apt-key.
 
     <p>When local repository changes, published repository could be updated in-place
     using command <a href="#aptly-publish-update">aptly publish update</a>.</p>
+
+    <p>Empty local repos could be published as well (as placeholder, for subsequent updates using
+    <a href="#aptly-publish-update">aptly publish update</a> command). When publishing empty
+    local repos it is important to specify complete architectures list (using <code>-architectures</code> flag),
+    as it can't be changed after publishing.</p>
+
+    <p>Multiple component repositories should be published from several local repositories, one repository
+    per component. In that case, command accepts several local repositories names:</p>
+
+    <pre><span class="greeting">$</span> <span class="command">aptly publish repo -component=main,contrib mysoft-main mysoft-contrib</span></pre>
 
     <p>Example:</p>
 
@@ -2015,6 +2081,9 @@ Don't forget to add your GPG key to apt with apt-key.
     <li>  <code>-skip-signing=false</code>: don't sign Release files with GPG
     </ul>
 
+    <p>When updating multiple-component published repository, all local repositories are updated
+    simultaneously.</p>
+
     <p>Example:</p>
 
 <pre><span class="greeting">$</span> <span class="command">aptly publish update maverick</span>
@@ -2030,7 +2099,7 @@ Clearsigning file '/var/aptly/public/dists/maverick/Release.tmp' with gpg, pleas
 
 Cleaning up prefix "." component "main"...
 
-Publish for local repo ./maverick (main) [i386, source] publishes [local-repo] has been successfully updated.
+Publish for local repo ./maverick [i386, source] publishes {main: [local-repo]} has been successfully updated.
 </pre>
 
   <!-- ================ aptly publish switch ============== -->
@@ -2061,12 +2130,21 @@ Publish for local repo ./maverick (main) [i386, source] publishes [local-repo] h
     <p>Flags:</p>
 
     <ul>
+    <li>  <code>-component=""</code>: list of components to update (separate components with commas)</li>
     <li>  <code>-gpg-key=""</code>: GPG key ID to use when signing the release, if not
     specified default key is used</li>
     <li>  <code>-keyring=""</code>: GPG keyring to use (instead of default)</li>
     <li>  <code>-secret-keyring=""</code>: GPG secret keyring to use (instead of default)</li>
     <li>  <code>-skip-signing=false</code>: don't sign Release files with GPG
     </ul>
+
+    <p>When switching published snapshots for multiple component repositories any subset of snapshots
+    could be updated, they should be listed on command line with <code>-component</code> flag:</p>
+
+    <pre><span class="greeting">$</span> <span class="command">aptly publish switch -component=main,contrib wheezy wheezy-main wheezy-contrib</span></pre>
+
+    <p>Flag <code>-component</code> could be omitted for single-component published repositories.</p>
+
 
     <p>Example:</p>
 
@@ -2083,7 +2161,7 @@ Clearsigning file '/var/aptly/public/dists/wheezy/Release.tmp' with gpg, please 
 
 Cleaning up prefix "." component "main"...
 
-Publish for local repo ./wheezy (main) [i386, amd64] publishes [wheezy-7.4]: snapshot from mirror [wheezy]: http://ftp.ru.debian.org/debian/ wheezy has been successfully updated.
+Publish for local repo ./wheezy [i386, amd64] publishes {main: [wheezy-7.4]: snapshot from mirror [wheezy]: http://ftp.ru.debian.org/debian/ wheezy} has been successfully updated.
 </pre>
 
   <!-- ================ aptly publish list ============== -->
@@ -2111,8 +2189,8 @@ Publish for local repo ./wheezy (main) [i386, amd64] publishes [wheezy-7.4]: sna
 
 <pre><span class="greeting">$</span> <span class="command">aptly publish list</span>
 Published repositories:
-  * ./sq-b (main) [amd64, i386] publishes [back3]: Snapshot from mirror [backports2]: http://mirror.yandex.ru/backports.org/ squeeze-backports
-  * ./squeeze-backports (contrib) [amd64, i386] publishes [back3]: Snapshot from mirror [backports2]: http://mirror.yandex.ru/backports.org/ squeeze-backports
+  * ./sq-b [amd64, i386] publishes {main: [back3]: Snapshot from mirror [backports2]: http://mirror.yandex.ru/backports.org/ squeeze-backports}
+  * ./squeeze-backports [amd64, i386] publishes {contrib: [back3]: Snapshot from mirror [backports2]: http://mirror.yandex.ru/backports.org/ squeeze-backports}
 </pre>
 
 <pre><span class="greeting">$</span> <span class="command">aptly publish list -raw</span>
@@ -2263,6 +2341,23 @@ Starting web server at: 127.0.0.1:8765 (press Ctrl+C to quit)...
 <!-- ================ history ============== -->
 <div class="target-spacer" id="history"><a name="history"></a>&nbsp;</div>
 <h2>History</h2>
+
+
+  <h3>Version 0.6</h3>
+
+  <ul>
+    <li>support for multi-component published repositories (<a href="https://github.com/smira/aptly/issues/36">#36</a>)</li>
+    <li>handling duplicate packages with different content gracefully (<a href="https://github.com/smira/aptly/issues/60">#60</a>)</li>
+    <li>repositories published by aptly now can be consumed by debian-installer (<a href="https://github.com/smira/aptly/issues/61">#61</a>)</li>
+    <li>new flag: <code>-no-remove</code> for <a href="#aptly-snapshot-merge">aptly snapshot merge</a> to merge snapshots with all package versions preserved (<a href="https://github.com/smira/aptly/issues/57">#57</a>)</li>
+    <li>publishing of empty snapshots/repositories is possible (<a href="https://github.com/smira/aptly/issues/55">#55</a>)</li>
+    <li><a href="#aptly-repo-add">aptly repo add</a> now exists with 1 if any of files failed to add (<a href="https://github.com/smira/aptly/issues/53">#53</a>)</li>
+    <li>bug fix: <code>Package:</code> line comes first in package metadata (<a href="https://github.com/smira/aptly/issues/49">#49</a>)</li>
+    <li>bug fix: when command parsing fails, aptly returns exit code 2 (<a href="https://github.com/smira/aptly/issues/52">#52</a>)</li>
+    <li>bug fix: pulling more than 128 packates at once (<a href="https://github.com/smira/aptly/issues/53">#53</a>)</li>
+    <li>bug fix: <a href="#aptly-graph">aptly graph</a> may get confused with package pull requests (<a href="https://github.com/smira/aptly/issues/58">#58</a>)</li>
+  </ul>
+
 
   <h3>Version 0.5.1</h3>
 
