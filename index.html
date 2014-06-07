@@ -1719,6 +1719,8 @@ You can run 'aptly publish snapshot snap-deb-main-w-xorg' to publish snapshot as
 
     <p>Merge merges several snapshots into one. Merge happens from left to right. By default, packages with the same
     name-architecture pair are replaced during merge (package from latest snapshot on the list wins).
+    With <code>-latest</code>, package with latest version wins.
+    With <code>-no-remove</code> flag, all versions of packages are preserved during merge.
     If only one snapshot is specified, merge copies <code>source</code> into <code>destination</code>.</p>
 
     <p>Usage:</p>
@@ -1837,7 +1839,8 @@ Snapshot `snap-wheezy` has been dropped.</pre>
 
     <ul>
     <li>  <code>-component=""</code>: component name to publish; guessed from original
-    repository (if any), or defaults to <code>main</code></li>
+    repository (if any), or defaults to <code>main</code> (for multi-component publishing,
+    separate components with commas)</li>
     <li>  <code>-distribution=""</code>: distribution name to publish; guessed from
     original repository distribution</li>
     <li>  <code>-gpg-key=""</code>: GPG key ID to use when signing the release, if not
@@ -1867,6 +1870,14 @@ Snapshot `snap-wheezy` has been dropped.</pre>
     <a href="#aptly-publish-switch">aptly publish switch</a> command). When publishing empty
     snapshots it is important to specify complete architectures list (using <code>-architectures</code> flag),
     as it can't be changed after publishing.</p>
+
+    <p>Multiple component repositories should be published from several snapshots, one snapshot
+    per component. In case of multiple component publishing, command accepts several snapshot names:</p>
+
+    <pre><span class="greeting">$</span> <span class="command">aptly publish snapshot -component=main,contrib wheezy-main wheezy-contrib</span></pre>
+
+    <p>When mirroring remote repositories in order to preserve package split by component, create
+    individual mirrors for each component, take snapshots and publish them as multi-component repository.</p>
 
     <p>Example:</p>
 
@@ -1985,7 +1996,8 @@ Don't forget to add your GPG key to apt with apt-key.
 
     <ul>
     <li>  <code>-component=""</code>: component name to publish; it is taken from local
-    repository default, otherwise it defaults to <code>main</code></li>
+    repository default, otherwise it defaults to <code>main</code> (for multi-component publishing,
+    separate components with commas)</li>
     <li>  <code>-distribution=""</code>: distribution name to publish; guessed from
     local repository default distribution</li>
     <li>  <code>-gpg-key=""</code>: GPG key ID to use when signing the release, if not
@@ -2011,6 +2023,11 @@ Don't forget to add your GPG key to apt with apt-key.
     <a href="#aptly-publish-update">aptly publish update</a> command). When publishing empty
     local repos it is important to specify complete architectures list (using <code>-architectures</code> flag),
     as it can't be changed after publishing.</p>
+
+    <p>Multiple component repositories should be published from several local repositories, one repository
+    per component. In that case, command accepts several local repositories names:</p>
+
+    <pre><span class="greeting">$</span> <span class="command">aptly publish repo -component=main,contrib mysoft-main mysoft-contrib</span></pre>
 
     <p>Example:</p>
 
@@ -2064,6 +2081,9 @@ Don't forget to add your GPG key to apt with apt-key.
     <li>  <code>-skip-signing=false</code>: don't sign Release files with GPG
     </ul>
 
+    <p>When updating multiple-component published repository, all local repositories are updated
+    simultaneously.</p>
+
     <p>Example:</p>
 
 <pre><span class="greeting">$</span> <span class="command">aptly publish update maverick</span>
@@ -2079,7 +2099,7 @@ Clearsigning file '/var/aptly/public/dists/maverick/Release.tmp' with gpg, pleas
 
 Cleaning up prefix "." component "main"...
 
-Publish for local repo ./maverick (main) [i386, source] publishes [local-repo] has been successfully updated.
+Publish for local repo ./maverick [i386, source] publishes {main: [local-repo]} has been successfully updated.
 </pre>
 
   <!-- ================ aptly publish switch ============== -->
@@ -2110,12 +2130,21 @@ Publish for local repo ./maverick (main) [i386, source] publishes [local-repo] h
     <p>Flags:</p>
 
     <ul>
+    <li>  <code>-component=""</code>: list of components to update (separate components with commas)</li>
     <li>  <code>-gpg-key=""</code>: GPG key ID to use when signing the release, if not
     specified default key is used</li>
     <li>  <code>-keyring=""</code>: GPG keyring to use (instead of default)</li>
     <li>  <code>-secret-keyring=""</code>: GPG secret keyring to use (instead of default)</li>
     <li>  <code>-skip-signing=false</code>: don't sign Release files with GPG
     </ul>
+
+    <p>When switching published snapshots for multiple component repositories any subset of snapshots
+    could be updated, they should be listed on command line with <code>-component</code> flag:</p>
+
+    <pre><span class="greeting">$</span> <span class="command">aptly publish switch -component=main,contrib wheezy wheezy-main wheezy-contrib</span></pre>
+
+    <p>Flag <code>-component</code> could be omitted for single-component published repositories.</p>
+
 
     <p>Example:</p>
 
@@ -2132,7 +2161,7 @@ Clearsigning file '/var/aptly/public/dists/wheezy/Release.tmp' with gpg, please 
 
 Cleaning up prefix "." component "main"...
 
-Publish for local repo ./wheezy (main) [i386, amd64] publishes [wheezy-7.4]: snapshot from mirror [wheezy]: http://ftp.ru.debian.org/debian/ wheezy has been successfully updated.
+Publish for local repo ./wheezy [i386, amd64] publishes {main: [wheezy-7.4]: snapshot from mirror [wheezy]: http://ftp.ru.debian.org/debian/ wheezy} has been successfully updated.
 </pre>
 
   <!-- ================ aptly publish list ============== -->
@@ -2160,8 +2189,8 @@ Publish for local repo ./wheezy (main) [i386, amd64] publishes [wheezy-7.4]: sna
 
 <pre><span class="greeting">$</span> <span class="command">aptly publish list</span>
 Published repositories:
-  * ./sq-b (main) [amd64, i386] publishes [back3]: Snapshot from mirror [backports2]: http://mirror.yandex.ru/backports.org/ squeeze-backports
-  * ./squeeze-backports (contrib) [amd64, i386] publishes [back3]: Snapshot from mirror [backports2]: http://mirror.yandex.ru/backports.org/ squeeze-backports
+  * ./sq-b [amd64, i386] publishes {main: [back3]: Snapshot from mirror [backports2]: http://mirror.yandex.ru/backports.org/ squeeze-backports}
+  * ./squeeze-backports [amd64, i386] publishes {contrib: [back3]: Snapshot from mirror [backports2]: http://mirror.yandex.ru/backports.org/ squeeze-backports}
 </pre>
 
 <pre><span class="greeting">$</span> <span class="command">aptly publish list -raw</span>
