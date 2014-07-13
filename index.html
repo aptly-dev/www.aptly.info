@@ -554,6 +554,7 @@ You can run 'aptly publish snapshot snap-deb-w-nginx' to publish snapshot as Deb
 <pre>{
   "rootDir": "$HOME/.aptly",
   "downloadConcurrency": 4,
+  "downloadSpeedLimit": 0,
   "architectures": [],
   "dependencyFollowSuggests": false,
   "dependencyFollowRecommends": false,
@@ -575,6 +576,8 @@ You can run 'aptly publish snapshot snap-deb-w-nginx' to publish snapshot as Deb
       repositories (<code>rootDir/public</code>)</li>
       <li>  <code>downloadConcurrency</code> is a number of parallel download threads to
       use when downloading packages</li>
+      <li>  <code>downloadSpeedLimit</code> is a limit on download bandwidth used by aptly in
+      kbytes per second, 0 means unlimited</li>
       <li>  <code>architectures</code> is a list of architectures to process; if left empty
       defaults to all available architectures; could be overridden with
       option <code>-architectures</code>
@@ -839,6 +842,9 @@ You can run 'aptly mirror update debian-main' to download repository contents.
     <p>Flags:</p>
 
     <ul>
+      <li>
+        <code>-download-limit=0</code>: limit download speed (kbytes/sec)
+      </li>
       <li>
         <code>-ignore-checksums=false</code>: ignore checksum mismatches for downloaded items (packages file, metadata)
       </li>
