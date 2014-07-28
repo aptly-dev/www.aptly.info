@@ -43,6 +43,8 @@
                 <li><a href="#aptly-mirror-update">aptly mirror update</a></li>
                 <li><a href="#aptly-mirror-list">aptly mirror list</a></li>
                 <li><a href="#aptly-mirror-show">aptly mirror show</a></li>
+                <li><a href="#aptly-mirror-edit">aptly mirror edit</a></li>
+                <li><a href="#aptly-mirror-rename">aptly mirror rename</a></li>
                 <li><a href="#aptly-mirror-drop">aptly mirror drop</a></li>
               </ul>
             </li>
@@ -58,6 +60,7 @@
                 <li><a href="#aptly-repo-move">aptly repo move</a></li>
                 <li><a href="#aptly-repo-remove">aptly repo remove</a></li>
                 <li><a href="#aptly-repo-edit">aptly repo edit</a></li>
+                <li><a href="#aptly-repo-rename">aptly repo rename</a></li>
                 <li><a href="#aptly-repo-drop">aptly repo drop</a></li>
               </ul>
             </li>
@@ -71,6 +74,7 @@
                 <li><a href="#aptly-snapshot-pull">aptly snapshot pull</a></li>
                 <li><a href="#aptly-snapshot-diff">aptly snapshot diff</a></li>
                 <li><a href="#aptly-snapshot-merge">aptly snapshot merge</a></li>
+                <li><a href="#aptly-snapshot-rename">aptly snapshot rename</a></li>
                 <li><a href="#aptly-snapshot-drop">aptly snapshot drop</a></li>
               </ul>
             </li>
@@ -564,7 +568,16 @@ You can run 'aptly publish snapshot snap-deb-w-nginx' to publish snapshot as Deb
   "gpgDisableVerify": false,
   "downloadSourcePackages": false,
   "ppaDistributorID": "ubuntu",
-  "ppaCodename": ""
+  "ppaCodename": "",
+  "S3PublishEndpoints": {
+    "test": {
+      "region": "us-east-1",
+      "bucket": "repo",
+      "awsAccessKeyID": ""
+      "awsSecretAccessKey": "",
+      "prefix": "",
+      "acl": "public-read"
+    }
 }
 </pre>
 
@@ -600,6 +613,7 @@ You can run 'aptly publish snapshot snap-deb-w-nginx' to publish snapshot as Deb
       </li>
       <li><code>ppaDistributorID</code> &amp; <code>ppaCodename</code> specifies paramaters for short PPA url expansion,
           if left blank they default to output of <code>lsb_release</code> command
+      <li><code>S3PublisEndpoints</code> is a configuration of Amazon S3 publishing endpoints (see below)</li>
     </ul>
 
     <div class="alert alert-warning"><strong>Warning:</strong> <code>rootDir</code> contains all the downloaded packages from remote mirrors,
@@ -647,41 +661,76 @@ You can run 'aptly publish snapshot snap-deb-w-nginx' to publish snapshot as Deb
 
       <p>Global flags override configuration parameters with similar names.</p>
 
-  <!-- ================ package-spec ============== -->
-  <div class="target-spacer" id="package-spec"><a name="package-spec"></a>&nbsp;</div>
-  <h3>Package Spec</h3>
+  <!-- ================ package-query ============== -->
+  <div class="target-spacer" id="package-query"><a name="package-query"></a>&nbsp;</div>
+  <h3>Package Queries</h3>
 
-  <p>Some commands accept package specs to identify list of packages to process. Package spec is a list of
-  following search conditions:</p>
+  <p>Some commands accept package queries to identify list of packages to process.
+Package query syntax almost matches <code>reprepro</code> query language. Query consists of
+the following simple terms:</p>
 
-  <ul>
-    <li><strong>direct package reference</strong>: reference to exaclty one package. Format is identical to the way
-    aptly lists packages in <code>show</code> commands with <code>-with-packages</code> flag: <code>name_version_arch</code>, e.g.:
-    <code>libmysqlclient18_5.5.35-rel33.0-611.squeeze_amd64</code> </li>
-    <li><strong>dependency condition</strong>: syntax follows Debian dependency specification: <code>package_name</code> followed by
-    optional version specification and architecture limit.<br/> Examples:
-    <ul>
-      <li>
-        <code>mysql-client</code>: matches package <code>mysql-client</code> of any version and
-        architecture (including <code>source</code>)
-      </li>
-      <li>
-        <code>mysql-client (&gt;= 3.6)</code>: matches package <code>mysql-client</code> with version greater or equal to <code>3.6</code>.
-        Valid operators for version are: <code>&gt;=</code>, <code>&lt;=</code>, <code>=</code>, <code>&gt;&gt;</code> (strictly greater),
-        <code>&lt;&lt;</code> (strictly less).
-      </li>
-      <li>
-        <code>mysql-client {i386}</code>: matches package <code>mysql-client</code> on architecture <code>i386</code>, architecture
-        <code>all</code> matches all architectures but source.
-      </li>
-      <li>
-        <code>mysql-client (&gt;= 3.6) {i386}</code>: version and architecture conditions combined.
-      </li>
-    </ul>
-    When specified on command line, condition may have to be quoted according to shell rules, so that it stays single argument:
-    <code>aptly repo import percona stable 'mysql-client (&gt;= 3.6)'</code>.
-    </li>
-  </ul>
+<ul>
+<li><b>direct package reference</b>: reference to exaclty one package. Format is identical to the way aptly lists packages in
+show commands with <code>-with-packages</code> flag: <code>name_version_arch</code>,
+e.g.: <code>libmysqlclient18_5.5.35-rel33.0-611.squeeze_amd64</code></li>
+<li><b>dependency condition</b>: syntax follows Debian dependency specification: <code>package_name</code> followed by optional version specification and architecture limit, e.g: <code>mysql-client (&gt;= 3.6)</code>.</li>
+<li><b>query against package fields</b>syntax is the same as for dependency conditions, but instead of package name field name is used, e.g:
+<code>Priority (optional)</code>.</li>
+</ul>
+
+
+<p>Supported fields:</p>
+
+<ul>
+<li>all field names from Debian package control files are supported except for <code>Filename</code>, <code>MD5sum</code>,
+<code>SHA1</code>, <code>SHA256</code>, <code>Size</code>, <code>Files</code>, <code>Checksums-SHA1</code>, <code>Checksums-SHA256</code>.</li>
+<li><code>$Source</code> is a name of source package (for binary packages)</li>
+<li><code>$SourceVersion</code> is a version of source package</li>
+<li><code>$Architecture</code> is <code>Architecture</code> for binary packages and <code>source</code> for source packages,
+ when matching with equal (<code>=</code>) operator, package with <code>any</code> architecture matches all architectures
+ but <code>source</code>.</li>
+<li><code>$Version</code> has the same value as <code>Version</code>, but comparison operators use Debian
+ version precedence rules</li>
+<li><code>$PackageType</code> is <code>deb</code> for binary packages and <code>source</code> for source packages</li>
+</ul>
+
+
+<p>Operators:</p>
+
+<ul>
+<li><code>=</code>: strict match, default operator is no operator is given</li>
+<li><code>&gt;=</code>, <code>&lt;=</code>, <code>=</code>, <code>>&gt;</code> (strictly greater), <code>&lt;&lt;</code> (strictly less)
+:lexicographical comparison for all fields and special rules when comparing package versions</li>
+<li><code>%</code>: pattern matching, like shell patterns, supported special symbols are: <code>[^]?*</code>, e.g.:
+<code>$Version (% 3.5-*)</code></li>
+<li><code>~</code>: regular expression matching, e.g.:
+<code>Name (~ .*-dev)</code></li>
+</ul>
+
+<p>Simple terms could be combined into more complex queries using operators <code>,</code> (and), <code>|</code> (or) and
+<code>!</code> (not), parentheses <code>()</code> are used to change operator precedence. Match value could be
+enclosed in single (<code>'</code>) or double (<code>"</code>) quotes if required to resolve ambiguity, quotes
+inside quoted string should escaped with slash (<code>\</code>).</p>
+
+<p>Examples:</p>
+
+<ul>
+<li><code>mysql-client</code>: matches package mysql-client of any version and architecture (including source), also
+ matches packages that <code>Provide:</code> <code>mysql-client</code>.</li>
+<li><code>mysql-client (&gt;= 3.6)</code>: matches package mysql-client with version greater or equal to 3.6. Valid operators for
+ version are: <code>&gt;=</code>, <code>&lt;=</code>, <code>=</code>, <code>>&gt;</code> (strictly greater), <code>&lt;&lt;</code> (strictly less).</li>
+<li><code>mysql-client {i386}</code>: matches package <code>mysql-client</code> on architecture <code>i386</code>, architecture <code>all</code> matches all architectures but source.</li>
+<li><code>mysql-client (&gt;= 3.6) {i386}</code>: version and architecture conditions combined.</li>
+<li><code>libmysqlclient18_5.5.35-rel33.0-611.squeeze_amd64</code>: direct package reference.</li>
+<li><code>$Source (nginx)</code>: all binary packages with <code>nginx</code> as source package.</li>
+<li><code>!Name (~ .*-dev), mail-transport, $Version (&gt;= 3.5)</code>: matches all packages that provide <code>mail-transport</code> with name that has no suffix <code>-dev</code> and
+with version greater or equal to <code>3.5</code>.</li>
+</ul>
+
+<p>When specified on command line, query may have to be quoted according to shell rules, so that it stays single argument:</p>
+
+<pre><span class="greeting">$</span> <span class="command">aptly repo import percona stable 'mysql-client (&gt;= 3.6)'</span></pre>
+
 
 
   <!-- ================ duplicate-packages ============== -->
@@ -704,6 +753,57 @@ You can run 'aptly publish snapshot snap-deb-w-nginx' to publish snapshot as Deb
   into one list in aptly (into one local repo, snapshot, mirror, etc.) When such thing happens, aptly would
   complain about conflict in packages. Usually such duplicate packages with different content represent some
   software packaged for different Debian distribution, so they should never be in the same list.</p>
+
+  <!-- ================ s3-publishing ============== -->
+  <div class="target-spacer" id="s3-publishing"><a name="s3-publishin"></a>&nbsp;</div>
+  <h3>Publishing to Amazon S3</h3>
+
+  <p>aptly could be configured to publish repository directly to Amazon S3. First, publishing
+endpoints should be described in aptly <a href="#configuration">configuration</a> file. Each endpoint has name
+and associated settings:</p>
+
+<ul>
+<li> <code>region</code>: Amazon region for S3 bucket (e.g. <code>us-east-1</code>)</li>
+<li> <code>bucket</code>: bucket name</li>
+<li> <code>prefix</code>: (optional) do publishing under specified prefix in the bucket, defaults to
+ no prefix (bucket root)</li>
+<li> <code>acl</code>: (optional) assign ACL to published files (one of the canned ACLs in Amazon
+ terminology). Useful values: <code>private</code> (default) or <code>public-read</code> (public
+ repository). Public repositories could be consumed by <code>apt</code> using
+ HTTP endpoint (Amazon bucket should be configured for "website hosting"),
+ for private repositories special apt S3 transport is required.</li>
+<li> <code>awsAccessKeyID</code>, <code>awsSecretAccessKey</code>: (optional) Amazon credentials to access S3 bucket. If not supplied,
+ environment variables <code>AWS_ACCESS_KEY_ID</code> and <code>AWS_SECRET_ACCESS_KEY</code>
+ are used.</li>
+</ul>
+
+      <div class="alert alert-danger">
+        S3 bucket used for publishing should be empty initially and should not be used to store other data,
+        as aptly might remove objects while doing cleanup operation. If <code>prefix</code> is configured,
+        bucket should be empty under the prefix (aptly won't touch any objects outside prefix).
+      </div>
+
+
+<p>In order to publish to S3, specify endpoint as <code>s3:endpoint-name:</code> before
+publishing prefix on the command line, e.g.:</p>
+
+<pre><span class="greeting">$</span> <span class="command">aptly publish snapshot wheezy-main s3:test:</span></pre>
+
+<p>Or, with prefix:</p>
+
+<pre><span class="greeting">$</span> <span class="command">aptly publish snapshot wheezy-main s3:test:debian/</span></pre>
+
+<p>If you would like to publish public repository to Amazon S3, create bucket, enable website hosting
+option at Amazon console. Specify bucket name, region and access keys in aptly configuration under <code>S3PublishEndpoints</code>.
+Use <code>public-read</code> as value for <code>acl</code> parameter. Published repository could be added
+to <code>/etc/apt/sources.list</code> by using public HTTP URL, like any other HTTP repository.</p>
+
+<p>For private repositories, don't enable website hosting option and use <code>private</code> as value for <code>acl</code>
+parameter. Install <a href="https://github.com/brianm/apt-s3/">apt-s3</a> or any other similar tool to enable <code>s3://</code>
+transport in <code>apt</code>. Use special URLs to include your private repository in <code>/etc/apt/sources.list</code>:</p>
+
+<pre>deb s3://&lt;access-key&gt;:[&lt;secret-key&gt;]@s3-eu-east-1.amazonaws.com/private-repo main</pre>
+
 
   <!-- ================ integrations ============== -->
   <div class="target-spacer" id="integrations"><a name="integrations"></a>&nbsp;</div>
@@ -755,6 +855,8 @@ You can run 'aptly publish snapshot snap-deb-w-nginx' to publish snapshot as Deb
     <p>Flags:</p>
 
     <ul>
+      <li>  <code>-filter=</code>: <a href="#package-query">package query</a> that is applied to packages in the mirror</li>
+      <li>  <code>-filter-with-deps=false</code>: when filtering, include dependencies of matching packages as well</li>
       <li>
         <code>-ignore-signatures=false</code>: disable verification of Release file signatures
       </li>
@@ -778,6 +880,12 @@ You can run 'aptly publish snapshot snap-deb-w-nginx' to publish snapshot as Deb
     <p>If PPA url is specified, aptly would expand it to HTTP url using configuration options <code>ppaDistributorID</code> &amp;
     <code>ppaCodename</code>. If you're running aptly on Ubuntu, defaults should work (aptly would figure out codename using
     <code>lsb_release</code> command).</p>
+
+    <p>If filtering is enabled, all package lists are downloaded and filters are applied to those lists. Only packages
+    that match filter query would be downloaded and filtered list would be contents of the mirror. If dependency following
+    is enabled, dependencies would be expanded in filtered list to build resulting package list. Filters could be used
+    to limit mirror to only one package and its dependencies (<code>-filter='nginx' -filter-follow-deps</code>),
+    download only high-priority packages (<code>-filter='Prirority (required)'</code>) and so on.</p>
 
     <p>aptly would try to verify signature of Release files using GnuPG. By default, keyring <code>~/.gnupg/trustedkeys.gpg</code>
     would be used. If you would like to use different keyring(s), specify them using <code>-keyring</code> flag. aptly would
@@ -944,6 +1052,62 @@ Information from release file:
     filters by component &amp; architecture, timestamp of last successful
     repository fetch and number of packages.</p>
 
+  <!-- ================ aptly mirror edit ============== -->
+  <div class="target-spacer"  id="aptly-mirror-edit"><a name="aptly-mirror-edit"></a>&nbsp;</div>
+  <h4>Command <code>aptly mirror edit</code></h4>
+
+    <p>Command edit allows to change settings of mirror: filters, using dependencies while filtering.</p>
+
+    <p>Usage:</p>
+
+    <pre><span class="greeting">$</span> <span class="command">aptly mirror edit &lt;name&gt;</span></pre>
+
+    <p>Params are:</p>
+
+    <ul>
+    <li>  <code>name</code> is a mirror name (given when mirror was created)</li>
+    </ul>
+
+    <p>Flags:</p>
+
+    <ul>
+    <li>  <code>-filter=</code>: <a href="#package-query">package query</a> that is applied to packages in the mirror</li>
+    <li>  <code>-filter-with-deps=false</code>: when filtering, include dependencies of matching packages as well</li>
+    </ul>
+
+    <p>In order to apply new filtering settings, <a href="#aptly-mirror-update">update</a> mirror.</p>
+
+    <p>Example:</p>
+
+<pre><span class="greeting">$</span> <span class="command">aptly mirror edit -filter=nginx -filter-with-deps wheezy-main</span>
+Mirror [wheezy-main]: http://mirror.yandex.ru/debian/ wheezy successfully updated.
+</pre>
+
+  <!-- ================ aptly mirror rename ============== -->
+  <div class="target-spacer" id="aptly-mirror-rename"><a name="aptly-mirror-rename"></a>&nbsp;</div>
+  <h4>Command <code>aptly mirror rename</code></h4>
+
+    <p>Command changes name of the mirror. Mirror name should be unique.
+    </p>
+
+    <p>Usage:</p>
+
+    <pre><span class="greeting">$</span> <span class="command">aptly mirror rename &lt;old-name&gt; &lt;new-name&gt;</span></pre>
+
+    <p>Params:</p>
+
+    <ul>
+    <li>  <code>old-name</code> is current mirror name</li>
+    <li>  <code>new-name</code> is new mirror name</li>
+    </ul>
+
+    <p>Example:</p>
+
+<pre><span class="greeting">$</span> <span class="command">aptly mirror rename whezy-main wheezy-main</span>
+
+Mirror whezy-main -> wheezy-main has been successfully renamed.
+</pre>
+
   <!-- ================ aptly mirror drop ============== -->
   <div class="target-spacer" id="aptly-mirror-drop"><a name="aptly-mirror-drop"></a>&nbsp;</div>
   <h4>Command <code>aptly mirror drop</code></h4>
@@ -1083,20 +1247,20 @@ Loading packages...
   <div class="target-spacer" id="aptly-repo-import"><a name="aptly-repo-import"></a>&nbsp;</div>
   <h4>Command <code>aptly repo import</code></h4>
 
-    <p>Commands import copies packages matching <a href="#package-spec">package spec</a> from mirror <code>src-name</code>
+    <p>Commands import copies packages matching <a href="#package-query">package spec</a> from mirror <code>src-name</code>
     to local repo <code>dst-repo</code>. If dependency following is enabled, aptly would try to copy
     missing dependencies from <code>src-mirror</code> as well.</p>
 
     <p>Usage:</p>
 
-    <pre><span class="greeting">$</span> <span class="command"> aptly repo import &lt;src-mirror&gt; &lt;dst-repo&gt; &lt;package-spec&gt; ...</span></pre>
+    <pre><span class="greeting">$</span> <span class="command"> aptly repo import &lt;src-mirror&gt; &lt;dst-repo&gt; &lt;package-query&gt; ...</span></pre>
 
     <p>Params are:</p>
 
     <ul>
     <li>  <code>src-mirror</code> packages would be searched in this mirror</li>
     <li>  <code>dst-repo</code> packages would be copied to this local repository</li>
-    <li>  <code>package-spec</code> list of <a href="#package-spec">package search conditions</a></li>
+    <li>  <code>package-query</code> list of <a href="#package-query">package search conditions</a></li>
     </ul>
 
     <p>Flags:</p>
@@ -1106,7 +1270,7 @@ Loading packages...
         <code>-dry-run=false</code>: don't import, just show what would be imported
       </li>
       <li>
-        <code>-with-deps=false</code>: follow dependencies when processing package-spec
+        <code>-with-deps=false</code>: follow dependencies when processing package-query
       </li>
     </ul>
 
@@ -1203,20 +1367,20 @@ testing
   <div class="target-spacer" id="aptly-repo-copy"><a name="aptly-repo-copy"></a>&nbsp;</div>
   <h4>Command <code>aptly repo copy</code></h4>
 
-    <p>Commands copy copies packages matching <a href="#package-spec">package spec</a> from local repo <code>src-name</code>
+    <p>Commands copy copies packages matching <a href="#package-query">package query</a> from local repo <code>src-name</code>
     to local repo <code>dst-name</code>. If dependency following is enabled, aptly would try to copy
     missing dependencies from <code>src-name</code> as well.</p>
 
     <p>Usage:</p>
 
-    <pre><span class="greeting">$</span> <span class="command"> aptly repo copy &lt;src-name&gt; &lt;dst-name&gt; &lt;package-spec&gt; ...</span></pre>
+    <pre><span class="greeting">$</span> <span class="command"> aptly repo copy &lt;src-name&gt; &lt;dst-name&gt; &lt;package-query&gt; ...</span></pre>
 
     <p>Params are:</p>
 
     <ul>
     <li>  <code>src-name</code> packages would be searched in this local repository</li>
     <li>  <code>dst-name</code> packages would be copied to this local repository</li>
-    <li>  <code>package-spec</code> list of <a href="#package-spec">package search conditions</a></li>
+    <li>  <code>package-query</code> list of <a href="#package-query">package queries</a></li>
     </ul>
 
     <p>Flags:</p>
@@ -1226,7 +1390,7 @@ testing
         <code>-dry-run=false</code>: don't copy, just show what would be copied
       </li>
       <li>
-        <code>-with-deps=false</code>: follow dependencies when processing package-spec
+        <code>-with-deps=false</code>: follow dependencies when processing package query
       </li>
     </ul>
 
@@ -1246,20 +1410,20 @@ Loading packages...
   <div class="target-spacer" id="aptly-repo-move"><a name="aptly-repo-move"></a>&nbsp;</div>
   <h4>Command <code>aptly repo move</code></h4>
 
-    <p>Commands move moves packages matching <a href="#package-spec">package spec</a> from local repo <code>src-repo</code>
+    <p>Commands move moves packages matching <a href="#package-query">package query</a> from local repo <code>src-repo</code>
     to local repo <code>dst-name</code>. If dependency following is enabled, aptly would try to move
     dependencies from <code>src-name</code> as well.</p>
 
     <p>Usage:</p>
 
-    <pre><span class="greeting">$</span> <span class="command"> aptly repo move &lt;src-name&gt; &lt;dst-name&gt; &lt;package-spec&gt; ...</span></pre>
+    <pre><span class="greeting">$</span> <span class="command"> aptly repo move &lt;src-name&gt; &lt;dst-name&gt; &lt;package-query&gt; ...</span></pre>
 
     <p>Params are:</p>
 
     <ul>
     <li>  <code>src-name</code> packages would be searched in this local repository</li>
     <li>  <code>dst-name</code> packages would be moved to this local repository</li>
-    <li>  <code>package-spec</code> list of <a href="#package-spec">package search conditions</a></li>
+    <li>  <code>package-query</code> list of <a href="#package-query">package queries</a></li>
     </ul>
 
     <p>Flags:</p>
@@ -1269,7 +1433,7 @@ Loading packages...
         <code>-dry-run=false</code>: don't move, just show what would be moved
       </li>
       <li>
-        <code>-with-deps=false</code>: follow dependencies when processing package-spec
+        <code>-with-deps=false</code>: follow dependencies when processing package query
       </li>
     </ul>
 
@@ -1289,17 +1453,17 @@ Loading packages...
   <div class="target-spacer" id="aptly-repo-remove"><a name="aptly-repo-remove"></a>&nbsp;</div>
   <h4>Command <code>aptly repo remove</code></h4>
 
-    <p>Commands remove deletes packages matching <a href="#package-spec">package spec</a> from local repo <code>name</code>.</p>
+    <p>Commands remove deletes packages matching <a href="#package-query">package query</a> from local repo <code>name</code>.</p>
 
     <p>Usage:</p>
 
-    <pre><span class="greeting">$</span> <span class="command"> aptly repo remove &lt;name&gt; &lt;package-spec&gt; ...</span></pre>
+    <pre><span class="greeting">$</span> <span class="command"> aptly repo remove &lt;name&gt; &lt;package-query&gt; ...</span></pre>
 
     <p>Params are:</p>
 
     <ul>
     <li>  <code>name</code> packages would be removed in this local repository</li>
-    <li>  <code>package-spec</code> list of <a href="#package-spec">package search conditions</a></li>
+    <li>  <code>package-query</code> list of <a href="#package-query">package queries</a></li>
     </ul>
 
     <p>Flags:</p>
@@ -1361,6 +1525,31 @@ Loading packages...
 
 <pre><span class="greeting">$</span> <span class="command">aptly repo edit -comment="Nightly builds" -distribution=wheezy testing</span>
 Local repo [testing]: Nightly builds successfully updated.
+</pre>
+
+  <!-- ================ aptly repo rename ============== -->
+  <div class="target-spacer" id="aptly-repo-rename"><a name="aptly-repo-rename"></a>&nbsp;</div>
+  <h4>Command <code>aptly repo rename</code></h4>
+
+    <p>Command changes name of the local repository. Local repository name should be unique.
+    </p>
+
+    <p>Usage:</p>
+
+    <pre><span class="greeting">$</span> <span class="command">aptly repo rename &lt;old-name&gt; &lt;new-name&gt;</span></pre>
+
+    <p>Params:</p>
+
+    <ul>
+    <li>  <code>old-name</code> is current local repository name</li>
+    <li>  <code>new-name</code> is new local repository name</li>
+    </ul>
+
+    <p>Example:</p>
+
+<pre><span class="greeting">$</span> <span class="command">aptly repo rename whezy-main wheezy-main</span>
+
+Local repository whezy-main -> wheezy-main has been successfully renamed.
 </pre>
 
   <!-- ================ aptly repo drop ============== -->
@@ -1607,13 +1796,13 @@ Missing dependencies (7):
   <h4>Command <code>aptly snapshot pull</code></h4>
 
     <p>Pulls new packages along with its dependencies in <code>name</code> snapshot from
-    <code>source</code> snapshot. Also can upgrade package version from one snapshot
+    <code>source</code> snapshot. Also pull command can upgrade package version from one snapshot
     into another, once again along with dependencies. New snapshot
     <code>destination</code> is created as result of this process.</p>
 
     <p>Usage:</p>
 
-    <pre><span class="greeting">$</span> <span class="command">aptly snapshot pull &lt;name&gt; &lt;source&gt; &lt;destination&gt; &lt;package-name&gt; ...</span></pre>
+    <pre><span class="greeting">$</span> <span class="command">aptly snapshot pull &lt;name&gt; &lt;source&gt; &lt;destination&gt; &lt;package-query&gt; ...</span></pre>
 
     <p>Params:</p>
 
@@ -1623,9 +1812,9 @@ Missing dependencies (7):
     <li>  <code>source</code> is a snapshot name where packages and dependencies would be
     searched</li>
     <li>  <code>destination</code> is a name of the snapshot that would be created</li>
-    <li>  <code>package-name</code> is a name of package to be pulled from <code>source</code>,
-    could be specified as Debian dependency, e.g. <code>package (&gt;= 1.3.5)</code>
-    to restrict search to specific version</li>
+    <li>  <code>package-query</code> is a list of <a href="#package-query">package queries</a>,
+    in the simplest form, name of package to be pulled from <code>source</code>,
+    could be specified</li>
     </ul>
 
     <p>Flags:</p>
@@ -1757,6 +1946,31 @@ Snapshot debian-w-backports successfully created.
 You can run 'aptly publish snapshot debian-w-backports' to publish snapshot as Debian repository.
 </pre>
 
+  <!-- ================ aptly snapshot rename ============== -->
+  <div class="target-spacer" id="aptly-snapshot-rename"><a name="aptly-snapshot-rename"></a>&nbsp;</div>
+  <h4>Command <code>aptly snapshot rename</code></h4>
+
+    <p>Command changes name of the snapshot. Snapshot name should be unique.
+    </p>
+
+    <p>Usage:</p>
+
+    <pre><span class="greeting">$</span> <span class="command">aptly snapshot rename &lt;old-name&gt; &lt;new-name&gt;</span></pre>
+
+    <p>Params:</p>
+
+    <ul>
+    <li>  <code>old-name</code> is current snapshot name</li>
+    <li>  <code>new-name</code> is new snapshot name</li>
+    </ul>
+
+    <p>Example:</p>
+
+<pre><span class="greeting">$</span> <span class="command">aptly snapshot rename whezy-main wheezy-main</span>
+
+Snapshot whezy-main -> wheezy-main has been successfully renamed.
+</pre>
+
   <!-- ================ aptly snapshot drop ============== -->
   <div class="target-spacer" id="aptly-snapshot-drop"><a name="aptly-snapshot-drop"></a>&nbsp;</div>
   <h4>Command <code>aptly snapshot drop</code></h4>
@@ -1801,6 +2015,10 @@ Snapshot `snap-wheezy` has been dropped.</pre>
   Key should be created beforehand (see section GPG Keys). Published
   repository could be consumed directly by apt.</p>
 
+  <p>Repositories could be published to Amazon S3 service: create bucket,
+  <a href="#s3-publishing">configure publishing endpoint</a>, use endpoint
+  when publishing.</p>
+
   <!-- ================ GPG Keys ============== -->
   <div class="target-spacer" id="gpg-keys"><a name="gpg-keys"></a>&nbsp;</div>
   <h4>GPG Keys</h4>
@@ -1830,12 +2048,16 @@ Snapshot `snap-wheezy` has been dropped.</pre>
 
     <p>Usage:</p>
 
-    <pre><span class="greeting">$</span> <span class="command">aptly publish snapshot &lt;name&gt; [&lt;prefix&gt;]</span></pre>
+    <pre><span class="greeting">$</span> <span class="command">aptly publish snapshot &lt;name&gt; [[&lt;endpoint:&gt;]&lt;prefix&gt;]</span></pre>
 
     <p>Params:</p>
 
     <ul>
     <li>  <code>name</code> is a snapshot name that snould be published</li>
+    <li>  <code>endpoint</code> is an optional endpoint reference. Without endpoint, repository
+    would be pulished to local file system. In order to publish to Amazon S3, use
+    endpoint name <code>s3:&lt;name&gt;:</code>, where endpoint <code>name</code> is configured
+    as S3 publishing endpoint in <a href="#s3-publishing">configuration file</a>.</li>
     <li>  <code>prefix</code> is an optional prefix for publishing, if not specified,
     repository would be published to the root of publiс directory. <code>prefix</code> could be single directory like
     <code>ppa</code> or part of the tree like <code>ppa/android</code>. <code>prefix</code> shouldn't contain
@@ -1987,12 +2209,16 @@ Don't forget to add your GPG key to apt with apt-key.
 
     <p>Usage:</p>
 
-    <pre><span class="greeting">$</span> <span class="command">aptly publish repo &lt;name&gt; [&lt;prefix&gt;]</span></pre>
+    <pre><span class="greeting">$</span> <span class="command">aptly publish repo &lt;name&gt; [[&lt;endpoint:&gt;]&lt;prefix&gt;]</span></pre>
 
     <p>Params:</p>
 
     <ul>
     <li>  <code>name</code> is a local repo name that snould be published</li>
+    <li>  <code>endpoint</code> is an optional endpoint reference. Without endpoint, repository
+    would be pulished to local file system. In order to publish to Amazon S3, use
+    endpoint name <code>s3:&lt;name&gt;:</code>, where endpoint <code>name</code> is configured
+    as S3 publishing endpoint in <a href="#s3-publishing">configuration file</a>.</li>
     <li>  <code>prefix</code> is an optional prefix for publishing, if not specified,
     repository would be published to the root of publiс directory. <code>prefix</code> could be single directory like
     <code>ppa</code> or part of the tree like <code>ppa/android</code>. <code>prefix</code> shouldn't contain
@@ -2070,12 +2296,13 @@ Don't forget to add your GPG key to apt with apt-key.
 
     <p>Usage:</p>
 
-    <pre><span class="greeting">$</span> <span class="command">aptly publish update &lt;distribution&gt; [&lt;prefix&gt;]</span></pre>
+    <pre><span class="greeting">$</span> <span class="command">aptly publish update &lt;distribution&gt; [[&lt;endpoint:&gt;]&lt;prefix&gt;]</span></pre>
 
     <p>Params:</p>
 
     <ul>
     <li>  <code>distribution</code> is distribution name of published repository</li>
+    <li>  <code>endpoint</code> is publishing endpoint, if not specified, it would default to empty endpoint (local file system).</li>
     <li>  <code>prefix</code> is publishing prefix, if not specified, it would default to empty prefix (<code>.</code>).</li>
     </ul>
 
@@ -2125,12 +2352,13 @@ Publish for local repo ./maverick [i386, source] publishes {main: [local-repo]} 
 
     <p>Usage:</p>
 
-    <pre><span class="greeting">$</span> <span class="command">aptly publish switch &lt;distribution&gt; [&lt;prefix&gt;] &lt;new-snapshot&gt;</span></pre>
+    <pre><span class="greeting">$</span> <span class="command">aptly publish switch &lt;distribution&gt; [[&lt;endpoint:&gt;]&lt;prefix&gt;] &lt;new-snapshot&gt;</span></pre>
 
     <p>Params:</p>
 
     <ul>
     <li>  <code>distribution</code> is distribution name of published repository</li>
+    <li>  <code>endpoint</code> is publishing endpoint, if not specified, it would default to empty endpoint (local file system).</li>
     <li>  <code>prefix</code> is publishing prefix, if not specified, it would default to empty prefix (<code>.</code>).</li>
     <li>  <code>new-snapshot</code> is a snapshot name that snould be re-published</li>
     </ul>
@@ -2177,7 +2405,7 @@ Publish for local repo ./wheezy [i386, amd64] publishes {main: [wheezy-7.4]: sna
   <h4>Command <code>aptly publish list</code></h4>
 
     <p>Lists repositories that have been published with <code>aptly publish snapshot</code>. For each
-    repository information about <code>prefix</code> and <code>distribution</code> is listed along
+    repository information about <code>endpoint</code>, <code>prefix</code> and <code>distribution</code> is listed along
     with <code>component</code> and architecture list. Information about snapshot published is appended
     to published repository description.</p>
 
@@ -2198,7 +2426,7 @@ Publish for local repo ./wheezy [i386, amd64] publishes {main: [wheezy-7.4]: sna
 <pre><span class="greeting">$</span> <span class="command">aptly publish list</span>
 Published repositories:
   * ./sq-b [amd64, i386] publishes {main: [back3]: Snapshot from mirror [backports2]: http://mirror.yandex.ru/backports.org/ squeeze-backports}
-  * ./squeeze-backports [amd64, i386] publishes {contrib: [back3]: Snapshot from mirror [backports2]: http://mirror.yandex.ru/backports.org/ squeeze-backports}
+  * s3:repo:./squeeze-backports [amd64, i386] publishes {contrib: [back3]: Snapshot from mirror [backports2]: http://mirror.yandex.ru/backports.org/ squeeze-backports}
 </pre>
 
 <pre><span class="greeting">$</span> <span class="command">aptly publish list -raw</span>
@@ -2216,10 +2444,11 @@ Published repositories:
 
     <p>Usage:</p>
 
-    <pre><span class="greeting">$</span> <span class="command">aptly publish drop &lt;distribution&gt; [&lt;prefix&gt;]</span></pre>
+    <pre><span class="greeting">$</span> <span class="command">aptly publish drop &lt;distribution&gt; [[&lt;endpoint:&gt;]&lt;prefix&gt;]</span></pre>
 
     <ul>
     <li>  <code>distribution</code> is a distribution name for published repository (as displayed by <code>aptly publish list</code>).</li>
+    <li>  <code>endpoint</code> is publishing endpoint, if not specified, it would default to empty endpoint (local file system).</li>
     <li>  <code>prefix</code> is an optional prefix for publishing, if not specified,
     prefix is considered to be <code>.</code>.</li>
     </ul>
@@ -2349,6 +2578,12 @@ Starting web server at: 127.0.0.1:8765 (press Ctrl+C to quit)...
 <!-- ================ history ============== -->
 <div class="target-spacer" id="history"><a name="history"></a>&nbsp;</div>
 <h2>History</h2>
+
+  <h3>Version 0.7</h3>
+
+  <ul>
+    <li></li>
+  </ul>
 
 
   <h3>Version 0.6</h3>
