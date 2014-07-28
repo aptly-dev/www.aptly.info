@@ -367,7 +367,7 @@ You can run 'aptly publish snapshot snap-deb-w-nginx' to publish snapshot as Deb
 <div class="target-spacer" id="download"><a name="download"></a>&nbsp;</div>
 <h2>Download</h2>
 
-    <p class="lead">Currently released aptly version is <strong>0.6</strong> (<a href="#history">what's new?</a>).
+    <p class="lead">Currently released aptly version is <strong>0.7</strong> (<a href="#history">what's new?</a>).
     </p>
 
     <p>Roadmap:</p>
@@ -396,7 +396,7 @@ You can run 'aptly publish snapshot snap-deb-w-nginx' to publish snapshot as Deb
     contains aptly binary, man page and bash completion.</p>
 
     <p><strong>Binary</strong> executables (depends almost only on libc) for Debian, CentOS, MacOS X &amp; FreeBSD are available for
-    download from <a href="http://dl.bintray.com/smira/aptly/0.6/">Bintray</a>. Linux executables should run on almost any
+    download from <a href="http://dl.bintray.com/smira/aptly/0.7/">Bintray</a>. Linux executables should run on almost any
     recent Linux distribution.</p>
 
       <div class="row">
@@ -406,16 +406,16 @@ You can run 'aptly publish snapshot snap-deb-w-nginx' to publish snapshot as Deb
           </div>
           <h4>Debian (Ubuntu)</h4>
           <p><strong>see part on installation from .deb package above</strong></p>
-          <p>squeeze+: <a href="http://dl.bintray.com/smira/aptly/0.6/debian-squeeze-x32/aptly">32-bit</a> |
-                      <a href="http://dl.bintray.com/smira/aptly/0.6/debian-squeeze-x64/aptly">64-bit</a></p>
+          <p>squeeze+: <a href="http://dl.bintray.com/smira/aptly/0.7/debian-squeeze-x32/aptly">32-bit</a> |
+                      <a href="http://dl.bintray.com/smira/aptly/0.7/debian-squeeze-x64/aptly">64-bit</a></p>
         </div>
         <div class="col-lg-6">
           <div class="pull-left">
             <img src="centos.png" alt="CentOS" class="logo">
           </div>
           <h4>CentOS (RedHat, Fedora)</h4>
-          <p>6.5+: <a href="http://dl.bintray.com/smira/aptly/0.6/centos-6.5-x32/aptly">32-bit</a> |
-                  <a href="http://dl.bintray.com/smira/aptly/0.6/centos-6.5-x64/aptly">64-bit</a></p>
+          <p>6.5+: <a href="http://dl.bintray.com/smira/aptly/0.7/centos-6.5-x32/aptly">32-bit</a> |
+                  <a href="http://dl.bintray.com/smira/aptly/0.7/centos-6.5-x64/aptly">64-bit</a></p>
         </div>
       </div>
       <div class="row">
@@ -424,15 +424,15 @@ You can run 'aptly publish snapshot snap-deb-w-nginx' to publish snapshot as Deb
             <img src="freebsd.png" alt="FreeBSD" class="logo">
           </div>
           <h4>FreeBSD</h4>
-          <p>9.2+: <a href="http://dl.bintray.com/smira/aptly/0.6/freebsd-9.2-x32/aptly">32-bit</a> |
-                  <a href="http://dl.bintray.com/smira/aptly/0.6/freebsd-9.2-x64/aptly">64-bit</a></p>
+          <p>9.2+: <a href="http://dl.bintray.com/smira/aptly/0.7/freebsd-9.2-x32/aptly">32-bit</a> |
+                  <a href="http://dl.bintray.com/smira/aptly/0.7/freebsd-9.2-x64/aptly">64-bit</a></p>
         </div>
         <div class="col-lg-6">
           <div class="pull-left">
             <img src="macosx.png" alt="Mac OS X" class="logo">
           </div>
           <h4>Mac OS X</h4>
-          <p>10.9: <a href="http://dl.bintray.com/smira/aptly/0.6/osx/aptly">64-bit</a></p>
+          <p>10.9: <a href="http://dl.bintray.com/smira/aptly/0.7/osx/aptly">64-bit</a></p>
         </div>
       </div>
       <div class="row">
@@ -1839,6 +1839,9 @@ Missing dependencies (7):
     <code>software_1.3_amd64</code>, package <code>software_1.2.9_amd64</code>  would be removed. With flag <code>-no-remove</code>
     both package versions would stay in the snapshot.</p>
 
+    <p>aptly pulls first package matching each of <code>package queries</code>, but with flag <code>-all-matches</code>
+    all matching packages would be pulled.</p>
+
     <p>Example:</p>
 
 <pre><span class="greeting">$</span> <span class="command">aptly snapshot pull snap-deb2-main back snap-deb-main-w-xorg xserver-xorg</span>
@@ -2582,7 +2585,24 @@ Starting web server at: 127.0.0.1:8765 (press Ctrl+C to quit)...
   <h3>Version 0.7</h3>
 
   <ul>
-    <li></li>
+    <li>direct <a href="#s3-publishing">publishing to Amazon S3</a> (<a href="https://github.com/smira/aptly/issues/15">#15</a>)</li>
+    <li>support for new, powerful <a href="#package-query">query language</a> in many commands:
+      <a href="#aptly-snapshot-pull">aptly snapshot pull</a>, <a href="#aptly-repo-move">aptly repo move</a>,
+      <a href="#aptly-repo-copy">aptly repo copy</a>, <a href="#aptly-repo-import">aptly repo import</a> and
+      <a href="#aptly-repo-remove">aptly repo remove</a></li>
+      <li>bug fix: files from conflicting packages might override each other while publishing (<a href="https://github.com/smira/aptly/issues/65">#65</a>)</li>
+    <li>partial mirrors: filter package lists when mirroring (<a href="https://github.com/smira/aptly/issues/64">#64</a>)</li>
+    <li>new commands: <a href="#aptly-mirror-rename">mirrors</a>, <a href="#aptly-repo-rename">local repositories</a> and <a href="#aptly-snapshot-rename">snapshots</a> can be renamed (<a href="https://github.com/smira/aptly/issues/63">#63</a>)</li>
+    <li>new command: <a href="#aptly-mirror-edit">aptly mirror edit</a> allows to change mirror filtering (<a href="https://github.com/smira/aptly/issues/63">#63</a>)</li>
+    <li>download transfer rate could be limited either via <a href="#configuration">configuration</a> file parameter <code>downloadSpeedLimit</code> or with flag <code>-download-limit</code> for command <a href="#aptly-mirror-update">aptly mirror update</a> (<a href="https://github.com/smira/aptly/issues/62">#62</a>)</li>
+    <li>new flag: <code>-all-matches</code> for <a href="#aptly-snapshot-pull">aptly snapshot pull</a> enables pulling of all matching
+    packages (<a href="https://github.com/smira/aptly/pull/70">#70</a>), thanks to <a href="https://github.com/simonaquino">Simon Aquino</a></li>
+    <li>when matching single package in <a href="#aptly-snapshot-pull">aptly snapshot pull</a> latest version would be pulled (<a href="https://github.com/smira/aptly/pull/67">#67</a>), thanks to <a href="https://github.com/simonaquino">Simon Aquino</a></li>
+    <li>new flag: <code>-sort</code> for <a href="#aptly-snapshot-list">aptly snapshot list</a> allows to change order of snapshots in the list (<a href="https://github.com/smira/aptly/pull/73">#73</a>), thanks to <a href="https://github.com/simonaquino">Simon Aquino</a></li>
+    <li>bug fix: publish update fails on empty multi-component repo (<a href="https://github.com/smira/aptly/issues/66">#66</a>)</li>
+    <li>bug fix: <a href="#aptly-snapshot-pull">aptly snapshot pull</a> might remove already pulled packages (<a href="https://github.com/smira/aptly/issues/78">#78</a>)</li>
+    <li>bug fix: aptly package was missing <code>bzip2</code> dependency (<a href="https://github.com/smira/aptly/issues/84">#84</a>)</li>
+    <li>aptly binary packages are built with go1.3</li>
   </ul>
 
 
