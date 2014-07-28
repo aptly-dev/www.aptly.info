@@ -804,6 +804,31 @@ transport in <code>apt</code>. Use special URLs to include your private reposito
 
 <pre>deb s3://&lt;access-key&gt;:[&lt;secret-key&gt;]@s3-eu-east-1.amazonaws.com/private-repo main</pre>
 
+<p>It is recommended to setup separate user in Amazon IAM for publishing to S3. This user would have
+access only to one bucket for publishing and limited operations. Sample policy (change <code>bucket</code> to match
+you bucket name):</p>
+
+<pre>
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "Stmt1405592139000",
+      "Effect": "Allow",
+      "Action": [
+        "s3:DeleteObject",
+        "s3:GetObject",
+        "s3:ListBucket",
+        "s3:PutObject",
+        "s3:PutObjectAcl"
+      ],
+      "Resource": [
+        "arn:aws:s3:::bucket/*"
+      ]
+    }
+  ]
+}
+</pre>
 
   <!-- ================ integrations ============== -->
   <div class="target-spacer" id="integrations"><a name="integrations"></a>&nbsp;</div>
