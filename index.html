@@ -367,7 +367,7 @@ You can run 'aptly publish snapshot snap-deb-w-nginx' to publish snapshot as Deb
 <div class="target-spacer" id="download"><a name="download"></a>&nbsp;</div>
 <h2>Download</h2>
 
-    <p class="lead">Currently released aptly version is <strong>0.7</strong> (<a href="#history">what's new?</a>).
+    <p class="lead">Currently released aptly version is <strong>0.7.1</strong> (<a href="#history">what's new?</a>).
     </p>
 
     <p>Roadmap:</p>
@@ -377,7 +377,7 @@ You can run 'aptly publish snapshot snap-deb-w-nginx' to publish snapshot as Deb
       <li>0.9 (end of September): translations, udebs</li>
     </ul>
 
-    <p><strong>For Debian/Ubuntu</strong> aptly could be installed from by adding new repository
+    <p><strong>For Debian/Ubuntu</strong> aptly could be installed by adding new repository
     to <code>/etc/apt/sources.list</code>:</p>
 
     <pre>deb http://repo.aptly.info/ squeeze main</pre>
@@ -396,7 +396,7 @@ You can run 'aptly publish snapshot snap-deb-w-nginx' to publish snapshot as Deb
     contains aptly binary, man page and bash completion.</p>
 
     <p><strong>Binary</strong> executables (depends almost only on libc) for Debian, CentOS, MacOS X &amp; FreeBSD are available for
-    download from <a href="http://dl.bintray.com/smira/aptly/0.7/">Bintray</a>. Linux executables should run on almost any
+    download from <a href="http://dl.bintray.com/smira/aptly/0.7.1/">Bintray</a>. Linux executables should run on almost any
     recent Linux distribution.</p>
 
       <div class="row">
@@ -406,16 +406,16 @@ You can run 'aptly publish snapshot snap-deb-w-nginx' to publish snapshot as Deb
           </div>
           <h4>Debian (Ubuntu)</h4>
           <p><strong>see part on installation from .deb package above</strong></p>
-          <p>squeeze+: <a href="http://dl.bintray.com/smira/aptly/0.7/debian-squeeze-x32/aptly">32-bit</a> |
-                      <a href="http://dl.bintray.com/smira/aptly/0.7/debian-squeeze-x64/aptly">64-bit</a></p>
+          <p>squeeze+: <a href="http://dl.bintray.com/smira/aptly/0.7.1/debian-squeeze-x32/aptly">32-bit</a> |
+                      <a href="http://dl.bintray.com/smira/aptly/0.7.1/debian-squeeze-x64/aptly">64-bit</a></p>
         </div>
         <div class="col-lg-6">
           <div class="pull-left">
             <img src="centos.png" alt="CentOS" class="logo">
           </div>
           <h4>CentOS (RedHat, Fedora)</h4>
-          <p>6.5+: <a href="http://dl.bintray.com/smira/aptly/0.7/centos-6.5-x32/aptly">32-bit</a> |
-                  <a href="http://dl.bintray.com/smira/aptly/0.7/centos-6.5-x64/aptly">64-bit</a></p>
+          <p>6.5+: <a href="http://dl.bintray.com/smira/aptly/0.7.1/centos-6.5-x32/aptly">32-bit</a> |
+                  <a href="http://dl.bintray.com/smira/aptly/0.7.1/centos-6.5-x64/aptly">64-bit</a></p>
         </div>
       </div>
       <div class="row">
@@ -424,15 +424,15 @@ You can run 'aptly publish snapshot snap-deb-w-nginx' to publish snapshot as Deb
             <img src="freebsd.png" alt="FreeBSD" class="logo">
           </div>
           <h4>FreeBSD</h4>
-          <p>9.2+: <a href="http://dl.bintray.com/smira/aptly/0.7/freebsd-9.2-x32/aptly">32-bit</a> |
-                  <a href="http://dl.bintray.com/smira/aptly/0.7/freebsd-9.2-x64/aptly">64-bit</a></p>
+          <p>9.2+: <a href="http://dl.bintray.com/smira/aptly/0.7.1/freebsd-9.2-x32/aptly">32-bit</a> |
+                  <a href="http://dl.bintray.com/smira/aptly/0.7.1/freebsd-9.2-x64/aptly">64-bit</a></p>
         </div>
         <div class="col-lg-6">
           <div class="pull-left">
             <img src="macosx.png" alt="Mac OS X" class="logo">
           </div>
           <h4>Mac OS X</h4>
-          <p>10.9: <a href="http://dl.bintray.com/smira/aptly/0.7/osx/aptly">64-bit</a></p>
+          <p>10.9: <a href="http://dl.bintray.com/smira/aptly/0.7.1/osx/aptly">64-bit</a></p>
         </div>
       </div>
       <div class="row">
@@ -456,7 +456,7 @@ You can run 'aptly publish snapshot snap-deb-w-nginx' to publish snapshot as Deb
 
     <p><strong>Bash completion</strong> for aptly is available as <a href="https://github.com/aptly-dev/aptly-bash-completion">separate repo</a>.</p>
 
-    <p>If you have Go environment set up (go 1.1+ required), you can build aptly from <strong>source</strong> by
+    <p>If you have Go environment set up (go 1.2+ required), you can build aptly from <strong>source</strong> by
     cloning it and building with gom:</p>
 
 <pre><span class="greeting">$</span> <span class="command">go get -u github.com/mattn/gom</span>
@@ -735,7 +735,7 @@ with version greater or equal to <code>3.5</code>.</li>
 
   <!-- ================ duplicate-packages ============== -->
   <div class="target-spacer" id="duplicate-packages"><a name="duplicate-packages"></a>&nbsp;</div>
-  <h3>On duplicate packages</h3>
+  <h3>On Duplicate Packages</h3>
 
   <p>In ideal world, tuple <code>(architecture, name, version)</code> should identify unique package.
   That holds true (well, almost true) with Debian-based distributions. If two packages with the same
@@ -753,6 +753,14 @@ with version greater or equal to <code>3.5</code>.</li>
   into one list in aptly (into one local repo, snapshot, mirror, etc.) When such thing happens, aptly would
   complain about conflict in packages. Usually such duplicate packages with different content represent some
   software packaged for different Debian distribution, so they should never be in the same list.</p>
+
+  <p>When aptly is publishing repository, it would give an error if conflicting package files 
+  (same name, but different content) are put together in one package pool. Package pool is shared
+  by all published repositories with the same component and prefix. The same applies to switching
+  snapshots or updating published repositories: if previous state and new state contain two 
+  conflicting packages, aptly would give an error. If you're completely sure that this update
+  operation is correct, you can use flag <code>-force-overwrite</code> to disable check for
+  conflicting package files.</p>
 
   <!-- ================ s3-publishing ============== -->
   <div class="target-spacer" id="s3-publishing"><a name="s3-publishin"></a>&nbsp;</div>
@@ -2087,7 +2095,7 @@ Snapshot `snap-wheezy` has been dropped.</pre>
     endpoint name <code>s3:&lt;name&gt;:</code>, where endpoint <code>name</code> is configured
     as S3 publishing endpoint in <a href="#s3-publishing">configuration file</a>.</li>
     <li>  <code>prefix</code> is an optional prefix for publishing, if not specified,
-    repository would be published to the root of publiс directory. <code>prefix</code> could be single directory like
+    repository would be published to the root of public directory. <code>prefix</code> could be single directory like
     <code>ppa</code> or part of the tree like <code>ppa/android</code>. <code>prefix</code> shouldn't contain
     <code>..</code>, and names <code>dists</code> and <code>pool</code> are not accepted. Empty <code>prefix</code>
     would be converted to <code>.</code>.</li>
@@ -2101,6 +2109,8 @@ Snapshot `snap-wheezy` has been dropped.</pre>
     separate components with commas)</li>
     <li>  <code>-distribution=""</code>: distribution name to publish; guessed from
     original repository distribution</li>
+    <li>  <code>-force-overwrite=false</code>: overwrite packages files in the pool
+    even if content is different (see also <a href="#duplicate-packages">duplicate packages</a>)</li>
     <li>  <code>-gpg-key=""</code>: GPG key ID to use when signing the release, if not
     specified default key is used</li>
     <li>  <code>-keyring=""</code>: GPG keyring to use (instead of default)</li>
@@ -2262,6 +2272,8 @@ Don't forget to add your GPG key to apt with apt-key.
     separate components with commas)</li>
     <li>  <code>-distribution=""</code>: distribution name to publish; guessed from
     local repository default distribution</li>
+    <li>  <code>-force-overwrite=false</code>: overwrite packages files in the pool
+    even if content is different (see also <a href="#duplicate-packages">duplicate packages</a>)</li>
     <li>  <code>-gpg-key=""</code>: GPG key ID to use when signing the release, if not
     specified default key is used</li>
     <li>  <code>-keyring=""</code>: GPG keyring to use (instead of default)</li>
@@ -2337,6 +2349,8 @@ Don't forget to add your GPG key to apt with apt-key.
     <p>Flags:</p>
 
     <ul>
+    <li>  <code>-force-overwrite=false</code>: overwrite packages files in the pool
+    even if content is different (see also <a href="#duplicate-packages">duplicate packages</a>)</li>
     <li>  <code>-gpg-key=""</code>: GPG key ID to use when signing the release, if not
     specified default key is used</li>
     <li>  <code>-keyring=""</code>: GPG keyring to use (instead of default)</li>
@@ -2395,6 +2409,8 @@ Publish for local repo ./maverick [i386, source] publishes {main: [local-repo]} 
 
     <ul>
     <li>  <code>-component=""</code>: list of components to update (separate components with commas)</li>
+    <li>  <code>-force-overwrite=false</code>: overwrite packages files in the pool
+    even if content is different (see also <a href="#duplicate-packages">duplicate packages</a>)</li>
     <li>  <code>-gpg-key=""</code>: GPG key ID to use when signing the release, if not
     specified default key is used</li>
     <li>  <code>-keyring=""</code>: GPG keyring to use (instead of default)</li>
@@ -2606,6 +2622,14 @@ Starting web server at: 127.0.0.1:8765 (press Ctrl+C to quit)...
 <!-- ================ history ============== -->
 <div class="target-spacer" id="history"><a name="history"></a>&nbsp;</div>
 <h2>History</h2>
+
+  <h3>Version 0.7.1</h3>
+
+  <ul>
+    <li>bug fix: publish update fails on package conflicts, new flag <code>-force-overwrite</code> added to publish commands (<a href="https://github.com/smira/aptly/issues/90">#90</a>)</li>
+    <li>bug fix: aptly built with go1.2+ fails to read DB of aptly built with go1.1 or go1.0 (<a href="https://github.com/smira/aptly/issues/89">#89</a>)</li>
+    <li>aptly supports go compilers version 1.2 and up (go 1.1 is not supported anymore)</li>
+  </ul>
 
   <h3>Version 0.7</h3>
 
