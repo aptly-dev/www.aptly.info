@@ -1,0 +1,109 @@
+{{ template "partials/header.html" . }}
+    <section class="promo-example">
+      <div class="container">
+        <h2 class="text-center">See how it is clean and simple</h2>
+        <div class="code-switches-wrapper">
+          <ul class="code-switches">
+            <li><span class="switch-target active"></span></li>
+            <li><span class="switch-target"></span></li>
+            <li><span class="switch-target"></span></li>
+            <li><span class="switch-target"></span></li>
+          </ul>
+          <div class="code">
+            $ gpg --keyserver keys.gnupg.net --recv-keys 2A194991<br>
+            $ gpg -a --export 2A194991 | sudo apt-key add -<br>
+            <br>
+            $ apt-get update<br>
+            $ apt-get install aptly<br>
+            <br>
+            $ go get -u github.com/mattn/gom<br>
+            $ aptly --option1 command ...
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="promo-features">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="feature-wrapper">
+              <i class="feature-icon feature-icon-repository"></i>
+              <div class="feature-text">
+                <h4>Mirror repository</h4>
+                <p>Take and update mirrors of any Debian/Ubuntu remote repository.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="feature-wrapper">
+              <i class="feature-icon feature-icon-packages"></i>
+              <div class="feature-text">
+                <h4>Publish your packages</h4>
+                <p>Manage your own repositories of packages, merge them with offical and publish the result.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="feature-wrapper">
+              <i class="feature-icon feature-icon-snapshot"></i>
+              <div class="feature-text">
+                <h4>Take snapshot</h4>
+                <p>At any point in time, take snapshot of the mirror to fix current set of packages.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="feature-wrapper">
+              <i class="feature-icon feature-icon-publish_snapshot"></i>
+              <div class="feature-text">
+                <h4>Publish snapshot</h4>
+                <p>Any snapshot could be published back as repository (only HTTP server is required).</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="feature-wrapper">
+              <i class="feature-icon feature-icon-merge"></i>
+              <div class="feature-text">
+                <h4>Merge snapshots</h4>
+                <p>Merge two or more snapshots into one snapshot: e.g. merge wheezy and wheezy-updates.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="feature-wrapper">
+              <i class="feature-icon feature-icon-refresh"></i>
+              <div class="feature-text">
+                <h4>Upgrade package versions</h4>
+                <p>New package version available in backports? Pull only single package with dependencies from backports into snapshot of stable repository.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <hr>
+        <p class="text-center">
+          <a href="#" class="more-features">See upcoming features<i class="glyphicon glyphicon-chevron-down"></i></a>
+        </p>
+      </div>
+    </section>
+    <section class="promo-trusted">
+      <div class="container">
+        <h2 class="text-center">Aptly is trusted by</h2>
+        <div class="row text-center">
+          <div class="col-md-3"><img src="img/trusted_by/intel.png" alt="Intel"></div>
+          <div class="col-md-3"><img src="img/trusted_by/amazon.png" alt="Amazon"></div>
+          <div class="col-md-3"><img src="img/trusted_by/instagram.png" alt="Instagram"></div>
+          <div class="col-md-3"><img src="img/trusted_by/dell.png" alt="Dell"></div>
+        </div>
+        <hr>
+        <div class="source-buttons">
+          <a href="#" class="btn btn-primary">download</a>
+          <a href="#" class="btn btn-default">github</a>
+        </div>
+      </div>
+    </section>
+{{ template "partials/footer.html" }}

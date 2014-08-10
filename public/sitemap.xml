@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  
+  <url>
+    <loc>http://localhost:1313/</loc>
+    <lastmod>2014-08-08T11:17:38+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/doc/aptly/db</loc>
+    <lastmod>2014-08-08T11:17:38+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/doc/aptly/db/recover</loc>
+    <lastmod>2014-08-08T11:17:38+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/doc/aptly/db/cleanup</loc>
+    <lastmod>2014-08-08T11:17:38+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/doc/aptly/graph</loc>
+    <lastmod>2014-08-08T11:17:38+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/doc/aptly/mirror/show</loc>
+    <lastmod>2014-08-08T11:17:38+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/doc/commands</loc>
+    <lastmod>2014-08-08T11:17:38+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/doc/aptly/snapshot/merge</loc>
+    <lastmod>2014-08-08T11:17:38+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/doc/aptly/snapshot/diff</loc>
+    <lastmod>2014-08-08T11:17:38+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/doc/aptly/serve</loc>
+    <lastmod>2014-08-08T11:17:38+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/doc/aptly/snapshot</loc>
+    <lastmod>2014-08-08T11:17:38+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/doc/overview</loc>
+    <lastmod>2014-08-08T11:17:38+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/doc/aptly/snapshot/show</loc>
+    <lastmod>2014-08-08T11:17:38+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/doc/aptly/snapshot/rename</loc>
+    <lastmod>2014-08-08T11:17:38+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/doc/aptly/mirror</loc>
+    <lastmod>2014-08-08T11:17:38+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/doc/aptly/snapshot/drop</loc>
+    <lastmod>2014-08-08T11:17:38+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/doc/aptly/mirror/update</loc>
+    <lastmod>2014-08-08T11:17:38+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/doc/aptly/repo/remove</loc>
+    <lastmod>2014-08-08T11:17:38+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/doc/aptly/repo/import</loc>
+    <lastmod>2014-08-08T11:17:38+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/doc/aptly/publish/repo</loc>
+    <lastmod>2014-08-08T11:17:38+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/doc/aptly/publish/snapshot</loc>
+    <lastmod>2014-08-08T11:17:38+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/doc/aptly/repo/move</loc>
+    <lastmod>2014-08-08T11:17:38+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/doc/aptly/mirror/list</loc>
+    <lastmod>2014-08-08T11:17:38+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/doc/aptly/repo/copy</loc>
+    <lastmod>2014-08-08T11:17:38+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/doc/aptly/mirror/drop</loc>
+    <lastmod>2014-08-08T11:17:38+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/doc/aptly/mirror/rename</loc>
+    <lastmod>2014-08-08T11:17:38+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/doc/aptly/publish/list</loc>
+    <lastmod>2014-08-08T11:17:38+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/doc/aptly/repo/rename</loc>
+    <lastmod>2014-08-08T11:17:38+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/doc/aptly/repo/add</loc>
+    <lastmod>2014-08-08T11:17:38+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/doc/aptly/repo</loc>
+    <lastmod>2014-08-08T11:17:38+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/doc/aptly/snapshot/verify</loc>
+    <lastmod>2014-08-08T11:17:38+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/doc/aptly/snapshot/pull</loc>
+    <lastmod>2014-08-08T11:17:38+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/doc/aptly/mirror/edit</loc>
+    <lastmod>2014-08-08T11:17:38+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/doc/aptly/publish/drop</loc>
+    <lastmod>2014-08-08T11:17:38+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/doc/aptly/repo/show</loc>
+    <lastmod>2014-08-08T11:17:38+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/doc/history</loc>
+    <lastmod>2014-08-08T11:17:38+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/doc/aptly/publish/switch</loc>
+    <lastmod>2014-08-08T11:17:38+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/doc/aptly/publish/update</loc>
+    <lastmod>2014-08-08T11:17:38+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/doc/aptly/publish</loc>
+    <lastmod>2014-08-08T11:17:38+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/doc/why</loc>
+    <lastmod>2014-08-08T11:17:38+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/doc/aptly/snapshot/list</loc>
+    <lastmod>2014-08-08T11:17:38+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/doc/aptly/repo/drop</loc>
+    <lastmod>2014-08-08T11:17:38+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/doc/aptly/repo/create</loc>
+    <lastmod>2014-08-08T11:17:38+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/doc/aptly/snapshot/create</loc>
+    <lastmod>2014-08-08T11:17:38+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/doc/aptly/repo/edit</loc>
+    <lastmod>2014-08-08T11:17:38+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/doc/aptly/mirror/create</loc>
+    <lastmod>2014-08-08T11:17:38+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/doc/aptly/repo/list</loc>
+    <lastmod>2014-08-08T11:17:38+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/post/aptly-0-7</loc>
+    <lastmod>2014-07-29T21:22:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/examples</loc>
+    <lastmod>2014-07-16T17:02:05+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/download</loc>
+    <lastmod>2014-07-16T17:02:05+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/post/aptly-0-6</loc>
+    <lastmod>2014-06-09T00:57:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/post/aptly-0-5</loc>
+    <lastmod>2014-04-25T00:12:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/post/aptly-0-4</loc>
+    <lastmod>2014-03-11T16:14:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/post/aptly-memory-usage-optimization</loc>
+    <lastmod>2014-03-05T17:15:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/post/aptly-0-3</loc>
+    <lastmod>2014-02-10T23:20:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/post/aptly-02-moscow-devops-meetup</loc>
+    <lastmod>2014-01-29T12:24:00+00:00</lastmod>
+  </url>
+  
+</urlset>

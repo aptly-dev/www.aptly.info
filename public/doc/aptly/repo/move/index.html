@@ -1,0 +1,352 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>aptly repo move</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link type="text/css" rel="stylesheet" href="/css/styles.css">
+    <link rel="canonical" href="http://localhost:1313/doc/aptly/repo/move">
+    <link href="" rel="alternate" type="application/rss+xml" title="aptly - Debian repository management tool" />
+    
+  </head>
+  <body>
+    <header id="page-header">
+      <div class="container">
+                <nav class="navbar navbar-default navbar-static-top" role="navigation">
+          <ul class="nav navbar-nav nav-justified">
+            <li><a href="/examples/">examples</a> doc</li>
+            <li ><a href="/download/">download</a></li>
+            <li><a href="/support/">support</a></li>
+            <li class="active"><a href="/doc/">documentation</a></li>
+            <li ><a href="/about/">about</a></li>
+            <li ><a href="/post/">blog</a></li>
+          </ul>
+        </nav>
+
+        <div class="row">
+          <div class="col-md-6 col-md-offset-3 text-center">
+            <div class="brand">
+              <i class="brand-logo"></i>
+              <span class="brand-name">aptly</span>
+            </div>
+          </div>
+        </div>
+      
+      </div>
+    </header>
+
+    
+    <section class="documentation">
+      <div class="container">
+        <div class="sidebar-overlay"></div>
+        <div class="row">
+          <div class="col-md-3 col-sm-3 col-xs-3">
+            <div class="sidebar">
+              <ul class="nav nav-sidebar">
+                
+                
+                  <li >
+                    <a href="http://localhost:1313/doc/overview">Overview</a>
+                    
+                  </li>
+                
+                  <li >
+                    <a href="http://localhost:1313/doc/why">Why aptly?</a>
+                    
+                  </li>
+                
+                  <li >
+                    <a href="http://localhost:1313/doc/commands">Commands</a>
+                    
+                      <ul class="nav">
+                        
+                          <li >
+                            <a href="http://localhost:1313/doc/aptly/mirror">aptly mirror</a>
+                            
+                              <ul class="nav">
+                                
+                                  <li >
+                                    <a href="http://localhost:1313/doc/aptly/mirror/create">aptly mirror create</a>
+                                  </li>
+                                
+                                  <li >
+                                    <a href="http://localhost:1313/doc/aptly/mirror/update">aptly mirror update</a>
+                                  </li>
+                                
+                                  <li >
+                                    <a href="http://localhost:1313/doc/aptly/mirror/list">aptly mirror list</a>
+                                  </li>
+                                
+                                  <li >
+                                    <a href="http://localhost:1313/doc/aptly/mirror/show">aptly mirror show</a>
+                                  </li>
+                                
+                                  <li >
+                                    <a href="http://localhost:1313/doc/aptly/mirror/edit">aptly mirror edit</a>
+                                  </li>
+                                
+                                  <li >
+                                    <a href="http://localhost:1313/doc/aptly/mirror/rename">aptly mirror rename</a>
+                                  </li>
+                                
+                                  <li >
+                                    <a href="http://localhost:1313/doc/aptly/mirror/drop">aptly mirror drop</a>
+                                  </li>
+                                
+                              </ul>
+                            
+                          </li>
+                        
+                          <li class="active">
+                            <a href="http://localhost:1313/doc/aptly/repo">aptly repo</a>
+                            
+                              <ul class="nav">
+                                
+                                  <li >
+                                    <a href="http://localhost:1313/doc/aptly/repo/create">aptly repo create</a>
+                                  </li>
+                                
+                                  <li >
+                                    <a href="http://localhost:1313/doc/aptly/repo/add">aptly repo add</a>
+                                  </li>
+                                
+                                  <li >
+                                    <a href="http://localhost:1313/doc/aptly/repo/import">aptly repo import</a>
+                                  </li>
+                                
+                                  <li >
+                                    <a href="http://localhost:1313/doc/aptly/repo/show">aptly repo show</a>
+                                  </li>
+                                
+                                  <li >
+                                    <a href="http://localhost:1313/doc/aptly/repo/list">aptly repo list</a>
+                                  </li>
+                                
+                                  <li >
+                                    <a href="http://localhost:1313/doc/aptly/repo/copy">aptly repo copy</a>
+                                  </li>
+                                
+                                  <li class="active">
+                                    <a href="http://localhost:1313/doc/aptly/repo/move">aptly repo move</a>
+                                  </li>
+                                
+                                  <li >
+                                    <a href="http://localhost:1313/doc/aptly/repo/remove">aptly repo remove</a>
+                                  </li>
+                                
+                                  <li >
+                                    <a href="http://localhost:1313/doc/aptly/repo/edit">aptly repo edit</a>
+                                  </li>
+                                
+                                  <li >
+                                    <a href="http://localhost:1313/doc/aptly/repo/rename">aptly repo rename</a>
+                                  </li>
+                                
+                                  <li >
+                                    <a href="http://localhost:1313/doc/aptly/repo/drop">aptly repo drop</a>
+                                  </li>
+                                
+                              </ul>
+                            
+                          </li>
+                        
+                          <li >
+                            <a href="http://localhost:1313/doc/aptly/snapshot">aptly snapshot</a>
+                            
+                              <ul class="nav">
+                                
+                                  <li >
+                                    <a href="http://localhost:1313/doc/aptly/snapshot/create">aptly snapshot create</a>
+                                  </li>
+                                
+                                  <li >
+                                    <a href="http://localhost:1313/doc/aptly/snapshot/list">aptly snapshot list</a>
+                                  </li>
+                                
+                                  <li >
+                                    <a href="http://localhost:1313/doc/aptly/snapshot/show">aptly snapshot show</a>
+                                  </li>
+                                
+                                  <li >
+                                    <a href="http://localhost:1313/doc/aptly/snapshot/verify">aptly snapshot verify</a>
+                                  </li>
+                                
+                                  <li >
+                                    <a href="http://localhost:1313/doc/aptly/snapshot/pull">aptly snapshot pull</a>
+                                  </li>
+                                
+                                  <li >
+                                    <a href="http://localhost:1313/doc/aptly/snapshot/diff">aptly snapshot diff</a>
+                                  </li>
+                                
+                                  <li >
+                                    <a href="http://localhost:1313/doc/aptly/snapshot/merge">aptly snapshot merge</a>
+                                  </li>
+                                
+                                  <li >
+                                    <a href="http://localhost:1313/doc/aptly/snapshot/rename">aptly snapshot rename</a>
+                                  </li>
+                                
+                                  <li >
+                                    <a href="http://localhost:1313/doc/aptly/snapshot/drop">aptly snapshot drop</a>
+                                  </li>
+                                
+                              </ul>
+                            
+                          </li>
+                        
+                          <li >
+                            <a href="http://localhost:1313/doc/aptly/publish">aptly publish</a>
+                            
+                              <ul class="nav">
+                                
+                                  <li >
+                                    <a href="http://localhost:1313/doc/aptly/publish/snapshot">aptly publish snapshot</a>
+                                  </li>
+                                
+                                  <li >
+                                    <a href="http://localhost:1313/doc/aptly/publish/repo">aptly publish repo</a>
+                                  </li>
+                                
+                                  <li >
+                                    <a href="http://localhost:1313/doc/aptly/publish/update">aptly publish update</a>
+                                  </li>
+                                
+                                  <li >
+                                    <a href="http://localhost:1313/doc/aptly/publish/switch">aptly publish switch</a>
+                                  </li>
+                                
+                                  <li >
+                                    <a href="http://localhost:1313/doc/aptly/publish/list">aptly publish list</a>
+                                  </li>
+                                
+                                  <li >
+                                    <a href="http://localhost:1313/doc/aptly/publish/drop">aptly publish drop</a>
+                                  </li>
+                                
+                              </ul>
+                            
+                          </li>
+                        
+                          <li >
+                            <a href="http://localhost:1313/doc/aptly/db">aptly db</a>
+                            
+                              <ul class="nav">
+                                
+                                  <li >
+                                    <a href="http://localhost:1313/doc/aptly/db/cleanup">aptly db cleanup</a>
+                                  </li>
+                                
+                                  <li >
+                                    <a href="http://localhost:1313/doc/aptly/db/recover">aptly db recover</a>
+                                  </li>
+                                
+                              </ul>
+                            
+                          </li>
+                        
+                          <li >
+                            <a href="http://localhost:1313/doc/aptly/serve">aptly serve</a>
+                            
+                          </li>
+                        
+                          <li >
+                            <a href="http://localhost:1313/doc/aptly/graph">aptly graph</a>
+                            
+                          </li>
+                        
+                      </ul>
+                    
+                  </li>
+                
+                  <li >
+                    <a href="http://localhost:1313/doc/history">History</a>
+                    
+                  </li>
+                
+              </ul>
+              <div class="source-buttons">
+                <a href="/download/" class="btn btn-danger">Download</a>
+                <a href="https://github.com/smira/aptly" class="btn btn-default">Github</a>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-9 col-sm-9 col-xs-9">
+            
+
+<h2 id="toc_0">aptly repo move</h2>
+
+<p>Command <code>move</code> moves packages matching <a href="#package-query">package query</a>
+from local repo <code>src-repo</code> to local repo <code>dst-name</code>. If dependency
+following is enabled, aptly would try to move dependencies from
+<code>src-name</code> as well.</p>
+
+<p>Usage:</p>
+
+<pre><code>$  aptly repo move &lt;src-name&gt; &lt;dst-name&gt; &lt;package-query&gt; ...
+</code></pre>
+
+<p>Params are:</p>
+
+<ul>
+<li><code>src-name</code> packages would be searched in this local repository</li>
+<li><code>dst-name</code> packages would be moved to this local repository</li>
+<li><code>package-query</code> list of <a href="#package-query">package queries</a></li>
+</ul>
+
+<p>Flags:</p>
+
+<ul>
+<li><code>-dry-run=false</code>: don&rsquo;t move, just show what would be moved</li>
+<li><code>-with-deps=false</code>: follow dependencies when processing package
+query</li>
+</ul>
+
+<p>When moving with dependencies, global dependency options are used. For
+example, to move source packages, use <code>-dep-follow-source</code>. If aptly
+won&rsquo;t be able to guess list of architectures from contents of local
+repository <code>dst-name</code>, architectures should be specified with
+<code>-architectures</code> flag.</p>
+
+<p>Example:</p>
+
+<pre><code>$ aptly repo move stable testing percona-server-client-5.5
+Loading packages...
+[o] percona-server-client-5.5_5.5.35-rel33.0-611.squeeze_i386 moved
+[o] percona-server-client-5.5_5.5.35-rel33.0-611.squeeze_amd64 moved
+</code></pre>
+
+<p> </p>
+
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <footer id="page-footer">
+      <div class="container">
+                <nav class="navbar navbar-default navbar-static-top" role="navigation">
+          <ul class="nav navbar-nav nav-justified">
+            <li><a href="/examples/">examples</a> doc</li>
+            <li ><a href="/download/">download</a></li>
+            <li><a href="/support/">support</a></li>
+            <li class="active"><a href="/doc/">documentation</a></li>
+            <li ><a href="/about/">about</a></li>
+            <li ><a href="/post/">blog</a></li>
+          </ul>
+        </nav>
+
+        <div class="copy">
+          &copy;&nbsp;Andrey Smirnov
+        </div>
+      </div>
+    </footer>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+  <script>document.write('<script src="http://'
+        + (location.host || 'localhost').split(':')[0]
+		+ ':1313/livereload.js?mindelay=10"></'
+        + 'script>')</script></body>
+</html>

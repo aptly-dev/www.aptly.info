@@ -1,0 +1,25 @@
+{{ template "partials/header.html" . }}
+    <!-- About -->
+    <section class="about">
+      <div class="container">
+        <div class="row col-md-3">
+          <div class="photo-wrapper"><img src="/img/smira.jpg" alt="Andrey Smirnov photo" class="photo"></div>
+          <div class="photo-caption">
+            <span class="name">Andrey Smirnov</span>
+            <span class="position">Founder &amp; Ideologist</span>
+          </div>
+        </div>
+        <div class="col-md-9">
+          <h2>Few words about me</h2>
+          {{ .Content }}
+          <h4 class="uppercase">Follow me on</h4>
+          <p class="social">
+            <a href="https://twitter.com/smira"><span class='symbol'>&#xe086;</span></a>
+            <a href="https://github.com/smira"><span class='symbol'>&#xe037;</span></a>
+            <a href="http://smira.ru/"><span class='symbol'>&#xe021;</span></a>
+          </p>
+        </div>
+      </div>
+    </section>
+    <!-- /About -->
+{{ template "partials/footer.html" . }}

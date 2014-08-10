@@ -1,0 +1,10 @@
+        <nav class="navbar navbar-default navbar-static-top" role="navigation">
+          <ul class="nav navbar-nav nav-justified">
+            <li><a href="/examples/">examples</a> {{ .Type }}</li>
+            <li {{ if eq .Section "download"}}class="active"{{end}}><a href="/download/">download</a></li>
+            <li><a href="/support/">support</a></li>
+            <li {{ if eq .Section "doc"}}class="active"{{end}}><a href="/doc/">documentation</a></li>
+            <li {{ if eq .Section "about"}}class="active"{{end}}><a href="/about/">about</a></li>
+            <li {{ if eq .Section "post"}}class="active"{{end}}><a href="/post/">blog</a></li>
+          </ul>
+        </nav>
