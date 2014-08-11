@@ -2,8 +2,6 @@
 date = 2014-07-16T17:02:05Z
 title = "Examples"
 type = "examples"
-section = "examples"
-version = "0.7.1"
 +++
 
 Examples

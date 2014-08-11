@@ -1,0 +1,26 @@
+{{ template "partials/header.html" . }}
+    <section class="primary-content">
+      <div class="container">
+        <h2>Support</h2>
+        {{ .Content }}
+        <h2>Got any questions?</h2>
+        <form action="" class="feedback-form">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <input type="text" class="form-control" placeholder="Your name">
+              </div>
+              <div class="form-group">
+                <input type="text" class="form-control" placeholder="Your email">
+              </div>
+              <div class="form-group feedback-buttons">
+                <input type="reset" value="Cancel" class="btn btn-default">
+                <input type="submit" value="Send a message" class="btn btn-danger">
+              </div>
+            </div>
+            <div class="col-md-6"><textarea  class="form-control" name="" id="" placeholder="Type your message"></textarea></div>
+          </div>
+        </form>
+      </div>
+    </section>
+{{ template "partials/footer.html" . }}

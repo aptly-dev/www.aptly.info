@@ -24,7 +24,7 @@ the release:
 
 Aptly has new logo, soon I'm going to launch new website:
 
-![image](/galleries/aptly_logo.png%0A%20:alt:%20aptly%20logo)
+![aptly logo](/img/aptly_logo.png)
 
 Most important new features are:
 

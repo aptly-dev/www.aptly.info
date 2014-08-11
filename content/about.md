@@ -1,8 +1,7 @@
 +++
 date = 2014-07-16T17:02:05Z
-draft = true
 type = "about"
-section = "about"
+title = "About"
 +++
 
 It really sounds so simple that one can say a lot about his/herself once given a chance but trust me it’s not. When the first time I tried to write down something about me , I was completely lost that from where i should start and where finish. I could manage to write just a few lines only.
