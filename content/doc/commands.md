@@ -8,3 +8,12 @@ menu:
 
 Commands
 --------
+
+aptly supports commands in three basic categories:
+
+-   `mirror`: manage, update mirrors of remote repositories
+-   `repo`: manage local package repositories, add, remove, move, copy
+    packages
+-   `snapshot`: create, merge, manage snapshots
+-   `publish`: publish snapshot or local repository
+-   `serve`: quickly export published repositories via HTTP
