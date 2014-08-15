@@ -13,15 +13,15 @@
         <pre>deb http://repo.aptly.info/ squeeze main</pre>
         <p>And importing key that is used to sign the release:</p>
 
-<pre class="code"><span class="greeting">$</span> <span class="command">gpg --keyserver keys.gnupg.net --recv-keys 2A194991</span>
-<span class="greeting">$</span> <span class="command">gpg -a --export 2A194991 | sudo apt-key add -</span></pre>
+<pre class="code">$ gpg --keyserver keys.gnupg.net --recv-keys 2A194991
+$ gpg -a --export 2A194991 | sudo apt-key add -</pre>
 
         <p>After that you can install aptly as any other software package:</p>
 
-<pre class="code"><span class="greeting">$</span> <span class="command">apt-get update</span>
-<span class="greeting">$</span> <span class="command">apt-get install aptly</span></pre>
+<pre class="code">$ apt-get update
+$ apt-get install aptly</pre>
 
-        <p>Don't worry about <code>squeeze</code> part in repo name: aptly package should work on Debian squeeze+, Ubuntu 10.0+. Package contains aptly binary, man page and bash completion.</p>
+        <p>Please don't worry about <code>squeeze</code> part in repo name: aptly package should work on Debian squeeze+, Ubuntu 10.0+. Package contains aptly binary, man page and bash completion.</p>
       </div>
     </section>
     <section class="primary-content">
@@ -61,21 +61,21 @@
         </div>
         <p>Just copy binary to your machine, make it executable and run it:</p>
 
-<pre class="code"><span class="greeting">$</span> <span class="command">chmod +x aptly</span>
-<span class="greeting">$</span> <span class="command">./aptly</span></pre>
+<pre class="code">$ chmod +x aptly
+$ ./aptly</pre>
 
         <p><strong>Bash completion</strong> for aptly is available as <a href="https://github.com/aptly-dev/aptly-bash-completion">separate repo</a>.</p>
 
         <p>If you have Go environment set up (go 1.2+ required), you can build aptly from <strong>source</strong> by
         cloning it and building with gom:</p>
 
-<pre class="code"><span class="greeting">$</span> <span class="command">go get -u github.com/mattn/gom</span>
-<span class="greeting">$</span> <span class="command">mkdir -p $GOPATH/src/github.com/smira/aptly</span>
-<span class="greeting">$</span> <span class="command">git clone https://github.com/smira/aptly $GOPATH/src/github.com/smira/aptly</span>
-<span class="greeting">$</span> <span class="command">cd $GOPATH/src/github.com/smira/aptly</span>
-<span class="greeting">$</span> <span class="command">gom -production install</span>
-<span class="greeting">$</span> <span class="command">gom build -o $GOPATH/bin/aptly</span>
-<span class="greeting">$</span> <span class="command">aptly</span>
+<pre class="code">$ go get -u github.com/mattn/gom
+$ mkdir -p $GOPATH/src/github.com/smira/aptly
+$ git clone https://github.com/smira/aptly $GOPATH/src/github.com/smira/aptly
+$ cd $GOPATH/src/github.com/smira/aptly
+$ gom -production install
+$ gom build -o $GOPATH/bin/aptly
+$ aptly
 </pre>
       </div>
     </section>
