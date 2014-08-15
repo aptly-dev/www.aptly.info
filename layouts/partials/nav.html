@@ -3,7 +3,7 @@
             <li {{ if eq .Url "" }}{{ if eq .Type "examples" }}class="active"{{end}}{{end}}><a href="/examples/">examples</a></li>
             <li {{ if eq .Url "" }}{{ if eq .Type "download" }}class="active"{{end}}{{end}}><a href="/download/">download</a></li>
             <li {{ if eq .Url "" }}{{ if eq .Type "support" }}class="active"{{end}}{{end}}><a href="/support/">support</a></li>
-            <li {{ if or (eq .Url "/doc") (eq .Section "doc") }}class="active"{{end}}><a href="/doc/">documentation</a></li>
+            <li {{ if or (eq .Url "/doc") (eq .Section "doc") }}class="active"{{end}}><a href="/doc/overview/">documentation</a></li>
             <li {{ if eq .Url "" }}{{ if eq .Type "about" }}class="active"{{end}}{{end}}><a href="/about/">about</a></li>
             <li {{ if or (eq .Url "/post") (eq .Section "post") }}class="active"{{end}}><a href="/post/">blog</a></li>
           </ul>
