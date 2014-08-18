@@ -57,3 +57,4 @@ prefix) and consumed by `apt` tools on your Debian systems. Local
 repositories could be [published directly](/doc/aptly/publish/repo)
 bypassing snapshot step.
 
+Next section, [Why aptly?](/doc/why/) describes why aptly is unique.
