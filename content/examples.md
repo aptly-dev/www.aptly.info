@@ -7,6 +7,8 @@ type = "examples"
 Examples
 --------
 
+### Mirroring remote repository and serving published repository
+
 Mirror Debian repository distribution squeeze only for architectures
 `i386`, `amd64` and publish the result:
 
@@ -78,6 +80,8 @@ aptly itself:
 Run apt-get to fetch repository metadata:
 
     $ apt-get update
+
+### Pulling new version of packages from backports
 
 Pulling new version of `nginx` from `backports`:
 
