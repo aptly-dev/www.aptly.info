@@ -17,6 +17,11 @@ $(document).ready(function() {
 
   $("pre code").each(highlight)
   $("pre.code").each(highlight)
+
+  $("a.more-features").click(
+    function() {
+      $("#upcoming").toggle().removeClass("hidden");
+  })
 })
 
 function redirectLegacyHashes() {
