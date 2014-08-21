@@ -27,6 +27,9 @@ Params:
 -   `source` is a optional list of snapshot names which would be used as
     additional sources
 
+If additional sources are given, depdencies would be searched for in
+full list of `<name>` and `<source>` snapshots.
+
 If architectures are limited (with config `architectures` or option
 `-architectures`), only mentioned architectures are checked for internal
 dependencies, otherwise `aptly` will check all architectures in the

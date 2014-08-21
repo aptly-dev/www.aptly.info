@@ -15,7 +15,7 @@ This is not recommended for production use, but is a quick way to try
 out published repository. 
 
 Command serve starts embedded HTTP server (not suitable for real
-production usage) to serve contents of public/ subdirectory of aptly's
+production usage) to serve contents of `public/` subdirectory of aptly's
 root that contains published repositories. aptly would print recommended
 `apt-sources` for the currently published repositories. By default aptly
 would listen on port 8080, but this can be changed with flag `-listen`.

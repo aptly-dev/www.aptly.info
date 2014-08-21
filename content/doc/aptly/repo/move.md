@@ -12,7 +12,7 @@ menu:
 aptly repo move
 ---------------
 
-Command `move` moves packages matching [package query](#package-query)
+Command `move` moves packages matching [package query](/doc/feature/query/)
 from local repo `src-repo` to local repo `dst-name`. If dependency
 following is enabled, aptly would try to move dependencies from
 `src-name` as well.
@@ -25,7 +25,7 @@ Params are:
 
 -   `src-name` packages would be searched in this local repository
 -   `dst-name` packages would be moved to this local repository
--   `package-query` list of [package queries](#package-query)
+-   `package-query` list of [package queries](/doc/feature/query/)
 
 Flags:
 

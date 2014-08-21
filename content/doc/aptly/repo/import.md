@@ -12,7 +12,7 @@ menu:
 aptly repo import
 -----------------
 
-Commands import copies packages matching [package spec](#package-query)
+Commands import copies packages matching [package query](/doc/feature/query/)
 from mirror `src-name` to local repo `dst-repo`. If dependency following
 is enabled, aptly would try to copy missing dependencies from
 `src-mirror` as well.
@@ -25,7 +25,7 @@ Params are:
 
 -   `src-mirror` packages would be searched in this mirror
 -   `dst-repo` packages would be copied to this local repository
--   `package-query` list of [package search conditions](#package-query)
+-   `package-query` list of [package queries](/doc/feature/query/)
 
 Flags:
 

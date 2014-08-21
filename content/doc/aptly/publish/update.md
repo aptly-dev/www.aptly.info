@@ -14,9 +14,9 @@ aptly publish update
 
 Command re-publishes (updates) published local repository.
 `distribution` and `prefix` should be occupied with local repository
-published using command [aptly publish repo](#aptly-publish-repo).
+published using command [`aptly publish repo`](/doc/aptly/publish/repo/).
 Update happens in-place with minimum possible downtime for published
-repository. Valid [GPG key](#gpg-keys) is required for publishing.
+repository. Valid [GPG key](/doc/aptly/publish/) is required for publishing.
 
 When published repository is updated, all the options are preserved:
 distribution, component, list of architectures, etc.
@@ -36,8 +36,7 @@ Params:
 Flags:
 
 -   `-force-overwrite=false`: overwrite packages files in the pool even
-    if content is different (see also [duplicate
-    packages](#duplicate-packages))
+    if content is different (see also [duplicate packages](/doc/feature/duplicate/))
 -   `-gpg-key=""`: GPG key ID to use when signing the release, if not
     specified default key is used
 -   `-keyring=""`: GPG keyring to use (instead of default)

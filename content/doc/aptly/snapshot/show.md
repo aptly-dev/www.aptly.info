@@ -13,7 +13,7 @@ aptly snapshot show
 -------------------
 
 Shows detailed information about snapshot. Full list of packages in the
-snapshot is displayed as well.
+snapshot could be displayed as well.
 
 Usage:
 

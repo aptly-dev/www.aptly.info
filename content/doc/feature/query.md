@@ -21,7 +21,7 @@ Query consists of the following simple terms:
 -   **dependency condition**: syntax follows Debian dependency
     specification: `package_name` followed by optional version
     specification and architecture limit, e.g: `mysql-client (>= 3.6)`.
--   **query against package fields**syntax is the same as for dependency
+-   **query against package fields**: syntax is the same as for dependency
     conditions, but instead of package name field name is used, e.g:
     `Priority (optional)`.
 
@@ -44,8 +44,8 @@ Supported fields:
 Operators:
 
 -   `=`: strict match, default operator is no operator is given
--   `>=`, `<=`, `=`, `>>` (strictly greater), `<<` (strictly less)
-    :lexicographical comparison for all fields and special rules when
+-   `>=`, `<=`, `=`, `>>` (strictly greater), `<<` (strictly less):
+    lexicographical comparison for all fields and special rules when
     comparing package versions
 -   `%`: pattern matching, like shell patterns, supported special
     symbols are: `[^]?*`, e.g.: `$Version (% 3.5-*)`

@@ -12,7 +12,7 @@ menu:
 aptly mirror list
 -----------------
 
-Shows list of registered repository mirrors.
+Shows list of created remote repository mirrors.
 
 Usage:
 
@@ -29,7 +29,7 @@ Examples:
      * [backports]: http://mirror.yandex.ru/backports.org/ squeeze-backports
      * [debian-main]: http://ftp.ru.debian.org/debian/ squeeze
 
-    To get more information about repository, run `aptly mirror show <name>`.
+To get more information about repository, run `aptly mirror show <name>`.
 
     $ aptly mirror list -raw
     backports

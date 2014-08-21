@@ -33,7 +33,7 @@ Flags:
 
 Dropping snapshot only removes metadata, in order to cleanup the disk
 space occupied by package files you might need to run
-[`aptly db cleanup`](#aptly-db-cleanup) command (package files would be
+[`aptly db cleanup`](/doc/aptly/db/cleanup/) command (package files would be
 removed only if they're not referenced by mirrors and other snapshots
 anymore).
 

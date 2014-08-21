@@ -14,9 +14,8 @@ aptly publish switch
 
 Command switches in-place published repository with new snapshot
 contents. `distribution` and `prefix` should be occupied with snapshot
-published using command [aptly publish
-snapshot](#aptly-publish-snapshot). Update happens in-place with minimum
-possible downtime for published repository. Valid [GPG key](#gpg-keys)
+published using command [`aptly publish snapshot`](/doc/aptly/publish/snapshot/). Update happens in-place with minimum
+possible downtime for published repository. Valid [GPG key](/doc/aptly/publish/)
 is required for publishing.
 
 When published repository is updated, all the options are preserved:
@@ -40,8 +39,7 @@ Flags:
 -   `-component=""`: list of components to update (separate components
     with commas)
 -   `-force-overwrite=false`: overwrite packages files in the pool even
-    if content is different (see also [duplicate
-    packages](#duplicate-packages))
+    if content is different (see also [duplicate packages](/doc/feature/duplicate/))
 -   `-gpg-key=""`: GPG key ID to use when signing the release, if not
     specified default key is used
 -   `-keyring=""`: GPG keyring to use (instead of default)

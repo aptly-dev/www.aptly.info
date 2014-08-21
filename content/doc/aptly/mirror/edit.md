@@ -12,8 +12,8 @@ menu:
 aptly mirror edit
 -----------------
 
-Command edit allows to change settings of mirror: filters, using
-dependencies while filtering.
+Command edit allows to change mirror settings: filter query, whether
+to include dependencies while filtering.
 
 Usage:
 
@@ -25,12 +25,12 @@ Params are:
 
 Flags:
 
--   `-filter=`: [package query](#package-query) that is applied to
-    packages in the mirror
+-   `-filter=`: [package query](/doc/feature/query/) which is applied to
+    packages in the mirror, set to empty to disable filtering
 -   `-filter-with-deps=false`: when filtering, include dependencies of
     matching packages as well
 
-In order to apply new filtering settings, [update](#aptly-mirror-update)
+In order to apply new filtering settings, [update](/doc/aptly/mirror/update/)
 mirror.
 
 Example:

@@ -22,44 +22,44 @@ History
 
 ### Version 0.7
 
--   direct [publishing to Amazon S3](#s3-publishing)
+-   direct [publishing to Amazon S3](/doc/aptly/feature/s3/)
     ([\#15](https://github.com/smira/aptly/issues/15))
--   support for new, powerful [query language](#package-query) in many
-    commands: [aptly snapshot pull](#aptly-snapshot-pull), [aptly repo
-    move](#aptly-repo-move), [aptly repo copy](#aptly-repo-copy), [aptly
-    repo import](#aptly-repo-import) and [aptly repo
-    remove](#aptly-repo-remove)
+-   support for new, powerful [query language](/doc/aptly/feature/query/) in many
+    commands: [aptly snapshot pull](/doc/aptly/snapshot/pull/), [aptly repo
+    move](/doc/aptly/repo/move/), [aptly repo copy](/doc/aptly/repo/copy/), [aptly
+    repo import](/doc/aptly/repo/import/) and [aptly repo
+    remove](/doc/aptly/repo/remove/)
 -   bug fix: files from conflicting packages might override each other
     while publishing ([\#65](https://github.com/smira/aptly/issues/65))
 -   partial mirrors: filter package lists when mirroring
     ([\#64](https://github.com/smira/aptly/issues/64))
--   new commands: [mirrors](#aptly-mirror-rename), [local
-    repositories](#aptly-repo-rename) and
-    [snapshots](#aptly-snapshot-rename) can be renamed
+-   new commands: [mirrors](/doc/aptly/mirror/rename/), [local
+    repositories](/doc/aptly/repo/rename/) and
+    [snapshots](/doc/aptly/snapshot/rename/) can be renamed
     ([\#63](https://github.com/smira/aptly/issues/63))
--   new command: [aptly mirror edit](#aptly-mirror-edit) allows to
+-   new command: [aptly mirror edit](/doc/aptly/mirror/edit/) allows to
     change mirror filtering
     ([\#63](https://github.com/smira/aptly/issues/63))
 -   download transfer rate could be limited either via
-    [configuration](#configuration) file parameter `downloadSpeedLimit`
+    [configuration](/doc/configuration) file parameter `downloadSpeedLimit`
     or with flag `-download-limit` for command [aptly mirror
-    update](#aptly-mirror-update)
+    update](/doc/aptly/mirror/update/)
     ([\#62](https://github.com/smira/aptly/issues/62))
 -   new flag: `-all-matches` for [aptly snapshot
-    pull](#aptly-snapshot-pull) enables pulling of all matching packages
+    pull](/doc/aptly/snapshot/pull/) enables pulling of all matching packages
     ([\#70](https://github.com/smira/aptly/pull/70)), thanks to [Simon
     Aquino](https://github.com/simonaquino)
 -   when matching single package in [aptly snapshot
-    pull](#aptly-snapshot-pull) latest version would be pulled
+    pull](/doc/aptly/snapshot/pull/) latest version would be pulled
     ([\#67](https://github.com/smira/aptly/pull/67)), thanks to [Simon
     Aquino](https://github.com/simonaquino)
--   new flag: `-sort` for [aptly snapshot list](#aptly-snapshot-list)
+-   new flag: `-sort` for [aptly snapshot list](/doc/aptly/snapshot/list/)
     allows to change order of snapshots in the list
     ([\#73](https://github.com/smira/aptly/pull/73)), thanks to [Simon
     Aquino](https://github.com/simonaquino)
 -   bug fix: publish update fails on empty multi-component repo
     ([\#66](https://github.com/smira/aptly/issues/66))
--   bug fix: [aptly snapshot pull](#aptly-snapshot-pull) might remove
+-   bug fix: [aptly snapshot pull](/doc/aptly/snapshot/pull/) might remove
     already pulled packages
     ([\#78](https://github.com/smira/aptly/issues/78))
 -   bug fix: aptly package was missing `bzip2` dependency
@@ -75,12 +75,12 @@ History
 -   repositories published by aptly now can be consumed by
     debian-installer ([\#61](https://github.com/smira/aptly/issues/61))
 -   new flag: `-no-remove` for [aptly snapshot
-    merge](#aptly-snapshot-merge) to merge snapshots with all package
+    merge](/doc/aptly/snapshot/merge/) to merge snapshots with all package
     versions preserved
     ([\#57](https://github.com/smira/aptly/issues/57))
 -   publishing of empty snapshots/repositories is possible
     ([\#55](https://github.com/smira/aptly/issues/55))
--   [aptly repo add](#aptly-repo-add) now exits with 1 if any of files
+-   [aptly repo add](/doc/aptly/repo/add/) now exits with 1 if any of files
     failed to add ([\#53](https://github.com/smira/aptly/issues/53))
 -   bug fix: `Package:` line comes first in package metadata
     ([\#49](https://github.com/smira/aptly/issues/49))
@@ -88,7 +88,7 @@ History
     ([\#52](https://github.com/smira/aptly/issues/52))
 -   bug fix: pulling more than 128 packates at once
     ([\#53](https://github.com/smira/aptly/issues/53))
--   bug fix: [aptly graph](#aptly-graph) may get confused with package
+-   bug fix: [aptly graph](/doc/aptly/graph/) may get confused with package
     pull requests ([\#58](https://github.com/smira/aptly/issues/58))
 
 ### Version 0.5.1
@@ -102,56 +102,56 @@ History
 
 ### Version 0.5
 
--   Debian packages for aptly are [available](#download)
+-   Debian packages for aptly are [available](/download/)
 -   internal DB is compacted when calling [aptly db
-    cleanup](#aptly-db-cleanup)
+    cleanup](/doc/aptly/db/cleanup/)
     ([\#19](https://github.com/smira/aptly/issues/19))
 -   size is shown in human-readable format
     ([\#18](https://github.com/smira/aptly/issues/18))
 -   fixed wrong location of man page in Debian package
     ([\#22](https://github.com/smira/aptly/issues/22))
 -   new flags: `-distribution` and `-component` to specify default
-    publishing options in [aptly repo create](#aptly-repo-create)
+    publishing options in [aptly repo create](/doc/aptly/repo/create/)
     ([\#12](https://github.com/smira/aptly/issues/12))
 -   aptly would try harder to figure out distribution & component
     automatically when publishing going through the tree of snapshots,
     mirrors and local repositories
 -   aptly supports publishing local repositories, without intermediate
     snapshot step ([\#10](https://github.com/smira/aptly/issues/10))
--   new command: [aptly publish repo](#aptly-publish-repo) to publish
+-   new command: [aptly publish repo](/doc/aptly/publish/repo/) to publish
     local repository directly
     ([\#10](https://github.com/smira/aptly/issues/10))
--   new command: [aptly publish edit](#aptly-repo-edit) to change
+-   new command: [aptly publish edit](/doc/aptly/repo/edit/) to change
     defaults for the local repository
     ([\#12](https://github.com/smira/aptly/issues/12))
 -   aptly supports global & command flags placement in any position in
     command line (before command name, after command name)
     ([\#17](https://github.com/smira/aptly/issues/17))
--   new command: [aptly db recover](#aptly-db-recover) to recover
+-   new command: [aptly db recover](/doc/aptly/db/recover/) to recover
     internal DB after crash
     ([\#25](https://github.com/smira/aptly/issues/25))
 -   new flag: `-raw` to display list in machine-readable format for
-    commands [aptly mirror list](#aptly-mirror-list), [aptly repo
-    list](#aptly-repo-list), [aptly snapshot list](#aptly-snapshot-list)
-    and [aptly publish list](#aptly-publish-list)
+    commands [aptly mirror list](/doc/aptly/mirror/list/), [aptly repo
+    list](/doc/aptly/repo/list/), [aptly snapshot list](/doc/aptly/snapshot/list/)
+    and [aptly publish list](/doc/aptly/publish/list/)
     ([\#27](https://github.com/smira/aptly/issues/27),
     [\#31](https://github.com/smira/aptly/issues/31))
 -   new flags: `-origin` and `-label` to customize fields `Origin:` and
     `Label:` in `Release` files during publishing in commands [aptly
-    publish snapshot](#aptly-publish-snapshot) and [aptly publish
-    repo](#aptly-publish-repo)
+    publish snapshot](/doc/aptly/publish/snapshot/) and [aptly publish
+    repo](/doc/aptly/publish/repo/)
     ([\#29](https://github.com/smira/aptly/issues/29))
 -   bug fix: with some HTTP servers aptly might have given "size
     mismatch" errors due to unnecessary decompression
     ([\#33](https://github.com/smira/aptly/issues/33))
--   new command: [aptly publish update](#aptly-publish-update) updates
+-   new command: [aptly publish update](/doc/aptly/publish/update/) updates
     published repo in-place
     ([\#8](https://github.com/smira/aptly/issues/8))
--   new command: [aptly publish switch](#aptly-publish-switch) switches
+-   new command: [aptly publish switch](/doc/aptly/publish/switch/) switches
     published snapshot in-place
     ([\#8](https://github.com/smira/aptly/issues/8))
 -   new flag: `-latest` for command [aptly snapshot
-    merge](#aptly-snapshot-merge) changes merge strategy to "latest
+    merge](/doc/aptly/snapshot/merge/) changes merge strategy to "latest
     version wins" ([\#42](https://github.com/smira/aptly/pull/42)),
     thanks to [@ryanuber](https://github.com/ryanuber) and
     [@keithchambers](https://github.com/keithchambers)
@@ -163,33 +163,33 @@ History
 
 ### Version 0.4
 
--   new command: [aptly db cleanup](#aptly-db-cleanup) to remove
+-   new command: [aptly db cleanup](/doc/aptly/db/cleanup/) to remove
     unreferenced DB entries and files
 -   new flags: `-keyring` & `-secret-keyring` for [aptly snapshot
-    publish](#aptly-snapshot-publish) command
+    publish](/doc/aptly/snapshot/publish/) command
 -   aptly supports mirroring remote repos with source packages and
     publishing repositories with sources
 -   new config: `downloadSourcePackages` to enable source package
     downloading
 -   new flag: `-with-sources` for [aptly mirror
-    create](#aptly-mirror-create) command
+    create](/doc/aptly/mirror/create/) command
 -   new config & flag: `dependencyFollowSource` & `-dep-follow-source`
     to follow `Source:` dependencies
 -   packages are printed in lists with underscores instead of dashes,
     e.g. `pkg_1.3-3_amd64` instead of `pkg-1.3-3-amd64`
 -   local package repositories are supported
--   new commands in `aptly repo` family: [add](#aptly-repo-add),
-    [copy](#aptly-repo-copy), [create](#aptly-repo-create),
-    [drop](#aptly-repo-drop), [import](#aptly-repo-import),
-    [list](#aptly-repo-list), [move](#aptly-repo-move),
-    [remove](#aptly-repo-remove) and [show](#aptly-repo-show)
--   command [aptly snapshot create](#aptly-snapshot-create) supports
+-   new commands in `aptly repo` family: [add](/doc/aptly/repo/add/),
+    [copy](/doc/aptly/repo/copy/), [create](/doc/aptly/repo/create/),
+    [drop](/doc/aptly/repo/drop/), [import](/doc/aptly/repo/import/),
+    [list](/doc/aptly/repo/list/), [move](/doc/aptly/repo/move/),
+    [remove](/doc/aptly/repo/remove/) and [show](/doc/aptly/repo/show/)
+-   command [aptly snapshot create](/doc/aptly/snapshot/create/) supports
     creation of snapshots from local repos
 -   aptly peak memory usage has been reduced by factor of 3x
 -   new flag `-no-remove` for [aptly snapshot
-    pull](#aptly-snapshot-pull): don't remove other version of packages
+    pull](/doc/aptly/snapshot/pull/): don't remove other version of packages
     when pulling (e.g. keep old versions)
--   command [aptly mirror create](#aptly-mirror-create) supports
+-   command [aptly mirror create](/doc/aptly/mirror/create/) supports
     shorthand PPA url: `ppa:user/project`
 -   new config: `ppaDistributorID` & `ppaCodename` to specify PPA url
     expansion rules
@@ -202,13 +202,13 @@ History
 -   [bash
     completion](https://github.com/aptly-dev/aptly-bash-completion) is
     now available for aptly
--   dropping [snapshots](#aptly-snapshot-drop) and
-    [mirrors](#aptly-mirror-drop) is supported
--   [serving](#aptly-serve) published repositories
+-   dropping [snapshots](/doc/aptly/snapshot/drop/) and
+    [mirrors](/doc/aptly/mirror/drop/) is supported
+-   [serving](/doc/aptly/serve/) published repositories
 -   aptly does checksum validation when downloading from remote mirrors
 -   aptly verifies crypto signature on Release files
 -   aptly can create empty snapshots
 -   new global flag `-config` to override default config location
 -   Debian flat repositories are now supported
--   command [aptly graph](#aptly-graph) can generate graph of
+-   command [aptly graph](/doc/aptly/graph) can generate graph of
     dependencies

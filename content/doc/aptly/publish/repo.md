@@ -14,13 +14,12 @@ aptly publish repo
 
 Publishes local repository directly, bypassing snapshot creation step.
 Published repositories appear under `rootDir/public` directory. Valid
-[GPG key](#gpg-keys) is required for publishing.
+[GPG key](/doc/aptly/publish) is required for publishing.
 
-It is not advised to publish local repositories directly unless
+<div class="alert alert-warning alert-note">It is not advised to publish local repositories directly unless
 repository is used to host testing versions of packages that change
-frequently. For production usage please [create
-snapshot](#aptly-snapshot-create) from repository and [publish
-it](#aptly-publish-snapshot).
+frequently. For production usage please <a href="/doc/aptly/snapshot/create/">create snapshot</a> from repository and
+<a href="/doc/aptly/publish/snapshot/">publish it</a>.</div>
 
 Usage:
 
@@ -32,8 +31,8 @@ Params:
 -   `endpoint` is an optional endpoint reference. Without endpoint,
     repository would be pulished to local file system. In order to
     publish to Amazon S3, use endpoint name `s3:<name>:`, where endpoint
-    `name` is configured as S3 publishing endpoint in [configuration
-    file](#s3-publishing).
+    `name` is configured as S3 publishing endpoint in
+    [configuration file](/doc/feature/s3).
 -   `prefix` is an optional prefix for publishing, if not specified,
     repository would be published to the root of publiс directory.
     `prefix` could be single directory like `ppa` or part of the tree
@@ -49,8 +48,7 @@ Flags:
 -   `-distribution=""`: distribution name to publish; guessed from local
     repository default distribution
 -   `-force-overwrite=false`: overwrite packages files in the pool even
-    if content is different (see also [duplicate
-    packages](#duplicate-packages))
+    if content is different (see also [duplicate packages](/doc/feature/duplicate/))
 -   `-gpg-key=""`: GPG key ID to use when signing the release, if not
     specified default key is used
 -   `-keyring=""`: GPG keyring to use (instead of default)
@@ -67,10 +65,10 @@ It is not allowed to publish two repositories or snapshots to the same
 `prefix` and `distribution`.
 
 When local repository changes, published repository could be updated
-in-place using command [aptly publish update](#aptly-publish-update).
+in-place using command [aptly publish update](/doc/aptly/publish/update/).
 
 Empty local repos could be published as well (as placeholder, for
-subsequent updates using [aptly publish update](#aptly-publish-update)
+subsequent updates using [aptly publish update](/doc/aptly/publish/update/)
 command). When publishing empty local repos it is important to specify
 complete architectures list (using `-architectures` flag), as it can't
 be changed after publishing.
@@ -80,6 +78,9 @@ repositories, one repository per component. In that case, command
 accepts several local repositories names:
 
     $ aptly publish repo -component=main,contrib mysoft-main mysoft-contrib
+
+Please see [multiple-component publishing](/doc/feature/multiple/)
+for more examples.
 
 Example:
 

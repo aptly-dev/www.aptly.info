@@ -12,7 +12,7 @@ menu:
 aptly repo copy
 ---------------
 
-Command copy copies packages matching [package query](#package-query)
+Command copy copies packages matching [package query](/doc/feature/query/)
 from local repo `src-name` to local repo `dst-name`. If dependency
 following is enabled, aptly would try to copy missing dependencies from
 `src-name` as well.
@@ -25,7 +25,7 @@ Params are:
 
 -   `src-name` packages would be searched in this local repository
 -   `dst-name` packages would be copied to this local repository
--   `package-query` list of [package queries](#package-query)
+-   `package-query` list of [package queries](/doc/feature/query/)
 
 Flags:
 

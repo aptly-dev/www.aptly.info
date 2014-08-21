@@ -38,16 +38,17 @@ Local repositories work best for distribution of in-house software or
 for custom-built upstream packages. Command `aptly repo add` allows to
 add source packages and built binary package to local repository. Local
 repository could be snapshotted, possibly mixed with snapshots of
-official repositories and published for cunsumption.
+official repositories and published.
 
 aptly won't complain if package is added to the repo which is complete
-duplicate. However it is forbidden to have two packages with identical
+duplicate. However it is forbidden to have two packages in one repo with identical
 triples (architecture, name, version) that have different metadata or
-files. All files added to package pool would be deduplicated, as it
+files (see [Duplicate packages](/doc/feature/duplicate) for details).
+All files added to package pool would be deduplicated, as it
 happens with files coming from mirrors, so exactly one copy of each file
 would be stored in aptly pool.
 
-Flag `-remove-files` allows to implement concept `incoming/` directory
+Flag `-remove-files` allows to implement concept of `incoming/` directory
 where packages are removed as soon as they're imported into database.
 
 Example:

@@ -12,7 +12,7 @@ menu:
 aptly repo list
 ---------------
 
-Commands list shows list of all local package repositories.
+Commands list displays list of all local package repositories.
 
 Usage:
 
@@ -29,7 +29,7 @@ Examples:
      * [stable]: Stable packages for project Foo (packages: 10)
      * [testing] (packages: 1)
 
-    To get more information about local repository, run `aptly repo show <name>`.
+To get more information about local repository, run `aptly repo show <name>`.
 
     $ aptly repo list -raw
     stable

@@ -12,12 +12,14 @@ menu:
 aptly snapshot merge
 --------------------
 
-Merge merges several snapshots into one. Merge happens from left to
-right. By default, packages with the same name-architecture pair are
-replaced during merge (package from latest snapshot on the list wins).
-With `-latest`, package with latest version wins. With `-no-remove`
-flag, all versions of packages are preserved during merge. If only one
-snapshot is specified, merge copies `source` into `destination`.
+Command merges several `source` snapshots into new `destination` snapshot.
+Merge happens from left to right. By default, packages with the same
+name-architecture pair are replaced during merge (package from latest snapshot on the list wins).
+
+With `-latest` flag, package with latest version wins. With `-no-remove`
+flag, all versions of packages are preserved during merge.
+
+If only one snapshot is specified, merge copies `source` into `destination`.
 
 Usage:
 

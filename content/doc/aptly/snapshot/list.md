@@ -32,7 +32,7 @@ Examples:
 
     To get more information about snapshot, run `aptly snapshot show <name>`.
 
-In snapshot list, basic information on snapshot creation way is
+In snapshot list, basic description on the way snapshot has been created is
 displayed.
 
     $ aptly snapshot list -raw

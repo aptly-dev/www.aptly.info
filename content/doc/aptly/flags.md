@@ -10,12 +10,12 @@ menu:
 Global Flags
 ------------
 
-There are several flags that should be specfied before or after command
-name:
+There are several flags that could be specfied almost with any aptly command.
+Flags could be specified before or after command name:
 
     $ aptly -option1 command ...
 
-These flags are:
+Global flags are:
 
 -   `-architectures=""`: list of architectures to consider during
     (comma-separated), default to all available

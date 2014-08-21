@@ -15,7 +15,7 @@ aptly db cleanup
 Database cleanup removes information about unreferenced packages and
 deletes files in the package pool that aren't used by packages anymore.
 It is a good idea to run this command after massive deletion of
-mirrors/snapshots.
+mirrors, snapshots or local repos.
 
 Usage:
 

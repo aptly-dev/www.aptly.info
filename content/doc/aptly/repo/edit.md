@@ -31,8 +31,8 @@ Flags:
 -   `-component=""`: default component when publishing
 -   `-distribution=""`: default distribution when publishing
 
-Default distribution and component would be taken as defaults when
-publishing repository either directly or via snapshots.
+Distribution and component would be used as defaults when
+publishing repository either directly or via snapshot.
 
 Example:
 

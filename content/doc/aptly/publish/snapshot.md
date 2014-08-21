@@ -13,8 +13,8 @@ aptly publish snapshot
 ----------------------
 
 Publishes snapshot as repository to be consumed by `apt`. Published
-repostiories appear under `rootDir/public` directory. Valid [GPG
-key](#gpg-keys) is required for publishing.
+repostiories appear under `rootDir/public` directory.
+Valid [GPG key](/doc/aptly/publish) is required for publishing.
 
 Usage:
 
@@ -26,8 +26,8 @@ Params:
 -   `endpoint` is an optional endpoint reference. Without endpoint,
     repository would be pulished to local file system. In order to
     publish to Amazon S3, use endpoint name `s3:<name>:`, where endpoint
-    `name` is configured as S3 publishing endpoint in [configuration
-    file](#s3-publishing).
+    `name` should configured
+    as S3 publishing endpoint in [configuration file](/doc/feature/s3/).
 -   `prefix` is an optional prefix for publishing, if not specified,
     repository would be published to the root of public directory.
     `prefix` could be single directory like `ppa` or part of the tree
@@ -43,8 +43,7 @@ Flags:
 -   `-distribution=""`: distribution name to publish; guessed from
     original repository distribution
 -   `-force-overwrite=false`: overwrite packages files in the pool even
-    if content is different (see also [duplicate
-    packages](#duplicate-packages))
+    if content is different (see also [duplicate packages](/doc/feature/duplicate/))
 -   `-gpg-key=""`: GPG key ID to use when signing the release, if not
     specified default key is used
 -   `-keyring=""`: GPG keyring to use (instead of default)
@@ -56,9 +55,11 @@ Flags:
 If architectures are limited (with config `architectures` or option
 `-architectures`), only mentioned architectures would be published,
 otherwise `aptly` will publish all architectures in the snapshot.
+When publishing `source` is treated as separate architecture,
+so if `-architectures` flag is used, include `source` when required.
 
 `aptly` would try to figure out distribution and component from snapshot
-by going via snapshot source tree down to mirrors and local
+by going via snapshot source tree up to mirrors and local
 repositories. If all roots report the same distribution name, it is
 chosen as default. If there are different distribution names or
 distribution name is not specfied, `aptly` would display an error. For
@@ -69,7 +70,7 @@ It is not allowed to publish two snapshots to the same `prefix` and
 `distribution`.
 
 Empty snapshots could be published as well (as placeholder, for
-subsequent updates using [aptly publish switch](#aptly-publish-switch)
+subsequent updates using [aptly publish switch](/doc/aptly/publish/switch/)
 command). When publishing empty snapshots it is important to specify
 complete architectures list (using `-architectures` flag), as it can't
 be changed after publishing.
@@ -82,7 +83,8 @@ publishing, command accepts several snapshot names:
 
 When mirroring remote repositories in order to preserve package split by
 component, create individual mirrors for each component, take snapshots
-and publish them as multi-component repository.
+and publish them as multi-component repository. Please see [multiple-component publishing](/doc/feature/multiple/)
+for more examples.
 
 Example:
 
@@ -103,7 +105,7 @@ Example:
 
 Directory structure for published repositories:
 
--   `<rootDir>`: [configuration](#configuration) parameter, defaults to
+-   `<rootDir>`: [configuration](/doc/configuration/) parameter, defaults to
     `~/.aptly`
     -   `public/`: root of published tree (root for webserver)
         -   `dists/`

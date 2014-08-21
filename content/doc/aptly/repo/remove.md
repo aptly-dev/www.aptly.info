@@ -12,8 +12,8 @@ menu:
 aptly repo remove
 -----------------
 
-Command `remove` deletes packages matching [package
-query](#package-query) from local repo `name`.
+Command `remove` deletes packages matching [package query](/doc/feature/query/)
+from local repo `name`.
 
 Usage:
 
@@ -21,8 +21,8 @@ Usage:
 
 Params are:
 
--   `name` packages would be removed in this local repository
--   `package-query` list of [package queries](#package-query)
+-   `name` packages would be removed from this local repository
+-   `package-query` list of [package queries](/doc/feature/query/)
 
 Flags:
 
@@ -32,7 +32,7 @@ When packages are removed from local repository, only references to
 those packages are removed. If packages are part of any snapshot, this
 action won't remove them from snapshot. If there are no references to
 the packages, package files and metadata could be cleaned up by running
-command [aptly db cleanup](#aptly-db-cleanup).
+command [aptly db cleanup](/doc/aptly/db/cleanup/).
 
 Example:
 

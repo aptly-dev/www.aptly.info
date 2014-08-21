@@ -15,7 +15,7 @@ aptly snapshot create
 #### Command `aptly snapshot create .. from mirror`
 
 Creates snapshot from current state of remote mirror. Mirror should be
-updated at least once before running this command.
+[updated](/doc/aptly/mirror/update/) at least once before running this command.
 
 Snapshot would contain exactly the same set of packages as mirror
 currently does. Snapshot is immutable, so if mirror is updated, snapshot
@@ -70,9 +70,11 @@ Example:
 #### Command `aptly snapshot create .. empty`
 
 Creates empty snapshot. As snapshots are immutable, creating one empty
-snapshot should be enough. Empty snapshots could be used as first
-snapshot while pulling packages to create completely defined set of
-packages.
+snapshot should be enough.
+
+Empty snapshots could be used as first argument to [`aptly snapshot pull`](/doc/aptly/snapshot/pull/)
+in order to create set of packages matching query, or as initial contents of empty
+published repository.
 
 Usage:
 

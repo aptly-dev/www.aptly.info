@@ -12,9 +12,9 @@ menu:
 aptly snapshot pull
 -------------------
 
-Pulls new packages along with its dependencies in `name` snapshot from
-`source` snapshot. Also pull command can upgrade package version from
-one snapshot into another, once again along with dependencies. New
+Pulls new packages (along with its dependencies) to `name` snapshot from
+`source` snapshot. Also pull command can upgrade package versions if
+`name` snapshot already contains packages being pulled. New
 snapshot `destination` is created as result of this process.
 
 Usage:
@@ -28,15 +28,16 @@ Params:
 -   `source` is a snapshot name where packages and dependencies would be
     searched
 -   `destination` is a name of the snapshot that would be created
--   `package-query` is a list of [package queries](#package-query), in
-    the simplest form, name of package to be pulled from `source`, could
+-   `package-query` is a list of [package queries](/doc/feature/query/), in
+    the simplest form, name of package to be pulled from `source` could
     be specified
 
 Flags:
 
 -   `-all-matches=false`: pull all the packages that satisfy the
-    dependency version requirements
--   `-dry-run=false`: don't create destination snapshot, just show what
+    dependency version requirements (default is to pull first matching
+    package)
+-   `-dry-run=false`: don't create `destination` snapshot, just show what
     would be pulled
 -   `-no-deps=false`: don't process dependencies, just pull listed
     packages

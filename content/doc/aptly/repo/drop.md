@@ -33,7 +33,7 @@ Flags:
 
 Dropping local repository only removes metadata, in order to cleanup the
 disk space occupied by package files you might need to run
-[`aptly db cleanup`](#aptly-db-cleanup) command.
+[`aptly db cleanup`](/doc/aptly/db/cleanup/) command.
 
 Example:
 

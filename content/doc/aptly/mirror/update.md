@@ -27,21 +27,21 @@ Params are:
 -   `name` is a mirror name (given when mirror was created)
 
 All packages would be stored under aptly's root dir (see section on
-[Configuration](#configuration)).
+[Configuration](/doc/configuration)).
 
 Flags:
 
 -   `-download-limit=0`: limit download speed (kbytes/sec)
 -   `-ignore-checksums=false`: ignore checksum mismatches for downloaded
-    items (packages file, metadata)
--   `-ignore-signatures=false`: disable verification of Release file
+    items (package files, metadata)
+-   `-ignore-signatures=false`: disable verification of `Release` file
     signatures
 -   `-keyring=trustedkeys.gpg` gpg keyring to use when verifying Release
     file (could be specified multiple times)
 
-While updating mirror, aptly would verify signature of Release file
+While updating mirror, aptly would verify signature of `Release` file
 using GnuPG. Please read information about signature verification in
-[aptly mirror create](#aptly-mirror-create) command description.
+[aptly mirror create](/doc/aptly/mirror/create) command description.
 
 Example:
 
