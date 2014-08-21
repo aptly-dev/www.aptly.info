@@ -20,7 +20,8 @@ $(document).ready(function() {
 
   $("a.more-features").click(
     function() {
-      $("#upcoming").toggle().removeClass("hidden");
+      $("#upcoming").toggle().removeClass("hidden")
+      return false
   })
 })
 
@@ -70,5 +71,47 @@ function redirectLegacyHashes() {
         document.location.replace(document.location.origin + newpath)
     }
 }
+
+var carouselInterval, carouselTimeout
+
+function carouselActivate(num) {
+  $(".code-switches-wrapper a.switch-target").removeClass("active")
+  $(".code-switches-wrapper a.switch-target[data-c='" + num +"']").addClass("active")
+
+  $(".code-switches-wrapper div.carousel").hide()
+  $(".code-switches-wrapper div.carousel[data-c='" + num + "']").removeClass('hidden').show()
+}
+
+function carouselNext() {
+  var current = $(".code-switches-wrapper a.switch-target.active").attr("data-c")
+  carouselActivate(current % 6 + 1)
+}
+
+function carouselPause() {
+  if (carouselInterval != null) {
+    window.clearInterval(carouselInterval)
+    carouselInterval = null
+  }
+
+  if (carouselTimeout != null) {
+    window.clearTimeout(carouselTimeout)
+  }
+
+  carouselTimeout = window.setTimeout(function() {
+    carouselInterval = window.setInterval(carouselNext, 3 * 1000)
+  }, 15 * 1000)
+}
+
+function setupCarousel() {
+  $(".code-switches-wrapper a.switch-target").click(function() {
+    carouselActivate($(this).attr("data-c"))
+    carouselPause()
+    return false
+  })
+
+  carouselInterval = window.setInterval(carouselNext, 3 * 1000)
+}
+
+$(document).ready(setupCarousel)
 
 redirectLegacyHashes()
