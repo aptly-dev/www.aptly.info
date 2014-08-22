@@ -4,6 +4,16 @@ type = "about"
 title = "About"
 +++
 
-It really sounds so simple that one can say a lot about his/herself once given a chance but trust me it’s not. When the first time I tried to write down something about me , I was completely lost that from where i should start and where finish. I could manage to write just a few lines only.
+My name is Andrey Smirnov. Currently I'm independent developer. I'm big fan of
+Go, Python, DevOps and high-load projects.
+I had been working as team development lead at Qik, Skype and Microsoft, my
+team was in charge of asynchronous communication backend.
+Prior to that I've been leading development of smotri.com, Russian clone
+of YouTube. You can find my [resume](http://smira.ru/cv-eng.pdf) to get
+more details.
 
-If you have already visited here, you must have read something about me. It took me a while to figure out what and how to write something about me. Well here is what I have come up with. It’s not complete of me but still I have tried to tell you about me as much I can in some lines and paragraphs.
+Some my open-source projects are: [Redis Resharding Proxy](https://github.com/smira/redis-resharding-proxy)
+and [txZMQ](https://github.com/smira/txZMQ). I've developed
+Flash broadcasting backend (smotri.com), call signalling and notification (Qik) and
+many other products. I'm frequently giving talks at conferences, long time ago I've been teaching
+at Moscow State University.
