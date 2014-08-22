@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>aptly - aptly Memory Usage Optimization</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link type="text/css" rel="stylesheet" href="/css/styles.css">
+    <link rel="canonical" href="http://beta.aptly.info/post/aptly-memory-usage-optimization">
+    <link href="/post/index.xml" rel="alternate" type="application/rss+xml" title="Debian repository management tool" />
+    
+  </head>
+  <body>
+    <header id="page-header">
+      <div class="container">
+                <nav class="navbar navbar-default navbar-static-top" role="navigation">
+          <ul class="nav navbar-nav nav-justified">
+            <li ><a href="/examples/">examples</a></li>
+            <li ><a href="/download/">download</a></li>
+            <li ><a href="/support/">support</a></li>
+            <li ><a href="/doc/overview/">documentation</a></li>
+            <li ><a href="/about/">about</a></li>
+            <li class="active"><a href="/post/">blog</a></li>
+          </ul>
+        </nav>
+
+        <div class="row">
+          <div class="col-md-6 col-md-offset-3 text-center">
+            <a class="brand" href="/">
+              <i class="brand-logo"></i>
+              <span class="brand-name">aptly</span>
+            </a>
+          </div>
+        </div>
+      
+      </div>
+    </header>
+
+    <section class="primary-content">
+      <div class="container">
+         <p>Next <a href="http://www.aptly.info">aptly</a> version (0.4) would contain some
+changes to lower memory requirements while doing general operations:
+memory usage will be decreased by factor of 3. aptly is written in Go
+language, so this is a short story of optimizing Go program memory
+usage.</p>
+
+<p>When I have been developing aptly, I suspected that memory usage would
+be not optimal, as aptly is processing huge amounts of package metadata
+(for example, when mirroring upstream Debian repositories consisting of
+30000 packages). Memory usage went unnoticed until I was testing aptly
+in virtual machine with just 512 MB of memory, aptly was performing
+poorly because Linux was busy in swapping. This was something completely
+unexpected: so much memory? how could that be?</p>
+
+<p>First I applied some general optimizations which were trivial:</p>
+
+<ul>
+<li>some long operations (like mirroring) were happening in single
+function and some big data structures weren&rsquo;t required full time
+during function execution. So assigning <code>nil</code> to them allowed Go&rsquo;s
+garbage collector to reclaim unused memory faster.</li>
+<li>reusing buffers for structure encoding (this is safe, as there&rsquo;re no
+concurrent operations and resulting byte slice is copied
+immediately).</li>
+</ul>
+
+<p>Instead of creating buffer every time&hellip;</p>
+
+<pre><code class="sourceCode go">// Encode does msgpack encoding of Package
+func (p *Package) Encode() []byte {
+    var buf bytes.Buffer
+
+    encoder := codec.NewEncoder(&amp;buf, &amp;codec.MsgpackHandle{})
+    encoder.Encode(p)
+
+    return buf.Bytes()
+}
+</code></pre>
+
+<p>&hellip; re-use buffer:</p>
+
+<pre><code class="sourceCode go">// Internal buffer reused by all Package.Encode operations
+var encodeBuf bytes.Buffer
+
+// Encode does msgpack encoding of Package, []byte should be copied, as buffer would
+// be used for the next call to Encode
+func (p *Package) Encode() []byte {
+    encodeBuf.Reset()
+
+    encoder := codec.NewEncoder(&amp;encodeBuf, &amp;codec.MsgpackHandle{})
+    encoder.Encode(p)
+
+    return encodeBuf.Bytes()
+}
+</code></pre>
+
+<p>Second, I had to find reliable way to measure memory consumption, that
+was easy thanks to <a href="http://blog.cloudflare.com/recycling-memory-buffers-in-go">CloudFlare blog
+post</a>. What I
+discovered first was:</p>
+
+<p><img src="/img/mem-verify0.png" alt="mem stats for aptly snapshot verify" class="img-responsive"></p>
+
+<p><img src="/img/mem-mirror-update1.png" alt="mem stats for aptly mirror update" class="img-responsive"></p>
+
+<p>First graph is for <code>aptly snapshot verify</code> command verifying
+dependencies in whole Debian wheezy distribution, second graph is
+<code>aptly mirror update</code> command parsing package metadata and building
+empty download queue.</p>
+
+<p>What I did next was <a href="http://blog.golang.org/profiling-go-programs">CPU &amp; memory
+profiling</a> which showed
+two things:</p>
+
+<ul>
+<li>a lot of time spent in GC (unsurprisingly, for 800GB heap);</li>
+<li>there are no unexpected memory allocations, memory is allocated as
+expected.</li>
+</ul>
+
+<p>The major memory usage was structure <code>Package</code> that represents parsed
+information from Debian control file. Some parts of that structure are
+required for all operations, some are required only when publishing or
+mirroring. So I had to split <code>Package</code> into parts that are loaded from
+DB on demand and removed when not used.</p>
+
+<p>What I got in the end was:</p>
+
+<p><img src="/img/mem-verify4.png" alt="mem stats for aptly snapshot verify" class="img-responsive"></p>
+
+<p><img src="/img/mem-mirror-update4.png" alt="mem stats for aptly mirror update" class="img-responsive"></p>
+
+<p>As it could be seen easily from these graphs, GC is freeing much more
+memory all the time keeping memory usage more linear. There are some
+more things that could be optimized to improve memory usage, but they
+are left for future aptly development.</p>
+
+<p>In order to produce these graphs, aptly was extended with following code
+that dumps <code>runtime.MemStats</code> every 100ms:</p>
+
+<pre><code class="sourceCode go">memstats := cmd.Flag.Lookup(&quot;memstats&quot;).Value.String()
+if memstats != &quot;&quot; {
+    interval := cmd.Flag.Lookup(&quot;meminterval&quot;).Value.Get().(time.Duration)
+
+    context.fileMemStats, err = os.Create(memstats)
+    if err != nil {
+        return err
+    }
+
+    context.fileMemStats.WriteString(&quot;# Time\tHeapSys\tHeapAlloc\tHeapIdle\tHeapReleased\n&quot;)
+
+    go func() {
+        var stats runtime.MemStats
+
+        start := time.Now().UnixNano()
+
+        for {
+            runtime.ReadMemStats(&amp;stats)
+            if context.fileMemStats != nil {
+                context.fileMemStats.WriteString(fmt.Sprintf(&quot;%d\t%d\t%d\t%d\t%d\n&quot;,
+                    (time.Now().UnixNano()-start)/1000000, stats.HeapSys, stats.HeapAlloc, stats.HeapIdle, stats.HeapReleased))
+                time.Sleep(interval)
+            } else {
+                break
+            }
+        }
+    }()
+}
+</code></pre>
+
+<p>Graphs were produced from raw data using <code>gnuplot</code> and following script:</p>
+
+<pre><code>set output 'mem.png'
+set term png
+set key box left
+set xlabel &quot;Time (msec)&quot;
+set ylabel &quot;Mem (MB)&quot;
+plot &quot;mem.dat&quot; using 1:($2/1e6) title 'HeapSys' with lines, &quot;mem.dat&quot; using 1:($3/1e6) title 'HeapAlloc' with lines, &quot;mem.dat&quot; using 1:($4/1e6) title 'HeapIdle' with lines
+</code></pre>
+
+      </div>
+    </section>
+    <footer id="page-footer">
+      <div class="container">
+                <nav class="navbar navbar-default navbar-static-top" role="navigation">
+          <ul class="nav navbar-nav nav-justified">
+            <li ><a href="/examples/">examples</a></li>
+            <li ><a href="/download/">download</a></li>
+            <li ><a href="/support/">support</a></li>
+            <li ><a href="/doc/overview/">documentation</a></li>
+            <li ><a href="/about/">about</a></li>
+            <li class="active"><a href="/post/">blog</a></li>
+          </ul>
+        </nav>
+
+        <div class="copy">
+          Sponsored by <a href="http://express42.com/">express42</a> &copy;&nbsp;2013-2014 Andrey Smirnov
+        </div>
+      </div>
+    </footer>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/aptly.js"></script>
+  </body>
+</html>
