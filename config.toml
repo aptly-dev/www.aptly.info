@@ -1,7 +1,9 @@
 baseurl = "http://beta.aptly.info/"
 languageCode = "en-us"
 title = "Debian repository management tool"
-DisqusShortname = "aptly"
+
+[params]
+    DisqusShortname = "aptly"
 
 [author]
     name = "Andrey Smirnov"
