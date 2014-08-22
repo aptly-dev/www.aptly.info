@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>aptly - aptly 0.4</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link type="text/css" rel="stylesheet" href="/css/styles.css">
+    <link rel="canonical" href="http://beta.aptly.info/post/aptly-0-4">
+    <link href="/post/index.xml" rel="alternate" type="application/rss+xml" title="Debian repository management tool" />
+    
+  </head>
+  <body>
+    <header id="page-header">
+      <div class="container">
+                <nav class="navbar navbar-default navbar-static-top" role="navigation">
+          <ul class="nav navbar-nav nav-justified">
+            <li ><a href="/examples/">examples</a></li>
+            <li ><a href="/download/">download</a></li>
+            <li ><a href="/support/">support</a></li>
+            <li ><a href="/doc/overview/">documentation</a></li>
+            <li ><a href="/about/">about</a></li>
+            <li class="active"><a href="/post/">blog</a></li>
+          </ul>
+        </nav>
+
+        <div class="row">
+          <div class="col-md-6 col-md-offset-3 text-center">
+            <a class="brand" href="/">
+              <i class="brand-logo"></i>
+              <span class="brand-name">aptly</span>
+            </a>
+          </div>
+        </div>
+      
+      </div>
+    </header>
+
+    <section class="primary-content">
+      <div class="container">
+         <p><a href="http://www.aptly.info/">aptly</a> version 0.4 has been released today.
+Major feature in this version is <a href="http://www.aptly.info/#aptly-repo">local package repository
+management</a> which allows to manage
+collection of your own packages, publish, take snapshots, mix with
+upstream repositories mirrors. Please <a href="http://www.aptly.info/#download">download
+it</a> or install from
+<a href="https://github.com/smira/aptly">source</a>, <a href="https://github.com/smira/aplty/issues">raise
+issues</a>, disscuss in
+<a href="https://groups.google.com/forum/#!forum/aptly-discuss">aptly-discuss
+group</a>, follow
+<a href="https://twitter.com/smira/">me (@smira)</a> to get information about
+updates.</p>
+
+<p>Other features in 0.4 worth mentioning are: support for source packages
+for mirrors and local repositories, ability to delete unused package
+files and DB entries, and memory usage optimizations.</p>
+
+<p>Full list of changes in this version:</p>
+
+<ul>
+<li>local package repositories are supported</li>
+<li>aptly supports mirroring remote repos with source packages and
+publishing repositories with sources</li>
+<li>new command: <code>aptly db cleanup</code> to remove unreferenced DB entries
+and files</li>
+<li>aptly peak memory usage has been reduced by factor of 3x</li>
+<li>new flags: <code>-keyring</code> &amp; <code>-secret-keyring</code> for
+<code>aptly snapshot publish</code> command</li>
+<li>new config: <code>downloadSourcePackages</code> to enable source package
+downloading</li>
+<li>new flag: <code>-with-sources</code> for <code>aptly mirror create</code> command</li>
+<li>new config &amp; flag: <code>dependencyFollowSource</code> &amp; <code>-dep-follow-source</code>
+to follow <code>Source:</code> dependencies</li>
+<li>new commands in <code>aptly repo</code> family: <code>add</code>, <code>copy</code>, <code>create</code>,
+<code>drop</code>, <code>import</code>, <code>list</code>, <code>move</code>, <code>remove</code> and <code>show</code></li>
+<li>command <code>aptly snapshot create</code> supports creation of snapshots from
+local repos</li>
+<li>new flag<code>-no-remove</code> for <code>aptly snapshot pull</code>: don&rsquo;t remove other
+version of packages when pulling (e.g. keep old versions)</li>
+<li>command <code>aptly mirror create</code> supports shorthand PPA url:
+<code>ppa:user/project</code></li>
+<li>new config: <code>ppaDistributorID</code> &amp; <code>ppaCodename</code> to specify PPA url
+expansion rules</li>
+<li>packages are printed in lists with underscores instead of dashes,
+e.g. <code>pkg_1.3-3_amd64</code> instead of <code>pkg-1.3-3-amd64</code></li>
+</ul>
+
+<p>With addition of local package repositories, schema of aptly entities
+and transitions looks like that:</p>
+
+<p><img src="/img/schema04.png" class="img-responsive" alt="aptly schema"></p>
+
+      </div>
+    </section>
+    <footer id="page-footer">
+      <div class="container">
+                <nav class="navbar navbar-default navbar-static-top" role="navigation">
+          <ul class="nav navbar-nav nav-justified">
+            <li ><a href="/examples/">examples</a></li>
+            <li ><a href="/download/">download</a></li>
+            <li ><a href="/support/">support</a></li>
+            <li ><a href="/doc/overview/">documentation</a></li>
+            <li ><a href="/about/">about</a></li>
+            <li class="active"><a href="/post/">blog</a></li>
+          </ul>
+        </nav>
+
+        <div class="copy">
+          Sponsored by <a href="http://express42.com/">express42</a> &copy;&nbsp;2013-2014 Andrey Smirnov
+        </div>
+      </div>
+    </footer>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/aptly.js"></script>
+  </body>
+</html>

@@ -1,0 +1,780 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+      <title>Posts on aptly - Debian repository management tool </title>
+      <generator uri="https://hugo.spf13.com">Hugo</generator>
+    <link>http://beta.aptly.info/post/index.xml</link>
+    <language>en-us</language>
+    <author>Andrey Smirnov</author>
+    
+    <updated>Tue, 29 Jul 2014 21:22:00 UTC</updated>
+    
+    <item>
+      <title>aptly 0.7 - S3 publishing, complex queries</title>
+      <link>http://beta.aptly.info/post/aptly-0-7</link>
+      <pubDate>Tue, 29 Jul 2014 21:22:00 UTC</pubDate>
+      <author>Andrey Smirnov</author>
+      <guid>http://beta.aptly.info/post/aptly-0-7</guid>
+      <description>
+
+&lt;p&gt;&lt;a href=&#34;http://www.aptly.info&#34;&gt;aptly&lt;/a&gt; 0.7 has been released today. aptly is a
+Debian repository management tool, it allows to mirror remote
+repositories, create local package repositories, manage repositories
+snapshots and publish them back as Debian repository. aptly main idea is
+&amp;ldquo;owning your own repository&amp;rdquo;: you can mix and match official repos,
+3rd-party repositories, your own packages, creating your own
+stable/testing/whatever repositories, allowing reproducible package
+installations along with controlled upgrades. It is available for
+download as &lt;a href=&#34;http://www.aptly.info#download&#34;&gt;binary executables&lt;/a&gt; or from
+Debian repository:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;deb http://repo.aptly.info/ squeeze main
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;When installing from repository, don&amp;rsquo;t forget to import key used to sign
+the release:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ gpg --keyserver keys.gnupg.net --recv-keys 2A194991
+$ gpg -a --export 2A194991 | sudo apt-key add -
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Aptly has new logo, soon I&amp;rsquo;m going to launch new website:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;/img/aptly_logo.png&#34; alt=&#34;aptly logo&#34; /&gt;
+&lt;/p&gt;
+
+&lt;p&gt;Most important new features are:&lt;/p&gt;
+
+&lt;h1 id=&#34;toc_0&#34;&gt;Publishing to Amazon S3&lt;/h1&gt;
+
+&lt;p&gt;aptly can publish repositories directly to Amazon S3.&lt;/p&gt;
+
+&lt;p&gt;First, create new S3 bucket using AWS console. Let it be &lt;code&gt;aptly-repo&lt;/code&gt;.
+Remember Amazon region you have used to create, I&amp;rsquo;ll be using
+&lt;code&gt;us-west-1&lt;/code&gt; in this example. If you&amp;rsquo;re going to have public repository,
+enable website hosting for that bucket.&lt;/p&gt;
+
+&lt;p&gt;Go to IAM page, create new user, save access key ID and secret access
+key and create bash script `aws.creds.sh`:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;# Access Key ID:
+# AKIAISHG7G3H8AWBCFG
+# Secret Access Key:
+# E7aujXChaMZwp3ghfk45+Zabd55
+
+export AWS_ACCESS_KEY_ID=&amp;quot;AKIAISHG7G3H8AWBCFG&amp;quot; AWS_SECRET_ACCESS_KEY=&amp;quot;E7aujXChaMZwp3ghfk45+Zabd55&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;In IAM console, attach new custom policy for that user:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;{
+  &amp;quot;Version&amp;quot;: &amp;quot;2012-10-17&amp;quot;,
+  &amp;quot;Statement&amp;quot;: [
+    {
+      &amp;quot;Sid&amp;quot;: &amp;quot;Stmt1405592139000&amp;quot;,
+      &amp;quot;Effect&amp;quot;: &amp;quot;Allow&amp;quot;,
+      &amp;quot;Action&amp;quot;: [
+        &amp;quot;s3:DeleteObject&amp;quot;,
+        &amp;quot;s3:GetObject&amp;quot;,
+        &amp;quot;s3:ListBucket&amp;quot;,
+        &amp;quot;s3:PutObject&amp;quot;,
+        &amp;quot;s3:PutObjectAcl&amp;quot;
+      ],
+      &amp;quot;Resource&amp;quot;: [
+        &amp;quot;arn:aws:s3:::aptly-repo/*&amp;quot;, &amp;quot;arn:aws:s3:::aptly-repo&amp;quot;
+      ]
+    }
+  ]
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This user would have limited access only to the bucket you&amp;rsquo;ve created.&lt;/p&gt;
+
+&lt;p&gt;Now, configure aptly, edit configuration file &lt;code&gt;~/.aptly.conf&lt;/code&gt; and add
+key &lt;code&gt;S3PublishEndpoints&lt;/code&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;quot;S3PublishEndpoints&amp;quot;: {
+  &amp;quot;aptly-repo&amp;quot;: {
+    &amp;quot;region&amp;quot;: &amp;quot;us-west-1&amp;quot;,
+    &amp;quot;bucket&amp;quot;: &amp;quot;aptly-repo&amp;quot;,
+    &amp;quot;acl&amp;quot;: &amp;quot;public-read&amp;quot;
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;If you&amp;rsquo;re going to have public repository, set &lt;code&gt;acl&lt;/code&gt; to &lt;code&gt;public-read&lt;/code&gt;,
+otherwise set &lt;code&gt;acl&lt;/code&gt; to &lt;code&gt;private&lt;/code&gt;. Now you&amp;rsquo;re ready to do your first
+publish. For example, to publish snapshot &lt;code&gt;my-snapshot&lt;/code&gt; to the mentioned
+bucket, run:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;aptly publish snapshot my-snapshot s3:aptly-repo:
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;As with publishes to local filesystem, you can publish under prefix:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;aptly publish snapshot my-snapshot s3:aptly-repo:debian/
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;All regular publish commands are supported: you can switch between
+snapshots (atomically), update published local repositories, drop
+published repos, etc. aptly would do its best to upload package files
+only once to package pool in S3.&lt;/p&gt;
+
+&lt;p&gt;In order to use published repository, for public repositories use
+regular HTTP protocol in &lt;code&gt;/etc/apt/sources.list&lt;/code&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;deb http://s3-us-west-1.amazonaws.com/aptly-repo wheezy main
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;For private repositories you would need special &lt;a href=&#34;https://github.com/kyleshank/apt-s3&#34;&gt;apt s3
+transport&lt;/a&gt;, after installing
+transport you can use it like that:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;deb s3://AWS_ACCESS_ID:[AWS_SECRET_KEY_IN_BRACKETS]@s3-us-west-1.amazonaws.com/aptly-repo wheezy main
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h1 id=&#34;toc_1&#34;&gt;Package Queries&lt;/h1&gt;
+
+&lt;p&gt;Before 0.7, aptly supported only Debian dependency-like package queries.
+In version 0.7, complex queries were introduced. Query syntax matches
+reprepro query language, reference could be found in the
+&lt;a href=&#34;http://www.aptly.info/#package-query&#34;&gt;docs&lt;/a&gt;. I&amp;rsquo;ll give some examples.&lt;/p&gt;
+
+&lt;p&gt;Now you can filter mirrors to include only packages with limited
+priorities:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;aptly mirror create -filter=&amp;quot;Priority (required)&amp;quot; wheezy-required http://mirror.yandex.ru/debian/ wheezy main
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Or download single packages and all its dependencies:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;aptly mirror create -filter=&amp;quot;nginx&amp;quot; -filter-with-deps wheezy-required http://mirror.yandex.ru/debian/ wheezy main
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Pull packages with complex conditions:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;aptly snapshot pull snapshot1 source snapshot2 &#39;!Name (% *-dev), $Version (&amp;gt;= 3.5)&#39;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Or remove packages based on query:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;aptly repo remove local-repo &#39;Name (% http-*) | $Source (webserver)&#39;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;In the next version, package queries would be used to filter snapshots,
+search for packages in repos/snapshots and local repos, and do whole
+&amp;ldquo;world&amp;rdquo; package searching.&lt;/p&gt;
+
+&lt;h1 id=&#34;toc_2&#34;&gt;Other Features&lt;/h1&gt;
+
+&lt;p&gt;aptly can now pull all matching packages with &lt;code&gt;aptly snapshot pull&lt;/code&gt;
+command using flag &lt;code&gt;-all-matches&lt;/code&gt;, e.g. one can pull subset of versions
+from 0.7 to 0.9:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;aptly snapshot pull stable1 foo-snapsot stable2 &#39;foo (&amp;gt;= 0.7), foo (&amp;lt;= 0.9)&#39;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Download speed could be limited while mirroring using config option
+downloadSpeedLimit, so that aptly won&amp;rsquo;t consume all bandwidth.&lt;/p&gt;
+
+&lt;h1 id=&#34;toc_3&#34;&gt;All Changes&lt;/h1&gt;
+
+&lt;p&gt;Full ist of changes since 0.7:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;direct &lt;a href=&#34;http://www.aptly.info/#s3-publishing&#34;&gt;publishing to Amazon S3&lt;/a&gt; (&lt;a href=&#34;https://github.com/smira/aptly/issues/15&#34;&gt;#15&lt;/a&gt;)&lt;/li&gt;
+  &lt;li&gt;support for new, powerful &lt;a href=&#34;http://www.aptly.info/#package-query&#34;&gt;query language&lt;/a&gt; in many commands:
+    &lt;a href=&#34;http://www.aptly.info/#aptly-snapshot-pull&#34;&gt;aptly snapshot pull&lt;/a&gt;, &lt;a href=&#34;http://www.aptly.info/#aptly-repo-move&#34;&gt;aptly repo move&lt;/a&gt;,
+    &lt;a href=&#34;http://www.aptly.info/#aptly-repo-copy&#34;&gt;aptly repo copy&lt;/a&gt;, &lt;a href=&#34;http://www.aptly.info/#aptly-repo-import&#34;&gt;aptly repo import&lt;/a&gt; and
+    &lt;a href=&#34;http://www.aptly.info/#aptly-repo-remove&#34;&gt;aptly repo remove&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;bug fix: files from conflicting packages might override each other while publishing (&lt;a href=&#34;https://github.com/smira/aptly/issues/65&#34;&gt;#65&lt;/a&gt;)&lt;/li&gt;
+  &lt;li&gt;partial mirrors: filter package lists when mirroring (&lt;a href=&#34;https://github.com/smira/aptly/issues/64&#34;&gt;#64&lt;/a&gt;)&lt;/li&gt;
+  &lt;li&gt;new commands: &lt;a href=&#34;http://www.aptly.info/#aptly-mirror-rename&#34;&gt;mirrors&lt;/a&gt;, &lt;a href=&#34;http://www.aptly.info/#aptly-repo-rename&#34;&gt;local repositories&lt;/a&gt; and &lt;a href=&#34;http://www.aptly.info/#aptly-snapshot-rename&#34;&gt;snapshots&lt;/a&gt; can be renamed (&lt;a href=&#34;https://github.com/smira/aptly/issues/63&#34;&gt;#63&lt;/a&gt;)&lt;/li&gt;
+  &lt;li&gt;new command: &lt;a href=&#34;http://www.aptly.info/#aptly-mirror-edit&#34;&gt;aptly mirror edit&lt;/a&gt; allows to change mirror filtering (&lt;a href=&#34;https://github.com/smira/aptly/issues/63&#34;&gt;#63&lt;/a&gt;)&lt;/li&gt;
+  &lt;li&gt;download transfer rate could be limited either via &lt;a href=&#34;http://www.aptly.info/#configuration&#34;&gt;configuration&lt;/a&gt; file parameter &lt;code&gt;downloadSpeedLimit&lt;/code&gt; or with flag &lt;code&gt;-download-limit&lt;/code&gt; for command &lt;a href=&#34;http://www.aptly.info/#aptly-mirror-update&#34;&gt;aptly mirror update&lt;/a&gt; (&lt;a href=&#34;https://github.com/smira/aptly/issues/62&#34;&gt;#62&lt;/a&gt;)&lt;/li&gt;
+  &lt;li&gt;new flag: &lt;code&gt;-all-matches&lt;/code&gt; for &lt;a href=&#34;http://www.aptly.info/#aptly-snapshot-pull&#34;&gt;aptly snapshot pull&lt;/a&gt; enables pulling of all matching
+  packages (&lt;a href=&#34;https://github.com/smira/aptly/pull/70&#34;&gt;#70&lt;/a&gt;), thanks to &lt;a href=&#34;https://github.com/simonaquino&#34;&gt;Simon Aquino&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;when matching single package in &lt;a href=&#34;http://www.aptly.info/#aptly-snapshot-pull&#34;&gt;aptly snapshot pull&lt;/a&gt; latest version would be pulled (&lt;a href=&#34;https://github.com/smira/aptly/pull/67&#34;&gt;#67&lt;/a&gt;), thanks to &lt;a href=&#34;https://github.com/simonaquino&#34;&gt;Simon Aquino&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;new flag: &lt;code&gt;-sort&lt;/code&gt; for &lt;a href=&#34;http://www.aptly.info/#aptly-snapshot-list&#34;&gt;aptly snapshot list&lt;/a&gt; allows to change order of snapshots in the list (&lt;a href=&#34;https://github.com/smira/aptly/pull/73&#34;&gt;#73&lt;/a&gt;), thanks to &lt;a href=&#34;https://github.com/simonaquino&#34;&gt;Simon Aquino&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;bug fix: publish update fails on empty multi-component repo (&lt;a href=&#34;https://github.com/smira/aptly/issues/66&#34;&gt;#66&lt;/a&gt;)&lt;/li&gt;
+  &lt;li&gt;bug fix: &lt;a href=&#34;http://www.aptly.info/#aptly-snapshot-pull&#34;&gt;aptly snapshot pull&lt;/a&gt; might remove already pulled packages (&lt;a href=&#34;https://github.com/smira/aptly/issues/78&#34;&gt;#78&lt;/a&gt;)&lt;/li&gt;
+  &lt;li&gt;bug fix: aptly package was missing &lt;code&gt;bzip2&lt;/code&gt; dependency (&lt;a href=&#34;https://github.com/smira/aptly/issues/84&#34;&gt;#84&lt;/a&gt;)&lt;/li&gt;
+  &lt;li&gt;aptly binary packages are built with go1.3&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>aptly 0.6</title>
+      <link>http://beta.aptly.info/post/aptly-0-6</link>
+      <pubDate>Mon, 09 Jun 2014 00:57:00 UTC</pubDate>
+      <author>Andrey Smirnov</author>
+      <guid>http://beta.aptly.info/post/aptly-0-6</guid>
+      <description>
+
+&lt;p&gt;&lt;a href=&#34;http://www.aptly.info&#34;&gt;aptly&lt;/a&gt; 0.6 has been released on June, 7th. It is
+available for download as &lt;a href=&#34;http://www.aptly.info#download&#34;&gt;binary
+executables&lt;/a&gt; or from Debian repository:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;deb http://repo.aptly.info/ squeeze main
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;When installing from repository, don&amp;rsquo;t forget to import key used to sign
+the release:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ gpg --keyserver keys.gnupg.net --recv-keys 2A194991
+$ gpg -a --export 2A194991 | sudo apt-key add -
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Most important new features are:&lt;/p&gt;
+
+&lt;h1 id=&#34;toc_0&#34;&gt;Multi-Component Repository Publishing&lt;/h1&gt;
+
+&lt;p&gt;aptly is based on concept of list of packages. Snapshots, mirrors and
+local repositories are list of packages (more precisely, list of
+references to packages). When merging, pulling, copying or moving
+packages might move from one list into another. Component is a way to
+break down packages into groups, usually these groups make sense only in
+published repository. At the same time mapping from package to component
+is not universal, there&amp;rsquo;s Debian way to group packages into &lt;code&gt;main&lt;/code&gt;,
+&lt;code&gt;contrib&lt;/code&gt; and &lt;code&gt;non-free&lt;/code&gt; components, Ubuntu uses different schema of
+components, some 3rd party repositories use components in place of
+different distributions (like &lt;code&gt;squeeze&lt;/code&gt;, &lt;code&gt;wheezy&lt;/code&gt; etc.) or to separate
+stable and testing versions of software.&lt;/p&gt;
+
+&lt;p&gt;In order to keep aptly simple, I decided that there&amp;rsquo;s no mapping from
+package to component and package lists internally aren&amp;rsquo;t split by
+component. Each list (snapshot, mirror and local repository) is
+mono-component (actually there&amp;rsquo;s no component at all). When publishing
+repository, several lists could be published as separate components.&lt;/p&gt;
+
+&lt;p&gt;By default, aptly mirrors all components from remote repository and
+merges them into one &amp;ldquo;single component&amp;rdquo;. If we&amp;rsquo;d like to preserve
+package split by components, individual mirrors should be created for
+each component:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;aptly mirror create wheezy-main http://ftp.ru.debian.org/debian/ wheezy main
+aptly mirror create wheezy-contrib http://ftp.ru.debian.org/debian/ wheezy main
+aptly mirror create wheezy-non-free http://ftp.ru.debian.org/debian/ wheezy non-free
+
+aptly mirror list -raw | xargs -n 1 aptly mirror update
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;We can create snapshots from each of the mirrors:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;aptly snapshot create wheezy-main-7.5 from mirror wheezy-main
+aptly snapshot create wheezy-contrib-7.5 from mirror wheezy-contrib
+aptly snapshot create wheezy-non-free-7.5 from mirror wheezy-non-free
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;And publish all snapshots as single repository preserving component
+structure (publishing distribution &lt;code&gt;wheezy&lt;/code&gt; under prefix &lt;code&gt;upstream&lt;/code&gt;):&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;aptly publish snapshot -component=main,contrib,non-free -distribution=wheezy wheezy-main-7.5 wheezy-contrib-7.5 wheezy-non-free-7.5  upstream
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;aptly is smart enough to figure out component names and distribution
+from the mirrors, so I can omit them (commas left to identify number of
+components):&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;aptly publish snapshot -component=,, wheezy-main-7.5 wheezy-contrib-7.5 wheezy-non-free-7.5 upstream
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Of course we could do all regular aptly operations: merging snapshots,
+pulling packages, etc.&lt;/p&gt;
+
+&lt;h1 id=&#34;toc_1&#34;&gt;Handling Package Conflicts&lt;/h1&gt;
+
+&lt;p&gt;Package in Debian universe is identified by triple (architecture, name,
+version). If two packages have the same (architecture, name, version)
+but different content, they are called conflicting packages. Debian
+guidelines prohibit including conflicting packages in repositories that
+could be used together (which could be present in one &lt;code&gt;apt.sources&lt;/code&gt;
+file). Unfortunately, in real word there are conflicting packages, one
+such package has been reported in &lt;code&gt;squeeze&lt;/code&gt; + security updates, another
+example was puppet repository which contains packages with the same
+triple but for different Debian distributions in several components.&lt;/p&gt;
+
+&lt;p&gt;Before 0.6, aptly would complain when it detects such conflicts and stop
+processing. In this version special handling has been added that
+considers packages with same (architecture, name, version) and different
+files as different package entires. There&amp;rsquo;s one restriction though: you
+can&amp;rsquo;t put packages with duplicate (architecture, name, version) into one
+list (one mirror, snapshot, local repo, published repository). This is
+in line with Debian guidelines that one repository shouldn&amp;rsquo;t contain
+duplicate packages.&lt;/p&gt;
+
+&lt;p&gt;This feature works transparently when upgrading from older versions of
+aptly: conflicts would be just gone. In the background aptly would be
+updating references to packages when you update mirrors, create new
+snapshots, etc.&lt;/p&gt;
+
+&lt;h1 id=&#34;toc_2&#34;&gt;Empty Repository Publishing&lt;/h1&gt;
+
+&lt;p&gt;Many people are using aptly to handle package repository from various
+automation tools, e.g. configuration management systems. For such usage
+it is convenient to create local repository (empty initially), publish
+it, and then add packages and update published repository.&lt;/p&gt;
+
+&lt;p&gt;Before 0.6, aptly would refuse to publish empty repositories. Now this
+is possible, but correct architecture list should be supplied when
+publishing (as aptly can&amp;rsquo;t figure out architecture list automatically
+from package list). List of architectures can&amp;rsquo;t be changed when
+published repository is updated, you would have drop published
+repository and create new one if required.&lt;/p&gt;
+
+&lt;h1 id=&#34;toc_3&#34;&gt;Merging Snapshots: 3rd Strategy&lt;/h1&gt;
+
+&lt;p&gt;There&amp;rsquo;s a feature in aptly that allows to merge two snapshots: this is
+useful to combine for example main repository and security updates or
+main repository and 3rd-party repository. With 0.6, three merge
+strategies are available:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;for packages with same (architecture, name) package which comes from
+latest snapshot on the command line wins (default);&lt;/li&gt;
+&lt;li&gt;for packages with same (architecture, name) package with latest
+version wins (&lt;code&gt;-latest&lt;/code&gt;);&lt;/li&gt;
+&lt;li&gt;all versions of packages are preserved (&lt;code&gt;-no-remove&lt;/code&gt;, new in 0.6).&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&#34;toc_4&#34;&gt;All Changes&lt;/h1&gt;
+
+&lt;p&gt;Full list of changes in 0.6:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;support for multi-component published repositories (&lt;a href=&#34;https://github.com/smira/aptly/issues/36&#34;&gt;#36&lt;/a&gt;)&lt;/li&gt;
+  &lt;li&gt;handling duplicate packages with different content gracefully (&lt;a href=&#34;https://github.com/smira/aptly/issues/60&#34;&gt;#60&lt;/a&gt;)&lt;/li&gt;
+  &lt;li&gt;repositories published by aptly now can be consumed by debian-installer (&lt;a href=&#34;https://github.com/smira/aptly/issues/61&#34;&gt;#61&lt;/a&gt;)&lt;/li&gt;
+  &lt;li&gt;new flag: &lt;code&gt;-no-remove&lt;/code&gt; for &lt;a href=&#34;http://www.aptly.info/#aptly-snapshot-merge&#34;&gt;aptly snapshot merge&lt;/a&gt; to merge snapshots with all package versions preserved (&lt;a href=&#34;https://github.com/smira/aptly/issues/57&#34;&gt;#57&lt;/a&gt;)&lt;/li&gt;
+  &lt;li&gt;publishing of empty snapshots/repositories is possible (&lt;a href=&#34;https://github.com/smira/aptly/issues/55&#34;&gt;#55&lt;/a&gt;)&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&#34;http://www.aptly.info/#aptly-repo-add&#34;&gt;aptly repo add&lt;/a&gt; now exists with 1 if any of files failed to add (&lt;a href=&#34;https://github.com/smira/aptly/issues/53&#34;&gt;#53&lt;/a&gt;)&lt;/li&gt;
+  &lt;li&gt;bug fix: &lt;code&gt;Package:&lt;/code&gt; line comes first in package metadata (&lt;a href=&#34;https://github.com/smira/aptly/issues/49&#34;&gt;#49&lt;/a&gt;)&lt;/li&gt;
+  &lt;li&gt;bug fix: when command parsing fails, aptly returns exit code 2 (&lt;a href=&#34;https://github.com/smira/aptly/issues/52&#34;&gt;#52&lt;/a&gt;)&lt;/li&gt;
+  &lt;li&gt;bug fix: pulling more than 128 packates at once (&lt;a href=&#34;https://github.com/smira/aptly/issues/53&#34;&gt;#53&lt;/a&gt;)&lt;/li&gt;
+  &lt;li&gt;bug fix: &lt;a href=&#34;http://www.aptly.info/#aptly-graph&#34;&gt;aptly graph&lt;/a&gt; may get confused with package pull requests (&lt;a href=&#34;https://github.com/smira/aptly/issues/58&#34;&gt;#58&lt;/a&gt;)&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>aptly 0.5</title>
+      <link>http://beta.aptly.info/post/aptly-0-5</link>
+      <pubDate>Fri, 25 Apr 2014 00:12:00 UTC</pubDate>
+      <author>Andrey Smirnov</author>
+      <guid>http://beta.aptly.info/post/aptly-0-5</guid>
+      <description>
+
+&lt;p&gt;&lt;a href=&#34;http://www.aptly.info&#34;&gt;aptly&lt;/a&gt; 0.5 has been released today. It is
+available for download as &lt;a href=&#34;http://www.aptly.info#download&#34;&gt;binary
+executables&lt;/a&gt; or from Debian repository:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;deb http://repo.aptly.info/ squeeze main
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;When installing from repository, don&amp;rsquo;t forget to import key used to sign
+the release:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ gpg --keyserver keys.gnupg.net --recv-keys 2A194991
+$ gpg -a --export 2A194991 | sudo apt-key add -
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Most important new features are:&lt;/p&gt;
+
+&lt;h1 id=&#34;toc_0&#34;&gt;Local Repository Publishing&lt;/h1&gt;
+
+&lt;p&gt;Local repositories could be used in two ways:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;test new versions of software&lt;/li&gt;
+&lt;li&gt;provide stable distribution of new versions&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;For the second case, it is best to create snapshots of local
+repositories and publish them. However, when testing out new versions,
+there isn&amp;rsquo;t much sense in creating snapshot each time repository is
+updated. So aptly since version 0.5 supports &lt;a href=&#34;http://www.aptly.info/#aptly-publish-repo&#34;&gt;direct publishing of
+repositories&lt;/a&gt;. Moreover, when
+local repository is updated, published repository could be updated as
+well in &lt;a href=&#34;http://www.aptly.info/#aptly-publish-update&#34;&gt;one step&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;When local repository is created, default publishing options
+(distribution and component) could be specified, so that these options
+don&amp;rsquo;t need to be specified when publishing:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;aptly repo create -distribution=wheezy testing-wheezy
+aptly repo add -remove-files testing-wheezy incoming/*.deb
+aptly publish repo testing-wheezy
+...
+aptly repo add -remove-files testing-wheezy incoming/*.deb
+aptly publish update wheezy
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h1 id=&#34;toc_1&#34;&gt;Published Snapshot Switching&lt;/h1&gt;
+
+&lt;p&gt;Snapshot is a way to make package environment stable and repeatable, but
+from time to time new snapshots are created that contain new versions of
+software. To publish new version of snapshot, aptly before 0.5 required
+old snapshot to be unpublished and new snapshot to be published again.
+During this process, repository would be unusable.&lt;/p&gt;
+
+&lt;p&gt;New feature allows to &lt;a href=&#34;http://www.aptly.info/#aptly-publish-switch&#34;&gt;&amp;ldquo;switch&amp;rdquo; snapshots in published
+repository&lt;/a&gt;. aptly would do
+its best to minimize repository downtime:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;first, new packages files are linked to published root&lt;/li&gt;
+&lt;li&gt;new metadata files (&lt;code&gt;Packages&lt;/code&gt;, &lt;code&gt;Release&lt;/code&gt;, &amp;hellip;) are created in
+temporary locations&lt;/li&gt;
+&lt;li&gt;new versions of metadata files are moved to final locations&lt;/li&gt;
+&lt;li&gt;old package files are cleaned up from the pool (if required).&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;For example:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;aptly snapshot create wheezy-7.3 from mirror wheezy-main
+aptly publish snapshot wheezy-7.3
+....
+aptly mirror update wheezy-main
+aptly snapshot create wheezy-7.4 from mirror wheezy-main
+aptly publish switch wheezy wheezy-7.4
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h1 id=&#34;toc_2&#34;&gt;Merge Strategy&lt;/h1&gt;
+
+&lt;p&gt;When &lt;a href=&#34;http://www.aptly.info/#aptly-snapshot-merge&#34;&gt;merging snapshots&lt;/a&gt;
+aptly would override packages with the version from the latest argument
+on the command line. This works ok if you merge, for example regular
+repository and backports. But sometimes this is not enough, e.g. when
+merging regular repository, updates and security repository. aptly now
+supports flag &lt;code&gt;-latest&lt;/code&gt; to change merge strategy to &amp;ldquo;latest version
+wins&amp;rdquo;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;aptly snapshot merge -latest wheezy-latest wheezy-backports wheezy-main wheezy-security
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Thanks to &lt;a href=&#34;https://github.com/ryanuber&#34;&gt;Ryan Uber&lt;/a&gt; and &lt;a href=&#34;https://github.com/keithchambers&#34;&gt;Keith
+Chambers&lt;/a&gt; for the idea and pull
+request.&lt;/p&gt;
+
+&lt;h1 id=&#34;toc_3&#34;&gt;Scripting&lt;/h1&gt;
+
+&lt;p&gt;Sometimes you need to perform bunch of actions with mirrors, snapshots
+or repositories. aptly 0.5 supports special &amp;ldquo;raw&amp;rdquo; listing which is
+easily parseable. E.g. update all Debian mirrors:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;aptly mirror list -raw | grep -E &#39;^debian-.*&#39; | xargs -n 1 aptly mirror update
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Thanks to &lt;a href=&#34;https://github.com/erickeller&#34;&gt;Eric Keller&lt;/a&gt; for the idea.&lt;/p&gt;
+
+&lt;h1 id=&#34;toc_4&#34;&gt;All Changes&lt;/h1&gt;
+
+&lt;p&gt;Full list of changes in 0.5:&lt;/p&gt;
+
+&lt;ul&gt;
+    &lt;li&gt;Debian packages for aptly are &lt;a href=&#34;http://www.aptly.info#download&#34;&gt;available&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;internal DB is compacted when calling &lt;a href=&#34;http://www.aptly.info#aptly-db-cleanup&#34;&gt;aptly db cleanup&lt;/a&gt; (&lt;a href=&#34;https://github.com/smira/aptly/issues/19&#34;&gt;#19&lt;/a&gt;)&lt;/li&gt;
+    &lt;li&gt;size is shown in human-readable format (&lt;a href=&#34;https://github.com/smira/aptly/issues/18&#34;&gt;#18&lt;/a&gt;)&lt;/li&gt;
+    &lt;li&gt;fixed wrong location of man page in Debian package (&lt;a href=&#34;https://github.com/smira/aptly/issues/22&#34;&gt;#22&lt;/a&gt;)&lt;/li&gt;
+    &lt;li&gt;new flags: &lt;code&gt;-distribution&lt;/code&gt; and &lt;code&gt;-component&lt;/code&gt; to specify default publishing options in &lt;a href=&#34;http://www.aptly.info#aptly-repo-create&#34;&gt;aptly repo create&lt;/a&gt; (&lt;a href=&#34;https://github.com/smira/aptly/issues/12&#34;&gt;#12&lt;/a&gt;)&lt;/li&gt;
+    &lt;li&gt;aptly would try harder to figure out distribution &amp;amp; component automatically when publishing going through the tree of snapshots, mirrors and local repositories&lt;/li&gt;
+    &lt;li&gt;aptly supports publishing local repositories, without intermediate snapshot step (&lt;a href=&#34;https://github.com/smira/aptly/issues/10&#34;&gt;#10&lt;/a&gt;)&lt;/li&gt;
+    &lt;li&gt;new command: &lt;a href=&#34;http://www.aptly.info#aptly-publish-repo&#34;&gt;aptly publish repo&lt;/a&gt; to publish local repository directly (&lt;a href=&#34;https://github.com/smira/aptly/issues/10&#34;&gt;#10&lt;/a&gt;)&lt;/li&gt;
+    &lt;li&gt;new command: &lt;a href=&#34;http://www.aptly.info#aptly-repo-edit&#34;&gt;aptly publish edit&lt;/a&gt; to change defaults for the local repository (&lt;a href=&#34;https://github.com/smira/aptly/issues/12&#34;&gt;#12&lt;/a&gt;)&lt;/li&gt;
+    &lt;li&gt;aptly supports global &amp;amp; command flags placement in any position in command line (before command name, after command name) (&lt;a href=&#34;https://github.com/smira/aptly/issues/17&#34;&gt;#17&lt;/a&gt;)&lt;/li&gt;
+    &lt;li&gt;new command: &lt;a href=&#34;http://www.aptly.info#aptly-db-recover&#34;&gt;aptly db recover&lt;/a&gt; to recover internal DB after crash (&lt;a href=&#34;https://github.com/smira/aptly/issues/25&#34;&gt;#25&lt;/a&gt;)&lt;/li&gt;
+    &lt;li&gt;new flag: &lt;code&gt;-raw&lt;/code&gt; to display list in machine-readable format for commands &lt;a href=&#34;http://www.aptly.info#aptly-mirror-list&#34;&gt;aptly mirror list&lt;/a&gt;, &lt;a href=&#34;http://www.aptly.info#aptly-repo-list&#34;&gt;aptly repo list&lt;/a&gt;, &lt;a href=&#34;http://www.aptly.info#aptly-snapshot-list&#34;&gt;aptly snapshot list&lt;/a&gt; and &lt;a href=&#34;http://www.aptly.info#aptly-publish-list&#34;&gt;aptly publish list&lt;/a&gt; (&lt;a href=&#34;https://github.com/smira/aptly/issues/27&#34;&gt;#27&lt;/a&gt;, &lt;a href=&#34;https://github.com/smira/aptly/issues/31&#34;&gt;#31&lt;/a&gt;)&lt;/li&gt;
+    &lt;li&gt;new flags: &lt;code&gt;-origin&lt;/code&gt; and &lt;code&gt;-label&lt;/code&gt; to customize fields &lt;code&gt;Origin:&lt;/code&gt; and &lt;code&gt;Label:&lt;/code&gt; in &lt;code&gt;Release&lt;/code&gt; files during publishing in commands &lt;a href=&#34;http://www.aptly.info#aptly-publish-snapshot&#34;&gt;aptly publish snapshot&lt;/a&gt; and &lt;a href=&#34;http://www.aptly.info#aptly-publish-repo&#34;&gt;aptly publish repo&lt;/a&gt; (&lt;a href=&#34;https://github.com/smira/aptly/issues/29&#34;&gt;#29&lt;/a&gt;)&lt;/li&gt;
+    &lt;li&gt;bug fix: with some HTTP servers aptly might have given &#34;size mismatch&#34; errors due to unnecessary decompression (&lt;a href=&#34;https://github.com/smira/aptly/issues/33&#34;&gt;#33&lt;/a&gt;)&lt;/li&gt;
+    &lt;li&gt;new command: &lt;a href=&#34;http://www.aptly.info#aptly-publish-update&#34;&gt;aptly publish update&lt;/a&gt; updates published repo in-place (&lt;a href=&#34;https://github.com/smira/aptly/issues/8&#34;&gt;#8&lt;/a&gt;)&lt;/li&gt;
+    &lt;li&gt;new command: &lt;a href=&#34;http://www.aptly.info#aptly-publish-switch&#34;&gt;aptly publish switch&lt;/a&gt; switches published snapshot in-place (&lt;a href=&#34;https://github.com/smira/aptly/issues/8&#34;&gt;#8&lt;/a&gt;)&lt;/li&gt;
+    &lt;li&gt;new flag: &lt;code&gt;-latest&lt;/code&gt; for command &lt;a href=&#34;http://www.aptly.info#aptly-snapshot-merge&#34;&gt;aptly snapshot merge&lt;/a&gt; changes merge strategy to &#34;latest version wins&#34; (&lt;a href=&#34;https://github.com/smira/aptly/pull/42&#34;&gt;#42&lt;/a&gt;), thanks to &lt;a href=&#34;https://github.com/ryanuber&#34;&gt;@ryanuber&lt;/a&gt; and &lt;a href=&#34;https://github.com/keithchambers&#34;&gt;@keithchambers&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>aptly 0.4</title>
+      <link>http://beta.aptly.info/post/aptly-0-4</link>
+      <pubDate>Tue, 11 Mar 2014 16:14:00 UTC</pubDate>
+      <author>Andrey Smirnov</author>
+      <guid>http://beta.aptly.info/post/aptly-0-4</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;http://www.aptly.info/&#34;&gt;aptly&lt;/a&gt; version 0.4 has been released today.
+Major feature in this version is &lt;a href=&#34;http://www.aptly.info/#aptly-repo&#34;&gt;local package repository
+management&lt;/a&gt; which allows to manage
+collection of your own packages, publish, take snapshots, mix with
+upstream repositories mirrors. Please &lt;a href=&#34;http://www.aptly.info/#download&#34;&gt;download
+it&lt;/a&gt; or install from
+&lt;a href=&#34;https://github.com/smira/aptly&#34;&gt;source&lt;/a&gt;, &lt;a href=&#34;https://github.com/smira/aplty/issues&#34;&gt;raise
+issues&lt;/a&gt;, disscuss in
+&lt;a href=&#34;https://groups.google.com/forum/#!forum/aptly-discuss&#34;&gt;aptly-discuss
+group&lt;/a&gt;, follow
+&lt;a href=&#34;https://twitter.com/smira/&#34;&gt;me (@smira)&lt;/a&gt; to get information about
+updates.&lt;/p&gt;
+
+&lt;p&gt;Other features in 0.4 worth mentioning are: support for source packages
+for mirrors and local repositories, ability to delete unused package
+files and DB entries, and memory usage optimizations.&lt;/p&gt;
+
+&lt;p&gt;Full list of changes in this version:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;local package repositories are supported&lt;/li&gt;
+&lt;li&gt;aptly supports mirroring remote repos with source packages and
+publishing repositories with sources&lt;/li&gt;
+&lt;li&gt;new command: &lt;code&gt;aptly db cleanup&lt;/code&gt; to remove unreferenced DB entries
+and files&lt;/li&gt;
+&lt;li&gt;aptly peak memory usage has been reduced by factor of 3x&lt;/li&gt;
+&lt;li&gt;new flags: &lt;code&gt;-keyring&lt;/code&gt; &amp;amp; &lt;code&gt;-secret-keyring&lt;/code&gt; for
+&lt;code&gt;aptly snapshot publish&lt;/code&gt; command&lt;/li&gt;
+&lt;li&gt;new config: &lt;code&gt;downloadSourcePackages&lt;/code&gt; to enable source package
+downloading&lt;/li&gt;
+&lt;li&gt;new flag: &lt;code&gt;-with-sources&lt;/code&gt; for &lt;code&gt;aptly mirror create&lt;/code&gt; command&lt;/li&gt;
+&lt;li&gt;new config &amp;amp; flag: &lt;code&gt;dependencyFollowSource&lt;/code&gt; &amp;amp; &lt;code&gt;-dep-follow-source&lt;/code&gt;
+to follow &lt;code&gt;Source:&lt;/code&gt; dependencies&lt;/li&gt;
+&lt;li&gt;new commands in &lt;code&gt;aptly repo&lt;/code&gt; family: &lt;code&gt;add&lt;/code&gt;, &lt;code&gt;copy&lt;/code&gt;, &lt;code&gt;create&lt;/code&gt;,
+&lt;code&gt;drop&lt;/code&gt;, &lt;code&gt;import&lt;/code&gt;, &lt;code&gt;list&lt;/code&gt;, &lt;code&gt;move&lt;/code&gt;, &lt;code&gt;remove&lt;/code&gt; and &lt;code&gt;show&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;command &lt;code&gt;aptly snapshot create&lt;/code&gt; supports creation of snapshots from
+local repos&lt;/li&gt;
+&lt;li&gt;new flag&lt;code&gt;-no-remove&lt;/code&gt; for &lt;code&gt;aptly snapshot pull&lt;/code&gt;: don&amp;rsquo;t remove other
+version of packages when pulling (e.g. keep old versions)&lt;/li&gt;
+&lt;li&gt;command &lt;code&gt;aptly mirror create&lt;/code&gt; supports shorthand PPA url:
+&lt;code&gt;ppa:user/project&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;new config: &lt;code&gt;ppaDistributorID&lt;/code&gt; &amp;amp; &lt;code&gt;ppaCodename&lt;/code&gt; to specify PPA url
+expansion rules&lt;/li&gt;
+&lt;li&gt;packages are printed in lists with underscores instead of dashes,
+e.g. &lt;code&gt;pkg_1.3-3_amd64&lt;/code&gt; instead of &lt;code&gt;pkg-1.3-3-amd64&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;With addition of local package repositories, schema of aptly entities
+and transitions looks like that:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;/img/schema04.png&#34; class=&#34;img-responsive&#34; alt=&#34;aptly schema&#34;&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>aptly Memory Usage Optimization</title>
+      <link>http://beta.aptly.info/post/aptly-memory-usage-optimization</link>
+      <pubDate>Wed, 05 Mar 2014 17:15:00 UTC</pubDate>
+      <author>Andrey Smirnov</author>
+      <guid>http://beta.aptly.info/post/aptly-memory-usage-optimization</guid>
+      <description>&lt;p&gt;Next &lt;a href=&#34;http://www.aptly.info&#34;&gt;aptly&lt;/a&gt; version (0.4) would contain some
+changes to lower memory requirements while doing general operations:
+memory usage will be decreased by factor of 3. aptly is written in Go
+language, so this is a short story of optimizing Go program memory
+usage.&lt;/p&gt;
+
+&lt;p&gt;When I have been developing aptly, I suspected that memory usage would
+be not optimal, as aptly is processing huge amounts of package metadata
+(for example, when mirroring upstream Debian repositories consisting of
+30000 packages). Memory usage went unnoticed until I was testing aptly
+in virtual machine with just 512 MB of memory, aptly was performing
+poorly because Linux was busy in swapping. This was something completely
+unexpected: so much memory? how could that be?&lt;/p&gt;
+
+&lt;p&gt;First I applied some general optimizations which were trivial:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;some long operations (like mirroring) were happening in single
+function and some big data structures weren&amp;rsquo;t required full time
+during function execution. So assigning &lt;code&gt;nil&lt;/code&gt; to them allowed Go&amp;rsquo;s
+garbage collector to reclaim unused memory faster.&lt;/li&gt;
+&lt;li&gt;reusing buffers for structure encoding (this is safe, as there&amp;rsquo;re no
+concurrent operations and resulting byte slice is copied
+immediately).&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Instead of creating buffer every time&amp;hellip;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;sourceCode go&#34;&gt;// Encode does msgpack encoding of Package
+func (p *Package) Encode() []byte {
+    var buf bytes.Buffer
+
+    encoder := codec.NewEncoder(&amp;amp;buf, &amp;amp;codec.MsgpackHandle{})
+    encoder.Encode(p)
+
+    return buf.Bytes()
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&amp;hellip; re-use buffer:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;sourceCode go&#34;&gt;// Internal buffer reused by all Package.Encode operations
+var encodeBuf bytes.Buffer
+
+// Encode does msgpack encoding of Package, []byte should be copied, as buffer would
+// be used for the next call to Encode
+func (p *Package) Encode() []byte {
+    encodeBuf.Reset()
+
+    encoder := codec.NewEncoder(&amp;amp;encodeBuf, &amp;amp;codec.MsgpackHandle{})
+    encoder.Encode(p)
+
+    return encodeBuf.Bytes()
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Second, I had to find reliable way to measure memory consumption, that
+was easy thanks to &lt;a href=&#34;http://blog.cloudflare.com/recycling-memory-buffers-in-go&#34;&gt;CloudFlare blog
+post&lt;/a&gt;. What I
+discovered first was:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;/img/mem-verify0.png&#34; alt=&#34;mem stats for aptly snapshot verify&#34; class=&#34;img-responsive&#34;&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;/img/mem-mirror-update1.png&#34; alt=&#34;mem stats for aptly mirror update&#34; class=&#34;img-responsive&#34;&gt;&lt;/p&gt;
+
+&lt;p&gt;First graph is for &lt;code&gt;aptly snapshot verify&lt;/code&gt; command verifying
+dependencies in whole Debian wheezy distribution, second graph is
+&lt;code&gt;aptly mirror update&lt;/code&gt; command parsing package metadata and building
+empty download queue.&lt;/p&gt;
+
+&lt;p&gt;What I did next was &lt;a href=&#34;http://blog.golang.org/profiling-go-programs&#34;&gt;CPU &amp;amp; memory
+profiling&lt;/a&gt; which showed
+two things:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;a lot of time spent in GC (unsurprisingly, for 800GB heap);&lt;/li&gt;
+&lt;li&gt;there are no unexpected memory allocations, memory is allocated as
+expected.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The major memory usage was structure &lt;code&gt;Package&lt;/code&gt; that represents parsed
+information from Debian control file. Some parts of that structure are
+required for all operations, some are required only when publishing or
+mirroring. So I had to split &lt;code&gt;Package&lt;/code&gt; into parts that are loaded from
+DB on demand and removed when not used.&lt;/p&gt;
+
+&lt;p&gt;What I got in the end was:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;/img/mem-verify4.png&#34; alt=&#34;mem stats for aptly snapshot verify&#34; class=&#34;img-responsive&#34;&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;/img/mem-mirror-update4.png&#34; alt=&#34;mem stats for aptly mirror update&#34; class=&#34;img-responsive&#34;&gt;&lt;/p&gt;
+
+&lt;p&gt;As it could be seen easily from these graphs, GC is freeing much more
+memory all the time keeping memory usage more linear. There are some
+more things that could be optimized to improve memory usage, but they
+are left for future aptly development.&lt;/p&gt;
+
+&lt;p&gt;In order to produce these graphs, aptly was extended with following code
+that dumps &lt;code&gt;runtime.MemStats&lt;/code&gt; every 100ms:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;sourceCode go&#34;&gt;memstats := cmd.Flag.Lookup(&amp;quot;memstats&amp;quot;).Value.String()
+if memstats != &amp;quot;&amp;quot; {
+    interval := cmd.Flag.Lookup(&amp;quot;meminterval&amp;quot;).Value.Get().(time.Duration)
+
+    context.fileMemStats, err = os.Create(memstats)
+    if err != nil {
+        return err
+    }
+
+    context.fileMemStats.WriteString(&amp;quot;# Time\tHeapSys\tHeapAlloc\tHeapIdle\tHeapReleased\n&amp;quot;)
+
+    go func() {
+        var stats runtime.MemStats
+
+        start := time.Now().UnixNano()
+
+        for {
+            runtime.ReadMemStats(&amp;amp;stats)
+            if context.fileMemStats != nil {
+                context.fileMemStats.WriteString(fmt.Sprintf(&amp;quot;%d\t%d\t%d\t%d\t%d\n&amp;quot;,
+                    (time.Now().UnixNano()-start)/1000000, stats.HeapSys, stats.HeapAlloc, stats.HeapIdle, stats.HeapReleased))
+                time.Sleep(interval)
+            } else {
+                break
+            }
+        }
+    }()
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Graphs were produced from raw data using &lt;code&gt;gnuplot&lt;/code&gt; and following script:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;set output &#39;mem.png&#39;
+set term png
+set key box left
+set xlabel &amp;quot;Time (msec)&amp;quot;
+set ylabel &amp;quot;Mem (MB)&amp;quot;
+plot &amp;quot;mem.dat&amp;quot; using 1:($2/1e6) title &#39;HeapSys&#39; with lines, &amp;quot;mem.dat&amp;quot; using 1:($3/1e6) title &#39;HeapAlloc&#39; with lines, &amp;quot;mem.dat&amp;quot; using 1:($4/1e6) title &#39;HeapIdle&#39; with lines
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>aptly 0.3</title>
+      <link>http://beta.aptly.info/post/aptly-0-3</link>
+      <pubDate>Mon, 10 Feb 2014 23:20:00 UTC</pubDate>
+      <author>Andrey Smirnov</author>
+      <guid>http://beta.aptly.info/post/aptly-0-3</guid>
+      <description>&lt;p&gt;Today I&amp;rsquo;ve released &lt;a href=&#34;http://www.aptly.info/&#34;&gt;aptly&lt;/a&gt; version 0.3. It&amp;rsquo;s
+the first version I would recommend for production usage. Please
+&lt;a href=&#34;http://www.aptly.info/#download&#34;&gt;download it&lt;/a&gt; or install from
+&lt;a href=&#34;https://github.com/smira/aptly&#34;&gt;source&lt;/a&gt;, &lt;a href=&#34;https://github.com/smira/aplty/issues&#34;&gt;raise
+issues&lt;/a&gt;, disscuss in
+&lt;a href=&#34;https://groups.google.com/forum/#!forum/aptly-discuss&#34;&gt;aptly-discuss
+group&lt;/a&gt;, follow
+&lt;a href=&#34;https://twitter.com/smira/&#34;&gt;me (@smira)&lt;/a&gt; to get information about
+updates.&lt;/p&gt;
+
+&lt;p&gt;New features:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;using &lt;a href=&#34;http://www.aptly.info/#aptly-serve&#34;&gt;aptly serve&lt;/a&gt; command you
+can quickly serve your published repositories over HTTP, aptly would
+even advise right settings for apt sources;&lt;/li&gt;
+&lt;li&gt;aptly checks signatures and verifies checksums for downloaded files
+while mirroring remote repositories, if you don&amp;rsquo;t have key that was
+used to sign the mirror in your trusted GnuPG keychain, aptly would
+give some hints, &lt;a href=&#34;http://www.aptly.info/#aptly-mirror-create&#34;&gt;some
+hints&lt;/a&gt;;&lt;/li&gt;
+&lt;li&gt;flat format of Debian repositories is now supported (e.g.
+&lt;a href=&#34;https://build.opensuse.org&#34;&gt;OBS&lt;/a&gt; creates repositories in such
+format);&lt;/li&gt;
+&lt;li&gt;now you can drop &lt;a href=&#34;http://www.aptly.info/#aptly-mirror-drop&#34;&gt;mirrors&lt;/a&gt;
+and &lt;a href=&#34;http://www.aptly.info/#aptly-snapshot-drop&#34;&gt;snapshots&lt;/a&gt;;&lt;/li&gt;
+&lt;li&gt;aptly can &lt;a href=&#34;http://www.aptly.info/#aptly-graph&#34;&gt;draw graph of
+relationships&lt;/a&gt; between your
+mirros, snapshots and published repositories;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/aptly-dev/aptly-bash-completion&#34;&gt;bash
+completion&lt;/a&gt; is
+available for aptly, try it out, it&amp;rsquo;s amazing!&lt;/li&gt;
+&lt;li&gt;aptly gained ability to &lt;a href=&#34;http://www.aptly.info/#aptly-snapshot-create&#34;&gt;create empty
+snapshot&lt;/a&gt;, it could be
+useful if you&amp;rsquo;d like to extract part of repository by
+&lt;a href=&#34;http://www.aptly.info/#aptly-snapshot-pull&#34;&gt;pulling&lt;/a&gt; packages;&lt;/li&gt;
+&lt;li&gt;custom config location could be given with flag &lt;code&gt;-config&lt;/code&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Nice picture (actually it&amp;rsquo;s output of &lt;a href=&#34;http://www.aptly.info/#aptly-graph&#34;&gt;aptly
+graph&lt;/a&gt; command):&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;/img/aptlygraph.png&#34; class=&#34;img-responsive&#34; alt=&#34;aptly graph output&#34;&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>aptly 0.2, Moscow DevOps Meetup</title>
+      <link>http://beta.aptly.info/post/aptly-02-moscow-devops-meetup</link>
+      <pubDate>Wed, 29 Jan 2014 12:24:00 UTC</pubDate>
+      <author>Andrey Smirnov</author>
+      <guid>http://beta.aptly.info/post/aptly-02-moscow-devops-meetup</guid>
+      <description>&lt;p&gt;Two great things have happened recently:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;I&amp;rsquo;ve released &lt;a href=&#34;http://www.aptly.info&#34;&gt;aptly&lt;/a&gt; version 0.2, which is
+alpha-quality.&lt;/li&gt;
+&lt;li&gt;I&amp;rsquo;ve presented aptly at &lt;a href=&#34;http://tech.yandex.ru/events/yagosti/devops/&#34;&gt;DevOps Meetup
+Moscow&lt;/a&gt; (in Russian).&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Slides from my talk about aptly can be downloaded in
+&lt;a href=&#34;/pdf/aptly_devops_meetup_eng.pdf&#34;&gt;PDF&lt;/a&gt; (English version).&lt;/p&gt;
+
+&lt;p&gt;&lt;iframe src=&#34;http://www.slideshare.net/slideshow/embed_code/30569026&#34; width=&#34;597&#34; height=&#34;486&#34; frameborder=&#34;0&#34; marginwidth=&#34;0&#34; marginheight=&#34;0&#34; scrolling=&#34;no&#34; style=&#34;border:1px solid #CCC; border-width:1px 1px 0; margin-bottom:5px; max-width: 100%;&#34; allowfullscreen&gt; &lt;/iframe&gt; &lt;div style=&#34;margin-bottom:5px&#34;&gt; &lt;strong&gt; &lt;a href=&#34;https://www.slideshare.net/Smirnov.Andrey/aptly-debian-repository-management-tool&#34; title=&#34;aptly: Debian repository management tool&#34; target=&#34;_blank&#34;&gt;aptly: Debian repository management tool&lt;/a&gt; &lt;/strong&gt; from &lt;strong&gt;&lt;a href=&#34;http://www.slideshare.net/Smirnov.Andrey&#34; target=&#34;_blank&#34;&gt;Andrey Smirnov&lt;/a&gt;&lt;/strong&gt; &lt;/div&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

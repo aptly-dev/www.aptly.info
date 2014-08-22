@@ -1,0 +1,457 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>aptly - Publishing to S3</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link type="text/css" rel="stylesheet" href="/css/styles.css">
+    <link rel="canonical" href="http://beta.aptly.info/doc/feature/s3">
+    <link href="/post/index.xml" rel="alternate" type="application/rss+xml" title="Debian repository management tool" />
+    
+  </head>
+  <body>
+    <header id="page-header">
+      <div class="container">
+                <nav class="navbar navbar-default navbar-static-top" role="navigation">
+          <ul class="nav navbar-nav nav-justified">
+            <li ><a href="/examples/">examples</a></li>
+            <li ><a href="/download/">download</a></li>
+            <li ><a href="/support/">support</a></li>
+            <li class="active"><a href="/doc/overview/">documentation</a></li>
+            <li ><a href="/about/">about</a></li>
+            <li ><a href="/post/">blog</a></li>
+          </ul>
+        </nav>
+
+        <div class="row">
+          <div class="col-md-6 col-md-offset-3 text-center">
+            <a class="brand" href="/">
+              <i class="brand-logo"></i>
+              <span class="brand-name">aptly</span>
+            </a>
+          </div>
+        </div>
+      
+      </div>
+    </header>
+
+    
+    <section class="documentation">
+      <div class="container">
+        <div class="sidebar-overlay"></div>
+        <div class="row">
+          <div class="col-md-3 col-sm-3 col-xs-3">
+            <div class="sidebar">
+              <ul class="nav nav-sidebar">
+                
+                
+                  <li >
+                    <a href="http://beta.aptly.info/doc/overview">Overview</a>
+                    
+                  </li>
+                
+                  <li >
+                    <a href="http://beta.aptly.info/doc/why">Why aptly?</a>
+                    
+                  </li>
+                
+                  <li >
+                    <a href="http://beta.aptly.info/doc/faq">FAQ</a>
+                    
+                  </li>
+                
+                  <li class="active">
+                    <a href="http://beta.aptly.info/doc/features">Features</a>
+                    
+                      <ul class="nav">
+                        
+                          <li >
+                            <a href="http://beta.aptly.info/doc/feature/query">Package Queries</a>
+                            
+                          </li>
+                        
+                          <li >
+                            <a href="http://beta.aptly.info/doc/feature/duplicate">Duplicate Packages</a>
+                            
+                          </li>
+                        
+                          <li class="active">
+                            <a href="http://beta.aptly.info/doc/feature/s3">Publishing to S3</a>
+                            
+                          </li>
+                        
+                          <li >
+                            <a href="http://beta.aptly.info/doc/feature/multi-component">Multi-Component Publishing</a>
+                            
+                          </li>
+                        
+                      </ul>
+                    
+                  </li>
+                
+                  <li >
+                    <a href="http://beta.aptly.info/doc/configuration">Configuration</a>
+                    
+                  </li>
+                
+                  <li >
+                    <a href="http://beta.aptly.info/doc/commands">Commands</a>
+                    
+                      <ul class="nav">
+                        
+                          <li >
+                            <a href="http://beta.aptly.info/doc/aptly/flags">Global Flags</a>
+                            
+                          </li>
+                        
+                          <li >
+                            <a href="http://beta.aptly.info/doc/aptly/mirror">aptly mirror</a>
+                            
+                              <ul class="nav">
+                                
+                                  <li >
+                                    <a href="http://beta.aptly.info/doc/aptly/mirror/create">aptly mirror create</a>
+                                  </li>
+                                
+                                  <li >
+                                    <a href="http://beta.aptly.info/doc/aptly/mirror/update">aptly mirror update</a>
+                                  </li>
+                                
+                                  <li >
+                                    <a href="http://beta.aptly.info/doc/aptly/mirror/list">aptly mirror list</a>
+                                  </li>
+                                
+                                  <li >
+                                    <a href="http://beta.aptly.info/doc/aptly/mirror/show">aptly mirror show</a>
+                                  </li>
+                                
+                                  <li >
+                                    <a href="http://beta.aptly.info/doc/aptly/mirror/edit">aptly mirror edit</a>
+                                  </li>
+                                
+                                  <li >
+                                    <a href="http://beta.aptly.info/doc/aptly/mirror/rename">aptly mirror rename</a>
+                                  </li>
+                                
+                                  <li >
+                                    <a href="http://beta.aptly.info/doc/aptly/mirror/drop">aptly mirror drop</a>
+                                  </li>
+                                
+                              </ul>
+                            
+                          </li>
+                        
+                          <li >
+                            <a href="http://beta.aptly.info/doc/aptly/repo">aptly repo</a>
+                            
+                              <ul class="nav">
+                                
+                                  <li >
+                                    <a href="http://beta.aptly.info/doc/aptly/repo/create">aptly repo create</a>
+                                  </li>
+                                
+                                  <li >
+                                    <a href="http://beta.aptly.info/doc/aptly/repo/add">aptly repo add</a>
+                                  </li>
+                                
+                                  <li >
+                                    <a href="http://beta.aptly.info/doc/aptly/repo/import">aptly repo import</a>
+                                  </li>
+                                
+                                  <li >
+                                    <a href="http://beta.aptly.info/doc/aptly/repo/show">aptly repo show</a>
+                                  </li>
+                                
+                                  <li >
+                                    <a href="http://beta.aptly.info/doc/aptly/repo/list">aptly repo list</a>
+                                  </li>
+                                
+                                  <li >
+                                    <a href="http://beta.aptly.info/doc/aptly/repo/copy">aptly repo copy</a>
+                                  </li>
+                                
+                                  <li >
+                                    <a href="http://beta.aptly.info/doc/aptly/repo/move">aptly repo move</a>
+                                  </li>
+                                
+                                  <li >
+                                    <a href="http://beta.aptly.info/doc/aptly/repo/remove">aptly repo remove</a>
+                                  </li>
+                                
+                                  <li >
+                                    <a href="http://beta.aptly.info/doc/aptly/repo/edit">aptly repo edit</a>
+                                  </li>
+                                
+                                  <li >
+                                    <a href="http://beta.aptly.info/doc/aptly/repo/rename">aptly repo rename</a>
+                                  </li>
+                                
+                                  <li >
+                                    <a href="http://beta.aptly.info/doc/aptly/repo/drop">aptly repo drop</a>
+                                  </li>
+                                
+                              </ul>
+                            
+                          </li>
+                        
+                          <li >
+                            <a href="http://beta.aptly.info/doc/aptly/snapshot">aptly snapshot</a>
+                            
+                              <ul class="nav">
+                                
+                                  <li >
+                                    <a href="http://beta.aptly.info/doc/aptly/snapshot/create">aptly snapshot create</a>
+                                  </li>
+                                
+                                  <li >
+                                    <a href="http://beta.aptly.info/doc/aptly/snapshot/list">aptly snapshot list</a>
+                                  </li>
+                                
+                                  <li >
+                                    <a href="http://beta.aptly.info/doc/aptly/snapshot/show">aptly snapshot show</a>
+                                  </li>
+                                
+                                  <li >
+                                    <a href="http://beta.aptly.info/doc/aptly/snapshot/verify">aptly snapshot verify</a>
+                                  </li>
+                                
+                                  <li >
+                                    <a href="http://beta.aptly.info/doc/aptly/snapshot/pull">aptly snapshot pull</a>
+                                  </li>
+                                
+                                  <li >
+                                    <a href="http://beta.aptly.info/doc/aptly/snapshot/diff">aptly snapshot diff</a>
+                                  </li>
+                                
+                                  <li >
+                                    <a href="http://beta.aptly.info/doc/aptly/snapshot/merge">aptly snapshot merge</a>
+                                  </li>
+                                
+                                  <li >
+                                    <a href="http://beta.aptly.info/doc/aptly/snapshot/rename">aptly snapshot rename</a>
+                                  </li>
+                                
+                                  <li >
+                                    <a href="http://beta.aptly.info/doc/aptly/snapshot/drop">aptly snapshot drop</a>
+                                  </li>
+                                
+                              </ul>
+                            
+                          </li>
+                        
+                          <li >
+                            <a href="http://beta.aptly.info/doc/aptly/publish">aptly publish</a>
+                            
+                              <ul class="nav">
+                                
+                                  <li >
+                                    <a href="http://beta.aptly.info/doc/aptly/publish/snapshot">aptly publish snapshot</a>
+                                  </li>
+                                
+                                  <li >
+                                    <a href="http://beta.aptly.info/doc/aptly/publish/repo">aptly publish repo</a>
+                                  </li>
+                                
+                                  <li >
+                                    <a href="http://beta.aptly.info/doc/aptly/publish/update">aptly publish update</a>
+                                  </li>
+                                
+                                  <li >
+                                    <a href="http://beta.aptly.info/doc/aptly/publish/switch">aptly publish switch</a>
+                                  </li>
+                                
+                                  <li >
+                                    <a href="http://beta.aptly.info/doc/aptly/publish/list">aptly publish list</a>
+                                  </li>
+                                
+                                  <li >
+                                    <a href="http://beta.aptly.info/doc/aptly/publish/drop">aptly publish drop</a>
+                                  </li>
+                                
+                              </ul>
+                            
+                          </li>
+                        
+                          <li >
+                            <a href="http://beta.aptly.info/doc/aptly/db">aptly db</a>
+                            
+                              <ul class="nav">
+                                
+                                  <li >
+                                    <a href="http://beta.aptly.info/doc/aptly/db/cleanup">aptly db cleanup</a>
+                                  </li>
+                                
+                                  <li >
+                                    <a href="http://beta.aptly.info/doc/aptly/db/recover">aptly db recover</a>
+                                  </li>
+                                
+                              </ul>
+                            
+                          </li>
+                        
+                          <li >
+                            <a href="http://beta.aptly.info/doc/aptly/serve">aptly serve</a>
+                            
+                          </li>
+                        
+                          <li >
+                            <a href="http://beta.aptly.info/doc/aptly/graph">aptly graph</a>
+                            
+                          </li>
+                        
+                      </ul>
+                    
+                  </li>
+                
+                  <li >
+                    <a href="http://beta.aptly.info/doc/integrations">Integrations</a>
+                    
+                  </li>
+                
+                  <li >
+                    <a href="http://beta.aptly.info/doc/history">History</a>
+                    
+                  </li>
+                
+              </ul>
+              <div class="source-buttons">
+                <a href="/download/" class="btn btn-danger">Download</a>
+                <a href="https://github.com/smira/aptly" class="btn btn-default">Github</a>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-9 col-sm-9 col-xs-9">
+            
+
+<h2 id="toc_0">Publishing to Amazon S3</h2>
+
+<p>aptly could be configured to publish repository directly to Amazon S3.
+First, publishing endpoints should be described in aptly
+<a href="/doc/configuration/">configuration</a> file. Each endpoint has name and
+associated settings:</p>
+
+<ul>
+<li><code>region</code>: Amazon region for S3 bucket (e.g. <code>us-east-1</code>)</li>
+<li><code>bucket</code>: bucket name</li>
+<li><code>prefix</code>: (optional) do publishing under specified prefix in the
+bucket, defaults to no prefix (bucket root)</li>
+<li><code>acl</code>: (optional) assign ACL to published files (one of the canned
+ACLs in Amazon terminology). Useful values: <code>private</code> (default) or
+<code>public-read</code> (public repository). Public repositories could be
+consumed by <code>apt</code> using HTTP endpoint (Amazon bucket should be
+configured for &ldquo;website hosting&rdquo;), for private repositories special
+apt S3 transport is required.</li>
+<li><code>awsAccessKeyID</code>, <code>awsSecretAccessKey</code>: (optional) Amazon
+credentials to access S3 bucket. If not supplied, environment
+variables <code>AWS_ACCESS_KEY_ID</code> and <code>AWS_SECRET_ACCESS_KEY</code> are used.</li>
+</ul>
+
+<p>S3 bucket used for publishing should be empty initially and should not
+be used to store other data, as aptly might remove objects while doing
+cleanup operation. If <code>prefix</code> is configured, bucket should be empty
+under the prefix (aptly won&rsquo;t touch any objects outside prefix).</p>
+
+<p>In order to publish to S3, specify endpoint as <code>s3:endpoint-name:</code>
+before publishing prefix on the command line, e.g.:</p>
+
+<pre><code>$ aptly publish snapshot wheezy-main s3:test:
+</code></pre>
+
+<p>Or, with prefix:</p>
+
+<pre><code>$ aptly publish snapshot wheezy-main s3:test:debian/
+</code></pre>
+
+<p>If you would like to publish public repository to Amazon S3, create
+bucket, enable website hosting option at Amazon console. Specify bucket
+name, region and access keys in aptly configuration under
+<code>S3PublishEndpoints</code>. Use <code>public-read</code> as value for <code>acl</code> parameter.
+Published repository could be added to <code>/etc/apt/sources.list</code> by using
+public HTTP URL, like any other HTTP repository.</p>
+
+<p>For private repositories, don&rsquo;t enable website hosting option and use
+<code>private</code> as value for <code>acl</code> parameter. Install
+<a href="https://github.com/brianm/apt-s3/">apt-s3</a> or any other similar tool to
+enable <code>s3://</code> transport in <code>apt</code>. Use special URLs to include your
+private repository in <code>/etc/apt/sources.list</code>:</p>
+
+<pre><code>deb s3://&lt;access-key&gt;:[&lt;secret-key&gt;]@s3-eu-east-1.amazonaws.com/private-repo main
+</code></pre>
+
+<p>It is recommended to setup separate user in Amazon IAM for publishing to
+S3. This user would have access only to one bucket for publishing and
+limited operations. Sample policy (change <code>bucket</code> to match you bucket
+name):</p>
+
+<pre><code>{
+  &quot;Version&quot;: &quot;2012-10-17&quot;,
+  &quot;Statement&quot;: [
+    {
+      &quot;Sid&quot;: &quot;Stmt1405592139000&quot;,
+      &quot;Effect&quot;: &quot;Allow&quot;,
+      &quot;Action&quot;: [
+        &quot;s3:DeleteObject&quot;,
+        &quot;s3:GetObject&quot;,
+        &quot;s3:ListBucket&quot;,
+        &quot;s3:PutObject&quot;,
+        &quot;s3:PutObjectAcl&quot;
+      ],
+      &quot;Resource&quot;: [
+        &quot;arn:aws:s3:::bucket/*&quot;, &quot;arn:aws:s3:::bucket&quot;
+      ]
+    }
+  ]
+}
+</code></pre>
+
+<p> </p>
+
+            <div id="disqus_thread"></div>
+<script type="text/javascript">
+
+(function() {
+    
+    
+    if (window.location.hostname == "localhost")
+        return;
+
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    var disqus_shortname = 'aptly';
+    var disqus_title = 'Publishing to S3';
+    var disqus_identifier = '\/doc\/feature\/s3';
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <footer id="page-footer">
+      <div class="container">
+                <nav class="navbar navbar-default navbar-static-top" role="navigation">
+          <ul class="nav navbar-nav nav-justified">
+            <li ><a href="/examples/">examples</a></li>
+            <li ><a href="/download/">download</a></li>
+            <li ><a href="/support/">support</a></li>
+            <li class="active"><a href="/doc/overview/">documentation</a></li>
+            <li ><a href="/about/">about</a></li>
+            <li ><a href="/post/">blog</a></li>
+          </ul>
+        </nav>
+
+        <div class="copy">
+          Sponsored by <a href="http://express42.com/">express42</a> &copy;&nbsp;2013-2014 Andrey Smirnov
+        </div>
+      </div>
+    </footer>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/aptly.js"></script>
+  </body>
+</html>
