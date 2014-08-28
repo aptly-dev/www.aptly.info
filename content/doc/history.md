@@ -22,9 +22,9 @@ History
 
 ### Version 0.7
 
--   direct [publishing to Amazon S3](/doc/aptly/feature/s3/)
+-   direct [publishing to Amazon S3](/doc/feature/s3/)
     ([\#15](https://github.com/smira/aptly/issues/15))
--   support for new, powerful [query language](/doc/aptly/feature/query/) in many
+-   support for new, powerful [query language](/doc/feature/query/) in many
     commands: [aptly snapshot pull](/doc/aptly/snapshot/pull/), [aptly repo
     move](/doc/aptly/repo/move/), [aptly repo copy](/doc/aptly/repo/copy/), [aptly
     repo import](/doc/aptly/repo/import/) and [aptly repo
@@ -166,7 +166,7 @@ History
 -   new command: [aptly db cleanup](/doc/aptly/db/cleanup/) to remove
     unreferenced DB entries and files
 -   new flags: `-keyring` & `-secret-keyring` for [aptly snapshot
-    publish](/doc/aptly/snapshot/publish/) command
+    publish](/doc/aptly/publish/snapshot/) command
 -   aptly supports mirroring remote repos with source packages and
     publishing repositories with sources
 -   new config: `downloadSourcePackages` to enable source package

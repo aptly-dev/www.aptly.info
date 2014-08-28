@@ -83,7 +83,7 @@ publishing, command accepts several snapshot names:
 
 When mirroring remote repositories in order to preserve package split by
 component, create individual mirrors for each component, take snapshots
-and publish them as multi-component repository. Please see [multiple-component publishing](/doc/feature/multiple/)
+and publish them as multi-component repository. Please see [multiple-component publishing](/doc/feature/multi-component/)
 for more examples.
 
 Example:

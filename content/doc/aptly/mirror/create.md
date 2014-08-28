@@ -56,7 +56,7 @@ downloaded.
 
 If components are not specified, aptly will download packages from all
 components and merge them into one. If components should
-be left separate, please create [separate mirror for each component](/doc/feature/multiple-component/).
+be left separate, please create [separate mirror for each component](/doc/feature/multi-component/).
 
 If PPA url is specified, aptly would expand it to HTTP url using
 configuration options `ppaDistributorID` & `ppaCodename`. If you're

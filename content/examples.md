@@ -99,7 +99,7 @@ $ apt-get update
 Pulling new version of `nginx` from `backports`:
 
 [Create](/doc/aptly/mirror/create) `backports` mirror,
-[download](/doc/aptly/mirror/update) it and [take](/doc/aplty/snapshot/create)
+[download](/doc/aptly/mirror/update) it and [take](/doc/aptly/snapshot/create)
 snapshot:
 
 <pre class="code">

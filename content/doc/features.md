@@ -16,7 +16,7 @@ List of aptly features, in no particular order:
   * regular and flat repositories
   * HTTP servers are supported
   * mirror only specified architectures/components
-  * [partial mirrors](/doc/aptly/feature/query/) (with filters on packages)
+  * [partial mirrors](/doc/feature/query/) (with filters on packages)
 * local repositories handling:
   * any number of local repositories
   * packages could be [added](/doc/aptly/repo/add/) from files or by directory scan
@@ -28,7 +28,7 @@ List of aptly features, in no particular order:
   * packages from mirrors and local repos are stored in deduplicated manner
   * package file is kept in package pool until there's at least a single reference
   * pool could be [cleaned up](/doc/aptly/db/cleanup/)
-* handling of [duplicate](/doc/aptly/feature/duplicate/) packages
+* handling of [duplicate](/doc/feature/duplicate/) packages
 * snapshots for mirrors and local repositories:
   * [creating](/doc/aptly/snapshot/create/) snapshots from mirrors and local repositories
   * snapshot is immutable
@@ -40,7 +40,7 @@ List of aptly features, in no particular order:
 * publishing snapshots and local repositories:
   * publishing [snapshots](/doc/aptly/publish/snapshot/) created from mirrors or local repositories
   * publishing [local repositories](/doc/aptly/publish/repo/) directly
-  * [multi-component](/doc/feature/multiple-component/) publishing
+  * [multi-component](/doc/feature/multi-component/) publishing
   * publishing under prefix
   * publishing to [Amazon S3](/doc/feature/s3/)
   * atomic [switching](/doc/aptly/publish/switch) of published snapshots

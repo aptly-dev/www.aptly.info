@@ -79,7 +79,7 @@ accepts several local repositories names:
 
     $ aptly publish repo -component=main,contrib mysoft-main mysoft-contrib
 
-Please see [multiple-component publishing](/doc/feature/multiple/)
+Please see [multiple-component publishing](/doc/feature/multi-component/)
 for more examples.
 
 Example:
