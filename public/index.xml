@@ -10,577 +10,6 @@
     <updated>Fri, 08 Aug 2014 11:17:38 UTC</updated>
     
     <item>
-      <title>aptly db</title>
-      <link>http://www.aptly.info/doc/aptly/db</link>
-      <pubDate>Fri, 08 Aug 2014 11:17:38 UTC</pubDate>
-      <author>Andrey Smirnov</author>
-      <guid>http://www.aptly.info/doc/aptly/db</guid>
-      <description>
-
-&lt;h2 id=&#34;toc_0&#34;&gt;aptly db&lt;/h2&gt;
-
-&lt;p&gt;aptly db subcommands manage aptly&amp;rsquo;s internal metadata database and
-package pool.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>aptly snapshot pull</title>
-      <link>http://www.aptly.info/doc/aptly/snapshot/pull</link>
-      <pubDate>Fri, 08 Aug 2014 11:17:38 UTC</pubDate>
-      <author>Andrey Smirnov</author>
-      <guid>http://www.aptly.info/doc/aptly/snapshot/pull</guid>
-      <description>
-
-&lt;h2 id=&#34;toc_0&#34;&gt;aptly snapshot pull&lt;/h2&gt;
-
-&lt;p&gt;Pulls new packages (along with its dependencies) to &lt;code&gt;name&lt;/code&gt; snapshot from
-&lt;code&gt;source&lt;/code&gt; snapshot. Also pull command can upgrade package versions if
-&lt;code&gt;name&lt;/code&gt; snapshot already contains packages being pulled. New
-snapshot &lt;code&gt;destination&lt;/code&gt; is created as result of this process.&lt;/p&gt;
-
-&lt;p&gt;Usage:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ aptly snapshot pull &amp;lt;name&amp;gt; &amp;lt;source&amp;gt; &amp;lt;destination&amp;gt; &amp;lt;package-query&amp;gt; ...
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Params:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;name&lt;/code&gt; is snapshot name which has been given during snapshot
-creation&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;source&lt;/code&gt; is a snapshot name where packages and dependencies would be
-searched&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;destination&lt;/code&gt; is a name of the snapshot that would be created&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;package-query&lt;/code&gt; is a list of &lt;a href=&#34;/doc/feature/query/&#34;&gt;package queries&lt;/a&gt;, in
-the simplest form, name of package to be pulled from &lt;code&gt;source&lt;/code&gt; could
-be specified&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Flags:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;-all-matches=false&lt;/code&gt;: pull all the packages that satisfy the
-dependency version requirements (default is to pull first matching
-package)&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;-dry-run=false&lt;/code&gt;: don&amp;rsquo;t create &lt;code&gt;destination&lt;/code&gt; snapshot, just show what
-would be pulled&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;-no-deps=false&lt;/code&gt;: don&amp;rsquo;t process dependencies, just pull listed
-packages&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;-no-remove=false&lt;/code&gt;: don&amp;rsquo;t remove other package versions when pulling
-package&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;If architectures are limited (with config &lt;code&gt;architectures&lt;/code&gt; or option
-&lt;code&gt;-architectures&lt;/code&gt;), only mentioned architectures are processed, otherwise
-&lt;code&gt;aptly&lt;/code&gt; will process all architectures in the snapshot.&lt;/p&gt;
-
-&lt;p&gt;If following dependencies by source is enabled (using either
-&lt;code&gt;dependencyFollowSource&lt;/code&gt; config option or flag &lt;code&gt;-dep-follow-source&lt;/code&gt;),
-pulling binary packages would also pull corresponding source packages as
-well.&lt;/p&gt;
-
-&lt;p&gt;By default aptly would remove packages matching name and architecture
-while importing: e.g. when importing &lt;code&gt;software_1.3_amd64&lt;/code&gt;, package
-&lt;code&gt;software_1.2.9_amd64&lt;/code&gt; would be removed. With flag &lt;code&gt;-no-remove&lt;/code&gt; both
-package versions would stay in the snapshot.&lt;/p&gt;
-
-&lt;p&gt;aptly pulls first package matching each of &lt;code&gt;package queries&lt;/code&gt;, but with
-flag &lt;code&gt;-all-matches&lt;/code&gt; all matching packages would be pulled.&lt;/p&gt;
-
-&lt;p&gt;Example:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ aptly snapshot pull snap-deb2-main back snap-deb-main-w-xorg xserver-xorg
-Dependencies would be pulled into snapshot:
-    [snap-deb2-main]: Snapshot from mirror [deb2-main]: http://ftp.ru.debian.org/debian/ squeeze
-from snapshot:
-    [back]: Snapshot from mirror [backports2]: http://mirror.yandex.ru/backports.org/ squeeze-backports
-and result would be saved as new snapshot snap-deb-main-w-xorg.
-Loading packages (49476)...
-Building indexes...
-[-] xserver-xorg-1:7.5+8+squeeze1_amd64 removed
-[+] xserver-xorg-1:7.6+8~bpo60+1_amd64 added
-[-] xserver-xorg-core-2:1.7.7-16_amd64 removed
-[+] xserver-xorg-core-2:1.10.4-1~bpo60+2_amd64 added
-[-] xserver-common-2:1.7.7-16_all removed
-[+] xserver-common-2:1.10.4-1~bpo60+2_all added
-[-] libxfont1-1:1.4.1-3_amd64 removed
-[+] libxfont1-1:1.4.4-1~bpo60+1_amd64 added
-[-] xserver-xorg-1:7.5+8+squeeze1_i386 removed
-[+] xserver-xorg-1:7.6+8~bpo60+1_i386 added
-[-] xserver-xorg-core-2:1.7.7-16_i386 removed
-[+] xserver-xorg-core-2:1.10.4-1~bpo60+2_i386 added
-[-] libxfont1-1:1.4.1-3_i386 removed
-[+] libxfont1-1:1.4.4-1~bpo60+1_i386 added
-
-Snapshot snap-deb-main-w-xorg successfully created.
-You can run &#39;aptly publish snapshot snap-deb-main-w-xorg&#39; to publish snapshot as Debian repository.
-&lt;/code&gt;&lt;/pre&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Package Queries</title>
-      <link>http://www.aptly.info/doc/feature/query</link>
-      <pubDate>Fri, 08 Aug 2014 11:17:38 UTC</pubDate>
-      <author>Andrey Smirnov</author>
-      <guid>http://www.aptly.info/doc/feature/query</guid>
-      <description>
-
-&lt;h2 id=&#34;toc_0&#34;&gt;Package Queries&lt;/h2&gt;
-
-&lt;p&gt;Some commands accept package queries to identify list of packages to
-process. Package query syntax almost matches &lt;code&gt;reprepro&lt;/code&gt; query language.
-Query consists of the following simple terms:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;direct package reference&lt;/strong&gt;: reference to exaclty one package.
-Format is identical to the way aptly lists packages in show commands
-with &lt;code&gt;-with-packages&lt;/code&gt; flag: &lt;code&gt;name_version_arch&lt;/code&gt;, e.g.:
-&lt;code&gt;libmysqlclient18_5.5.35-rel33.0-611.squeeze_amd64&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;dependency condition&lt;/strong&gt;: syntax follows Debian dependency
-specification: &lt;code&gt;package_name&lt;/code&gt; followed by optional version
-specification and architecture limit, e.g: &lt;code&gt;mysql-client (&amp;gt;= 3.6)&lt;/code&gt;.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;query against package fields&lt;/strong&gt;: syntax is the same as for dependency
-conditions, but instead of package name field name is used, e.g:
-&lt;code&gt;Priority (optional)&lt;/code&gt;.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Supported fields:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;all field names from Debian package control files are supported
-except for &lt;code&gt;Filename&lt;/code&gt;, &lt;code&gt;MD5sum&lt;/code&gt;, &lt;code&gt;SHA1&lt;/code&gt;, &lt;code&gt;SHA256&lt;/code&gt;, &lt;code&gt;Size&lt;/code&gt;, &lt;code&gt;Files&lt;/code&gt;,
-&lt;code&gt;Checksums-SHA1&lt;/code&gt;, &lt;code&gt;Checksums-SHA256&lt;/code&gt;.&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;$Source&lt;/code&gt; is a name of source package (for binary packages)&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;$SourceVersion&lt;/code&gt; is a version of source package&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;$Architecture&lt;/code&gt; is &lt;code&gt;Architecture&lt;/code&gt; for binary packages and &lt;code&gt;source&lt;/code&gt;
-for source packages, when matching with equal (&lt;code&gt;=&lt;/code&gt;) operator,
-package with &lt;code&gt;any&lt;/code&gt; architecture matches all architectures but
-&lt;code&gt;source&lt;/code&gt;.&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;$Version&lt;/code&gt; has the same value as &lt;code&gt;Version&lt;/code&gt;, but comparison operators
-use Debian version precedence rules&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;$PackageType&lt;/code&gt; is &lt;code&gt;deb&lt;/code&gt; for binary packages and &lt;code&gt;source&lt;/code&gt; for source
-packages&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Operators:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;=&lt;/code&gt;: strict match, default operator is no operator is given&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;&amp;gt;=&lt;/code&gt;, &lt;code&gt;&amp;lt;=&lt;/code&gt;, &lt;code&gt;=&lt;/code&gt;, &lt;code&gt;&amp;gt;&amp;gt;&lt;/code&gt; (strictly greater), &lt;code&gt;&amp;lt;&amp;lt;&lt;/code&gt; (strictly less):
-lexicographical comparison for all fields and special rules when
-comparing package versions&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;%&lt;/code&gt;: pattern matching, like shell patterns, supported special
-symbols are: &lt;code&gt;[^]?*&lt;/code&gt;, e.g.: &lt;code&gt;$Version (% 3.5-*)&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;~&lt;/code&gt;: regular expression matching, e.g.: &lt;code&gt;Name (~ .*-dev)&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Simple terms could be combined into more complex queries using operators
-&lt;code&gt;,&lt;/code&gt; (and), &lt;code&gt;|&lt;/code&gt; (or) and &lt;code&gt;!&lt;/code&gt; (not), parentheses &lt;code&gt;()&lt;/code&gt; are used to change
-operator precedence. Match value could be enclosed in single (&lt;code&gt;&#39;&lt;/code&gt;) or
-double (&lt;code&gt;&amp;quot;&lt;/code&gt;) quotes if required to resolve ambiguity, quotes inside
-quoted string should escaped with slash (&lt;code&gt;\&lt;/code&gt;).&lt;/p&gt;
-
-&lt;p&gt;Examples:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;mysql-client&lt;/code&gt;: matches package mysql-client of any version and
-architecture (including source), also matches packages that
-&lt;code&gt;Provide:&lt;/code&gt; &lt;code&gt;mysql-client&lt;/code&gt;.&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;mysql-client (&amp;gt;= 3.6)&lt;/code&gt;: matches package mysql-client with version
-greater or equal to 3.6. Valid operators for version are: &lt;code&gt;&amp;gt;=&lt;/code&gt;,
-&lt;code&gt;&amp;lt;=&lt;/code&gt;, &lt;code&gt;=&lt;/code&gt;, &lt;code&gt;&amp;gt;&amp;gt;&lt;/code&gt; (strictly greater), &lt;code&gt;&amp;lt;&amp;lt;&lt;/code&gt; (strictly less).&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;mysql-client {i386}&lt;/code&gt;: matches package &lt;code&gt;mysql-client&lt;/code&gt; on
-architecture &lt;code&gt;i386&lt;/code&gt;, architecture &lt;code&gt;all&lt;/code&gt; matches all architectures
-but source.&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;mysql-client (&amp;gt;= 3.6) {i386}&lt;/code&gt;: version and architecture conditions
-combined.&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;libmysqlclient18_5.5.35-rel33.0-611.squeeze_amd64&lt;/code&gt;: direct package
-reference.&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;$Source (nginx)&lt;/code&gt;: all binary packages with &lt;code&gt;nginx&lt;/code&gt; as source
-package.&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;!Name (~ .*-dev), mail-transport, $Version (&amp;gt;= 3.5)&lt;/code&gt;: matches all
-packages that provide &lt;code&gt;mail-transport&lt;/code&gt; with name that has no suffix
-&lt;code&gt;-dev&lt;/code&gt; and with version greater or equal to &lt;code&gt;3.5&lt;/code&gt;.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;When specified on command line, query may have to be quoted according to
-shell rules, so that it stays single argument:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ aptly repo import percona stable &#39;mysql-client (&amp;gt;= 3.6)&#39;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;You can use package queries filter mirrors to include only packages with limited
-priorities:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ aptly mirror create -filter=&amp;quot;Priority (required)&amp;quot; wheezy-required http://mirror.yandex.ru/debian/ wheezy main
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Or download single packages and all its dependencies:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ aptly mirror create -filter=&amp;quot;nginx&amp;quot; -filter-with-deps wheezy-required http://mirror.yandex.ru/debian/ wheezy main
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Pull packages with complex conditions:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ aptly snapshot pull snapshot1 source snapshot2 &#39;!Name (% *-dev), $Version (&amp;gt;= 3.5)&#39;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Or remove packages based on query:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ aptly repo remove local-repo &#39;Name (% http-*) | $Source (webserver)&#39;
-&lt;/code&gt;&lt;/pre&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>aptly db recover</title>
-      <link>http://www.aptly.info/doc/aptly/db/recover</link>
-      <pubDate>Fri, 08 Aug 2014 11:17:38 UTC</pubDate>
-      <author>Andrey Smirnov</author>
-      <guid>http://www.aptly.info/doc/aptly/db/recover</guid>
-      <description>
-
-&lt;h2 id=&#34;toc_0&#34;&gt;aptly db recover&lt;/h2&gt;
-
-&lt;p&gt;Database recover does its best to recover database after crash. It is
-recommended to backup DB before running recover. Recover procedures
-ignores all index files and tries to reconstruct them from &lt;code&gt;.sst&lt;/code&gt; files.&lt;/p&gt;
-
-&lt;p&gt;Usage:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ aptly db recover
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Example:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ aptly db recover
-Recovering DB...
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt; &lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>aptly mirror update</title>
-      <link>http://www.aptly.info/doc/aptly/mirror/update</link>
-      <pubDate>Fri, 08 Aug 2014 11:17:38 UTC</pubDate>
-      <author>Andrey Smirnov</author>
-      <guid>http://www.aptly.info/doc/aptly/mirror/update</guid>
-      <description>
-
-&lt;h2 id=&#34;toc_0&#34;&gt;aptly mirror update&lt;/h2&gt;
-
-&lt;p&gt;Updates remote mirror (downloads package files and meta information).
-When mirror is created, this command should be run for the first time to
-fetch mirror contents. This command could be run many times to get
-updated repository contents. If interrupted, command could be restarted
-safely.&lt;/p&gt;
-
-&lt;p&gt;Usage:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ aptly mirror update &amp;lt;name&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Params are:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;name&lt;/code&gt; is a mirror name (given when mirror was created)&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;All packages would be stored under aptly&amp;rsquo;s root dir (see section on
-&lt;a href=&#34;/doc/configuration&#34;&gt;Configuration&lt;/a&gt;).&lt;/p&gt;
-
-&lt;p&gt;Flags:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;-download-limit=0&lt;/code&gt;: limit download speed (kbytes/sec)&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;-ignore-checksums=false&lt;/code&gt;: ignore checksum mismatches for downloaded
-items (package files, metadata)&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;-ignore-signatures=false&lt;/code&gt;: disable verification of &lt;code&gt;Release&lt;/code&gt; file
-signatures&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;-keyring=trustedkeys.gpg&lt;/code&gt; gpg keyring to use when verifying Release
-file (could be specified multiple times)&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;While updating mirror, aptly would verify signature of &lt;code&gt;Release&lt;/code&gt; file
-using GnuPG. Please read information about signature verification in
-&lt;a href=&#34;/doc/aptly/mirror/create&#34;&gt;aptly mirror create&lt;/a&gt; command description.&lt;/p&gt;
-
-&lt;p&gt;Example:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ aptly mirror update debian-main
-
-2013/12/29 18:32:34 Downloading http://ftp.ru.debian.org/debian/dists/squeeze/Release...
-2013/12/29 18:32:37 Downloading http://ftp.ru.debian.org/debian/dists/squeeze/main/binary-amd64/Packages.bz2...
-2013/12/29 18:37:19 Downloading http://ftp.ru.debian.org/debian/pool/main/libg/libgwenhywfar/libgwenhywfar47-dev_3.11.3-1_amd64.deb...
-....
-&lt;/code&gt;&lt;/pre&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>aptly repo copy</title>
-      <link>http://www.aptly.info/doc/aptly/repo/copy</link>
-      <pubDate>Fri, 08 Aug 2014 11:17:38 UTC</pubDate>
-      <author>Andrey Smirnov</author>
-      <guid>http://www.aptly.info/doc/aptly/repo/copy</guid>
-      <description>
-
-&lt;h2 id=&#34;toc_0&#34;&gt;aptly repo copy&lt;/h2&gt;
-
-&lt;p&gt;Command copy copies packages matching &lt;a href=&#34;/doc/feature/query/&#34;&gt;package query&lt;/a&gt;
-from local repo &lt;code&gt;src-name&lt;/code&gt; to local repo &lt;code&gt;dst-name&lt;/code&gt;. If dependency
-following is enabled, aptly would try to copy missing dependencies from
-&lt;code&gt;src-name&lt;/code&gt; as well.&lt;/p&gt;
-
-&lt;p&gt;Usage:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$  aptly repo copy &amp;lt;src-name&amp;gt; &amp;lt;dst-name&amp;gt; &amp;lt;package-query&amp;gt; ...
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Params are:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;src-name&lt;/code&gt; packages would be searched in this local repository&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;dst-name&lt;/code&gt; packages would be copied to this local repository&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;package-query&lt;/code&gt; list of &lt;a href=&#34;/doc/feature/query/&#34;&gt;package queries&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Flags:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;-dry-run=false&lt;/code&gt;: don&amp;rsquo;t copy, just show what would be copied&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;-with-deps=false&lt;/code&gt;: follow dependencies when processing package
-query&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;When copying with dependencies, global dependency options are used. For
-example, to copy source packages, use &lt;code&gt;-dep-follow-source&lt;/code&gt;. If aptly
-won&amp;rsquo;t be able to guess list of architectures from contents of local
-repository &lt;code&gt;dst-name&lt;/code&gt;, architectures should be specified with
-&lt;code&gt;-architectures&lt;/code&gt; flag.&lt;/p&gt;
-
-&lt;p&gt;Example:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ aptly repo copy stable testing percona-server-client-5.5
-Loading packages...
-[o] percona-server-client-5.5_5.5.35-rel33.0-611.squeeze_i386 copied
-[o] percona-server-client-5.5_5.5.35-rel33.0-611.squeeze_amd64 copied
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt; &lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>aptly mirror rename</title>
-      <link>http://www.aptly.info/doc/aptly/mirror/rename</link>
-      <pubDate>Fri, 08 Aug 2014 11:17:38 UTC</pubDate>
-      <author>Andrey Smirnov</author>
-      <guid>http://www.aptly.info/doc/aptly/mirror/rename</guid>
-      <description>
-
-&lt;h2 id=&#34;toc_0&#34;&gt;aptly mirror rename&lt;/h2&gt;
-
-&lt;p&gt;Command changes name of the mirror. Mirror name should be unique.&lt;/p&gt;
-
-&lt;p&gt;Usage:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ aptly mirror rename &amp;lt;old-name&amp;gt; &amp;lt;new-name&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Params:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;old-name&lt;/code&gt; is current mirror name&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;new-name&lt;/code&gt; is new mirror name&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Example:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ aptly mirror rename whezy-main wheezy-main
-
-Mirror whezy-main -&amp;gt; wheezy-main has been successfully renamed.
-&lt;/code&gt;&lt;/pre&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>aptly publish switch</title>
-      <link>http://www.aptly.info/doc/aptly/publish/switch</link>
-      <pubDate>Fri, 08 Aug 2014 11:17:38 UTC</pubDate>
-      <author>Andrey Smirnov</author>
-      <guid>http://www.aptly.info/doc/aptly/publish/switch</guid>
-      <description>
-
-&lt;h2 id=&#34;toc_0&#34;&gt;aptly publish switch&lt;/h2&gt;
-
-&lt;p&gt;Command switches in-place published repository with new snapshot
-contents. &lt;code&gt;distribution&lt;/code&gt; and &lt;code&gt;prefix&lt;/code&gt; should be occupied with snapshot
-published using command &lt;a href=&#34;/doc/aptly/publish/snapshot/&#34;&gt;&lt;code&gt;aptly publish snapshot&lt;/code&gt;&lt;/a&gt;. Update happens in-place with minimum
-possible downtime for published repository. Valid &lt;a href=&#34;/doc/aptly/publish/&#34;&gt;GPG key&lt;/a&gt;
-is required for publishing.&lt;/p&gt;
-
-&lt;p&gt;When published repository is updated, all the options are preserved:
-distribution, component, list of architectures, etc.&lt;/p&gt;
-
-&lt;p&gt;Usage:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ aptly publish switch &amp;lt;distribution&amp;gt; [[&amp;lt;endpoint:&amp;gt;]&amp;lt;prefix&amp;gt;] &amp;lt;new-snapshot&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Params:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;distribution&lt;/code&gt; is distribution name of published repository&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;endpoint&lt;/code&gt; is publishing endpoint, if not specified, it would
-default to empty endpoint (local file system).&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;prefix&lt;/code&gt; is publishing prefix, if not specified, it would default to
-empty prefix (&lt;code&gt;.&lt;/code&gt;).&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;new-snapshot&lt;/code&gt; is a snapshot name that snould be re-published&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Flags:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;-component=&amp;quot;&amp;quot;&lt;/code&gt;: list of components to update (separate components
-with commas)&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;-force-overwrite=false&lt;/code&gt;: overwrite packages files in the pool even
-if content is different (see also &lt;a href=&#34;/doc/feature/duplicate/&#34;&gt;duplicate packages&lt;/a&gt;)&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;-gpg-key=&amp;quot;&amp;quot;&lt;/code&gt;: GPG key ID to use when signing the release, if not
-specified default key is used&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;-keyring=&amp;quot;&amp;quot;&lt;/code&gt;: GPG keyring to use (instead of default)&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;-secret-keyring=&amp;quot;&amp;quot;&lt;/code&gt;: GPG secret keyring to use (instead of default)&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;-skip-signing=false&lt;/code&gt;: don&amp;rsquo;t sign Release files with GPG&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;When switching published snapshots for multiple component repositories
-any subset of snapshots could be updated, they should be listed on
-command line with &lt;code&gt;-component&lt;/code&gt; flag:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ aptly publish switch -component=main,contrib wheezy wheezy-main wheezy-contrib
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Flag &lt;code&gt;-component&lt;/code&gt; could be omitted for single-component published
-repositories.&lt;/p&gt;
-
-&lt;p&gt;Example:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ aptly publish switch wheezy wheezy-7.4
-Loading packages...
-Generating metadata files and linking package files...
-Signing file &#39;/var/aptly/public/dists/wheezy/Release.tmp&#39; with gpg, please enter your passphrase when prompted:
-
-&amp;lt;&amp;lt;gpg asks for passphrase&amp;gt;&amp;gt;
-
-Clearsigning file &#39;/var/aptly/public/dists/wheezy/Release.tmp&#39; with gpg, please enter your passphrase when prompted:
-
-&amp;lt;&amp;lt;gpg asks for passphrase&amp;gt;&amp;gt;
-
-Cleaning up prefix &amp;quot;.&amp;quot; component &amp;quot;main&amp;quot;...
-
-Publish for local repo ./wheezy [i386, amd64] publishes {main: [wheezy-7.4]: snapshot from mirror [wheezy]: http://ftp.ru.debian.org/debian/ wheezy} has been successfully updated.
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt; &lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>aptly mirror show</title>
-      <link>http://www.aptly.info/doc/aptly/mirror/show</link>
-      <pubDate>Fri, 08 Aug 2014 11:17:38 UTC</pubDate>
-      <author>Andrey Smirnov</author>
-      <guid>http://www.aptly.info/doc/aptly/mirror/show</guid>
-      <description>
-
-&lt;h2 id=&#34;toc_0&#34;&gt;aptly mirror show&lt;/h2&gt;
-
-&lt;p&gt;Shows detailed information about mirror.&lt;/p&gt;
-
-&lt;p&gt;Usage:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ aptly mirror show &amp;lt;name&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Params are:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;name&lt;/code&gt; is a mirror name (given when mirror was created)&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Flags:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;-with-packages=false&lt;/code&gt;: show detailed list of packages and versions
-stored in the mirror&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Example:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ aptly mirror show backports2
-Name: backports2
-Archive Root URL: http://mirror.yandex.ru/backports.org/
-Distribution: squeeze-backports
-Components: main, contrib, non-free
-Architectures: i386, amd64
-Last update: 2013-12-27 19:30:19 MSK
-Number of packages: 3898
-
-Information from release file:
-...
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;In detailed information basic information about mirror is displayed:
-filters by component &amp;amp; architecture, timestamp of last successful
-repository fetch and number of packages.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>aptly mirror list</title>
-      <link>http://www.aptly.info/doc/aptly/mirror/list</link>
-      <pubDate>Fri, 08 Aug 2014 11:17:38 UTC</pubDate>
-      <author>Andrey Smirnov</author>
-      <guid>http://www.aptly.info/doc/aptly/mirror/list</guid>
-      <description>
-
-&lt;h2 id=&#34;toc_0&#34;&gt;aptly mirror list&lt;/h2&gt;
-
-&lt;p&gt;Shows list of created remote repository mirrors.&lt;/p&gt;
-
-&lt;p&gt;Usage:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ aptly mirror list
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Flags:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;-raw=false&lt;/code&gt;: display list in machine-readable format&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Examples:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ aptly mirror list
-List of mirrors:
- * [backports]: http://mirror.yandex.ru/backports.org/ squeeze-backports
- * [debian-main]: http://ftp.ru.debian.org/debian/ squeeze
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;To get more information about repository, run &lt;code&gt;aptly mirror show &amp;lt;name&amp;gt;&lt;/code&gt;.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ aptly mirror list -raw
-backports
-debian-main
-&lt;/code&gt;&lt;/pre&gt;
-</description>
-    </item>
-    
-    <item>
       <title>aptly publish snapshot</title>
       <link>http://www.aptly.info/doc/aptly/publish/snapshot</link>
       <pubDate>Fri, 08 Aug 2014 11:17:38 UTC</pubDate>
@@ -667,7 +96,7 @@ publishing, command accepts several snapshot names:&lt;/p&gt;
 
 &lt;p&gt;When mirroring remote repositories in order to preserve package split by
 component, create individual mirrors for each component, take snapshots
-and publish them as multi-component repository. Please see &lt;a href=&#34;/doc/feature/multiple/&#34;&gt;multiple-component publishing&lt;/a&gt;
+and publish them as multi-component repository. Please see &lt;a href=&#34;/doc/feature/multi-component/&#34;&gt;multiple-component publishing&lt;/a&gt;
 for more examples.&lt;/p&gt;
 
 &lt;p&gt;Example:&lt;/p&gt;
@@ -752,483 +181,592 @@ source packages are available)
     </item>
     
     <item>
-      <title>History</title>
-      <link>http://www.aptly.info/doc/history</link>
+      <title>aptly mirror rename</title>
+      <link>http://www.aptly.info/doc/aptly/mirror/rename</link>
       <pubDate>Fri, 08 Aug 2014 11:17:38 UTC</pubDate>
       <author>Andrey Smirnov</author>
-      <guid>http://www.aptly.info/doc/history</guid>
+      <guid>http://www.aptly.info/doc/aptly/mirror/rename</guid>
       <description>
 
-&lt;h2 id=&#34;toc_0&#34;&gt;History&lt;/h2&gt;
+&lt;h2 id=&#34;toc_0&#34;&gt;aptly mirror rename&lt;/h2&gt;
 
-&lt;h3 id=&#34;toc_1&#34;&gt;Version 0.7.1&lt;/h3&gt;
+&lt;p&gt;Command changes name of the mirror. Mirror name should be unique.&lt;/p&gt;
+
+&lt;p&gt;Usage:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ aptly mirror rename &amp;lt;old-name&amp;gt; &amp;lt;new-name&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Params:&lt;/p&gt;
 
 &lt;ul&gt;
-&lt;li&gt;bug fix: publish update fails on package conflicts, new flag
-&lt;code&gt;-force-overwrite&lt;/code&gt; added to publish commands
-(&lt;a href=&#34;https://github.com/smira/aptly/issues/90&#34;&gt;#90&lt;/a&gt;)&lt;/li&gt;
-&lt;li&gt;bug fix: aptly built with go1.2+ fails to read DB of aptly built
-with go1.1 or go1.0
-(&lt;a href=&#34;https://github.com/smira/aptly/issues/89&#34;&gt;#89&lt;/a&gt;)&lt;/li&gt;
-&lt;li&gt;aptly supports go compilers version 1.2 and up (go 1.1 is not
-supported anymore)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;old-name&lt;/code&gt; is current mirror name&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;new-name&lt;/code&gt; is new mirror name&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h3 id=&#34;toc_2&#34;&gt;Version 0.7&lt;/h3&gt;
+&lt;p&gt;Example:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ aptly mirror rename whezy-main wheezy-main
+
+Mirror whezy-main -&amp;gt; wheezy-main has been successfully renamed.
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>aptly repo</title>
+      <link>http://www.aptly.info/doc/aptly/repo</link>
+      <pubDate>Fri, 08 Aug 2014 11:17:38 UTC</pubDate>
+      <author>Andrey Smirnov</author>
+      <guid>http://www.aptly.info/doc/aptly/repo</guid>
+      <description>
+
+&lt;h2 id=&#34;toc_0&#34;&gt;aptly repo&lt;/h2&gt;
+
+&lt;p&gt;Local repository is a collection of packages (most usually custom packages created internally).
+Packages could be added to local repository at any moment, removed, moved or copied between repos.
+Multiple versions of the same package could be added to the repository.
+In order to capture current repository state, &lt;a href=&#34;/doc/aptly/snapshot/create/&#34;&gt;create snapshot&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Local repositories could be published either &lt;a href=&#34;/doc/aptly/publish/repo/&#34;&gt;directly&lt;/a&gt;
+or from &lt;a href=&#34;/doc/aptly/publish/snapshot&#34;&gt;snapshot&lt;/a&gt;.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>aptly graph</title>
+      <link>http://www.aptly.info/doc/aptly/graph</link>
+      <pubDate>Fri, 08 Aug 2014 11:17:38 UTC</pubDate>
+      <author>Andrey Smirnov</author>
+      <guid>http://www.aptly.info/doc/aptly/graph</guid>
+      <description>
+
+&lt;h2 id=&#34;toc_0&#34;&gt;aptly graph&lt;/h2&gt;
+
+&lt;p&gt;aptly generates graph showing depedencies between mirrors, local repositories,
+snapshots and published repositories.
+ &lt;/p&gt;
+
+&lt;p&gt;Command graph generates graph of dependencies:&lt;/p&gt;
 
 &lt;ul&gt;
-&lt;li&gt;direct &lt;a href=&#34;/doc/aptly/feature/s3/&#34;&gt;publishing to Amazon S3&lt;/a&gt;
-(&lt;a href=&#34;https://github.com/smira/aptly/issues/15&#34;&gt;#15&lt;/a&gt;)&lt;/li&gt;
-&lt;li&gt;support for new, powerful &lt;a href=&#34;/doc/aptly/feature/query/&#34;&gt;query language&lt;/a&gt; in many
-commands: &lt;a href=&#34;/doc/aptly/snapshot/pull/&#34;&gt;aptly snapshot pull&lt;/a&gt;, &lt;a href=&#34;/doc/aptly/repo/move/&#34;&gt;aptly repo
-move&lt;/a&gt;, &lt;a href=&#34;/doc/aptly/repo/copy/&#34;&gt;aptly repo copy&lt;/a&gt;, &lt;a href=&#34;/doc/aptly/repo/import/&#34;&gt;aptly
-repo import&lt;/a&gt; and &lt;a href=&#34;/doc/aptly/repo/remove/&#34;&gt;aptly repo
-remove&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;bug fix: files from conflicting packages might override each other
-while publishing (&lt;a href=&#34;https://github.com/smira/aptly/issues/65&#34;&gt;#65&lt;/a&gt;)&lt;/li&gt;
-&lt;li&gt;partial mirrors: filter package lists when mirroring
-(&lt;a href=&#34;https://github.com/smira/aptly/issues/64&#34;&gt;#64&lt;/a&gt;)&lt;/li&gt;
-&lt;li&gt;new commands: &lt;a href=&#34;/doc/aptly/mirror/rename/&#34;&gt;mirrors&lt;/a&gt;, &lt;a href=&#34;/doc/aptly/repo/rename/&#34;&gt;local
-repositories&lt;/a&gt; and
-&lt;a href=&#34;/doc/aptly/snapshot/rename/&#34;&gt;snapshots&lt;/a&gt; can be renamed
-(&lt;a href=&#34;https://github.com/smira/aptly/issues/63&#34;&gt;#63&lt;/a&gt;)&lt;/li&gt;
-&lt;li&gt;new command: &lt;a href=&#34;/doc/aptly/mirror/edit/&#34;&gt;aptly mirror edit&lt;/a&gt; allows to
-change mirror filtering
-(&lt;a href=&#34;https://github.com/smira/aptly/issues/63&#34;&gt;#63&lt;/a&gt;)&lt;/li&gt;
-&lt;li&gt;download transfer rate could be limited either via
-&lt;a href=&#34;/doc/configuration&#34;&gt;configuration&lt;/a&gt; file parameter &lt;code&gt;downloadSpeedLimit&lt;/code&gt;
-or with flag &lt;code&gt;-download-limit&lt;/code&gt; for command &lt;a href=&#34;/doc/aptly/mirror/update/&#34;&gt;aptly mirror
-update&lt;/a&gt;
-(&lt;a href=&#34;https://github.com/smira/aptly/issues/62&#34;&gt;#62&lt;/a&gt;)&lt;/li&gt;
-&lt;li&gt;new flag: &lt;code&gt;-all-matches&lt;/code&gt; for &lt;a href=&#34;/doc/aptly/snapshot/pull/&#34;&gt;aptly snapshot
-pull&lt;/a&gt; enables pulling of all matching packages
-(&lt;a href=&#34;https://github.com/smira/aptly/pull/70&#34;&gt;#70&lt;/a&gt;), thanks to &lt;a href=&#34;https://github.com/simonaquino&#34;&gt;Simon
-Aquino&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;when matching single package in &lt;a href=&#34;/doc/aptly/snapshot/pull/&#34;&gt;aptly snapshot
-pull&lt;/a&gt; latest version would be pulled
-(&lt;a href=&#34;https://github.com/smira/aptly/pull/67&#34;&gt;#67&lt;/a&gt;), thanks to &lt;a href=&#34;https://github.com/simonaquino&#34;&gt;Simon
-Aquino&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;new flag: &lt;code&gt;-sort&lt;/code&gt; for &lt;a href=&#34;/doc/aptly/snapshot/list/&#34;&gt;aptly snapshot list&lt;/a&gt;
-allows to change order of snapshots in the list
-(&lt;a href=&#34;https://github.com/smira/aptly/pull/73&#34;&gt;#73&lt;/a&gt;), thanks to &lt;a href=&#34;https://github.com/simonaquino&#34;&gt;Simon
-Aquino&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;bug fix: publish update fails on empty multi-component repo
-(&lt;a href=&#34;https://github.com/smira/aptly/issues/66&#34;&gt;#66&lt;/a&gt;)&lt;/li&gt;
-&lt;li&gt;bug fix: &lt;a href=&#34;/doc/aptly/snapshot/pull/&#34;&gt;aptly snapshot pull&lt;/a&gt; might remove
-already pulled packages
-(&lt;a href=&#34;https://github.com/smira/aptly/issues/78&#34;&gt;#78&lt;/a&gt;)&lt;/li&gt;
-&lt;li&gt;bug fix: aptly package was missing &lt;code&gt;bzip2&lt;/code&gt; dependency
-(&lt;a href=&#34;https://github.com/smira/aptly/issues/84&#34;&gt;#84&lt;/a&gt;)&lt;/li&gt;
-&lt;li&gt;aptly binary packages are built with go1.3&lt;/li&gt;
+&lt;li&gt;between snapshots and mirrors (what mirror was used to create each snapshot)&lt;/li&gt;
+&lt;li&gt;between snapshots and local repos (what local repo was used to create snapshot)&lt;/li&gt;
+&lt;li&gt;between snapshots (pulling, merging, etc.)&lt;/li&gt;
+&lt;li&gt;between snapshots, local repos and published repositories (how snapshots were published).&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h3 id=&#34;toc_3&#34;&gt;Version 0.6&lt;/h3&gt;
+&lt;p&gt;Graph is rendered to PNG file using graphviz package.&lt;/p&gt;
+
+&lt;p&gt;Usage:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ aptly graph
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Example:&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;/img/graphfull.png&#34;&gt;&lt;img src=&#34;/img/graph.png&#34; alt=&#34;Example graph from aptly graph&#34; class=&#34;img-responsive&#34;&gt;&lt;/a&gt;
+ &lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>aptly snapshot drop</title>
+      <link>http://www.aptly.info/doc/aptly/snapshot/drop</link>
+      <pubDate>Fri, 08 Aug 2014 11:17:38 UTC</pubDate>
+      <author>Andrey Smirnov</author>
+      <guid>http://www.aptly.info/doc/aptly/snapshot/drop</guid>
+      <description>
+
+&lt;h2 id=&#34;toc_0&#34;&gt;aptly snapshot drop&lt;/h2&gt;
+
+&lt;p&gt;Drop removes information about snapshot. If snapshot is published, it
+can&amp;rsquo;t be dropped (first remove publishing for snapshot). If snapshot is
+used as source for other snapshots (using merge or pull), aptly would
+refuse to drop such snapshot, use flag &lt;code&gt;-force&lt;/code&gt; to override this check.&lt;/p&gt;
+
+&lt;p&gt;Usage:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ aptly snapshot drop &amp;lt;name&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Params:&lt;/p&gt;
 
 &lt;ul&gt;
-&lt;li&gt;support for multi-component published repositories
-(&lt;a href=&#34;https://github.com/smira/aptly/issues/36&#34;&gt;#36&lt;/a&gt;)&lt;/li&gt;
-&lt;li&gt;handling duplicate packages with different content gracefully
-(&lt;a href=&#34;https://github.com/smira/aptly/issues/60&#34;&gt;#60&lt;/a&gt;)&lt;/li&gt;
-&lt;li&gt;repositories published by aptly now can be consumed by
-debian-installer (&lt;a href=&#34;https://github.com/smira/aptly/issues/61&#34;&gt;#61&lt;/a&gt;)&lt;/li&gt;
-&lt;li&gt;new flag: &lt;code&gt;-no-remove&lt;/code&gt; for &lt;a href=&#34;/doc/aptly/snapshot/merge/&#34;&gt;aptly snapshot
-merge&lt;/a&gt; to merge snapshots with all package
-versions preserved
-(&lt;a href=&#34;https://github.com/smira/aptly/issues/57&#34;&gt;#57&lt;/a&gt;)&lt;/li&gt;
-&lt;li&gt;publishing of empty snapshots/repositories is possible
-(&lt;a href=&#34;https://github.com/smira/aptly/issues/55&#34;&gt;#55&lt;/a&gt;)&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;/doc/aptly/repo/add/&#34;&gt;aptly repo add&lt;/a&gt; now exits with 1 if any of files
-failed to add (&lt;a href=&#34;https://github.com/smira/aptly/issues/53&#34;&gt;#53&lt;/a&gt;)&lt;/li&gt;
-&lt;li&gt;bug fix: &lt;code&gt;Package:&lt;/code&gt; line comes first in package metadata
-(&lt;a href=&#34;https://github.com/smira/aptly/issues/49&#34;&gt;#49&lt;/a&gt;)&lt;/li&gt;
-&lt;li&gt;bug fix: when command parsing fails, aptly returns exit code 2
-(&lt;a href=&#34;https://github.com/smira/aptly/issues/52&#34;&gt;#52&lt;/a&gt;)&lt;/li&gt;
-&lt;li&gt;bug fix: pulling more than 128 packates at once
-(&lt;a href=&#34;https://github.com/smira/aptly/issues/53&#34;&gt;#53&lt;/a&gt;)&lt;/li&gt;
-&lt;li&gt;bug fix: &lt;a href=&#34;/doc/aptly/graph/&#34;&gt;aptly graph&lt;/a&gt; may get confused with package
-pull requests (&lt;a href=&#34;https://github.com/smira/aptly/issues/58&#34;&gt;#58&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;name&lt;/code&gt; is snapshot name which has been given during snapshot
+creation&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h3 id=&#34;toc_4&#34;&gt;Version 0.5.1&lt;/h3&gt;
+&lt;p&gt;Flags:&lt;/p&gt;
 
 &lt;ul&gt;
-&lt;li&gt;bug fix: &lt;code&gt;HTTP_PROXY&lt;/code&gt; environment variable has been ignored
-(&lt;a href=&#34;https://github.com/smira/aptly/issues/46&#34;&gt;#46&lt;/a&gt;)&lt;/li&gt;
-&lt;li&gt;bug fix: support for flat repositories in subdirectory
-(&lt;a href=&#34;https://github.com/smira/aptly/issues/47&#34;&gt;#47&lt;/a&gt;)&lt;/li&gt;
-&lt;li&gt;bug fix: wrong pool directory name when &lt;code&gt;Source:&lt;/code&gt; contains version
-(&lt;a href=&#34;https://github.com/smira/aptly/issues/44&#34;&gt;#44&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-force=false&lt;/code&gt;: drop snapshot even if it used as source in other
+snapshots&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h3 id=&#34;toc_5&#34;&gt;Version 0.5&lt;/h3&gt;
+&lt;p&gt;Dropping snapshot only removes metadata, in order to cleanup the disk
+space occupied by package files you might need to run
+&lt;a href=&#34;/doc/aptly/db/cleanup/&#34;&gt;&lt;code&gt;aptly db cleanup&lt;/code&gt;&lt;/a&gt; command (package files would be
+removed only if they&amp;rsquo;re not referenced by mirrors and other snapshots
+anymore).&lt;/p&gt;
+
+&lt;p&gt;Example:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ snapshot drop snap-wheezy
+Snapshot `snap-wheezy` has been dropped.
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>aptly mirror drop</title>
+      <link>http://www.aptly.info/doc/aptly/mirror/drop</link>
+      <pubDate>Fri, 08 Aug 2014 11:17:38 UTC</pubDate>
+      <author>Andrey Smirnov</author>
+      <guid>http://www.aptly.info/doc/aptly/mirror/drop</guid>
+      <description>
+
+&lt;h2 id=&#34;toc_0&#34;&gt;aptly mirror drop&lt;/h2&gt;
+
+&lt;p&gt;Drop deletes information about remote repository mirror. Package data is
+not deleted (it could be still used by other mirrors or snapshots). If
+mirror is used as source to create a snapshot, aptly would refuse to
+delete such mirror, use flag &lt;code&gt;-force&lt;/code&gt; to override.&lt;/p&gt;
+
+&lt;p&gt;Usage:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ aptly mirror drop &amp;lt;name&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Params:&lt;/p&gt;
 
 &lt;ul&gt;
-&lt;li&gt;Debian packages for aptly are &lt;a href=&#34;/download/&#34;&gt;available&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;internal DB is compacted when calling &lt;a href=&#34;/doc/aptly/db/cleanup/&#34;&gt;aptly db
-cleanup&lt;/a&gt;
-(&lt;a href=&#34;https://github.com/smira/aptly/issues/19&#34;&gt;#19&lt;/a&gt;)&lt;/li&gt;
-&lt;li&gt;size is shown in human-readable format
-(&lt;a href=&#34;https://github.com/smira/aptly/issues/18&#34;&gt;#18&lt;/a&gt;)&lt;/li&gt;
-&lt;li&gt;fixed wrong location of man page in Debian package
-(&lt;a href=&#34;https://github.com/smira/aptly/issues/22&#34;&gt;#22&lt;/a&gt;)&lt;/li&gt;
-&lt;li&gt;new flags: &lt;code&gt;-distribution&lt;/code&gt; and &lt;code&gt;-component&lt;/code&gt; to specify default
-publishing options in &lt;a href=&#34;/doc/aptly/repo/create/&#34;&gt;aptly repo create&lt;/a&gt;
-(&lt;a href=&#34;https://github.com/smira/aptly/issues/12&#34;&gt;#12&lt;/a&gt;)&lt;/li&gt;
-&lt;li&gt;aptly would try harder to figure out distribution &amp;amp; component
-automatically when publishing going through the tree of snapshots,
-mirrors and local repositories&lt;/li&gt;
-&lt;li&gt;aptly supports publishing local repositories, without intermediate
-snapshot step (&lt;a href=&#34;https://github.com/smira/aptly/issues/10&#34;&gt;#10&lt;/a&gt;)&lt;/li&gt;
-&lt;li&gt;new command: &lt;a href=&#34;/doc/aptly/publish/repo/&#34;&gt;aptly publish repo&lt;/a&gt; to publish
-local repository directly
-(&lt;a href=&#34;https://github.com/smira/aptly/issues/10&#34;&gt;#10&lt;/a&gt;)&lt;/li&gt;
-&lt;li&gt;new command: &lt;a href=&#34;/doc/aptly/repo/edit/&#34;&gt;aptly publish edit&lt;/a&gt; to change
-defaults for the local repository
-(&lt;a href=&#34;https://github.com/smira/aptly/issues/12&#34;&gt;#12&lt;/a&gt;)&lt;/li&gt;
-&lt;li&gt;aptly supports global &amp;amp; command flags placement in any position in
-command line (before command name, after command name)
-(&lt;a href=&#34;https://github.com/smira/aptly/issues/17&#34;&gt;#17&lt;/a&gt;)&lt;/li&gt;
-&lt;li&gt;new command: &lt;a href=&#34;/doc/aptly/db/recover/&#34;&gt;aptly db recover&lt;/a&gt; to recover
-internal DB after crash
-(&lt;a href=&#34;https://github.com/smira/aptly/issues/25&#34;&gt;#25&lt;/a&gt;)&lt;/li&gt;
-&lt;li&gt;new flag: &lt;code&gt;-raw&lt;/code&gt; to display list in machine-readable format for
-commands &lt;a href=&#34;/doc/aptly/mirror/list/&#34;&gt;aptly mirror list&lt;/a&gt;, &lt;a href=&#34;/doc/aptly/repo/list/&#34;&gt;aptly repo
-list&lt;/a&gt;, &lt;a href=&#34;/doc/aptly/snapshot/list/&#34;&gt;aptly snapshot list&lt;/a&gt;
-and &lt;a href=&#34;/doc/aptly/publish/list/&#34;&gt;aptly publish list&lt;/a&gt;
-(&lt;a href=&#34;https://github.com/smira/aptly/issues/27&#34;&gt;#27&lt;/a&gt;,
-&lt;a href=&#34;https://github.com/smira/aptly/issues/31&#34;&gt;#31&lt;/a&gt;)&lt;/li&gt;
-&lt;li&gt;new flags: &lt;code&gt;-origin&lt;/code&gt; and &lt;code&gt;-label&lt;/code&gt; to customize fields &lt;code&gt;Origin:&lt;/code&gt; and
-&lt;code&gt;Label:&lt;/code&gt; in &lt;code&gt;Release&lt;/code&gt; files during publishing in commands &lt;a href=&#34;/doc/aptly/publish/snapshot/&#34;&gt;aptly
-publish snapshot&lt;/a&gt; and &lt;a href=&#34;/doc/aptly/publish/repo/&#34;&gt;aptly publish
-repo&lt;/a&gt;
-(&lt;a href=&#34;https://github.com/smira/aptly/issues/29&#34;&gt;#29&lt;/a&gt;)&lt;/li&gt;
-&lt;li&gt;bug fix: with some HTTP servers aptly might have given &amp;ldquo;size
-mismatch&amp;rdquo; errors due to unnecessary decompression
-(&lt;a href=&#34;https://github.com/smira/aptly/issues/33&#34;&gt;#33&lt;/a&gt;)&lt;/li&gt;
-&lt;li&gt;new command: &lt;a href=&#34;/doc/aptly/publish/update/&#34;&gt;aptly publish update&lt;/a&gt; updates
-published repo in-place
-(&lt;a href=&#34;https://github.com/smira/aptly/issues/8&#34;&gt;#8&lt;/a&gt;)&lt;/li&gt;
-&lt;li&gt;new command: &lt;a href=&#34;/doc/aptly/publish/switch/&#34;&gt;aptly publish switch&lt;/a&gt; switches
-published snapshot in-place
-(&lt;a href=&#34;https://github.com/smira/aptly/issues/8&#34;&gt;#8&lt;/a&gt;)&lt;/li&gt;
-&lt;li&gt;new flag: &lt;code&gt;-latest&lt;/code&gt; for command &lt;a href=&#34;/doc/aptly/snapshot/merge/&#34;&gt;aptly snapshot
-merge&lt;/a&gt; changes merge strategy to &amp;ldquo;latest
-version wins&amp;rdquo; (&lt;a href=&#34;https://github.com/smira/aptly/pull/42&#34;&gt;#42&lt;/a&gt;),
-thanks to &lt;a href=&#34;https://github.com/ryanuber&#34;&gt;@ryanuber&lt;/a&gt; and
-&lt;a href=&#34;https://github.com/keithchambers&#34;&gt;@keithchambers&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;name&lt;/code&gt; is mirror name which has been given during mirror creation&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h3 id=&#34;toc_6&#34;&gt;Version 0.4.1&lt;/h3&gt;
+&lt;p&gt;Flags:&lt;/p&gt;
 
 &lt;ul&gt;
-&lt;li&gt;fixed &lt;a href=&#34;https://github.com/smira/aptly/issues/5&#34;&gt;bug&lt;/a&gt; with slashes in
-component names&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-force=false&lt;/code&gt;: drop mirror even if it used as source of some
+snapshot&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h3 id=&#34;toc_7&#34;&gt;Version 0.4&lt;/h3&gt;
+&lt;p&gt;Dropping mirror only removes metadata about the mirror, in order to
+cleanup the disk space occupied by package files you might need to run
+&lt;a href=&#34;/doc/aptly/db/cleanup/&#34;&gt;&lt;code&gt;aptly db cleanup&lt;/code&gt;&lt;/a&gt; command.&lt;/p&gt;
+
+&lt;p&gt;Example:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ aptly mirror drop -force wheezy-main
+Mirror `wheezy-main` has been removed.
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>aptly snapshot rename</title>
+      <link>http://www.aptly.info/doc/aptly/snapshot/rename</link>
+      <pubDate>Fri, 08 Aug 2014 11:17:38 UTC</pubDate>
+      <author>Andrey Smirnov</author>
+      <guid>http://www.aptly.info/doc/aptly/snapshot/rename</guid>
+      <description>
+
+&lt;h2 id=&#34;toc_0&#34;&gt;aptly snapshot rename&lt;/h2&gt;
+
+&lt;p&gt;Command changes name of the snapshot. Snapshot name should be unique.&lt;/p&gt;
+
+&lt;p&gt;Usage:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ aptly snapshot rename &amp;lt;old-name&amp;gt; &amp;lt;new-name&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Params:&lt;/p&gt;
 
 &lt;ul&gt;
-&lt;li&gt;new command: &lt;a href=&#34;/doc/aptly/db/cleanup/&#34;&gt;aptly db cleanup&lt;/a&gt; to remove
-unreferenced DB entries and files&lt;/li&gt;
-&lt;li&gt;new flags: &lt;code&gt;-keyring&lt;/code&gt; &amp;amp; &lt;code&gt;-secret-keyring&lt;/code&gt; for &lt;a href=&#34;/doc/aptly/snapshot/publish/&#34;&gt;aptly snapshot
-publish&lt;/a&gt; command&lt;/li&gt;
-&lt;li&gt;aptly supports mirroring remote repos with source packages and
-publishing repositories with sources&lt;/li&gt;
-&lt;li&gt;new config: &lt;code&gt;downloadSourcePackages&lt;/code&gt; to enable source package
-downloading&lt;/li&gt;
-&lt;li&gt;new flag: &lt;code&gt;-with-sources&lt;/code&gt; for &lt;a href=&#34;/doc/aptly/mirror/create/&#34;&gt;aptly mirror
-create&lt;/a&gt; command&lt;/li&gt;
-&lt;li&gt;new config &amp;amp; flag: &lt;code&gt;dependencyFollowSource&lt;/code&gt; &amp;amp; &lt;code&gt;-dep-follow-source&lt;/code&gt;
-to follow &lt;code&gt;Source:&lt;/code&gt; dependencies&lt;/li&gt;
-&lt;li&gt;packages are printed in lists with underscores instead of dashes,
-e.g. &lt;code&gt;pkg_1.3-3_amd64&lt;/code&gt; instead of &lt;code&gt;pkg-1.3-3-amd64&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;local package repositories are supported&lt;/li&gt;
-&lt;li&gt;new commands in &lt;code&gt;aptly repo&lt;/code&gt; family: &lt;a href=&#34;/doc/aptly/repo/add/&#34;&gt;add&lt;/a&gt;,
-&lt;a href=&#34;/doc/aptly/repo/copy/&#34;&gt;copy&lt;/a&gt;, &lt;a href=&#34;/doc/aptly/repo/create/&#34;&gt;create&lt;/a&gt;,
-&lt;a href=&#34;/doc/aptly/repo/drop/&#34;&gt;drop&lt;/a&gt;, &lt;a href=&#34;/doc/aptly/repo/import/&#34;&gt;import&lt;/a&gt;,
-&lt;a href=&#34;/doc/aptly/repo/list/&#34;&gt;list&lt;/a&gt;, &lt;a href=&#34;/doc/aptly/repo/move/&#34;&gt;move&lt;/a&gt;,
-&lt;a href=&#34;/doc/aptly/repo/remove/&#34;&gt;remove&lt;/a&gt; and &lt;a href=&#34;/doc/aptly/repo/show/&#34;&gt;show&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;command &lt;a href=&#34;/doc/aptly/snapshot/create/&#34;&gt;aptly snapshot create&lt;/a&gt; supports
-creation of snapshots from local repos&lt;/li&gt;
-&lt;li&gt;aptly peak memory usage has been reduced by factor of 3x&lt;/li&gt;
-&lt;li&gt;new flag &lt;code&gt;-no-remove&lt;/code&gt; for &lt;a href=&#34;/doc/aptly/snapshot/pull/&#34;&gt;aptly snapshot
-pull&lt;/a&gt;: don&amp;rsquo;t remove other version of packages
-when pulling (e.g. keep old versions)&lt;/li&gt;
-&lt;li&gt;command &lt;a href=&#34;/doc/aptly/mirror/create/&#34;&gt;aptly mirror create&lt;/a&gt; supports
-shorthand PPA url: &lt;code&gt;ppa:user/project&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;new config: &lt;code&gt;ppaDistributorID&lt;/code&gt; &amp;amp; &lt;code&gt;ppaCodename&lt;/code&gt; to specify PPA url
-expansion rules&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;old-name&lt;/code&gt; is current snapshot name&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;new-name&lt;/code&gt; is new snapshot name&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h3 id=&#34;toc_8&#34;&gt;Version 0.3&lt;/h3&gt;
+&lt;p&gt;Example:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ aptly snapshot rename whezy-main wheezy-main
+
+Snapshot whezy-main -&amp;gt; wheezy-main has been successfully renamed.
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt; &lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Commands</title>
+      <link>http://www.aptly.info/doc/commands</link>
+      <pubDate>Fri, 08 Aug 2014 11:17:38 UTC</pubDate>
+      <author>Andrey Smirnov</author>
+      <guid>http://www.aptly.info/doc/commands</guid>
+      <description>
+
+&lt;h2 id=&#34;toc_0&#34;&gt;Commands&lt;/h2&gt;
+
+&lt;p&gt;aptly supports commands in several basic categories:&lt;/p&gt;
 
 &lt;ul&gt;
-&lt;li&gt;&lt;code&gt;aptly snapshot show&lt;/code&gt; doesn&amp;rsquo;t show list of packages by default&lt;/li&gt;
-&lt;li&gt;option &lt;code&gt;-with-packages&lt;/code&gt; to show list of packages stored in mirror
-and snapshot&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/aptly-dev/aptly-bash-completion&#34;&gt;bash
-completion&lt;/a&gt; is
-now available for aptly&lt;/li&gt;
-&lt;li&gt;dropping &lt;a href=&#34;/doc/aptly/snapshot/drop/&#34;&gt;snapshots&lt;/a&gt; and
-&lt;a href=&#34;/doc/aptly/mirror/drop/&#34;&gt;mirrors&lt;/a&gt; is supported&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;/doc/aptly/serve/&#34;&gt;serving&lt;/a&gt; published repositories&lt;/li&gt;
-&lt;li&gt;aptly does checksum validation when downloading from remote mirrors&lt;/li&gt;
-&lt;li&gt;aptly verifies crypto signature on Release files&lt;/li&gt;
-&lt;li&gt;aptly can create empty snapshots&lt;/li&gt;
-&lt;li&gt;new global flag &lt;code&gt;-config&lt;/code&gt; to override default config location&lt;/li&gt;
-&lt;li&gt;Debian flat repositories are now supported&lt;/li&gt;
-&lt;li&gt;command &lt;a href=&#34;/doc/aptly/graph&#34;&gt;aptly graph&lt;/a&gt; can generate graph of
-dependencies&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;mirror&lt;/code&gt;: manage, update mirrors of remote repositories&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;repo&lt;/code&gt;: manage local package repositories, add, remove, move, copy
+packages&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;snapshot&lt;/code&gt;: create, merge, manage snapshots&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;publish&lt;/code&gt;: publish snapshot or local repository&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;serve&lt;/code&gt;: quickly export published repositories via HTTP&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;db&lt;/code&gt;: cleanup database and package pool, recover database after failure&lt;/li&gt;
 &lt;/ul&gt;
 </description>
     </item>
     
     <item>
-      <title>Features</title>
-      <link>http://www.aptly.info/doc/features</link>
+      <title>Integrations</title>
+      <link>http://www.aptly.info/doc/integrations</link>
       <pubDate>Fri, 08 Aug 2014 11:17:38 UTC</pubDate>
       <author>Andrey Smirnov</author>
-      <guid>http://www.aptly.info/doc/features</guid>
+      <guid>http://www.aptly.info/doc/integrations</guid>
       <description>
 
-&lt;h2 id=&#34;toc_0&#34;&gt;Features&lt;/h2&gt;
+&lt;h2 id=&#34;toc_0&#34;&gt;Integrations&lt;/h2&gt;
 
-&lt;p&gt;List of aptly features, in no particular order:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;/doc/aptly/mirror/create/&#34;&gt;mirroring&lt;/a&gt; remote repositories:
+&lt;p&gt;With configuration management systems:&lt;/p&gt;
 
 &lt;ul&gt;
-&lt;li&gt;regular and flat repositories&lt;/li&gt;
-&lt;li&gt;HTTP servers are supported&lt;/li&gt;
-&lt;li&gt;mirror only specified architectures/components&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;/doc/aptly/feature/query/&#34;&gt;partial mirrors&lt;/a&gt; (with filters on packages)&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;local repositories handling:
-
-&lt;ul&gt;
-&lt;li&gt;any number of local repositories&lt;/li&gt;
-&lt;li&gt;packages could be &lt;a href=&#34;/doc/aptly/repo/add/&#34;&gt;added&lt;/a&gt; from files or by directory scan&lt;/li&gt;
-&lt;li&gt;source packages pull all related files automatically&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;/doc/aptly/repo/move/&#34;&gt;moving&lt;/a&gt;, &lt;a href=&#34;/doc/aptly/repo/copy/&#34;&gt;copying&lt;/a&gt; packages between repositories&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;/doc/aptly/repo/import/&#34;&gt;importing&lt;/a&gt; packages from mirrors&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;/doc/aptly/repo/import&#34;&gt;removing&lt;/a&gt; packages matching condition&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;package pool (internal package files storage):
-
-&lt;ul&gt;
-&lt;li&gt;packages from mirrors and local repos are stored in deduplicated manner&lt;/li&gt;
-&lt;li&gt;package file is kept in package pool until there&amp;rsquo;s at least a single reference&lt;/li&gt;
-&lt;li&gt;pool could be &lt;a href=&#34;/doc/aptly/db/cleanup/&#34;&gt;cleaned up&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;handling of &lt;a href=&#34;/doc/aptly/feature/duplicate/&#34;&gt;duplicate&lt;/a&gt; packages&lt;/li&gt;
-&lt;li&gt;snapshots for mirrors and local repositories:
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;/doc/aptly/snapshot/create/&#34;&gt;creating&lt;/a&gt; snapshots from mirrors and local repositories&lt;/li&gt;
-&lt;li&gt;snapshot is immutable&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;/doc/aptly/snapshot/merge/&#34;&gt;merging&lt;/a&gt; several snapshots into one&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;/doc/aptly/snapshot/pull/&#34;&gt;pulling&lt;/a&gt; packages matching query from one snapshot into another,
-producing new snapshot&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;/doc/aptly/snapshot/verify/&#34;&gt;checking&lt;/a&gt; snapshot for unsatisfied dependencies&lt;/li&gt;
-&lt;li&gt;calculating &lt;a href=&#34;/doc/aptly/snapshot/diff/&#34;&gt;difference&lt;/a&gt; between snapshots&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;publishing snapshots and local repositories:
-
-&lt;ul&gt;
-&lt;li&gt;publishing &lt;a href=&#34;/doc/aptly/publish/snapshot/&#34;&gt;snapshots&lt;/a&gt; created from mirrors or local repositories&lt;/li&gt;
-&lt;li&gt;publishing &lt;a href=&#34;/doc/aptly/publish/repo/&#34;&gt;local repositories&lt;/a&gt; directly&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;/doc/feature/multiple-component/&#34;&gt;multi-component&lt;/a&gt; publishing&lt;/li&gt;
-&lt;li&gt;publishing under prefix&lt;/li&gt;
-&lt;li&gt;publishing to &lt;a href=&#34;/doc/feature/s3/&#34;&gt;Amazon S3&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;atomic &lt;a href=&#34;/doc/aptly/publish/switch&#34;&gt;switching&lt;/a&gt; of published snapshots&lt;/li&gt;
-&lt;li&gt;atomic &lt;a href=&#34;/doc/aptly/publish/update&#34;&gt;updating&lt;/a&gt; of published local repositories&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;displaying &lt;a href=&#34;/doc/aptly/graph/&#34;&gt;graph&lt;/a&gt; of dependencies between mirrors, local repos, snapshots and
-published repositories&lt;/li&gt;
-&lt;li&gt;quickly &lt;a href=&#34;/doc/aptly/serve/&#34;&gt;serving&lt;/a&gt; published repositories over HTTP&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/hw-cookbooks/aptly&#34;&gt;Chef cookbook&lt;/a&gt; by Aaron Baer
+(Heavy Water Operations, LLC)&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/alphagov/puppet-aptly&#34;&gt;Puppet module&lt;/a&gt; by
+Government Digital Services&lt;/li&gt;
 &lt;/ul&gt;
 </description>
     </item>
     
     <item>
-      <title>Multi-Component Publishing</title>
-      <link>http://www.aptly.info/doc/feature/multi-component</link>
+      <title>aptly repo show</title>
+      <link>http://www.aptly.info/doc/aptly/repo/show</link>
       <pubDate>Fri, 08 Aug 2014 11:17:38 UTC</pubDate>
       <author>Andrey Smirnov</author>
-      <guid>http://www.aptly.info/doc/feature/multi-component</guid>
+      <guid>http://www.aptly.info/doc/aptly/repo/show</guid>
       <description>
 
-&lt;h2 id=&#34;toc_0&#34;&gt;Multi-Component Repository Publishing&lt;/h2&gt;
+&lt;h2 id=&#34;toc_0&#34;&gt;aptly repo show&lt;/h2&gt;
 
-&lt;p&gt;aptly is based on a concept of package lists. Snapshots, mirrors and
-local repositories are lists of packages (more precisely, lists of
-references to packages). When merging, pulling, copying or moving
-packages might move from one list to another. Component is a way to
-break down packages into groups, usually these groups make sense only in
-published repository. At the same time mapping from package to component
-is not universal, there&amp;rsquo;s Debian way to group packages into &lt;code&gt;main&lt;/code&gt;,
-&lt;code&gt;contrib&lt;/code&gt; and &lt;code&gt;non-free&lt;/code&gt; components, Ubuntu uses different component schema,
-some 3rd party repositories use components in place of
-distribution name (like &lt;code&gt;squeeze&lt;/code&gt;, &lt;code&gt;wheezy&lt;/code&gt; etc.), other use them to separate
-stable and testing versions of software.&lt;/p&gt;
+&lt;p&gt;Commands show displays information about local repository, possibly
+listing all packages in the repository.&lt;/p&gt;
 
-&lt;p&gt;In order to keep aptly simple, I&amp;rsquo;ve decided that there should be no mapping from
-package to component and package lists internally aren&amp;rsquo;t split by
-component. Each list (snapshot, mirror and local repository) is
-mono-component (actually there&amp;rsquo;s no component at all). When publishing
-repository, several lists could be published as separate components in
-one published repository.&lt;/p&gt;
+&lt;p&gt;Usage:&lt;/p&gt;
 
-&lt;p&gt;By default, aptly mirrors all components from remote repository and
-merges them into one &amp;ldquo;single component&amp;rdquo;. If we&amp;rsquo;d like to preserve
-package split by components, individual mirrors should be created for
-each component:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ aptly mirror create wheezy-main http://ftp.ru.debian.org/debian/ wheezy main
-$ aptly mirror create wheezy-contrib http://ftp.ru.debian.org/debian/ wheezy main
-$ aptly mirror create wheezy-non-free http://ftp.ru.debian.org/debian/ wheezy non-free
-
-# update all mirrors
-$ aptly mirror list -raw | xargs -n 1 aptly mirror update
+&lt;pre&gt;&lt;code&gt;$  aptly repo show &amp;lt;name&amp;gt;
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;We can create snapshots from each of the mirrors:&lt;/p&gt;
+&lt;p&gt;Params are:&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;$ aptly snapshot create wheezy-main-7.5 from mirror wheezy-main
-$ aptly snapshot create wheezy-contrib-7.5 from mirror wheezy-contrib
-$ aptly snapshot create wheezy-non-free-7.5 from mirror wheezy-non-free
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;name&lt;/code&gt; local repository name&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Flags:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;-with-packages=false&lt;/code&gt;: show detailed list of packages and versions
+stored in the mirror&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Example:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ aptly repo show -with-packages stable
+Name: stable
+Comment: Stable packages for project Foo
+Default Distribution: wheezy
+Default Component: main
+Number of packages: 10
+Packages:
+  libmysqlclient18_5.5.35-rel33.0-611.squeeze_amd64
+  percona-server-client-5.5_5.5.35-rel33.0-611.squeeze_amd64
+  percona-server-common-5.5_5.5.35-rel33.0-611.squeeze_amd64
+  percona-server-server_5.5.35-rel33.0-611.squeeze_amd64
+  percona-server-server-5.5_5.5.35-rel33.0-611.squeeze_amd64
+  libmysqlclient18_5.5.35-rel33.0-611.squeeze_i386
+  percona-server-client-5.5_5.5.35-rel33.0-611.squeeze_i386
+  percona-server-common-5.5_5.5.35-rel33.0-611.squeeze_i386
+  percona-server-server_5.5.35-rel33.0-611.squeeze_i386
+  percona-server-server-5.5_5.5.35-rel33.0-611.squeeze_i386
 &lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;And publish all snapshots as single repository preserving component
-structure (publishing distribution &lt;code&gt;wheezy&lt;/code&gt; under prefix &lt;code&gt;upstream&lt;/code&gt;):&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ aptly publish snapshot -component=main,contrib,non-free -distribution=wheezy wheezy-main-7.5 wheezy-contrib-7.5 wheezy-non-free-7.5 upstream
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;aptly is smart enough to figure out component names and distribution
-from the mirrors, so I can omit them (commas left to identify number of
-components):&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ aptly publish snapshot -component=,, wheezy-main-7.5 wheezy-contrib-7.5 wheezy-non-free-7.5 upstream
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Of course we could do all regular aptly operations: merging snapshots,
-pulling packages, etc.&lt;/p&gt;
-
-&lt;p&gt;The same applies to local repositories: if packages should be published as different components,
-several local repositories (one per component) should be created:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ aptly repo create -distribution=wheezy -component=main my-soft-main
-$ aptly repo create -distribution=wheezy -component=contrib my-soft-contrib
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Local repositories could be published either directly:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ aptly publish repo -component=, my-soft-main my-soft-contrib
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Or via snapshot:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ aptly snapshot create my-soft-main-1.0 from repo my-soft-main
-$ aptly snapshot create my-soft-contrib-1.0 from repo my-soft-contrib
-
-$ aptly publish snapshot -component=, my-soft-main-1.0 my-soft-contrib-1.0
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;When &lt;a href=&#34;/doc/aptly/publish/update/&#34;&gt;updating published repository&lt;/a&gt;, all component
-parts are updated at the same time. When &lt;a href=&#34;/doc/aptly/publish/switch/&#34;&gt;switching published snapshots&lt;/a&gt;,
-only specified components are updated.&lt;/p&gt;
 </description>
     </item>
     
     <item>
-      <title>Publishing to S3</title>
-      <link>http://www.aptly.info/doc/feature/s3</link>
+      <title>aptly snapshot list</title>
+      <link>http://www.aptly.info/doc/aptly/snapshot/list</link>
       <pubDate>Fri, 08 Aug 2014 11:17:38 UTC</pubDate>
       <author>Andrey Smirnov</author>
-      <guid>http://www.aptly.info/doc/feature/s3</guid>
+      <guid>http://www.aptly.info/doc/aptly/snapshot/list</guid>
       <description>
 
-&lt;h2 id=&#34;toc_0&#34;&gt;Publishing to Amazon S3&lt;/h2&gt;
+&lt;h2 id=&#34;toc_0&#34;&gt;aptly snapshot list&lt;/h2&gt;
 
-&lt;p&gt;aptly could be configured to publish repository directly to Amazon S3.
-First, publishing endpoints should be described in aptly
-&lt;a href=&#34;/doc/configuration/&#34;&gt;configuration&lt;/a&gt; file. Each endpoint has name and
-associated settings:&lt;/p&gt;
+&lt;p&gt;Displays list of all created snapshots.&lt;/p&gt;
+
+&lt;p&gt;Usage:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ aptly snapshot list
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Flags:&lt;/p&gt;
 
 &lt;ul&gt;
-&lt;li&gt;&lt;code&gt;region&lt;/code&gt;: Amazon region for S3 bucket (e.g. &lt;code&gt;us-east-1&lt;/code&gt;)&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;bucket&lt;/code&gt;: bucket name&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;prefix&lt;/code&gt;: (optional) do publishing under specified prefix in the
-bucket, defaults to no prefix (bucket root)&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;acl&lt;/code&gt;: (optional) assign ACL to published files (one of the canned
-ACLs in Amazon terminology). Useful values: &lt;code&gt;private&lt;/code&gt; (default) or
-&lt;code&gt;public-read&lt;/code&gt; (public repository). Public repositories could be
-consumed by &lt;code&gt;apt&lt;/code&gt; using HTTP endpoint (Amazon bucket should be
-configured for &amp;ldquo;website hosting&amp;rdquo;), for private repositories special
-apt S3 transport is required.&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;awsAccessKeyID&lt;/code&gt;, &lt;code&gt;awsSecretAccessKey&lt;/code&gt;: (optional) Amazon
-credentials to access S3 bucket. If not supplied, environment
-variables &lt;code&gt;AWS_ACCESS_KEY_ID&lt;/code&gt; and &lt;code&gt;AWS_SECRET_ACCESS_KEY&lt;/code&gt; are used.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-raw=false&lt;/code&gt;: display list in machine-readable format&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-sort=&amp;quot;name&amp;quot;&lt;/code&gt;: display list in &amp;lsquo;name&amp;rsquo; or creation &amp;lsquo;time&amp;rsquo; order&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;S3 bucket used for publishing should be empty initially and should not
-be used to store other data, as aptly might remove objects while doing
-cleanup operation. If &lt;code&gt;prefix&lt;/code&gt; is configured, bucket should be empty
-under the prefix (aptly won&amp;rsquo;t touch any objects outside prefix).&lt;/p&gt;
+&lt;p&gt;Examples:&lt;/p&gt;
 
-&lt;p&gt;In order to publish to S3, specify endpoint as &lt;code&gt;s3:endpoint-name:&lt;/code&gt;
-before publishing prefix on the command line, e.g.:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;$ aptly snapshot list
+List of snapshots:
+ * [monday-updates]: Snapshot from mirror [backports2]: http://mirror.yandex.ru/backports.org/ squeeze-backports
+ * [back]: Snapshot from mirror [backports2]: http://mirror.yandex.ru/backports.org/ squeeze-backports
 
-&lt;pre&gt;&lt;code&gt;$ aptly publish snapshot wheezy-main s3:test:
+To get more information about snapshot, run `aptly snapshot show &amp;lt;name&amp;gt;`.
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;Or, with prefix:&lt;/p&gt;
+&lt;p&gt;In snapshot list, basic description on the way snapshot has been created is
+displayed.&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;$ aptly publish snapshot wheezy-main s3:test:debian/
+&lt;pre&gt;&lt;code&gt;$ aptly snapshot list -raw
+monday-updates
+back
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;If you would like to publish public repository to Amazon S3, create
-bucket, enable website hosting option at Amazon console. Specify bucket
-name, region and access keys in aptly configuration under
-&lt;code&gt;S3PublishEndpoints&lt;/code&gt;. Use &lt;code&gt;public-read&lt;/code&gt; as value for &lt;code&gt;acl&lt;/code&gt; parameter.
-Published repository could be added to &lt;code&gt;/etc/apt/sources.list&lt;/code&gt; by using
-public HTTP URL, like any other HTTP repository.&lt;/p&gt;
+&lt;p&gt; &lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>aptly repo list</title>
+      <link>http://www.aptly.info/doc/aptly/repo/list</link>
+      <pubDate>Fri, 08 Aug 2014 11:17:38 UTC</pubDate>
+      <author>Andrey Smirnov</author>
+      <guid>http://www.aptly.info/doc/aptly/repo/list</guid>
+      <description>
 
-&lt;p&gt;For private repositories, don&amp;rsquo;t enable website hosting option and use
-&lt;code&gt;private&lt;/code&gt; as value for &lt;code&gt;acl&lt;/code&gt; parameter. Install
-&lt;a href=&#34;https://github.com/brianm/apt-s3/&#34;&gt;apt-s3&lt;/a&gt; or any other similar tool to
-enable &lt;code&gt;s3://&lt;/code&gt; transport in &lt;code&gt;apt&lt;/code&gt;. Use special URLs to include your
-private repository in &lt;code&gt;/etc/apt/sources.list&lt;/code&gt;:&lt;/p&gt;
+&lt;h2 id=&#34;toc_0&#34;&gt;aptly repo list&lt;/h2&gt;
 
-&lt;pre&gt;&lt;code&gt;deb s3://&amp;lt;access-key&amp;gt;:[&amp;lt;secret-key&amp;gt;]@s3-eu-east-1.amazonaws.com/private-repo main
+&lt;p&gt;Commands list displays list of all local package repositories.&lt;/p&gt;
+
+&lt;p&gt;Usage:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$  aptly repo list
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;It is recommended to setup separate user in Amazon IAM for publishing to
-S3. This user would have access only to one bucket for publishing and
-limited operations. Sample policy (change &lt;code&gt;bucket&lt;/code&gt; to match you bucket
-name):&lt;/p&gt;
+&lt;p&gt;Flags:&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;{
-  &amp;quot;Version&amp;quot;: &amp;quot;2012-10-17&amp;quot;,
-  &amp;quot;Statement&amp;quot;: [
-    {
-      &amp;quot;Sid&amp;quot;: &amp;quot;Stmt1405592139000&amp;quot;,
-      &amp;quot;Effect&amp;quot;: &amp;quot;Allow&amp;quot;,
-      &amp;quot;Action&amp;quot;: [
-        &amp;quot;s3:DeleteObject&amp;quot;,
-        &amp;quot;s3:GetObject&amp;quot;,
-        &amp;quot;s3:ListBucket&amp;quot;,
-        &amp;quot;s3:PutObject&amp;quot;,
-        &amp;quot;s3:PutObjectAcl&amp;quot;
-      ],
-      &amp;quot;Resource&amp;quot;: [
-        &amp;quot;arn:aws:s3:::bucket/*&amp;quot;, &amp;quot;arn:aws:s3:::bucket&amp;quot;
-      ]
-    }
-  ]
-}
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;-raw=false&lt;/code&gt;: display list in machine-readable format&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Examples:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ aptly repo list
+List of local repos:
+ * [stable]: Stable packages for project Foo (packages: 10)
+ * [testing] (packages: 1)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;To get more information about local repository, run &lt;code&gt;aptly repo show &amp;lt;name&amp;gt;&lt;/code&gt;.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ aptly repo list -raw
+stable
+testing
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt; &lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>aptly snapshot show</title>
+      <link>http://www.aptly.info/doc/aptly/snapshot/show</link>
+      <pubDate>Fri, 08 Aug 2014 11:17:38 UTC</pubDate>
+      <author>Andrey Smirnov</author>
+      <guid>http://www.aptly.info/doc/aptly/snapshot/show</guid>
+      <description>
+
+&lt;h2 id=&#34;toc_0&#34;&gt;aptly snapshot show&lt;/h2&gt;
+
+&lt;p&gt;Shows detailed information about snapshot. Full list of packages in the
+snapshot could be displayed as well.&lt;/p&gt;
+
+&lt;p&gt;Usage:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ aptly snapshot show &amp;lt;name&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Params:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;name&lt;/code&gt; is snapshot name which has been given during snapshot
+creation&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Flags:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;-with-packages=false&lt;/code&gt;: show detailed list of packages and versions
+stored in the mirror&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Example:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ aptly snapshot show back
+Name: back
+Created At: 2013-12-24 15:39:29 MSK
+Description: Snapshot from mirror [backports2]: http://mirror.yandex.ru/backports.org/ squeeze-backports
+Number of packages: 3898
+Packages:
+  altos-1.0.3~bpo60+1_i386
+  amanda-client-1:3.3.1-3~bpo60+1_amd64
+  ...
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt; &lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>aptly snapshot create</title>
+      <link>http://www.aptly.info/doc/aptly/snapshot/create</link>
+      <pubDate>Fri, 08 Aug 2014 11:17:38 UTC</pubDate>
+      <author>Andrey Smirnov</author>
+      <guid>http://www.aptly.info/doc/aptly/snapshot/create</guid>
+      <description>
+
+&lt;h2 id=&#34;toc_0&#34;&gt;aptly snapshot create&lt;/h2&gt;
+
+&lt;h4 id=&#34;toc_1&#34;&gt;Command &lt;code&gt;aptly snapshot create .. from mirror&lt;/code&gt;&lt;/h4&gt;
+
+&lt;p&gt;Creates snapshot from current state of remote mirror. Mirror should be
+&lt;a href=&#34;/doc/aptly/mirror/update/&#34;&gt;updated&lt;/a&gt; at least once before running this command.&lt;/p&gt;
+
+&lt;p&gt;Snapshot would contain exactly the same set of packages as mirror
+currently does. Snapshot is immutable, so if mirror is updated, snapshot
+contents won&amp;rsquo;t change. If mirror contains source packages, snapshot
+would also contain source packages.&lt;/p&gt;
+
+&lt;p&gt;Usage:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ aptly snapshot create &amp;lt;name&amp;gt; from mirror &amp;lt;mirror-name&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Params are:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;name&lt;/code&gt; is a name for the snapshot to be created&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;mirror-name&lt;/code&gt; is a mirror name (given when mirror was created)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Example:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ aptly snapshot create monday-updates from mirror backports2
+
+Snapshot monday-updates successfully created.
+You can run &#39;aptly publish snapshot monday-updates&#39; to publish snapshot as Debian repository.
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt; &lt;/p&gt;
+
+&lt;h4 id=&#34;toc_2&#34;&gt;Command &lt;code&gt;aptly snapshot create .. from repo&lt;/code&gt;&lt;/h4&gt;
+
+&lt;p&gt;Creates snapshot from current state of local package repository.
+Repository should contain at least one package.&lt;/p&gt;
+
+&lt;p&gt;Snapshot would contain exactly the same set of packages as local
+repositorory currently does. Snapshot is immutable, so if local
+repository is changed in any way, snapshot contents won&amp;rsquo;t change.&lt;/p&gt;
+
+&lt;p&gt;Usage:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ aptly snapshot create &amp;lt;name&amp;gt; from repo &amp;lt;repo-name&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Params are:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;name&lt;/code&gt; is a name for the snapshot to be created&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;repo-name&lt;/code&gt; is a local repository name&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Example:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ aptly snapshot create snap-stable from repo stable
+
+Snapshot snap-stable successfully created.
+You can run &#39;aptly publish snapshot snap-stable&#39; to publish snapshot as Debian repository.
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt; &lt;/p&gt;
+
+&lt;h4 id=&#34;toc_3&#34;&gt;Command &lt;code&gt;aptly snapshot create .. empty&lt;/code&gt;&lt;/h4&gt;
+
+&lt;p&gt;Creates empty snapshot. As snapshots are immutable, creating one empty
+snapshot should be enough.&lt;/p&gt;
+
+&lt;p&gt;Empty snapshots could be used as first argument to &lt;a href=&#34;/doc/aptly/snapshot/pull/&#34;&gt;&lt;code&gt;aptly snapshot pull&lt;/code&gt;&lt;/a&gt;
+in order to create set of packages matching query, or as initial contents of empty
+published repository.&lt;/p&gt;
+
+&lt;p&gt;Usage:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ aptly snapshot create &amp;lt;name&amp;gt; empty
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Params are:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;name&lt;/code&gt; is a name for the snapshot to be created&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Example:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ aptly snapshot create empty-snapshot empty
+
+Snapshot empty-snapshot successfully created.
+You can run &#39;aptly publish snapshot empty-snapshot&#39; to publish snapshot as Debian repository.
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>aptly db cleanup</title>
+      <link>http://www.aptly.info/doc/aptly/db/cleanup</link>
+      <pubDate>Fri, 08 Aug 2014 11:17:38 UTC</pubDate>
+      <author>Andrey Smirnov</author>
+      <guid>http://www.aptly.info/doc/aptly/db/cleanup</guid>
+      <description>
+
+&lt;h2 id=&#34;toc_0&#34;&gt;aptly db cleanup&lt;/h2&gt;
+
+&lt;p&gt;Database cleanup removes information about unreferenced packages and
+deletes files in the package pool that aren&amp;rsquo;t used by packages anymore.
+It is a good idea to run this command after massive deletion of
+mirrors, snapshots or local repos.&lt;/p&gt;
+
+&lt;p&gt;Usage:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ aptly db cleanup
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Example:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ aptly db cleanup
+Loading mirrors and snapshots...
+Loading list of all packages...
+Deleting unreferenced packages (325)...
+Building list of files referenced by packages...
+Building list of files in package pool...
+Deleting unreferenced files (325)...
+Disk space freed: 0.27 GiB...
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt; &lt;/p&gt;
