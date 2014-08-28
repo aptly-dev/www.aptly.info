@@ -99,3 +99,6 @@ Pull packages with complex conditions:
 Or remove packages based on query:
 
     $ aptly repo remove local-repo 'Name (% http-*) | $Source (webserver)'
+
+Query could be tested by using family of search commands: for [mirrors](/doc/aptly/mirror/search/),
+[snapshots](/doc/aptly/snapshot/search/) and [local repos](/doc/aptly/repo/search/).

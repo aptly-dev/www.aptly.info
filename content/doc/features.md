@@ -17,6 +17,7 @@ List of aptly features, in no particular order:
   * HTTP servers are supported
   * mirror only specified architectures/components
   * [partial mirrors](/doc/feature/query/) (with filters on packages)
+  * [search](/doc/aptly/mirror/search/) mirror for packages matching query
 * local repositories handling:
   * any number of local repositories
   * packages could be [added](/doc/aptly/repo/add/) from files or by directory scan
@@ -37,6 +38,7 @@ List of aptly features, in no particular order:
     producing new snapshot
   * [checking](/doc/aptly/snapshot/verify/) snapshot for unsatisfied dependencies
   * calculating [difference](/doc/aptly/snapshot/diff/) between snapshots
+  * [searching](/doc/aptly/snapshot/search/) snapshots for packages matching query
 * publishing snapshots and local repositories:
   * publishing [snapshots](/doc/aptly/publish/snapshot/) created from mirrors or local repositories
   * publishing [local repositories](/doc/aptly/publish/repo/) directly
