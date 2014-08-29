@@ -14,7 +14,7 @@ List of aptly features, in no particular order:
 
 * [mirroring](/doc/aptly/mirror/create/) remote repositories:
   * regular and flat repositories
-  * HTTP servers are supported
+  * HTTP(S) and FTP servers are supported
   * mirror only specified architectures/components
   * [partial mirrors](/doc/feature/query/) (with filters on packages)
   * [search](/doc/aptly/mirror/search/) mirror for packages matching query

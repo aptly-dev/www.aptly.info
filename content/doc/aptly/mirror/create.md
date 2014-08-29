@@ -13,7 +13,7 @@ aptly mirror create
 -------------------
 
 Creates mirror of remote repository, aptly supports both regular and
-flat Debian repositories exported via HTTP. aptly would try download
+flat Debian repositories exported via HTTP(S) or FTP. aptly would try download
 Release file from remote repository and verify its signature.
 
 Usage:
