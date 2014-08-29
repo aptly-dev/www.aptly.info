@@ -29,6 +29,8 @@ List of aptly features, in no particular order:
   * packages from mirrors and local repos are stored in deduplicated manner
   * package file is kept in package pool until there's at least a single reference
   * pool could be [cleaned up](/doc/aptly/db/cleanup/)
+  * [searching](/doc/aptly/package/search/) and [showing details](/doc/aptly/package/show/) for
+    packages in the pool
 * handling of [duplicate](/doc/feature/duplicate/) packages
 * snapshots for mirrors and local repositories:
   * [creating](/doc/aptly/snapshot/create/) snapshots from mirrors and local repositories
