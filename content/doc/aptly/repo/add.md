@@ -31,6 +31,8 @@ Params are:
 
 Flags:
 
+-   `-force-replace=false`: when adding package that conflicts with existing package,
+    remove existing package
 -   `-remove-files=false`: remove files that have been imported
     successfully into repository
 
@@ -44,6 +46,8 @@ aptly won't complain if package is added to the repo which is complete
 duplicate. However it is forbidden to have two packages in one repo with identical
 triples (architecture, name, version) that have different metadata or
 files (see [Duplicate packages](/doc/feature/duplicate) for details).
+If you need to replace package that conflicts with existing, use flag
+`-force-replace`.
 All files added to package pool would be deduplicated, as it
 happens with files coming from mirrors, so exactly one copy of each file
 would be stored in aptly pool.
