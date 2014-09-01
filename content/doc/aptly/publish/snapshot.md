@@ -48,6 +48,8 @@ Flags:
     specified default key is used
 -   `-keyring=""`: GPG keyring to use (instead of default)
 -   `-label=""`: value for `Label:` field
+-   `-passphrase=""`: GPG passphrase to unlock private key (possibly insecure)
+-   `-passphrase-file=""`: GPG passphrase file to unlock private key (possibly insecure)
 -   `-origin=""`: value for `Origin:` field
 -   `-secret-keyring=""`: GPG secret keyring to use (instead of default)
 -   `-skip-signing=false`: don't sign Release files with GPG

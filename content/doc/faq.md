@@ -55,8 +55,12 @@ Please see [multi-component publishing](/doc/feature/multi-component/).
 **Q: How to automate entering GPG key passphrase with aptly?**
 
 If you publish packages from some kind of automation tool (e.g. from continuous integration
-service), it is not possible to enter passphrase manually. One way is to create a key
-without passphrase. To create such key, create `gpg` batch file `foo` with following content:
+service), it is not possible to enter passphrase manually. There are two possible workarounds,
+both of them compromise on security: create key without passphrase or pass passphrase via
+aptly flags when publishing.
+
+*Key without passphrase*. To create such key,
+create `gpg` batch file `foo` with following content:
 
     %echo Generating a default key
     Key-Type: default
@@ -76,6 +80,11 @@ And run `gpg`:
     $ gpg --batch --gen-key foo
 
 More information could be found in [GnuPG manual](https://www.gnupg.org/documentation/manuals/gnupg-devel/Unattended-GPG-key-generation.html).
+
+*Passing passphrase when publishing*. Create key as usual, and add flags `-passphrase=` or
+`-passphrase-file=` to aptly publishing commands. Flag values would be passed to corresponding GnuPG
+flags. Contents of command line could be visible to other users on multi-user system, while contents
+of the file with passphrase could be readable by other users. So use these options with caution.
 
 **Q: Why does PXE installing of Debian fails with repository published by aptly?**
 
