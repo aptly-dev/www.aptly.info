@@ -106,3 +106,9 @@ dash. Please use two dashes (`--`) to separate flags from arguments:
 
     $ aptly snapshot rename -- -foo my-foo
 
+
+**Q: Why does aptly ignore config file `/etc/aptly.conf`?**
+
+aptly first looks for configuration file in `~/.aptly.conf`, and if no file is found, it
+makes attempt to load `/etc/aptly.conf`. aptly creates configuration file in `~/.aptly.conf`
+if no config file is found, so you might need to remove auto-generated `~/.aptly.conf`.
