@@ -9,8 +9,9 @@ menu:
 Configuration
 --------------
 
-aptly looks for configuration file in `/etc/aptly.conf` and
-`~/.aptly.conf`, if no config file found, new one is created. If
+aptly looks for configuration file first in `~/.aptly.conf` then
+in `/etc/aptly.conf` and, if no config file found, new one is created in
+home directory. If
 `-config=` flag is specified, aptly would use config file at specified
 location. Also aptly needs root directory for database, package and
 published repository storage. If not specified, directory defaults to
