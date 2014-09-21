@@ -49,7 +49,8 @@ Local repos could be modified by [copying](/doc/aptly/repo/copy) and
 [created](/doc/aptly/snapshot/create) from remote repository (official
 Debain repositories, backports, 3rd party repos, etc.) or your local
 repository (custom built packages, your own software). Snapshots can be
-used to produce new snapshots by [pulling](/doc/aptly/snapshot/pull)
+used to produce new snapshots by [filtering](/doc/aptly/snapshot/filter/)
+other snapshots, [pulling](/doc/aptly/snapshot/pull)
 packages with dependencies between snapshots and by
 [merging](/doc/aptly/snapshot/merge) snapshots. Any snapshot can be
 [published](/doc/aptly/publish/snapshot) to location (distribution name,

@@ -36,6 +36,7 @@ List of aptly features, in no particular order:
   * [creating](/doc/aptly/snapshot/create/) snapshots from mirrors and local repositories
   * snapshot is immutable
   * [merging](/doc/aptly/snapshot/merge/) several snapshots into one
+  * [filtering](/doc/aptly/snapshot/filter/) snapshots producing new snapshot
   * [pulling](/doc/aptly/snapshot/pull/) packages matching query from one snapshot into another,
     producing new snapshot
   * [checking](/doc/aptly/snapshot/verify/) snapshot for unsatisfied dependencies
