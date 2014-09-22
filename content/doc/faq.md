@@ -112,3 +112,10 @@ dash. Please use two dashes (`--`) to separate flags from arguments:
 aptly first looks for configuration file in `~/.aptly.conf`, and if no file is found, it
 makes attempt to load `/etc/aptly.conf`. aptly creates configuration file in `~/.aptly.conf`
 if no config file is found, so you might need to remove auto-generated `~/.aptly.conf`.
+
+**Q: How do I change permissions for published repository files?**
+
+aptly creates files with permission `0666` and directories with permission `0777`, permissions
+are affected by user's [umask](http://en.wikipedia.org/wiki/Umask) setting. With default umask
+of `0022`, files created would have permissions `-rw-r--r--` and dirs would be `drwxr-xr-x`.
+So change umask before running `aptly publish` in order to set final permissions as you need.
