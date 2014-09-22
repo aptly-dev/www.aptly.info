@@ -30,6 +30,8 @@ Flags:
 -   `-filter-with-deps=false`: when filtering, include dependencies of
     matching packages as well
 -   `-architectures=`: global flag to change architectures list.
+-   `-with-sources=false`: download source packages in addition to
+    binary packages
 
 In order to apply new filtering settings, [update](/doc/aptly/mirror/update/)
 mirror.
