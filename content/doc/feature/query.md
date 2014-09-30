@@ -38,8 +38,8 @@ Supported fields:
     `source`.
 -   `$Version` has the same value as `Version`, but comparison operators
     use Debian version precedence rules
--   `$PackageType` is `deb` for binary packages and `source` for source
-    packages
+-   `$PackageType` is `deb` for binary packages, `udeb` for .udeb packages
+    and `source` for source packages
 
 Operators:
 
