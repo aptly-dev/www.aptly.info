@@ -18,6 +18,7 @@ List of aptly features, in no particular order:
   * mirror only specified architectures/components
   * [partial mirrors](/doc/feature/query/) (with filters on packages)
   * [search](/doc/aptly/mirror/search/) mirror for packages matching query
+  * .udeb packages support (Debian installer)
 * local repositories handling:
   * any number of local repositories
   * packages could be [added](/doc/aptly/repo/add/) from files or by directory scan

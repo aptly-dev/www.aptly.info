@@ -12,9 +12,10 @@ menu:
 aptly repo add
 --------------
 
-Command adds packages to local repository from `.deb` (binary packages)
+Command adds packages to local repository from `.deb` (binary packages),
+`.udeb` (binary packages for Debian installer)
 and `.dsc` (source packages) files. When importing from directory aptly
-would do recursive scan looking for all files matching `*.deb` or
+would do recursive scan looking for all files matching `*.[u]deb` or
 `*.dsc` patterns. Every file discovered would be analyzed to extract
 metadata, package would be created and added to database. Files would be
 imported to internal package pool. For source packages, all required
