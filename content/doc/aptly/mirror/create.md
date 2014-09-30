@@ -48,6 +48,8 @@ Flags:
 -   `-with-sources=false`: download source packages in addition to
     binary packages (could be enabled by default with config option
     `downloadSourcePackages`)
+-   `-with-udebs=false`: download .udeb packages (Debian installer
+    support)
 
 By default aptly would download packages for all available
 architectures. If architectures are limited (with config `architectures`

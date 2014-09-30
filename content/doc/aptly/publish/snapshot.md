@@ -127,6 +127,14 @@ Directory structure for published repositories:
                     -   `Sources.gz`
                     -   `Sources.bz2`
                     -   `Release`: used by debian-installer
+                -   `debian-installer`: indexes for .udeb packages
+                     (generated only if .udeb packages are present)
+                     -   `binary-i386`: binary .udeb index for
+                         architecture `i386`
+                        -   `Packages`: package index, .udeb
+                        -   `Packages.gz`
+                        -   `Packages.bz2`
+                        -   `Release`: used by debian-installer
         -   `pool/`
             -   `main/`: component main
                 -   `m/`

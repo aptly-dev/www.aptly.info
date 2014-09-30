@@ -88,7 +88,10 @@ of the file with passphrase could be readable by other users. So use these optio
 
 **Q: Why does PXE installing of Debian fails with repository published by aptly?**
 
-aptly doesn't yet support handling of `.udeb` packages, which are required for PXE install.
+Debian installer requires `.udeb` packages, they can be mirrored from main Debian repository
+with flag `-with-udebs` to [`aptly mirror create`](/doc/aptly/mirror/create) command. aptly
+would sign repository with your GPG key, so you might need to modify installer to accept
+your custom key.
 
 **Q: Can I preserve Debian signing key when mirroring?**
 

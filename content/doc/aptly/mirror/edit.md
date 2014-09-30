@@ -32,6 +32,8 @@ Flags:
 -   `-architectures=`: global flag to change architectures list.
 -   `-with-sources=false`: download source packages in addition to
     binary packages
+-   `-with-udebs=false`: download .udeb packages (Debian installer
+    support)
 
 In order to apply new filtering settings, [update](/doc/aptly/mirror/update/)
 mirror.
