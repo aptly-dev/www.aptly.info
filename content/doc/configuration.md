@@ -43,7 +43,8 @@ below):
           "prefix": "",
           "acl": "public-read",
           "storageClass": "",
-          "encryptionMethod": ""
+          "encryptionMethod": "",
+          "plusWorkaround": false
         }
     }
 

@@ -122,3 +122,9 @@ aptly creates files with permission `0666` and directories with permission `0777
 are affected by user's [umask](http://en.wikipedia.org/wiki/Umask) setting. With default umask
 of `0022`, files created would have permissions `-rw-r--r--` and dirs would be `drwxr-xr-x`.
 So change umask before running `aptly publish` in order to set final permissions as you need.
+
+**Q: Why does apt-get fail to download packages published to S3 with `+` in filenames?**
+
+This is a result of somewhat non-standard behavior of Amazon S3 API related to encoding
+of `+` character. This has been fixed in `apt` version 0.9.9.1. If you have older version
+of `apt`, you can enable workaround in aptly with option [`plusWorkaround`](/doc/feature/s3/).
