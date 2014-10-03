@@ -132,6 +132,10 @@
                                   </li>
                                 
                                   <li >
+                                    <a href="http://www.aptly.info/doc/aptly/mirror/search">aptly mirror search</a>
+                                  </li>
+                                
+                                  <li >
                                     <a href="http://www.aptly.info/doc/aptly/mirror/rename">aptly mirror rename</a>
                                   </li>
                                 
@@ -181,6 +185,10 @@
                                   </li>
                                 
                                   <li >
+                                    <a href="http://www.aptly.info/doc/aptly/repo/search">aptly repo search</a>
+                                  </li>
+                                
+                                  <li >
                                     <a href="http://www.aptly.info/doc/aptly/repo/edit">aptly repo edit</a>
                                   </li>
                                 
@@ -222,6 +230,10 @@
                                   </li>
                                 
                                   <li >
+                                    <a href="http://www.aptly.info/doc/aptly/snapshot/filter">aptly snapshot filter</a>
+                                  </li>
+                                
+                                  <li >
                                     <a href="http://www.aptly.info/doc/aptly/snapshot/diff">aptly snapshot diff</a>
                                   </li>
                                 
@@ -230,11 +242,32 @@
                                   </li>
                                 
                                   <li >
+                                    <a href="http://www.aptly.info/doc/aptly/snapshot/search">aptly snapshot search</a>
+                                  </li>
+                                
+                                  <li >
                                     <a href="http://www.aptly.info/doc/aptly/snapshot/rename">aptly snapshot rename</a>
                                   </li>
                                 
                                   <li >
                                     <a href="http://www.aptly.info/doc/aptly/snapshot/drop">aptly snapshot drop</a>
+                                  </li>
+                                
+                              </ul>
+                            
+                          </li>
+                        
+                          <li >
+                            <a href="http://www.aptly.info/doc/aptly/package">aptly package</a>
+                            
+                              <ul class="nav">
+                                
+                                  <li >
+                                    <a href="http://www.aptly.info/doc/aptly/package/search">aptly package search</a>
+                                  </li>
+                                
+                                  <li >
+                                    <a href="http://www.aptly.info/doc/aptly/package/show">aptly package show</a>
                                   </li>
                                 
                               </ul>
@@ -346,6 +379,18 @@ apt S3 transport is required.</li>
 <li><code>awsAccessKeyID</code>, <code>awsSecretAccessKey</code>: (optional) Amazon
 credentials to access S3 bucket. If not supplied, environment
 variables <code>AWS_ACCESS_KEY_ID</code> and <code>AWS_SECRET_ACCESS_KEY</code> are used.</li>
+<li><code>storageClass</code>: (optional) Amazon S3 storage class, defaults to <code>STANDARD</code>. Other values
+available: <code>REDUCED_REDUNDANCY</code> (lower price, lower redundancy)</li>
+<li><code>encryptionMethod</code>: (optional) server-side encryption method, defaults to none. Currently
+the only available encryption method is <code>AES256</code></li>
+<li><code>plusWorkaround</code>: (optional) workaround misbehavior in apt and Amazon S3
+(see <a href="https://bugs.launchpad.net/ubuntu/+source/apt/+bug/1003633">bug</a>) by
+creating two copies of package files with <code>+</code> in filename: one original
+and another one with spaces instead of plus signs
+<div class="alert alert-warning alert-note"><strong>Warning:</strong>
+With <strong>plusWorkaround</strong> enabled, package files with plus sign
+would be stored twice. aptly might not cleanup files with spaces when published
+repository is dropped or updated (switched) to new version of repository (snapshot).</div></li>
 </ul>
 
 <p>S3 bucket used for publishing should be empty initially and should not

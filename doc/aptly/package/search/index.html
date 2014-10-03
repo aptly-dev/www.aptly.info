@@ -3,11 +3,11 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>aptly - aptly repo list</title>
+    <title>aptly - aptly package search</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" href="/favicon.ico">
     <link type="text/css" rel="stylesheet" href="/css/styles.css">
-    <link rel="canonical" href="http://www.aptly.info/doc/aptly/repo/list">
+    <link rel="canonical" href="http://www.aptly.info/doc/aptly/package/search">
     <link href="/post/index.xml" rel="alternate" type="application/rss+xml" title="Debian repository management tool" />
     
   </head>
@@ -147,7 +147,7 @@
                             
                           </li>
                         
-                          <li class="active">
+                          <li >
                             <a href="http://www.aptly.info/doc/aptly/repo">aptly repo</a>
                             
                               <ul class="nav">
@@ -168,7 +168,7 @@
                                     <a href="http://www.aptly.info/doc/aptly/repo/show">aptly repo show</a>
                                   </li>
                                 
-                                  <li class="active">
+                                  <li >
                                     <a href="http://www.aptly.info/doc/aptly/repo/list">aptly repo list</a>
                                   </li>
                                 
@@ -257,12 +257,12 @@
                             
                           </li>
                         
-                          <li >
+                          <li class="active">
                             <a href="http://www.aptly.info/doc/aptly/package">aptly package</a>
                             
                               <ul class="nav">
                                 
-                                  <li >
+                                  <li class="active">
                                     <a href="http://www.aptly.info/doc/aptly/package/search">aptly package search</a>
                                   </li>
                                 
@@ -358,37 +358,73 @@
           <div class="col-md-9 col-sm-9 col-xs-9">
             
 
-<h2 id="toc_0">aptly repo list</h2>
+<h2 id="toc_0">aptly package search</h2>
 
-<p>Commands list displays list of all local package repositories.</p>
+<p>Search whole package database for packages matching query.
+Whole database of packages includes all packages (deduplicated)
+from all the mirrors, local repos and snapshots.</p>
+
+<p>In order to get more detailed information about the package,
+use <a href="/doc/aptly/package/show/"><code>aptly package show</code></a> command.</p>
 
 <p>Usage:</p>
 
-<pre><code>$  aptly repo list
+<pre><code>$ aptly package search &lt;package-query&gt;
 </code></pre>
 
-<p>Flags:</p>
+<p>Params are:</p>
 
 <ul>
-<li><code>-raw=false</code>: display list in machine-readable format</li>
+<li><code>package-query</code> is a <a href="/doc/feature/query/">package query</a> to
+search for packages</li>
 </ul>
 
-<p>Examples:</p>
+<p>Example:</p>
 
-<pre><code>$ aptly repo list
-List of local repos:
- * [stable]: Stable packages for project Foo (packages: 10)
- * [testing] (packages: 1)
+<pre><code>$ aptly package search 'Version (&gt;=1.2.3-2), Version (&lt;1.2.3-3)'
+libibmad-dev_1.2.3-20090314-1.1_amd64
+libibumad-dev_1.2.3-20090314-1.1_i386
+libibumad1_1.2.3-20090314-1.1_amd64
+libibumad1_1.2.3-20090314-1.1_i386
+libghc-uuid-dev_1.2.3-2+b3_amd64
+python-mysqldb_1.2.3-2_i386
+libibumad-dev_1.2.3-20090314-1.1_amd64
+libibmad_1.2.3-20090314-1.1_source
+python-mysqldb_1.2.3-2_amd64
+jpegoptim_1.2.3-2+b2_i386
+libghc-uuid-doc_1.2.3-2_all
+libjibx1.2-java-doc_1.2.3-2_all
+bwbar_1.2.3-2_amd64
+libghc-certificate-doc_1.2.3-2_all
+haskell-certificate_1.2.3-2_source
+bwbar_1.2.3-2_i386
+jpegoptim_1.2.3-2_source
+libghc-certificate-dev_1.2.3-2_amd64
+libibmad1_1.2.3-20090314-1.1_i386
+libibmad-dev_1.2.3-20090314-1.1_i386
+libjibx1.2-java_1.2.3-2_source
+python-mysqldb-dbg_1.2.3-2_i386
+shush_1.2.3-2_i386
+moksha.common_1.2.3-2~bpo70+1_source
+libghc-certificate-prof_1.2.3-2_i386
+libghc-uuid-prof_1.2.3-2+b3_amd64
+libghc-uuid-prof_1.2.3-2+b4_i386
+shush_1.2.3-2_source
+libghc-certificate-prof_1.2.3-2_amd64
+libjibx1.2-java_1.2.3-2_all
+libjibx-java_1.2.3-2_all
+libghc-uuid-dev_1.2.3-2+b4_i386
+python-mysqldb_1.2.3-2_source
+haskell-uuid_1.2.3-2_source
+libibumad_1.2.3-20090314-1.1_source
+libghc-certificate-dev_1.2.3-2_i386
+jpegoptim_1.2.3-2+b2_amd64
+python-moksha.common_1.2.3-2~bpo70+1_all
+bwbar_1.2.3-2_source
+python-mysqldb-dbg_1.2.3-2_amd64
+libibmad1_1.2.3-20090314-1.1_amd64
+shush_1.2.3-2_amd64
 </code></pre>
-
-<p>To get more information about local repository, run <code>aptly repo show &lt;name&gt;</code>.</p>
-
-<pre><code>$ aptly repo list -raw
-stable
-testing
-</code></pre>
-
-<p> </p>
 
             <div id="disqus_thread"></div>
 <script type="text/javascript">
@@ -401,8 +437,8 @@ testing
 
     var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
     var disqus_shortname = 'aptly';
-    var disqus_title = 'aptly repo list';
-    var disqus_identifier = '\/doc\/aptly\/repo\/list';
+    var disqus_title = 'aptly package search';
+    var disqus_identifier = '\/doc\/aptly\/package\/search';
     dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
     (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
 })();

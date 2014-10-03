@@ -132,6 +132,10 @@
                                   </li>
                                 
                                   <li >
+                                    <a href="http://www.aptly.info/doc/aptly/mirror/search">aptly mirror search</a>
+                                  </li>
+                                
+                                  <li >
                                     <a href="http://www.aptly.info/doc/aptly/mirror/rename">aptly mirror rename</a>
                                   </li>
                                 
@@ -181,6 +185,10 @@
                                   </li>
                                 
                                   <li >
+                                    <a href="http://www.aptly.info/doc/aptly/repo/search">aptly repo search</a>
+                                  </li>
+                                
+                                  <li >
                                     <a href="http://www.aptly.info/doc/aptly/repo/edit">aptly repo edit</a>
                                   </li>
                                 
@@ -222,6 +230,10 @@
                                   </li>
                                 
                                   <li >
+                                    <a href="http://www.aptly.info/doc/aptly/snapshot/filter">aptly snapshot filter</a>
+                                  </li>
+                                
+                                  <li >
                                     <a href="http://www.aptly.info/doc/aptly/snapshot/diff">aptly snapshot diff</a>
                                   </li>
                                 
@@ -230,11 +242,32 @@
                                   </li>
                                 
                                   <li >
+                                    <a href="http://www.aptly.info/doc/aptly/snapshot/search">aptly snapshot search</a>
+                                  </li>
+                                
+                                  <li >
                                     <a href="http://www.aptly.info/doc/aptly/snapshot/rename">aptly snapshot rename</a>
                                   </li>
                                 
                                   <li >
                                     <a href="http://www.aptly.info/doc/aptly/snapshot/drop">aptly snapshot drop</a>
+                                  </li>
+                                
+                              </ul>
+                            
+                          </li>
+                        
+                          <li >
+                            <a href="http://www.aptly.info/doc/aptly/package">aptly package</a>
+                            
+                              <ul class="nav">
+                                
+                                  <li >
+                                    <a href="http://www.aptly.info/doc/aptly/package/search">aptly package search</a>
+                                  </li>
+                                
+                                  <li >
+                                    <a href="http://www.aptly.info/doc/aptly/package/show">aptly package show</a>
                                   </li>
                                 
                               </ul>
@@ -327,9 +360,10 @@
 
 <h2 id="toc_0">aptly repo add</h2>
 
-<p>Command adds packages to local repository from <code>.deb</code> (binary packages)
+<p>Command adds packages to local repository from <code>.deb</code> (binary packages),
+<code>.udeb</code> (binary packages for Debian installer)
 and <code>.dsc</code> (source packages) files. When importing from directory aptly
-would do recursive scan looking for all files matching <code>*.deb</code> or
+would do recursive scan looking for all files matching <code>*.[u]deb</code> or
 <code>*.dsc</code> patterns. Every file discovered would be analyzed to extract
 metadata, package would be created and added to database. Files would be
 imported to internal package pool. For source packages, all required
@@ -350,6 +384,8 @@ should be in the same directory as <code>*.dsc</code> file.</p>
 <p>Flags:</p>
 
 <ul>
+<li><code>-force-replace=false</code>: when adding package that conflicts with existing package,
+remove existing package</li>
 <li><code>-remove-files=false</code>: remove files that have been imported
 successfully into repository</li>
 </ul>
@@ -364,6 +400,8 @@ official repositories and published.</p>
 duplicate. However it is forbidden to have two packages in one repo with identical
 triples (architecture, name, version) that have different metadata or
 files (see <a href="/doc/feature/duplicate">Duplicate packages</a> for details).
+If you need to replace package that conflicts with existing, use flag
+<code>-force-replace</code>.
 All files added to package pool would be deduplicated, as it
 happens with files coming from mirrors, so exactly one copy of each file
 would be stored in aptly pool.</p>

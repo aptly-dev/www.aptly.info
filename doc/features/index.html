@@ -132,6 +132,10 @@
                                   </li>
                                 
                                   <li >
+                                    <a href="http://www.aptly.info/doc/aptly/mirror/search">aptly mirror search</a>
+                                  </li>
+                                
+                                  <li >
                                     <a href="http://www.aptly.info/doc/aptly/mirror/rename">aptly mirror rename</a>
                                   </li>
                                 
@@ -181,6 +185,10 @@
                                   </li>
                                 
                                   <li >
+                                    <a href="http://www.aptly.info/doc/aptly/repo/search">aptly repo search</a>
+                                  </li>
+                                
+                                  <li >
                                     <a href="http://www.aptly.info/doc/aptly/repo/edit">aptly repo edit</a>
                                   </li>
                                 
@@ -222,6 +230,10 @@
                                   </li>
                                 
                                   <li >
+                                    <a href="http://www.aptly.info/doc/aptly/snapshot/filter">aptly snapshot filter</a>
+                                  </li>
+                                
+                                  <li >
                                     <a href="http://www.aptly.info/doc/aptly/snapshot/diff">aptly snapshot diff</a>
                                   </li>
                                 
@@ -230,11 +242,32 @@
                                   </li>
                                 
                                   <li >
+                                    <a href="http://www.aptly.info/doc/aptly/snapshot/search">aptly snapshot search</a>
+                                  </li>
+                                
+                                  <li >
                                     <a href="http://www.aptly.info/doc/aptly/snapshot/rename">aptly snapshot rename</a>
                                   </li>
                                 
                                   <li >
                                     <a href="http://www.aptly.info/doc/aptly/snapshot/drop">aptly snapshot drop</a>
+                                  </li>
+                                
+                              </ul>
+                            
+                          </li>
+                        
+                          <li >
+                            <a href="http://www.aptly.info/doc/aptly/package">aptly package</a>
+                            
+                              <ul class="nav">
+                                
+                                  <li >
+                                    <a href="http://www.aptly.info/doc/aptly/package/search">aptly package search</a>
+                                  </li>
+                                
+                                  <li >
+                                    <a href="http://www.aptly.info/doc/aptly/package/show">aptly package show</a>
                                   </li>
                                 
                               </ul>
@@ -334,9 +367,11 @@
 
 <ul>
 <li>regular and flat repositories</li>
-<li>HTTP servers are supported</li>
+<li>HTTP(S) and FTP servers are supported</li>
 <li>mirror only specified architectures/components</li>
 <li><a href="/doc/feature/query/">partial mirrors</a> (with filters on packages)</li>
+<li><a href="/doc/aptly/mirror/search/">search</a> mirror for packages matching query</li>
+<li>.udeb packages support (Debian installer)</li>
 </ul></li>
 <li>local repositories handling:
 
@@ -354,6 +389,8 @@
 <li>packages from mirrors and local repos are stored in deduplicated manner</li>
 <li>package file is kept in package pool until there&rsquo;s at least a single reference</li>
 <li>pool could be <a href="/doc/aptly/db/cleanup/">cleaned up</a></li>
+<li><a href="/doc/aptly/package/search/">searching</a> and <a href="/doc/aptly/package/show/">showing details</a> for
+packages in the pool</li>
 </ul></li>
 <li>handling of <a href="/doc/feature/duplicate/">duplicate</a> packages</li>
 <li>snapshots for mirrors and local repositories:
@@ -362,10 +399,12 @@
 <li><a href="/doc/aptly/snapshot/create/">creating</a> snapshots from mirrors and local repositories</li>
 <li>snapshot is immutable</li>
 <li><a href="/doc/aptly/snapshot/merge/">merging</a> several snapshots into one</li>
+<li><a href="/doc/aptly/snapshot/filter/">filtering</a> snapshots producing new snapshot</li>
 <li><a href="/doc/aptly/snapshot/pull/">pulling</a> packages matching query from one snapshot into another,
 producing new snapshot</li>
 <li><a href="/doc/aptly/snapshot/verify/">checking</a> snapshot for unsatisfied dependencies</li>
 <li>calculating <a href="/doc/aptly/snapshot/diff/">difference</a> between snapshots</li>
+<li><a href="/doc/aptly/snapshot/search/">searching</a> snapshots for packages matching query</li>
 </ul></li>
 <li>publishing snapshots and local repositories:
 

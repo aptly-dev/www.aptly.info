@@ -3,11 +3,11 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>aptly - aptly repo list</title>
+    <title>aptly - aptly snapshot filter</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" href="/favicon.ico">
     <link type="text/css" rel="stylesheet" href="/css/styles.css">
-    <link rel="canonical" href="http://www.aptly.info/doc/aptly/repo/list">
+    <link rel="canonical" href="http://www.aptly.info/doc/aptly/snapshot/filter">
     <link href="/post/index.xml" rel="alternate" type="application/rss+xml" title="Debian repository management tool" />
     
   </head>
@@ -147,7 +147,7 @@
                             
                           </li>
                         
-                          <li class="active">
+                          <li >
                             <a href="http://www.aptly.info/doc/aptly/repo">aptly repo</a>
                             
                               <ul class="nav">
@@ -168,7 +168,7 @@
                                     <a href="http://www.aptly.info/doc/aptly/repo/show">aptly repo show</a>
                                   </li>
                                 
-                                  <li class="active">
+                                  <li >
                                     <a href="http://www.aptly.info/doc/aptly/repo/list">aptly repo list</a>
                                   </li>
                                 
@@ -204,7 +204,7 @@
                             
                           </li>
                         
-                          <li >
+                          <li class="active">
                             <a href="http://www.aptly.info/doc/aptly/snapshot">aptly snapshot</a>
                             
                               <ul class="nav">
@@ -229,7 +229,7 @@
                                     <a href="http://www.aptly.info/doc/aptly/snapshot/pull">aptly snapshot pull</a>
                                   </li>
                                 
-                                  <li >
+                                  <li class="active">
                                     <a href="http://www.aptly.info/doc/aptly/snapshot/filter">aptly snapshot filter</a>
                                   </li>
                                 
@@ -358,37 +358,56 @@
           <div class="col-md-9 col-sm-9 col-xs-9">
             
 
-<h2 id="toc_0">aptly repo list</h2>
+<h2 id="toc_0">aptly snapshot filter</h2>
 
-<p>Commands list displays list of all local package repositories.</p>
+<p>Applies filter to contents of snapshot <code>source</code> producing <code>destination</code>
+snapshot. All packages from <code>source</code> snapshot matching any of the package
+queries (optionally with all their dependencies from <code>source</code>)  are used
+to build new snapshot <code>destination</code>.</p>
 
 <p>Usage:</p>
 
-<pre><code>$  aptly repo list
+<pre><code>$ aptly snapshot filter &lt;source&gt; &lt;destination&gt; &lt;package-query&gt; ...
 </code></pre>
+
+<p>Params:</p>
+
+<ul>
+<li><code>source</code> is a snapshot name where packages would be
+searched</li>
+<li><code>destination</code> is a name of the snapshot that would be created</li>
+<li><code>package-query</code> is a list of <a href="/doc/feature/query/">package queries</a>, in
+the simplest form, name of package to be pulled from <code>source</code> could
+be specified</li>
+</ul>
 
 <p>Flags:</p>
 
 <ul>
-<li><code>-raw=false</code>: display list in machine-readable format</li>
+<li><code>-with-deps=false</code>: include dependencies of matching packages</li>
 </ul>
 
-<p>Examples:</p>
+<p>Filter command is almost identical to
+<code>aptly snapshot pull empty source destination query</code> (<code>empty</code> being empty
+snapshot), the differences are:</p>
 
-<pre><code>$ aptly repo list
-List of local repos:
- * [stable]: Stable packages for project Foo (packages: 10)
- * [testing] (packages: 1)
+<ul>
+<li>pull by default includes only first matching package</li>
+<li>pull honors <code>-architectures</code> flag and would pull only packages with
+mentioned architectures, while filter command would use package
+query as given to match packages (one might use <code>$Architecture (i386)</code> in query
+to limit architectures)</li>
+</ul>
+
+<p>Example:</p>
+
+<pre><code>$ aptly snapshot filter wheezy-main wheezy-main-required 'Priority (required)'
+Loading packages (31661)...
+Building indexes...
+
+Snapshot wheezy-main-required successfully filtered.
+You can run 'aptly publish snapshot wheezy-main-required' to publish snapshot as Debian repository.
 </code></pre>
-
-<p>To get more information about local repository, run <code>aptly repo show &lt;name&gt;</code>.</p>
-
-<pre><code>$ aptly repo list -raw
-stable
-testing
-</code></pre>
-
-<p> </p>
 
             <div id="disqus_thread"></div>
 <script type="text/javascript">
@@ -401,8 +420,8 @@ testing
 
     var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
     var disqus_shortname = 'aptly';
-    var disqus_title = 'aptly repo list';
-    var disqus_identifier = '\/doc\/aptly\/repo\/list';
+    var disqus_title = 'aptly snapshot filter';
+    var disqus_identifier = '\/doc\/aptly\/snapshot\/filter';
     dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
     (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
 })();
