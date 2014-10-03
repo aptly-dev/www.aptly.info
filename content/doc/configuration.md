@@ -9,8 +9,9 @@ menu:
 Configuration
 --------------
 
-aptly looks for configuration file in `/etc/aptly.conf` and
-`~/.aptly.conf`, if no config file found, new one is created. If
+aptly looks for configuration file first in `~/.aptly.conf` then
+in `/etc/aptly.conf` and, if no config file found, new one is created in
+home directory. If
 `-config=` flag is specified, aptly would use config file at specified
 location. Also aptly needs root directory for database, package and
 published repository storage. If not specified, directory defaults to
@@ -40,7 +41,10 @@ below):
           "awsAccessKeyID": ""
           "awsSecretAccessKey": "",
           "prefix": "",
-          "acl": "public-read"
+          "acl": "public-read",
+          "storageClass": "",
+          "encryptionMethod": "",
+          "plusWorkaround": false
         }
     }
 
@@ -76,8 +80,8 @@ Options:
 -   `ppaDistributorID` & `ppaCodename` specifies paramaters for short
     PPA url expansion, if left blank they default to output of
     `lsb_release` command
--   `S3PublisEndpoints` is a configuration of Amazon S3 publishing
-    endpoints (see below)
+-   `S3PublishEndpoints` is a configuration of Amazon S3 publishing
+    endpoints (see [publishing to S3](/doc/feature/s3/))
 
 <div class="alert alert-warning alert-note"><strong>Warning:</strong> <code>rootDir</code> contains all the downloaded packages from remote
 mirrors, so it should have enough space. For example. mirror of Debian

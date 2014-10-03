@@ -2,14 +2,16 @@
     <!-- Download -->
     <section class="primary-content">
       <div class="container">
-        <h2>Currently released aptly version is <span class="text-danger">{{ .Params.version }}</span> (<a href="#">what's new?</a>)</h2>
+        <h2>Currently released aptly version is <span class="text-danger">{{ .Params.version }}</span> (<a href="/doc/history/">what's new?</a>)</h2>
         {{ .Content }}
       </div>
     </section>
     <section class="note">
       <div class="container">
+        <img src="/img/os_icons/debian.png" alt="Debian/Ubuntu" class="pull-right">
         <h2>aptly installation</h2>
-        <p>For Debian/Ubuntu aptly could be installed by adding new repository to    <code>/etc/apt/sources.list:</code></p>
+        <p><b>Debian/Ubuntu</b>: aptly package is <a href="https://packages.debian.org/jessie/aptly">available</a> in Debian jessie (testing). If you would like to install aptly on older versions of Debian or to stay on the bleeding edge, aptly could be installed
+        by adding new repository to    <code>/etc/apt/sources.list</code>:</p>
         <pre>deb http://repo.aptly.info/ squeeze main</pre>
         <p>And importing key that is used to sign the release:</p>
 

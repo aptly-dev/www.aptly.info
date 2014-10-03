@@ -9,6 +9,63 @@ menu:
 History
 -------
 
+### Version 0.8
+
+ - aptly supports **concurrent operations while mirror is updated**, new flag
+   `-force` for [aptly mirror update](/doc/aptly/mirror/update/)
+   ([\#45](https://github.com/smira/aptly/issues/45)) ([\#114](https://github.com/smira/aptly/issues/114))
+ - support for **`.udeb` packages (Debian installer)** in mirrors, local repos and
+   published repositories
+   ([\#108](https://github.com/smira/aptly/issues/108))
+ - new command [aptly snapshot filter](/doc/aptly/snapshot/filter):
+   **filtering snapshots** using package query, complementary
+   to [snapshot pulling](/doc/aptly/snapshot/pull/)
+   ([\#82](https://github.com/smira/aptly/issues/82))
+ - **searching for packages matching query** in
+   [mirrors](/doc/aptly/mirror/search),
+   [local repos](/doc/aptly/repo/search),
+   [snapshots](/doc/aptly/snapshot/search) and
+   [whole package database](/doc/aptly/package/search)
+   ([\#81](https://github.com/smira/aptly/issues/81))
+   ([\#80](https://github.com/smira/aptly/issues/80))
+ - new command [aptly package show](/doc/aptly/package/show/):
+   displaying **details about package**, its inclusion into snapshots,
+   mirrors, local repos
+   ([\#80](https://github.com/smira/aptly/issues/80))
+ - [aptly mirror edit](/doc/aptly/mirror/edit/) now supports changing list of architectures
+   and download source setting
+   ([\#109](https://github.com/smira/aptly/issues/109))
+   ([\#99](https://github.com/smira/aptly/issues/99))
+ - workaround S3/apt issue with `+` in package filenames
+   (S3 config option `plusWorkaround`)
+   ([\#105](https://github.com/smira/aptly/issues/105))
+ - when publishing to S3 it's possible to choose reduced redundancy storage and
+   server-side encryption (S3 config options `storageClass` and `encryptionMethod`)
+   ([\#105](https://github.com/smira/aptly/issues/105))
+ - when signing published repository, it's possible to pass passphrase
+   for GPG key with flags `-passphrase` or `-passphrase-file`
+   ([\#94](https://github.com/smira/aptly/issues/194))
+ - new flag `-force-replace` in [aptly repo add](/doc/aptly/repo/add/) command
+   to replace conflicting packages automatically
+   ([\#83](https://github.com/smira/aptly/issues/83))
+ - dependency resolution algorithm has been improved
+   ([\#100](https://github.com/smira/aptly/issues/100))
+ - aptly now supports mirroring over FTP
+   ([\#48](https://github.com/smira/aptly/issues/48))
+ - bug fix: for boolean options, settings
+   from configuration file were overriding settings on command line
+   ([\#104](https://github.com/smira/aptly/issues/104))
+ - bug fix: [aptly publish list](/doc/aptly/publish/list/) with `-raw` flag
+   hasn't been displaying storage prefix for repositories published to S3
+   ([\#113](https://github.com/smira/aptly/issues/113))
+ - bug fix: dropping repositories published to S3 might result in "bad signature" error
+ - bug fix: publishing repositories with `/` in distribution name isn't allowed anymore,
+   when guessing distribution `/` is replaced with `-`
+   ([\#110](https://github.com/smira/aptly/issues/110))
+ - bug fix: download errors while mirroring now include original
+   URL
+   ([\#26](https://github.com/smira/aptly/issues/26))
+
 ### Version 0.7.1
 
 -   bug fix: publish update fails on package conflicts, new flag

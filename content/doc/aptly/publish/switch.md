@@ -43,6 +43,8 @@ Flags:
 -   `-gpg-key=""`: GPG key ID to use when signing the release, if not
     specified default key is used
 -   `-keyring=""`: GPG keyring to use (instead of default)
+-   `-passphrase=""`: GPG passphrase to unlock private key (possibly insecure)
+-   `-passphrase-file=""`: GPG passphrase file to unlock private key (possibly insecure)
 -   `-secret-keyring=""`: GPG secret keyring to use (instead of default)
 -   `-skip-signing=false`: don't sign Release files with GPG
 

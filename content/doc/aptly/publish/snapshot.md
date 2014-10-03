@@ -48,6 +48,8 @@ Flags:
     specified default key is used
 -   `-keyring=""`: GPG keyring to use (instead of default)
 -   `-label=""`: value for `Label:` field
+-   `-passphrase=""`: GPG passphrase to unlock private key (possibly insecure)
+-   `-passphrase-file=""`: GPG passphrase file to unlock private key (possibly insecure)
 -   `-origin=""`: value for `Origin:` field
 -   `-secret-keyring=""`: GPG secret keyring to use (instead of default)
 -   `-skip-signing=false`: don't sign Release files with GPG
@@ -125,6 +127,14 @@ Directory structure for published repositories:
                     -   `Sources.gz`
                     -   `Sources.bz2`
                     -   `Release`: used by debian-installer
+                -   `debian-installer`: indexes for .udeb packages
+                     (generated only if .udeb packages are present)
+                     -   `binary-i386`: binary .udeb index for
+                         architecture `i386`
+                        -   `Packages`: package index, .udeb
+                        -   `Packages.gz`
+                        -   `Packages.bz2`
+                        -   `Release`: used by debian-installer
         -   `pool/`
             -   `main/`: component main
                 -   `m/`

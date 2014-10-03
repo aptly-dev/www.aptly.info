@@ -55,8 +55,12 @@ Please see [multi-component publishing](/doc/feature/multi-component/).
 **Q: How to automate entering GPG key passphrase with aptly?**
 
 If you publish packages from some kind of automation tool (e.g. from continuous integration
-service), it is not possible to enter passphrase manually. One way is to create a key
-without passphrase. To create such key, create `gpg` batch file `foo` with following content:
+service), it is not possible to enter passphrase manually. There are two possible workarounds,
+both of them compromise on security: create key without passphrase or pass passphrase via
+aptly flags when publishing.
+
+*Key without passphrase*. To create such key,
+create `gpg` batch file `foo` with following content:
 
     %echo Generating a default key
     Key-Type: default
@@ -77,9 +81,17 @@ And run `gpg`:
 
 More information could be found in [GnuPG manual](https://www.gnupg.org/documentation/manuals/gnupg-devel/Unattended-GPG-key-generation.html).
 
+*Passing passphrase when publishing*. Create key as usual, and add flags `-passphrase=` or
+`-passphrase-file=` to aptly publishing commands. Flag values would be passed to corresponding GnuPG
+flags. Contents of command line could be visible to other users on multi-user system, while contents
+of the file with passphrase could be readable by other users. So use these options with caution.
+
 **Q: Why does PXE installing of Debian fails with repository published by aptly?**
 
-aptly doesn't yet support handling of `.udeb` packages, which are required for PXE install.
+Debian installer requires `.udeb` packages, they can be mirrored from main Debian repository
+with flag `-with-udebs` to [`aptly mirror create`](/doc/aptly/mirror/create) command. aptly
+would sign repository with your GPG key, so you might need to modify installer to accept
+your custom key.
 
 **Q: Can I preserve Debian signing key when mirroring?**
 
@@ -97,3 +109,22 @@ dash. Please use two dashes (`--`) to separate flags from arguments:
 
     $ aptly snapshot rename -- -foo my-foo
 
+
+**Q: Why does aptly ignore config file `/etc/aptly.conf`?**
+
+aptly first looks for configuration file in `~/.aptly.conf`, and if no file is found, it
+makes attempt to load `/etc/aptly.conf`. aptly creates configuration file in `~/.aptly.conf`
+if no config file is found, so you might need to remove auto-generated `~/.aptly.conf`.
+
+**Q: How do I change permissions for published repository files?**
+
+aptly creates files with permission `0666` and directories with permission `0777`, permissions
+are affected by user's [umask](http://en.wikipedia.org/wiki/Umask) setting. With default umask
+of `0022`, files created would have permissions `-rw-r--r--` and dirs would be `drwxr-xr-x`.
+So change umask before running `aptly publish` in order to set final permissions as you need.
+
+**Q: Why does apt-get fail to download packages published to S3 with `+` in filenames?**
+
+This is a result of somewhat non-standard behavior of Amazon S3 API related to encoding
+of `+` character. This has been fixed in `apt` version 0.9.9.1. If you have older version
+of `apt`, you can enable workaround in aptly with option [`plusWorkaround`](/doc/feature/s3/).

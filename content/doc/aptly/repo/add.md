@@ -12,9 +12,10 @@ menu:
 aptly repo add
 --------------
 
-Command adds packages to local repository from `.deb` (binary packages)
+Command adds packages to local repository from `.deb` (binary packages),
+`.udeb` (binary packages for Debian installer)
 and `.dsc` (source packages) files. When importing from directory aptly
-would do recursive scan looking for all files matching `*.deb` or
+would do recursive scan looking for all files matching `*.[u]deb` or
 `*.dsc` patterns. Every file discovered would be analyzed to extract
 metadata, package would be created and added to database. Files would be
 imported to internal package pool. For source packages, all required
@@ -31,6 +32,8 @@ Params are:
 
 Flags:
 
+-   `-force-replace=false`: when adding package that conflicts with existing package,
+    remove existing package
 -   `-remove-files=false`: remove files that have been imported
     successfully into repository
 
@@ -44,6 +47,8 @@ aptly won't complain if package is added to the repo which is complete
 duplicate. However it is forbidden to have two packages in one repo with identical
 triples (architecture, name, version) that have different metadata or
 files (see [Duplicate packages](/doc/feature/duplicate) for details).
+If you need to replace package that conflicts with existing, use flag
+`-force-replace`.
 All files added to package pool would be deduplicated, as it
 happens with files coming from mirrors, so exactly one copy of each file
 would be stored in aptly pool.

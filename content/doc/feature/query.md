@@ -38,8 +38,8 @@ Supported fields:
     `source`.
 -   `$Version` has the same value as `Version`, but comparison operators
     use Debian version precedence rules
--   `$PackageType` is `deb` for binary packages and `source` for source
-    packages
+-   `$PackageType` is `deb` for binary packages, `udeb` for .udeb packages
+    and `source` for source packages
 
 Operators:
 
@@ -99,3 +99,6 @@ Pull packages with complex conditions:
 Or remove packages based on query:
 
     $ aptly repo remove local-repo 'Name (% http-*) | $Source (webserver)'
+
+Query could be tested by using family of search commands: for [mirrors](/doc/aptly/mirror/search/),
+[snapshots](/doc/aptly/snapshot/search/) and [local repos](/doc/aptly/repo/search/).

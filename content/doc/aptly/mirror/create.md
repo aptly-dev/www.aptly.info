@@ -13,7 +13,7 @@ aptly mirror create
 -------------------
 
 Creates mirror of remote repository, aptly supports both regular and
-flat Debian repositories exported via HTTP. aptly would try download
+flat Debian repositories exported via HTTP(S) or FTP. aptly would try download
 Release file from remote repository and verify its signature.
 
 Usage:
@@ -48,6 +48,8 @@ Flags:
 -   `-with-sources=false`: download source packages in addition to
     binary packages (could be enabled by default with config option
     `downloadSourcePackages`)
+-   `-with-udebs=false`: download .udeb packages (Debian installer
+    support)
 
 By default aptly would download packages for all available
 architectures. If architectures are limited (with config `architectures`

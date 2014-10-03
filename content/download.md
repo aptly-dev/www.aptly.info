@@ -2,10 +2,10 @@
 date: 2014-07-16T17:02:05Z
 title: Download
 type: download
-version: 0.7.1
+version: 0.8
 ---
 
 Roadmap:
 
-* __0.8 (end of August):__ searching, web API
-* __0.9 (end of September):__ translations, udebs
+* __0.9 (end of October):__ REST API
+* __0.10 (end of November):__ support for translations, yum (?)

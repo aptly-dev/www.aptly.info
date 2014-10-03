@@ -31,6 +31,7 @@ All packages would be stored under aptly's root dir (see section on
 
 Flags:
 
+-   `-force=false`: force mirror update even if locked by another process
 -   `-download-limit=0`: limit download speed (kbytes/sec)
 -   `-ignore-checksums=false`: ignore checksum mismatches for downloaded
     items (package files, metadata)
@@ -52,3 +53,17 @@ Example:
     2013/12/29 18:37:19 Downloading http://ftp.ru.debian.org/debian/pool/main/libg/libgwenhywfar/libgwenhywfar47-dev_3.11.3-1_amd64.deb...
     ....
 
+#### Concurrent operations while mirror is updated
+
+Mirror update is split in two phases:
+
+ * initial download of `Release` and `Packages` files, parsing, analyzing
+ * download of packages files
+
+During second phase aptly would unlock the database and allow other aptly commands to be run while the mirror is
+being updated. Any operations with the mirror currently updated would result in error and `aptly mirror show` would
+show updating status. At the end of the mirror update operation, aptly would re-open the database
+and store final status of the mirror.
+
+If mirror update status would be stored in wrong way in DB (e.g. after crash), mirror update lock could be
+overridden with flag `-force`.
