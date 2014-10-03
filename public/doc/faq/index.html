@@ -132,6 +132,10 @@
                                   </li>
                                 
                                   <li >
+                                    <a href="http://www.aptly.info/doc/aptly/mirror/search">aptly mirror search</a>
+                                  </li>
+                                
+                                  <li >
                                     <a href="http://www.aptly.info/doc/aptly/mirror/rename">aptly mirror rename</a>
                                   </li>
                                 
@@ -181,6 +185,10 @@
                                   </li>
                                 
                                   <li >
+                                    <a href="http://www.aptly.info/doc/aptly/repo/search">aptly repo search</a>
+                                  </li>
+                                
+                                  <li >
                                     <a href="http://www.aptly.info/doc/aptly/repo/edit">aptly repo edit</a>
                                   </li>
                                 
@@ -222,6 +230,10 @@
                                   </li>
                                 
                                   <li >
+                                    <a href="http://www.aptly.info/doc/aptly/snapshot/filter">aptly snapshot filter</a>
+                                  </li>
+                                
+                                  <li >
                                     <a href="http://www.aptly.info/doc/aptly/snapshot/diff">aptly snapshot diff</a>
                                   </li>
                                 
@@ -230,11 +242,32 @@
                                   </li>
                                 
                                   <li >
+                                    <a href="http://www.aptly.info/doc/aptly/snapshot/search">aptly snapshot search</a>
+                                  </li>
+                                
+                                  <li >
                                     <a href="http://www.aptly.info/doc/aptly/snapshot/rename">aptly snapshot rename</a>
                                   </li>
                                 
                                   <li >
                                     <a href="http://www.aptly.info/doc/aptly/snapshot/drop">aptly snapshot drop</a>
+                                  </li>
+                                
+                              </ul>
+                            
+                          </li>
+                        
+                          <li >
+                            <a href="http://www.aptly.info/doc/aptly/package">aptly package</a>
+                            
+                              <ul class="nav">
+                                
+                                  <li >
+                                    <a href="http://www.aptly.info/doc/aptly/package/search">aptly package search</a>
+                                  </li>
+                                
+                                  <li >
+                                    <a href="http://www.aptly.info/doc/aptly/package/show">aptly package show</a>
                                   </li>
                                 
                               </ul>
@@ -375,8 +408,12 @@ packages, specify explicit list of architectures when publishing:</p>
 <p><strong>Q: How to automate entering GPG key passphrase with aptly?</strong></p>
 
 <p>If you publish packages from some kind of automation tool (e.g. from continuous integration
-service), it is not possible to enter passphrase manually. One way is to create a key
-without passphrase. To create such key, create <code>gpg</code> batch file <code>foo</code> with following content:</p>
+service), it is not possible to enter passphrase manually. There are two possible workarounds,
+both of them compromise on security: create key without passphrase or pass passphrase via
+aptly flags when publishing.</p>
+
+<p><em>Key without passphrase</em>. To create such key,
+create <code>gpg</code> batch file <code>foo</code> with following content:</p>
 
 <pre><code>%echo Generating a default key
 Key-Type: default
@@ -399,9 +436,17 @@ Expire-Date: 0
 
 <p>More information could be found in <a href="https://www.gnupg.org/documentation/manuals/gnupg-devel/Unattended-GPG-key-generation.html">GnuPG manual</a>.</p>
 
+<p><em>Passing passphrase when publishing</em>. Create key as usual, and add flags <code>-passphrase=</code> or
+<code>-passphrase-file=</code> to aptly publishing commands. Flag values would be passed to corresponding GnuPG
+flags. Contents of command line could be visible to other users on multi-user system, while contents
+of the file with passphrase could be readable by other users. So use these options with caution.</p>
+
 <p><strong>Q: Why does PXE installing of Debian fails with repository published by aptly?</strong></p>
 
-<p>aptly doesn&rsquo;t yet support handling of <code>.udeb</code> packages, which are required for PXE install.</p>
+<p>Debian installer requires <code>.udeb</code> packages, they can be mirrored from main Debian repository
+with flag <code>-with-udebs</code> to <a href="/doc/aptly/mirror/create"><code>aptly mirror create</code></a> command. aptly
+would sign repository with your GPG key, so you might need to modify installer to accept
+your custom key.</p>
 
 <p><strong>Q: Can I preserve Debian signing key when mirroring?</strong></p>
 
@@ -419,6 +464,25 @@ dash. Please use two dashes (<code>--</code>) to separate flags from arguments:<
 
 <pre><code>$ aptly snapshot rename -- -foo my-foo
 </code></pre>
+
+<p><strong>Q: Why does aptly ignore config file <code>/etc/aptly.conf</code>?</strong></p>
+
+<p>aptly first looks for configuration file in <code>~/.aptly.conf</code>, and if no file is found, it
+makes attempt to load <code>/etc/aptly.conf</code>. aptly creates configuration file in <code>~/.aptly.conf</code>
+if no config file is found, so you might need to remove auto-generated <code>~/.aptly.conf</code>.</p>
+
+<p><strong>Q: How do I change permissions for published repository files?</strong></p>
+
+<p>aptly creates files with permission <code>0666</code> and directories with permission <code>0777</code>, permissions
+are affected by user&rsquo;s <a href="http://en.wikipedia.org/wiki/Umask">umask</a> setting. With default umask
+of <code>0022</code>, files created would have permissions <code>-rw-r--r--</code> and dirs would be <code>drwxr-xr-x</code>.
+So change umask before running <code>aptly publish</code> in order to set final permissions as you need.</p>
+
+<p><strong>Q: Why does apt-get fail to download packages published to S3 with <code>+</code> in filenames?</strong></p>
+
+<p>This is a result of somewhat non-standard behavior of Amazon S3 API related to encoding
+of <code>+</code> character. This has been fixed in <code>apt</code> version 0.9.9.1. If you have older version
+of <code>apt</code>, you can enable workaround in aptly with option <a href="/doc/feature/s3/"><code>plusWorkaround</code></a>.</p>
 
             <div id="disqus_thread"></div>
 <script type="text/javascript">

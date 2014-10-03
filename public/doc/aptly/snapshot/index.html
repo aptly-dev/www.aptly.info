@@ -132,6 +132,10 @@
                                   </li>
                                 
                                   <li >
+                                    <a href="http://www.aptly.info/doc/aptly/mirror/search">aptly mirror search</a>
+                                  </li>
+                                
+                                  <li >
                                     <a href="http://www.aptly.info/doc/aptly/mirror/rename">aptly mirror rename</a>
                                   </li>
                                 
@@ -181,6 +185,10 @@
                                   </li>
                                 
                                   <li >
+                                    <a href="http://www.aptly.info/doc/aptly/repo/search">aptly repo search</a>
+                                  </li>
+                                
+                                  <li >
                                     <a href="http://www.aptly.info/doc/aptly/repo/edit">aptly repo edit</a>
                                   </li>
                                 
@@ -222,6 +230,10 @@
                                   </li>
                                 
                                   <li >
+                                    <a href="http://www.aptly.info/doc/aptly/snapshot/filter">aptly snapshot filter</a>
+                                  </li>
+                                
+                                  <li >
                                     <a href="http://www.aptly.info/doc/aptly/snapshot/diff">aptly snapshot diff</a>
                                   </li>
                                 
@@ -230,11 +242,32 @@
                                   </li>
                                 
                                   <li >
+                                    <a href="http://www.aptly.info/doc/aptly/snapshot/search">aptly snapshot search</a>
+                                  </li>
+                                
+                                  <li >
                                     <a href="http://www.aptly.info/doc/aptly/snapshot/rename">aptly snapshot rename</a>
                                   </li>
                                 
                                   <li >
                                     <a href="http://www.aptly.info/doc/aptly/snapshot/drop">aptly snapshot drop</a>
+                                  </li>
+                                
+                              </ul>
+                            
+                          </li>
+                        
+                          <li >
+                            <a href="http://www.aptly.info/doc/aptly/package">aptly package</a>
+                            
+                              <ul class="nav">
+                                
+                                  <li >
+                                    <a href="http://www.aptly.info/doc/aptly/package/search">aptly package search</a>
+                                  </li>
+                                
+                                  <li >
+                                    <a href="http://www.aptly.info/doc/aptly/package/show">aptly package show</a>
                                   </li>
                                 
                               </ul>
@@ -330,6 +363,7 @@
 <p>Snapshot is a fixed state of remote repository mirror or local repository.
 Internally snapshot is list of references to packages. Snapshot is immutable, i.e. it
 can&rsquo;t be changed since it has been created. Snapshots could be <a href="/doc/aptly/snapshot/merge/">merged</a>,
+<a href="/doc/aptly/snapshot/pull/">filtered</a>,
 individual packages could be <a href="/doc/aptly/snapshot/pull/">pulled</a>, snapshot could be
 <a href="/doc/aptly/snapshot/verify/">verified</a> for missing dependencies. Finally, snapshots could be
 <a href="/doc/aptly/publish/snapshot">published as repositories</a>.</p>

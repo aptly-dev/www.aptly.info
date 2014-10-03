@@ -3,11 +3,11 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>aptly - aptly repo list</title>
+    <title>aptly - aptly package</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" href="/favicon.ico">
     <link type="text/css" rel="stylesheet" href="/css/styles.css">
-    <link rel="canonical" href="http://www.aptly.info/doc/aptly/repo/list">
+    <link rel="canonical" href="http://www.aptly.info/doc/aptly/package">
     <link href="/post/index.xml" rel="alternate" type="application/rss+xml" title="Debian repository management tool" />
     
   </head>
@@ -96,7 +96,7 @@
                     
                   </li>
                 
-                  <li >
+                  <li class="active">
                     <a href="http://www.aptly.info/doc/commands">Commands</a>
                     
                       <ul class="nav">
@@ -147,7 +147,7 @@
                             
                           </li>
                         
-                          <li class="active">
+                          <li >
                             <a href="http://www.aptly.info/doc/aptly/repo">aptly repo</a>
                             
                               <ul class="nav">
@@ -168,7 +168,7 @@
                                     <a href="http://www.aptly.info/doc/aptly/repo/show">aptly repo show</a>
                                   </li>
                                 
-                                  <li class="active">
+                                  <li >
                                     <a href="http://www.aptly.info/doc/aptly/repo/list">aptly repo list</a>
                                   </li>
                                 
@@ -257,7 +257,7 @@
                             
                           </li>
                         
-                          <li >
+                          <li class="active">
                             <a href="http://www.aptly.info/doc/aptly/package">aptly package</a>
                             
                               <ul class="nav">
@@ -358,37 +358,10 @@
           <div class="col-md-9 col-sm-9 col-xs-9">
             
 
-<h2 id="toc_0">aptly repo list</h2>
+<h2 id="toc_0">aptly package</h2>
 
-<p>Commands list displays list of all local package repositories.</p>
-
-<p>Usage:</p>
-
-<pre><code>$  aptly repo list
-</code></pre>
-
-<p>Flags:</p>
-
-<ul>
-<li><code>-raw=false</code>: display list in machine-readable format</li>
-</ul>
-
-<p>Examples:</p>
-
-<pre><code>$ aptly repo list
-List of local repos:
- * [stable]: Stable packages for project Foo (packages: 10)
- * [testing] (packages: 1)
-</code></pre>
-
-<p>To get more information about local repository, run <code>aptly repo show &lt;name&gt;</code>.</p>
-
-<pre><code>$ aptly repo list -raw
-stable
-testing
-</code></pre>
-
-<p> </p>
+<p><code>aptly package</code> family of command perform operation on the whole
+collection of packages in apty database.</p>
 
             <div id="disqus_thread"></div>
 <script type="text/javascript">
@@ -401,8 +374,8 @@ testing
 
     var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
     var disqus_shortname = 'aptly';
-    var disqus_title = 'aptly repo list';
-    var disqus_identifier = '\/doc\/aptly\/repo\/list';
+    var disqus_title = 'aptly package';
+    var disqus_identifier = '\/doc\/aptly\/package';
     dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
     (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
 })();

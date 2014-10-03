@@ -132,6 +132,10 @@
                                   </li>
                                 
                                   <li >
+                                    <a href="http://www.aptly.info/doc/aptly/mirror/search">aptly mirror search</a>
+                                  </li>
+                                
+                                  <li >
                                     <a href="http://www.aptly.info/doc/aptly/mirror/rename">aptly mirror rename</a>
                                   </li>
                                 
@@ -181,6 +185,10 @@
                                   </li>
                                 
                                   <li >
+                                    <a href="http://www.aptly.info/doc/aptly/repo/search">aptly repo search</a>
+                                  </li>
+                                
+                                  <li >
                                     <a href="http://www.aptly.info/doc/aptly/repo/edit">aptly repo edit</a>
                                   </li>
                                 
@@ -222,6 +230,10 @@
                                   </li>
                                 
                                   <li >
+                                    <a href="http://www.aptly.info/doc/aptly/snapshot/filter">aptly snapshot filter</a>
+                                  </li>
+                                
+                                  <li >
                                     <a href="http://www.aptly.info/doc/aptly/snapshot/diff">aptly snapshot diff</a>
                                   </li>
                                 
@@ -230,11 +242,32 @@
                                   </li>
                                 
                                   <li >
+                                    <a href="http://www.aptly.info/doc/aptly/snapshot/search">aptly snapshot search</a>
+                                  </li>
+                                
+                                  <li >
                                     <a href="http://www.aptly.info/doc/aptly/snapshot/rename">aptly snapshot rename</a>
                                   </li>
                                 
                                   <li >
                                     <a href="http://www.aptly.info/doc/aptly/snapshot/drop">aptly snapshot drop</a>
+                                  </li>
+                                
+                              </ul>
+                            
+                          </li>
+                        
+                          <li >
+                            <a href="http://www.aptly.info/doc/aptly/package">aptly package</a>
+                            
+                              <ul class="nav">
+                                
+                                  <li >
+                                    <a href="http://www.aptly.info/doc/aptly/package/search">aptly package search</a>
+                                  </li>
+                                
+                                  <li >
+                                    <a href="http://www.aptly.info/doc/aptly/package/show">aptly package show</a>
                                   </li>
                                 
                               </ul>
@@ -328,7 +361,7 @@
 <h2 id="toc_0">aptly mirror edit</h2>
 
 <p>Command edit allows to change mirror settings: filter query, whether
-to include dependencies while filtering.</p>
+to include dependencies while filtering, list of architectures to process.</p>
 
 <p>Usage:</p>
 
@@ -348,15 +381,24 @@ to include dependencies while filtering.</p>
 packages in the mirror, set to empty to disable filtering</li>
 <li><code>-filter-with-deps=false</code>: when filtering, include dependencies of
 matching packages as well</li>
+<li><code>-architectures=</code>: global flag to change architectures list.</li>
+<li><code>-with-sources=false</code>: download source packages in addition to
+binary packages</li>
+<li><code>-with-udebs=false</code>: download .udeb packages (Debian installer
+support)</li>
 </ul>
 
 <p>In order to apply new filtering settings, <a href="/doc/aptly/mirror/update/">update</a>
 mirror.</p>
 
-<p>Example:</p>
+<p>Examples:</p>
 
 <pre><code>$ aptly mirror edit -filter=nginx -filter-with-deps wheezy-main
 Mirror [wheezy-main]: http://mirror.yandex.ru/debian/ wheezy successfully updated.
+
+$ aptly mirror edit -architectures=i386,amd64 sensu
+Downloading http://repos.sensuapp.org/apt/dists/sensu/Release...
+Mirror [sensu]: http://repos.sensuapp.org/apt/ sensu successfully updated.
 </code></pre>
 
             <div id="disqus_thread"></div>

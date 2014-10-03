@@ -40,20 +40,22 @@
     
     <section class="primary-content">
       <div class="container">
-        <h2>Currently released aptly version is <span class="text-danger">0.7.1</span> (<a href="#">what's new?</a>)</h2>
+        <h2>Currently released aptly version is <span class="text-danger">0.8</span> (<a href="/doc/history/">what's new?</a>)</h2>
         <p>Roadmap:</p>
 
 <ul>
-<li><strong>0.8 (end of August):</strong> searching, web API</li>
-<li><strong>0.9 (end of September):</strong> translations, udebs</li>
+<li><strong>0.9 (end of October):</strong> REST API</li>
+<li><strong>0.10 (end of November):</strong> support for translations, yum (?)</li>
 </ul>
 
       </div>
     </section>
     <section class="note">
       <div class="container">
+        <img src="/img/os_icons/debian.png" alt="Debian/Ubuntu" class="pull-right">
         <h2>aptly installation</h2>
-        <p>For Debian/Ubuntu aptly could be installed by adding new repository to    <code>/etc/apt/sources.list:</code></p>
+        <p><b>Debian/Ubuntu</b>: aptly package is <a href="https://packages.debian.org/jessie/aptly">available</a> in Debian jessie (testing). If you would like to install aptly on older versions of Debian or to stay on the bleeding edge, aptly could be installed
+        by adding new repository to    <code>/etc/apt/sources.list</code>:</p>
         <pre>deb http://repo.aptly.info/ squeeze main</pre>
         <p>And importing key that is used to sign the release:</p>
 
@@ -70,30 +72,30 @@ $ apt-get install aptly</pre>
     </section>
     <section class="primary-content">
       <div class="container">
-        <p><strong>Binary</strong> executables (depend almost only on <code>libc</code>) for Debian, CentOS, MacOS X &amp; FreeBSD are available for download from <a href="http://dl.bintray.com/smira/aptly/0.7.1/">Bintray</a>. Linux executables should run on almost any recent Linux distribution.</p>
+        <p><strong>Binary</strong> executables (depend almost only on <code>libc</code>) for Debian, CentOS, MacOS X &amp; FreeBSD are available for download from <a href="http://dl.bintray.com/smira/aptly/0.8/">Bintray</a>. Linux executables should run on almost any recent Linux distribution.</p>
         <div class="row text-center">
           <div class="col-md-3">
             <img src="/img/os_icons/debian.png" alt="Debian/Ubuntu" class="download-os-icon">
             Debian (Ubuntu) <span class="small">squeeze+</span><br />
-            <a href="http://dl.bintray.com/smira/aptly/0.7.1/debian-squeeze-x32/aptly" class="btn btn-default">32-bit</a>
-            <a href="http://dl.bintray.com/smira/aptly/0.7.1/debian-squeeze-x64/aptly" class="btn btn-default">64-bit</a>
+            <a href="http://dl.bintray.com/smira/aptly/0.8/debian-squeeze-x32/aptly" class="btn btn-default">32-bit</a>
+            <a href="http://dl.bintray.com/smira/aptly/0.8/debian-squeeze-x64/aptly" class="btn btn-default">64-bit</a>
           </div>
           <div class="col-md-3">
             <img src="/img/os_icons/centos.png" alt="CentOS/RedHat/Fedora" class="download-os-icon">
             CentOS (RedHat, Fedora) <span class="small">6.5+</span><br />
-            <a href="http://dl.bintray.com/smira/aptly/0.7.1/centos-6.5-x32/aptly" class="btn btn-default">32-bit</a>
-            <a href="http://dl.bintray.com/smira/aptly/0.7.1/centos-6.5-x64/aptly" class="btn btn-default">64-bit</a>
+            <a href="http://dl.bintray.com/smira/aptly/0.8/centos-6.5-x32/aptly" class="btn btn-default">32-bit</a>
+            <a href="http://dl.bintray.com/smira/aptly/0.8/centos-6.5-x64/aptly" class="btn btn-default">64-bit</a>
           </div>
           <div class="col-md-3">
             <img src="/img/os_icons/freebsd.png" alt="FreeBSD" class="download-os-icon">
             FreeBSD  <span class="small">9.2+</span><br />
-            <a href="http://dl.bintray.com/smira/aptly/0.7.1/freebsd-9.2-x32/aptly" class="btn btn-default">32-bit</a>
-            <a href="http://dl.bintray.com/smira/aptly/0.7.1/freebsd-9.2-x64/aptly" class="btn btn-default">64-bit</a>
+            <a href="http://dl.bintray.com/smira/aptly/0.8/freebsd-9.2-x32/aptly" class="btn btn-default">32-bit</a>
+            <a href="http://dl.bintray.com/smira/aptly/0.8/freebsd-9.2-x64/aptly" class="btn btn-default">64-bit</a>
           </div>
           <div class="col-md-3">
             <img src="/img/os_icons/osx.png" alt="Mac OS X" class="download-os-icon">
             Mac OS X <span class="small">10.9</span><br />
-            <a href="http://dl.bintray.com/smira/aptly/0.7.1/osx/aptly" class="btn btn-default">64-bit</a>
+            <a href="http://dl.bintray.com/smira/aptly/0.8/osx/aptly" class="btn btn-default">64-bit</a>
           </div>
         </div>
         <div class="row text-center">

@@ -3,11 +3,11 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>aptly - aptly repo list</title>
+    <title>aptly - aptly repo search</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" href="/favicon.ico">
     <link type="text/css" rel="stylesheet" href="/css/styles.css">
-    <link rel="canonical" href="http://www.aptly.info/doc/aptly/repo/list">
+    <link rel="canonical" href="http://www.aptly.info/doc/aptly/repo/search">
     <link href="/post/index.xml" rel="alternate" type="application/rss+xml" title="Debian repository management tool" />
     
   </head>
@@ -168,7 +168,7 @@
                                     <a href="http://www.aptly.info/doc/aptly/repo/show">aptly repo show</a>
                                   </li>
                                 
-                                  <li class="active">
+                                  <li >
                                     <a href="http://www.aptly.info/doc/aptly/repo/list">aptly repo list</a>
                                   </li>
                                 
@@ -184,7 +184,7 @@
                                     <a href="http://www.aptly.info/doc/aptly/repo/remove">aptly repo remove</a>
                                   </li>
                                 
-                                  <li >
+                                  <li class="active">
                                     <a href="http://www.aptly.info/doc/aptly/repo/search">aptly repo search</a>
                                   </li>
                                 
@@ -358,37 +358,53 @@
           <div class="col-md-9 col-sm-9 col-xs-9">
             
 
-<h2 id="toc_0">aptly repo list</h2>
+<h2 id="toc_0">aptly repo search</h2>
 
-<p>Commands list displays list of all local package repositories.</p>
+<p>Search local repositories for packages matching query.</p>
 
 <p>Usage:</p>
 
-<pre><code>$  aptly repo list
+<pre><code>$ aptly repo search &lt;name&gt; &lt;package-query&gt;
 </code></pre>
+
+<p>Params are:</p>
+
+<ul>
+<li><code>name</code> packages would be removed from this local repository</li>
+<li><code>package-query</code> is a <a href="/doc/feature/query/">package query</a> to
+search for packages</li>
+</ul>
 
 <p>Flags:</p>
 
 <ul>
-<li><code>-raw=false</code>: display list in machine-readable format</li>
+<li><code>-with-deps=false</code>: include dependencies of matching packages
+into search results</li>
 </ul>
 
-<p>Examples:</p>
+<p>Example:</p>
 
-<pre><code>$ aptly repo list
-List of local repos:
- * [stable]: Stable packages for project Foo (packages: 10)
- * [testing] (packages: 1)
+<pre><code>$ aptly repo search internal-pkg 'Version (&gt;= 4.5)'
+libtinfo5_5.9-10_i386
+perl-base_5.14.2-21+deb7u1_amd64
+ncurses-base_5.9-10_all
+xz-utils_5.1.1alpha+20120614-2_i386
+gcc-4.7-base_4.7.2-5_amd64
+libtinfo5_5.9-10_amd64
+base-files_7.1wheezy5_i386
+ncurses-bin_5.9-10_i386
+xz-utils_5.1.1alpha+20120614-2_amd64
+liblzma5_5.1.1alpha+20120614-2_i386
+coreutils_8.13-3.5_amd64
+liblzma5_5.1.1alpha+20120614-2_amd64
+libncurses5_5.9-10_amd64
+coreutils_8.13-3.5_i386
+libncurses5_5.9-10_i386
+perl-base_5.14.2-21+deb7u1_i386
+base-files_7.1wheezy5_amd64
+ncurses-bin_5.9-10_amd64
+gcc-4.7-base_4.7.2-5_i386
 </code></pre>
-
-<p>To get more information about local repository, run <code>aptly repo show &lt;name&gt;</code>.</p>
-
-<pre><code>$ aptly repo list -raw
-stable
-testing
-</code></pre>
-
-<p> </p>
 
             <div id="disqus_thread"></div>
 <script type="text/javascript">
@@ -401,8 +417,8 @@ testing
 
     var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
     var disqus_shortname = 'aptly';
-    var disqus_title = 'aptly repo list';
-    var disqus_identifier = '\/doc\/aptly\/repo\/list';
+    var disqus_title = 'aptly repo search';
+    var disqus_identifier = '\/doc\/aptly\/repo\/search';
     dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
     (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
 })();

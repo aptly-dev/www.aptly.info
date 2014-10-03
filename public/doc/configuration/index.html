@@ -132,6 +132,10 @@
                                   </li>
                                 
                                   <li >
+                                    <a href="http://www.aptly.info/doc/aptly/mirror/search">aptly mirror search</a>
+                                  </li>
+                                
+                                  <li >
                                     <a href="http://www.aptly.info/doc/aptly/mirror/rename">aptly mirror rename</a>
                                   </li>
                                 
@@ -181,6 +185,10 @@
                                   </li>
                                 
                                   <li >
+                                    <a href="http://www.aptly.info/doc/aptly/repo/search">aptly repo search</a>
+                                  </li>
+                                
+                                  <li >
                                     <a href="http://www.aptly.info/doc/aptly/repo/edit">aptly repo edit</a>
                                   </li>
                                 
@@ -222,6 +230,10 @@
                                   </li>
                                 
                                   <li >
+                                    <a href="http://www.aptly.info/doc/aptly/snapshot/filter">aptly snapshot filter</a>
+                                  </li>
+                                
+                                  <li >
                                     <a href="http://www.aptly.info/doc/aptly/snapshot/diff">aptly snapshot diff</a>
                                   </li>
                                 
@@ -230,11 +242,32 @@
                                   </li>
                                 
                                   <li >
+                                    <a href="http://www.aptly.info/doc/aptly/snapshot/search">aptly snapshot search</a>
+                                  </li>
+                                
+                                  <li >
                                     <a href="http://www.aptly.info/doc/aptly/snapshot/rename">aptly snapshot rename</a>
                                   </li>
                                 
                                   <li >
                                     <a href="http://www.aptly.info/doc/aptly/snapshot/drop">aptly snapshot drop</a>
+                                  </li>
+                                
+                              </ul>
+                            
+                          </li>
+                        
+                          <li >
+                            <a href="http://www.aptly.info/doc/aptly/package">aptly package</a>
+                            
+                              <ul class="nav">
+                                
+                                  <li >
+                                    <a href="http://www.aptly.info/doc/aptly/package/search">aptly package search</a>
+                                  </li>
+                                
+                                  <li >
+                                    <a href="http://www.aptly.info/doc/aptly/package/show">aptly package show</a>
                                   </li>
                                 
                               </ul>
@@ -327,8 +360,9 @@
 
 <h2 id="toc_0">Configuration</h2>
 
-<p>aptly looks for configuration file in <code>/etc/aptly.conf</code> and
-<code>~/.aptly.conf</code>, if no config file found, new one is created. If
+<p>aptly looks for configuration file first in <code>~/.aptly.conf</code> then
+in <code>/etc/aptly.conf</code> and, if no config file found, new one is created in
+home directory. If
 <code>-config=</code> flag is specified, aptly would use config file at specified
 location. Also aptly needs root directory for database, package and
 published repository storage. If not specified, directory defaults to
@@ -358,7 +392,10 @@ below):</p>
       &quot;awsAccessKeyID&quot;: &quot;&quot;
       &quot;awsSecretAccessKey&quot;: &quot;&quot;,
       &quot;prefix&quot;: &quot;&quot;,
-      &quot;acl&quot;: &quot;public-read&quot;
+      &quot;acl&quot;: &quot;public-read&quot;,
+      &quot;storageClass&quot;: &quot;&quot;,
+      &quot;encryptionMethod&quot;: &quot;&quot;,
+      &quot;plusWorkaround&quot;: false
     }
 }
 </code></pre>
@@ -396,8 +433,8 @@ controlled on per-mirror basis with <code>-with-sources</code> flag</li>
 <li><code>ppaDistributorID</code> &amp; <code>ppaCodename</code> specifies paramaters for short
 PPA url expansion, if left blank they default to output of
 <code>lsb_release</code> command</li>
-<li><code>S3PublisEndpoints</code> is a configuration of Amazon S3 publishing
-endpoints (see below)</li>
+<li><code>S3PublishEndpoints</code> is a configuration of Amazon S3 publishing
+endpoints (see <a href="/doc/feature/s3/">publishing to S3</a>)</li>
 </ul>
 
 <div class="alert alert-warning alert-note"><strong>Warning:</strong> <code>rootDir</code> contains all the downloaded packages from remote
