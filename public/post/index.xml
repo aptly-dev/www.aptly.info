@@ -3,18 +3,191 @@
   <channel>
       <title>Posts on aptly - Debian repository management tool </title>
       <generator uri="https://hugo.spf13.com">Hugo</generator>
-    <link>http://www.aptly.info/post/index.xml</link>
+    <link>http://localhost:1313/post/index.xml</link>
     <language>en-us</language>
     <author>Andrey Smirnov</author>
     
-    <updated>Tue, 29 Jul 2014 21:22:00 UTC</updated>
+    <updated>Fri, 03 Oct 2014 21:22:00 UTC</updated>
+    
+    <item>
+      <title>aptly 0.8 - .udeb support, search and filtering</title>
+      <link>http://localhost:1313/post/aptly-0-8</link>
+      <pubDate>Fri, 03 Oct 2014 21:22:00 UTC</pubDate>
+      <author>Andrey Smirnov</author>
+      <guid>http://localhost:1313/post/aptly-0-8</guid>
+      <description>
+
+&lt;p&gt;&lt;a href=&#34;http://www.aptly.info&#34;&gt;aptly&lt;/a&gt; 0.8 has been released today.
+For installation instructions, please proceed to &lt;a href=&#34;http://www.aptly.info#download&#34;&gt;Download&lt;/a&gt; page.&lt;/p&gt;
+
+&lt;p&gt;Most important new features are:&lt;/p&gt;
+
+&lt;h2 id=&#34;toc_0&#34;&gt;Searching for Packages&lt;/h2&gt;
+
+&lt;p&gt;aptly has powerful &lt;a href=&#34;http://www.aptly.info/doc/feature/query&#34;&gt;query language&lt;/a&gt;
+which allows to select subset of packages. Query language is used
+in many commands: pulling packages between snapshots, copying, moving packages
+between local repositories, filtering mirror contents, etc. \
+aptly 0.8 allows to use queries to search mirrors, snapshots and local repos
+for packages matching condition. E.g. all packages that have been built
+from source package &lt;code&gt;apt&lt;/code&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ aptly mirror search wheezy-main &#39;$Source (apt)&#39;
+apt-doc_0.9.7.9+deb7u1_all
+apt-transport-https_0.9.7.9+deb7u1_amd64
+apt-utils_0.9.7.9+deb7u1_amd64
+libapt-pkg4.12_0.9.7.9+deb7u1_amd64
+apt_0.9.7.9+deb7u1_amd64
+libapt-pkg-dev_0.9.7.9+deb7u1_i386
+apt_0.9.7.9+deb7u1_i386
+libapt-pkg-doc_0.9.7.9+deb7u1_all
+libapt-pkg-dev_0.9.7.9+deb7u1_amd64
+libapt-inst1.5_0.9.7.9+deb7u1_amd64
+libapt-inst1.5_0.9.7.9+deb7u1_i386
+apt-utils_0.9.7.9+deb7u1_i386
+apt-transport-https_0.9.7.9+deb7u1_i386
+libapt-pkg4.12_0.9.7.9+deb7u1_i386
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;aptly can also search whole package database for packages matching condition. For
+example, all packages with name starting with &lt;code&gt;pam&lt;/code&gt;, not including source packages:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ aptly package search &#39;Name (% pam*), !$Architecture (source)&#39;
+pam-dbus-notify_0.2.1-1_all
+paml_4.5-1_amd64
+paman_0.9.4-1_i386
+pam-pkcs11-dbg_0.6.8-1_amd64
+pamusb-common_0.5.0-4_i386
+pamusb-common_0.5.0-4_amd64
+pamusb-tools_0.5.0-4_all
+paman_0.9.4-1_amd64
+paml-doc_4.5-1_all
+pam-pkcs11-dbg_0.6.8-1_i386
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;We can get details about packages, including its inclusion into other objects:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ aptly package show -with-references libattr1_1:2.4.46-8_amd64
+Package: libattr1
+Version: 1:2.4.46-8
+Installed-Size: 61
+Priority: required
+...
+
+References to package:
+  mirror [wheezy-main]: http://mirror.yandex.ru/debian/ wheezy
+  mirror [wheezy-main-src]: http://mirror.yandex.ru/debian/ wheezy [src]
+  snapshot [wheezy-7.5]: Snapshot from mirror [wheezy-main]: http://mirror.yandex.ru/debian/ wheezy
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;toc_1&#34;&gt;Filtering Snapshots&lt;/h2&gt;
+
+&lt;p&gt;Now snapshots could be filtered directly to produce other snapshots. Prior to that,
+the same effect could be achieved using empty snapshot as one of the arguments
+to &lt;code&gt;aptly snapshot pull&lt;/code&gt; command. Filtering is based on package queries as well.
+E.g. extract &amp;lsquo;required&amp;rsquo; part of Debian into separate snapshot:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ aptly snapshot filter wheezy-7.5 wheezy-7.5-required &#39;Priority (required)&#39;
+Loading packages (56121)...
+Building indexes...
+
+Snapshot wheezy-7.5-required successfully filtered.
+You can run &#39;aptly publish snapshot wheezy-7.5-required&#39; to publish snapshot as Debian repository.
+
+$ aptly snapshot show wheezy-7.5-required
+Name: wheezy-7.5-required
+Created At: 2014-10-03 21:50:30 MSK
+Description: Filtered &#39;wheezy-7.5&#39;, query was: &#39;Priority (required)&#39;
+Number of packages: 113
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;toc_2&#34;&gt;.udeb Support&lt;/h2&gt;
+
+&lt;p&gt;aptly now supports .udeb (micro-deb) packages in mirrors, local repos and published repositories.
+.udeb packages are used by Debian installer during initial installation phase. With .udeb support,
+it should be possible to install Debian from repository published by aptly. As aptly doesn&amp;rsquo;t support
+yet mirroring without resigning (leaving Debian signature as-is), it would require some changes to installer
+in order to support custom key.&lt;/p&gt;
+
+&lt;h2 id=&#34;toc_3&#34;&gt;Concurrent Mirror Update&lt;/h2&gt;
+
+&lt;p&gt;Prior to version 0.8, aptly was locking database (which prevented any concurrent operations)
+during whole &lt;code&gt;aptly mirror update&lt;/code&gt; run, which included
+download of package files that might take hours. aptly 0.8 would unlock the database
+after package index download (right before package files download), so during download phase
+other commands could be run, e.g. create another mirror, take snapshots, publish other repositories
+and so on. aptly locks repository being updated during package download to prevent modifications
+to the repository.&lt;/p&gt;
+
+&lt;h2 id=&#34;toc_4&#34;&gt;All Changes&lt;/h2&gt;
+
+&lt;p&gt;Full list of changes since 0.7.1:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;aptly supports &lt;strong&gt;concurrent operations while mirror is updated&lt;/strong&gt;, new flag
+  &lt;code&gt;-force&lt;/code&gt; for &lt;a href=&#34;http://www.aptly.info/doc/aptly/mirror/update/&#34;&gt;aptly mirror update&lt;/a&gt;
+  (&lt;a href=&#34;https://github.com/smira/aptly/issues/45&#34;&gt;#45&lt;/a&gt;) (&lt;a href=&#34;https://github.com/smira/aptly/issues/114&#34;&gt;#114&lt;/a&gt;)&lt;/li&gt;
+  &lt;li&gt;support for &lt;strong&gt;&lt;code&gt;.udeb&lt;/code&gt; packages (Debian installer)&lt;/strong&gt; in mirrors, local repos and
+  published repositories
+  (&lt;a href=&#34;https://github.com/smira/aptly/issues/108&#34;&gt;#108&lt;/a&gt;)&lt;/li&gt;
+  &lt;li&gt;new command &lt;a href=&#34;http://www.aptly.info/doc/aptly/snapshot/filter&#34;&gt;aptly snapshot filter&lt;/a&gt;:
+  &lt;strong&gt;filtering snapshots&lt;/strong&gt; using package query, complementary
+  to &lt;a href=&#34;http://www.aptly.info/doc/aptly/snapshot/pull/&#34;&gt;snapshot pulling&lt;/a&gt;
+  (&lt;a href=&#34;https://github.com/smira/aptly/issues/82&#34;&gt;#82&lt;/a&gt;)&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;searching for packages matching query&lt;/strong&gt; in
+  &lt;a href=&#34;http://www.aptly.info/doc/aptly/mirror/search&#34;&gt;mirrors&lt;/a&gt;,
+  &lt;a href=&#34;http://www.aptly.info/doc/aptly/repo/search&#34;&gt;local repos&lt;/a&gt;,
+  &lt;a href=&#34;http://www.aptly.info/doc/aptly/snapshot/search&#34;&gt;snapshots&lt;/a&gt; and
+  &lt;a href=&#34;http://www.aptly.info/doc/aptly/package/search&#34;&gt;whole package database&lt;/a&gt;
+  (&lt;a href=&#34;https://github.com/smira/aptly/issues/81&#34;&gt;#81&lt;/a&gt;)
+  (&lt;a href=&#34;https://github.com/smira/aptly/issues/80&#34;&gt;#80&lt;/a&gt;)&lt;/li&gt;
+  &lt;li&gt;new command &lt;a href=&#34;http://www.aptly.info/doc/aptly/package/show/&#34;&gt;aptly package show&lt;/a&gt;:
+  displaying &lt;strong&gt;details about package&lt;/strong&gt;, its inclusion into snapshots,
+  mirrors, local repos
+  (&lt;a href=&#34;https://github.com/smira/aptly/issues/80&#34;&gt;#80&lt;/a&gt;)&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&#34;http://www.aptly.info/doc/aptly/mirror/edit/&#34;&gt;aptly mirror edit&lt;/a&gt; now supports changing list of architectures
+  and download source setting
+  (&lt;a href=&#34;https://github.com/smira/aptly/issues/109&#34;&gt;#109&lt;/a&gt;)
+  (&lt;a href=&#34;https://github.com/smira/aptly/issues/99&#34;&gt;#99&lt;/a&gt;)&lt;/li&gt;
+  &lt;li&gt;workaround S3/apt issue with &lt;code&gt;+&lt;/code&gt; in package filenames
+  (S3 config option &lt;code&gt;plusWorkaround&lt;/code&gt;)
+  (&lt;a href=&#34;https://github.com/smira/aptly/issues/105&#34;&gt;#105&lt;/a&gt;)&lt;/li&gt;
+  &lt;li&gt;when publishing to S3 it&amp;rsquo;s possible to choose reduced redundancy storage and
+  server-side encryption (S3 config options &lt;code&gt;storageClass&lt;/code&gt; and &lt;code&gt;encryptionMethod&lt;/code&gt;)
+  (&lt;a href=&#34;https://github.com/smira/aptly/issues/105&#34;&gt;#105&lt;/a&gt;)&lt;/li&gt;
+  &lt;li&gt;when signing published repository, it&amp;rsquo;s possible to pass passphrase
+  for GPG key with flags &lt;code&gt;-passphrase&lt;/code&gt; or &lt;code&gt;-passphrase-file&lt;/code&gt;
+  (&lt;a href=&#34;https://github.com/smira/aptly/issues/194&#34;&gt;#94&lt;/a&gt;)&lt;/li&gt;
+  &lt;li&gt;new flag &lt;code&gt;-force-replace&lt;/code&gt; in &lt;a href=&#34;http://www.aptly.info/doc/aptly/repo/add/&#34;&gt;aptly repo add&lt;/a&gt; command
+  to replace conflicting packages automatically
+  (&lt;a href=&#34;https://github.com/smira/aptly/issues/83&#34;&gt;#83&lt;/a&gt;)&lt;/li&gt;
+  &lt;li&gt;dependency resolution algorithm has been improved
+  (&lt;a href=&#34;https://github.com/smira/aptly/issues/100&#34;&gt;#100&lt;/a&gt;)&lt;/li&gt;
+  &lt;li&gt;aptly now supports mirroring over FTP
+  (&lt;a href=&#34;https://github.com/smira/aptly/issues/48&#34;&gt;#48&lt;/a&gt;)&lt;/li&gt;
+  &lt;li&gt;bug fix: for boolean options, settings
+  from configuration file were overriding settings on command line
+  (&lt;a href=&#34;https://github.com/smira/aptly/issues/104&#34;&gt;#104&lt;/a&gt;)&lt;/li&gt;
+  &lt;li&gt;bug fix: &lt;a href=&#34;http://www.aptly.info/doc/aptly/publish/list/&#34;&gt;aptly publish list&lt;/a&gt; with &lt;code&gt;-raw&lt;/code&gt; flag
+  hasn&amp;rsquo;t been displaying storage prefix for repositories published to S3
+  (&lt;a href=&#34;https://github.com/smira/aptly/issues/113&#34;&gt;#113&lt;/a&gt;)&lt;/li&gt;
+  &lt;li&gt;bug fix: dropping repositories published to S3 might result in &amp;ldquo;bad signature&amp;rdquo; error&lt;/li&gt;
+  &lt;li&gt;bug fix: publishing repositories with &lt;code&gt;/&lt;/code&gt; in distribution name isn&amp;rsquo;t allowed anymore,
+  when guessing distribution &lt;code&gt;/&lt;/code&gt; is replaced with &lt;code&gt;-&lt;/code&gt;
+  (&lt;a href=&#34;https://github.com/smira/aptly/issues/110&#34;&gt;#110&lt;/a&gt;)&lt;/li&gt;
+  &lt;li&gt;bug fix: download errors while mirroring now include original
+  URL
+  (&lt;a href=&#34;https://github.com/smira/aptly/issues/26&#34;&gt;#26&lt;/a&gt;)&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
     
     <item>
       <title>aptly 0.7 - S3 publishing, complex queries</title>
-      <link>http://www.aptly.info/post/aptly-0-7</link>
+      <link>http://localhost:1313/post/aptly-0-7</link>
       <pubDate>Tue, 29 Jul 2014 21:22:00 UTC</pubDate>
       <author>Andrey Smirnov</author>
-      <guid>http://www.aptly.info/post/aptly-0-7</guid>
+      <guid>http://localhost:1313/post/aptly-0-7</guid>
       <description>
 
 &lt;p&gt;&lt;a href=&#34;http://www.aptly.info&#34;&gt;aptly&lt;/a&gt; 0.7 has been released today. aptly is a
@@ -206,10 +379,10 @@ downloadSpeedLimit, so that aptly won&amp;rsquo;t consume all bandwidth.&lt;/p&g
     
     <item>
       <title>aptly 0.6</title>
-      <link>http://www.aptly.info/post/aptly-0-6</link>
+      <link>http://localhost:1313/post/aptly-0-6</link>
       <pubDate>Mon, 09 Jun 2014 00:57:00 UTC</pubDate>
       <author>Andrey Smirnov</author>
-      <guid>http://www.aptly.info/post/aptly-0-6</guid>
+      <guid>http://localhost:1313/post/aptly-0-6</guid>
       <description>
 
 &lt;p&gt;&lt;a href=&#34;http://www.aptly.info&#34;&gt;aptly&lt;/a&gt; 0.6 has been released on June, 7th. It is
@@ -359,10 +532,10 @@ version wins (&lt;code&gt;-latest&lt;/code&gt;);&lt;/li&gt;
     
     <item>
       <title>aptly 0.5</title>
-      <link>http://www.aptly.info/post/aptly-0-5</link>
+      <link>http://localhost:1313/post/aptly-0-5</link>
       <pubDate>Fri, 25 Apr 2014 00:12:00 UTC</pubDate>
       <author>Andrey Smirnov</author>
-      <guid>http://www.aptly.info/post/aptly-0-5</guid>
+      <guid>http://localhost:1313/post/aptly-0-5</guid>
       <description>
 
 &lt;p&gt;&lt;a href=&#34;http://www.aptly.info&#34;&gt;aptly&lt;/a&gt; 0.5 has been released today. It is
@@ -496,10 +669,10 @@ easily parseable. E.g. update all Debian mirrors:&lt;/p&gt;
     
     <item>
       <title>aptly 0.4</title>
-      <link>http://www.aptly.info/post/aptly-0-4</link>
+      <link>http://localhost:1313/post/aptly-0-4</link>
       <pubDate>Tue, 11 Mar 2014 16:14:00 UTC</pubDate>
       <author>Andrey Smirnov</author>
-      <guid>http://www.aptly.info/post/aptly-0-4</guid>
+      <guid>http://localhost:1313/post/aptly-0-4</guid>
       <description>&lt;p&gt;&lt;a href=&#34;http://www.aptly.info/&#34;&gt;aptly&lt;/a&gt; version 0.4 has been released today.
 Major feature in this version is &lt;a href=&#34;http://www.aptly.info/#aptly-repo&#34;&gt;local package repository
 management&lt;/a&gt; which allows to manage
@@ -556,10 +729,10 @@ and transitions looks like that:&lt;/p&gt;
     
     <item>
       <title>aptly Memory Usage Optimization</title>
-      <link>http://www.aptly.info/post/aptly-memory-usage-optimization</link>
+      <link>http://localhost:1313/post/aptly-memory-usage-optimization</link>
       <pubDate>Wed, 05 Mar 2014 17:15:00 UTC</pubDate>
       <author>Andrey Smirnov</author>
-      <guid>http://www.aptly.info/post/aptly-memory-usage-optimization</guid>
+      <guid>http://localhost:1313/post/aptly-memory-usage-optimization</guid>
       <description>&lt;p&gt;Next &lt;a href=&#34;http://www.aptly.info&#34;&gt;aptly&lt;/a&gt; version (0.4) would contain some
 changes to lower memory requirements while doing general operations:
 memory usage will be decreased by factor of 3. aptly is written in Go
@@ -704,10 +877,10 @@ plot &amp;quot;mem.dat&amp;quot; using 1:($2/1e6) title &#39;HeapSys&#39; with l
     
     <item>
       <title>aptly 0.3</title>
-      <link>http://www.aptly.info/post/aptly-0-3</link>
+      <link>http://localhost:1313/post/aptly-0-3</link>
       <pubDate>Mon, 10 Feb 2014 23:20:00 UTC</pubDate>
       <author>Andrey Smirnov</author>
-      <guid>http://www.aptly.info/post/aptly-0-3</guid>
+      <guid>http://localhost:1313/post/aptly-0-3</guid>
       <description>&lt;p&gt;Today I&amp;rsquo;ve released &lt;a href=&#34;http://www.aptly.info/&#34;&gt;aptly&lt;/a&gt; version 0.3. It&amp;rsquo;s
 the first version I would recommend for production usage. Please
 &lt;a href=&#34;http://www.aptly.info/#download&#34;&gt;download it&lt;/a&gt; or install from
@@ -756,10 +929,10 @@ graph&lt;/a&gt; command):&lt;/p&gt;
     
     <item>
       <title>aptly 0.2, Moscow DevOps Meetup</title>
-      <link>http://www.aptly.info/post/aptly-02-moscow-devops-meetup</link>
+      <link>http://localhost:1313/post/aptly-02-moscow-devops-meetup</link>
       <pubDate>Wed, 29 Jan 2014 12:24:00 UTC</pubDate>
       <author>Andrey Smirnov</author>
-      <guid>http://www.aptly.info/post/aptly-02-moscow-devops-meetup</guid>
+      <guid>http://localhost:1313/post/aptly-02-moscow-devops-meetup</guid>
       <description>&lt;p&gt;Two great things have happened recently:&lt;/p&gt;
 
 &lt;ul&gt;
