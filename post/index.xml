@@ -3,7 +3,7 @@
   <channel>
       <title>Posts on aptly - Debian repository management tool </title>
       <generator uri="https://hugo.spf13.com">Hugo</generator>
-    <link>http://localhost:1313/post/index.xml</link>
+    <link>http://www.aptly.info/post/index.xml</link>
     <language>en-us</language>
     <author>Andrey Smirnov</author>
     
@@ -11,10 +11,10 @@
     
     <item>
       <title>aptly 0.8 - .udeb support, search and filtering</title>
-      <link>http://localhost:1313/post/aptly-0-8</link>
+      <link>http://www.aptly.info/post/aptly-0-8</link>
       <pubDate>Fri, 03 Oct 2014 21:22:00 UTC</pubDate>
       <author>Andrey Smirnov</author>
-      <guid>http://localhost:1313/post/aptly-0-8</guid>
+      <guid>http://www.aptly.info/post/aptly-0-8</guid>
       <description>
 
 &lt;p&gt;&lt;a href=&#34;http://www.aptly.info&#34;&gt;aptly&lt;/a&gt; 0.8 has been released today.
@@ -184,10 +184,10 @@ to the repository.&lt;/p&gt;
     
     <item>
       <title>aptly 0.7 - S3 publishing, complex queries</title>
-      <link>http://localhost:1313/post/aptly-0-7</link>
+      <link>http://www.aptly.info/post/aptly-0-7</link>
       <pubDate>Tue, 29 Jul 2014 21:22:00 UTC</pubDate>
       <author>Andrey Smirnov</author>
-      <guid>http://localhost:1313/post/aptly-0-7</guid>
+      <guid>http://www.aptly.info/post/aptly-0-7</guid>
       <description>
 
 &lt;p&gt;&lt;a href=&#34;http://www.aptly.info&#34;&gt;aptly&lt;/a&gt; 0.7 has been released today. aptly is a
@@ -379,10 +379,10 @@ downloadSpeedLimit, so that aptly won&amp;rsquo;t consume all bandwidth.&lt;/p&g
     
     <item>
       <title>aptly 0.6</title>
-      <link>http://localhost:1313/post/aptly-0-6</link>
+      <link>http://www.aptly.info/post/aptly-0-6</link>
       <pubDate>Mon, 09 Jun 2014 00:57:00 UTC</pubDate>
       <author>Andrey Smirnov</author>
-      <guid>http://localhost:1313/post/aptly-0-6</guid>
+      <guid>http://www.aptly.info/post/aptly-0-6</guid>
       <description>
 
 &lt;p&gt;&lt;a href=&#34;http://www.aptly.info&#34;&gt;aptly&lt;/a&gt; 0.6 has been released on June, 7th. It is
@@ -532,10 +532,10 @@ version wins (&lt;code&gt;-latest&lt;/code&gt;);&lt;/li&gt;
     
     <item>
       <title>aptly 0.5</title>
-      <link>http://localhost:1313/post/aptly-0-5</link>
+      <link>http://www.aptly.info/post/aptly-0-5</link>
       <pubDate>Fri, 25 Apr 2014 00:12:00 UTC</pubDate>
       <author>Andrey Smirnov</author>
-      <guid>http://localhost:1313/post/aptly-0-5</guid>
+      <guid>http://www.aptly.info/post/aptly-0-5</guid>
       <description>
 
 &lt;p&gt;&lt;a href=&#34;http://www.aptly.info&#34;&gt;aptly&lt;/a&gt; 0.5 has been released today. It is
@@ -669,10 +669,10 @@ easily parseable. E.g. update all Debian mirrors:&lt;/p&gt;
     
     <item>
       <title>aptly 0.4</title>
-      <link>http://localhost:1313/post/aptly-0-4</link>
+      <link>http://www.aptly.info/post/aptly-0-4</link>
       <pubDate>Tue, 11 Mar 2014 16:14:00 UTC</pubDate>
       <author>Andrey Smirnov</author>
-      <guid>http://localhost:1313/post/aptly-0-4</guid>
+      <guid>http://www.aptly.info/post/aptly-0-4</guid>
       <description>&lt;p&gt;&lt;a href=&#34;http://www.aptly.info/&#34;&gt;aptly&lt;/a&gt; version 0.4 has been released today.
 Major feature in this version is &lt;a href=&#34;http://www.aptly.info/#aptly-repo&#34;&gt;local package repository
 management&lt;/a&gt; which allows to manage
@@ -729,10 +729,10 @@ and transitions looks like that:&lt;/p&gt;
     
     <item>
       <title>aptly Memory Usage Optimization</title>
-      <link>http://localhost:1313/post/aptly-memory-usage-optimization</link>
+      <link>http://www.aptly.info/post/aptly-memory-usage-optimization</link>
       <pubDate>Wed, 05 Mar 2014 17:15:00 UTC</pubDate>
       <author>Andrey Smirnov</author>
-      <guid>http://localhost:1313/post/aptly-memory-usage-optimization</guid>
+      <guid>http://www.aptly.info/post/aptly-memory-usage-optimization</guid>
       <description>&lt;p&gt;Next &lt;a href=&#34;http://www.aptly.info&#34;&gt;aptly&lt;/a&gt; version (0.4) would contain some
 changes to lower memory requirements while doing general operations:
 memory usage will be decreased by factor of 3. aptly is written in Go
@@ -877,10 +877,10 @@ plot &amp;quot;mem.dat&amp;quot; using 1:($2/1e6) title &#39;HeapSys&#39; with l
     
     <item>
       <title>aptly 0.3</title>
-      <link>http://localhost:1313/post/aptly-0-3</link>
+      <link>http://www.aptly.info/post/aptly-0-3</link>
       <pubDate>Mon, 10 Feb 2014 23:20:00 UTC</pubDate>
       <author>Andrey Smirnov</author>
-      <guid>http://localhost:1313/post/aptly-0-3</guid>
+      <guid>http://www.aptly.info/post/aptly-0-3</guid>
       <description>&lt;p&gt;Today I&amp;rsquo;ve released &lt;a href=&#34;http://www.aptly.info/&#34;&gt;aptly&lt;/a&gt; version 0.3. It&amp;rsquo;s
 the first version I would recommend for production usage. Please
 &lt;a href=&#34;http://www.aptly.info/#download&#34;&gt;download it&lt;/a&gt; or install from
@@ -929,10 +929,10 @@ graph&lt;/a&gt; command):&lt;/p&gt;
     
     <item>
       <title>aptly 0.2, Moscow DevOps Meetup</title>
-      <link>http://localhost:1313/post/aptly-02-moscow-devops-meetup</link>
+      <link>http://www.aptly.info/post/aptly-02-moscow-devops-meetup</link>
       <pubDate>Wed, 29 Jan 2014 12:24:00 UTC</pubDate>
       <author>Andrey Smirnov</author>
-      <guid>http://localhost:1313/post/aptly-02-moscow-devops-meetup</guid>
+      <guid>http://www.aptly.info/post/aptly-02-moscow-devops-meetup</guid>
       <description>&lt;p&gt;Two great things have happened recently:&lt;/p&gt;
 
 &lt;ul&gt;
