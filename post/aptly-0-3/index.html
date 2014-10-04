@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" href="/favicon.ico">
     <link type="text/css" rel="stylesheet" href="/css/styles.css">
-    <link rel="canonical" href="http://www.aptly.info/post/aptly-0-3">
+    <link rel="canonical" href="http://localhost:1313/post/aptly-0-3">
     <link href="/post/index.xml" rel="alternate" type="application/rss+xml" title="Debian repository management tool" />
     
   </head>
@@ -39,6 +39,7 @@
 
     <section class="primary-content">
       <div class="container">
+         <h1>aptly 0.3</h1>
          <p>Today I&rsquo;ve released <a href="http://www.aptly.info/">aptly</a> version 0.3. It&rsquo;s
 the first version I would recommend for production usage. Please
 <a href="http://www.aptly.info/#download">download it</a> or install from
@@ -117,5 +118,8 @@ graph</a> command):</p>
     ga('send', 'pageview');
 
     </script>
-  </body>
+  <script>document.write('<script src="http://'
+        + (location.host || 'localhost').split(':')[0]
+		+ ':1313/livereload.js?mindelay=10"></'
+        + 'script>')</script></body>
 </html>

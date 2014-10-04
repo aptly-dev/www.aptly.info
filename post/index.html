@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" href="/favicon.ico">
     <link type="text/css" rel="stylesheet" href="/css/styles.css">
-    <link rel="canonical" href="http://www.aptly.info/post">
+    <link rel="canonical" href="http://localhost:1313/post">
     <link href="/post/index.xml" rel="alternate" type="application/rss+xml" title="Debian repository management tool" />
     
   </head>
@@ -42,25 +42,28 @@
           <h2>Posts</h2>
           <ul>
               
-                <li><a href="http://www.aptly.info/post/aptly-0-7">aptly 0.7 - S3 publishing, complex queries</a><time class="pull-right post-list">Tue, Jul 29, 2014</time>
+                <li><a href="http://localhost:1313/post/aptly-0-8"><b>aptly 0.8 - .udeb support, search and filtering</b></a><time class="pull-right post-list">Fri, Oct 3, 2014</time>
+                <p class="small">aptly 0.8 has been released today. For installation instructions, please proceed to Download page. Most important new features are: Searching for Packages aptly has powerful query language which allows to select subset of packages. Query language is used in many commands: pulling packages between snapshots, copying, moving packages between local repositories, filtering mirror contents, etc. \ aptly 0.8 allows to use queries to search mirrors, snapshots and local repos for packages matching condition.</p></li>
+              
+                <li><a href="http://localhost:1313/post/aptly-0-7"><b>aptly 0.7 - S3 publishing, complex queries</b></a><time class="pull-right post-list">Tue, Jul 29, 2014</time>
                 <p class="small">aptly 0.7 has been released today. aptly is a Debian repository management tool, it allows to mirror remote repositories, create local package repositories, manage repositories snapshots and publish them back as Debian repository. aptly main idea is &ldquo;owning your own repository&rdquo;: you can mix and match official repos, 3rd-party repositories, your own packages, creating your own stable/testing/whatever repositories, allowing reproducible package installations along with controlled upgrades. It is available for download as binary executables or from Debian repository: deb http://repo.aptly.info/ squeeze main When installing from repository, don&rsquo;t forget to import key used to sign the release: $ gpg --keyserver keys.gnupg.net --recv-keys 2A194991 $ gpg -a --export 2A194991 | sudo apt-key add - Aptly has new logo, soon I&rsquo;m going to launch new website: Most important new features are: Publishing to Amazon S3 aptly can publish repositories directly to Amazon S3.</p></li>
               
-                <li><a href="http://www.aptly.info/post/aptly-0-6">aptly 0.6</a><time class="pull-right post-list">Mon, Jun 9, 2014</time>
+                <li><a href="http://localhost:1313/post/aptly-0-6"><b>aptly 0.6</b></a><time class="pull-right post-list">Mon, Jun 9, 2014</time>
                 <p class="small">aptly 0.6 has been released on June, 7th. It is available for download as binary executables or from Debian repository: deb http://repo.aptly.info/ squeeze main When installing from repository, don&rsquo;t forget to import key used to sign the release: $ gpg --keyserver keys.gnupg.net --recv-keys 2A194991 $ gpg -a --export 2A194991 | sudo apt-key add - Most important new features are: Multi-Component Repository Publishing aptly is based on concept of list of packages.</p></li>
               
-                <li><a href="http://www.aptly.info/post/aptly-0-5">aptly 0.5</a><time class="pull-right post-list">Fri, Apr 25, 2014</time>
+                <li><a href="http://localhost:1313/post/aptly-0-5"><b>aptly 0.5</b></a><time class="pull-right post-list">Fri, Apr 25, 2014</time>
                 <p class="small">aptly 0.5 has been released today. It is available for download as binary executables or from Debian repository: deb http://repo.aptly.info/ squeeze main When installing from repository, don&rsquo;t forget to import key used to sign the release: $ gpg --keyserver keys.gnupg.net --recv-keys 2A194991 $ gpg -a --export 2A194991 | sudo apt-key add - Most important new features are: Local Repository Publishing Local repositories could be used in two ways: test new versions of software provide stable distribution of new versions For the second case, it is best to create snapshots of local repositories and publish them.</p></li>
               
-                <li><a href="http://www.aptly.info/post/aptly-0-4">aptly 0.4</a><time class="pull-right post-list">Tue, Mar 11, 2014</time>
+                <li><a href="http://localhost:1313/post/aptly-0-4"><b>aptly 0.4</b></a><time class="pull-right post-list">Tue, Mar 11, 2014</time>
                 <p class="small">aptly version 0.4 has been released today. Major feature in this version is local package repository management which allows to manage collection of your own packages, publish, take snapshots, mix with upstream repositories mirrors. Please download it or install from source, raise issues, disscuss in aptly-discuss group, follow me (@smira) to get information about updates. Other features in 0.4 worth mentioning are: support for source packages for mirrors and local repositories, ability to delete unused package files and DB entries, and memory usage optimizations.</p></li>
               
-                <li><a href="http://www.aptly.info/post/aptly-memory-usage-optimization">aptly Memory Usage Optimization</a><time class="pull-right post-list">Wed, Mar 5, 2014</time>
+                <li><a href="http://localhost:1313/post/aptly-memory-usage-optimization"><b>aptly Memory Usage Optimization</b></a><time class="pull-right post-list">Wed, Mar 5, 2014</time>
                 <p class="small">Next aptly version (0.4) would contain some changes to lower memory requirements while doing general operations: memory usage will be decreased by factor of 3. aptly is written in Go language, so this is a short story of optimizing Go program memory usage. When I have been developing aptly, I suspected that memory usage would be not optimal, as aptly is processing huge amounts of package metadata (for example, when mirroring upstream Debian repositories consisting of 30000 packages).</p></li>
               
-                <li><a href="http://www.aptly.info/post/aptly-0-3">aptly 0.3</a><time class="pull-right post-list">Mon, Feb 10, 2014</time>
+                <li><a href="http://localhost:1313/post/aptly-0-3"><b>aptly 0.3</b></a><time class="pull-right post-list">Mon, Feb 10, 2014</time>
                 <p class="small">Today I&rsquo;ve released aptly version 0.3. It&rsquo;s the first version I would recommend for production usage. Please download it or install from source, raise issues, disscuss in aptly-discuss group, follow me (@smira) to get information about updates. New features: using aptly serve command you can quickly serve your published repositories over HTTP, aptly would even advise right settings for apt sources; aptly checks signatures and verifies checksums for downloaded files while mirroring remote repositories, if you don&rsquo;t have key that was used to sign the mirror in your trusted GnuPG keychain, aptly would give some hints, some hints; flat format of Debian repositories is now supported (e.g.</p></li>
               
-                <li><a href="http://www.aptly.info/post/aptly-02-moscow-devops-meetup">aptly 0.2, Moscow DevOps Meetup</a><time class="pull-right post-list">Wed, Jan 29, 2014</time>
+                <li><a href="http://localhost:1313/post/aptly-02-moscow-devops-meetup"><b>aptly 0.2, Moscow DevOps Meetup</b></a><time class="pull-right post-list">Wed, Jan 29, 2014</time>
                 <p class="small">Two great things have happened recently: I&rsquo;ve released aptly version 0.2, which is alpha-quality. I&rsquo;ve presented aptly at DevOps Meetup Moscow (in Russian). Slides from my talk about aptly can be downloaded in PDF (English version). aptly: Debian repository management tool from Andrey Smirnov</p></li>
               
           </ul>
@@ -98,5 +101,8 @@
     ga('send', 'pageview');
 
     </script>
-  </body>
+  <script>document.write('<script src="http://'
+        + (location.host || 'localhost').split(':')[0]
+		+ ':1313/livereload.js?mindelay=10"></'
+        + 'script>')</script></body>
 </html>
