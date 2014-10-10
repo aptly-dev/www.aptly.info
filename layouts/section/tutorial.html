@@ -1,0 +1,13 @@
+{{ template "partials/header.html" . }}
+    <section class="primary-content">
+      <div class="container">
+          <h2>{{.Title}}</h2>
+          <ul>
+              {{ range .Data.Pages.ByDate }}
+                <li><a href="{{ .Permalink }}"><b>{{ .Title }}</b></a>
+                <p class="small">{{ .Description }}</p></li>
+              {{ end }}
+          </ul>
+    </div>
+  </section>
+{{ template "partials/footer.html" . }}
