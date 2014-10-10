@@ -7,6 +7,10 @@ description = "How to pull some packages from backports and 3rd party repositori
 Pulling new versions of packages
 --------------------------------
 
+<p class="lead">Goal: pull new version of nginx package from backports, add aptly
+package from 3rd party repository.</p>
+
+
 Let's start with mirrors created in [first tutorial](/tutorial/mirror/): `wheezy-main`,
 `wheezy-updates` and `wheezy-security`.
 
