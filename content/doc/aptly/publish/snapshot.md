@@ -37,6 +37,7 @@ Params:
 
 Flags:
 
+-   `-batch`: run GPG with detached tty (useful when running from crontab)
 -   `-component=""`: component name to publish; guessed from original
     repository (if any), or defaults to `main` (for multi-component
     publishing, separate components with commas)
