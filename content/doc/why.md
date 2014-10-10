@@ -65,6 +65,8 @@ As Debian distribution is updated, we can take new snapshot and update published
     $ aptly snapshot create wheezy-main-2014-09-02 from mirror wheezy-main
     $ aptly publish switch wheezy wheezy-main-2014-09-02
 
+Please see [mirroring tutorial](/tutorial/mirror/) for more details.
+
 ### Mixing different packages sources
 
 One can configure `apt` to use multiple package sources via `apt.sources.list`. This works just fine
@@ -86,7 +88,7 @@ create our own "mix", which should be consistent, tested and available in the sa
 Once state of mirrors and our internal package repositories is fixed using snapshots, we might
 use [aptly snapshot pull](/doc/aptly/snapshot/pull) to mix packages from several snapshots into final
 snapshot that would be published to be consumed from our servers. aptly would take care about dependencies,
-replacing conflicting packages when required. Please see [examples](/examples/) on how to pull
+replacing conflicting packages when required. Please see [tutorial](/tutorial/pull/) on how to pull
 package `nginx` from backports.
 
 ### Managing internal package repositories
@@ -99,5 +101,7 @@ from mirrors (in snapshots).
 
 Local repositories could be published either via snapshots or directly (loosing flexibility of
 snapshots). Please see [`aptly repo`](/doc/aptly/repo/) commands for examples.
+
+More examples on local repository management in [tutorial](/tutorial/repo/).
 
 
