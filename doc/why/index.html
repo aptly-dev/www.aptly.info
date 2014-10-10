@@ -422,6 +422,8 @@ $ aptly snapshot create wheezy-main-2014-09-02 from mirror wheezy-main
 $ aptly publish switch wheezy wheezy-main-2014-09-02
 </code></pre>
 
+<p>Please see <a href="/tutorial/mirror/">mirroring tutorial</a> for more details.</p>
+
 <h3 id="toc_2">Mixing different packages sources</h3>
 
 <p>One can configure <code>apt</code> to use multiple package sources via <code>apt.sources.list</code>. This works just fine
@@ -448,7 +450,7 @@ create our own &ldquo;mix&rdquo;, which should be consistent, tested and availab
 <p>Once state of mirrors and our internal package repositories is fixed using snapshots, we might
 use <a href="/doc/aptly/snapshot/pull">aptly snapshot pull</a> to mix packages from several snapshots into final
 snapshot that would be published to be consumed from our servers. aptly would take care about dependencies,
-replacing conflicting packages when required. Please see <a href="/examples/">examples</a> on how to pull
+replacing conflicting packages when required. Please see <a href="/tutorial/pull/">tutorial</a> on how to pull
 package <code>nginx</code> from backports.</p>
 
 <h3 id="toc_3">Managing internal package repositories</h3>
@@ -461,6 +463,8 @@ from mirrors (in snapshots).</p>
 
 <p>Local repositories could be published either via snapshots or directly (loosing flexibility of
 snapshots). Please see <a href="/doc/aptly/repo/"><code>aptly repo</code></a> commands for examples.</p>
+
+<p>More examples on local repository management in <a href="/tutorial/repo/">tutorial</a>.</p>
 
             <div id="disqus_thread"></div>
 <script type="text/javascript">
