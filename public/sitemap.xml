@@ -28,7 +28,7 @@
   </url>
   
   <url>
-    <loc>http://www.aptly.info/doc/aptly/package/search</loc>
+    <loc>http://www.aptly.info/doc/aptly/mirror/edit</loc>
     <lastmod>2014-08-29T11:17:38+00:00</lastmod>
   </url>
   
@@ -43,7 +43,12 @@
   </url>
   
   <url>
-    <loc>http://www.aptly.info/doc/aptly/snapshot/search</loc>
+    <loc>http://www.aptly.info/doc/aptly/repo/search</loc>
+    <lastmod>2014-08-29T11:17:38+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://www.aptly.info/doc/aptly/package/search</loc>
     <lastmod>2014-08-29T11:17:38+00:00</lastmod>
   </url>
   
@@ -53,147 +58,12 @@
   </url>
   
   <url>
-    <loc>http://www.aptly.info/doc/aptly/mirror/edit</loc>
+    <loc>http://www.aptly.info/doc/aptly/snapshot/search</loc>
     <lastmod>2014-08-29T11:17:38+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://www.aptly.info/doc/aptly/repo/search</loc>
-    <lastmod>2014-08-29T11:17:38+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://www.aptly.info/doc/aptly/repo/create</loc>
-    <lastmod>2014-08-08T11:17:38+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://www.aptly.info/doc/aptly/repo</loc>
-    <lastmod>2014-08-08T11:17:38+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://www.aptly.info/doc/aptly/snapshot/rename</loc>
-    <lastmod>2014-08-08T11:17:38+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://www.aptly.info/doc/aptly/serve</loc>
-    <lastmod>2014-08-08T11:17:38+00:00</lastmod>
   </url>
   
   <url>
     <loc>http://www.aptly.info/doc/aptly/mirror/rename</loc>
-    <lastmod>2014-08-08T11:17:38+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://www.aptly.info/doc/aptly/snapshot/verify</loc>
-    <lastmod>2014-08-08T11:17:38+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://www.aptly.info/doc/aptly/repo/remove</loc>
-    <lastmod>2014-08-08T11:17:38+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://www.aptly.info/doc/aptly/mirror/create</loc>
-    <lastmod>2014-08-08T11:17:38+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://www.aptly.info/doc/aptly/snapshot/show</loc>
-    <lastmod>2014-08-08T11:17:38+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://www.aptly.info/doc/aptly/repo/drop</loc>
-    <lastmod>2014-08-08T11:17:38+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://www.aptly.info/doc/aptly/mirror/update</loc>
-    <lastmod>2014-08-08T11:17:38+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://www.aptly.info/doc/commands</loc>
-    <lastmod>2014-08-08T11:17:38+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://www.aptly.info/doc/aptly/mirror</loc>
-    <lastmod>2014-08-08T11:17:38+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://www.aptly.info/doc/aptly/snapshot/list</loc>
-    <lastmod>2014-08-08T11:17:38+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://www.aptly.info/doc/feature/duplicate</loc>
-    <lastmod>2014-08-08T11:17:38+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://www.aptly.info/doc/aptly/publish/snapshot</loc>
-    <lastmod>2014-08-08T11:17:38+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://www.aptly.info/doc/aptly/snapshot/drop</loc>
-    <lastmod>2014-08-08T11:17:38+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://www.aptly.info/doc/aptly/publish</loc>
-    <lastmod>2014-08-08T11:17:38+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://www.aptly.info/doc/aptly/repo/add</loc>
-    <lastmod>2014-08-08T11:17:38+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://www.aptly.info/doc/aptly/publish/switch</loc>
-    <lastmod>2014-08-08T11:17:38+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://www.aptly.info/doc/why</loc>
-    <lastmod>2014-08-08T11:17:38+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://www.aptly.info/doc/aptly/publish/update</loc>
-    <lastmod>2014-08-08T11:17:38+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://www.aptly.info/doc/aptly/db/cleanup</loc>
-    <lastmod>2014-08-08T11:17:38+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://www.aptly.info/doc/aptly/repo/copy</loc>
-    <lastmod>2014-08-08T11:17:38+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://www.aptly.info/doc/feature/query</loc>
-    <lastmod>2014-08-08T11:17:38+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://www.aptly.info/doc/aptly/db</loc>
-    <lastmod>2014-08-08T11:17:38+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://www.aptly.info/doc/aptly/publish/drop</loc>
     <lastmod>2014-08-08T11:17:38+00:00</lastmod>
   </url>
   
@@ -203,22 +73,67 @@
   </url>
   
   <url>
+    <loc>http://www.aptly.info/doc/aptly/publish/drop</loc>
+    <lastmod>2014-08-08T11:17:38+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://www.aptly.info/doc/feature/duplicate</loc>
+    <lastmod>2014-08-08T11:17:38+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://www.aptly.info/doc/why</loc>
+    <lastmod>2014-08-08T11:17:38+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://www.aptly.info/doc/aptly/serve</loc>
+    <lastmod>2014-08-08T11:17:38+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://www.aptly.info/doc/aptly/repo/create</loc>
+    <lastmod>2014-08-08T11:17:38+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://www.aptly.info/doc/aptly/mirror/drop</loc>
+    <lastmod>2014-08-08T11:17:38+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://www.aptly.info/doc/aptly/db</loc>
+    <lastmod>2014-08-08T11:17:38+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://www.aptly.info/doc/aptly/repo/list</loc>
+    <lastmod>2014-08-08T11:17:38+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://www.aptly.info/doc/aptly/repo/remove</loc>
+    <lastmod>2014-08-08T11:17:38+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://www.aptly.info/doc/aptly/db/cleanup</loc>
+    <lastmod>2014-08-08T11:17:38+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://www.aptly.info/doc/overview</loc>
     <lastmod>2014-08-08T11:17:38+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://www.aptly.info/doc/aptly/snapshot/diff</loc>
+    <loc>http://www.aptly.info/doc/aptly/mirror/list</loc>
     <lastmod>2014-08-08T11:17:38+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://www.aptly.info/doc/aptly/publish/list</loc>
-    <lastmod>2014-08-08T11:17:38+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://www.aptly.info/doc/aptly/flags</loc>
+    <loc>http://www.aptly.info/doc/aptly/mirror/show</loc>
     <lastmod>2014-08-08T11:17:38+00:00</lastmod>
   </url>
   
@@ -233,37 +148,47 @@
   </url>
   
   <url>
-    <loc>http://www.aptly.info/doc/aptly/repo/import</loc>
-    <lastmod>2014-08-08T11:17:38+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://www.aptly.info/doc/aptly/repo/list</loc>
-    <lastmod>2014-08-08T11:17:38+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://www.aptly.info/doc/aptly/repo/move</loc>
-    <lastmod>2014-08-08T11:17:38+00:00</lastmod>
-  </url>
-  
-  <url>
     <loc>http://www.aptly.info/doc/aptly/repo/rename</loc>
     <lastmod>2014-08-08T11:17:38+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://www.aptly.info/doc/aptly/repo/edit</loc>
+    <loc>http://www.aptly.info/doc/aptly/snapshot/rename</loc>
     <lastmod>2014-08-08T11:17:38+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://www.aptly.info/doc/aptly/db/recover</loc>
+    <loc>http://www.aptly.info/doc/aptly/mirror/update</loc>
     <lastmod>2014-08-08T11:17:38+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://www.aptly.info/doc/aptly/snapshot/merge</loc>
+    <loc>http://www.aptly.info/doc/aptly/publish/snapshot</loc>
+    <lastmod>2014-08-08T11:17:38+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://www.aptly.info/doc/aptly/publish/update</loc>
+    <lastmod>2014-08-08T11:17:38+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://www.aptly.info/doc/aptly/flags</loc>
+    <lastmod>2014-08-08T11:17:38+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://www.aptly.info/doc/aptly/publish</loc>
+    <lastmod>2014-08-08T11:17:38+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://www.aptly.info/doc/aptly/repo/drop</loc>
+    <lastmod>2014-08-08T11:17:38+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://www.aptly.info/doc/aptly/mirror/create</loc>
     <lastmod>2014-08-08T11:17:38+00:00</lastmod>
   </url>
   
@@ -273,17 +198,7 @@
   </url>
   
   <url>
-    <loc>http://www.aptly.info/doc/aptly/snapshot</loc>
-    <lastmod>2014-08-08T11:17:38+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://www.aptly.info/doc/aptly/mirror/list</loc>
-    <lastmod>2014-08-08T11:17:38+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://www.aptly.info/doc/aptly/snapshot/pull</loc>
+    <loc>http://www.aptly.info/doc/history</loc>
     <lastmod>2014-08-08T11:17:38+00:00</lastmod>
   </url>
   
@@ -293,27 +208,17 @@
   </url>
   
   <url>
-    <loc>http://www.aptly.info/doc/aptly/snapshot/filter</loc>
+    <loc>http://www.aptly.info/doc/aptly/repo/add</loc>
     <lastmod>2014-08-08T11:17:38+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://www.aptly.info/doc/aptly/mirror/drop</loc>
+    <loc>http://www.aptly.info/doc/features</loc>
     <lastmod>2014-08-08T11:17:38+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://www.aptly.info/doc/aptly/publish/repo</loc>
-    <lastmod>2014-08-08T11:17:38+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://www.aptly.info/doc/aptly/mirror/show</loc>
-    <lastmod>2014-08-08T11:17:38+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://www.aptly.info/doc/history</loc>
+    <loc>http://www.aptly.info/doc/aptly/snapshot/list</loc>
     <lastmod>2014-08-08T11:17:38+00:00</lastmod>
   </url>
   
@@ -323,7 +228,52 @@
   </url>
   
   <url>
-    <loc>http://www.aptly.info/doc/configuration</loc>
+    <loc>http://www.aptly.info/doc/aptly/publish/repo</loc>
+    <lastmod>2014-08-08T11:17:38+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://www.aptly.info/doc/aptly/repo/import</loc>
+    <lastmod>2014-08-08T11:17:38+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://www.aptly.info/doc/feature/query</loc>
+    <lastmod>2014-08-08T11:17:38+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://www.aptly.info/doc/aptly/repo/edit</loc>
+    <lastmod>2014-08-08T11:17:38+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://www.aptly.info/doc/aptly/repo/move</loc>
+    <lastmod>2014-08-08T11:17:38+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://www.aptly.info/doc/aptly/snapshot/filter</loc>
+    <lastmod>2014-08-08T11:17:38+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://www.aptly.info/doc/aptly/mirror</loc>
+    <lastmod>2014-08-08T11:17:38+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://www.aptly.info/doc/commands</loc>
+    <lastmod>2014-08-08T11:17:38+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://www.aptly.info/doc/aptly/db/recover</loc>
+    <lastmod>2014-08-08T11:17:38+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://www.aptly.info/doc/aptly/snapshot</loc>
     <lastmod>2014-08-08T11:17:38+00:00</lastmod>
   </url>
   
@@ -333,7 +283,57 @@
   </url>
   
   <url>
-    <loc>http://www.aptly.info/doc/features</loc>
+    <loc>http://www.aptly.info/doc/aptly/publish/switch</loc>
+    <lastmod>2014-08-08T11:17:38+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://www.aptly.info/doc/aptly/snapshot/verify</loc>
+    <lastmod>2014-08-08T11:17:38+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://www.aptly.info/doc/aptly/snapshot/diff</loc>
+    <lastmod>2014-08-08T11:17:38+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://www.aptly.info/doc/aptly/publish/list</loc>
+    <lastmod>2014-08-08T11:17:38+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://www.aptly.info/doc/aptly/snapshot/drop</loc>
+    <lastmod>2014-08-08T11:17:38+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://www.aptly.info/doc/aptly/repo</loc>
+    <lastmod>2014-08-08T11:17:38+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://www.aptly.info/doc/configuration</loc>
+    <lastmod>2014-08-08T11:17:38+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://www.aptly.info/doc/aptly/snapshot/show</loc>
+    <lastmod>2014-08-08T11:17:38+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://www.aptly.info/doc/aptly/snapshot/pull</loc>
+    <lastmod>2014-08-08T11:17:38+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://www.aptly.info/doc/aptly/repo/copy</loc>
+    <lastmod>2014-08-08T11:17:38+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://www.aptly.info/doc/aptly/snapshot/merge</loc>
     <lastmod>2014-08-08T11:17:38+00:00</lastmod>
   </url>
   
@@ -348,7 +348,7 @@
   </url>
   
   <url>
-    <loc>http://www.aptly.info/download</loc>
+    <loc>http://www.aptly.info/examples</loc>
     <lastmod>2014-07-16T17:02:05+00:00</lastmod>
   </url>
   
@@ -358,7 +358,7 @@
   </url>
   
   <url>
-    <loc>http://www.aptly.info/examples</loc>
+    <loc>http://www.aptly.info/download</loc>
     <lastmod>2014-07-16T17:02:05+00:00</lastmod>
   </url>
   
