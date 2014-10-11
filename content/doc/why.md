@@ -9,7 +9,7 @@ menu:
 Why aptly?
 ----------
 
-Linux distribution is well-tested collection of packages carefully organized and
+Linux distribution is a well-tested collection of packages that are carefully organized and
 supported by the vendor. There's a support for the released version, including
 updates, security fixes, etc. For many of us that is just enough.
 
