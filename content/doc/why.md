@@ -9,22 +9,22 @@ menu:
 Why aptly?
 ----------
 
-Linux distribution is a well-tested collection of packages that are carefully organized and
+A Linux distribution is a well-tested collection of packages that are carefully organized and
 supported by the vendor. There's a support for the released version, including
 updates, security fixes, etc. For many of us that is just enough.
 
 But sooner or later our requirements start to evolve:
 
-* we have a lot of machines and we would like to have internal mirror
+* we have a lot of machines and we would like to have an internal mirror
   of package repository, so that we could save bandwidth and manage
   upgrades;
-* some packages are missing in official distribution or are outdated,
+* some packages are missing in the official distribution or are outdated,
   so we need to add 3rd party repositories;
 * we start packaging our own software (or modified versions of official
   packages), so we need to host our own internal package repository.
 
-In the end, we would like **to own package repository**, that is to have
-package repository that is our "own distribution" tailored to fit our
+In the end, we would like **to own a package repository**, that is to have
+a package repository that is our "own distribution" tailored to fit our
 needs. Relying on single vendor is fine, but if we start to manage our
 own repository, we need great tools to help us. That's where aptly comes to help us.
 
@@ -43,13 +43,13 @@ If later I issue exactly the same `apt-get install package` commands on the seco
 server, I might get slightly different set of package versions, as remote repository
 might have been updated in the mean time.
 
-There are many tools to create mirror of Debian package repositories, not many of those tools
+There are many tools to creat a mirror of the Debian package repositories, not many of those tools
 are able to create partial mirrors (download only specified packages) and most
 important, there are just several tools that can update mirror at any moment in time and preserve previous
 mirror states as snapshots.
 
-Snapshotting mirror is very important to make sure that all servers are installed from the same
-snapshot. When tested, mirror could be upgraded to new snapshot.
+Mirror snapshotting is very important to make sure that all servers are installed from the same
+snapshot. When tested carefully, mirror could be upgraded to the new snapshot.
 
 Using aptly, you can do something like that:
 

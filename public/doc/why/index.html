@@ -360,24 +360,24 @@
 
 <h2 id="toc_0">Why aptly?</h2>
 
-<p>Linux distribution is a well-tested collection of packages that are carefully organized and
+<p>A Linux distribution is a well-tested collection of packages that are carefully organized and
 supported by the vendor. There&rsquo;s a support for the released version, including
 updates, security fixes, etc. For many of us that is just enough.</p>
 
 <p>But sooner or later our requirements start to evolve:</p>
 
 <ul>
-<li>we have a lot of machines and we would like to have internal mirror
+<li>we have a lot of machines and we would like to have an internal mirror
 of package repository, so that we could save bandwidth and manage
 upgrades;</li>
-<li>some packages are missing in official distribution or are outdated,
+<li>some packages are missing in the official distribution or are outdated,
 so we need to add 3rd party repositories;</li>
 <li>we start packaging our own software (or modified versions of official
 packages), so we need to host our own internal package repository.</li>
 </ul>
 
-<p>In the end, we would like <strong>to own package repository</strong>, that is to have
-package repository that is our &ldquo;own distribution&rdquo; tailored to fit our
+<p>In the end, we would like <strong>to own a package repository</strong>, that is to have
+a package repository that is our &ldquo;own distribution&rdquo; tailored to fit our
 needs. Relying on single vendor is fine, but if we start to manage our
 own repository, we need great tools to help us. That&rsquo;s where aptly comes to help us.</p>
 
@@ -398,13 +398,13 @@ If later I issue exactly the same <code>apt-get install package</code> commands 
 server, I might get slightly different set of package versions, as remote repository
 might have been updated in the mean time.</p>
 
-<p>There are many tools to create mirror of Debian package repositories, not many of those tools
+<p>There are many tools to creat a mirror of the Debian package repositories, not many of those tools
 are able to create partial mirrors (download only specified packages) and most
 important, there are just several tools that can update mirror at any moment in time and preserve previous
 mirror states as snapshots.</p>
 
-<p>Snapshotting mirror is very important to make sure that all servers are installed from the same
-snapshot. When tested, mirror could be upgraded to new snapshot.</p>
+<p>Mirror snapshotting is very important to make sure that all servers are installed from the same
+snapshot. When tested carefully, mirror could be upgraded to the new snapshot.</p>
 
 <p>Using aptly, you can do something like that:</p>
 
