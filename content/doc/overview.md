@@ -9,14 +9,14 @@ menu:
 Overview
 --------
 
-<p class="lead">aptly goal is to establish repeatiblity and controlled changes in
-package environment.</p>
+<p class="lead">Aptly's goal is to establish repeatiblity and controlled changes in
+package environments.</p>
 
-aptly allows to produce fixed set of packages in the repository,
+aptly produces a fixed set of packages in the repository,
 so that package installation and upgrade becomes deterministic. At the
-same time aptly is able perform controlled, fine-grained changes in
-repository contents to transition your package environment to new
-version.
+same time aptly is able to perform controlled, fine-grained changes to 
+repository content. Aptly allows you to transistion your package environment to a
+new version, or rollback to a previous version.
 
 aptly has several core entities:
 
@@ -26,17 +26,17 @@ aptly has several core entities:
     and package files</dd>
     <dt>local repo</dt>
     <dd>local package repository, consists of metadata, packages and files,
-    packages could be easily added and removed</dd>
+    packages can be easily added and removed</dd>
     <dt>snapshot</dt>
     <dd>immutable list of packages, basic block to implement repeatability
     and controlled changes</dd>
     <dt>published<br> repository</dt>
-    <dd>published representation of snapshot or local repository, ready to
+    <dd>published representation of aptly generated snapshot or local repository, ready to
     be consumed by apt tools</dd>
 </dl>
 
 
-The schema of aptly's commands and transitions between entities:
+The schema of Aptly's commands and transitions between entities:
 
 <img src="/img/schema.png" alt="aptly core schema" class="img-responsive">
 
