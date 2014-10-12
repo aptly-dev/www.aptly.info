@@ -360,14 +360,14 @@
 
 <h2 id="toc_0">Overview</h2>
 
-<p class="lead">aptly goal is to establish repeatiblity and controlled changes in
-package environment.</p>
+<p class="lead">aptly's goal is to establish repeatiblity and controlled changes in
+package environments.</p>
 
-<p>aptly allows to produce fixed set of packages in the repository,
+<p>aptly produces a fixed set of packages in the repository,
 so that package installation and upgrade becomes deterministic. At the
-same time aptly is able perform controlled, fine-grained changes in
-repository contents to transition your package environment to new
-version.</p>
+same time aptly is able to perform controlled, fine-grained changes to
+repository content. aptly allows you to transistion your package environment to a
+new version, or rollback to a previous version.</p>
 
 <p>aptly has several core entities:</p>
 
@@ -377,12 +377,12 @@ version.</p>
     and package files</dd>
     <dt>local repo</dt>
     <dd>local package repository, consists of metadata, packages and files,
-    packages could be easily added and removed</dd>
+    packages can be easily added and removed</dd>
     <dt>snapshot</dt>
     <dd>immutable list of packages, basic block to implement repeatability
     and controlled changes</dd>
     <dt>published<br> repository</dt>
-    <dd>published representation of snapshot or local repository, ready to
+    <dd>published representation of aptly generated snapshot or local repository, ready to
     be consumed by apt tools</dd>
 </dl>
 
