@@ -41,8 +41,8 @@ The schema of aptly's commands and transitions between entities:
 <img src="/img/schema.png" alt="aptly core schema" class="img-responsive">
 
 We can start with creating [mirrors of remote
-repositories](/doc/aptly/mirror/create). Also you can create [local package
-repositories](/doc/aptly/repo/create) and import there packages as files.
+repositories](/doc/aptly/mirror/create). Also we can create [local package
+repositories](/doc/aptly/repo/create) and [import package files](/doc/aptly/repo/add).
 Local repos could be modified by [copying](/doc/aptly/repo/copy) and
 [moving](/doc/aptly/repo/move) packages between local repositories and
 [importing](/doc/aptly/repo/import) them from mirrors. Snapshot could be
