@@ -1099,6 +1099,21 @@ to the repository.&lt;/p&gt;
     </item>
     
     <item>
+      <title>aptly package</title>
+      <link>http://www.aptly.info/doc/aptly/package</link>
+      <pubDate>Fri, 29 Aug 2014 11:17:38 UTC</pubDate>
+      <author>Andrey Smirnov</author>
+      <guid>http://www.aptly.info/doc/aptly/package</guid>
+      <description>
+
+&lt;h2 id=&#34;toc_0&#34;&gt;aptly package&lt;/h2&gt;
+
+&lt;p&gt;&lt;code&gt;aptly package&lt;/code&gt; family of command perform operation on the whole
+collection of packages in apty database.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
       <title>aptly snapshot search</title>
       <link>http://www.aptly.info/doc/aptly/snapshot/search</link>
       <pubDate>Fri, 29 Aug 2014 11:17:38 UTC</pubDate>
@@ -1141,117 +1156,6 @@ nginx-extras_1.6.0-1~bpo70+1_amd64
 nginx-full_1.6.0-1~bpo70+1_i386
 nginx-naxsi_1.6.0-1~bpo70+1_amd64
 nginx-naxsi_1.6.0-1~bpo70+1_i386
-&lt;/code&gt;&lt;/pre&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>aptly repo search</title>
-      <link>http://www.aptly.info/doc/aptly/repo/search</link>
-      <pubDate>Fri, 29 Aug 2014 11:17:38 UTC</pubDate>
-      <author>Andrey Smirnov</author>
-      <guid>http://www.aptly.info/doc/aptly/repo/search</guid>
-      <description>
-
-&lt;h2 id=&#34;toc_0&#34;&gt;aptly repo search&lt;/h2&gt;
-
-&lt;p&gt;Search local repositories for packages matching query.&lt;/p&gt;
-
-&lt;p&gt;Usage:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ aptly repo search &amp;lt;name&amp;gt; &amp;lt;package-query&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Params are:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;name&lt;/code&gt; packages would be removed from this local repository&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;package-query&lt;/code&gt; is a &lt;a href=&#34;/doc/feature/query/&#34;&gt;package query&lt;/a&gt; to
-search for packages&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Flags:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;-with-deps=false&lt;/code&gt;: include dependencies of matching packages
-into search results&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Example:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ aptly repo search internal-pkg &#39;Version (&amp;gt;= 4.5)&#39;
-libtinfo5_5.9-10_i386
-perl-base_5.14.2-21+deb7u1_amd64
-ncurses-base_5.9-10_all
-xz-utils_5.1.1alpha+20120614-2_i386
-gcc-4.7-base_4.7.2-5_amd64
-libtinfo5_5.9-10_amd64
-base-files_7.1wheezy5_i386
-ncurses-bin_5.9-10_i386
-xz-utils_5.1.1alpha+20120614-2_amd64
-liblzma5_5.1.1alpha+20120614-2_i386
-coreutils_8.13-3.5_amd64
-liblzma5_5.1.1alpha+20120614-2_amd64
-libncurses5_5.9-10_amd64
-coreutils_8.13-3.5_i386
-libncurses5_5.9-10_i386
-perl-base_5.14.2-21+deb7u1_i386
-base-files_7.1wheezy5_amd64
-ncurses-bin_5.9-10_amd64
-gcc-4.7-base_4.7.2-5_i386
-&lt;/code&gt;&lt;/pre&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>aptly mirror edit</title>
-      <link>http://www.aptly.info/doc/aptly/mirror/edit</link>
-      <pubDate>Fri, 29 Aug 2014 11:17:38 UTC</pubDate>
-      <author>Andrey Smirnov</author>
-      <guid>http://www.aptly.info/doc/aptly/mirror/edit</guid>
-      <description>
-
-&lt;h2 id=&#34;toc_0&#34;&gt;aptly mirror edit&lt;/h2&gt;
-
-&lt;p&gt;Command edit allows to change mirror settings: filter query, whether
-to include dependencies while filtering, list of architectures to process.&lt;/p&gt;
-
-&lt;p&gt;Usage:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ aptly mirror edit &amp;lt;name&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Params are:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;name&lt;/code&gt; is a mirror name (given when mirror was created)&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Flags:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;-filter=&lt;/code&gt;: &lt;a href=&#34;/doc/feature/query/&#34;&gt;package query&lt;/a&gt; which is applied to
-packages in the mirror, set to empty to disable filtering&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;-filter-with-deps=false&lt;/code&gt;: when filtering, include dependencies of
-matching packages as well&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;-architectures=&lt;/code&gt;: global flag to change architectures list.&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;-with-sources=false&lt;/code&gt;: download source packages in addition to
-binary packages&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;-with-udebs=false&lt;/code&gt;: download .udeb packages (Debian installer
-support)&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;In order to apply new filtering settings, &lt;a href=&#34;/doc/aptly/mirror/update/&#34;&gt;update&lt;/a&gt;
-mirror.&lt;/p&gt;
-
-&lt;p&gt;Examples:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ aptly mirror edit -filter=nginx -filter-with-deps wheezy-main
-Mirror [wheezy-main]: http://mirror.yandex.ru/debian/ wheezy successfully updated.
-
-$ aptly mirror edit -architectures=i386,amd64 sensu
-Downloading http://repos.sensuapp.org/apt/dists/sensu/Release...
-Mirror [sensu]: http://repos.sensuapp.org/apt/ sensu successfully updated.
 &lt;/code&gt;&lt;/pre&gt;
 </description>
     </item>
@@ -1336,6 +1240,59 @@ References to package:
     </item>
     
     <item>
+      <title>aptly mirror edit</title>
+      <link>http://www.aptly.info/doc/aptly/mirror/edit</link>
+      <pubDate>Fri, 29 Aug 2014 11:17:38 UTC</pubDate>
+      <author>Andrey Smirnov</author>
+      <guid>http://www.aptly.info/doc/aptly/mirror/edit</guid>
+      <description>
+
+&lt;h2 id=&#34;toc_0&#34;&gt;aptly mirror edit&lt;/h2&gt;
+
+&lt;p&gt;Command edit allows to change mirror settings: filter query, whether
+to include dependencies while filtering, list of architectures to process.&lt;/p&gt;
+
+&lt;p&gt;Usage:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ aptly mirror edit &amp;lt;name&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Params are:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;name&lt;/code&gt; is a mirror name (given when mirror was created)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Flags:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;-filter=&lt;/code&gt;: &lt;a href=&#34;/doc/feature/query/&#34;&gt;package query&lt;/a&gt; which is applied to
+packages in the mirror, set to empty to disable filtering&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-filter-with-deps=false&lt;/code&gt;: when filtering, include dependencies of
+matching packages as well&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-architectures=&lt;/code&gt;: global flag to change architectures list.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-with-sources=false&lt;/code&gt;: download source packages in addition to
+binary packages&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-with-udebs=false&lt;/code&gt;: download .udeb packages (Debian installer
+support)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;In order to apply new filtering settings, &lt;a href=&#34;/doc/aptly/mirror/update/&#34;&gt;update&lt;/a&gt;
+mirror.&lt;/p&gt;
+
+&lt;p&gt;Examples:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ aptly mirror edit -filter=nginx -filter-with-deps wheezy-main
+Mirror [wheezy-main]: http://mirror.yandex.ru/debian/ wheezy successfully updated.
+
+$ aptly mirror edit -architectures=i386,amd64 sensu
+Downloading http://repos.sensuapp.org/apt/dists/sensu/Release...
+Mirror [sensu]: http://repos.sensuapp.org/apt/ sensu successfully updated.
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
       <title>aptly mirror search</title>
       <link>http://www.aptly.info/doc/aptly/mirror/search</link>
       <pubDate>Fri, 29 Aug 2014 11:17:38 UTC</pubDate>
@@ -1379,21 +1336,6 @@ nginx-naxsi-ui_1.2.1-2.2+wheezy2_all
 nginx_1.2.1-2.2+wheezy2_all
 nginx-naxsi_1.2.1-2.2+wheezy2_i386
 &lt;/code&gt;&lt;/pre&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>aptly package</title>
-      <link>http://www.aptly.info/doc/aptly/package</link>
-      <pubDate>Fri, 29 Aug 2014 11:17:38 UTC</pubDate>
-      <author>Andrey Smirnov</author>
-      <guid>http://www.aptly.info/doc/aptly/package</guid>
-      <description>
-
-&lt;h2 id=&#34;toc_0&#34;&gt;aptly package&lt;/h2&gt;
-
-&lt;p&gt;&lt;code&gt;aptly package&lt;/code&gt; family of command perform operation on the whole
-collection of packages in apty database.&lt;/p&gt;
 </description>
     </item>
     
@@ -1476,6 +1418,238 @@ shush_1.2.3-2_amd64
     </item>
     
     <item>
+      <title>aptly repo search</title>
+      <link>http://www.aptly.info/doc/aptly/repo/search</link>
+      <pubDate>Fri, 29 Aug 2014 11:17:38 UTC</pubDate>
+      <author>Andrey Smirnov</author>
+      <guid>http://www.aptly.info/doc/aptly/repo/search</guid>
+      <description>
+
+&lt;h2 id=&#34;toc_0&#34;&gt;aptly repo search&lt;/h2&gt;
+
+&lt;p&gt;Search local repositories for packages matching query.&lt;/p&gt;
+
+&lt;p&gt;Usage:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ aptly repo search &amp;lt;name&amp;gt; &amp;lt;package-query&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Params are:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;name&lt;/code&gt; packages would be removed from this local repository&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;package-query&lt;/code&gt; is a &lt;a href=&#34;/doc/feature/query/&#34;&gt;package query&lt;/a&gt; to
+search for packages&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Flags:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;-with-deps=false&lt;/code&gt;: include dependencies of matching packages
+into search results&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Example:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ aptly repo search internal-pkg &#39;Version (&amp;gt;= 4.5)&#39;
+libtinfo5_5.9-10_i386
+perl-base_5.14.2-21+deb7u1_amd64
+ncurses-base_5.9-10_all
+xz-utils_5.1.1alpha+20120614-2_i386
+gcc-4.7-base_4.7.2-5_amd64
+libtinfo5_5.9-10_amd64
+base-files_7.1wheezy5_i386
+ncurses-bin_5.9-10_i386
+xz-utils_5.1.1alpha+20120614-2_amd64
+liblzma5_5.1.1alpha+20120614-2_i386
+coreutils_8.13-3.5_amd64
+liblzma5_5.1.1alpha+20120614-2_amd64
+libncurses5_5.9-10_amd64
+coreutils_8.13-3.5_i386
+libncurses5_5.9-10_i386
+perl-base_5.14.2-21+deb7u1_i386
+base-files_7.1wheezy5_amd64
+ncurses-bin_5.9-10_amd64
+gcc-4.7-base_4.7.2-5_i386
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Multi-Component Publishing</title>
+      <link>http://www.aptly.info/doc/feature/multi-component</link>
+      <pubDate>Fri, 08 Aug 2014 11:17:38 UTC</pubDate>
+      <author>Andrey Smirnov</author>
+      <guid>http://www.aptly.info/doc/feature/multi-component</guid>
+      <description>
+
+&lt;h2 id=&#34;toc_0&#34;&gt;Multi-Component Repository Publishing&lt;/h2&gt;
+
+&lt;p&gt;aptly is based on a concept of package lists. Snapshots, mirrors and
+local repositories are lists of packages (more precisely, lists of
+references to packages). When merging, pulling, copying or moving
+packages might move from one list to another. Component is a way to
+break down packages into groups, usually these groups make sense only in
+published repository. At the same time mapping from package to component
+is not universal, there&amp;rsquo;s Debian way to group packages into &lt;code&gt;main&lt;/code&gt;,
+&lt;code&gt;contrib&lt;/code&gt; and &lt;code&gt;non-free&lt;/code&gt; components, Ubuntu uses different component schema,
+some 3rd party repositories use components in place of
+distribution name (like &lt;code&gt;squeeze&lt;/code&gt;, &lt;code&gt;wheezy&lt;/code&gt; etc.), other use them to separate
+stable and testing versions of software.&lt;/p&gt;
+
+&lt;p&gt;In order to keep aptly simple, I&amp;rsquo;ve decided that there should be no mapping from
+package to component and package lists internally aren&amp;rsquo;t split by
+component. Each list (snapshot, mirror and local repository) is
+mono-component (actually there&amp;rsquo;s no component at all). When publishing
+repository, several lists could be published as separate components in
+one published repository.&lt;/p&gt;
+
+&lt;p&gt;By default, aptly mirrors all components from remote repository and
+merges them into one &amp;ldquo;single component&amp;rdquo;. If we&amp;rsquo;d like to preserve
+package split by components, individual mirrors should be created for
+each component:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ aptly mirror create wheezy-main http://ftp.ru.debian.org/debian/ wheezy main
+$ aptly mirror create wheezy-contrib http://ftp.ru.debian.org/debian/ wheezy main
+$ aptly mirror create wheezy-non-free http://ftp.ru.debian.org/debian/ wheezy non-free
+
+# update all mirrors
+$ aptly mirror list -raw | xargs -n 1 aptly mirror update
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;We can create snapshots from each of the mirrors:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ aptly snapshot create wheezy-main-7.5 from mirror wheezy-main
+$ aptly snapshot create wheezy-contrib-7.5 from mirror wheezy-contrib
+$ aptly snapshot create wheezy-non-free-7.5 from mirror wheezy-non-free
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;And publish all snapshots as single repository preserving component
+structure (publishing distribution &lt;code&gt;wheezy&lt;/code&gt; under prefix &lt;code&gt;upstream&lt;/code&gt;):&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ aptly publish snapshot -component=main,contrib,non-free -distribution=wheezy wheezy-main-7.5 wheezy-contrib-7.5 wheezy-non-free-7.5 upstream
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;aptly is smart enough to figure out component names and distribution
+from the mirrors, so I can omit them (commas left to identify number of
+components):&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ aptly publish snapshot -component=,, wheezy-main-7.5 wheezy-contrib-7.5 wheezy-non-free-7.5 upstream
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Of course we could do all regular aptly operations: merging snapshots,
+pulling packages, etc.&lt;/p&gt;
+
+&lt;p&gt;The same applies to local repositories: if packages should be published as different components,
+several local repositories (one per component) should be created:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ aptly repo create -distribution=wheezy -component=main my-soft-main
+$ aptly repo create -distribution=wheezy -component=contrib my-soft-contrib
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Local repositories could be published either directly:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ aptly publish repo -component=, my-soft-main my-soft-contrib
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Or via snapshot:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ aptly snapshot create my-soft-main-1.0 from repo my-soft-main
+$ aptly snapshot create my-soft-contrib-1.0 from repo my-soft-contrib
+
+$ aptly publish snapshot -component=, my-soft-main-1.0 my-soft-contrib-1.0
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;When &lt;a href=&#34;/doc/aptly/publish/update/&#34;&gt;updating published repository&lt;/a&gt;, all component
+parts are updated at the same time. When &lt;a href=&#34;/doc/aptly/publish/switch/&#34;&gt;switching published snapshots&lt;/a&gt;,
+only specified components are updated.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>aptly repo show</title>
+      <link>http://www.aptly.info/doc/aptly/repo/show</link>
+      <pubDate>Fri, 08 Aug 2014 11:17:38 UTC</pubDate>
+      <author>Andrey Smirnov</author>
+      <guid>http://www.aptly.info/doc/aptly/repo/show</guid>
+      <description>
+
+&lt;h2 id=&#34;toc_0&#34;&gt;aptly repo show&lt;/h2&gt;
+
+&lt;p&gt;Commands show displays information about local repository, possibly
+listing all packages in the repository.&lt;/p&gt;
+
+&lt;p&gt;Usage:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$  aptly repo show &amp;lt;name&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Params are:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;name&lt;/code&gt; local repository name&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Flags:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;-with-packages=false&lt;/code&gt;: show detailed list of packages and versions
+stored in the mirror&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Example:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ aptly repo show -with-packages stable
+Name: stable
+Comment: Stable packages for project Foo
+Default Distribution: wheezy
+Default Component: main
+Number of packages: 10
+Packages:
+  libmysqlclient18_5.5.35-rel33.0-611.squeeze_amd64
+  percona-server-client-5.5_5.5.35-rel33.0-611.squeeze_amd64
+  percona-server-common-5.5_5.5.35-rel33.0-611.squeeze_amd64
+  percona-server-server_5.5.35-rel33.0-611.squeeze_amd64
+  percona-server-server-5.5_5.5.35-rel33.0-611.squeeze_amd64
+  libmysqlclient18_5.5.35-rel33.0-611.squeeze_i386
+  percona-server-client-5.5_5.5.35-rel33.0-611.squeeze_i386
+  percona-server-common-5.5_5.5.35-rel33.0-611.squeeze_i386
+  percona-server-server_5.5.35-rel33.0-611.squeeze_i386
+  percona-server-server-5.5_5.5.35-rel33.0-611.squeeze_i386
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>aptly db recover</title>
+      <link>http://www.aptly.info/doc/aptly/db/recover</link>
+      <pubDate>Fri, 08 Aug 2014 11:17:38 UTC</pubDate>
+      <author>Andrey Smirnov</author>
+      <guid>http://www.aptly.info/doc/aptly/db/recover</guid>
+      <description>
+
+&lt;h2 id=&#34;toc_0&#34;&gt;aptly db recover&lt;/h2&gt;
+
+&lt;p&gt;Database recover does its best to recover database after crash. It is
+recommended to backup DB before running recover. Recover procedures
+ignores all index files and tries to reconstruct them from &lt;code&gt;.sst&lt;/code&gt; files.&lt;/p&gt;
+
+&lt;p&gt;Usage:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ aptly db recover
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Example:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ aptly db recover
+Recovering DB...
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt; &lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
       <title>aptly mirror show</title>
       <link>http://www.aptly.info/doc/aptly/mirror/show</link>
       <pubDate>Fri, 08 Aug 2014 11:17:38 UTC</pubDate>
@@ -1523,218 +1697,6 @@ Information from release file:
 &lt;p&gt;In detailed information basic information about mirror is displayed:
 filters by component &amp;amp; architecture, timestamp of last successful
 repository fetch and number of packages.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Package Queries</title>
-      <link>http://www.aptly.info/doc/feature/query</link>
-      <pubDate>Fri, 08 Aug 2014 11:17:38 UTC</pubDate>
-      <author>Andrey Smirnov</author>
-      <guid>http://www.aptly.info/doc/feature/query</guid>
-      <description>
-
-&lt;h2 id=&#34;toc_0&#34;&gt;Package Queries&lt;/h2&gt;
-
-&lt;p&gt;Some commands accept package queries to identify list of packages to
-process. Package query syntax almost matches &lt;code&gt;reprepro&lt;/code&gt; query language.
-Query consists of the following simple terms:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;direct package reference&lt;/strong&gt;: reference to exaclty one package.
-Format is identical to the way aptly lists packages in show commands
-with &lt;code&gt;-with-packages&lt;/code&gt; flag: &lt;code&gt;name_version_arch&lt;/code&gt;, e.g.:
-&lt;code&gt;libmysqlclient18_5.5.35-rel33.0-611.squeeze_amd64&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;dependency condition&lt;/strong&gt;: syntax follows Debian dependency
-specification: &lt;code&gt;package_name&lt;/code&gt; followed by optional version
-specification and architecture limit, e.g: &lt;code&gt;mysql-client (&amp;gt;= 3.6)&lt;/code&gt;.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;query against package fields&lt;/strong&gt;: syntax is the same as for dependency
-conditions, but instead of package name field name is used, e.g:
-&lt;code&gt;Priority (optional)&lt;/code&gt;.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Supported fields:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;all field names from Debian package control files are supported
-except for &lt;code&gt;Filename&lt;/code&gt;, &lt;code&gt;MD5sum&lt;/code&gt;, &lt;code&gt;SHA1&lt;/code&gt;, &lt;code&gt;SHA256&lt;/code&gt;, &lt;code&gt;Size&lt;/code&gt;, &lt;code&gt;Files&lt;/code&gt;,
-&lt;code&gt;Checksums-SHA1&lt;/code&gt;, &lt;code&gt;Checksums-SHA256&lt;/code&gt;.&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;$Source&lt;/code&gt; is a name of source package (for binary packages)&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;$SourceVersion&lt;/code&gt; is a version of source package&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;$Architecture&lt;/code&gt; is &lt;code&gt;Architecture&lt;/code&gt; for binary packages and &lt;code&gt;source&lt;/code&gt;
-for source packages, when matching with equal (&lt;code&gt;=&lt;/code&gt;) operator,
-package with &lt;code&gt;any&lt;/code&gt; architecture matches all architectures but
-&lt;code&gt;source&lt;/code&gt;.&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;$Version&lt;/code&gt; has the same value as &lt;code&gt;Version&lt;/code&gt;, but comparison operators
-use Debian version precedence rules&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;$PackageType&lt;/code&gt; is &lt;code&gt;deb&lt;/code&gt; for binary packages, &lt;code&gt;udeb&lt;/code&gt; for .udeb packages
-and &lt;code&gt;source&lt;/code&gt; for source packages&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Operators:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;=&lt;/code&gt;: strict match, default operator is no operator is given&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;&amp;gt;=&lt;/code&gt;, &lt;code&gt;&amp;lt;=&lt;/code&gt;, &lt;code&gt;=&lt;/code&gt;, &lt;code&gt;&amp;gt;&amp;gt;&lt;/code&gt; (strictly greater), &lt;code&gt;&amp;lt;&amp;lt;&lt;/code&gt; (strictly less):
-lexicographical comparison for all fields and special rules when
-comparing package versions&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;%&lt;/code&gt;: pattern matching, like shell patterns, supported special
-symbols are: &lt;code&gt;[^]?*&lt;/code&gt;, e.g.: &lt;code&gt;$Version (% 3.5-*)&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;~&lt;/code&gt;: regular expression matching, e.g.: &lt;code&gt;Name (~ .*-dev)&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Simple terms could be combined into more complex queries using operators
-&lt;code&gt;,&lt;/code&gt; (and), &lt;code&gt;|&lt;/code&gt; (or) and &lt;code&gt;!&lt;/code&gt; (not), parentheses &lt;code&gt;()&lt;/code&gt; are used to change
-operator precedence. Match value could be enclosed in single (&lt;code&gt;&#39;&lt;/code&gt;) or
-double (&lt;code&gt;&amp;quot;&lt;/code&gt;) quotes if required to resolve ambiguity, quotes inside
-quoted string should escaped with slash (&lt;code&gt;\&lt;/code&gt;).&lt;/p&gt;
-
-&lt;p&gt;Examples:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;mysql-client&lt;/code&gt;: matches package mysql-client of any version and
-architecture (including source), also matches packages that
-&lt;code&gt;Provide:&lt;/code&gt; &lt;code&gt;mysql-client&lt;/code&gt;.&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;mysql-client (&amp;gt;= 3.6)&lt;/code&gt;: matches package mysql-client with version
-greater or equal to 3.6. Valid operators for version are: &lt;code&gt;&amp;gt;=&lt;/code&gt;,
-&lt;code&gt;&amp;lt;=&lt;/code&gt;, &lt;code&gt;=&lt;/code&gt;, &lt;code&gt;&amp;gt;&amp;gt;&lt;/code&gt; (strictly greater), &lt;code&gt;&amp;lt;&amp;lt;&lt;/code&gt; (strictly less).&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;mysql-client {i386}&lt;/code&gt;: matches package &lt;code&gt;mysql-client&lt;/code&gt; on
-architecture &lt;code&gt;i386&lt;/code&gt;, architecture &lt;code&gt;all&lt;/code&gt; matches all architectures
-but source.&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;mysql-client (&amp;gt;= 3.6) {i386}&lt;/code&gt;: version and architecture conditions
-combined.&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;libmysqlclient18_5.5.35-rel33.0-611.squeeze_amd64&lt;/code&gt;: direct package
-reference.&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;$Source (nginx)&lt;/code&gt;: all binary packages with &lt;code&gt;nginx&lt;/code&gt; as source
-package.&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;!Name (~ .*-dev), mail-transport, $Version (&amp;gt;= 3.5)&lt;/code&gt;: matches all
-packages that provide &lt;code&gt;mail-transport&lt;/code&gt; with name that has no suffix
-&lt;code&gt;-dev&lt;/code&gt; and with version greater or equal to &lt;code&gt;3.5&lt;/code&gt;.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;When specified on command line, query may have to be quoted according to
-shell rules, so that it stays single argument:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ aptly repo import percona stable &#39;mysql-client (&amp;gt;= 3.6)&#39;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;You can use package queries filter mirrors to include only packages with limited
-priorities:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ aptly mirror create -filter=&amp;quot;Priority (required)&amp;quot; wheezy-required http://mirror.yandex.ru/debian/ wheezy main
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Or download single packages and all its dependencies:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ aptly mirror create -filter=&amp;quot;nginx&amp;quot; -filter-with-deps wheezy-required http://mirror.yandex.ru/debian/ wheezy main
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Pull packages with complex conditions:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ aptly snapshot pull snapshot1 source snapshot2 &#39;!Name (% *-dev), $Version (&amp;gt;= 3.5)&#39;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Or remove packages based on query:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ aptly repo remove local-repo &#39;Name (% http-*) | $Source (webserver)&#39;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Query could be tested by using family of search commands: for &lt;a href=&#34;/doc/aptly/mirror/search/&#34;&gt;mirrors&lt;/a&gt;,
-&lt;a href=&#34;/doc/aptly/snapshot/search/&#34;&gt;snapshots&lt;/a&gt; and &lt;a href=&#34;/doc/aptly/repo/search/&#34;&gt;local repos&lt;/a&gt;.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>aptly repo list</title>
-      <link>http://www.aptly.info/doc/aptly/repo/list</link>
-      <pubDate>Fri, 08 Aug 2014 11:17:38 UTC</pubDate>
-      <author>Andrey Smirnov</author>
-      <guid>http://www.aptly.info/doc/aptly/repo/list</guid>
-      <description>
-
-&lt;h2 id=&#34;toc_0&#34;&gt;aptly repo list&lt;/h2&gt;
-
-&lt;p&gt;Commands list displays list of all local package repositories.&lt;/p&gt;
-
-&lt;p&gt;Usage:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$  aptly repo list
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Flags:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;-raw=false&lt;/code&gt;: display list in machine-readable format&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Examples:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ aptly repo list
-List of local repos:
- * [stable]: Stable packages for project Foo (packages: 10)
- * [testing] (packages: 1)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;To get more information about local repository, run &lt;code&gt;aptly repo show &amp;lt;name&amp;gt;&lt;/code&gt;.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ aptly repo list -raw
-stable
-testing
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt; &lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>aptly repo import</title>
-      <link>http://www.aptly.info/doc/aptly/repo/import</link>
-      <pubDate>Fri, 08 Aug 2014 11:17:38 UTC</pubDate>
-      <author>Andrey Smirnov</author>
-      <guid>http://www.aptly.info/doc/aptly/repo/import</guid>
-      <description>
-
-&lt;h2 id=&#34;toc_0&#34;&gt;aptly repo import&lt;/h2&gt;
-
-&lt;p&gt;Commands import copies packages matching &lt;a href=&#34;/doc/feature/query/&#34;&gt;package query&lt;/a&gt;
-from mirror &lt;code&gt;src-name&lt;/code&gt; to local repo &lt;code&gt;dst-repo&lt;/code&gt;. If dependency following
-is enabled, aptly would try to copy missing dependencies from
-&lt;code&gt;src-mirror&lt;/code&gt; as well.&lt;/p&gt;
-
-&lt;p&gt;Usage:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$  aptly repo import &amp;lt;src-mirror&amp;gt; &amp;lt;dst-repo&amp;gt; &amp;lt;package-query&amp;gt; ...
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Params are:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;src-mirror&lt;/code&gt; packages would be searched in this mirror&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;dst-repo&lt;/code&gt; packages would be copied to this local repository&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;package-query&lt;/code&gt; list of &lt;a href=&#34;/doc/feature/query/&#34;&gt;package queries&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Flags:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;-dry-run=false&lt;/code&gt;: don&amp;rsquo;t import, just show what would be imported&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;-with-deps=false&lt;/code&gt;: follow dependencies when processing
-package-query&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;When copying with dependencies, global dependency options are used. For
-example, to copy source packages, use &lt;code&gt;-dep-follow-source&lt;/code&gt;. If aptly
-won&amp;rsquo;t be able to guess list of architectures from contents of local
-repository &lt;code&gt;dst-repo&lt;/code&gt;, architectures should be specified with
-&lt;code&gt;-architectures&lt;/code&gt; flag.&lt;/p&gt;
-
-&lt;p&gt;Example:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ aptly repo import percona testing percona-server-client-5.5
-Loading packages...
-[o] percona-server-client-5.5_5.5.35-rel33.0-611.squeeze_i386 imported
-[o] percona-server-client-5.5_5.5.35-rel33.0-611.squeeze_amd64 imported
-&lt;/code&gt;&lt;/pre&gt;
 </description>
     </item>
     
