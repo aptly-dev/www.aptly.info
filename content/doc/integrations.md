@@ -15,6 +15,10 @@ Vagrant:
     Zane Williamson, allowing to bring two virtual servers, one with aptly installed
     and another one set up to install packages from repository published by aptly
 
+Docker:
+
+-    [Docker container](https://github.com/mikepurvis/aptly-docker) with aptly inside by Mike Purvis
+
 With configuration management systems:
 
 -   [Chef cookbook](https://github.com/hw-cookbooks/aptly) by Aaron Baer
