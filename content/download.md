@@ -7,5 +7,5 @@ version: 0.8
 
 Roadmap:
 
-* __0.9 (end of October):__ REST API
-* __0.10 (end of November):__ support for translations, yum (?)
+* __0.9 (end of November):__ REST API
+* __0.10 (end of December):__ support for translations, yum (?)

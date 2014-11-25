@@ -24,6 +24,13 @@ $ gpg -a --export 2A194991 | sudo apt-key add -</pre>
 $ apt-get install aptly</pre>
 
         <p>Please don't worry about <code>squeeze</code> part in repo name: aptly package should work on Debian squeeze+, Ubuntu 10.0+. Package contains aptly binary, man page and bash completion.</p>
+
+        <p>If you would like to use nightly (unstable) builds of aptly, add following line
+           to <code>/etc/apt/sources.list</code>:</p>
+        <pre>deb http://repo.aptly.info/ nightly main</pre>
+
+        <p><b>Mac OS X</b>: Installation using Homebrew:</p>
+        <pre>brew install aptly</pre>
       </div>
     </section>
     <section class="primary-content">
