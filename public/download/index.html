@@ -12,6 +12,9 @@
     
   </head>
   <body>
+    <div id="job-promo" class="alert alert-info">
+      <span class="glyphicon glyphicon-fire" aria-hidden="true"></span> <strong>Andrey Smirnov</strong> (author of aptly) is <strong>looking for a job</strong>. Go/Python, remote is preferred. <a class="alert-link" href="https://github.com/smira/">GitHub</a> <a class="alert-link" href="http://smira.ru/cv-eng.pdf">CV</a> <a href="mailto:me@smira.ru" class="alert-link">me@smira.ru</a>
+    </div>
     <header id="page-header">
       <div class="container">
                 <nav class="navbar navbar-default navbar-static-top" role="navigation">
@@ -44,8 +47,8 @@
         <p>Roadmap:</p>
 
 <ul>
-<li><strong>0.9 (end of October):</strong> REST API</li>
-<li><strong>0.10 (end of November):</strong> support for translations, yum (?)</li>
+<li><strong>0.9 (end of November):</strong> REST API</li>
+<li><strong>0.10 (end of December):</strong> support for translations, yum (?)</li>
 </ul>
 
       </div>
@@ -68,6 +71,13 @@ $ gpg -a --export 2A194991 | sudo apt-key add -</pre>
 $ apt-get install aptly</pre>
 
         <p>Please don't worry about <code>squeeze</code> part in repo name: aptly package should work on Debian squeeze+, Ubuntu 10.0+. Package contains aptly binary, man page and bash completion.</p>
+
+        <p>If you would like to use nightly (unstable) builds of aptly, add following line
+           to <code>/etc/apt/sources.list</code>:</p>
+        <pre>deb http://repo.aptly.info/ nightly main</pre>
+
+        <p><b>Mac OS X</b>: Installation using Homebrew:</p>
+        <pre>brew install aptly</pre>
       </div>
     </section>
     <section class="primary-content">
