@@ -38,7 +38,7 @@ below):
         "test": {
           "region": "us-east-1",
           "bucket": "repo",
-          "awsAccessKeyID": ""
+          "awsAccessKeyID": "",
           "awsSecretAccessKey": "",
           "prefix": "",
           "acl": "public-read",
