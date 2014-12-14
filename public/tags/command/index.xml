@@ -10,132 +10,6 @@
     <updated>Fri, 29 Aug 2014 11:17:38 UTC</updated>
     
     <item>
-      <title>aptly package show</title>
-      <link>http://www.aptly.info/doc/aptly/package/show</link>
-      <pubDate>Fri, 29 Aug 2014 11:17:38 UTC</pubDate>
-      <author>Andrey Smirnov</author>
-      <guid>http://www.aptly.info/doc/aptly/package/show</guid>
-      <description>
-
-&lt;h2 id=&#34;toc_0&#34;&gt;aptly package show&lt;/h2&gt;
-
-&lt;p&gt;Display details about packages from whole package database. Command
-show does searching much like &lt;a href=&#34;/doc/aptly/package/search/&#34;&gt;&lt;code&gt;aptly package search&lt;/code&gt;&lt;/a&gt;
-command does, but displays complete information about the package:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;contents of control file&lt;/li&gt;
-&lt;li&gt;(optionally) information about package files in the pool&lt;/li&gt;
-&lt;li&gt;(optionally) list of mirrors, local repos and snapshots that reference (include) this package&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;It is possible to submit any search query to this command, but it is much more common
-to have queries resulting in single package.&lt;/p&gt;
-
-&lt;p&gt;Usage:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ aptly package show &amp;lt;package-query&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Params are:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;package-query&lt;/code&gt; is a &lt;a href=&#34;/doc/feature/query/&#34;&gt;package query&lt;/a&gt; to
-search for packages (most usually in the format of package
-reference, e.g. &lt;code&gt;bwbar_1.2.3-2_amd64&lt;/code&gt;)&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Flags:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;-with-files=false&lt;/code&gt;: display list of package files in the package pool&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;-with-references=false&lt;/code&gt;: display list of mirrors, snapshots and local repos
-which reference this package.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Example:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ aptly package show -with-files -with-references bwbar_1.2.3-2_source
-Package: bwbar
-Version: 1.2.3-2
-Priority: source
-Section: net
-Maintainer: Julien Danjou &amp;lt;acid@debian.org&amp;gt;
-Architecture: any
-Format: 1.0
-Build-Depends: debhelper (&amp;gt;&amp;gt; 7.0.0), libpng12-dev, cdbs
-Files: 138ba54405656adc16c882839482795e 54582 bwbar_1.2.3-2.diff.gz
- cd4f216514cf38f42be9d7b35d429adc 1586 bwbar_1.2.3-2.dsc
- 766265ddf0615b552ff19d12f78be719 34142 bwbar_1.2.3.orig.tar.gz
-Checksums-Sha1: c5259d7fc3ac750d9d9b8d458d702a1bc49a708e 54582 bwbar_1.2.3-2.diff.gz
- 674a6f5db91e83f9ad4f30d1563d3249aa21bb39 1586 bwbar_1.2.3-2.dsc
- 13f5a17658a5c5adbb0db5b0fdd88805d6b3158b 34142 bwbar_1.2.3.orig.tar.gz
-Directory: pool/main/b/bwbar
-Binary: bwbar
-Standards-Version: 3.9.2
-Checksums-Sha256: 1ae625e6a29b745d24bab9185692ecc5b17cb4624d2019ae9a94e08a89f15edb 54582 bwbar_1.2.3-2.diff.gz
- b2d022dd912bc1129b0d0e216b7f8e587649582578484c776bcbe81afe993879 1586 bwbar_1.2.3-2.dsc
- bd8f5079f17b1dec6eae81ddc43c58c49b777b336fd902ffbb8e631885fbb45c 34142 bwbar_1.2.3.orig.tar.gz
-
-Files in the pool:
-  /Users/smira/.aptly/pool/13/8b/bwbar_1.2.3-2.diff.gz
-  /Users/smira/.aptly/pool/cd/4f/bwbar_1.2.3-2.dsc
-  /Users/smira/.aptly/pool/76/62/bwbar_1.2.3.orig.tar.gz
-
-References to package:
-  mirror [wheezy-main-src]: http://mirror.yandex.ru/debian/ wheezy [src]
-&lt;/code&gt;&lt;/pre&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>aptly mirror search</title>
-      <link>http://www.aptly.info/doc/aptly/mirror/search</link>
-      <pubDate>Fri, 29 Aug 2014 11:17:38 UTC</pubDate>
-      <author>Andrey Smirnov</author>
-      <guid>http://www.aptly.info/doc/aptly/mirror/search</guid>
-      <description>
-
-&lt;h2 id=&#34;toc_0&#34;&gt;aptly mirror search&lt;/h2&gt;
-
-&lt;p&gt;Search mirror for packages matching query.&lt;/p&gt;
-
-&lt;p&gt;Usage:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ aptly mirror search &amp;lt;name&amp;gt; &amp;lt;package-query&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Params are:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;name&lt;/code&gt; is a mirror name (given when mirror was created)&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;package-query&lt;/code&gt; is a &lt;a href=&#34;/doc/feature/query/&#34;&gt;package query&lt;/a&gt; to
-search for packages&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Flags:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;-with-deps=false&lt;/code&gt;: include dependencies of matching packages
-into search results&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Example:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ aptly mirror search wheezy &#39;Name (% nginx*), $Architecture (i386), !Name (% *-dbg)&#39;
-nginx-full_1.2.1-2.2+wheezy2_i386
-nginx-extras_1.2.1-2.2+wheezy2_i386
-nginx-light_1.2.1-2.2+wheezy2_i386
-nginx-common_1.2.1-2.2+wheezy2_all
-nginx-doc_1.2.1-2.2+wheezy2_all
-nginx-naxsi-ui_1.2.1-2.2+wheezy2_all
-nginx_1.2.1-2.2+wheezy2_all
-nginx-naxsi_1.2.1-2.2+wheezy2_i386
-&lt;/code&gt;&lt;/pre&gt;
-</description>
-    </item>
-    
-    <item>
       <title>aptly snapshot search</title>
       <link>http://www.aptly.info/doc/aptly/snapshot/search</link>
       <pubDate>Fri, 29 Aug 2014 11:17:38 UTC</pubDate>
@@ -178,59 +52,6 @@ nginx-extras_1.6.0-1~bpo70+1_amd64
 nginx-full_1.6.0-1~bpo70+1_i386
 nginx-naxsi_1.6.0-1~bpo70+1_amd64
 nginx-naxsi_1.6.0-1~bpo70+1_i386
-&lt;/code&gt;&lt;/pre&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>aptly mirror edit</title>
-      <link>http://www.aptly.info/doc/aptly/mirror/edit</link>
-      <pubDate>Fri, 29 Aug 2014 11:17:38 UTC</pubDate>
-      <author>Andrey Smirnov</author>
-      <guid>http://www.aptly.info/doc/aptly/mirror/edit</guid>
-      <description>
-
-&lt;h2 id=&#34;toc_0&#34;&gt;aptly mirror edit&lt;/h2&gt;
-
-&lt;p&gt;Command edit allows to change mirror settings: filter query, whether
-to include dependencies while filtering, list of architectures to process.&lt;/p&gt;
-
-&lt;p&gt;Usage:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ aptly mirror edit &amp;lt;name&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Params are:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;name&lt;/code&gt; is a mirror name (given when mirror was created)&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Flags:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;-filter=&lt;/code&gt;: &lt;a href=&#34;/doc/feature/query/&#34;&gt;package query&lt;/a&gt; which is applied to
-packages in the mirror, set to empty to disable filtering&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;-filter-with-deps=false&lt;/code&gt;: when filtering, include dependencies of
-matching packages as well&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;-architectures=&lt;/code&gt;: global flag to change architectures list.&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;-with-sources=false&lt;/code&gt;: download source packages in addition to
-binary packages&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;-with-udebs=false&lt;/code&gt;: download .udeb packages (Debian installer
-support)&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;In order to apply new filtering settings, &lt;a href=&#34;/doc/aptly/mirror/update/&#34;&gt;update&lt;/a&gt;
-mirror.&lt;/p&gt;
-
-&lt;p&gt;Examples:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ aptly mirror edit -filter=nginx -filter-with-deps wheezy-main
-Mirror [wheezy-main]: http://mirror.yandex.ru/debian/ wheezy successfully updated.
-
-$ aptly mirror edit -architectures=i386,amd64 sensu
-Downloading http://repos.sensuapp.org/apt/dists/sensu/Release...
-Mirror [sensu]: http://repos.sensuapp.org/apt/ sensu successfully updated.
 &lt;/code&gt;&lt;/pre&gt;
 </description>
     </item>
@@ -314,6 +135,53 @@ shush_1.2.3-2_amd64
     </item>
     
     <item>
+      <title>aptly mirror search</title>
+      <link>http://www.aptly.info/doc/aptly/mirror/search</link>
+      <pubDate>Fri, 29 Aug 2014 11:17:38 UTC</pubDate>
+      <author>Andrey Smirnov</author>
+      <guid>http://www.aptly.info/doc/aptly/mirror/search</guid>
+      <description>
+
+&lt;h2 id=&#34;toc_0&#34;&gt;aptly mirror search&lt;/h2&gt;
+
+&lt;p&gt;Search mirror for packages matching query.&lt;/p&gt;
+
+&lt;p&gt;Usage:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ aptly mirror search &amp;lt;name&amp;gt; &amp;lt;package-query&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Params are:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;name&lt;/code&gt; is a mirror name (given when mirror was created)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;package-query&lt;/code&gt; is a &lt;a href=&#34;/doc/feature/query/&#34;&gt;package query&lt;/a&gt; to
+search for packages&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Flags:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;-with-deps=false&lt;/code&gt;: include dependencies of matching packages
+into search results&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Example:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ aptly mirror search wheezy &#39;Name (% nginx*), $Architecture (i386), !Name (% *-dbg)&#39;
+nginx-full_1.2.1-2.2+wheezy2_i386
+nginx-extras_1.2.1-2.2+wheezy2_i386
+nginx-light_1.2.1-2.2+wheezy2_i386
+nginx-common_1.2.1-2.2+wheezy2_all
+nginx-doc_1.2.1-2.2+wheezy2_all
+nginx-naxsi-ui_1.2.1-2.2+wheezy2_all
+nginx_1.2.1-2.2+wheezy2_all
+nginx-naxsi_1.2.1-2.2+wheezy2_i386
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
       <title>aptly repo search</title>
       <link>http://www.aptly.info/doc/aptly/repo/search</link>
       <pubDate>Fri, 29 Aug 2014 11:17:38 UTC</pubDate>
@@ -372,147 +240,201 @@ gcc-4.7-base_4.7.2-5_i386
     </item>
     
     <item>
-      <title>aptly snapshot merge</title>
-      <link>http://www.aptly.info/doc/aptly/snapshot/merge</link>
-      <pubDate>Fri, 08 Aug 2014 11:17:38 UTC</pubDate>
+      <title>aptly package show</title>
+      <link>http://www.aptly.info/doc/aptly/package/show</link>
+      <pubDate>Fri, 29 Aug 2014 11:17:38 UTC</pubDate>
       <author>Andrey Smirnov</author>
-      <guid>http://www.aptly.info/doc/aptly/snapshot/merge</guid>
+      <guid>http://www.aptly.info/doc/aptly/package/show</guid>
       <description>
 
-&lt;h2 id=&#34;toc_0&#34;&gt;aptly snapshot merge&lt;/h2&gt;
+&lt;h2 id=&#34;toc_0&#34;&gt;aptly package show&lt;/h2&gt;
 
-&lt;p&gt;Command merges several &lt;code&gt;source&lt;/code&gt; snapshots into new &lt;code&gt;destination&lt;/code&gt; snapshot.
-Merge happens from left to right. By default, packages with the same
-name-architecture pair are replaced during merge (package from latest snapshot on the list wins).&lt;/p&gt;
+&lt;p&gt;Display details about packages from whole package database. Command
+show does searching much like &lt;a href=&#34;/doc/aptly/package/search/&#34;&gt;&lt;code&gt;aptly package search&lt;/code&gt;&lt;/a&gt;
+command does, but displays complete information about the package:&lt;/p&gt;
 
-&lt;p&gt;With &lt;code&gt;-latest&lt;/code&gt; flag, package with latest version wins. With &lt;code&gt;-no-remove&lt;/code&gt;
-flag, all versions of packages are preserved during merge.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;contents of control file&lt;/li&gt;
+&lt;li&gt;(optionally) information about package files in the pool&lt;/li&gt;
+&lt;li&gt;(optionally) list of mirrors, local repos and snapshots that reference (include) this package&lt;/li&gt;
+&lt;/ul&gt;
 
-&lt;p&gt;If only one snapshot is specified, merge copies &lt;code&gt;source&lt;/code&gt; into &lt;code&gt;destination&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;It is possible to submit any search query to this command, but it is much more common
+to have queries resulting in single package.&lt;/p&gt;
 
 &lt;p&gt;Usage:&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;$ aptly snapshot merge &amp;lt;destination&amp;gt; &amp;lt;source&amp;gt; [&amp;lt;source&amp;gt;...]
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Params:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;destination&lt;/code&gt; is a name of the snapshot that would be created&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;source&lt;/code&gt; is a list of snapshot names that would be merged together&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Flags:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;-latest=false&lt;/code&gt;: use only the latest version of each package&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;-no-remove=false&lt;/code&gt;: don&amp;rsquo;t remove duplicate arch/name packages&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Example:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ aptly snapshot merge debian-w-backports debian-main debian-backports
-
-Snapshot debian-w-backports successfully created.
-You can run &#39;aptly publish snapshot debian-w-backports&#39; to publish snapshot as Debian repository.
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt; &lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>aptly repo import</title>
-      <link>http://www.aptly.info/doc/aptly/repo/import</link>
-      <pubDate>Fri, 08 Aug 2014 11:17:38 UTC</pubDate>
-      <author>Andrey Smirnov</author>
-      <guid>http://www.aptly.info/doc/aptly/repo/import</guid>
-      <description>
-
-&lt;h2 id=&#34;toc_0&#34;&gt;aptly repo import&lt;/h2&gt;
-
-&lt;p&gt;Commands import copies packages matching &lt;a href=&#34;/doc/feature/query/&#34;&gt;package query&lt;/a&gt;
-from mirror &lt;code&gt;src-name&lt;/code&gt; to local repo &lt;code&gt;dst-repo&lt;/code&gt;. If dependency following
-is enabled, aptly would try to copy missing dependencies from
-&lt;code&gt;src-mirror&lt;/code&gt; as well.&lt;/p&gt;
-
-&lt;p&gt;Usage:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$  aptly repo import &amp;lt;src-mirror&amp;gt; &amp;lt;dst-repo&amp;gt; &amp;lt;package-query&amp;gt; ...
+&lt;pre&gt;&lt;code&gt;$ aptly package show &amp;lt;package-query&amp;gt;
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;Params are:&lt;/p&gt;
 
 &lt;ul&gt;
-&lt;li&gt;&lt;code&gt;src-mirror&lt;/code&gt; packages would be searched in this mirror&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;dst-repo&lt;/code&gt; packages would be copied to this local repository&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;package-query&lt;/code&gt; list of &lt;a href=&#34;/doc/feature/query/&#34;&gt;package queries&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;package-query&lt;/code&gt; is a &lt;a href=&#34;/doc/feature/query/&#34;&gt;package query&lt;/a&gt; to
+search for packages (most usually in the format of package
+reference, e.g. &lt;code&gt;bwbar_1.2.3-2_amd64&lt;/code&gt;)&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;Flags:&lt;/p&gt;
 
 &lt;ul&gt;
-&lt;li&gt;&lt;code&gt;-dry-run=false&lt;/code&gt;: don&amp;rsquo;t import, just show what would be imported&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;-with-deps=false&lt;/code&gt;: follow dependencies when processing
-package-query&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-with-files=false&lt;/code&gt;: display list of package files in the package pool&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-with-references=false&lt;/code&gt;: display list of mirrors, snapshots and local repos
+which reference this package.&lt;/li&gt;
 &lt;/ul&gt;
-
-&lt;p&gt;When copying with dependencies, global dependency options are used. For
-example, to copy source packages, use &lt;code&gt;-dep-follow-source&lt;/code&gt;. If aptly
-won&amp;rsquo;t be able to guess list of architectures from contents of local
-repository &lt;code&gt;dst-repo&lt;/code&gt;, architectures should be specified with
-&lt;code&gt;-architectures&lt;/code&gt; flag.&lt;/p&gt;
 
 &lt;p&gt;Example:&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;$ aptly repo import percona testing percona-server-client-5.5
+&lt;pre&gt;&lt;code&gt;$ aptly package show -with-files -with-references bwbar_1.2.3-2_source
+Package: bwbar
+Version: 1.2.3-2
+Priority: source
+Section: net
+Maintainer: Julien Danjou &amp;lt;acid@debian.org&amp;gt;
+Architecture: any
+Format: 1.0
+Build-Depends: debhelper (&amp;gt;&amp;gt; 7.0.0), libpng12-dev, cdbs
+Files: 138ba54405656adc16c882839482795e 54582 bwbar_1.2.3-2.diff.gz
+ cd4f216514cf38f42be9d7b35d429adc 1586 bwbar_1.2.3-2.dsc
+ 766265ddf0615b552ff19d12f78be719 34142 bwbar_1.2.3.orig.tar.gz
+Checksums-Sha1: c5259d7fc3ac750d9d9b8d458d702a1bc49a708e 54582 bwbar_1.2.3-2.diff.gz
+ 674a6f5db91e83f9ad4f30d1563d3249aa21bb39 1586 bwbar_1.2.3-2.dsc
+ 13f5a17658a5c5adbb0db5b0fdd88805d6b3158b 34142 bwbar_1.2.3.orig.tar.gz
+Directory: pool/main/b/bwbar
+Binary: bwbar
+Standards-Version: 3.9.2
+Checksums-Sha256: 1ae625e6a29b745d24bab9185692ecc5b17cb4624d2019ae9a94e08a89f15edb 54582 bwbar_1.2.3-2.diff.gz
+ b2d022dd912bc1129b0d0e216b7f8e587649582578484c776bcbe81afe993879 1586 bwbar_1.2.3-2.dsc
+ bd8f5079f17b1dec6eae81ddc43c58c49b777b336fd902ffbb8e631885fbb45c 34142 bwbar_1.2.3.orig.tar.gz
+
+Files in the pool:
+  /Users/smira/.aptly/pool/13/8b/bwbar_1.2.3-2.diff.gz
+  /Users/smira/.aptly/pool/cd/4f/bwbar_1.2.3-2.dsc
+  /Users/smira/.aptly/pool/76/62/bwbar_1.2.3.orig.tar.gz
+
+References to package:
+  mirror [wheezy-main-src]: http://mirror.yandex.ru/debian/ wheezy [src]
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>aptly mirror edit</title>
+      <link>http://www.aptly.info/doc/aptly/mirror/edit</link>
+      <pubDate>Fri, 29 Aug 2014 11:17:38 UTC</pubDate>
+      <author>Andrey Smirnov</author>
+      <guid>http://www.aptly.info/doc/aptly/mirror/edit</guid>
+      <description>
+
+&lt;h2 id=&#34;toc_0&#34;&gt;aptly mirror edit&lt;/h2&gt;
+
+&lt;p&gt;Command edit allows to change mirror settings: filter query, whether
+to include dependencies while filtering, list of architectures to process.&lt;/p&gt;
+
+&lt;p&gt;Usage:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ aptly mirror edit &amp;lt;name&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Params are:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;name&lt;/code&gt; is a mirror name (given when mirror was created)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Flags:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;-filter=&lt;/code&gt;: &lt;a href=&#34;/doc/feature/query/&#34;&gt;package query&lt;/a&gt; which is applied to
+packages in the mirror, set to empty to disable filtering&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-filter-with-deps=false&lt;/code&gt;: when filtering, include dependencies of
+matching packages as well&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-architectures=&lt;/code&gt;: global flag to change architectures list.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-with-sources=false&lt;/code&gt;: download source packages in addition to
+binary packages&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-with-udebs=false&lt;/code&gt;: download .udeb packages (Debian installer
+support)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;In order to apply new filtering settings, &lt;a href=&#34;/doc/aptly/mirror/update/&#34;&gt;update&lt;/a&gt;
+mirror.&lt;/p&gt;
+
+&lt;p&gt;Examples:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ aptly mirror edit -filter=nginx -filter-with-deps wheezy-main
+Mirror [wheezy-main]: http://mirror.yandex.ru/debian/ wheezy successfully updated.
+
+$ aptly mirror edit -architectures=i386,amd64 sensu
+Downloading http://repos.sensuapp.org/apt/dists/sensu/Release...
+Mirror [sensu]: http://repos.sensuapp.org/apt/ sensu successfully updated.
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>aptly repo add</title>
+      <link>http://www.aptly.info/doc/aptly/repo/add</link>
+      <pubDate>Fri, 08 Aug 2014 11:17:38 UTC</pubDate>
+      <author>Andrey Smirnov</author>
+      <guid>http://www.aptly.info/doc/aptly/repo/add</guid>
+      <description>
+
+&lt;h2 id=&#34;toc_0&#34;&gt;aptly repo add&lt;/h2&gt;
+
+&lt;p&gt;Command adds packages to local repository from &lt;code&gt;.deb&lt;/code&gt; (binary packages),
+&lt;code&gt;.udeb&lt;/code&gt; (binary packages for Debian installer)
+and &lt;code&gt;.dsc&lt;/code&gt; (source packages) files. When importing from directory aptly
+would do recursive scan looking for all files matching &lt;code&gt;*.[u]deb&lt;/code&gt; or
+&lt;code&gt;*.dsc&lt;/code&gt; patterns. Every file discovered would be analyzed to extract
+metadata, package would be created and added to database. Files would be
+imported to internal package pool. For source packages, all required
+files are added as well automatically. Extra files for source package
+should be in the same directory as &lt;code&gt;*.dsc&lt;/code&gt; file.&lt;/p&gt;
+
+&lt;p&gt;Usage:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$  aptly repo add &amp;lt;name&amp;gt; &amp;lt;package file&amp;gt;|&amp;lt;directory&amp;gt; ...
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Params are:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;name&lt;/code&gt; is local repository name&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Flags:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;-force-replace=false&lt;/code&gt;: when adding package that conflicts with existing package,
+remove existing package&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-remove-files=false&lt;/code&gt;: remove files that have been imported
+successfully into repository&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Local repositories work best for distribution of in-house software or
+for custom-built upstream packages. Command &lt;code&gt;aptly repo add&lt;/code&gt; allows to
+add source packages and built binary package to local repository. Local
+repository could be snapshotted, possibly mixed with snapshots of
+official repositories and published.&lt;/p&gt;
+
+&lt;p&gt;aptly won&amp;rsquo;t complain if package is added to the repo which is complete
+duplicate. However it is forbidden to have two packages in one repo with identical
+triples (architecture, name, version) that have different metadata or
+files (see &lt;a href=&#34;/doc/feature/duplicate&#34;&gt;Duplicate packages&lt;/a&gt; for details).
+If you need to replace package that conflicts with existing, use flag
+&lt;code&gt;-force-replace&lt;/code&gt;.
+All files added to package pool would be deduplicated, as it
+happens with files coming from mirrors, so exactly one copy of each file
+would be stored in aptly pool.&lt;/p&gt;
+
+&lt;p&gt;Flag &lt;code&gt;-remove-files&lt;/code&gt; allows to implement concept of &lt;code&gt;incoming/&lt;/code&gt; directory
+where packages are removed as soon as they&amp;rsquo;re imported into database.&lt;/p&gt;
+
+&lt;p&gt;Example:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ aptly repo add testing files/libboost-program-options-dev_1.49.0.1_i386.deb
 Loading packages...
-[o] percona-server-client-5.5_5.5.35-rel33.0-611.squeeze_i386 imported
-[o] percona-server-client-5.5_5.5.35-rel33.0-611.squeeze_amd64 imported
-&lt;/code&gt;&lt;/pre&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>aptly repo edit</title>
-      <link>http://www.aptly.info/doc/aptly/repo/edit</link>
-      <pubDate>Fri, 08 Aug 2014 11:17:38 UTC</pubDate>
-      <author>Andrey Smirnov</author>
-      <guid>http://www.aptly.info/doc/aptly/repo/edit</guid>
-      <description>
-
-&lt;h2 id=&#34;toc_0&#34;&gt;aptly repo edit&lt;/h2&gt;
-
-&lt;p&gt;Command edit allows to change metadata of local repository: comment,
-default distribution and component.&lt;/p&gt;
-
-&lt;p&gt;Usage:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$  aptly repo edit &amp;lt;name&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Params are:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;name&lt;/code&gt; is a local repository name&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Flags:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;-comment=&amp;quot;&amp;quot;&lt;/code&gt;: any text that would be used to described local
-repository&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;-component=&amp;quot;&amp;quot;&lt;/code&gt;: default component when publishing&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;-distribution=&amp;quot;&amp;quot;&lt;/code&gt;: default distribution when publishing&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Distribution and component would be used as defaults when
-publishing repository either directly or via snapshot.&lt;/p&gt;
-
-&lt;p&gt;Example:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ aptly repo edit -comment=&amp;quot;Nightly builds&amp;quot; -distribution=wheezy testing
-Local repo [testing]: Nightly builds successfully updated.
+[+] libboost-program-options-dev_1.49.0.1_i386 added
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt; &lt;/p&gt;
@@ -520,56 +442,151 @@ Local repo [testing]: Nightly builds successfully updated.
     </item>
     
     <item>
-      <title>aptly repo show</title>
-      <link>http://www.aptly.info/doc/aptly/repo/show</link>
+      <title>aptly snapshot create</title>
+      <link>http://www.aptly.info/doc/aptly/snapshot/create</link>
       <pubDate>Fri, 08 Aug 2014 11:17:38 UTC</pubDate>
       <author>Andrey Smirnov</author>
-      <guid>http://www.aptly.info/doc/aptly/repo/show</guid>
+      <guid>http://www.aptly.info/doc/aptly/snapshot/create</guid>
       <description>
 
-&lt;h2 id=&#34;toc_0&#34;&gt;aptly repo show&lt;/h2&gt;
+&lt;h2 id=&#34;toc_0&#34;&gt;aptly snapshot create&lt;/h2&gt;
 
-&lt;p&gt;Commands show displays information about local repository, possibly
-listing all packages in the repository.&lt;/p&gt;
+&lt;h4 id=&#34;toc_1&#34;&gt;Command &lt;code&gt;aptly snapshot create .. from mirror&lt;/code&gt;&lt;/h4&gt;
+
+&lt;p&gt;Creates snapshot from current state of remote mirror. Mirror should be
+&lt;a href=&#34;/doc/aptly/mirror/update/&#34;&gt;updated&lt;/a&gt; at least once before running this command.&lt;/p&gt;
+
+&lt;p&gt;Snapshot would contain exactly the same set of packages as mirror
+currently does. Snapshot is immutable, so if mirror is updated, snapshot
+contents won&amp;rsquo;t change. If mirror contains source packages, snapshot
+would also contain source packages.&lt;/p&gt;
 
 &lt;p&gt;Usage:&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;$  aptly repo show &amp;lt;name&amp;gt;
+&lt;pre&gt;&lt;code&gt;$ aptly snapshot create &amp;lt;name&amp;gt; from mirror &amp;lt;mirror-name&amp;gt;
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;Params are:&lt;/p&gt;
 
 &lt;ul&gt;
-&lt;li&gt;&lt;code&gt;name&lt;/code&gt; local repository name&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Flags:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;-with-packages=false&lt;/code&gt;: show detailed list of packages and versions
-stored in the mirror&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;name&lt;/code&gt; is a name for the snapshot to be created&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;mirror-name&lt;/code&gt; is a mirror name (given when mirror was created)&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;Example:&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;$ aptly repo show -with-packages stable
-Name: stable
-Comment: Stable packages for project Foo
-Default Distribution: wheezy
-Default Component: main
-Number of packages: 10
-Packages:
-  libmysqlclient18_5.5.35-rel33.0-611.squeeze_amd64
-  percona-server-client-5.5_5.5.35-rel33.0-611.squeeze_amd64
-  percona-server-common-5.5_5.5.35-rel33.0-611.squeeze_amd64
-  percona-server-server_5.5.35-rel33.0-611.squeeze_amd64
-  percona-server-server-5.5_5.5.35-rel33.0-611.squeeze_amd64
-  libmysqlclient18_5.5.35-rel33.0-611.squeeze_i386
-  percona-server-client-5.5_5.5.35-rel33.0-611.squeeze_i386
-  percona-server-common-5.5_5.5.35-rel33.0-611.squeeze_i386
-  percona-server-server_5.5.35-rel33.0-611.squeeze_i386
-  percona-server-server-5.5_5.5.35-rel33.0-611.squeeze_i386
+&lt;pre&gt;&lt;code&gt;$ aptly snapshot create monday-updates from mirror backports2
+
+Snapshot monday-updates successfully created.
+You can run &#39;aptly publish snapshot monday-updates&#39; to publish snapshot as Debian repository.
 &lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt; &lt;/p&gt;
+
+&lt;h4 id=&#34;toc_2&#34;&gt;Command &lt;code&gt;aptly snapshot create .. from repo&lt;/code&gt;&lt;/h4&gt;
+
+&lt;p&gt;Creates snapshot from current state of local package repository.
+Repository should contain at least one package.&lt;/p&gt;
+
+&lt;p&gt;Snapshot would contain exactly the same set of packages as local
+repositorory currently does. Snapshot is immutable, so if local
+repository is changed in any way, snapshot contents won&amp;rsquo;t change.&lt;/p&gt;
+
+&lt;p&gt;Usage:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ aptly snapshot create &amp;lt;name&amp;gt; from repo &amp;lt;repo-name&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Params are:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;name&lt;/code&gt; is a name for the snapshot to be created&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;repo-name&lt;/code&gt; is a local repository name&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Example:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ aptly snapshot create snap-stable from repo stable
+
+Snapshot snap-stable successfully created.
+You can run &#39;aptly publish snapshot snap-stable&#39; to publish snapshot as Debian repository.
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt; &lt;/p&gt;
+
+&lt;h4 id=&#34;toc_3&#34;&gt;Command &lt;code&gt;aptly snapshot create .. empty&lt;/code&gt;&lt;/h4&gt;
+
+&lt;p&gt;Creates empty snapshot. As snapshots are immutable, creating one empty
+snapshot should be enough.&lt;/p&gt;
+
+&lt;p&gt;Empty snapshots could be used as first argument to &lt;a href=&#34;/doc/aptly/snapshot/pull/&#34;&gt;&lt;code&gt;aptly snapshot pull&lt;/code&gt;&lt;/a&gt;
+in order to create set of packages matching query, or as initial contents of empty
+published repository.&lt;/p&gt;
+
+&lt;p&gt;Usage:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ aptly snapshot create &amp;lt;name&amp;gt; empty
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Params are:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;name&lt;/code&gt; is a name for the snapshot to be created&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Example:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ aptly snapshot create empty-snapshot empty
+
+Snapshot empty-snapshot successfully created.
+You can run &#39;aptly publish snapshot empty-snapshot&#39; to publish snapshot as Debian repository.
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>aptly snapshot list</title>
+      <link>http://www.aptly.info/doc/aptly/snapshot/list</link>
+      <pubDate>Fri, 08 Aug 2014 11:17:38 UTC</pubDate>
+      <author>Andrey Smirnov</author>
+      <guid>http://www.aptly.info/doc/aptly/snapshot/list</guid>
+      <description>
+
+&lt;h2 id=&#34;toc_0&#34;&gt;aptly snapshot list&lt;/h2&gt;
+
+&lt;p&gt;Displays list of all created snapshots.&lt;/p&gt;
+
+&lt;p&gt;Usage:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ aptly snapshot list
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Flags:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;-raw=false&lt;/code&gt;: display list in machine-readable format&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-sort=&amp;quot;name&amp;quot;&lt;/code&gt;: display list in &amp;lsquo;name&amp;rsquo; or creation &amp;lsquo;time&amp;rsquo; order&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Examples:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ aptly snapshot list
+List of snapshots:
+ * [monday-updates]: Snapshot from mirror [backports2]: http://mirror.yandex.ru/backports.org/ squeeze-backports
+ * [back]: Snapshot from mirror [backports2]: http://mirror.yandex.ru/backports.org/ squeeze-backports
+
+To get more information about snapshot, run `aptly snapshot show &amp;lt;name&amp;gt;`.
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;In snapshot list, basic description on the way snapshot has been created is
+displayed.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ aptly snapshot list -raw
+monday-updates
+back
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt; &lt;/p&gt;
 </description>
     </item>
     
@@ -628,273 +645,119 @@ Loading packages...
     </item>
     
     <item>
-      <title>aptly mirror update</title>
-      <link>http://www.aptly.info/doc/aptly/mirror/update</link>
+      <title>aptly repo rename</title>
+      <link>http://www.aptly.info/doc/aptly/repo/rename</link>
       <pubDate>Fri, 08 Aug 2014 11:17:38 UTC</pubDate>
       <author>Andrey Smirnov</author>
-      <guid>http://www.aptly.info/doc/aptly/mirror/update</guid>
+      <guid>http://www.aptly.info/doc/aptly/repo/rename</guid>
       <description>
 
-&lt;h2 id=&#34;toc_0&#34;&gt;aptly mirror update&lt;/h2&gt;
+&lt;h2 id=&#34;toc_0&#34;&gt;aptly repo rename&lt;/h2&gt;
 
-&lt;p&gt;Updates remote mirror (downloads package files and meta information).
-When mirror is created, this command should be run for the first time to
-fetch mirror contents. This command could be run many times to get
-updated repository contents. If interrupted, command could be restarted
-safely.&lt;/p&gt;
+&lt;p&gt;Command changes name of the local repository. Local repository name
+should be unique.&lt;/p&gt;
 
 &lt;p&gt;Usage:&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;$ aptly mirror update &amp;lt;name&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Params are:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;name&lt;/code&gt; is a mirror name (given when mirror was created)&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;All packages would be stored under aptly&amp;rsquo;s root dir (see section on
-&lt;a href=&#34;/doc/configuration&#34;&gt;Configuration&lt;/a&gt;).&lt;/p&gt;
-
-&lt;p&gt;Flags:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;-force=false&lt;/code&gt;: force mirror update even if locked by another process&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;-download-limit=0&lt;/code&gt;: limit download speed (kbytes/sec)&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;-ignore-checksums=false&lt;/code&gt;: ignore checksum mismatches for downloaded
-items (package files, metadata)&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;-ignore-signatures=false&lt;/code&gt;: disable verification of &lt;code&gt;Release&lt;/code&gt; file
-signatures&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;-keyring=trustedkeys.gpg&lt;/code&gt; gpg keyring to use when verifying Release
-file (could be specified multiple times)&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;While updating mirror, aptly would verify signature of &lt;code&gt;Release&lt;/code&gt; file
-using GnuPG. Please read information about signature verification in
-&lt;a href=&#34;/doc/aptly/mirror/create&#34;&gt;aptly mirror create&lt;/a&gt; command description.&lt;/p&gt;
-
-&lt;p&gt;Example:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ aptly mirror update debian-main
-
-2013/12/29 18:32:34 Downloading http://ftp.ru.debian.org/debian/dists/squeeze/Release...
-2013/12/29 18:32:37 Downloading http://ftp.ru.debian.org/debian/dists/squeeze/main/binary-amd64/Packages.bz2...
-2013/12/29 18:37:19 Downloading http://ftp.ru.debian.org/debian/pool/main/libg/libgwenhywfar/libgwenhywfar47-dev_3.11.3-1_amd64.deb...
-....
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h4 id=&#34;toc_1&#34;&gt;Concurrent operations while mirror is updated&lt;/h4&gt;
-
-&lt;p&gt;Mirror update is split in two phases:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;initial download of &lt;code&gt;Release&lt;/code&gt; and &lt;code&gt;Packages&lt;/code&gt; files, parsing, analyzing&lt;/li&gt;
-&lt;li&gt;download of packages files&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;During second phase aptly would unlock the database and allow other aptly commands to be run while the mirror is
-being updated. Any operations with the mirror currently updated would result in error and &lt;code&gt;aptly mirror show&lt;/code&gt; would
-show updating status. At the end of the mirror update operation, aptly would re-open the database
-and store final status of the mirror.&lt;/p&gt;
-
-&lt;p&gt;If mirror update status would be stored in wrong way in DB (e.g. after crash), mirror update lock could be
-overridden with flag &lt;code&gt;-force&lt;/code&gt;.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>aptly snapshot filter</title>
-      <link>http://www.aptly.info/doc/aptly/snapshot/filter</link>
-      <pubDate>Fri, 08 Aug 2014 11:17:38 UTC</pubDate>
-      <author>Andrey Smirnov</author>
-      <guid>http://www.aptly.info/doc/aptly/snapshot/filter</guid>
-      <description>
-
-&lt;h2 id=&#34;toc_0&#34;&gt;aptly snapshot filter&lt;/h2&gt;
-
-&lt;p&gt;Applies filter to contents of snapshot &lt;code&gt;source&lt;/code&gt; producing &lt;code&gt;destination&lt;/code&gt;
-snapshot. All packages from &lt;code&gt;source&lt;/code&gt; snapshot matching any of the package
-queries (optionally with all their dependencies from &lt;code&gt;source&lt;/code&gt;)  are used
-to build new snapshot &lt;code&gt;destination&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;Usage:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ aptly snapshot filter &amp;lt;source&amp;gt; &amp;lt;destination&amp;gt; &amp;lt;package-query&amp;gt; ...
+&lt;pre&gt;&lt;code&gt;$ aptly repo rename &amp;lt;old-name&amp;gt; &amp;lt;new-name&amp;gt;
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;Params:&lt;/p&gt;
 
 &lt;ul&gt;
-&lt;li&gt;&lt;code&gt;source&lt;/code&gt; is a snapshot name where packages would be
-searched&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;destination&lt;/code&gt; is a name of the snapshot that would be created&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;package-query&lt;/code&gt; is a list of &lt;a href=&#34;/doc/feature/query/&#34;&gt;package queries&lt;/a&gt;, in
-the simplest form, name of package to be pulled from &lt;code&gt;source&lt;/code&gt; could
-be specified&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Flags:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;-with-deps=false&lt;/code&gt;: include dependencies of matching packages&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Filter command is almost identical to
-&lt;code&gt;aptly snapshot pull empty source destination query&lt;/code&gt; (&lt;code&gt;empty&lt;/code&gt; being empty
-snapshot), the differences are:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;pull by default includes only first matching package&lt;/li&gt;
-&lt;li&gt;pull honors &lt;code&gt;-architectures&lt;/code&gt; flag and would pull only packages with
-mentioned architectures, while filter command would use package
-query as given to match packages (one might use &lt;code&gt;$Architecture (i386)&lt;/code&gt; in query
-to limit architectures)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;old-name&lt;/code&gt; is current local repository name&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;new-name&lt;/code&gt; is new local repository name&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;Example:&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;$ aptly snapshot filter wheezy-main wheezy-main-required &#39;Priority (required)&#39;
-Loading packages (31661)...
-Building indexes...
+&lt;pre&gt;&lt;code&gt;$ aptly repo rename whezy-main wheezy-main
 
-Snapshot wheezy-main-required successfully filtered.
-You can run &#39;aptly publish snapshot wheezy-main-required&#39; to publish snapshot as Debian repository.
+Local repository whezy-main -&amp;gt; wheezy-main has been successfully renamed.
 &lt;/code&gt;&lt;/pre&gt;
 </description>
     </item>
     
     <item>
-      <title>aptly mirror create</title>
-      <link>http://www.aptly.info/doc/aptly/mirror/create</link>
+      <title>aptly publish switch</title>
+      <link>http://www.aptly.info/doc/aptly/publish/switch</link>
       <pubDate>Fri, 08 Aug 2014 11:17:38 UTC</pubDate>
       <author>Andrey Smirnov</author>
-      <guid>http://www.aptly.info/doc/aptly/mirror/create</guid>
+      <guid>http://www.aptly.info/doc/aptly/publish/switch</guid>
       <description>
 
-&lt;h2 id=&#34;toc_0&#34;&gt;aptly mirror create&lt;/h2&gt;
+&lt;h2 id=&#34;toc_0&#34;&gt;aptly publish switch&lt;/h2&gt;
 
-&lt;p&gt;Creates mirror of remote repository, aptly supports both regular and
-flat Debian repositories exported via HTTP(S) or FTP. aptly would try download
-Release file from remote repository and verify its signature.&lt;/p&gt;
+&lt;p&gt;Command switches in-place published repository with new snapshot
+contents. &lt;code&gt;distribution&lt;/code&gt; and &lt;code&gt;prefix&lt;/code&gt; should be occupied with snapshot
+published using command &lt;a href=&#34;/doc/aptly/publish/snapshot/&#34;&gt;&lt;code&gt;aptly publish snapshot&lt;/code&gt;&lt;/a&gt;. Update happens in-place with minimum
+possible downtime for published repository. Valid &lt;a href=&#34;/doc/aptly/publish/&#34;&gt;GPG key&lt;/a&gt;
+is required for publishing.&lt;/p&gt;
+
+&lt;p&gt;When published repository is updated, all the options are preserved:
+distribution, component, list of architectures, etc.&lt;/p&gt;
 
 &lt;p&gt;Usage:&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;$  aptly mirror create &amp;lt;name&amp;gt; &amp;lt;archive url&amp;gt; &amp;lt;distribution&amp;gt; [&amp;lt;component1&amp;gt; ...]
+&lt;pre&gt;&lt;code&gt;$ aptly publish switch &amp;lt;distribution&amp;gt; [[&amp;lt;endpoint:&amp;gt;]&amp;lt;prefix&amp;gt;] &amp;lt;new-snapshot&amp;gt;
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;For Launchpad PPAs:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$  aptly mirror create &amp;lt;name&amp;gt; &amp;lt;ppa:user/project&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Params are:&lt;/p&gt;
+&lt;p&gt;Params:&lt;/p&gt;
 
 &lt;ul&gt;
-&lt;li&gt;&lt;code&gt;name&lt;/code&gt; is a name that would be used in aptly to reference this
-mirror&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;archive url&lt;/code&gt; is a root of archive, e.g.
-&lt;a href=&#34;http://ftp.ru.debian.org/debian/&#34;&gt;http://ftp.ru.debian.org/debian/&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;distribution&lt;/code&gt; is a distribution name, e.g. &lt;code&gt;squeeze&lt;/code&gt;, for flat
-repositories use &lt;code&gt;./&lt;/code&gt; instead of distribution name&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;component1&lt;/code&gt; is an optional list of components to download, if not
-specified aptly would fetch all components.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;distribution&lt;/code&gt; is distribution name of published repository&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;endpoint&lt;/code&gt; is publishing endpoint, if not specified, it would
+default to empty endpoint (local file system).&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;prefix&lt;/code&gt; is publishing prefix, if not specified, it would default to
+empty prefix (&lt;code&gt;.&lt;/code&gt;).&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;new-snapshot&lt;/code&gt; is a snapshot name that snould be re-published&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;Flags:&lt;/p&gt;
 
 &lt;ul&gt;
-&lt;li&gt;&lt;code&gt;-filter=&lt;/code&gt;: &lt;a href=&#34;/doc/feature/query/&#34;&gt;package query&lt;/a&gt; that is applied to
-packages in the mirror&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;-filter-with-deps=false&lt;/code&gt;: when filtering, include dependencies of
-matching packages as well&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;-ignore-signatures=false&lt;/code&gt;: disable verification of Release file
-signatures&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;-keyring=trustedkeys.gpg&lt;/code&gt;: gpg keyring to use when verifying
-Release file (could be specified multiple times)&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;-with-sources=false&lt;/code&gt;: download source packages in addition to
-binary packages (could be enabled by default with config option
-&lt;code&gt;downloadSourcePackages&lt;/code&gt;)&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;-with-udebs=false&lt;/code&gt;: download .udeb packages (Debian installer
-support)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-component=&amp;quot;&amp;quot;&lt;/code&gt;: list of components to update (separate components
+with commas)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-force-overwrite=false&lt;/code&gt;: overwrite packages files in the pool even
+if content is different (see also &lt;a href=&#34;/doc/feature/duplicate/&#34;&gt;duplicate packages&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-gpg-key=&amp;quot;&amp;quot;&lt;/code&gt;: GPG key ID to use when signing the release, if not
+specified default key is used&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-keyring=&amp;quot;&amp;quot;&lt;/code&gt;: GPG keyring to use (instead of default)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-passphrase=&amp;quot;&amp;quot;&lt;/code&gt;: GPG passphrase to unlock private key (possibly insecure)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-passphrase-file=&amp;quot;&amp;quot;&lt;/code&gt;: GPG passphrase file to unlock private key (possibly insecure)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-secret-keyring=&amp;quot;&amp;quot;&lt;/code&gt;: GPG secret keyring to use (instead of default)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-skip-signing=false&lt;/code&gt;: don&amp;rsquo;t sign Release files with GPG&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;By default aptly would download packages for all available
-architectures. If architectures are limited (with config &lt;code&gt;architectures&lt;/code&gt;
-or option &lt;code&gt;-architectures&lt;/code&gt;), only packages for those architectures are
-downloaded.&lt;/p&gt;
+&lt;p&gt;When switching published snapshots for multiple component repositories
+any subset of snapshots could be updated, they should be listed on
+command line with &lt;code&gt;-component&lt;/code&gt; flag:&lt;/p&gt;
 
-&lt;p&gt;If components are not specified, aptly will download packages from all
-components and merge them into one. If components should
-be left separate, please create &lt;a href=&#34;/doc/feature/multi-component/&#34;&gt;separate mirror for each component&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;If PPA url is specified, aptly would expand it to HTTP url using
-configuration options &lt;code&gt;ppaDistributorID&lt;/code&gt; &amp;amp; &lt;code&gt;ppaCodename&lt;/code&gt;. If you&amp;rsquo;re
-running aptly on Ubuntu, defaults should work (aptly would figure out
-codename using &lt;code&gt;lsb_release&lt;/code&gt; command).&lt;/p&gt;
-
-&lt;p&gt;If filtering is enabled, all package lists are downloaded and filters
-are applied to those lists. Only packages that match filter query would
-be downloaded and filtered list would be stored as contents of the mirror. If
-dependency following is enabled, dependencies would be expanded in
-filtered list to build resulting package list. Filters could be used to
-limit mirror to only one package and its dependencies
-(&lt;code&gt;-filter=&#39;nginx&#39; -filter-follow-deps&lt;/code&gt;), download only high-priority
-packages (&lt;code&gt;-filter=&#39;Prirority (required)&#39;&lt;/code&gt;) and so on.&lt;/p&gt;
-
-&lt;p&gt;aptly would try to verify signature of Release files using GnuPG. By
-default, keyring &lt;code&gt;~/.gnupg/trustedkeys.gpg&lt;/code&gt; would be used. If you would
-like to use different keyring(s), specify them using &lt;code&gt;-keyring&lt;/code&gt; flag.
-aptly would advise &lt;code&gt;gpg&lt;/code&gt; commands to import keys into trusted keys
-keyring in order to successfully verify repository signature.&lt;/p&gt;
-
-&lt;p&gt;If aptly is running on Debian/Ubuntu machine, it would be good idea to import
-archive signing keys shipped with the operating system:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ gpg --keyring /usr/share/keyrings/debian-archive-keyring.gpg --export | gpg --no-default-keyring --keyring trustedkeys.gpg --import
+&lt;pre&gt;&lt;code&gt;$ aptly publish switch -component=main,contrib wheezy wheezy-main wheezy-contrib
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;If you&amp;rsquo;re running Ubuntu, use
-&lt;code&gt;/usr/share/keyrings/ubuntu-archive-keyring.gpg&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;If GnuPG is complaining that required key to verify signature is
-missing, it would report key ID, e.g. &lt;code&gt;46925553&lt;/code&gt;. Keys could be
-downloaded from public keyserver and imported into trusted keyring using
-command:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ gpg --no-default-keyring --keyring trustedkeys.gpg --keyserver keys.gnupg.net --recv-keys 46925553
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Replace &lt;code&gt;46925553&lt;/code&gt; with the key ID GnuPG is complaining about.&lt;/p&gt;
-
-&lt;p&gt;If you&amp;rsquo;re mirroring flat repository, sometimes repository key is located
-near release files, so you can download it and import into your trusted
-keychain:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ wget -O - http://some.repo/repository/Release.key | gpg --no-default-keyring --keyring trustedkeys.gpg --import
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;You can learn about signed Debian repositories in &lt;a href=&#34;https://wiki.debian.org/SecureApt&#34;&gt;Debian wiki&lt;/a&gt;.
-If you would like to disable signature checks, you can use flag &lt;code&gt;-ignore-signatures&lt;/code&gt; or configuration
-setting &lt;code&gt;gpgDisableVerify&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;aptly deduplicates all downloaded files, so if two mirrors are created
-one with source packages enabled and another with source packages
-disabled, they would consume only space required to store all binary and
-source packages (not twice the space required to store binary packages).&lt;/p&gt;
+&lt;p&gt;Flag &lt;code&gt;-component&lt;/code&gt; could be omitted for single-component published
+repositories.&lt;/p&gt;
 
 &lt;p&gt;Example:&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;$ aptly -architectures=&amp;quot;amd64&amp;quot; mirror create debian-main http://ftp.ru.debian.org/debian/ squeeze main
-2013/12/28 19:44:45 Downloading http://ftp.ru.debian.org/debian/dists/squeeze/Release...
-...
+&lt;pre&gt;&lt;code&gt;$ aptly publish switch wheezy wheezy-7.4
+Loading packages...
+Generating metadata files and linking package files...
+Signing file &#39;/var/aptly/public/dists/wheezy/Release.tmp&#39; with gpg, please enter your passphrase when prompted:
 
-Mirror [debian-main]: http://ftp.ru.debian.org/debian/ squeeze successfully added.
-You can run &#39;aptly mirror update debian-main&#39; to download repository contents.
+&amp;lt;&amp;lt;gpg asks for passphrase&amp;gt;&amp;gt;
+
+Clearsigning file &#39;/var/aptly/public/dists/wheezy/Release.tmp&#39; with gpg, please enter your passphrase when prompted:
+
+&amp;lt;&amp;lt;gpg asks for passphrase&amp;gt;&amp;gt;
+
+Cleaning up prefix &amp;quot;.&amp;quot; component &amp;quot;main&amp;quot;...
+
+Publish for local repo ./wheezy [i386, amd64] publishes {main: [wheezy-7.4]: snapshot from mirror [wheezy]: http://ftp.ru.debian.org/debian/ wheezy} has been successfully updated.
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;For newly created mirror, &lt;a href=&#34;/doc/aptly/mirror/update/&#34;&gt;&lt;code&gt;aptly mirror update&lt;/code&gt;&lt;/a&gt; should be run
-to download mirror contents for the first time.&lt;/p&gt;
+&lt;p&gt; &lt;/p&gt;
 </description>
     </item>
     
@@ -938,6 +801,96 @@ Published repositories:
 $ aptly publish list -raw
 . sq-b
 . squeeze-backports
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt; &lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>aptly db cleanup</title>
+      <link>http://www.aptly.info/doc/aptly/db/cleanup</link>
+      <pubDate>Fri, 08 Aug 2014 11:17:38 UTC</pubDate>
+      <author>Andrey Smirnov</author>
+      <guid>http://www.aptly.info/doc/aptly/db/cleanup</guid>
+      <description>
+
+&lt;h2 id=&#34;toc_0&#34;&gt;aptly db cleanup&lt;/h2&gt;
+
+&lt;p&gt;Database cleanup removes information about unreferenced packages and
+deletes files in the package pool that aren&amp;rsquo;t used by packages anymore.
+It is a good idea to run this command after massive deletion of
+mirrors, snapshots or local repos.&lt;/p&gt;
+
+&lt;p&gt;Usage:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ aptly db cleanup
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Example:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ aptly db cleanup
+Loading mirrors and snapshots...
+Loading list of all packages...
+Deleting unreferenced packages (325)...
+Building list of files referenced by packages...
+Building list of files in package pool...
+Deleting unreferenced files (325)...
+Disk space freed: 0.27 GiB...
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt; &lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>aptly repo copy</title>
+      <link>http://www.aptly.info/doc/aptly/repo/copy</link>
+      <pubDate>Fri, 08 Aug 2014 11:17:38 UTC</pubDate>
+      <author>Andrey Smirnov</author>
+      <guid>http://www.aptly.info/doc/aptly/repo/copy</guid>
+      <description>
+
+&lt;h2 id=&#34;toc_0&#34;&gt;aptly repo copy&lt;/h2&gt;
+
+&lt;p&gt;Command copy copies packages matching &lt;a href=&#34;/doc/feature/query/&#34;&gt;package query&lt;/a&gt;
+from local repo &lt;code&gt;src-name&lt;/code&gt; to local repo &lt;code&gt;dst-name&lt;/code&gt;. If dependency
+following is enabled, aptly would try to copy missing dependencies from
+&lt;code&gt;src-name&lt;/code&gt; as well.&lt;/p&gt;
+
+&lt;p&gt;Usage:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$  aptly repo copy &amp;lt;src-name&amp;gt; &amp;lt;dst-name&amp;gt; &amp;lt;package-query&amp;gt; ...
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Params are:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;src-name&lt;/code&gt; packages would be searched in this local repository&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;dst-name&lt;/code&gt; packages would be copied to this local repository&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;package-query&lt;/code&gt; list of &lt;a href=&#34;/doc/feature/query/&#34;&gt;package queries&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Flags:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;-dry-run=false&lt;/code&gt;: don&amp;rsquo;t copy, just show what would be copied&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-with-deps=false&lt;/code&gt;: follow dependencies when processing package
+query&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;When copying with dependencies, global dependency options are used. For
+example, to copy source packages, use &lt;code&gt;-dep-follow-source&lt;/code&gt;. If aptly
+won&amp;rsquo;t be able to guess list of architectures from contents of local
+repository &lt;code&gt;dst-name&lt;/code&gt;, architectures should be specified with
+&lt;code&gt;-architectures&lt;/code&gt; flag.&lt;/p&gt;
+
+&lt;p&gt;Example:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ aptly repo copy stable testing percona-server-client-5.5
+Loading packages...
+[o] percona-server-client-5.5_5.5.35-rel33.0-611.squeeze_i386 copied
+[o] percona-server-client-5.5_5.5.35-rel33.0-611.squeeze_amd64 copied
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt; &lt;/p&gt;
