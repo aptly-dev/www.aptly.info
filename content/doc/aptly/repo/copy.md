@@ -41,7 +41,7 @@ repository `dst-name`, architectures should be specified with
 
 Example:
 
-    $ aptly repo copy stable testing percona-server-client-5.5
+    $ aptly repo copy testing stable percona-server-client-5.5
     Loading packages...
     [o] percona-server-client-5.5_5.5.35-rel33.0-611.squeeze_i386 copied
     [o] percona-server-client-5.5_5.5.35-rel33.0-611.squeeze_amd64 copied

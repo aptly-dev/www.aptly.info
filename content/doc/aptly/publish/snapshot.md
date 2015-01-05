@@ -112,29 +112,30 @@ Directory structure for published repositories:
     -   `public/`: root of published tree (root for webserver)
         -   `dists/`
             -   `squeeze/`: distribution name
-                -   `Release`: raw file
-                -   `InRelease`: clearsigned version
-                -   `Release.gpg`: detached `Release` signature
-                -   `binary-i386`: binary packages index for
-                    architecture `i386`
-                    -   `Packages`: package metadata
-                    -   `Packages.gz`
-                    -   `Packages.bz2`
-                    -   `Release`: used by debian-installer
-                -   `source`: source packages index (generated only if
-                    source packages are available)
-                    -   `Sources`: package metadata
-                    -   `Sources.gz`
-                    -   `Sources.bz2`
-                    -   `Release`: used by debian-installer
-                -   `debian-installer`: indexes for .udeb packages
-                     (generated only if .udeb packages are present)
-                     -   `binary-i386`: binary .udeb index for
-                         architecture `i386`
-                        -   `Packages`: package index, .udeb
+                - `main/`: component name
+                    -   `Release`: raw file
+                    -   `InRelease`: clearsigned version
+                    -   `Release.gpg`: detached `Release` signature
+                    -   `binary-i386`: binary packages index for
+                        architecture `i386`
+                        -   `Packages`: package metadata
                         -   `Packages.gz`
                         -   `Packages.bz2`
                         -   `Release`: used by debian-installer
+                    -   `source`: source packages index (generated only if
+                        source packages are available)
+                        -   `Sources`: package metadata
+                        -   `Sources.gz`
+                        -   `Sources.bz2`
+                        -   `Release`: used by debian-installer
+                    -   `debian-installer`: indexes for .udeb packages
+                         (generated only if .udeb packages are present)
+                         -   `binary-i386`: binary .udeb index for
+                             architecture `i386`
+                            -   `Packages`: package index, .udeb
+                            -   `Packages.gz`
+                            -   `Packages.bz2`
+                            -   `Release`: used by debian-installer
         -   `pool/`
             -   `main/`: component main
                 -   `m/`
