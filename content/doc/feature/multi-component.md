@@ -35,7 +35,7 @@ package split by components, individual mirrors should be created for
 each component:
 
     $ aptly mirror create wheezy-main http://ftp.ru.debian.org/debian/ wheezy main
-    $ aptly mirror create wheezy-contrib http://ftp.ru.debian.org/debian/ wheezy main
+    $ aptly mirror create wheezy-contrib http://ftp.ru.debian.org/debian/ wheezy contrib
     $ aptly mirror create wheezy-non-free http://ftp.ru.debian.org/debian/ wheezy non-free
 
     # update all mirrors
