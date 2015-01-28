@@ -1099,21 +1099,6 @@ to the repository.&lt;/p&gt;
     </item>
     
     <item>
-      <title>aptly package</title>
-      <link>http://www.aptly.info/doc/aptly/package</link>
-      <pubDate>Fri, 29 Aug 2014 11:17:38 UTC</pubDate>
-      <author>Andrey Smirnov</author>
-      <guid>http://www.aptly.info/doc/aptly/package</guid>
-      <description>
-
-&lt;h2 id=&#34;toc_0&#34;&gt;aptly package&lt;/h2&gt;
-
-&lt;p&gt;&lt;code&gt;aptly package&lt;/code&gt; family of command perform operation on the whole
-collection of packages in apty database.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
       <title>aptly repo search</title>
       <link>http://www.aptly.info/doc/aptly/repo/search</link>
       <pubDate>Fri, 29 Aug 2014 11:17:38 UTC</pubDate>
@@ -1172,48 +1157,173 @@ gcc-4.7-base_4.7.2-5_i386
     </item>
     
     <item>
-      <title>aptly snapshot search</title>
-      <link>http://www.aptly.info/doc/aptly/snapshot/search</link>
+      <title>aptly package show</title>
+      <link>http://www.aptly.info/doc/aptly/package/show</link>
       <pubDate>Fri, 29 Aug 2014 11:17:38 UTC</pubDate>
       <author>Andrey Smirnov</author>
-      <guid>http://www.aptly.info/doc/aptly/snapshot/search</guid>
+      <guid>http://www.aptly.info/doc/aptly/package/show</guid>
       <description>
 
-&lt;h2 id=&#34;toc_0&#34;&gt;aptly snapshot search&lt;/h2&gt;
+&lt;h2 id=&#34;toc_0&#34;&gt;aptly package show&lt;/h2&gt;
 
-&lt;p&gt;Search snapshot for packages matching query.&lt;/p&gt;
+&lt;p&gt;Display details about packages from whole package database. Command
+show does searching much like &lt;a href=&#34;/doc/aptly/package/search/&#34;&gt;&lt;code&gt;aptly package search&lt;/code&gt;&lt;/a&gt;
+command does, but displays complete information about the package:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;contents of control file&lt;/li&gt;
+&lt;li&gt;(optionally) information about package files in the pool&lt;/li&gt;
+&lt;li&gt;(optionally) list of mirrors, local repos and snapshots that reference (include) this package&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;It is possible to submit any search query to this command, but it is much more common
+to have queries resulting in single package.&lt;/p&gt;
 
 &lt;p&gt;Usage:&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;$ aptly snapshot search &amp;lt;name&amp;gt; &amp;lt;package-query&amp;gt;
+&lt;pre&gt;&lt;code&gt;$ aptly package show &amp;lt;package-query&amp;gt;
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;Params are:&lt;/p&gt;
 
 &lt;ul&gt;
-&lt;li&gt;&lt;code&gt;name&lt;/code&gt; is snapshot name which has been given during snapshot
-creation&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;package-query&lt;/code&gt; is a &lt;a href=&#34;/doc/feature/query/&#34;&gt;package query&lt;/a&gt; to
-search for packages&lt;/li&gt;
+search for packages (most usually in the format of package
+reference, e.g. &lt;code&gt;bwbar_1.2.3-2_amd64&lt;/code&gt;)&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;Flags:&lt;/p&gt;
 
 &lt;ul&gt;
-&lt;li&gt;&lt;code&gt;-with-deps=false&lt;/code&gt;: include dependencies of matching packages
-into search results&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-with-files=false&lt;/code&gt;: display list of package files in the package pool&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-with-references=false&lt;/code&gt;: display list of mirrors, snapshots and local repos
+which reference this package.&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;Example:&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;$ aptly snapshot search backports &#39;nginx, !Name (% *-light)&#39;
-nginx_1.6.0-1~bpo70+1_all
-nginx-full_1.6.0-1~bpo70+1_amd64
-nginx-extras_1.6.0-1~bpo70+1_i386
-nginx-extras_1.6.0-1~bpo70+1_amd64
-nginx-full_1.6.0-1~bpo70+1_i386
-nginx-naxsi_1.6.0-1~bpo70+1_amd64
-nginx-naxsi_1.6.0-1~bpo70+1_i386
+&lt;pre&gt;&lt;code&gt;$ aptly package show -with-files -with-references bwbar_1.2.3-2_source
+Package: bwbar
+Version: 1.2.3-2
+Priority: source
+Section: net
+Maintainer: Julien Danjou &amp;lt;acid@debian.org&amp;gt;
+Architecture: any
+Format: 1.0
+Build-Depends: debhelper (&amp;gt;&amp;gt; 7.0.0), libpng12-dev, cdbs
+Files: 138ba54405656adc16c882839482795e 54582 bwbar_1.2.3-2.diff.gz
+ cd4f216514cf38f42be9d7b35d429adc 1586 bwbar_1.2.3-2.dsc
+ 766265ddf0615b552ff19d12f78be719 34142 bwbar_1.2.3.orig.tar.gz
+Checksums-Sha1: c5259d7fc3ac750d9d9b8d458d702a1bc49a708e 54582 bwbar_1.2.3-2.diff.gz
+ 674a6f5db91e83f9ad4f30d1563d3249aa21bb39 1586 bwbar_1.2.3-2.dsc
+ 13f5a17658a5c5adbb0db5b0fdd88805d6b3158b 34142 bwbar_1.2.3.orig.tar.gz
+Directory: pool/main/b/bwbar
+Binary: bwbar
+Standards-Version: 3.9.2
+Checksums-Sha256: 1ae625e6a29b745d24bab9185692ecc5b17cb4624d2019ae9a94e08a89f15edb 54582 bwbar_1.2.3-2.diff.gz
+ b2d022dd912bc1129b0d0e216b7f8e587649582578484c776bcbe81afe993879 1586 bwbar_1.2.3-2.dsc
+ bd8f5079f17b1dec6eae81ddc43c58c49b777b336fd902ffbb8e631885fbb45c 34142 bwbar_1.2.3.orig.tar.gz
+
+Files in the pool:
+  /Users/smira/.aptly/pool/13/8b/bwbar_1.2.3-2.diff.gz
+  /Users/smira/.aptly/pool/cd/4f/bwbar_1.2.3-2.dsc
+  /Users/smira/.aptly/pool/76/62/bwbar_1.2.3.orig.tar.gz
+
+References to package:
+  mirror [wheezy-main-src]: http://mirror.yandex.ru/debian/ wheezy [src]
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>aptly package</title>
+      <link>http://www.aptly.info/doc/aptly/package</link>
+      <pubDate>Fri, 29 Aug 2014 11:17:38 UTC</pubDate>
+      <author>Andrey Smirnov</author>
+      <guid>http://www.aptly.info/doc/aptly/package</guid>
+      <description>
+
+&lt;h2 id=&#34;toc_0&#34;&gt;aptly package&lt;/h2&gt;
+
+&lt;p&gt;&lt;code&gt;aptly package&lt;/code&gt; family of command perform operation on the whole
+collection of packages in apty database.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>aptly package search</title>
+      <link>http://www.aptly.info/doc/aptly/package/search</link>
+      <pubDate>Fri, 29 Aug 2014 11:17:38 UTC</pubDate>
+      <author>Andrey Smirnov</author>
+      <guid>http://www.aptly.info/doc/aptly/package/search</guid>
+      <description>
+
+&lt;h2 id=&#34;toc_0&#34;&gt;aptly package search&lt;/h2&gt;
+
+&lt;p&gt;Search whole package database for packages matching query.
+Whole database of packages includes all packages (deduplicated)
+from all the mirrors, local repos and snapshots.&lt;/p&gt;
+
+&lt;p&gt;In order to get more detailed information about the package,
+use &lt;a href=&#34;/doc/aptly/package/show/&#34;&gt;&lt;code&gt;aptly package show&lt;/code&gt;&lt;/a&gt; command.&lt;/p&gt;
+
+&lt;p&gt;Usage:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ aptly package search &amp;lt;package-query&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Params are:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;package-query&lt;/code&gt; is a &lt;a href=&#34;/doc/feature/query/&#34;&gt;package query&lt;/a&gt; to
+search for packages&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Example:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ aptly package search &#39;Version (&amp;gt;=1.2.3-2), Version (&amp;lt;1.2.3-3)&#39;
+libibmad-dev_1.2.3-20090314-1.1_amd64
+libibumad-dev_1.2.3-20090314-1.1_i386
+libibumad1_1.2.3-20090314-1.1_amd64
+libibumad1_1.2.3-20090314-1.1_i386
+libghc-uuid-dev_1.2.3-2+b3_amd64
+python-mysqldb_1.2.3-2_i386
+libibumad-dev_1.2.3-20090314-1.1_amd64
+libibmad_1.2.3-20090314-1.1_source
+python-mysqldb_1.2.3-2_amd64
+jpegoptim_1.2.3-2+b2_i386
+libghc-uuid-doc_1.2.3-2_all
+libjibx1.2-java-doc_1.2.3-2_all
+bwbar_1.2.3-2_amd64
+libghc-certificate-doc_1.2.3-2_all
+haskell-certificate_1.2.3-2_source
+bwbar_1.2.3-2_i386
+jpegoptim_1.2.3-2_source
+libghc-certificate-dev_1.2.3-2_amd64
+libibmad1_1.2.3-20090314-1.1_i386
+libibmad-dev_1.2.3-20090314-1.1_i386
+libjibx1.2-java_1.2.3-2_source
+python-mysqldb-dbg_1.2.3-2_i386
+shush_1.2.3-2_i386
+moksha.common_1.2.3-2~bpo70+1_source
+libghc-certificate-prof_1.2.3-2_i386
+libghc-uuid-prof_1.2.3-2+b3_amd64
+libghc-uuid-prof_1.2.3-2+b4_i386
+shush_1.2.3-2_source
+libghc-certificate-prof_1.2.3-2_amd64
+libjibx1.2-java_1.2.3-2_all
+libjibx-java_1.2.3-2_all
+libghc-uuid-dev_1.2.3-2+b4_i386
+python-mysqldb_1.2.3-2_source
+haskell-uuid_1.2.3-2_source
+libibumad_1.2.3-20090314-1.1_source
+libghc-certificate-dev_1.2.3-2_i386
+jpegoptim_1.2.3-2+b2_amd64
+python-moksha.common_1.2.3-2~bpo70+1_all
+bwbar_1.2.3-2_source
+python-mysqldb-dbg_1.2.3-2_amd64
+libibmad1_1.2.3-20090314-1.1_amd64
+shush_1.2.3-2_amd64
 &lt;/code&gt;&lt;/pre&gt;
 </description>
     </item>
@@ -1319,319 +1429,239 @@ Mirror [sensu]: http://repos.sensuapp.org/apt/ sensu successfully updated.
     </item>
     
     <item>
-      <title>aptly package search</title>
-      <link>http://www.aptly.info/doc/aptly/package/search</link>
+      <title>aptly snapshot search</title>
+      <link>http://www.aptly.info/doc/aptly/snapshot/search</link>
       <pubDate>Fri, 29 Aug 2014 11:17:38 UTC</pubDate>
       <author>Andrey Smirnov</author>
-      <guid>http://www.aptly.info/doc/aptly/package/search</guid>
+      <guid>http://www.aptly.info/doc/aptly/snapshot/search</guid>
       <description>
 
-&lt;h2 id=&#34;toc_0&#34;&gt;aptly package search&lt;/h2&gt;
+&lt;h2 id=&#34;toc_0&#34;&gt;aptly snapshot search&lt;/h2&gt;
 
-&lt;p&gt;Search whole package database for packages matching query.
-Whole database of packages includes all packages (deduplicated)
-from all the mirrors, local repos and snapshots.&lt;/p&gt;
-
-&lt;p&gt;In order to get more detailed information about the package,
-use &lt;a href=&#34;/doc/aptly/package/show/&#34;&gt;&lt;code&gt;aptly package show&lt;/code&gt;&lt;/a&gt; command.&lt;/p&gt;
+&lt;p&gt;Search snapshot for packages matching query.&lt;/p&gt;
 
 &lt;p&gt;Usage:&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;$ aptly package search &amp;lt;package-query&amp;gt;
+&lt;pre&gt;&lt;code&gt;$ aptly snapshot search &amp;lt;name&amp;gt; &amp;lt;package-query&amp;gt;
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;Params are:&lt;/p&gt;
 
 &lt;ul&gt;
+&lt;li&gt;&lt;code&gt;name&lt;/code&gt; is snapshot name which has been given during snapshot
+creation&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;package-query&lt;/code&gt; is a &lt;a href=&#34;/doc/feature/query/&#34;&gt;package query&lt;/a&gt; to
 search for packages&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Example:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ aptly package search &#39;Version (&amp;gt;=1.2.3-2), Version (&amp;lt;1.2.3-3)&#39;
-libibmad-dev_1.2.3-20090314-1.1_amd64
-libibumad-dev_1.2.3-20090314-1.1_i386
-libibumad1_1.2.3-20090314-1.1_amd64
-libibumad1_1.2.3-20090314-1.1_i386
-libghc-uuid-dev_1.2.3-2+b3_amd64
-python-mysqldb_1.2.3-2_i386
-libibumad-dev_1.2.3-20090314-1.1_amd64
-libibmad_1.2.3-20090314-1.1_source
-python-mysqldb_1.2.3-2_amd64
-jpegoptim_1.2.3-2+b2_i386
-libghc-uuid-doc_1.2.3-2_all
-libjibx1.2-java-doc_1.2.3-2_all
-bwbar_1.2.3-2_amd64
-libghc-certificate-doc_1.2.3-2_all
-haskell-certificate_1.2.3-2_source
-bwbar_1.2.3-2_i386
-jpegoptim_1.2.3-2_source
-libghc-certificate-dev_1.2.3-2_amd64
-libibmad1_1.2.3-20090314-1.1_i386
-libibmad-dev_1.2.3-20090314-1.1_i386
-libjibx1.2-java_1.2.3-2_source
-python-mysqldb-dbg_1.2.3-2_i386
-shush_1.2.3-2_i386
-moksha.common_1.2.3-2~bpo70+1_source
-libghc-certificate-prof_1.2.3-2_i386
-libghc-uuid-prof_1.2.3-2+b3_amd64
-libghc-uuid-prof_1.2.3-2+b4_i386
-shush_1.2.3-2_source
-libghc-certificate-prof_1.2.3-2_amd64
-libjibx1.2-java_1.2.3-2_all
-libjibx-java_1.2.3-2_all
-libghc-uuid-dev_1.2.3-2+b4_i386
-python-mysqldb_1.2.3-2_source
-haskell-uuid_1.2.3-2_source
-libibumad_1.2.3-20090314-1.1_source
-libghc-certificate-dev_1.2.3-2_i386
-jpegoptim_1.2.3-2+b2_amd64
-python-moksha.common_1.2.3-2~bpo70+1_all
-bwbar_1.2.3-2_source
-python-mysqldb-dbg_1.2.3-2_amd64
-libibmad1_1.2.3-20090314-1.1_amd64
-shush_1.2.3-2_amd64
-&lt;/code&gt;&lt;/pre&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>aptly package show</title>
-      <link>http://www.aptly.info/doc/aptly/package/show</link>
-      <pubDate>Fri, 29 Aug 2014 11:17:38 UTC</pubDate>
-      <author>Andrey Smirnov</author>
-      <guid>http://www.aptly.info/doc/aptly/package/show</guid>
-      <description>
-
-&lt;h2 id=&#34;toc_0&#34;&gt;aptly package show&lt;/h2&gt;
-
-&lt;p&gt;Display details about packages from whole package database. Command
-show does searching much like &lt;a href=&#34;/doc/aptly/package/search/&#34;&gt;&lt;code&gt;aptly package search&lt;/code&gt;&lt;/a&gt;
-command does, but displays complete information about the package:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;contents of control file&lt;/li&gt;
-&lt;li&gt;(optionally) information about package files in the pool&lt;/li&gt;
-&lt;li&gt;(optionally) list of mirrors, local repos and snapshots that reference (include) this package&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;It is possible to submit any search query to this command, but it is much more common
-to have queries resulting in single package.&lt;/p&gt;
-
-&lt;p&gt;Usage:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ aptly package show &amp;lt;package-query&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Params are:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;package-query&lt;/code&gt; is a &lt;a href=&#34;/doc/feature/query/&#34;&gt;package query&lt;/a&gt; to
-search for packages (most usually in the format of package
-reference, e.g. &lt;code&gt;bwbar_1.2.3-2_amd64&lt;/code&gt;)&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;Flags:&lt;/p&gt;
 
 &lt;ul&gt;
-&lt;li&gt;&lt;code&gt;-with-files=false&lt;/code&gt;: display list of package files in the package pool&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;-with-references=false&lt;/code&gt;: display list of mirrors, snapshots and local repos
-which reference this package.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-with-deps=false&lt;/code&gt;: include dependencies of matching packages
+into search results&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;Example:&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;$ aptly package show -with-files -with-references bwbar_1.2.3-2_source
-Package: bwbar
-Version: 1.2.3-2
-Priority: source
-Section: net
-Maintainer: Julien Danjou &amp;lt;acid@debian.org&amp;gt;
-Architecture: any
-Format: 1.0
-Build-Depends: debhelper (&amp;gt;&amp;gt; 7.0.0), libpng12-dev, cdbs
-Files: 138ba54405656adc16c882839482795e 54582 bwbar_1.2.3-2.diff.gz
- cd4f216514cf38f42be9d7b35d429adc 1586 bwbar_1.2.3-2.dsc
- 766265ddf0615b552ff19d12f78be719 34142 bwbar_1.2.3.orig.tar.gz
-Checksums-Sha1: c5259d7fc3ac750d9d9b8d458d702a1bc49a708e 54582 bwbar_1.2.3-2.diff.gz
- 674a6f5db91e83f9ad4f30d1563d3249aa21bb39 1586 bwbar_1.2.3-2.dsc
- 13f5a17658a5c5adbb0db5b0fdd88805d6b3158b 34142 bwbar_1.2.3.orig.tar.gz
-Directory: pool/main/b/bwbar
-Binary: bwbar
-Standards-Version: 3.9.2
-Checksums-Sha256: 1ae625e6a29b745d24bab9185692ecc5b17cb4624d2019ae9a94e08a89f15edb 54582 bwbar_1.2.3-2.diff.gz
- b2d022dd912bc1129b0d0e216b7f8e587649582578484c776bcbe81afe993879 1586 bwbar_1.2.3-2.dsc
- bd8f5079f17b1dec6eae81ddc43c58c49b777b336fd902ffbb8e631885fbb45c 34142 bwbar_1.2.3.orig.tar.gz
-
-Files in the pool:
-  /Users/smira/.aptly/pool/13/8b/bwbar_1.2.3-2.diff.gz
-  /Users/smira/.aptly/pool/cd/4f/bwbar_1.2.3-2.dsc
-  /Users/smira/.aptly/pool/76/62/bwbar_1.2.3.orig.tar.gz
-
-References to package:
-  mirror [wheezy-main-src]: http://mirror.yandex.ru/debian/ wheezy [src]
+&lt;pre&gt;&lt;code&gt;$ aptly snapshot search backports &#39;nginx, !Name (% *-light)&#39;
+nginx_1.6.0-1~bpo70+1_all
+nginx-full_1.6.0-1~bpo70+1_amd64
+nginx-extras_1.6.0-1~bpo70+1_i386
+nginx-extras_1.6.0-1~bpo70+1_amd64
+nginx-full_1.6.0-1~bpo70+1_i386
+nginx-naxsi_1.6.0-1~bpo70+1_amd64
+nginx-naxsi_1.6.0-1~bpo70+1_i386
 &lt;/code&gt;&lt;/pre&gt;
 </description>
     </item>
     
     <item>
-      <title>aptly snapshot</title>
-      <link>http://www.aptly.info/doc/aptly/snapshot</link>
+      <title>aptly snapshot merge</title>
+      <link>http://www.aptly.info/doc/aptly/snapshot/merge</link>
       <pubDate>Fri, 08 Aug 2014 11:17:38 UTC</pubDate>
       <author>Andrey Smirnov</author>
-      <guid>http://www.aptly.info/doc/aptly/snapshot</guid>
+      <guid>http://www.aptly.info/doc/aptly/snapshot/merge</guid>
       <description>
 
-&lt;h2 id=&#34;toc_0&#34;&gt;aptly snapshot&lt;/h2&gt;
+&lt;h2 id=&#34;toc_0&#34;&gt;aptly snapshot merge&lt;/h2&gt;
 
-&lt;p&gt;Snapshot is a fixed state of remote repository mirror or local repository.
-Internally snapshot is list of references to packages. Snapshot is immutable, i.e. it
-can&amp;rsquo;t be changed since it has been created. Snapshots could be &lt;a href=&#34;/doc/aptly/snapshot/merge/&#34;&gt;merged&lt;/a&gt;,
-&lt;a href=&#34;/doc/aptly/snapshot/pull/&#34;&gt;filtered&lt;/a&gt;,
-individual packages could be &lt;a href=&#34;/doc/aptly/snapshot/pull/&#34;&gt;pulled&lt;/a&gt;, snapshot could be
-&lt;a href=&#34;/doc/aptly/snapshot/verify/&#34;&gt;verified&lt;/a&gt; for missing dependencies. Finally, snapshots could be
-&lt;a href=&#34;/doc/aptly/publish/snapshot&#34;&gt;published as repositories&lt;/a&gt;.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>aptly graph</title>
-      <link>http://www.aptly.info/doc/aptly/graph</link>
-      <pubDate>Fri, 08 Aug 2014 11:17:38 UTC</pubDate>
-      <author>Andrey Smirnov</author>
-      <guid>http://www.aptly.info/doc/aptly/graph</guid>
-      <description>
+&lt;p&gt;Command merges several &lt;code&gt;source&lt;/code&gt; snapshots into new &lt;code&gt;destination&lt;/code&gt; snapshot.
+Merge happens from left to right. By default, packages with the same
+name-architecture pair are replaced during merge (package from latest snapshot on the list wins).&lt;/p&gt;
 
-&lt;h2 id=&#34;toc_0&#34;&gt;aptly graph&lt;/h2&gt;
+&lt;p&gt;With &lt;code&gt;-latest&lt;/code&gt; flag, package with latest version wins. With &lt;code&gt;-no-remove&lt;/code&gt;
+flag, all versions of packages are preserved during merge.&lt;/p&gt;
 
-&lt;p&gt;aptly generates graph showing depedencies between mirrors, local repositories,
-snapshots and published repositories.
- &lt;/p&gt;
-
-&lt;p&gt;Command graph generates graph of dependencies:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;between snapshots and mirrors (what mirror was used to create each snapshot)&lt;/li&gt;
-&lt;li&gt;between snapshots and local repos (what local repo was used to create snapshot)&lt;/li&gt;
-&lt;li&gt;between snapshots (pulling, merging, etc.)&lt;/li&gt;
-&lt;li&gt;between snapshots, local repos and published repositories (how snapshots were published).&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Graph is rendered to PNG file using graphviz package.&lt;/p&gt;
+&lt;p&gt;If only one snapshot is specified, merge copies &lt;code&gt;source&lt;/code&gt; into &lt;code&gt;destination&lt;/code&gt;.&lt;/p&gt;
 
 &lt;p&gt;Usage:&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;$ aptly graph
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Example:&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;/img/graphfull.png&#34;&gt;&lt;img src=&#34;/img/graph.png&#34; alt=&#34;Example graph from aptly graph&#34; class=&#34;img-responsive&#34;&gt;&lt;/a&gt;
- &lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>aptly repo</title>
-      <link>http://www.aptly.info/doc/aptly/repo</link>
-      <pubDate>Fri, 08 Aug 2014 11:17:38 UTC</pubDate>
-      <author>Andrey Smirnov</author>
-      <guid>http://www.aptly.info/doc/aptly/repo</guid>
-      <description>
-
-&lt;h2 id=&#34;toc_0&#34;&gt;aptly repo&lt;/h2&gt;
-
-&lt;p&gt;Local repository is a collection of packages (most usually custom packages created internally).
-Packages could be added to local repository at any moment, removed, moved or copied between repos.
-Multiple versions of the same package could be added to the repository.
-In order to capture current repository state, &lt;a href=&#34;/doc/aptly/snapshot/create/&#34;&gt;create snapshot&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;Local repositories could be published either &lt;a href=&#34;/doc/aptly/publish/repo/&#34;&gt;directly&lt;/a&gt;
-or from &lt;a href=&#34;/doc/aptly/publish/snapshot&#34;&gt;snapshot&lt;/a&gt;.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>aptly publish switch</title>
-      <link>http://www.aptly.info/doc/aptly/publish/switch</link>
-      <pubDate>Fri, 08 Aug 2014 11:17:38 UTC</pubDate>
-      <author>Andrey Smirnov</author>
-      <guid>http://www.aptly.info/doc/aptly/publish/switch</guid>
-      <description>
-
-&lt;h2 id=&#34;toc_0&#34;&gt;aptly publish switch&lt;/h2&gt;
-
-&lt;p&gt;Command switches in-place published repository with new snapshot
-contents. &lt;code&gt;distribution&lt;/code&gt; and &lt;code&gt;prefix&lt;/code&gt; should be occupied with snapshot
-published using command &lt;a href=&#34;/doc/aptly/publish/snapshot/&#34;&gt;&lt;code&gt;aptly publish snapshot&lt;/code&gt;&lt;/a&gt;. Update happens in-place with minimum
-possible downtime for published repository. Valid &lt;a href=&#34;/doc/aptly/publish/&#34;&gt;GPG key&lt;/a&gt;
-is required for publishing.&lt;/p&gt;
-
-&lt;p&gt;When published repository is updated, all the options are preserved:
-distribution, component, list of architectures, etc.&lt;/p&gt;
-
-&lt;p&gt;Usage:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ aptly publish switch &amp;lt;distribution&amp;gt; [[&amp;lt;endpoint:&amp;gt;]&amp;lt;prefix&amp;gt;] &amp;lt;new-snapshot&amp;gt;
+&lt;pre&gt;&lt;code&gt;$ aptly snapshot merge &amp;lt;destination&amp;gt; &amp;lt;source&amp;gt; [&amp;lt;source&amp;gt;...]
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;Params:&lt;/p&gt;
 
 &lt;ul&gt;
-&lt;li&gt;&lt;code&gt;distribution&lt;/code&gt; is distribution name of published repository&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;endpoint&lt;/code&gt; is publishing endpoint, if not specified, it would
-default to empty endpoint (local file system).&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;prefix&lt;/code&gt; is publishing prefix, if not specified, it would default to
-empty prefix (&lt;code&gt;.&lt;/code&gt;).&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;new-snapshot&lt;/code&gt; is a snapshot name that snould be re-published&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;destination&lt;/code&gt; is a name of the snapshot that would be created&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;source&lt;/code&gt; is a list of snapshot names that would be merged together&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;Flags:&lt;/p&gt;
 
 &lt;ul&gt;
-&lt;li&gt;&lt;code&gt;-component=&amp;quot;&amp;quot;&lt;/code&gt;: list of components to update (separate components
-with commas)&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;-force-overwrite=false&lt;/code&gt;: overwrite packages files in the pool even
-if content is different (see also &lt;a href=&#34;/doc/feature/duplicate/&#34;&gt;duplicate packages&lt;/a&gt;)&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;-gpg-key=&amp;quot;&amp;quot;&lt;/code&gt;: GPG key ID to use when signing the release, if not
-specified default key is used&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;-keyring=&amp;quot;&amp;quot;&lt;/code&gt;: GPG keyring to use (instead of default)&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;-passphrase=&amp;quot;&amp;quot;&lt;/code&gt;: GPG passphrase to unlock private key (possibly insecure)&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;-passphrase-file=&amp;quot;&amp;quot;&lt;/code&gt;: GPG passphrase file to unlock private key (possibly insecure)&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;-secret-keyring=&amp;quot;&amp;quot;&lt;/code&gt;: GPG secret keyring to use (instead of default)&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;-skip-signing=false&lt;/code&gt;: don&amp;rsquo;t sign Release files with GPG&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-latest=false&lt;/code&gt;: use only the latest version of each package&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-no-remove=false&lt;/code&gt;: don&amp;rsquo;t remove duplicate arch/name packages&lt;/li&gt;
 &lt;/ul&gt;
-
-&lt;p&gt;When switching published snapshots for multiple component repositories
-any subset of snapshots could be updated, they should be listed on
-command line with &lt;code&gt;-component&lt;/code&gt; flag:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ aptly publish switch -component=main,contrib wheezy wheezy-main wheezy-contrib
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Flag &lt;code&gt;-component&lt;/code&gt; could be omitted for single-component published
-repositories.&lt;/p&gt;
 
 &lt;p&gt;Example:&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;$ aptly publish switch wheezy wheezy-7.4
-Loading packages...
-Generating metadata files and linking package files...
-Signing file &#39;/var/aptly/public/dists/wheezy/Release.tmp&#39; with gpg, please enter your passphrase when prompted:
+&lt;pre&gt;&lt;code&gt;$ aptly snapshot merge debian-w-backports debian-main debian-backports
 
-&amp;lt;&amp;lt;gpg asks for passphrase&amp;gt;&amp;gt;
-
-Clearsigning file &#39;/var/aptly/public/dists/wheezy/Release.tmp&#39; with gpg, please enter your passphrase when prompted:
-
-&amp;lt;&amp;lt;gpg asks for passphrase&amp;gt;&amp;gt;
-
-Cleaning up prefix &amp;quot;.&amp;quot; component &amp;quot;main&amp;quot;...
-
-Publish for local repo ./wheezy [i386, amd64] publishes {main: [wheezy-7.4]: snapshot from mirror [wheezy]: http://ftp.ru.debian.org/debian/ wheezy} has been successfully updated.
+Snapshot debian-w-backports successfully created.
+You can run &#39;aptly publish snapshot debian-w-backports&#39; to publish snapshot as Debian repository.
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt; &lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Commands</title>
+      <link>http://www.aptly.info/doc/commands</link>
+      <pubDate>Fri, 08 Aug 2014 11:17:38 UTC</pubDate>
+      <author>Andrey Smirnov</author>
+      <guid>http://www.aptly.info/doc/commands</guid>
+      <description>
+
+&lt;h2 id=&#34;toc_0&#34;&gt;Commands&lt;/h2&gt;
+
+&lt;p&gt;aptly supports commands in several basic categories:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;mirror&lt;/code&gt;: manage, update mirrors of remote repositories&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;repo&lt;/code&gt;: manage local package repositories, add, remove, move, copy
+packages&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;snapshot&lt;/code&gt;: create, merge, manage snapshots&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;publish&lt;/code&gt;: publish snapshot or local repository&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;serve&lt;/code&gt;: quickly export published repositories via HTTP&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;db&lt;/code&gt;: cleanup database and package pool, recover database after failure&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>aptly snapshot verify</title>
+      <link>http://www.aptly.info/doc/aptly/snapshot/verify</link>
+      <pubDate>Fri, 08 Aug 2014 11:17:38 UTC</pubDate>
+      <author>Andrey Smirnov</author>
+      <guid>http://www.aptly.info/doc/aptly/snapshot/verify</guid>
+      <description>
+
+&lt;h2 id=&#34;toc_0&#34;&gt;aptly snapshot verify&lt;/h2&gt;
+
+&lt;p&gt;Verifies dependencies between packages in snapshot &lt;code&gt;&amp;lt;name&amp;gt;&lt;/code&gt; and reports
+unsatisfied dependencies. Command might take additional snapshots as
+dependency sources.&lt;/p&gt;
+
+&lt;p&gt;Usage:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ aptly snapshot verify &amp;lt;name&amp;gt; [&amp;lt;source&amp;gt; ...]
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Params:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;name&lt;/code&gt; is snapshot name which has been given during snapshot
+creation&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;source&lt;/code&gt; is a optional list of snapshot names which would be used as
+additional sources&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;If additional sources are given, depdencies would be searched for in
+full list of &lt;code&gt;&amp;lt;name&amp;gt;&lt;/code&gt; and &lt;code&gt;&amp;lt;source&amp;gt;&lt;/code&gt; snapshots.&lt;/p&gt;
+
+&lt;p&gt;If architectures are limited (with config &lt;code&gt;architectures&lt;/code&gt; or option
+&lt;code&gt;-architectures&lt;/code&gt;), only mentioned architectures are checked for internal
+dependencies, otherwise &lt;code&gt;aptly&lt;/code&gt; will check all architectures in the
+snapshot.&lt;/p&gt;
+
+&lt;p&gt;By using &lt;code&gt;-dep-follow-source&lt;/code&gt; global flag you can verify that snapshot
+has all source packages available to re-build packages from source.&lt;/p&gt;
+
+&lt;p&gt;Example:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ aptly snapshot verify snap-deb2-main
+Missing dependencies (7):
+  oracle-instantclient11.2-basic [i386]
+  scsh-0.6 [amd64]
+  fenix [amd64]
+  fenix-plugins-system [amd64]
+  mozart (&amp;gt;= 1.4.0) [amd64]
+  scsh-0.6 (&amp;gt;= 0.6.6) [amd64]
+  oracle-instantclient11.2-basic [amd64]
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Overview</title>
+      <link>http://www.aptly.info/doc/overview</link>
+      <pubDate>Fri, 08 Aug 2014 11:17:38 UTC</pubDate>
+      <author>Andrey Smirnov</author>
+      <guid>http://www.aptly.info/doc/overview</guid>
+      <description>
+
+&lt;h2 id=&#34;toc_0&#34;&gt;Overview&lt;/h2&gt;
+
+&lt;p class=&#34;lead&#34;&gt;aptly&#39;s goal is to establish repeatiblity and controlled changes in
+package environments.&lt;/p&gt;
+
+&lt;p&gt;aptly produces a fixed set of packages in the repository,
+so that package installation and upgrade becomes deterministic. At the
+same time aptly is able to perform controlled, fine-grained changes to
+repository content. aptly allows you to transistion your package environment to a
+new version, or rollback to a previous version.&lt;/p&gt;
+
+&lt;p&gt;aptly has several core entities:&lt;/p&gt;
+
+&lt;dl class=&#34;dl-horizontal&#34;&gt;
+    &lt;dt&gt;mirror&lt;/dt&gt;
+    &lt;dd&gt;mirror of remote repository, consists of metadata, list of packages
+    and package files&lt;/dd&gt;
+    &lt;dt&gt;local repo&lt;/dt&gt;
+    &lt;dd&gt;local package repository, consists of metadata, packages and files,
+    packages can be easily added and removed&lt;/dd&gt;
+    &lt;dt&gt;snapshot&lt;/dt&gt;
+    &lt;dd&gt;immutable list of packages, basic block to implement repeatability
+    and controlled changes&lt;/dd&gt;
+    &lt;dt&gt;published&lt;br&gt; repository&lt;/dt&gt;
+    &lt;dd&gt;published representation of aptly generated snapshot or local repository, ready to
+    be consumed by apt tools&lt;/dd&gt;
+&lt;/dl&gt;
+
+&lt;p&gt;The schema of aptly&amp;rsquo;s commands and transitions between entities:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;/img/schema.png&#34; alt=&#34;aptly core schema&#34; class=&#34;img-responsive&#34;&gt;&lt;/p&gt;
+
+&lt;p&gt;We can start with creating &lt;a href=&#34;/doc/aptly/mirror/create&#34;&gt;mirrors of remote
+repositories&lt;/a&gt;. Also we can create &lt;a href=&#34;/doc/aptly/repo/create&#34;&gt;local package
+repositories&lt;/a&gt; and &lt;a href=&#34;/doc/aptly/repo/add&#34;&gt;import package files&lt;/a&gt;.
+Local repos could be modified by &lt;a href=&#34;/doc/aptly/repo/copy&#34;&gt;copying&lt;/a&gt; and
+&lt;a href=&#34;/doc/aptly/repo/move&#34;&gt;moving&lt;/a&gt; packages between local repositories and
+&lt;a href=&#34;/doc/aptly/repo/import&#34;&gt;importing&lt;/a&gt; them from mirrors. Snapshot could be
+&lt;a href=&#34;/doc/aptly/snapshot/create&#34;&gt;created&lt;/a&gt; from remote repository (official
+Debain repositories, backports, 3rd party repos, etc.) or your local
+repository (custom built packages, your own software). Snapshots can be
+used to produce new snapshots by &lt;a href=&#34;/doc/aptly/snapshot/filter/&#34;&gt;filtering&lt;/a&gt;
+other snapshots, &lt;a href=&#34;/doc/aptly/snapshot/pull&#34;&gt;pulling&lt;/a&gt;
+packages with dependencies between snapshots and by
+&lt;a href=&#34;/doc/aptly/snapshot/merge&#34;&gt;merging&lt;/a&gt; snapshots. Any snapshot can be
+&lt;a href=&#34;/doc/aptly/publish/snapshot&#34;&gt;published&lt;/a&gt; to location (distribution name,
+prefix) and consumed by &lt;code&gt;apt&lt;/code&gt; tools on your Debian systems. Local
+repositories could be &lt;a href=&#34;/doc/aptly/publish/repo&#34;&gt;published directly&lt;/a&gt;
+bypassing snapshot step.&lt;/p&gt;
+
+&lt;p&gt;Next section, &lt;a href=&#34;/doc/why/&#34;&gt;Why aptly?&lt;/a&gt; describes why aptly is unique.&lt;/p&gt;
 </description>
     </item>
     
