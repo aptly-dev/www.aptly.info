@@ -39,5 +39,5 @@ anymore).
 
 Example:
 
-    $ snapshot drop snap-wheezy
+    $ aptly snapshot drop snap-wheezy
     Snapshot `snap-wheezy` has been dropped.
