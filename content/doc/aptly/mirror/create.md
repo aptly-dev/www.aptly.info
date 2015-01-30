@@ -83,7 +83,7 @@ keyring in order to successfully verify repository signature.
 If aptly is running on Debian/Ubuntu machine, it would be good idea to import
 archive signing keys shipped with the operating system:
 
-    $ gpg --keyring /usr/share/keyrings/debian-archive-keyring.gpg --export | gpg --no-default-keyring --keyring trustedkeys.gpg --import
+    $ gpg --no-default-keyring --keyring /usr/share/keyrings/debian-archive-keyring.gpg --export | gpg --no-default-keyring --keyring trustedkeys.gpg --import
 
 If you're running Ubuntu, use
 `/usr/share/keyrings/ubuntu-archive-keyring.gpg`

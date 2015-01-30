@@ -87,7 +87,7 @@ $ aptly mirror create -architectures=amd64 -filter='Priority (required) | Priori
 Looks like your keyring with trusted keys is empty. You might consider importing some keys.
 If you're running Debian or Ubuntu, it's a good idea to import current archive keys by running:
 
-  gpg --keyring /usr/share/keyrings/debian-archive-keyring.gpg --export | gpg --no-default-keyring --keyring trustedkeys.gpg --import
+  gpg --no-default-keyring --keyring /usr/share/keyrings/debian-archive-keyring.gpg --export | gpg --no-default-keyring --keyring trustedkeys.gpg --import
 
 (for Ubuntu, use /usr/share/keyrings/ubuntu-archive-keyring.gpg)
 
@@ -114,7 +114,7 @@ aptly is complaining about missing keys in our trusted keyring, as it's not poss
 of files being downloaded. Let's follow the advice and import default Debian keyring:
 
 <pre class="code">
-$ gpg --keyring /usr/share/keyrings/debian-archive-keyring.gpg --export | gpg --no-default-keyring --keyring trustedkeys.gpg --import
+$ gpg --no-default-keyring --keyring /usr/share/keyrings/debian-archive-keyring.gpg --export | gpg --no-default-keyring --keyring trustedkeys.gpg --import
 gpg: key 6430156A: public key "Andrey Smirnov (Signing repos) &lt;me@smira.ru&gt;" imported
 gpg: key 2A194991: public key "Andrey Smirnov &lt;me@smira.ru&gt;" imported
 gpg: key B98321F9: public key "Squeeze Stable Release Key &lt;debian-release@lists.debian.org&gt;" imported
