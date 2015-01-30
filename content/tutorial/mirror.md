@@ -105,7 +105,7 @@ gpg --no-default-keyring --keyring trustedkeys.gpg --keyserver keys.gnupg.net --
 
 Sometimes keys are stored in repository root in file named Release.key, to import such key:
 
-wget -O - http://some.repo/repository/Release.key | gpg --no-default-keyring --keyring trustedkeys.gpg --import
+wget -O - https://some.repo/repository/Release.key | gpg --no-default-keyring --keyring trustedkeys.gpg --import
 
 ERROR: unable to fetch mirror: verification of detached signature failed: exit status 2
 </pre>

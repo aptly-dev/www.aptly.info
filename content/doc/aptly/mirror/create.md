@@ -101,7 +101,7 @@ If you're mirroring flat repository, sometimes repository key is located
 near release files, so you can download it and import into your trusted
 keychain:
 
-    $ wget -O - http://some.repo/repository/Release.key | gpg --no-default-keyring --keyring trustedkeys.gpg --import
+    $ wget -O - https://some.repo/repository/Release.key | gpg --no-default-keyring --keyring trustedkeys.gpg --import
 
 You can learn about signed Debian repositories in [Debian wiki](https://wiki.debian.org/SecureApt).
 If you would like to disable signature checks, you can use flag `-ignore-signatures` or configuration
