@@ -440,7 +440,7 @@ keyring in order to successfully verify repository signature.</p>
 <p>If aptly is running on Debian/Ubuntu machine, it would be good idea to import
 archive signing keys shipped with the operating system:</p>
 
-<pre><code>$ gpg --keyring /usr/share/keyrings/debian-archive-keyring.gpg --export | gpg --no-default-keyring --keyring trustedkeys.gpg --import
+<pre><code>$ gpg --no-default-keyring --keyring /usr/share/keyrings/debian-archive-keyring.gpg --export | gpg --no-default-keyring --keyring trustedkeys.gpg --import
 </code></pre>
 
 <p>If you&rsquo;re running Ubuntu, use
@@ -460,7 +460,7 @@ command:</p>
 near release files, so you can download it and import into your trusted
 keychain:</p>
 
-<pre><code>$ wget -O - http://some.repo/repository/Release.key | gpg --no-default-keyring --keyring trustedkeys.gpg --import
+<pre><code>$ wget -O - https://some.repo/repository/Release.key | gpg --no-default-keyring --keyring trustedkeys.gpg --import
 </code></pre>
 
 <p>You can learn about signed Debian repositories in <a href="https://wiki.debian.org/SecureApt">Debian wiki</a>.
