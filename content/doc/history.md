@@ -21,7 +21,7 @@ History
   ([\#121](https://github.com/smira/aptly/issues/121))
   ([\#122](https://github.com/smira/aptly/pull/122)),
   thanks to [Dmitrii Kashin](https://github.com/freehck)
-- **DOCS MISSING** **COMPLETION MISSING** new flag `-force-components` to
+- new flag `-force-components` for [aptly mirror create](/doc/aptly/mirror/create) to
   workaround repos which list actually missing components in `Release` files
   ([\#147](https://github.com/smira/aptly/issues/147))
 - new expiremental command [aptly task run](/doc/aptly/task/run)
