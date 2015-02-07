@@ -11,6 +11,22 @@ History
 
 ### Version 0.9
 
+- **REST API** for snapshots, local repos, file upload, publishing, graphs and version
+  ([\#16](https://github.com/smira/aptly/issues/16))
+  ([\#116](https://github.com/smira/aptly/issues/116))
+  ([\#167](https://github.com/smira/aptly/pull/167))
+  ([\#168](https://github.com/smira/aptly/pull/168))
+  ([\#169](https://github.com/smira/aptly/pull/169))
+  ([\#174](https://github.com/smira/aptly/pull/174)),
+  thanks to
+  [Sylvain Baubeau](https://github.com/lebauce),
+  [Michael Koval](https://github.com/mkoval)
+- **DOCS MISSING** new OpenStack Swift backend for publishing
+  ([\#191](https://github.com/smira/aptly/pull/191)),
+  thanks to [Sebastien Badia](https://github.com/sbadia)
+- command [aptly package search](/doc/aptly/package/search) exists with
+  failed code if no packages have been found
+  ([\#188](https://github.com/smira/aptly/issues/188))
 - fix to continue downloading on 403 error (workaround for Amazon S3 behavior)
   ([\#131](https://github.com/smira/aptly/pull/131)),
   thanks to [Rohan Garg](https://github.com/shadeslayer)
@@ -32,6 +48,12 @@ History
   thanks to [Simon Aquino](https://github.com/simonaquino)
 - security issue: advise to use https:// when dowloading repo keys,
   ([\#179](https://github.com/smira/aptly/issues/179))
+- goleveldb updated to new version with panic fixed
+  ([\#150](https://github.com/smira/aptly/issues/150))
+- workaround for different `MD5Sum` field name
+  ([\#151](https://github.com/smira/aptly/issues/151))
+- workaround for repositories with conflicting packages in the index
+  ([\#183](https://github.com/smira/aptly/issues/183))
 - bug fix: when doing [aptly repo add](/doc/aptly/repo/add) with
   `-force-replace` too many packages have been removed
   ([\#185](https://github.com/smira/aptly/issues/185))
@@ -74,28 +96,6 @@ History
 - bug fix: command [aptly publish switch](/doc/aptly/publish/switch) might have corrupted
   published repository due to missing checks on component names
   ([\#192](https://github.com/smira/aptly/issues/192))
-- goleveldb updated to new version with panic fixed
-  ([\#150](https://github.com/smira/aptly/issues/150))
-- workaround for different `MD5Sum` field name
-  ([\#151](https://github.com/smira/aptly/issues/151))
-- workaround for repositories with conflicting packages in the index
-  ([\#183](https://github.com/smira/aptly/issues/183))
-- **DOCS MISSING** new OpenStack Swift backend for publishing
-  ([\#191](https://github.com/smira/aptly/pull/191)),
-  thanks to [Sebastien Badia](https://github.com/sbadia)
-- **DOCS MISSING** command [aptly package search](/doc/aptly/package/search) exists with
-  failed code if no packages have been found
-  ([\#188](https://github.com/smira/aptly/issues/188))
-- **REST API** for snapshots, local repos, file upload, publishing, graphs and version
-  ([\#16](https://github.com/smira/aptly/issues/16))
-  ([\#116](https://github.com/smira/aptly/issues/116))
-  ([\#167](https://github.com/smira/aptly/pull/167))
-  ([\#168](https://github.com/smira/aptly/pull/168))
-  ([\#169](https://github.com/smira/aptly/pull/169))
-  ([\#174](https://github.com/smira/aptly/pull/174)),
-  thanks to
-  [Sylvain Baubeau](https://github.com/lebauce),
-  [Michael Koval](https://github.com/mkoval)
 
 
 ### Version 0.8
