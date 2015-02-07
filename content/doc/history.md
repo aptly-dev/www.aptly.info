@@ -9,6 +9,95 @@ menu:
 History
 -------
 
+### Version 0.9
+
+- fix to continue downloading on 403 error (workaround for Amazon S3 behavior)
+  ([\#131](https://github.com/smira/aptly/pull/131)),
+  thanks to [Rohan Garg](https://github.com/shadeslayer)
+- fix to support different types of `control` member in Debian archive
+  ([\#128](https://github.com/smira/aptly/pull/128)),
+  thanks to [Russ Allbery](https://github.com/rra)
+- new flag `-batch` for publish commands in no-tty mode (e.g. when running from cron)
+  ([\#121](https://github.com/smira/aptly/issues/121))
+  ([\#122](https://github.com/smira/aptly/pull/122)),
+  thanks to [Dmitrii Kashin](https://github.com/freehck)
+- **DOCS MISSING** **COMPLETION MISSING** new flag `-force-components` to
+  workaround repos which list actually missing components in `Release` files
+  ([\#147](https://github.com/smira/aptly/issues/147))
+- new expiremental command [aptly task run](/doc/aptly/task/run)
+  ([\#96](https://github.com/smira/aptly/pull/96)),
+  thanks to [Simon Aquino](https://github.com/simonaquino)
+- new command [aptly config show](/doc/aptly/config/show)
+  ([\#123](https://github.com/smira/aptly/pull/123)),
+  thanks to [Simon Aquino](https://github.com/simonaquino)
+- security issue: advise to use https:// when dowloading repo keys,
+  ([\#179](https://github.com/smira/aptly/issues/179))
+- bug fix: when doing [aptly repo add](/doc/aptly/repo/add) with
+  `-force-replace` too many packages have been removed
+  ([\#185](https://github.com/smira/aptly/issues/185))
+  ([\#186](https://github.com/smira/aptly/pull/186))
+  thanks to [Andrea Bernardo Ciddio](https://github.com/bcandrea)
+- bug fix: adding packages to repository from published location
+  truncates the file in the pool
+  ([\#127](https://github.com/smira/aptly/pull/127)),
+  thanks to [Simon Aquino](https://github.com/simonaquino)
+- bug fix: start writing to stdout only when database is closed,
+  avoids problems with pipes
+  ([\#117](https://github.com/smira/aptly/issues/117))
+- bug fix: report correct errors when falling back between
+  package index versions
+  ([\#125](https://github.com/smira/aptly/issues/125))
+  ([\#129](https://github.com/smira/aptly/issues/129))
+- bug fix: workaround `+` encoding when downloading from Amazon S3
+  ([\#130](https://github.com/smira/aptly/issues/130))
+- bug fix: handling mirrors with `/` in component names
+  ([\#140](https://github.com/smira/aptly/issues/140))
+  ([\#141](https://github.com/smira/aptly/issues/141))
+- bug fix: [aptly db cleanup](/doc/aptly/db/cleanup) might remove
+  packages still being published when publishing local repos
+  ([\#146](https://github.com/smira/aptly/issues/146))
+- bug fix: [aptly snapshot merge](/doc/aptly/snapshot/merge)
+  might have created unusable snapshots with conflicting packages
+  ([\#154](https://github.com/smira/aptly/issues/154))
+- bug fix: gpg with `--passphrase-file` on Ubuntu requires
+  `--no-use-agent`
+  ([\#162](https://github.com/smira/aptly/issues/162))
+- bug fix: some Debian tools expect `Packages` index
+  file to be sorted and fields to be in canonical order
+  ([\#172](https://github.com/smira/aptly/issues/172))
+- bug fix: publishing repository with `.udeb` and sources
+  might produce empty `Sources` index
+  ([\#180](https://github.com/smira/aptly/issues/180))
+- bug fix: when proxying, don't apply fix for Amazon S3
+  and `+` in URLs
+  ([\#189](https://github.com/smira/aptly/issues/189))
+- bug fix: command [aptly publish switch](/doc/aptly/publish/switch) might have corrupted
+  published repository due to missing checks on component names
+  ([\#192](https://github.com/smira/aptly/issues/192))
+- goleveldb updated to new version with panic fixed
+  ([\#150](https://github.com/smira/aptly/issues/150))
+- workaround for different `MD5Sum` field name
+  ([\#151](https://github.com/smira/aptly/issues/151))
+- workaround for repositories with conflicting packages in the index
+  ([\#183](https://github.com/smira/aptly/issues/183))
+- **DOCS MISSING** new OpenStack Swift backend for publishing
+  ([\#191](https://github.com/smira/aptly/pull/191)),
+  thanks to [Sebastien Badia](https://github.com/sbadia)
+- **DOCS MISSING** command [aptly package search](/doc/aptly/package/search) exists with
+  failed code if no packages have been found
+  ([\#188](https://github.com/smira/aptly/issues/188))
+- **REST API** for snapshots, local repos, file upload, publishing, graphs and version
+  ([\#16](https://github.com/smira/aptly/issues/16))
+  ([\#116](https://github.com/smira/aptly/issues/116))
+  ([\#167](https://github.com/smira/aptly/pull/167))
+  ([\#168](https://github.com/smira/aptly/pull/168))
+  ([\#169](https://github.com/smira/aptly/pull/169))
+  ([\#174](https://github.com/smira/aptly/pull/174)),
+  thanks to
+  [Sylvain Baubeau](https://github.com/lebauce),
+  [Michael Koval](https://github.com/mkoval)
+
+
 ### Version 0.8
 
  - aptly supports **concurrent operations while mirror is updated**, new flag
