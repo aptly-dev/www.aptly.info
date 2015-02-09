@@ -20,7 +20,7 @@ Usage:
 
 Params are:
 
--   `name` packages would be removed from this local repository
+-   `name` is a repo name (given when repo was created)
 -   `package-query` is a [package query](/doc/feature/query/) to
     search for packages
 
