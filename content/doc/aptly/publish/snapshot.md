@@ -22,7 +22,7 @@ Usage:
 
 Params:
 
--   `name` is a snapshot name that snould be published
+-   `name` is a snapshot name that should be published
 -   `endpoint` is an optional endpoint reference. Without endpoint,
     repository would be pulished to local file system. In order to
     publish to Amazon S3, use endpoint name `s3:<name>:`, where endpoint
