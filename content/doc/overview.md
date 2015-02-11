@@ -58,4 +58,7 @@ prefix) and consumed by `apt` tools on your Debian systems. Local
 repositories could be [published directly](/doc/aptly/publish/repo)
 bypassing snapshot step.
 
+aptly can be used as [CLI tool](/doc/commands) and [HTTP REST API service](/doc/api),
+whatever works best in your environment.
+
 Next section, [Why aptly?](/doc/why/) describes why aptly is unique.
