@@ -25,7 +25,7 @@ History
   ([\#191](https://github.com/smira/aptly/pull/191)),
   thanks to [Sebastien Badia](https://github.com/sbadia)
 - command [aptly package search](/doc/aptly/package/search) exists with
-  failed code if no packages have been found
+  failure code if no packages have been found
   ([\#188](https://github.com/smira/aptly/issues/188))
 - fix to continue downloading on 403 error (workaround for Amazon S3 behavior)
   ([\#131](https://github.com/smira/aptly/pull/131)),
@@ -54,6 +54,9 @@ History
   ([\#151](https://github.com/smira/aptly/issues/151))
 - workaround for repositories with conflicting packages in the index
   ([\#183](https://github.com/smira/aptly/issues/183))
+- bug fix: aptly shouldn't include empty `Source:` fields
+  into package stanza when publishing
+  ([\#195](https://github.com/smira/aptly/issues/195))
 - bug fix: when doing [aptly repo add](/doc/aptly/repo/add) with
   `-force-replace` too many packages have been removed
   ([\#185](https://github.com/smira/aptly/issues/185))
