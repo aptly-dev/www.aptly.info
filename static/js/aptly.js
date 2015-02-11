@@ -25,6 +25,10 @@ $(document).ready(function() {
   })
 })
 
+$(document).ready(function() {
+  $("section.documentation table").addClass("table table-striped");
+})
+
 function redirectLegacyHashes() {
     if (document.location.pathname != "/") {
         return
