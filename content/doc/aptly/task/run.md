@@ -12,6 +12,9 @@ menu:
 aptly task run
 --------------
 
+<div class="alert alert-warning alert-note"><strong>Warning:</strong>
+This command is experimental.</div>
+
 Command runs an aptly task, namely a sequence of atomic aptly commands within a single thread.
 
 The commands are run sequentially. If one returns an error, the remaining commands in the queue will not run.
