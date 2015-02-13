@@ -9,6 +9,14 @@ menu:
 History
 -------
 
+<!---
+
+- **DOCS MISSING** new OpenStack Swift backend for publishing
+  ([\#191](https://github.com/smira/aptly/pull/191)),
+  thanks to [Sebastien Badia](https://github.com/sbadia)
+
+-->
+
 ### Version 0.9
 
 - **REST API** for snapshots, local repos, file upload, publishing, graphs and version
@@ -21,9 +29,6 @@ History
   thanks to
   [Sylvain Baubeau](https://github.com/lebauce),
   [Michael Koval](https://github.com/mkoval)
-- **DOCS MISSING** new OpenStack Swift backend for publishing
-  ([\#191](https://github.com/smira/aptly/pull/191)),
-  thanks to [Sebastien Badia](https://github.com/sbadia)
 - command [aptly package search](/doc/aptly/package/search) exists with
   failure code if no packages have been found
   ([\#188](https://github.com/smira/aptly/issues/188))
@@ -99,7 +104,9 @@ History
 - bug fix: command [aptly publish switch](/doc/aptly/publish/switch) might have corrupted
   published repository due to missing checks on component names
   ([\#192](https://github.com/smira/aptly/issues/192))
-
+- bug fix: debian installer doesn't like Release files without `Suite` field
+  ([\#201](https://github.com/smira/aptly/pull/201))
+  thanks to [Alexander Guy](https://github.com/alexanderguy)
 
 ### Version 0.8
 
