@@ -32,7 +32,8 @@ Params:
     repository would be pulished to local file system. In order to
     publish to Amazon S3, use endpoint name `s3:<name>:`, where endpoint
     `name` is configured as S3 publishing endpoint in
-    [configuration file](/doc/feature/s3).
+    [configuration file](/doc/feature/s3), for OpenStack Swift,
+    use endpoint `swift:<name>` ([Swift configuration](/doc/feature/swift))
 -   `prefix` is an optional prefix for publishing, if not specified,
     repository would be published to the root of publiс directory.
     `prefix` could be single directory like `ppa` or part of the tree

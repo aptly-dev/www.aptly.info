@@ -9,13 +9,6 @@ menu:
 History
 -------
 
-<!---
-
-- **DOCS MISSING** new OpenStack Swift backend for publishing
-  ([\#191](https://github.com/smira/aptly/pull/191)),
-  thanks to [Sebastien Badia](https://github.com/sbadia)
-
--->
 
 ### Version 0.9
 
@@ -29,7 +22,12 @@ History
   thanks to
   [Sylvain Baubeau](https://github.com/lebauce),
   [Michael Koval](https://github.com/mkoval)
-- command [aptly package search](/doc/aptly/package/search) exists with
+- new **OpenStack Swift** backend for publishing
+  ([\#191](https://github.com/smira/aptly/pull/191)),
+  thanks to [Sebastien Badia](https://github.com/sbadia),
+  [Sylvain Baubeau](https://github.com/lebauce) and
+  [John Leach](https://github.com/johnl)
+- command [aptly package search](/doc/aptly/package/search) exits with
   failure code if no packages have been found
   ([\#188](https://github.com/smira/aptly/issues/188))
 - fix to continue downloading on 403 error (workaround for Amazon S3 behavior)
