@@ -233,7 +233,7 @@ Response is the same as for `GET /api/repos/:name` API.
 
 Example:
 
-    $ curl -v -X POST -H 'Content-Type: application/json' --data '{"PackageRefs": ["Psource pyspi 0.6.1-1.4 f8f1daa806004e89","Pi386 libboost-program-options-dev 1.49.0.1 918d2f433384e378"]}' http://localhost:8080/api/repos/repo2/packages
+    $ curl -X POST -H 'Content-Type: application/json' --data '{"PackageRefs": ["Psource pyspi 0.6.1-1.4 f8f1daa806004e89","Pi386 libboost-program-options-dev 1.49.0.1 918d2f433384e378"]}' http://localhost:8080/api/repos/repo2/packages
     {"Name":"repo2","Comment":"","DefaultDistribution":"","DefaultComponent":"main"}
 
 ### Delete packages by key
@@ -261,5 +261,5 @@ Response is the same as for `GET /api/repos/:name` API.
 
 Example:
 
-    $ curl -v -X DELETE -H 'Content-Type: application/json' --data '{"PackageRefs": ["Pi386 libboost-program-options-dev 1.49.0.1 918d2f433384e378"]}' http://localhost:8080/api/repos/repo2/packages
+    $ curl -X DELETE -H 'Content-Type: application/json' --data '{"PackageRefs": ["Pi386 libboost-program-options-dev 1.49.0.1 918d2f433384e378"]}' http://localhost:8080/api/repos/repo2/packages
     {"Name":"repo2","Comment":"","DefaultDistribution":"","DefaultComponent":"main"}
