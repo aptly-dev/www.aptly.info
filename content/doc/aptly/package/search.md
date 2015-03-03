@@ -28,6 +28,8 @@ Params are:
 -   `package-query` is a [package query](/doc/feature/query/) to
     search for packages
 
+If no package are found, aptly exits with code 1 (failure).
+
 Example:
 
     $ aptly package search 'Version (>=1.2.3-2), Version (<1.2.3-3)'

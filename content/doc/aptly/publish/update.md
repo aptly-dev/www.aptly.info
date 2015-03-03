@@ -35,6 +35,7 @@ Params:
 
 Flags:
 
+-   `-batch`: run GPG with detached tty (useful when running from crontab)
 -   `-force-overwrite=false`: overwrite packages files in the pool even
     if content is different (see also [duplicate packages](/doc/feature/duplicate/))
 -   `-gpg-key=""`: GPG key ID to use when signing the release, if not

@@ -27,7 +27,9 @@ Params:
     repository would be pulished to local file system. In order to
     publish to Amazon S3, use endpoint name `s3:<name>:`, where endpoint
     `name` should configured
-    as S3 publishing endpoint in [configuration file](/doc/feature/s3/).
+    as S3 publishing endpoint in
+    [configuration file](/doc/feature/s3), for OpenStack Swift,
+    use endpoint `swift:<name>` ([Swift configuration](/doc/feature/swift))
 -   `prefix` is an optional prefix for publishing, if not specified,
     repository would be published to the root of public directory.
     `prefix` could be single directory like `ppa` or part of the tree
@@ -37,6 +39,7 @@ Params:
 
 Flags:
 
+-   `-batch`: run GPG with detached tty (useful when running from crontab)
 -   `-component=""`: component name to publish; guessed from original
     repository (if any), or defaults to `main` (for multi-component
     publishing, separate components with commas)

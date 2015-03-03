@@ -17,4 +17,8 @@ aptly supports commands in several basic categories:
 -   `snapshot`: create, merge, manage snapshots
 -   `publish`: publish snapshot or local repository
 -   `serve`: quickly export published repositories via HTTP
+-   `task`: manage aptly tasks
 -   `db`: cleanup database and package pool, recover database after failure
+-   `api`: REST API service
+-   `config`: configuration management
+-   `task`: multi-command tasks

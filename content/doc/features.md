@@ -49,6 +49,7 @@ List of aptly features, in no particular order:
   * [multi-component](/doc/feature/multi-component/) publishing
   * publishing under prefix
   * publishing to [Amazon S3](/doc/feature/s3/)
+  * publishing to [OpenStack Swift](/doc/feature/swift/)
   * atomic [switching](/doc/aptly/publish/switch) of published snapshots
   * atomic [updating](/doc/aptly/publish/update) of published local repositories
 * displaying [graph](/doc/aptly/graph/) of dependencies between mirrors, local repos, snapshots and

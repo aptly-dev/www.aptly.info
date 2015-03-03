@@ -45,7 +45,18 @@ below):
           "storageClass": "",
           "encryptionMethod": "",
           "plusWorkaround": false
+        },
+      "SwiftPublishEndpoints": {
+        "test": {
+          "container": "repo",
+          "osname": "",
+          "password": "",
+          "prefix": "",
+          "authurl": "",
+          "tenant": "",
+          "tenantid": ""
         }
+      }
     }
 
 Options:
@@ -82,6 +93,8 @@ Options:
     `lsb_release` command
 -   `S3PublishEndpoints` is a configuration of Amazon S3 publishing
     endpoints (see [publishing to S3](/doc/feature/s3/))
+-   `SwiftPublishEndpoints` describes OpenStack Swift publishing
+    parameters (see [publishing to Swift](/doc/feature/swift))
 
 <div class="alert alert-warning alert-note"><strong>Warning:</strong> <code>rootDir</code> contains all the downloaded packages from remote
 mirrors, so it should have enough space. For example. mirror of Debian

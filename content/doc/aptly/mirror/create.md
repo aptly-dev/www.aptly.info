@@ -41,7 +41,9 @@ Flags:
     packages in the mirror
 -   `-filter-with-deps=false`: when filtering, include dependencies of
     matching packages as well
--   `-ignore-signatures=false`: disable verification of Release file
+-   `-force-components=false`: (only with component list on command line)
+    skip check that requested components are listed in `Release` file
+-   `-ignore-signatures=false`: disable verification of `Release` file
     signatures
 -   `-keyring=trustedkeys.gpg`: gpg keyring to use when verifying
     Release file (could be specified multiple times)

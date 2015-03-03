@@ -36,6 +36,7 @@ Params:
 
 Flags:
 
+-   `-batch`: run GPG with detached tty (useful when running from crontab)
 -   `-component=""`: list of components to update (separate components
     with commas)
 -   `-force-overwrite=false`: overwrite packages files in the pool even
