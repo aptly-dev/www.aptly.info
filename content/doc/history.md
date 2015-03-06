@@ -9,6 +9,12 @@ menu:
 History
 -------
 
+### Version 0.9.1
+
+*Critical bugfix release*
+
+- bug fix: `aptly db cleanup` was cleaning up duplicate packages
+  ([\#217](https://github.com/smira/aptly/issues/217))
 
 ### Version 0.9
 
