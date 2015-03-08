@@ -68,7 +68,7 @@ sub   2048R/E0C10001 2014-10-09
 </pre>
 
 Default options should be fine, you need to backup your key and prepare revocation
-certificate, for examle like described [here](http://fedoraproject.org/wiki/Creating_GPG_Keys).
+certificate, for example like described [here](http://fedoraproject.org/wiki/Creating_GPG_Keys).
 
 Now we're ready to start!
 
