@@ -46,6 +46,7 @@ below):
           "encryptionMethod": "",
           "plusWorkaround": false
         },
+      },
       "SwiftPublishEndpoints": {
         "test": {
           "container": "repo",
