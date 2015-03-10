@@ -25,3 +25,5 @@ With configuration management systems:
     (Heavy Water Operations, LLC)
 -   [Puppet module](https://github.com/alphagov/puppet-aptly) by
     Government Digital Services
+-   [SaltStack Formula](https://github.com/saltstack-formulas/aptly-formula) by
+    Forrest Alvarez and Brian Jackson
