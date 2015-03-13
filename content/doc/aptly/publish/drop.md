@@ -28,6 +28,15 @@ Usage:
 -   `prefix` is an optional prefix for publishing, if not specified,
     prefix is considered to be `.`.
 
+Flags:
+
+-   `-force-drop=false`: drop published repository even if component cleanup
+    fails
+
+Usually `-force-drop` isn't required, but if due to some corruption component cleanup
+fails, `-force-drop` could be used to drop published repository. This might leave
+some published repository files left under `public/` directory.
+
 Example:
 
     $ aptly publish drop squeeze-backports

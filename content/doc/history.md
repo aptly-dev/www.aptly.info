@@ -9,6 +9,20 @@ menu:
 History
 -------
 
+### Version 0.9.5
+
+- all `search` commands now exit with code 1 if no results had been found
+  ([\#213](https://github.com/smira/aptly/issues/213))
+- command [aptly db cleanup](/doc/aptly/db/cleanup) supports two new flags
+  `-verbose` and `-dry-run`
+  ([\#217](https://github.com/smira/aptly/issues/217))
+- command [aptly publish drop](/doc/aptly/publish/drop) gets new flag
+  `-force-drop` to drop published repository even if component cleanup
+  errors
+  ([\#153](https://github.com/smira/aptly/issues/153))
+- bug fix: aptly reads fields from control files in case-insensitive manner
+  ([\#193](https://github.com/smira/aptly/issues/193))
+
 ### Version 0.9.1
 
 *Critical bugfix release*

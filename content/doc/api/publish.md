@@ -130,6 +130,16 @@ Example:
 
 Delete published repository, clean up files in published directory.
 
+Query params:
+
+ Name                      | Description
+---------------------------|-------------------------------
+ `force`                   | force published repository removal even if component cleanup fails
+
+Usually `?force=1` isn't required, but if due to some corruption component cleanup
+fails, `?force=1` could be used to drop published repository. This might leave
+some published repository files left under `public/` directory.
+
 Example:
 
     $ curl -X DELETE http://localhost:8080/api/publish//wheezy

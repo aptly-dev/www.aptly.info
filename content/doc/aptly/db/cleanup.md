@@ -21,6 +21,15 @@ Usage:
 
     $ aptly db cleanup
 
+Flags:
+
+-   `-dry-run=false`: don't remove anything, but report what would have been
+    removed
+-   `-verbose=false`: be verbose when listing objects being processed
+
+If `aptly db cleanup` is run with both flags `-dry-run -verbose`, it collects information
+about all unresolved package references and reports them with details.
+
 Example:
 
     $ aptly db cleanup
