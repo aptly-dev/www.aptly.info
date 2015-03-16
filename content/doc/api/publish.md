@@ -114,14 +114,14 @@ JSON body params:
 
  Name                      | Type                 | Description
 ---------------------------|----------------------|-------------------------------
- `Sources`                 | []Source             | *only when updating published snapshots*, list of objects `Component`/`Name`
+ `Snapshots`               | []Source             | *only when updating published snapshots*, list of objects `Component`/`Name`
  `ForceOverwrite`          | bool                 | when publishing, overwrite files in `pool/` directory without notice
  `Signing`                 | SigningOptions       | gpg options (see above)
 
 
 Example:
 
-    $ curl -X PUT -H 'Content-Type: application/json' --data '{"Sources": [{"Name": "8KNOnIC7q900L5v"}]}' http://localhost:8080/api/publish//wheezy
+    $ curl -X PUT -H 'Content-Type: application/json' --data '{"Snapshots": [{"Component": "main", "Name": "8KNOnIC7q900L5v"}]}' http://localhost:8080/api/publish//wheezy
     {"Architectures":["amd64","i386"],"Distribution":"wheezy","Label":"","Origin":"","Prefix":".","SourceKind":"local","Sources":[{"Component":"main","Name":"2y21K6aKBE5UJBQ"}],"Storage":""}
 
 ### Drop Published Repository
