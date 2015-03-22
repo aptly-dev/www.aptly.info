@@ -9,6 +9,16 @@ menu:
 History
 -------
 
+### Version 0.9.6~dev
+
+- support for `.changes` file processing, including
+  uploaders restriction: new command
+  [aptly repo include](/doc/aptly/repo/include), new flag
+  `-uploaders-file` for commands [aptly repo create](/doc/aptly/repo/create)
+  and [aptly repo edit](/doc/aptly/repo/edit)
+  ([\#71](https://github.com/smira/aptly/issues/71))
+  **this work has been sponsored by sipgate GmbH** (http://www.sipgate.de/)
+
 ### Version 0.9.5
 
 - all `search` commands now exit with code 1 if no results had been found
