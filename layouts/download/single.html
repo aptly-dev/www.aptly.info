@@ -15,11 +15,11 @@
         <pre>deb http://repo.aptly.info/ squeeze main</pre>
         <p>And importing key that is used to sign the release either from keys.gnupg.net:</p>
 
-<pre class="code">$ apt-key adv --keyserver keys.gnupg.net --recv-keys E083A3782A194991</pre>
+<pre class="code">$ sudo apt-key adv --keyserver keys.gnupg.net --recv-keys E083A3782A194991</pre>
 
         <p>or by downloading it (<a href="https://www.aptly.info/pubkey.txt">GPG key</a>):</p>
 
-<pre class="code">$ wget -qO - https://www.aptly.info/pubkey.txt | apt-key add -</pre>
+<pre class="code">$ wget -qO - https://www.aptly.info/pubkey.txt | sudo apt-key add -</pre>
 
         <p>After that you can install aptly as any other software package:</p>
 
