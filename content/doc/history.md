@@ -18,6 +18,8 @@ History
   and [aptly repo edit](/doc/aptly/repo/edit)
   ([\#71](https://github.com/smira/aptly/issues/71))
   **this work has been sponsored by sipgate GmbH** (http://www.sipgate.de/)
+- new flag `-format` for [aptly graph](/doc/aptly/graph)
+  ([\#163](https://github.com/smira/aptly/issues/163))
 
 ### Version 0.9.5
 
