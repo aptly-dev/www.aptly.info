@@ -27,6 +27,11 @@ Usage:
 
     $ aptly graph
 
+Flags:
+
+-   `-format="png"`: graph output format, could be anything graphviz supports, e.g. `png`, `pdf`, `svg`, ...
+
+
 Example:
 
 <a href="/img/graphfull.png"><img src="/img/graph.png" alt="Example graph from aptly graph" class="img-responsive"></a>
