@@ -21,6 +21,10 @@ History
 - support for `Contents` indexes generation, new flag `-skip-contents`
   for `aptly publish` commands to disable it (per published repository)
   ([\#142](https://github.com/smira/aptly/issues/142))
+- support for non-Amazon S3-compatible cloud storages
+  ([\#218](https://github.com/smira/aptly/pull/218))
+  thanks to
+  [Serge van Ginderachter](https://github.com/srvg)
 - new flag `-format` for [aptly graph](/doc/aptly/graph)
   ([\#163](https://github.com/smira/aptly/issues/163))
 - now aptly removes empty `Depends:` lines
