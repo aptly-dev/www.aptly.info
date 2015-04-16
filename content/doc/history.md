@@ -18,8 +18,15 @@ History
   and [aptly repo edit](/doc/aptly/repo/edit)
   ([\#71](https://github.com/smira/aptly/issues/71))
   **this work has been sponsored by sipgate GmbH** (http://www.sipgate.de/)
+- support for `Contents` indexes generation, new flag `-skip-contents`
+  for `aptly publish` commands to disable it (per published repository)
+  ([\#142](https://github.com/smira/aptly/issues/142))
 - new flag `-format` for [aptly graph](/doc/aptly/graph)
   ([\#163](https://github.com/smira/aptly/issues/163))
+- now aptly removes empty `Depends:` lines
+  ([\#233](https://github.com/smira/aptly/issues/233))
+- preliminary support for `.ddeb` packages
+  ([\#231](https://github.com/smira/aptly/pull/231))
 
 ### Version 0.9.5
 
