@@ -107,7 +107,7 @@ file is JSON-based (it allows inline comments and relaxed comma placement):
 
     {
         "groups": {
-            "admins": ["1B2AFA1C"]
+            "admins": ["1B2AFA1C"],
             // admins can do whatever developers can do
             "developers": ["21DBB89C16DB3E6D", "37E1C17570096AD1", "admins"],
         },
