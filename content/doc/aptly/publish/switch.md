@@ -36,9 +36,15 @@ Params:
 
 Flags:
 
--   `-batch`: run GPG with detached tty (useful when running from crontab)
+-   `-architectures=""`: list of architectures to consider during switch (comma-separated), default to all available
+-   `-batch=false`: run GPG with detached tty (useful when running from crontab)
 -   `-component=""`: list of components to update (separate components
     with commas)
+-   `-config=""`: location of configuration file (default locations are /etc/aptly.conf, ~/.aptly.conf)
+-   `-dep-follow-all-variants=false`: when processing dependencies, follow a & b if depdency is 'a|b'
+-   `-dep-follow-recommends=false`: when processing dependencies, follow Recommends
+-   `-dep-follow-source=false`: when processing dependencies, follow from binary to Source packages
+-   `-dep-follow-suggests=false`: when processing dependencies, follow Suggests
 -   `-force-overwrite=false`: overwrite packages files in the pool even
     if content is different (see also [duplicate packages](/doc/feature/duplicate/))
 -   `-gpg-key=""`: GPG key ID to use when signing the release, if not
