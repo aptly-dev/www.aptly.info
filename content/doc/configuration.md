@@ -38,13 +38,15 @@ below):
         "test": {
           "region": "us-east-1",
           "bucket": "repo",
+          "endpoint": "",
           "awsAccessKeyID": "",
           "awsSecretAccessKey": "",
           "prefix": "",
           "acl": "public-read",
           "storageClass": "",
           "encryptionMethod": "",
-          "plusWorkaround": false
+          "plusWorkaround": false,
+          "disableMultiDel": false
         },
       },
       "SwiftPublishEndpoints": {
