@@ -109,12 +109,12 @@ file is JSON-based (it allows inline comments and relaxed comma placement):
         "groups": {
             "admins": ["1B2AFA1C"],
             // admins can do whatever developers can do
-            "developers": ["21DBB89C16DB3E6D", "37E1C17570096AD1", "admins"],
+            "developers": ["21DBB89C16DB3E6D", "37E1C17570096AD1", "admins"]
         },
         "rules": [
             // don't let anyone upload these packages
             { "condition": "Source (dangerous) | Source (kernel)",
-              "deny": ["*"],
+              "deny": ["*"]
             },
             // admins and our CTO can upload to stable
             { "condition": "Distribution (stable)",
@@ -126,12 +126,12 @@ file is JSON-based (it allows inline comments and relaxed comma placement):
             },
             // hardlink is our favourite package!
             { "condition": "Source (hardlink)",
-              "allow": ["developers", "admins"],
+              "allow": ["developers", "admins"]
             },
             // arm64 is open to anyone
             {
               "condition": "Architecture (% *arm64*)",
-              "allow": ["*"],
+              "allow": ["*"]
             }
         ]
     }
