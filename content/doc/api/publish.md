@@ -62,6 +62,10 @@ Example:
 Publish local repository or snapshot under specified prefix. Storage might be passed in prefix as well,
 e.g. `s3:packages/`. To supply empty prefix, just remove last part (`POST /api/publish`)
 
+Add `repos` or `snapshots` to end of POST depending on what you are publishing from, e.g. `POST /api/publish/:prefix/repos` to publish a repo with a prefix
+
+Or to publish a snapshot with no prefix required `POST /api/publish//snapshots`
+
 JSON body params:
 
  Name                      | Type                 | Description
@@ -95,10 +99,10 @@ Code      | Description
 
 Example:
 
-    $ curl -X POST -H 'Content-Type: application/json' --data '{"SourceKind": "local", "Sources": [{"Name": "local-repo"}], "Architectures": ["i386", "amd64"], "Distribution": "wheezy"}' http://localhost:8080/api/publish
+    $ curl -X POST -H 'Content-Type: application/json' --data '{"SourceKind": "local", "Sources": [{"Name": "local-repo"}], "Architectures": ["i386", "amd64"], "Distribution": "wheezy"}' http://localhost:8080/api/publish//repos
     {"Architectures":["amd64","i386"],"Distribution":"wheezy","Label":"","Origin":"","Prefix":".","SourceKind":"local","Sources":[{"Component":"main","Name":"local-repo"}],"Storage":""}
 
-    $ curl -X POST -H 'Content-Type: application/json' --data '{"SourceKind": "local", "Sources": [{"Name": "0XktRe6qMFp4b8C", "Component": "contrib"}, {"Name": "EqmoTZiVx8MGN65", "Component": "non-free"}], "Architectures": ["i386", "amd64"], "Distribution": "wheezy"}' http://localhost:8080/api/publish/debian_testing/
+    $ curl -X POST -H 'Content-Type: application/json' --data '{"SourceKind": "local", "Sources": [{"Name": "0XktRe6qMFp4b8C", "Component": "contrib"}, {"Name": "EqmoTZiVx8MGN65", "Component": "non-free"}], "Architectures": ["i386", "amd64"], "Distribution": "wheezy"}' http://localhost:8080/api/publish/debian_testing/repos
     {"Architectures":["amd64","i386"],"Distribution":"wheezy","Label":"","Origin":"","Prefix":"debian/testing","SourceKind":"local","Sources":[{"Component":"contrib","Name":"0XktRe6qMFp4b8C"},{"Component":"non-free","Name":"EqmoTZiVx8MGN65"}],"Storage":""}
 
 ### Update Published Local Repo/Switch Published Snapshot
