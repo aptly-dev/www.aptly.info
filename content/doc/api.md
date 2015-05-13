@@ -31,7 +31,7 @@ Run `aptly api serve` to start HTTP service:
     [GIN-debug] GET   /api/version              --> github.com/smira/aptly/api.apiVersion (4 handlers)
     ...
 
-By default aptly would listen on `*:8080`, but it could be changed with `-listen` flag.
+By default aptly would listen on `:8080`, but it could be changed with `-listen` flag.
 
 Try some APIs:
 
