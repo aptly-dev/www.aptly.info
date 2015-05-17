@@ -30,7 +30,7 @@ Flags:
 -   `-repo="{{.Distribution}}"`: which repo should files go to, defaults to Distribution field of .changes file
 -   `-uploaders-file=""`: path to uploaders.json file
 
-This command allows to implement package upload forkflow using Debian tools:
+This command allows to implement package upload workflow using Debian tools:
 `dpkg-genchanges`, `dput`, etc. Set of Debian package files is uploaded together
 with `.changes` file signed by developer and describing changeset.
 aptly would verify signature, package integrity and using optional
