@@ -25,8 +25,10 @@ History
   ([\#218](https://github.com/smira/aptly/pull/218))
   thanks to
   [Serge van Ginderachter](https://github.com/srvg)
-- new flag `-format` for [aptly graph](/doc/aptly/graph)
-  ([\#163](https://github.com/smira/aptly/issues/163))
+- new flags `-format` and `-output` for [aptly graph](/doc/aptly/graph)
+  ([\#163](https://github.com/smira/aptly/issues/163),
+   [\#242](https://github.com/smira/aptly/pull/242)),
+   thanks to [Zhang, Guodong](https://github.com/gdbdzgd)
 - now aptly removes empty `Depends:` lines
   ([\#233](https://github.com/smira/aptly/issues/233))
 - preliminary support for `.ddeb` packages

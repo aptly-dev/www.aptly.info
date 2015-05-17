@@ -30,7 +30,7 @@ Usage:
 Flags:
 
 -   `-format="png"`: graph output format, could be anything graphviz supports, e.g. `png`, `pdf`, `svg`, ...
-
+-   `-output=""`: specify output filename, default is to open result in viewer
 
 Example:
 
