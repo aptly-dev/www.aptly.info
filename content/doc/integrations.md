@@ -27,3 +27,4 @@ With configuration management systems:
     Government Digital Services
 -   [SaltStack Formula](https://github.com/saltstack-formulas/aptly-formula) by
     Forrest Alvarez and Brian Jackson
+-   [Ansible role](https://github.com/aioue/ansible-role-aptly) by Tom Paine
