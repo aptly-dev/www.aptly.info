@@ -491,7 +491,6 @@ Deleting unreferenced files (10)...
 Compacting database...
 </pre>
 
-Package files are not deleted until there's at least one object that references them (snapshot, mirror or
-local repositories).
+Package files are only deleted if no objects (snapshots, mirrors, local repositories) reference them.
 
 Next tutorial is about [pulling new version of packages from backports or 3rd party repos](/tutorial/pull/).
