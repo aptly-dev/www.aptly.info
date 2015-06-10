@@ -21,13 +21,13 @@ Docker:
 
 With configuration management systems:
 
+-   [Ansible role](https://github.com/aioue/ansible-role-aptly) by Tom Paine
 -   [Chef cookbook](https://github.com/hw-cookbooks/aptly) by Aaron Baer
     (Heavy Water Operations, LLC)
 -   [Puppet module](https://github.com/alphagov/puppet-aptly) by
     Government Digital Services
 -   [SaltStack Formula](https://github.com/saltstack-formulas/aptly-formula) by
     Forrest Alvarez and Brian Jackson
--   [Ansible role](https://github.com/aioue/ansible-role-aptly) by Tom Paine
 
 CLI for aptly API:
 
