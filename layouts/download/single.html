@@ -15,12 +15,12 @@
         <pre>deb http://repo.aptly.info/ squeeze main</pre>
         <p>And importing key that is used to sign the release:</p>
 
-<pre class="code">$ apt-key adv --keyserver keys.gnupg.net --recv-keys E083A3782A194991</pre>
+<pre class="code"># apt-key adv --keyserver keys.gnupg.net --recv-keys E083A3782A194991</pre>
 
         <p>After that you can install aptly as any other software package:</p>
 
-<pre class="code">$ apt-get update
-$ apt-get install aptly</pre>
+<pre class="code"># apt-get update
+# apt-get install aptly</pre>
 
         <p>Please don't worry about <code>squeeze</code> part in repo name: aptly package should work on Debian squeeze+, Ubuntu 10.0+. Package contains aptly binary, man page and bash completion.</p>
 
@@ -29,7 +29,7 @@ $ apt-get install aptly</pre>
         <pre>deb http://repo.aptly.info/ nightly main</pre>
 
         <p><b>Mac OS X</b>: Installation using Homebrew:</p>
-        <pre>brew install aptly</pre>
+        <pre class="code">$ brew install aptly</pre>
       </div>
     </section>
     <section class="primary-content">
