@@ -11,6 +11,10 @@ History
 
 ### Version 0.9.6~dev
 
+- bug fix: workaround downloads interrupted with EOF error
+  ([\#266](https://github.com/smira/aptly/pull/266))
+  thanks to
+  [Szymon Sobik](https://github.com/sobczyk)
 - support for `.changes` file processing, including
   uploaders restriction: new command
   [aptly repo include](/doc/aptly/repo/include), new flag
