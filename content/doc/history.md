@@ -11,10 +11,6 @@ History
 
 ### Version 0.9.6~dev
 
-- bug fix: workaround downloads interrupted with EOF error
-  ([\#266](https://github.com/smira/aptly/pull/266))
-  thanks to
-  [Szymon Sobik](https://github.com/sobczyk)
 - support for `.changes` file processing, including
   uploaders restriction: new command
   [aptly repo include](/doc/aptly/repo/include), new flag
@@ -29,6 +25,12 @@ History
   ([\#218](https://github.com/smira/aptly/pull/218))
   thanks to
   [Serge van Ginderachter](https://github.com/srvg)
+- bug fix: wrong handling of multiline fields in `Sources` indexes
+  ([\#261](https://github.com/smira/aptly/issues/261))
+- bug fix: workaround downloads interrupted with EOF error
+  ([\#266](https://github.com/smira/aptly/pull/266))
+  thanks to
+  [Szymon Sobik](https://github.com/sobczyk)
 - new flags `-format` and `-output` for [aptly graph](/doc/aptly/graph)
   ([\#163](https://github.com/smira/aptly/issues/163),
    [\#242](https://github.com/smira/aptly/pull/242)),
