@@ -44,6 +44,8 @@ History
   ([\#233](https://github.com/smira/aptly/issues/233))
 - preliminary support for `.ddeb` packages
   ([\#231](https://github.com/smira/aptly/pull/231))
+- bug fix: error messages should go to stderr
+  ([\#249](https://github.com/smira/aptly/issues/249))
 
 ### Version 0.9.5
 
