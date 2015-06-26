@@ -30,6 +30,8 @@ History
 - S3 upstream library has been updated to last version
   to include new Amazon regions
   ([\#253](https://github.com/smira/aptly/issues/253))
+- bug fix: [aptly snapshot switch](/doc/aptly/snapshot/switch) fails to respect the S3 `plusWorkaround`
+  ([\#239](https://github.com/smira/aptly/issues/239))
 - bug fix: wrong handling of multiline fields in `Sources` indexes
   ([\#261](https://github.com/smira/aptly/issues/261))
 - bug fix: workaround downloads interrupted with EOF error
