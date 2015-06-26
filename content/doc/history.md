@@ -27,6 +27,9 @@ History
   [Serge van Ginderachter](https://github.com/srvg)
 - aptly now retries S3 transient errors automatically
   ([\#255](https://github.com/smira/aptly/issues/255))
+- S3 upstream library has been updated to last version
+  to include new Amazon regions
+  ([\#253](https://github.com/smira/aptly/issues/253))
 - bug fix: wrong handling of multiline fields in `Sources` indexes
   ([\#261](https://github.com/smira/aptly/issues/261))
 - bug fix: workaround downloads interrupted with EOF error
