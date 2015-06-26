@@ -25,6 +25,8 @@ History
   ([\#218](https://github.com/smira/aptly/pull/218))
   thanks to
   [Serge van Ginderachter](https://github.com/srvg)
+- aptly now retries S3 transient errors automatically
+  ([\#255](https://github.com/smira/aptly/issues/255))
 - bug fix: wrong handling of multiline fields in `Sources` indexes
   ([\#261](https://github.com/smira/aptly/issues/261))
 - bug fix: workaround downloads interrupted with EOF error
