@@ -21,6 +21,8 @@ History
 - support for `Contents` indexes generation, new flag `-skip-contents`
   for `aptly publish` commands to disable it (per published repository)
   ([\#142](https://github.com/smira/aptly/issues/142))
+- support for custom output using flag `-format` and templates
+  ([\#254](https://github.com/smira/aptly/issues/254))
 - support for non-Amazon S3-compatible cloud storages
   ([\#218](https://github.com/smira/aptly/pull/218))
   thanks to
