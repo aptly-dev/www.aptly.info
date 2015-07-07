@@ -28,6 +28,11 @@ Params are:
 -   `package-query` is a [package query](/doc/feature/query/) to
     search for packages
 
+Flags:
+
+-   `-format=""`:
+    [custom format](/doc/feature/package-display/) for result printing
+
 If no package are found, aptly exits with code 1 (failure).
 
 Example:
