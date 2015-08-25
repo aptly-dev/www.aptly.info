@@ -4,16 +4,17 @@ type = "about"
 title = "About"
 +++
 
-My name is Andrey Smirnov. Currently I'm independent developer. I'm big fan of
+My name is Andrey Smirnov. Currently I'm an independent developer. I'm a big fan of
 Go, Python, DevOps and high-load projects.
-I had been working as team development lead at Qik, Skype and Microsoft, my
-team was in charge of asynchronous communication backend.
-Prior to that I've been leading development of smotri.com, Russian clone
-of YouTube. You can find my [resume](http://smira.ru/cv-eng.pdf) to get
+
+Previously, I was team development lead at Skype Qik (Microsoft).  There my
+team was in charge of the asynchronous communication backend.
+
+Prior to that I was leading development of smotri.com, a Russian clone
+of YouTube. You can see my [resume here](http://smira.ru/cv-eng.pdf) to get
 more details.
 
-Some my open-source projects are: [Redis Resharding Proxy](https://github.com/smira/redis-resharding-proxy)
-and [txZMQ](https://github.com/smira/txZMQ). I've developed
-Flash broadcasting backend (smotri.com), call signalling and notification (Qik) and
-many other products. I'm frequently giving talks at conferences, long time ago I've been teaching
-at Moscow State University.
+Some of my open-source projects are: [Redis Resharding Proxy](https://github.com/smira/redis-resharding-proxy)
+and [txZMQ](https://github.com/smira/txZMQ). I've developed Flash broadcasting backend (smotri.com), call signalling and notification (Qik), and many other products. 
+
+I frequently give talks at conferences.  A long time ago I taught at Moscow State University.
