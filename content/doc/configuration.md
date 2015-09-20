@@ -45,7 +45,7 @@ below):
           "storageClass": "",
           "encryptionMethod": "",
           "plusWorkaround": false
-        },
+        }
       },
       "SwiftPublishEndpoints": {
         "test": {
