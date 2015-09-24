@@ -50,6 +50,10 @@ History
   ([\#231](https://github.com/smira/aptly/pull/231))
 - bug fix: error messages should go to stderr
   ([\#249](https://github.com/smira/aptly/issues/249))
+- bug fix: handling of folded fields in stanza
+  ([\#270](https://github.com/smira/aptly/pulls/270))
+  thanks to
+  [Szymon Sobik](https://github.com/sobczyk)
 
 ### Version 0.9.5
 
