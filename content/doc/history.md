@@ -54,6 +54,8 @@ History
   ([\#270](https://github.com/smira/aptly/pulls/270))
   thanks to
   [Szymon Sobik](https://github.com/sobczyk)
+- bug fix: limit number of open files in goleveldb to 256
+  ([\#260](https://github.com/smira/aptly/pulls/260))
 
 ### Version 0.9.5
 
