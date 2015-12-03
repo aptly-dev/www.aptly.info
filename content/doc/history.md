@@ -56,6 +56,12 @@ History
   [Szymon Sobik](https://github.com/sobczyk)
 - bug fix: limit number of open files in goleveldb to 256
   ([\#260](https://github.com/smira/aptly/pulls/260))
+- bug fix: fix cache flusher in API daemon mode
+  ([\#307](https://github.com/smira/aptly/pulls/307),
+  thanks to [Vincent Bernat](https://github.com/vincentbernat))
+- bug fix: better error messages for package analysis
+  ([\#320](https://github.com/smira/aptly/pull/320),
+  thanks to [Paul Krohn](https://github.com/paul-krohn))
 
 ### Version 0.9.5
 
