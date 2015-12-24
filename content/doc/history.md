@@ -49,7 +49,8 @@ History
 - preliminary support for `.ddeb` packages
   ([\#231](https://github.com/smira/aptly/pull/231))
 - bug fix: error messages should go to stderr
-  ([\#249](https://github.com/smira/aptly/issues/249))
+  ([\#249](https://github.com/smira/aptly/issues/249),
+   [\#311](https://github.com/smira/aptly/issues/311))
 - bug fix: handling of folded fields in stanza
   ([\#270](https://github.com/smira/aptly/pulls/270))
   thanks to
@@ -62,6 +63,9 @@ History
 - bug fix: better error messages for package analysis
   ([\#320](https://github.com/smira/aptly/pull/320),
   thanks to [Paul Krohn](https://github.com/paul-krohn))
+- security bug fix: don't download files without checksums
+  ([\#324](https://github.com/smira/aptly/pull/324),
+  thanks to [x539](https://github.com/x539))
 
 ### Version 0.9.5
 
