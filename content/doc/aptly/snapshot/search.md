@@ -27,6 +27,8 @@ Params are:
 
 Flags:
 
+-   `-format=""`:
+    [custom format](/doc/feature/package-display/) for result printing
 -   `-with-deps=false`: include dependencies of matching packages
     into search results
 

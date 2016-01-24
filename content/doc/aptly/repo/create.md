@@ -32,9 +32,14 @@ Flags:
     repository
 -   `-component="main"`: default component when publishing
 -   `-distribution=""`: default distribution when publishing
+-   `-uploaders-file=""`: `uploaders.json` to be used when including .changes into this repository
 
 Distribution and component would be used as defaults when
 publishing repository either directly or via snapshot.
+
+If `-uploaders-file` flag is given, contents of the file are parsed
+and attached to local repository. This would be per-repository
+upload restriction used by [aptly repo include](/doc/aptly/repo/include) command.
 
 Example:
 

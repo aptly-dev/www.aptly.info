@@ -28,6 +28,8 @@ Flags:
 -   `-with-packages=false`: show detailed list of packages and versions
     stored in the mirror
 
+If repository has uploaders file attached, it would be displayed.
+
 Example:
 
     $ aptly repo show -with-packages stable

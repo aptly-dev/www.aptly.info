@@ -2,7 +2,7 @@
 date: 2014-07-16T17:02:05Z
 title: Download
 type: download
-version: 0.9.5
+version: 0.9.6
 ---
 
 Roadmap:

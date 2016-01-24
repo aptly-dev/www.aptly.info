@@ -55,6 +55,8 @@ Flags:
 -   `-passphrase-file=""`: GPG passphrase file to unlock private key (possibly insecure)
 -   `-origin=""`: value for `Origin:` field
 -   `-secret-keyring=""`: GPG secret keyring to use (instead of default)
+-   `-skip-contents=false`: don't generate Contents indexes (setting would
+    be stored permanently for published repository)
 -   `-skip-signing=false`: don't sign Release files with GPG
 
 If architectures are limited (with config `architectures` or option
@@ -119,6 +121,9 @@ Directory structure for published repositories:
                     -   `Release`: raw file
                     -   `InRelease`: clearsigned version
                     -   `Release.gpg`: detached `Release` signature
+                    -   `Contents-i386.gz`: contents indexes
+                    -   `Contents-udeb-i386.gz`: contents indexes for .udeb packages
+                        (generated only if .udeb packages are present)
                     -   `binary-i386`: binary packages index for
                         architecture `i386`
                         -   `Packages`: package metadata
@@ -132,7 +137,7 @@ Directory structure for published repositories:
                         -   `Sources.bz2`
                         -   `Release`: used by debian-installer
                     -   `debian-installer`: indexes for .udeb packages
-                         (generated only if .udeb packages are present)
+                        (generated only if .udeb packages are present)
                          -   `binary-i386`: binary .udeb index for
                              architecture `i386`
                             -   `Packages`: package index, .udeb

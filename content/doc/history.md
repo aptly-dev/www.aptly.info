@@ -9,6 +9,68 @@ menu:
 History
 -------
 
+### Version 0.9.6
+
+- support for `.changes` file processing, including
+  uploaders restriction: new command
+  [aptly repo include](/doc/aptly/repo/include), new flag
+  `-uploaders-file` for commands [aptly repo create](/doc/aptly/repo/create)
+  and [aptly repo edit](/doc/aptly/repo/edit)
+  ([\#71](https://github.com/smira/aptly/issues/71))
+  **this work has been sponsored by sipgate GmbH** (http://www.sipgate.de/)
+- support for `Contents` indexes generation, new flag `-skip-contents`
+  for `aptly publish` commands to disable it (per published repository)
+  ([\#142](https://github.com/smira/aptly/issues/142))
+- support for custom output using flag `-format` and templates
+  ([\#254](https://github.com/smira/aptly/issues/254))
+- support for non-Amazon S3-compatible cloud storages
+  ([\#218](https://github.com/smira/aptly/pull/218))
+  thanks to
+  [Serge van Ginderachter](https://github.com/srvg)
+- aptly now retries S3 transient errors automatically
+  ([\#255](https://github.com/smira/aptly/issues/255))
+- S3 upstream library has been updated to last version
+  to include new Amazon regions
+  ([\#253](https://github.com/smira/aptly/issues/253))
+- optional "no lock" mode of API service operations
+  allowing concurrent CLI usage
+  ([\#300](https://github.com/smira/aptly/pull/300))
+  thanks to [Vincent Bernat](https://github.com/vincentbernat))
+- bug fix: [aptly snapshot switch](/doc/aptly/snapshot/switch) fails to respect the S3 `plusWorkaround`
+  ([\#239](https://github.com/smira/aptly/issues/239))
+- bug fix: wrong handling of multiline fields in `Sources` indexes
+  ([\#261](https://github.com/smira/aptly/issues/261))
+- bug fix: workaround downloads interrupted with EOF error
+  ([\#266](https://github.com/smira/aptly/pull/266))
+  thanks to
+  [Szymon Sobik](https://github.com/sobczyk)
+- new flags `-format` and `-output` for [aptly graph](/doc/aptly/graph)
+  ([\#163](https://github.com/smira/aptly/issues/163),
+   [\#242](https://github.com/smira/aptly/pull/242)),
+   thanks to [Zhang, Guodong](https://github.com/gdbdzgd)
+- now aptly removes empty `Depends:` lines
+  ([\#233](https://github.com/smira/aptly/issues/233))
+- preliminary support for `.ddeb` packages
+  ([\#231](https://github.com/smira/aptly/pull/231))
+- bug fix: error messages should go to stderr
+  ([\#249](https://github.com/smira/aptly/issues/249),
+   [\#311](https://github.com/smira/aptly/issues/311))
+- bug fix: handling of folded fields in stanza
+  ([\#270](https://github.com/smira/aptly/pulls/270))
+  thanks to
+  [Szymon Sobik](https://github.com/sobczyk)
+- bug fix: limit number of open files in goleveldb to 256
+  ([\#260](https://github.com/smira/aptly/pulls/260))
+- bug fix: fix cache flusher in API daemon mode
+  ([\#307](https://github.com/smira/aptly/pulls/307),
+  thanks to [Vincent Bernat](https://github.com/vincentbernat))
+- bug fix: better error messages for package analysis
+  ([\#320](https://github.com/smira/aptly/pull/320),
+  thanks to [Paul Krohn](https://github.com/paul-krohn))
+- security bug fix: don't download files without checksums
+  ([\#324](https://github.com/smira/aptly/pull/324),
+  thanks to [x539](https://github.com/x539))
+
 ### Version 0.9.5
 
 - all `search` commands now exit with code 1 if no results had been found
