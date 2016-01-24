@@ -9,7 +9,7 @@ menu:
 History
 -------
 
-### Version 0.9.6~dev
+### Version 0.9.6
 
 - support for `.changes` file processing, including
   uploaders restriction: new command
@@ -32,6 +32,10 @@ History
 - S3 upstream library has been updated to last version
   to include new Amazon regions
   ([\#253](https://github.com/smira/aptly/issues/253))
+- optional "no lock" mode of API service operations
+  allowing concurrent CLI usage
+  ([\#300](https://github.com/smira/aptly/pull/300))
+  thanks to [Vincent Bernat](https://github.com/vincentbernat))
 - bug fix: [aptly snapshot switch](/doc/aptly/snapshot/switch) fails to respect the S3 `plusWorkaround`
   ([\#239](https://github.com/smira/aptly/issues/239))
 - bug fix: wrong handling of multiline fields in `Sources` indexes
