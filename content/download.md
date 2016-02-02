@@ -7,5 +7,5 @@ version: 0.9.6
 
 Roadmap:
 
-* __0.9.6 (end of March):__ small fixes and features, .changes support
-* __0.10 (April/May):__ support for translations, yum (?)
+* __0.9.7:__ bug fixes and small improvements
+* __0.10:__ .rpm support (?), mirror API

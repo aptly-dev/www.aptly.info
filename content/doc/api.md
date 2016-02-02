@@ -10,10 +10,10 @@ API
 ---
 
 <div class="alert alert-warning alert-note"><strong>Note:</strong>
-This is first release of aptly with HTTP REST API support. Some features
-are still missing from API (when compared to CLI version) and it has not
-been heavily tested. API service and CLI tool could
-be used from the same aptly root (though not simultaneously, due to DB locking).</div>
+HTTP REST API is not complete yet (mirroring support not implemented).
+API service and CLI tool could
+be used from the same aptly root (to enable concurrent CLI and API usage,
+add <code>-no-lock</code> flag to <code>aptly api serve</code> command).</div>
 
 #### Why?
 

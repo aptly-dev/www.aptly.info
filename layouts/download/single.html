@@ -38,30 +38,24 @@
     </section>
     <section class="primary-content">
       <div class="container">
-        <p><strong>Binary</strong> executables (depend almost only on <code>libc</code>) for Debian, CentOS, MacOS X &amp; FreeBSD are available for download from <a href="https://dl.bintray.com/smira/aptly/{{ .Params.version }}/">Bintray</a>. Linux executables should run on almost any recent Linux distribution.</p>
+        <p><strong>Binary</strong> distributions (depend almost only on <code>libc</code>) for Debian, CentOS, MacOS X &amp; FreeBSD are available.</p>
         <div class="row text-center">
-          <div class="col-md-3">
+          <div class="col-md-4">
             <img src="/img/os_icons/debian.png" alt="Debian/Ubuntu" class="download-os-icon">
-            Debian (Ubuntu) <span class="small">squeeze+</span><br />
-            <a href="https://dl.bintray.com/smira/aptly/{{ .Params.version }}/debian-squeeze-x32/aptly" class="btn btn-default">32-bit</a>
-            <a href="https://dl.bintray.com/smira/aptly/{{ .Params.version }}/debian-squeeze-x64/aptly" class="btn btn-default">64-bit</a>
+            Linux (Debian, Ubuntu, RedHat, Centos, ...) <br />
+            <a href="https://bintray.com/artifact/download/smira/aptly/aptly_{{ .Params.version }}_linux_386.tar.gz" class="btn btn-default">32-bit</a>
+            <a href="https://bintray.com/artifact/download/smira/aptly/aptly_{{ .Params.version }}_linux_amd64.tar.gz" class="btn btn-default">64-bit</a>
           </div>
-          <div class="col-md-3">
-            <img src="/img/os_icons/centos.png" alt="CentOS/RedHat/Fedora" class="download-os-icon">
-            CentOS (RedHat, Fedora) <span class="small">6.5+</span><br />
-            <a href="https://dl.bintray.com/smira/aptly/{{ .Params.version }}/centos-6.5-x32/aptly" class="btn btn-default">32-bit</a>
-            <a href="https://dl.bintray.com/smira/aptly/{{ .Params.version }}/centos-6.5-x64/aptly" class="btn btn-default">64-bit</a>
-          </div>
-          <div class="col-md-3">
+          <div class="col-md-4">
             <img src="/img/os_icons/freebsd.png" alt="FreeBSD" class="download-os-icon">
             FreeBSD  <span class="small">9.2+</span><br />
-            <a href="https://dl.bintray.com/smira/aptly/{{ .Params.version }}/freebsd-9.2-x32/aptly" class="btn btn-default">32-bit</a>
-            <a href="https://dl.bintray.com/smira/aptly/{{ .Params.version }}/freebsd-9.2-x64/aptly" class="btn btn-default">64-bit</a>
+            <a href="https://bintray.com/artifact/download/smira/aptly/aptly_{{ .Params.version }}_freebsd_386.zip" class="btn btn-default">32-bit</a>
+            <a href="https://bintray.com/artifact/download/smira/aptly/aptly_{{ .Params.version }}_freebsd_amd64.zip" class="btn btn-default">64-bit</a>
           </div>
-          <div class="col-md-3">
+          <div class="col-md-4">
             <img src="/img/os_icons/osx.png" alt="Mac OS X" class="download-os-icon">
             Mac OS X <span class="small">10.9</span><br />
-            <a href="https://dl.bintray.com/smira/aptly/{{ .Params.version }}/osx/aptly" class="btn btn-default">64-bit</a>
+            <a href="https://bintray.com/artifact/download/smira/aptly/aptly_{{ .Params.version }}_darwin_amd64.zip" class="btn btn-default">64-bit</a>
           </div>
         </div>
         <div class="row text-center">
@@ -71,10 +65,11 @@
             </a>
           </div>
         </div>
-        <p>Just copy binary to your machine, make it executable and run it:</p>
+        <p>Download archive, it contains binary executable:
 
-<pre class="code">$ chmod +x aptly
-$ ./aptly</pre>
+<pre class="code">$ tar xzf aptly_{{ .Params.version }}_linux_amd64.tar.gz
+$ aptly_{{ .Params.version }}_linux_amd64/aptly version
+aptly version: {{.Params.version }}</pre>
 
         <p><strong>Bash completion</strong> for aptly is available as <a href="https://github.com/aptly-dev/aptly-bash-completion">separate repo</a>.</p>
 
