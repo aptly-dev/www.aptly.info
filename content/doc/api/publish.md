@@ -15,7 +15,7 @@ Manages [published repositories](/doc/aptly/publish).
 Publish APIs use following convention to identify published repositories: `/api/publish/:prefix/:distribution`.
 `:distribution` is distribution name, while `:prefix` is `[<storage>:]<prefix>` (storage is optional, it defaults
 to empty string), if publishing prefix contains slashes `/`, they should be replaced with underscores (`_`) and underscores
-should be replaced with double underscore (`__`).
+should be replaced with double underscore (`__`). To specify root `:prefix`, use `:.`, as `.` is ambigious in URLs.
 
 Published repository properties:
 
@@ -95,7 +95,7 @@ Code      | Description
 
 Example:
 
-    $ curl -X POST -H 'Content-Type: application/json' --data '{"SourceKind": "local", "Sources": [{"Name": "local-repo"}], "Architectures": ["i386", "amd64"], "Distribution": "wheezy"}' http://localhost:8080/api/publish
+    $ curl -X POST -H 'Content-Type: application/json' --data '{"SourceKind": "local", "Sources": [{"Name": "local-repo"}], "Architectures": ["i386", "amd64"], "Distribution": "wheezy"}' http://localhost:8080/api/publish/:.
     {"Architectures":["amd64","i386"],"Distribution":"wheezy","Label":"","Origin":"","Prefix":".","SourceKind":"local","Sources":[{"Component":"main","Name":"local-repo"}],"Storage":""}
 
     $ curl -X POST -H 'Content-Type: application/json' --data '{"SourceKind": "local", "Sources": [{"Name": "0XktRe6qMFp4b8C", "Component": "contrib"}, {"Name": "EqmoTZiVx8MGN65", "Component": "non-free"}], "Architectures": ["i386", "amd64"], "Distribution": "wheezy"}' http://localhost:8080/api/publish/debian_testing/
@@ -121,7 +121,7 @@ JSON body params:
 
 Example:
 
-    $ curl -X PUT -H 'Content-Type: application/json' --data '{"Snapshots": [{"Component": "main", "Name": "8KNOnIC7q900L5v"}]}' http://localhost:8080/api/publish//wheezy
+    $ curl -X PUT -H 'Content-Type: application/json' --data '{"Snapshots": [{"Component": "main", "Name": "8KNOnIC7q900L5v"}]}' http://localhost:8080/api/publish/:./wheezy
     {"Architectures":["amd64","i386"],"Distribution":"wheezy","Label":"","Origin":"","Prefix":".","SourceKind":"local","Sources":[{"Component":"main","Name":"2y21K6aKBE5UJBQ"}],"Storage":""}
 
 ### Drop Published Repository
