@@ -9,6 +9,52 @@ menu:
 History
 -------
 
+### Version 0.9.7
+
+- official Go S3 SDK is used for S3 publishing, fixes numerous
+  issues with S3
+  ([\#344](https://github.com/smira/aptly/pull/344)
+  thanks to [Phil Frost](https://github.com/bitglue))
+  ([\#297](https://github.com/smira/aptly/issues/297))
+  ([\#326](https://github.com/smira/aptly/issues/326))
+  ([\#342](https://github.com/smira/aptly/issues/342))
+  ([\#358](https://github.com/smira/aptly/issues/358))
+  ([\#355](https://github.com/smira/aptly/pull/355))
+- `Release` files are signed with SHA-256 for new apt version
+  compatibility
+  ([\#366](https://github.com/smira/aptly/pull/366)
+  thanks to [Geoffrey Thomas](https://github.com/geofft))
+  ([\#380](https://github.com/smira/aptly/issues/380))
+- Index files now contain SHA-512 checksums
+  ([\#354](https://github.com/smira/aptly/pull/354))
+  ([\#361](https://github.com/smira/aptly/issues/361))
+- commands [aptly package search](/doc/aptly/package/search) and
+  [aptly package show](/doc/aptly/package/show) correctly report
+  duplicate packages
+  ([\#225](https://github.com/smira/aptly/issues/225))
+  ([\#368](https://github.com/smira/aptly/pull/368))
+- `Contents` index generation could be disabled with config
+  ([\#338](https://github.com/smira/aptly/issues/338))
+  ([\#345](https://github.com/smira/aptly/issues/345))
+- support for deprecated S3 SigV2 signature to keep compatibility
+  with non-Amazon S3 implementations (e.g. ceph)
+  ([\#356](https://github.com/smira/aptly/issues/356))
+- S3 debugging support (set `debug` to `true` in endpoint
+  settings)
+- aptly does object listing to prevent issuing lots of HEAD
+  requests
+  ([\#371](https://github.com/smira/aptly/pull/371))
+- bug fix: API returning 200 on failures
+  ([\#290](https://github.com/smira/aptly/issues/225))
+- bug fix: interoperability between aptly API and CLI in
+  `-no-lock` mode (flushing caches)
+  ([\#343](https://github.com/smira/aptly/issues/343))
+  ([\#346](https://github.com/smira/aptly/pull/346)
+- bug fix: fix default `mkdir` perms to be `0777` to
+  allow `umask` control
+  ([\#367](https://github.com/smira/aptly/pull/367)
+  thanks to [Phil Frost](https://github.com/bitglue))
+
 ### Version 0.9.6
 
 - support for `.changes` file processing, including
