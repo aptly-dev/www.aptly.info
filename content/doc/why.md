@@ -44,7 +44,7 @@ server, I might get a slightly different set of package versions, as the remote 
 might have been updated in the mean time.
 
 There are many tools to create a mirror of the Debian package repositories, but many of those tools
-are able to create partial mirrors (download only specified packages) and most
+are unable to create partial mirrors (download only specified packages) and most
 important, there are just several tools that can update mirror at any moment in time and preserve previous
 mirror states as snapshots.
 
