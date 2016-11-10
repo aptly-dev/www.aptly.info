@@ -57,7 +57,11 @@ below):
           "prefix": "",
           "authurl": "",
           "tenant": "",
-          "tenantid": ""
+          "tenantid": "",
+          "domain": "",
+          "domainid": "",
+          "tenantdomain": "",
+          "tenantdomainid": ""
         }
       }
     }
