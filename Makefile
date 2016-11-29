@@ -6,7 +6,7 @@ push:
 
 deploy:
 	hugo
-	boto-rsync -g public-read  public/ s3://www.aptly.info/
+	boto-rsync -g public-read public/ s3://www.aptly.info/
 
 deploy-beta:
 	hugo

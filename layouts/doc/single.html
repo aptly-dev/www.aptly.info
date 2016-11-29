@@ -10,17 +10,17 @@
                 {{ $currentNode := . }}
                 {{ range .Site.Menus.doc }}
                   <li {{if or ($currentNode.IsMenuCurrent "doc" .) ($currentNode.HasMenuCurrent "doc" .) }}class="active"{{end}}>
-                    <a href="{{.Url}}">{{.Name}}</a>
+                    <a href="{{.URL}}">{{.Name}}</a>
                     {{ if .HasChildren }}
                       <ul class="nav">
                         {{ range .Children }}
                           <li {{if or ($currentNode.IsMenuCurrent "doc" .) ($currentNode.HasMenuCurrent "doc" .) }}class="active"{{end}}>
-                            <a href="{{.Url}}">{{.Name}}</a>
+                            <a href="{{.URL}}">{{.Name}}</a>
                             {{ if .HasChildren }}
                               <ul class="nav">
                                 {{ range .Children }}
                                   <li {{if or ($currentNode.IsMenuCurrent "doc" .) ($currentNode.HasMenuCurrent "doc" .) }}class="active"{{end}}>
-                                    <a href="{{.Url}}">{{.Name}}</a>
+                                    <a href="{{.URL}}">{{.Name}}</a>
                                   </li>
                                 {{ end }}
                               </ul>
