@@ -4,8 +4,7 @@ go:
   - 1.7
 
 before_script:
-  - go get -u -v github.com/spf13/hugo
-  - pip install boto_rsync
+  - make prepare
 
 script:
   - make deploy
