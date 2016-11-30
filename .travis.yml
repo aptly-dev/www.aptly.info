@@ -1,10 +1,15 @@
 language: go
 
 go:
-    - 1.7
+  - 1.7
 
 before_script:
-    - go get -u -v github.com/spf13/hugo
+  - go get -u -v github.com/spf13/hugo
+  - pip install boto_rsync
 
 script:
-    - hugo
+  - make deploy
+
+env:
+  global:
+    secure: "KX+C9KkMB/rlYPxanHLnZQ7lnkAo6e6adFcm/WouyPVDKr+TWyowytjPw5ZLeS8QeCzQwvGOSxWPzkZFJ4Mkdy4+8gq0WCH/EPeuqPdRpAHCYvxUSNo6zGBI8JFQzRK9dvupGJrIMwfp5zkss6NqcBcBSFmsa0b4inQcn+GM9Rs="
