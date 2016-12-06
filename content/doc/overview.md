@@ -9,7 +9,7 @@ menu:
 Overview
 --------
 
-<p class="lead">aptly's goal is to establish repeatability and controlled changes in
+<p class="lead">aptly's goal is to establish repeatability  and controlled changes in
 package environments.</p>
 
 aptly produces a fixed set of packages in the repository,
