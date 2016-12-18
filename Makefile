@@ -1,10 +1,19 @@
+BRANCH := $(shell git rev-parse --abbrev-ref HEAD)
+
+ifeq ($(BRANCH),master)
+DESTINATION = s3://www.aptly.info/
+else
+DESTINATION = s3://beta.aptly.info/
+endif
+
 all: prepare deploy
 
 env:
 	virtualenv env
-	env/bin/pip install boto_rsync
+	env/bin/pip install s3cmd
 
 prepare: env
+
 	go get -u -v github.com/spf13/hugo
 
 links:
@@ -12,8 +21,4 @@ links:
 
 deploy:
 	hugo
-	. env/bin/activate && BOTO_CONFIG=./boto.config boto-rsync -g public-read public/ s3://www.aptly.info/
-
-deploy-beta:
-	hugo
-	boto-rsync -g public-read  public/ s3://beta.aptly.info/
+	[ -z "$$AWS_ACCESS_KEY_ID" ] || env/bin/s3cmd sync -c /dev/null --acl-public public/ $(DESTINATION)
