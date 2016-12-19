@@ -3,7 +3,7 @@ BRANCH := $(shell git rev-parse --abbrev-ref HEAD)
 ifeq ($(BRANCH),master)
 DESTINATION = s3://www.aptly.info/
 else
-ifeq ($(TRAVIS_PULL_REQUEST_BRANCH),false)
+ifeq ($(TRAVIS_PULL_REQUEST),false)
 DESTINATION = s3://www.aptly.info/
 else
 DESTINATION = s3://beta.aptly.info/
