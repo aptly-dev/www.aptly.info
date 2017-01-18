@@ -36,6 +36,8 @@ Example:
     Created At: 2013-12-24 15:39:29 MSK
     Description: Snapshot from mirror [backports2]: http://mirror.yandex.ru/backports.org/ squeeze-backports
     Number of packages: 3898
+    Sources:
+      backports2 [repo]
     Packages:
       altos-1.0.3~bpo60+1_i386
       amanda-client-1:3.3.1-3~bpo60+1_amd64
