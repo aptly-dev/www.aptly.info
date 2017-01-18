@@ -39,6 +39,7 @@ Flags:
     signatures
 -   `-keyring=trustedkeys.gpg` gpg keyring to use when verifying Release
     file (could be specified multiple times)
+-   `-max-tries=1`: Max download tries till process fails with download error
 
 While updating mirror, aptly would verify signature of `Release` file
 using GnuPG. Please read information about signature verification in
