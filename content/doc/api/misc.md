@@ -16,9 +16,16 @@ Generate graph of aptly objects (same as in [aptly graph](/doc/aptly/graph) comm
 
 `:ext` specifies desired file extension, e.g. `.png`, `.svg`.
 
+Query params:
+
+ Name                      | Description
+---------------------------|-------------------------------
+ `layout`                  | Change between a `horizontal` (default) and a `vertical` graph layout.
+
 Example:
 
-* open url http://localhost:8080/api/graph.svg in browser (hint: aptly database should be non-empty)
+* open url http://localhost:8080/api/graph.svg?layout=vertical in browser (hint: aptly database should be non-empty)
+
 
 Version API
 -----------

@@ -31,8 +31,9 @@ Flags:
 
 -   `-format="png"`: graph output format, could be anything graphviz supports, e.g. `png`, `pdf`, `svg`, ...
 -   `-output=""`: specify output filename, default is to open result in viewer
+-   `-layout="horizontal"`: change between a `horizontal` and a `vertical` graph layout.
 
 Example:
 
-<a href="/img/graphfull.png"><img src="/img/graph.png" alt="Example graph from aptly graph" class="img-responsive"></a>
- 
+<a href="/img/graphfull.png"><img src="/img/graph.png" alt="Example graph from aptly graph (horizontal)" class="img-responsive"></a>
+
