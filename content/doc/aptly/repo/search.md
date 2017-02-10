@@ -16,13 +16,15 @@ Search local repositories for packages matching query.
 
 Usage:
 
-    $ aptly repo search <name> <package-query>
+    $ aptly repo search <name> [<package-query>]
 
 Params are:
 
 -   `name` is a repo name (given when repo was created)
 -   `package-query` is a [package query](/doc/feature/query/) to
     search for packages
+
+If package query is omitted, all the packages are displayed.
 
 Flags:
 

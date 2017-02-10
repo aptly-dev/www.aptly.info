@@ -16,7 +16,7 @@ Search snapshot for packages matching query.
 
 Usage:
 
-    $ aptly snapshot search <name> <package-query>
+    $ aptly snapshot search <name> [<package-query>]
 
 Params are:
 
@@ -24,6 +24,8 @@ Params are:
     creation
 -   `package-query` is a [package query](/doc/feature/query/) to
     search for packages
+
+If package query is omitted, all the packages are displayed.
 
 Flags:
 

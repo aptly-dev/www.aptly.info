@@ -16,13 +16,15 @@ Search mirror for packages matching query.
 
 Usage:
 
-    $ aptly mirror search <name> <package-query>
+    $ aptly mirror search <name> [<package-query>]
 
 Params are:
 
 -   `name` is a mirror name (given when mirror was created)
 -   `package-query` is a [package query](/doc/feature/query/) to
     search for packages
+
+If package query is omitted, all the packages are displayed.
 
 Flags:
 
