@@ -53,18 +53,27 @@ Try some APIs:
     $ curl -X POST -H 'Content-Type: application/json' --data '{"Distribution": "wheezy", "Sources": [{"Name": "aptly-repo"}]}' http://localhost:8080/api/publish//repos
     {"Architectures":["i386"],"Distribution":"wheezy","Label":"","Origin":"","Prefix":".","SourceKind":"local","Sources":[{"Component":"main","Name":"aptly-repo"}],"Storage":""}
 
+#### Security
+
+For security reasons it is advised to let Aptly listen on a Unix domain socket
+rather than a port. Sockets are subject to file permissions and thus allow for
+user-level access control while binding to a port only gives host-level access
+control. To use a socket simply run Aptly with a suitable listen flag such as
+`aptly api serve -listen=unix:///var/run/aptly.sock`.
+
+Aptly's HTTP API shouldn't be directly exposed to the Internet: there's no
+authentication/protection of APIs. To publish the API it could be proxied
+through a HTTP proxy or server (e.g. nginx) to add an authentication mechanism
+or disallow all non-GET requests.
 
 #### Notes
 
-1. aptly HTTP API shouldn't be exposed to the Internet: there's no authentication/protection of APIs. File API allows uploading of any files
-   to the service.
-2. Authentication/authorization could be implemented by proxying aptly HTTP API via some HTTP proxy, e.g. nginx.
-3. Some things (for example, S3 publishing endpoints) could be set up only using configuration file, so it requires
+1. Some things (for example, S3 publishing endpoints) could be set up only using configuration file, so it requires
    restart of aptly HTTP server in order for changes to take effect.
-4. GPG key passphrase can't be input on console, so either passwordless GPG keys are required or passphrase should be specified in
+1. GPG key passphrase can't be input on console, so either passwordless GPG keys are required or passphrase should be specified in
    API parameters.
-5. Some script might be required to start/stop aptly HTTP service.
-6. Some parameters are given as part of URLs, which requires proper url encoding. Unfortunately, at the moment it's not possible
+1. Some script might be required to start/stop aptly HTTP service.
+1. Some parameters are given as part of URLs, which requires proper url encoding. Unfortunately, at the moment it's not possible
    to pass URL arguments with `/` in them.
 
 ### How to implement equivalent of aptly commands using API
