@@ -128,3 +128,66 @@ So change umask before running `aptly publish` in order to set final permissions
 This is a result of somewhat non-standard behavior of Amazon S3 API related to encoding
 of `+` character. This has been fixed in `apt` version 0.9.9.1. If you have older version
 of `apt`, you can enable workaround in aptly with option [`plusWorkaround`](/doc/feature/s3/).
+
+**Q: How do I secure API access to aptly?**
+
+Most easy way to protect the aptly remote API is to place it behind a reverse proxy like nginx or Apache and leverage their capabilities.
+
+*nginx* Example:
+
+Most of this is misc. nginx and ssl setup, interesting bits are tagged with ```###```.
+
+
+```
+server {
+	listen 80;
+	server_name your.repo.org ;
+	
+	### rewrite all non https traffic
+	location /api/ {
+		rewrite ^/(.*)$ https://$server_name$request_uri permanent;
+	}
+	root /nowhere;
+	### end of rewrite
+}
+server {
+	server_name your.repo.org;
+	ssl on;
+	listen 443 ssl http2;
+	ssl_certificate ...
+	ssl_certificate_key ...
+	ssl_protocols ...
+	ssl_ciphers ...
+	ssl_prefer_server_ciphers on;
+	root /nowhere;
+	location ~ /\.ht {
+		deny all;
+	}
+	### protect /api with basic auth
+	location /api/ {
+		client_max_body_size 100M;
+		auth_basic "Restricted";
+		auth_basic_user_file /etc/nginx/.htpasswd.aptly;
+		proxy_redirect	off;
+		proxy_pass	http://localhost:8080/api/;
+		proxy_redirect	http://localhost:8080/api/ /api;
+		proxy_set_header X-Real-IP $remote_addr;
+		proxy_set_header X-Forwarded-For $remote_addr;
+		proxy_set_header X-Forwarded-Proto $scheme;
+		proxy_set_header Host $http_host;
+		proxy_set_header Origin "";
+	}
+	### end of api protection
+}
+```
+
+You can create a *.htpasswd* file using *htpasswd*
+
+```
+apt-get install apache2-utils -y
+htpasswd -c /etc/nginx/.htpasswd.aptly repo-api
+chmod o-rw /etc/nginx/.htpasswd.aptly
+chown www-data: /etc/nginx/.htpasswd.aptly
+```
+
+Now you can add users without ```-c``` flag.
