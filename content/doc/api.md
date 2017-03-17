@@ -64,7 +64,7 @@ control. To use a socket simply run Aptly with a suitable listen flag such as
 Aptly's HTTP API shouldn't be directly exposed to the Internet: there's no
 authentication/protection of APIs. To publish the API it could be proxied
 through a HTTP proxy or server (e.g. nginx) to add an authentication mechanism
-or disallow all non-GET requests.
+or disallow all non-GET requests. [Reference example](https://github.com/sepich/nginx-ldap) for LDAP based per-repo access with nginx.
 
 #### Notes
 
