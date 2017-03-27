@@ -1,11 +1,12 @@
 ---
-date: 2014-07-16T17:02:05Z
+date: 2017-03-27T17:02:05Z
 title: Download
 type: download
-version: 0.9.7
+version: 1.0.0
 ---
 
 Roadmap:
 
-* __0.9.8:__ bug fixes and incremental improvements
-* __0.10:__  mirror API
+* __1.1.0:__ (June 2017)
+* __1.2.0:__ (Sep 2017)
+* __1.3.0:__ (Dec 2017)
