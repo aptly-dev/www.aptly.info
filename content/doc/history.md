@@ -1,9 +1,6 @@
 ---
 date: "2014-08-08T11:17:38Z"
 title: History
-menu:
-    doc:
-        weight: 120
 ---
 
 History
