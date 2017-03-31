@@ -32,7 +32,7 @@ Params:
 
 Flags:
 
--   `-with-deps=false`: include dependencies of matching packages
+-   `-with-deps=false`: include [dependencies](/doc/feature/dependencies) of matching packages
 
 Filter command is almost identical to
 `aptly snapshot pull empty source destination query` (`empty` being empty
@@ -52,4 +52,3 @@ Example:
 
     Snapshot wheezy-main-required successfully filtered.
     You can run 'aptly publish snapshot wheezy-main-required' to publish snapshot as Debian repository.
-

@@ -29,6 +29,7 @@ below):
       "dependencyFollowRecommends": false,
       "dependencyFollowAllVariants": false,
       "dependencyFollowSource": false,
+      "dependencyVerboseResolve": false,
       "gpgDisableSign": false,
       "gpgDisableVerify": false,
       "downloadSourcePackages": false,
@@ -86,6 +87,8 @@ Options:
     `package-a | package-b`, follow both variants always
 -   `dependencyFollowSource`: follow dependency from binary package to
     source package
+-   `dependencyVerboseResolve`:
+    print detailed logs while resolving dependencies {{< version "1.1.0" >}}
 -   `gpgDisableSign`: don't sign published repositories with `gpg`, also
     can be disabled on per-repo basis using `-skip-signing` flag when
     publishing

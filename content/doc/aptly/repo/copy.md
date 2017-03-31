@@ -30,7 +30,7 @@ Params are:
 Flags:
 
 -   `-dry-run=false`: don't copy, just show what would be copied
--   `-with-deps=false`: follow dependencies when processing package
+-   `-with-deps=false`: follow [dependencies](/doc/feature/dependencies) when processing package
     query
 
 When copying with dependencies, global dependency options are used. For

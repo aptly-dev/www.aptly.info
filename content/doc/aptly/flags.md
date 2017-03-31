@@ -29,7 +29,10 @@ Global flags are:
     from binary package to source package
 -   `-dep-follow-suggests=false`: when processing dependencies, follow
     Suggests
+-   `-dep-verbose-resolve=false`: when processing dependencies, print detailed
+    logs  {{< version "1.1.0" >}}
 
-Global flags override configuration parameters with similar names.
+Global flags override [configuration](/doc/configuration) parameters with similar names.
 
+For more information on `-dep-*` flags, please see [dependency resolving](/doc/feature/dependencies).
  
