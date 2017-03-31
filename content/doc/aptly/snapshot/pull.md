@@ -12,7 +12,7 @@ menu:
 aptly snapshot pull
 -------------------
 
-Pulls new packages (along with its dependencies) to `name` snapshot from
+Pulls new packages (along with its [dependencies](/doc/feature/dependencies)) to `name` snapshot from
 `source` snapshot. Also pull command can upgrade package versions if
 `name` snapshot already contains packages being pulled. New
 snapshot `destination` is created as result of this process.
@@ -88,4 +88,3 @@ Example:
 
     Snapshot snap-deb-main-w-xorg successfully created.
     You can run 'aptly publish snapshot snap-deb-main-w-xorg' to publish snapshot as Debian repository.
-
