@@ -41,10 +41,17 @@ If `-uploaders-file` flag is given, contents of the file are parsed
 and attached to local repository. This would be per-repository
 upload restriction used by [aptly repo include](/doc/aptly/repo/include) command.
 
+Local package repository contents could be also initialized from snapshot:
+
+    $ aptly repo create <name> from snapshot <snapshot>
+
+The only difference from `aptly repo create <name>` command is that initial repository contents
+would be copied from snapshot `<snapshot>`. This is useful to "roll back" to some state captured
+in the snapshot.
+
 Example:
 
     $ aptly repo create -comment="Nightly builds" testing
 
     Local repo [testing] successfully added.
     You can run 'aptly repo add testing ...' to add packages to repository.
-

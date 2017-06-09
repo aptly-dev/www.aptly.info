@@ -39,7 +39,7 @@ Flags:
 
 -   `-filter=`: [package query](/doc/feature/query/) that is applied to
     packages in the mirror
--   `-filter-with-deps=false`: when filtering, include dependencies of
+-   `-filter-with-deps=false`: when filtering, include [dependencies](/doc/feature/dependencies) of
     matching packages as well
 -   `-force-components=false`: (only with component list on command line)
     skip check that requested components are listed in `Release` file

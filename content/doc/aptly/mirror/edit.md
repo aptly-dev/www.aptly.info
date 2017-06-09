@@ -27,7 +27,7 @@ Flags:
 
 -   `-filter=`: [package query](/doc/feature/query/) which is applied to
     packages in the mirror, set to empty to disable filtering
--   `-filter-with-deps=false`: when filtering, include dependencies of
+-   `-filter-with-deps=false`: when filtering, include [dependencies](/doc/feature/dependencies) of
     matching packages as well
 -   `-architectures=`: global flag to change architectures list.
 -   `-with-sources=false`: download source packages in addition to

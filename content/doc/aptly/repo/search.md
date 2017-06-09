@@ -16,7 +16,7 @@ Search local repositories for packages matching query.
 
 Usage:
 
-    $ aptly repo search <name> <package-query>
+    $ aptly repo search <name> [<package-query>]
 
 Params are:
 
@@ -24,11 +24,13 @@ Params are:
 -   `package-query` is a [package query](/doc/feature/query/) to
     search for packages
 
+If package query is omitted, all the packages are displayed.
+
 Flags:
 
 -   `-format=""`:
     [custom format](/doc/feature/package-display/) for result printing
--   `-with-deps=false`: include dependencies of matching packages
+-   `-with-deps=false`: include [dependencies](/doc/feature/dependencies) of matching packages
     into search results
 
 Example:

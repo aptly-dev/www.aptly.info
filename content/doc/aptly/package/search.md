@@ -21,12 +21,14 @@ use [`aptly package show`](/doc/aptly/package/show/) command.
 
 Usage:
 
-    $ aptly package search <package-query>
+    $ aptly package search [<package-query>]
 
 Params are:
 
 -   `package-query` is a [package query](/doc/feature/query/) to
     search for packages
+
+If package query is omitted, all the packages are displayed.
 
 Flags:
 
@@ -80,4 +82,3 @@ Example:
     python-mysqldb-dbg_1.2.3-2_amd64
     libibmad1_1.2.3-20090314-1.1_amd64
     shush_1.2.3-2_amd64
-

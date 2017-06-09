@@ -2,7 +2,7 @@
     <!-- Download -->
     <section class="primary-content">
       <div class="container">
-        <h2>Currently released aptly version is <span class="text-danger">{{ .Params.version }}</span> (<a href="/doc/history/">what's new?</a>)</h2>
+        <h2>Currently released aptly version is <span class="text-danger">{{ .Params.version }}</span> (<a href="https://github.com/smira/aptly/releases/tag/v{{ .Params.version }}">what's new?</a>)</h2>
         {{ .Content }}
       </div>
     </section>
@@ -73,15 +73,14 @@ aptly version: {{.Params.version }}</pre>
 
         <p><strong>Bash completion</strong> for aptly is available as <a href="https://github.com/aptly-dev/aptly-bash-completion">separate repo</a>.</p>
 
-        <p>If you have Go environment set up (go 1.4+ required), you can build aptly from <strong>source</strong> by
-        cloning it and building with gom:</p>
+        <p>If you have Go environment set up (go 1.6+ required), you can build aptly from <strong>source</strong> by
+        cloning it and building:</p>
 
-<pre class="code">$ go get -u github.com/mattn/gom
-$ mkdir -p $GOPATH/src/github.com/smira/aptly
+<pre class="code">$ mkdir -p $GOPATH/src/github.com/smira/aptly
 $ git clone https://github.com/smira/aptly $GOPATH/src/github.com/smira/aptly
 $ cd $GOPATH/src/github.com/smira/aptly
-$ gom -production install
-$ gom build -o $GOPATH/bin/aptly
+$ make install
+# aptly binary would be built in $GOPATH/bin/
 $ aptly
 </pre>
       </div>

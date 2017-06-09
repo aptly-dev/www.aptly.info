@@ -77,6 +77,8 @@ Examples:
 -   `!Name (~ .*-dev), mail-transport, $Version (>= 3.5)`: matches all
     packages that provide `mail-transport` with name that has no suffix
     `-dev` and with version greater or equal to `3.5`.
+-   `Name`: query matches all the packages (as it means "package name is not
+     empty").
 
 When specified on command line, query may have to be quoted according to
 shell rules, so that it stays single argument:

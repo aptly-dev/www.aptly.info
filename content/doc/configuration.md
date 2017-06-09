@@ -29,9 +29,11 @@ below):
       "dependencyFollowRecommends": false,
       "dependencyFollowAllVariants": false,
       "dependencyFollowSource": false,
+      "dependencyVerboseResolve": false,
       "gpgDisableSign": false,
       "gpgDisableVerify": false,
       "downloadSourcePackages": false,
+      "skipLegacyPool": true,
       "ppaDistributorID": "ubuntu",
       "ppaCodename": "",
       "S3PublishEndpoints": {
@@ -86,6 +88,8 @@ Options:
     `package-a | package-b`, follow both variants always
 -   `dependencyFollowSource`: follow dependency from binary package to
     source package
+-   `dependencyVerboseResolve`:
+    print detailed logs while resolving dependencies {{< version "1.1.0" >}}
 -   `gpgDisableSign`: don't sign published repositories with `gpg`, also
     can be disabled on per-repo basis using `-skip-signing` flag when
     publishing
@@ -95,6 +99,12 @@ Options:
 -   `downloadSourcePackages`: if enabled, all mirrors created would have
     flag set to download source packages; this setting could be
     controlled on per-mirror basis with `-with-sources` flag
+-   `skipLegacyPool`: in aptly up to version 1.0.0,
+    package files were stored in internal package pool
+    with MD5-dervied path, since 1.1.0 package pool layout was changed;
+    if option is enabled, aptly stops checking for legacy paths;
+    by default option is enabled for new aptly installations and disabled when
+    upgrading from older versions {{< version "1.1.0" >}}
 -   `ppaDistributorID` & `ppaCodename` specifies paramaters for short
     PPA url expansion, if left blank they default to output of
     `lsb_release` command
