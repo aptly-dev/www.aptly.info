@@ -29,6 +29,8 @@ With configuration management systems:
 -   [SaltStack Formula](https://github.com/saltstack-formulas/aptly-formula) by
     Forrest Alvarez and Brian Jackson
 
-CLI for aptly API:
+aptly API:
 
--   [Ruby aptly CLI/library](https://github.com/sepulworld/aptly_cli) by Zane Williamson
+-   [aptly_cli Ruby library](https://github.com/sepulworld/aptly_cli) by Zane Williamson. 
+    This includes an aptly API command-line client.
+-   [aptly-api-client Python library](https://github.com/gopythongo/aptly-api-client) by Jonas Maurus.
