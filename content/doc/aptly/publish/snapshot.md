@@ -53,7 +53,9 @@ Flags:
 -   `-label=""`: value for `Label:` field
 -   `-passphrase=""`: GPG passphrase to unlock private key (possibly insecure)
 -   `-passphrase-file=""`: GPG passphrase file to unlock private key (possibly insecure)
--   `-origin=""`: value for `Origin:` field
+-   `-origin=""`: value for `Origin:` field. When not set will be inherited by given snapshot(s) if unique.
+-   `-notautomatic=""`: value for `NotAutomatic:` field. When not set will be inherited by given snapshot(s) if unique.
+-   `-butautomaticupgrades=""`: value for `ButAutomaticUpgrades:` field. When not set will be inherited by given snapshot(s) if unique.
 -   `-secret-keyring=""`: GPG secret keyring to use (instead of default)
 -   `-skip-contents=false`: don't generate Contents indexes (setting would
     be stored permanently for published repository)
