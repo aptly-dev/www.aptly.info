@@ -56,8 +56,8 @@ Flags:
 -   `-keyring=""`: GPG keyring to use (instead of default)
 -   `-label=""`: value for `Label:` field
 -   `-origin=""`: value for `Origin:` field
--   `-notautomatic=""`: value for `NotAutomatic:` field.
--   `-butautomaticupgrades=""`: value for `ButAutomaticUpgrades:` field.
+-   `-notautomatic=""`: value for `NotAutomatic:` field  {{< version "1.1.0" >}}
+-   `-butautomaticupgrades=""`: value for `ButAutomaticUpgrades:` field  {{< version "1.1.0" >}}
 -   `-passphrase=""`: GPG passphrase to unlock private key (possibly insecure)
 -   `-passphrase-file=""`: GPG passphrase file to unlock private key (possibly insecure)
 -   `-secret-keyring=""`: GPG secret keyring to use (instead of default)

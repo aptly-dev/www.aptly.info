@@ -21,6 +21,8 @@ Global flags are:
     (comma-separated), default to all available
 -   `-config=""`: location of configuration file (default locations are
     `/etc/aptly.conf`, `~/.aptly.conf`)
+-   `-db-open-attempts=10`: number of attempts to open DB if it's locked by
+    other instance of aptly  {{< version "1.1.0" >}}
 -   `-dep-follow-all-variants=false`: when processing dependencies,
     follow a & b if depdency is 'a|b'
 -   `-dep-follow-recommends=false`: when processing dependencies, follow
@@ -30,7 +32,7 @@ Global flags are:
 -   `-dep-follow-suggests=false`: when processing dependencies, follow
     Suggests
 -   `-dep-verbose-resolve=false`: when processing dependencies, print detailed
-    logs  {{< version "1.1.0" >}}
+    logs {{< version "1.1.0" >}}
 
 Global flags override [configuration](/doc/configuration) parameters with similar names.
 
