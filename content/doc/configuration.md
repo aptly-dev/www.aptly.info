@@ -36,6 +36,13 @@ below):
       "skipLegacyPool": true,
       "ppaDistributorID": "ubuntu",
       "ppaCodename": "",
+      "FileSystemPublishEndpoints": {
+        "test": {
+          "rootDir": "/opt/aptly-publish",
+          "linkMethod": "copy",
+          "verifyMethod": "md5"
+        }
+      },
       "S3PublishEndpoints": {
         "test": {
           "region": "us-east-1",
@@ -49,7 +56,7 @@ below):
           "encryptionMethod": "",
           "plusWorkaround": false,
           "disableMultiDel": false
-        },
+        }
       },
       "SwiftPublishEndpoints": {
         "test": {
@@ -105,9 +112,11 @@ Options:
     if option is enabled, aptly stops checking for legacy paths;
     by default option is enabled for new aptly installations and disabled when
     upgrading from older versions {{< version "1.1.0" >}}
--   `ppaDistributorID` & `ppaCodename` specifies paramaters for short
+-   `ppaDistributorID` & `ppaCodename` specifies parameters for short
     PPA url expansion, if left blank they default to output of
     `lsb_release` command
+-   `FileSystemPublishEndpoints` is configuration of local filesystem
+    publishing endpoints (see [custom filesystem publishing](/doc/feature/filesystem)) {{< version "1.1.0" >}}
 -   `S3PublishEndpoints` is a configuration of Amazon S3 publishing
     endpoints (see [publishing to S3](/doc/feature/s3/))
 -   `SwiftPublishEndpoints` describes OpenStack Swift publishing

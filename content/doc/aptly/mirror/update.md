@@ -41,7 +41,7 @@ Flags:
     file (could be specified multiple times)
 -   `-max-tries=1`: Max download tries till process fails with download error
 -   `-skip-existing-packages=false`: do not check file existence for packages
-    listed in the internal database of the mirror
+    listed in the internal database of the mirror  {{< version "1.1.0" >}}
 
 While updating mirror, aptly would verify signature of `Release` file
 using GnuPG. Please read information about signature verification in
