@@ -55,7 +55,9 @@ below):
           "storageClass": "",
           "encryptionMethod": "",
           "plusWorkaround": false,
-          "disableMultiDel": false
+          "disableMultiDel": false,
+          "forceSigV2": false,
+          "debug": false
         }
       },
       "SwiftPublishEndpoints": {
