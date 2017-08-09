@@ -32,6 +32,7 @@ below):
       "dependencyVerboseResolve": false,
       "gpgDisableSign": false,
       "gpgDisableVerify": false,
+      "gpgProvider": "gpg",
       "downloadSourcePackages": false,
       "skipLegacyPool": true,
       "ppaDistributorID": "ubuntu",
@@ -105,6 +106,8 @@ Options:
 -   `gpgDisableVerify`: don't verify remote mirrors with `gpg`, also can
     be disabled on per-mirror basis using `-ignore-signatures` flag when
     creating and updating mirrors
+-   `gpgProvider`: implementation of PGP signing/validation - `gpg` for external `gpg` utility or
+    `internal` to use [Go internal implementation](/doc/feature/pgp-providers)
 -   `downloadSourcePackages`: if enabled, all mirrors created would have
     flag set to download source packages; this setting could be
     controlled on per-mirror basis with `-with-sources` flag
