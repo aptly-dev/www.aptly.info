@@ -33,6 +33,8 @@ Global flags are:
     Suggests
 -   `-dep-verbose-resolve=false`: when processing dependencies, print detailed
     logs {{< version "1.1.0" >}}
+-   `-gpg-provider=gpg`: PGP provider implementation
+    (`gpg` for external gpg or `internal` for [Go internal implementation](/doc/feature/pgp-providers))    
 
 Global flags override [configuration](/doc/configuration) parameters with similar names.
 
