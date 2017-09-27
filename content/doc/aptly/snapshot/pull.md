@@ -34,14 +34,14 @@ Params:
 
 Flags:
 
--   `-all-matches=false`: pull all the packages that satisfy the
+-   `-all-matches`: pull all the packages that satisfy the
     dependency version requirements (default is to pull first matching
     package)
--   `-dry-run=false`: don't create `destination` snapshot, just show what
+-   `-dry-run`: don't create `destination` snapshot, just show what
     would be pulled
--   `-no-deps=false`: don't process dependencies, just pull listed
+-   `-no-deps`: don't process dependencies, just pull listed
     packages
--   `-no-remove=false`: don't remove other package versions when pulling
+-   `-no-remove`: don't remove other package versions when pulling
     package
 
 If architectures are limited (with config `architectures` or option

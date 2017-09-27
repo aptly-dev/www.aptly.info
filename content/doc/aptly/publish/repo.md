@@ -49,7 +49,7 @@ Flags:
     multi-component publishing, separate components with commas)
 -   `-distribution=""`: distribution name to publish; guessed from local
     repository default distribution
--   `-force-overwrite=false`: overwrite packages files in the pool even
+-   `-force-overwrite`: overwrite packages files in the pool even
     if content is different (see also [duplicate packages](/doc/feature/duplicate/))
 -   `-gpg-key=""`: GPG key ID to use when signing the release, if not
     specified default key is used
@@ -61,9 +61,9 @@ Flags:
 -   `-passphrase=""`: GPG passphrase to unlock private key (possibly insecure)
 -   `-passphrase-file=""`: GPG passphrase file to unlock private key (possibly insecure)
 -   `-secret-keyring=""`: GPG secret keyring to use (instead of default)
--   `-skip-contents=false`: don't generate Contents indexes (setting would
+-   `-skip-contents`: don't generate Contents indexes (setting would
     be stored permanently for published repository)
--   `-skip-signing=false`: don't sign Release files with GPG
+-   `-skip-signing`: don't sign Release files with GPG
 
 If architectures are limited (with config `architectures` or option
 `-architectures`), only mentioned architectures would be published,

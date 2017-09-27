@@ -26,7 +26,7 @@ Params are:
 
 Flags:
 
--   `-dry-run=false`: don't remove, just show what would be removed
+-   `-dry-run`: don't remove, just show what would be removed
 
 When packages are removed from local repository, only references to
 those packages are removed. If packages are part of any snapshot, this

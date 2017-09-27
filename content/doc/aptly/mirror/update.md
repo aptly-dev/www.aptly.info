@@ -31,16 +31,16 @@ All packages would be stored under aptly's root dir (see section on
 
 Flags:
 
--   `-force=false`: force mirror update even if locked by another process
+-   `-force`: force mirror update even if locked by another process
 -   `-download-limit=0`: limit download speed (kbytes/sec)
--   `-ignore-checksums=false`: ignore checksum mismatches for downloaded
+-   `-ignore-checksums`: ignore checksum mismatches for downloaded
     items (package files, metadata)
--   `-ignore-signatures=false`: disable verification of `Release` file
+-   `-ignore-signatures`: disable verification of `Release` file
     signatures
 -   `-keyring=trustedkeys.gpg` gpg keyring to use when verifying Release
     file (could be specified multiple times)
 -   `-max-tries=1`: Max download tries till process fails with download error
--   `-skip-existing-packages=false`: do not check file existence for packages
+-   `-skip-existing-packages`: do not check file existence for packages
     listed in the internal database of the mirror  {{< version "1.1.0" >}}
 
 While updating mirror, aptly would verify signature of `Release` file

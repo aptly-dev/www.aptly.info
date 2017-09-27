@@ -36,7 +36,7 @@ Params:
 Flags:
 
 -   `-batch`: run GPG with detached tty (useful when running from crontab)
--   `-force-overwrite=false`: overwrite packages files in the pool even
+-   `-force-overwrite`: overwrite packages files in the pool even
     if content is different (see also [duplicate packages](/doc/feature/duplicate/))
 -   `-gpg-key=""`: GPG key ID to use when signing the release, if not
     specified default key is used
@@ -44,10 +44,10 @@ Flags:
 -   `-passphrase=""`: GPG passphrase to unlock private key (possibly insecure)
 -   `-passphrase-file=""`: GPG passphrase file to unlock private key (possibly insecure)
 -   `-secret-keyring=""`: GPG secret keyring to use (instead of default)
--   `-skip-contents=false`: don't generate Contents indexes (setting would
+-   `-skip-contents`: don't generate Contents indexes (setting would
     be stored permanently for published repository)
 -   `-skip-cleanup`: don't remove unreferenced files in prefix/component
--   `-skip-signing=false`: don't sign Release files with GPG
+-   `-skip-signing`: don't sign Release files with GPG
 
 When updating multiple-component published repository, all local
 repositories are updated simultaneously.

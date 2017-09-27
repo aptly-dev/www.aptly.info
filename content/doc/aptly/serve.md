@@ -30,7 +30,7 @@ Usage:
 Flags:
 
 -   `-listen=":8080"`: host:port for HTTP listening
--   `-no-lock=false`: don't lock the database
+-   `-no-lock`: don't lock the database
 
 Example:
 

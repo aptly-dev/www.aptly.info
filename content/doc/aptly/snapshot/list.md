@@ -20,7 +20,7 @@ Usage:
 
 Flags:
 
--   `-raw=false`: display list in machine-readable format
+-   `-raw`: display list in machine-readable format
 -   `-sort="name"`: display list in 'name' or creation 'time' order
 
 Examples:

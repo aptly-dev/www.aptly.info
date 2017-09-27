@@ -30,7 +30,7 @@ Usage:
 
 Flags:
 
--   `-force-drop=false`: drop published repository even if component cleanup
+-   `-force-drop`: drop published repository even if component cleanup
     fails
 -   `-skip-cleanup`: don't remove unreferenced files in prefix/component
 

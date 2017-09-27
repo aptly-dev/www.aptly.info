@@ -25,7 +25,7 @@ Params are:
 
 Flags:
 
--   `-with-packages=false`: show detailed list of packages and versions
+-   `-with-packages`: show detailed list of packages and versions
     stored in the mirror
 
 If repository has uploaders file attached, it would be displayed.

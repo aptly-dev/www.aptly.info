@@ -27,7 +27,7 @@ Params:
 
 Flags:
 
--   `-force=false`: drop mirror even if it used as source of some
+-   `-force`: drop mirror even if it used as source of some
     snapshot
 
 Dropping mirror only removes metadata about the mirror, in order to

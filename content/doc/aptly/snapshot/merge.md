@@ -32,8 +32,8 @@ Params:
 
 Flags:
 
--   `-latest=false`: use only the latest version of each package
--   `-no-remove=false`: don't remove duplicate arch/name packages
+-   `-latest`: use only the latest version of each package
+-   `-no-remove`: don't remove duplicate arch/name packages
 
 Example:
 

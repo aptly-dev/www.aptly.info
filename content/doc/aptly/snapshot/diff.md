@@ -29,7 +29,7 @@ Params:
 
 Flags:
 
--   `-only-matching=false`: display diff only for package versions
+-   `-only-matching`: display diff only for package versions
     (don't display missing packages)
 
 Example:

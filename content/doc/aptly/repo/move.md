@@ -29,8 +29,8 @@ Params are:
 
 Flags:
 
--   `-dry-run=false`: don't move, just show what would be moved
--   `-with-deps=false`: follow [dependencies](/doc/feature/dependencies) when processing package
+-   `-dry-run`: don't move, just show what would be moved
+-   `-with-deps`: follow [dependencies](/doc/feature/dependencies) when processing package
     query
 
 When moving with dependencies, global dependency options are used. For

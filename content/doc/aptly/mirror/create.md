@@ -39,18 +39,18 @@ Flags:
 
 -   `-filter=`: [package query](/doc/feature/query/) that is applied to
     packages in the mirror
--   `-filter-with-deps=false`: when filtering, include [dependencies](/doc/feature/dependencies) of
+-   `-filter-with-deps`: when filtering, include [dependencies](/doc/feature/dependencies) of
     matching packages as well
--   `-force-components=false`: (only with component list on command line)
+-   `-force-components`: (only with component list on command line)
     skip check that requested components are listed in `Release` file
--   `-ignore-signatures=false`: disable verification of `Release` file
+-   `-ignore-signatures`: disable verification of `Release` file
     signatures
 -   `-keyring=trustedkeys.gpg`: gpg keyring to use when verifying
     Release file (could be specified multiple times)
--   `-with-sources=false`: download source packages in addition to
+-   `-with-sources`: download source packages in addition to
     binary packages (could be enabled by default with config option
     `downloadSourcePackages`)
--   `-with-udebs=false`: download .udeb packages (Debian installer
+-   `-with-udebs`: download .udeb packages (Debian installer
     support)
 
 By default aptly would download packages for all available
