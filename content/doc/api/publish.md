@@ -76,6 +76,8 @@ JSON body params:
  `ForceOverwrite`          | bool                 | when publishing, overwrite files in `pool/` directory without notice
  `Architectures`           | []string             | override list of published architectures
  `Signing`                 | SigningOptions       | gpg options (see above)
+ `NotAutomatic`            | string               | setting to `yes` indicates to the package manager to not install or upgrade packages from the repository without user consent [🛈](https://wiki.debian.org/DebianRepository/Format#NotAutomatic_and_ButAutomaticUpgrades)
+ `ButAutomaticUpgrades`    | string               | setting to `yes` excludes upgrades from the `NotAutomic` setting [🛈](https://wiki.debian.org/DebianRepository/Format#NotAutomatic_and_ButAutomaticUpgrades)
 
 Notes on `Sources` field:
 
