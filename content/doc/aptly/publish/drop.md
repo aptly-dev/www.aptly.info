@@ -32,6 +32,7 @@ Flags:
 
 -   `-force-drop=false`: drop published repository even if component cleanup
     fails
+-   `-skip-cleanup`: don't remove unreferenced files in prefix/component
 
 Usually `-force-drop` isn't required, but if due to some corruption component cleanup
 fails, `-force-drop` could be used to drop published repository. This might leave
