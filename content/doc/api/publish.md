@@ -29,6 +29,8 @@ Published repository properties:
  `Architectures`           | []string            | list of architectures published, e.g. `["i386", "amd64"]`
  `Label`                   | string              | value of `Label:` field in published repository stanza
  `Origin`                  | string              | value of `Origin:` field in published repository stanza
+ `NotAutomatic`            | string              | setting to `yes` indicates to the package manager to not install or upgrade packages from the repository without user consent [🛈](https://wiki.debian.org/DebianRepository/Format#NotAutomatic_and_ButAutomaticUpgrades)
+ `ButAutomaticUpgrades`    | string              | setting to `yes` excludes upgrades from the `NotAutomic` setting [🛈](https://wiki.debian.org/DebianRepository/Format#NotAutomatic_and_ButAutomaticUpgrades)
 
 Signing options (all are optional):
 
