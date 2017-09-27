@@ -78,6 +78,7 @@ JSON body params:
  `Signing`                 | SigningOptions       | gpg options (see above)
  `NotAutomatic`            | string               | setting to `yes` indicates to the package manager to not install or upgrade packages from the repository without user consent [🛈](https://wiki.debian.org/DebianRepository/Format#NotAutomatic_and_ButAutomaticUpgrades)
  `ButAutomaticUpgrades`    | string               | setting to `yes` excludes upgrades from the `NotAutomic` setting [🛈](https://wiki.debian.org/DebianRepository/Format#NotAutomatic_and_ButAutomaticUpgrades)
+`SkipCleanup`              | boolean              | don't remove unreferenced files in prefix/component
 
 Notes on `Sources` field:
 

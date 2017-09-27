@@ -46,6 +46,7 @@ Flags:
 -   `-secret-keyring=""`: GPG secret keyring to use (instead of default)
 -   `-skip-contents=false`: don't generate Contents indexes (setting would
     be stored permanently for published repository)
+-   `-skip-cleanup`: don't remove unreferenced files in prefix/component
 -   `-skip-signing=false`: don't sign Release files with GPG
 
 When updating multiple-component published repository, all local
