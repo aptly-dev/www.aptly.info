@@ -13,7 +13,7 @@ aptly repo import
 -----------------
 
 Commands import copies packages matching [package query](/doc/feature/query/)
-from mirror `src-name` to local repo `dst-repo`. If dependency following
+from mirror `src-mirror` to local repo `dst-repo`. If dependency following
 is enabled, aptly would try to copy missing dependencies from
 `src-mirror` as well.
 
