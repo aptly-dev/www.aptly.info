@@ -35,8 +35,8 @@ Params are:
 
 Flags:
 
--   `-with-files=false`: display list of package files in the package pool
--   `-with-references=false`: display list of mirrors, snapshots and local repos
+-   `-with-files`: display list of package files in the package pool
+-   `-with-references`: display list of mirrors, snapshots and local repos
     which reference this package.
 
 Example:

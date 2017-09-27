@@ -30,7 +30,7 @@ Flags:
 
 -   `-format=""`:
     [custom format](/doc/feature/package-display/) for result printing
--   `-with-deps=false`: include [dependencies](/doc/feature/dependencies) of matching packages
+-   `-with-deps`: include [dependencies](/doc/feature/dependencies) of matching packages
     into search results
 
 Example:

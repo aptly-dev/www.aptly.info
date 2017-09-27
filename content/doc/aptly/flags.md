@@ -23,15 +23,15 @@ Global flags are:
     `/etc/aptly.conf`, `~/.aptly.conf`)
 -   `-db-open-attempts=10`: number of attempts to open DB if it's locked by
     other instance of aptly  {{< version "1.1.0" >}}
--   `-dep-follow-all-variants=false`: when processing dependencies,
+-   `-dep-follow-all-variants`: when processing dependencies,
     follow a & b if depdency is 'a|b'
--   `-dep-follow-recommends=false`: when processing dependencies, follow
+-   `-dep-follow-recommends`: when processing dependencies, follow
     Recommends
--   `-dep-follow-source=false`: when processing dependencies, follow
+-   `-dep-follow-source`: when processing dependencies, follow
     from binary package to source package
--   `-dep-follow-suggests=false`: when processing dependencies, follow
+-   `-dep-follow-suggests`: when processing dependencies, follow
     Suggests
--   `-dep-verbose-resolve=false`: when processing dependencies, print detailed
+-   `-dep-verbose-resolve`: when processing dependencies, print detailed
     logs {{< version "1.1.0" >}}
 -   `-gpg-provider=gpg`: PGP provider implementation
     (`gpg` for external gpg or `internal` for [Go internal implementation](/doc/feature/pgp-providers))    

@@ -28,7 +28,7 @@ Params:
 
 Flags:
 
--   `-force=false`: drop snapshot even if it used as source in other
+-   `-force`: drop snapshot even if it used as source in other
     snapshots
 
 Dropping snapshot only removes metadata, in order to cleanup the disk

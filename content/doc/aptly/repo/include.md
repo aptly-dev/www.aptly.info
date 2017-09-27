@@ -21,12 +21,12 @@ Usage:
 
 Flags:
 
--   `-accept-unsigned=false`: accept unsigned .changes files
--   `-force-replace=false`: when adding package that conflicts with existing package,
+-   `-accept-unsigned`: accept unsigned .changes files
+-   `-force-replace`: when adding package that conflicts with existing package,
     remove existing package
--   `-ignore-signatures=false`: disable verification of .changes file signature
+-   `-ignore-signatures`: disable verification of .changes file signature
 -   `-keyring=`: gpg keyring to use when verifying .changes file (could be specified multiple times)
--   `-no-remove-files=false`: don't remove files that have been imported successfully into repository
+-   `-no-remove-files`: don't remove files that have been imported successfully into repository
 -   `-repo="{{.Distribution}}"`: which repo should files go to, defaults to Distribution field of .changes file
 -   `-uploaders-file=""`: path to uploaders.json file
 

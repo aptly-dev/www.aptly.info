@@ -28,7 +28,7 @@ Params:
 
 Flags:
 
--   `-force=false`: drop repository even if it used as source of some
+-   `-force`: drop repository even if it used as source of some
     snapshot
 
 Dropping local repository only removes metadata, in order to cleanup the

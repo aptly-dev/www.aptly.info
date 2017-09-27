@@ -32,7 +32,7 @@ Params:
 
 Flags:
 
--   `-with-deps=false`: include [dependencies](/doc/feature/dependencies) of matching packages
+-   `-with-deps`: include [dependencies](/doc/feature/dependencies) of matching packages
 
 Filter command is almost identical to
 `aptly snapshot pull empty source destination query` (`empty` being empty

@@ -24,7 +24,7 @@ Usage:
 
 Flags:
 
--   `-raw=false`: display list in machine-readable format
+-   `-raw`: display list in machine-readable format
 
 Format of the list is following: `endpoint:prefix/distribution [architecture list] publishes {local repo/snapshot description}`.
 Empty `prefix` is displayed as `.`, if repository is published on local filesystem, `endpoint` would be empty.

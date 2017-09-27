@@ -45,7 +45,7 @@ Flags:
     publishing, separate components with commas)
 -   `-distribution=""`: distribution name to publish; guessed from
     original repository distribution
--   `-force-overwrite=false`: overwrite packages files in the pool even
+-   `-force-overwrite`: overwrite packages files in the pool even
     if content is different (see also [duplicate packages](/doc/feature/duplicate/))
 -   `-gpg-key=""`: GPG key ID to use when signing the release, if not
     specified default key is used
@@ -59,9 +59,9 @@ Flags:
 -   `-butautomaticupgrades=""`: value for `ButAutomaticUpgrades:` field. When not set will be inherited by
     given snapshot(s) if unique {{< version "1.1.0" >}}
 -   `-secret-keyring=""`: GPG secret keyring to use (instead of default)
--   `-skip-contents=false`: don't generate Contents indexes (setting would
+-   `-skip-contents`: don't generate Contents indexes (setting would
     be stored permanently for published repository)
--   `-skip-signing=false`: don't sign Release files with GPG
+-   `-skip-signing`: don't sign Release files with GPG
 
 If architectures are limited (with config `architectures` or option
 `-architectures`), only mentioned architectures would be published,

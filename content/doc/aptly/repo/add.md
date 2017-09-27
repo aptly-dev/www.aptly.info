@@ -32,9 +32,9 @@ Params are:
 
 Flags:
 
--   `-force-replace=false`: when adding package that conflicts with existing package,
+-   `-force-replace`: when adding package that conflicts with existing package,
     remove existing package
--   `-remove-files=false`: remove files that have been imported
+-   `-remove-files`: remove files that have been imported
     successfully into repository
 
 Local repositories work best for distribution of in-house software or

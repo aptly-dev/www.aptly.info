@@ -29,8 +29,8 @@ Params are:
 
 Flags:
 
--   `-dry-run=false`: don't import, just show what would be imported
--   `-with-deps=false`: follow [dependencies](/doc/feature/dependencies) when processing
+-   `-dry-run`: don't import, just show what would be imported
+-   `-with-deps`: follow [dependencies](/doc/feature/dependencies) when processing
     package-query
 
 When copying with dependencies, global dependency options are used. For
