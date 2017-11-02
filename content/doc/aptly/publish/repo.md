@@ -56,6 +56,7 @@ Flags:
 -   `-keyring=""`: GPG keyring to use (instead of default)
 -   `-label=""`: value for `Label:` field
 -   `-origin=""`: value for `Origin:` field
+-   `-acquire-by-hash`: provide index files by hash if unique {{< version "1.2.0" >}}
 -   `-notautomatic=""`: value for `NotAutomatic:` field  {{< version "1.1.0" >}}
 -   `-butautomaticupgrades=""`: value for `ButAutomaticUpgrades:` field  {{< version "1.1.0" >}}
 -   `-passphrase=""`: GPG passphrase to unlock private key (possibly insecure)

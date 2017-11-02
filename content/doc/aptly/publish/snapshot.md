@@ -54,6 +54,7 @@ Flags:
 -   `-passphrase=""`: GPG passphrase to unlock private key (possibly insecure)
 -   `-passphrase-file=""`: GPG passphrase file to unlock private key (possibly insecure)
 -   `-origin=""`: value for `Origin:` field. When not set will be inherited by given snapshot(s) if unique
+-   `-acquire-by-hash`: provide index files by hash if unique {{< version "1.2.0" >}}
 -   `-notautomatic=""`: value for `NotAutomatic:` field. When not set will be inherited by given snapshot(s)
     if unique {{< version "1.1.0" >}}
 -   `-butautomaticupgrades=""`: value for `ButAutomaticUpgrades:` field. When not set will be inherited by
