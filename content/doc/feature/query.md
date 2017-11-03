@@ -14,7 +14,7 @@ Some commands accept package queries to identify list of packages to
 process. Package query syntax almost matches `reprepro` query language.
 Query consists of the following simple terms:
 
--   **direct package reference**: reference to exaclty one package.
+-   **direct package reference**: reference to exactly one package.
     Format is identical to the way aptly lists packages in show commands
     with `-with-packages` flag: `name_version_arch`, e.g.:
     `libmysqlclient18_5.5.35-rel33.0-611.squeeze_amd64`
