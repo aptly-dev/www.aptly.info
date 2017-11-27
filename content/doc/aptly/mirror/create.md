@@ -47,6 +47,8 @@ Flags:
     signatures
 -   `-keyring=trustedkeys.gpg`: gpg keyring to use when verifying
     Release file (could be specified multiple times)
+-   `-with-installer`: download additional not packaged installer
+    files
 -   `-with-sources`: download source packages in addition to
     binary packages (could be enabled by default with config option
     `downloadSourcePackages`)
