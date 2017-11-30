@@ -25,11 +25,16 @@ Params are:
 
 Flags:
 
+-   `-archive-url=`: flag to change archive url
 -   `-filter=`: [package query](/doc/feature/query/) which is applied to
     packages in the mirror, set to empty to disable filtering
 -   `-filter-with-deps`: when filtering, include [dependencies](/doc/feature/dependencies) of
     matching packages as well
 -   `-architectures=`: global flag to change architectures list.
+-   `-ignore-signatures`: disable verification of `Release` file
+    signatures
+-   `-keyring=trustedkeys.gpg`: gpg keyring to use when verifying
+    Release file (could be specified multiple times)
 -   `-with-sources`: download source packages in addition to
     binary packages
 -   `-with-udebs`: download .udeb packages (Debian installer
