@@ -31,6 +31,7 @@ Published repository properties:
  `Origin`                  | string              | value of `Origin:` field in published repository stanza
  `NotAutomatic`            | string              | setting to `yes` indicates to the package manager to not install or upgrade packages from the repository without user consent [🛈](https://wiki.debian.org/DebianRepository/Format#NotAutomatic_and_ButAutomaticUpgrades)
  `ButAutomaticUpgrades`    | string              | setting to `yes` excludes upgrades from the `NotAutomic` setting [🛈](https://wiki.debian.org/DebianRepository/Format#NotAutomatic_and_ButAutomaticUpgrades)
+ `AcquireByHash`           | bool                 | provide index files by hash
 
 Signing options (all are optional):
 
@@ -55,7 +56,7 @@ List published repositories.
 Example:
 
     $ curl http://localhost:8080/api/publish
-    [{"Architectures":["i386"],"Distribution":"trusty","Label":"","Origin":"","Prefix":".","SourceKind":"snapshot","Sources":[{"Component":"main","Name":"snap1"}],"Storage":""},{"Architectures":["i386","source"],"Distribution":"wheezy","Label":"","Origin":"","Prefix":"testing","SourceKind":"local","Sources":[{"Component":"main","Name":"local-repo"}],"Storage":""}]
+    [{"AcquireByHash":false,"Architectures":["i386"],"Distribution":"trusty","Label":"","Origin":"","Prefix":".","SourceKind":"snapshot","Sources":[{"Component":"main","Name":"snap1"}],"Storage":""},{"AcquireByHash":false,"Architectures":["i386","source"],"Distribution":"wheezy","Label":"","Origin":"","Prefix":"testing","SourceKind":"local","Sources":[{"Component":"main","Name":"local-repo"}],"Storage":""}]
 
 ### Publish Snapshot/Local Repo
 
@@ -78,7 +79,8 @@ JSON body params:
  `Signing`                 | SigningOptions       | gpg options (see above)
  `NotAutomatic`            | string               | setting to `yes` indicates to the package manager to not install or upgrade packages from the repository without user consent [🛈](https://wiki.debian.org/DebianRepository/Format#NotAutomatic_and_ButAutomaticUpgrades)
  `ButAutomaticUpgrades`    | string               | setting to `yes` excludes upgrades from the `NotAutomic` setting [🛈](https://wiki.debian.org/DebianRepository/Format#NotAutomatic_and_ButAutomaticUpgrades)
-`SkipCleanup`              | boolean              | don't remove unreferenced files in prefix/component
+ `SkipCleanup`             | bool                 | don't remove unreferenced files in prefix/component
+ `AcquireByHash`           | bool                 | provide index files by hash
 
 Notes on `Sources` field:
 
@@ -101,10 +103,10 @@ Code      | Description
 Example:
 
     $ curl -X POST -H 'Content-Type: application/json' --data '{"SourceKind": "local", "Sources": [{"Name": "local-repo"}], "Architectures": ["i386", "amd64"], "Distribution": "wheezy"}' http://localhost:8080/api/publish/:.
-    {"Architectures":["amd64","i386"],"Distribution":"wheezy","Label":"","Origin":"","Prefix":".","SourceKind":"local","Sources":[{"Component":"main","Name":"local-repo"}],"Storage":""}
+    {"AcquireByHash":false,"Architectures":["amd64","i386"],"Distribution":"wheezy","Label":"","Origin":"","Prefix":".","SourceKind":"local","Sources":[{"Component":"main","Name":"local-repo"}],"Storage":""}
 
     $ curl -X POST -H 'Content-Type: application/json' --data '{"SourceKind": "local", "Sources": [{"Name": "0XktRe6qMFp4b8C", "Component": "contrib"}, {"Name": "EqmoTZiVx8MGN65", "Component": "non-free"}], "Architectures": ["i386", "amd64"], "Distribution": "wheezy"}' http://localhost:8080/api/publish/debian_testing/
-    {"Architectures":["amd64","i386"],"Distribution":"wheezy","Label":"","Origin":"","Prefix":"debian/testing","SourceKind":"local","Sources":[{"Component":"contrib","Name":"0XktRe6qMFp4b8C"},{"Component":"non-free","Name":"EqmoTZiVx8MGN65"}],"Storage":""}
+    {"AcquireByHash":false,"Architectures":["amd64","i386"],"Distribution":"wheezy","Label":"","Origin":"","Prefix":"debian/testing","SourceKind":"local","Sources":[{"Component":"contrib","Name":"0XktRe6qMFp4b8C"},{"Component":"non-free","Name":"EqmoTZiVx8MGN65"}],"Storage":""}
 
 ### Update Published Local Repo/Switch Published Snapshot
 
@@ -122,12 +124,13 @@ JSON body params:
  `Snapshots`               | []Source             | *only when updating published snapshots*, list of objects `Component`/`Name`
  `ForceOverwrite`          | bool                 | when publishing, overwrite files in `pool/` directory without notice
  `Signing`                 | SigningOptions       | gpg options (see above)
+ `AcquireByHash`           | bool                 | provide index files by hash
 
 
 Example:
 
     $ curl -X PUT -H 'Content-Type: application/json' --data '{"Snapshots": [{"Component": "main", "Name": "8KNOnIC7q900L5v"}]}' http://localhost:8080/api/publish/:./wheezy
-    {"Architectures":["amd64","i386"],"Distribution":"wheezy","Label":"","Origin":"","Prefix":".","SourceKind":"local","Sources":[{"Component":"main","Name":"2y21K6aKBE5UJBQ"}],"Storage":""}
+    {"AcquireByHash":false,"Architectures":["amd64","i386"],"Distribution":"wheezy","Label":"","Origin":"","Prefix":".","SourceKind":"local","Sources":[{"Component":"main","Name":"2y21K6aKBE5UJBQ"}],"Storage":""}
 
 ### Drop Published Repository
 
