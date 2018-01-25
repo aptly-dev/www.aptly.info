@@ -69,7 +69,7 @@ JSON body params:
  Name                      | Type                 | Description
 ---------------------------|----------------------|-------------------------------
  `SourceKind`              | string, *required*   | source kind: `local` for local repositories and `snapshot` for snapshots
- `Sources`                 | []Source, *required* | list of `Component`/`Name` objects, `Name` is either local repository or snpashot name
+ `Sources`                 | []Source, *required* | list of `Component`/`Name` objects, `Name` is either local repository or snapshot name
  `Distribution`            | string               | distribution name, if missing aptly would try to guess from sources
  `Label`                   | string               | value of `Label:` field in published repository stanza
  `Origin`                  | string               | value of `Origin:` field in published repository stanza
