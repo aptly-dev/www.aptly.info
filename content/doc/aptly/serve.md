@@ -20,9 +20,6 @@ root that contains published repositories. aptly would print recommended
 `apt-sources` for the currently published repositories. By default aptly
 would listen on port 8080, but this can be changed with flag `-listen`.
 
-When `-no-lock` option is enabled, API server acquires and drops the lock
-around all the operations, so that API and CLI could be used concurrently.
-
 Usage:
 
     $ aptly serve -listen=:8080
@@ -30,7 +27,6 @@ Usage:
 Flags:
 
 -   `-listen=":8080"`: host:port for HTTP listening
--   `-no-lock`: don't lock the database
 
 Example:
 
