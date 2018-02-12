@@ -33,6 +33,18 @@ Run `aptly api serve` to start HTTP service:
 
 By default aptly would listen on `:8080`, but it could be changed with `-listen` flag.
 
+Usage:
+
+    $ aptly api serve -listen=:8080
+
+Flags:
+
+-   `-listen=":8080"`: host:port for HTTP listening
+-   `-no-lock`: don't lock the database
+
+When `-no-lock` option is enabled, API server acquires and drops the lock
+around all the operations, so that API and CLI could be used concurrently.
+
 Try some APIs:
 
     $ curl http://localhost:8080/api/version
