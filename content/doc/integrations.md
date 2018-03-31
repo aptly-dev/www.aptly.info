@@ -31,6 +31,7 @@ With configuration management systems:
 
 aptly API:
 
--   [aptly_cli Ruby library](https://github.com/sepulworld/aptly_cli) by Zane Williamson. 
+-   [aptly_cli Ruby library](https://github.com/sepulworld/aptly_cli) by Zane Williamson.
     This includes an aptly API command-line client.
 -   [aptly-api-client Python library](https://github.com/gopythongo/aptly-api-client) by Jonas Maurus.
+-   [Python aptly GUI (via pyqt5)](https://github.com/chnyda/python-aptly-gui) by Cedric Hnyda.
