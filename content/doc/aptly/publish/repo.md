@@ -27,9 +27,9 @@ Usage:
 
 Params:
 
--   `name` is a local repo name that snould be published
+-   `name` is a local repo name that should be published
 -   `endpoint` is an optional endpoint reference. Without endpoint,
-    repository would be pulished to local file system. In order to
+    repository would be published to local file system. In order to
     publish to Amazon S3, use endpoint name `s3:<name>:`, where endpoint
     `name` is configured as S3 publishing endpoint in
     [configuration file](/doc/feature/s3), for OpenStack Swift,
