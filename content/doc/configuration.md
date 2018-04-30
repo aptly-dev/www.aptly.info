@@ -11,11 +11,13 @@ Configuration
 
 aptly looks for configuration file first in `~/.aptly.conf` then
 in `/etc/aptly.conf` and, if no config file found, new one is created in
-home directory. If
-`-config=` flag is specified, aptly would use config file at specified
+home directory. If `-config=` flag is specified, aptly would use config file at specified
 location. Also aptly needs root directory for database, package and
 published repository storage. If not specified, directory defaults to
 `~/.aptly`, it will be created if missing.
+
+Configuration files do not cascade. The file that gets loaded must contain all
+configurations for a given aptly instance.
 
 Configuration file is stored in JSON format (default values shown
 below):
