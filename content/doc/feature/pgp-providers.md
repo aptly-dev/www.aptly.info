@@ -11,10 +11,15 @@ menu:
 PGP Providers  {{< version "1.1.0" >}}
 -------------
 
-Before version 1.1.0, aptly was using `gpg` to validate signatures and sign published repositories.
-In version {{< version "1.1.0" >}}, support for pluggable validation/signing providers is added.
-Previous implementation which does external calls to `gpg` is still the default one, but new
-provider based on [Go native OpenPGP implementation](https://github.com/golang/crypto/tree/master/openpgp) was added to aptly. With any PGP provider, aptly is using same keyrings both for signing and signature validation,
+Aptly at this time only supports GNUPG 1.x for server-side use.
+On newer Debian systems you'll want to make sure that the `gnupg1` and `gpgv1` packages are installed.
+Please note that GNUPG 1 and 2 maintain different keyrings, in order for keys to
+be available to Aptly they need to be in the GNUPG 1 keyring.
+
+Since version {{< version "1.1.0" >}}, Aptly supports pluggable validation/signing providers.
+The original `gpg` provider calls the actual gpg binary as a subprocess.
+The newer `internal` provider relies on a [Go native OpenPGP implementation](https://github.com/golang/crypto/tree/master/openpgp).
+With any PGP provider, aptly is using same keyrings both for signing and signature validation,
 so providers can be easily switched. Signing/validation options apply the same way for both provider
 implementations.
 
