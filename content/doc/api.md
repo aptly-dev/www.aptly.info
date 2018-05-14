@@ -28,7 +28,7 @@ Run `aptly api serve` to start HTTP service:
 
     $ aptly api serve
     Starting web server at: :8080 (press Ctrl+C to quit)...
-    [GIN-debug] GET   /api/version              --> github.com/smira/aptly/api.apiVersion (4 handlers)
+    [GIN-debug] GET   /api/version              --> github.com/aptly-dev/aptly/api.apiVersion (4 handlers)
     ...
 
 By default aptly would listen on `:8080`, but it could be changed with `-listen` flag.

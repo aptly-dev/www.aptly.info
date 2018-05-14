@@ -6,7 +6,7 @@ title = "aptly 0.3"
 Today I've released [aptly](http://www.aptly.info/) version 0.3. It's
 the first version I would recommend for production usage. Please
 [download it](http://www.aptly.info/#download) or install from
-[source](https://github.com/smira/aptly), [raise
+[source](https://github.com/aptly-dev/aptly), [raise
 issues](https://github.com/smira/aplty/issues), disscuss in
 [aptly-discuss
 group](https://groups.google.com/forum/#!forum/aptly-discuss), follow

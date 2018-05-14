@@ -131,15 +131,15 @@ All Changes
 Full list of changes in 0.6:
 
 <ul>
-  <li>support for multi-component published repositories (<a href="https://github.com/smira/aptly/issues/36">#36</a>)</li>
-  <li>handling duplicate packages with different content gracefully (<a href="https://github.com/smira/aptly/issues/60">#60</a>)</li>
-  <li>repositories published by aptly now can be consumed by debian-installer (<a href="https://github.com/smira/aptly/issues/61">#61</a>)</li>
-  <li>new flag: <code>-no-remove</code> for <a href="http://www.aptly.info/#aptly-snapshot-merge">aptly snapshot merge</a> to merge snapshots with all package versions preserved (<a href="https://github.com/smira/aptly/issues/57">#57</a>)</li>
-  <li>publishing of empty snapshots/repositories is possible (<a href="https://github.com/smira/aptly/issues/55">#55</a>)</li>
-  <li><a href="http://www.aptly.info/#aptly-repo-add">aptly repo add</a> now exists with 1 if any of files failed to add (<a href="https://github.com/smira/aptly/issues/53">#53</a>)</li>
-  <li>bug fix: <code>Package:</code> line comes first in package metadata (<a href="https://github.com/smira/aptly/issues/49">#49</a>)</li>
-  <li>bug fix: when command parsing fails, aptly returns exit code 2 (<a href="https://github.com/smira/aptly/issues/52">#52</a>)</li>
-  <li>bug fix: pulling more than 128 packates at once (<a href="https://github.com/smira/aptly/issues/53">#53</a>)</li>
-  <li>bug fix: <a href="http://www.aptly.info/#aptly-graph">aptly graph</a> may get confused with package pull requests (<a href="https://github.com/smira/aptly/issues/58">#58</a>)</li>
+  <li>support for multi-component published repositories (<a href="https://github.com/aptly-dev/aptly/issues/36">#36</a>)</li>
+  <li>handling duplicate packages with different content gracefully (<a href="https://github.com/aptly-dev/aptly/issues/60">#60</a>)</li>
+  <li>repositories published by aptly now can be consumed by debian-installer (<a href="https://github.com/aptly-dev/aptly/issues/61">#61</a>)</li>
+  <li>new flag: <code>-no-remove</code> for <a href="http://www.aptly.info/#aptly-snapshot-merge">aptly snapshot merge</a> to merge snapshots with all package versions preserved (<a href="https://github.com/aptly-dev/aptly/issues/57">#57</a>)</li>
+  <li>publishing of empty snapshots/repositories is possible (<a href="https://github.com/aptly-dev/aptly/issues/55">#55</a>)</li>
+  <li><a href="http://www.aptly.info/#aptly-repo-add">aptly repo add</a> now exists with 1 if any of files failed to add (<a href="https://github.com/aptly-dev/aptly/issues/53">#53</a>)</li>
+  <li>bug fix: <code>Package:</code> line comes first in package metadata (<a href="https://github.com/aptly-dev/aptly/issues/49">#49</a>)</li>
+  <li>bug fix: when command parsing fails, aptly returns exit code 2 (<a href="https://github.com/aptly-dev/aptly/issues/52">#52</a>)</li>
+  <li>bug fix: pulling more than 128 packates at once (<a href="https://github.com/aptly-dev/aptly/issues/53">#53</a>)</li>
+  <li>bug fix: <a href="http://www.aptly.info/#aptly-graph">aptly graph</a> may get confused with package pull requests (<a href="https://github.com/aptly-dev/aptly/issues/58">#58</a>)</li>
 </ul>
 

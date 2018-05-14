@@ -157,23 +157,23 @@ All Changes
 Full ist of changes since 0.7:
 
 <ul>
-  <li>direct <a href="http://www.aptly.info/#s3-publishing">publishing to Amazon S3</a> (<a href="https://github.com/smira/aptly/issues/15">#15</a>)</li>
+  <li>direct <a href="http://www.aptly.info/#s3-publishing">publishing to Amazon S3</a> (<a href="https://github.com/aptly-dev/aptly/issues/15">#15</a>)</li>
   <li>support for new, powerful <a href="http://www.aptly.info/#package-query">query language</a> in many commands:
     <a href="http://www.aptly.info/#aptly-snapshot-pull">aptly snapshot pull</a>, <a href="http://www.aptly.info/#aptly-repo-move">aptly repo move</a>,
     <a href="http://www.aptly.info/#aptly-repo-copy">aptly repo copy</a>, <a href="http://www.aptly.info/#aptly-repo-import">aptly repo import</a> and
     <a href="http://www.aptly.info/#aptly-repo-remove">aptly repo remove</a></li>
-    <li>bug fix: files from conflicting packages might override each other while publishing (<a href="https://github.com/smira/aptly/issues/65">#65</a>)</li>
-  <li>partial mirrors: filter package lists when mirroring (<a href="https://github.com/smira/aptly/issues/64">#64</a>)</li>
-  <li>new commands: <a href="http://www.aptly.info/#aptly-mirror-rename">mirrors</a>, <a href="http://www.aptly.info/#aptly-repo-rename">local repositories</a> and <a href="http://www.aptly.info/#aptly-snapshot-rename">snapshots</a> can be renamed (<a href="https://github.com/smira/aptly/issues/63">#63</a>)</li>
-  <li>new command: <a href="http://www.aptly.info/#aptly-mirror-edit">aptly mirror edit</a> allows to change mirror filtering (<a href="https://github.com/smira/aptly/issues/63">#63</a>)</li>
-  <li>download transfer rate could be limited either via <a href="http://www.aptly.info/#configuration">configuration</a> file parameter <code>downloadSpeedLimit</code> or with flag <code>-download-limit</code> for command <a href="http://www.aptly.info/#aptly-mirror-update">aptly mirror update</a> (<a href="https://github.com/smira/aptly/issues/62">#62</a>)</li>
+    <li>bug fix: files from conflicting packages might override each other while publishing (<a href="https://github.com/aptly-dev/aptly/issues/65">#65</a>)</li>
+  <li>partial mirrors: filter package lists when mirroring (<a href="https://github.com/aptly-dev/aptly/issues/64">#64</a>)</li>
+  <li>new commands: <a href="http://www.aptly.info/#aptly-mirror-rename">mirrors</a>, <a href="http://www.aptly.info/#aptly-repo-rename">local repositories</a> and <a href="http://www.aptly.info/#aptly-snapshot-rename">snapshots</a> can be renamed (<a href="https://github.com/aptly-dev/aptly/issues/63">#63</a>)</li>
+  <li>new command: <a href="http://www.aptly.info/#aptly-mirror-edit">aptly mirror edit</a> allows to change mirror filtering (<a href="https://github.com/aptly-dev/aptly/issues/63">#63</a>)</li>
+  <li>download transfer rate could be limited either via <a href="http://www.aptly.info/#configuration">configuration</a> file parameter <code>downloadSpeedLimit</code> or with flag <code>-download-limit</code> for command <a href="http://www.aptly.info/#aptly-mirror-update">aptly mirror update</a> (<a href="https://github.com/aptly-dev/aptly/issues/62">#62</a>)</li>
   <li>new flag: <code>-all-matches</code> for <a href="http://www.aptly.info/#aptly-snapshot-pull">aptly snapshot pull</a> enables pulling of all matching
-  packages (<a href="https://github.com/smira/aptly/pull/70">#70</a>), thanks to <a href="https://github.com/simonaquino">Simon Aquino</a></li>
-  <li>when matching single package in <a href="http://www.aptly.info/#aptly-snapshot-pull">aptly snapshot pull</a> latest version would be pulled (<a href="https://github.com/smira/aptly/pull/67">#67</a>), thanks to <a href="https://github.com/simonaquino">Simon Aquino</a></li>
-  <li>new flag: <code>-sort</code> for <a href="http://www.aptly.info/#aptly-snapshot-list">aptly snapshot list</a> allows to change order of snapshots in the list (<a href="https://github.com/smira/aptly/pull/73">#73</a>), thanks to <a href="https://github.com/simonaquino">Simon Aquino</a></li>
-  <li>bug fix: publish update fails on empty multi-component repo (<a href="https://github.com/smira/aptly/issues/66">#66</a>)</li>
-  <li>bug fix: <a href="http://www.aptly.info/#aptly-snapshot-pull">aptly snapshot pull</a> might remove already pulled packages (<a href="https://github.com/smira/aptly/issues/78">#78</a>)</li>
-  <li>bug fix: aptly package was missing <code>bzip2</code> dependency (<a href="https://github.com/smira/aptly/issues/84">#84</a>)</li>
+  packages (<a href="https://github.com/aptly-dev/aptly/pull/70">#70</a>), thanks to <a href="https://github.com/simonaquino">Simon Aquino</a></li>
+  <li>when matching single package in <a href="http://www.aptly.info/#aptly-snapshot-pull">aptly snapshot pull</a> latest version would be pulled (<a href="https://github.com/aptly-dev/aptly/pull/67">#67</a>), thanks to <a href="https://github.com/simonaquino">Simon Aquino</a></li>
+  <li>new flag: <code>-sort</code> for <a href="http://www.aptly.info/#aptly-snapshot-list">aptly snapshot list</a> allows to change order of snapshots in the list (<a href="https://github.com/aptly-dev/aptly/pull/73">#73</a>), thanks to <a href="https://github.com/simonaquino">Simon Aquino</a></li>
+  <li>bug fix: publish update fails on empty multi-component repo (<a href="https://github.com/aptly-dev/aptly/issues/66">#66</a>)</li>
+  <li>bug fix: <a href="http://www.aptly.info/#aptly-snapshot-pull">aptly snapshot pull</a> might remove already pulled packages (<a href="https://github.com/aptly-dev/aptly/issues/78">#78</a>)</li>
+  <li>bug fix: aptly package was missing <code>bzip2</code> dependency (<a href="https://github.com/aptly-dev/aptly/issues/84">#84</a>)</li>
   <li>aptly binary packages are built with go1.3</li>
 </ul>
 
