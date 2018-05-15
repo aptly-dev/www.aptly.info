@@ -115,57 +115,57 @@ Full list of changes since 0.7.1:
 <ul>
   <li>aptly supports <strong>concurrent operations while mirror is updated</strong>, new flag
   <code>-force</code> for <a href="http://www.aptly.info/doc/aptly/mirror/update/">aptly mirror update</a>
-  (<a href="https://github.com/smira/aptly/issues/45">#45</a>) (<a href="https://github.com/smira/aptly/issues/114">#114</a>)</li>
+  (<a href="https://github.com/aptly-dev/aptly/issues/45">#45</a>) (<a href="https://github.com/aptly-dev/aptly/issues/114">#114</a>)</li>
   <li>support for <strong><code>.udeb</code> packages (Debian installer)</strong> in mirrors, local repos and
   published repositories
-  (<a href="https://github.com/smira/aptly/issues/108">#108</a>)</li>
+  (<a href="https://github.com/aptly-dev/aptly/issues/108">#108</a>)</li>
   <li>new command <a href="http://www.aptly.info/doc/aptly/snapshot/filter">aptly snapshot filter</a>:
   <strong>filtering snapshots</strong> using package query, complementary
   to <a href="http://www.aptly.info/doc/aptly/snapshot/pull/">snapshot pulling</a>
-  (<a href="https://github.com/smira/aptly/issues/82">#82</a>)</li>
+  (<a href="https://github.com/aptly-dev/aptly/issues/82">#82</a>)</li>
   <li><strong>searching for packages matching query</strong> in
   <a href="http://www.aptly.info/doc/aptly/mirror/search">mirrors</a>,
   <a href="http://www.aptly.info/doc/aptly/repo/search">local repos</a>,
   <a href="http://www.aptly.info/doc/aptly/snapshot/search">snapshots</a> and
   <a href="http://www.aptly.info/doc/aptly/package/search">whole package database</a>
-  (<a href="https://github.com/smira/aptly/issues/81">#81</a>)
-  (<a href="https://github.com/smira/aptly/issues/80">#80</a>)</li>
+  (<a href="https://github.com/aptly-dev/aptly/issues/81">#81</a>)
+  (<a href="https://github.com/aptly-dev/aptly/issues/80">#80</a>)</li>
   <li>new command <a href="http://www.aptly.info/doc/aptly/package/show/">aptly package show</a>:
   displaying <strong>details about package</strong>, its inclusion into snapshots,
   mirrors, local repos
-  (<a href="https://github.com/smira/aptly/issues/80">#80</a>)</li>
+  (<a href="https://github.com/aptly-dev/aptly/issues/80">#80</a>)</li>
   <li><a href="http://www.aptly.info/doc/aptly/mirror/edit/">aptly mirror edit</a> now supports changing list of architectures
   and download source setting
-  (<a href="https://github.com/smira/aptly/issues/109">#109</a>)
-  (<a href="https://github.com/smira/aptly/issues/99">#99</a>)</li>
+  (<a href="https://github.com/aptly-dev/aptly/issues/109">#109</a>)
+  (<a href="https://github.com/aptly-dev/aptly/issues/99">#99</a>)</li>
   <li>workaround S3/apt issue with <code>+</code> in package filenames
   (S3 config option <code>plusWorkaround</code>)
-  (<a href="https://github.com/smira/aptly/issues/105">#105</a>)</li>
+  (<a href="https://github.com/aptly-dev/aptly/issues/105">#105</a>)</li>
   <li>when publishing to S3 it&rsquo;s possible to choose reduced redundancy storage and
   server-side encryption (S3 config options <code>storageClass</code> and <code>encryptionMethod</code>)
-  (<a href="https://github.com/smira/aptly/issues/105">#105</a>)</li>
+  (<a href="https://github.com/aptly-dev/aptly/issues/105">#105</a>)</li>
   <li>when signing published repository, it&rsquo;s possible to pass passphrase
   for GPG key with flags <code>-passphrase</code> or <code>-passphrase-file</code>
-  (<a href="https://github.com/smira/aptly/issues/194">#94</a>)</li>
+  (<a href="https://github.com/aptly-dev/aptly/issues/194">#94</a>)</li>
   <li>new flag <code>-force-replace</code> in <a href="http://www.aptly.info/doc/aptly/repo/add/">aptly repo add</a> command
   to replace conflicting packages automatically
-  (<a href="https://github.com/smira/aptly/issues/83">#83</a>)</li>
+  (<a href="https://github.com/aptly-dev/aptly/issues/83">#83</a>)</li>
   <li>dependency resolution algorithm has been improved
-  (<a href="https://github.com/smira/aptly/issues/100">#100</a>)</li>
+  (<a href="https://github.com/aptly-dev/aptly/issues/100">#100</a>)</li>
   <li>aptly now supports mirroring over FTP
-  (<a href="https://github.com/smira/aptly/issues/48">#48</a>)</li>
+  (<a href="https://github.com/aptly-dev/aptly/issues/48">#48</a>)</li>
   <li>bug fix: for boolean options, settings
   from configuration file were overriding settings on command line
-  (<a href="https://github.com/smira/aptly/issues/104">#104</a>)</li>
+  (<a href="https://github.com/aptly-dev/aptly/issues/104">#104</a>)</li>
   <li>bug fix: <a href="http://www.aptly.info/doc/aptly/publish/list/">aptly publish list</a> with <code>-raw</code> flag
   hasn&rsquo;t been displaying storage prefix for repositories published to S3
-  (<a href="https://github.com/smira/aptly/issues/113">#113</a>)</li>
+  (<a href="https://github.com/aptly-dev/aptly/issues/113">#113</a>)</li>
   <li>bug fix: dropping repositories published to S3 might result in &ldquo;bad signature&rdquo; error</li>
   <li>bug fix: publishing repositories with <code>/</code> in distribution name isn&rsquo;t allowed anymore,
   when guessing distribution <code>/</code> is replaced with <code>-</code>
-  (<a href="https://github.com/smira/aptly/issues/110">#110</a>)</li>
+  (<a href="https://github.com/aptly-dev/aptly/issues/110">#110</a>)</li>
   <li>bug fix: download errors while mirroring now include original
   URL
-  (<a href="https://github.com/smira/aptly/issues/26">#26</a>)</li>
+  (<a href="https://github.com/aptly-dev/aptly/issues/26">#26</a>)</li>
 </ul>
 

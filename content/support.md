@@ -8,7 +8,7 @@ If you have trouble using aptly, you can find community support from:
 
 * [aptly-discuss mailing list](https://groups.google.com/forum/#!forum/aptly-discuss)
 * #aptly freenode channel (logs at [BotBotme](https://botbot.me/freenode/aptly/))
-* [GitHub issue tracker](https://github.com/smira/aptly/issues)
+* [GitHub issue tracker](https://github.com/aptly-dev/aptly/issues)
 
 Please follow me ([@smira](https://twitter.com/smira/)) to get
 updates about aptly.

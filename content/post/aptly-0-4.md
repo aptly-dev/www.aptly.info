@@ -9,7 +9,7 @@ management](http://www.aptly.info/#aptly-repo) which allows to manage
 collection of your own packages, publish, take snapshots, mix with
 upstream repositories mirrors. Please [download
 it](http://www.aptly.info/#download) or install from
-[source](https://github.com/smira/aptly), [raise
+[source](https://github.com/aptly-dev/aptly), [raise
 issues](https://github.com/smira/aplty/issues), disscuss in
 [aptly-discuss
 group](https://groups.google.com/forum/#!forum/aptly-discuss), follow
