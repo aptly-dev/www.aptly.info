@@ -36,7 +36,7 @@ Flags:
 -   `-keyring=trustedkeys.gpg`: gpg keyring to use when verifying
     Release file (could be specified multiple times) {{< version "1.2.0" >}}
 -   `-with-installer`: download additional not packaged installer
-    files
+    files {{< version "1.4.0" >}}
 -   `-with-sources`: download source packages in addition to
     binary packages
 -   `-with-udebs`: download .udeb packages (Debian installer
