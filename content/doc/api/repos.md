@@ -202,6 +202,53 @@ Example (file upload, add package to repo):
     $ curl -X POST http://localhost:8080/api/repos/repo1/file/aptly-0.9
     {"FailedFiles":[],"Report":{"Warnings":[],"Added":["aptly_0.9~dev+217+ge5d646c_i386 added"],"Removed":[]}}
 
+
+### Include packages from uploaded file/directory
+
+`POST /api/repos/:name/include/:dir`
+
+`POST /api/repos/:name/include/:dir/:file`
+
+New in {{< version "1.4.0" >}}
+
+Allows automatic processing of `.changes` file controlling package upload (uploaded using [File Upload API](/doc/api/files)) to the local repository. Exposes [repo include](/doc/repo/include) command in api.
+
+Query params:
+
+ Name                      | Description
+---------------------------|-------------------------------
+ `noRemoveFiles`           | when value is set to `1`, don’t remove files that have been imported successfully into repository
+ `forceReplace`            | when value is set to `1`, when adding package that conflicts with existing package, remove existing package
+ `ignoreSignature`         | when value is set to `1` disable verification of .changes file signature
+ `acceptUnsigned`          | when value is set to `1` accept unsigned .changes files
+
+Response:
+
+Name                       | Type                | Description
+---------------------------|---------------------|-------------------------------
+ `FailedFiles`             | []string            | list of files that failed to be processed
+ `Report`                  | object              | operation report (see below)
+
+Report structure:
+
+Name                       | Type                | Description
+---------------------------|---------------------|-------------------------------
+ `Warnings`                | []string            | list of warnings
+ `Added`                   | []string            | list of messages related to packages being added
+ `Deleted`                 | []string            | list of messages related to packages being deleted
+
+Example (file upload, include changes files in repo):
+
+    $ curl -X POST -F file=@hardlink_0.2.1_amd64.changes http://localhost:8080/api/files/hardlink
+    ["file=@hardlink_0.2.1_amd64.changes"]
+
+    $ # upload any other files referenced in .changes file...
+
+    $ curl -X POST http://localhost:8080/api/repos/repo1/include/hardlink
+    {"FailedFiles":[],"Report":{"Warnings":[],"Added":["hardlink_0.2.1_source added"],"Removed":[]}}
+
+
+
 ### Add packages by key
 
 `POST /api/repos/:name/packages`
