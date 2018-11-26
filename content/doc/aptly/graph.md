@@ -10,7 +10,7 @@ menu:
 aptly graph
 -----------
 
-aptly generates graph showing depedencies between mirrors, local repositories,
+aptly generates graph showing dependencies between mirrors, local repositories,
 snapshots and published repositories.
  
 
