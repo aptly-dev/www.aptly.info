@@ -10,46 +10,46 @@ History
 
 - official Go S3 SDK is used for S3 publishing, fixes numerous
   issues with S3
-  ([\#344](https://github.com/smira/aptly/pull/344)
+  ([\#344](https://github.com/aptly-dev/aptly/pull/344)
   thanks to [Phil Frost](https://github.com/bitglue))
-  ([\#297](https://github.com/smira/aptly/issues/297))
-  ([\#326](https://github.com/smira/aptly/issues/326))
-  ([\#342](https://github.com/smira/aptly/issues/342))
-  ([\#358](https://github.com/smira/aptly/issues/358))
-  ([\#355](https://github.com/smira/aptly/pull/355))
+  ([\#297](https://github.com/aptly-dev/aptly/issues/297))
+  ([\#326](https://github.com/aptly-dev/aptly/issues/326))
+  ([\#342](https://github.com/aptly-dev/aptly/issues/342))
+  ([\#358](https://github.com/aptly-dev/aptly/issues/358))
+  ([\#355](https://github.com/aptly-dev/aptly/pull/355))
 - `Release` files are signed with SHA-256 for new apt version
   compatibility
-  ([\#366](https://github.com/smira/aptly/pull/366)
+  ([\#366](https://github.com/aptly-dev/aptly/pull/366)
   thanks to [Geoffrey Thomas](https://github.com/geofft))
-  ([\#380](https://github.com/smira/aptly/issues/380))
+  ([\#380](https://github.com/aptly-dev/aptly/issues/380))
 - Index files now contain SHA-512 checksums
-  ([\#354](https://github.com/smira/aptly/pull/354))
-  ([\#361](https://github.com/smira/aptly/issues/361))
+  ([\#354](https://github.com/aptly-dev/aptly/pull/354))
+  ([\#361](https://github.com/aptly-dev/aptly/issues/361))
 - commands [aptly package search](/doc/aptly/package/search) and
   [aptly package show](/doc/aptly/package/show) correctly report
   duplicate packages
-  ([\#225](https://github.com/smira/aptly/issues/225))
-  ([\#368](https://github.com/smira/aptly/pull/368))
+  ([\#225](https://github.com/aptly-dev/aptly/issues/225))
+  ([\#368](https://github.com/aptly-dev/aptly/pull/368))
 - `Contents` index generation could be disabled with config
-  ([\#338](https://github.com/smira/aptly/issues/338))
-  ([\#345](https://github.com/smira/aptly/issues/345))
+  ([\#338](https://github.com/aptly-dev/aptly/issues/338))
+  ([\#345](https://github.com/aptly-dev/aptly/issues/345))
 - support for deprecated S3 SigV2 signature to keep compatibility
   with non-Amazon S3 implementations (e.g. ceph)
-  ([\#356](https://github.com/smira/aptly/issues/356))
+  ([\#356](https://github.com/aptly-dev/aptly/issues/356))
 - S3 debugging support (set `debug` to `true` in endpoint
   settings)
 - aptly does object listing to prevent issuing lots of HEAD
   requests
-  ([\#371](https://github.com/smira/aptly/pull/371))
+  ([\#371](https://github.com/aptly-dev/aptly/pull/371))
 - bug fix: API returning 200 on failures
-  ([\#290](https://github.com/smira/aptly/issues/225))
+  ([\#290](https://github.com/aptly-dev/aptly/issues/225))
 - bug fix: interoperability between aptly API and CLI in
   `-no-lock` mode (flushing caches)
-  ([\#343](https://github.com/smira/aptly/issues/343))
-  ([\#346](https://github.com/smira/aptly/pull/346)
+  ([\#343](https://github.com/aptly-dev/aptly/issues/343))
+  ([\#346](https://github.com/aptly-dev/aptly/pull/346)
 - bug fix: fix default `mkdir` perms to be `0777` to
   allow `umask` control
-  ([\#367](https://github.com/smira/aptly/pull/367)
+  ([\#367](https://github.com/aptly-dev/aptly/pull/367)
   thanks to [Phil Frost](https://github.com/bitglue))
 
 ### Version 0.9.6
@@ -59,385 +59,385 @@ History
   [aptly repo include](/doc/aptly/repo/include), new flag
   `-uploaders-file` for commands [aptly repo create](/doc/aptly/repo/create)
   and [aptly repo edit](/doc/aptly/repo/edit)
-  ([\#71](https://github.com/smira/aptly/issues/71))
+  ([\#71](https://github.com/aptly-dev/aptly/issues/71))
   **this work has been sponsored by sipgate GmbH** (http://www.sipgate.de/)
 - support for `Contents` indexes generation, new flag `-skip-contents`
   for `aptly publish` commands to disable it (per published repository)
-  ([\#142](https://github.com/smira/aptly/issues/142))
+  ([\#142](https://github.com/aptly-dev/aptly/issues/142))
 - support for custom output using flag `-format` and templates
-  ([\#254](https://github.com/smira/aptly/issues/254))
+  ([\#254](https://github.com/aptly-dev/aptly/issues/254))
 - support for non-Amazon S3-compatible cloud storages
-  ([\#218](https://github.com/smira/aptly/pull/218))
+  ([\#218](https://github.com/aptly-dev/aptly/pull/218))
   thanks to
   [Serge van Ginderachter](https://github.com/srvg)
 - aptly now retries S3 transient errors automatically
-  ([\#255](https://github.com/smira/aptly/issues/255))
+  ([\#255](https://github.com/aptly-dev/aptly/issues/255))
 - S3 upstream library has been updated to last version
   to include new Amazon regions
-  ([\#253](https://github.com/smira/aptly/issues/253))
+  ([\#253](https://github.com/aptly-dev/aptly/issues/253))
 - optional "no lock" mode of API service operations
   allowing concurrent CLI usage
-  ([\#300](https://github.com/smira/aptly/pull/300))
+  ([\#300](https://github.com/aptly-dev/aptly/pull/300))
   thanks to [Vincent Bernat](https://github.com/vincentbernat))
 - bug fix: [aptly snapshot switch](/doc/aptly/snapshot/switch) fails to respect the S3 `plusWorkaround`
-  ([\#239](https://github.com/smira/aptly/issues/239))
+  ([\#239](https://github.com/aptly-dev/aptly/issues/239))
 - bug fix: wrong handling of multiline fields in `Sources` indexes
-  ([\#261](https://github.com/smira/aptly/issues/261))
+  ([\#261](https://github.com/aptly-dev/aptly/issues/261))
 - bug fix: workaround downloads interrupted with EOF error
-  ([\#266](https://github.com/smira/aptly/pull/266))
+  ([\#266](https://github.com/aptly-dev/aptly/pull/266))
   thanks to
   [Szymon Sobik](https://github.com/sobczyk)
 - new flags `-format` and `-output` for [aptly graph](/doc/aptly/graph)
-  ([\#163](https://github.com/smira/aptly/issues/163),
-   [\#242](https://github.com/smira/aptly/pull/242)),
+  ([\#163](https://github.com/aptly-dev/aptly/issues/163),
+   [\#242](https://github.com/aptly-dev/aptly/pull/242)),
    thanks to [Zhang, Guodong](https://github.com/gdbdzgd)
 - now aptly removes empty `Depends:` lines
-  ([\#233](https://github.com/smira/aptly/issues/233))
+  ([\#233](https://github.com/aptly-dev/aptly/issues/233))
 - preliminary support for `.ddeb` packages
-  ([\#231](https://github.com/smira/aptly/pull/231))
+  ([\#231](https://github.com/aptly-dev/aptly/pull/231))
 - bug fix: error messages should go to stderr
-  ([\#249](https://github.com/smira/aptly/issues/249),
-   [\#311](https://github.com/smira/aptly/issues/311))
+  ([\#249](https://github.com/aptly-dev/aptly/issues/249),
+   [\#311](https://github.com/aptly-dev/aptly/issues/311))
 - bug fix: handling of folded fields in stanza
-  ([\#270](https://github.com/smira/aptly/pulls/270))
+  ([\#270](https://github.com/aptly-dev/aptly/pulls/270))
   thanks to
   [Szymon Sobik](https://github.com/sobczyk)
 - bug fix: limit number of open files in goleveldb to 256
-  ([\#260](https://github.com/smira/aptly/pulls/260))
+  ([\#260](https://github.com/aptly-dev/aptly/pulls/260))
 - bug fix: fix cache flusher in API daemon mode
-  ([\#307](https://github.com/smira/aptly/pulls/307),
+  ([\#307](https://github.com/aptly-dev/aptly/pulls/307),
   thanks to [Vincent Bernat](https://github.com/vincentbernat))
 - bug fix: better error messages for package analysis
-  ([\#320](https://github.com/smira/aptly/pull/320),
+  ([\#320](https://github.com/aptly-dev/aptly/pull/320),
   thanks to [Paul Krohn](https://github.com/paul-krohn))
 - security bug fix: don't download files without checksums
-  ([\#324](https://github.com/smira/aptly/pull/324),
+  ([\#324](https://github.com/aptly-dev/aptly/pull/324),
   thanks to [x539](https://github.com/x539))
 
 ### Version 0.9.5
 
 - all `search` commands now exit with code 1 if no results had been found
-  ([\#213](https://github.com/smira/aptly/issues/213))
+  ([\#213](https://github.com/aptly-dev/aptly/issues/213))
 - command [aptly db cleanup](/doc/aptly/db/cleanup) supports two new flags
   `-verbose` and `-dry-run`
-  ([\#217](https://github.com/smira/aptly/issues/217))
+  ([\#217](https://github.com/aptly-dev/aptly/issues/217))
 - command [aptly publish drop](/doc/aptly/publish/drop) gets new flag
   `-force-drop` to drop published repository even if component cleanup
   errors
-  ([\#153](https://github.com/smira/aptly/issues/153))
+  ([\#153](https://github.com/aptly-dev/aptly/issues/153))
 - bug fix: aptly reads fields from control files in case-insensitive manner
-  ([\#193](https://github.com/smira/aptly/issues/193))
+  ([\#193](https://github.com/aptly-dev/aptly/issues/193))
 
 ### Version 0.9.1
 
 *Critical bugfix release*
 
 - bug fix: `aptly db cleanup` was cleaning up duplicate packages
-  ([\#217](https://github.com/smira/aptly/issues/217))
+  ([\#217](https://github.com/aptly-dev/aptly/issues/217))
 
 ### Version 0.9
 
 - **REST API** for snapshots, local repos, file upload, publishing, graphs and version
-  ([\#16](https://github.com/smira/aptly/issues/16))
-  ([\#116](https://github.com/smira/aptly/issues/116))
-  ([\#167](https://github.com/smira/aptly/pull/167))
-  ([\#168](https://github.com/smira/aptly/pull/168))
-  ([\#169](https://github.com/smira/aptly/pull/169))
-  ([\#174](https://github.com/smira/aptly/pull/174)),
+  ([\#16](https://github.com/aptly-dev/aptly/issues/16))
+  ([\#116](https://github.com/aptly-dev/aptly/issues/116))
+  ([\#167](https://github.com/aptly-dev/aptly/pull/167))
+  ([\#168](https://github.com/aptly-dev/aptly/pull/168))
+  ([\#169](https://github.com/aptly-dev/aptly/pull/169))
+  ([\#174](https://github.com/aptly-dev/aptly/pull/174)),
   thanks to
   [Sylvain Baubeau](https://github.com/lebauce),
   [Michael Koval](https://github.com/mkoval)
 - new **OpenStack Swift** backend for publishing
-  ([\#191](https://github.com/smira/aptly/pull/191)),
+  ([\#191](https://github.com/aptly-dev/aptly/pull/191)),
   thanks to [Sebastien Badia](https://github.com/sbadia),
   [Sylvain Baubeau](https://github.com/lebauce) and
   [John Leach](https://github.com/johnl)
 - command [aptly package search](/doc/aptly/package/search) exits with
   failure code if no packages have been found
-  ([\#188](https://github.com/smira/aptly/issues/188))
+  ([\#188](https://github.com/aptly-dev/aptly/issues/188))
 - fix to continue downloading on 403 error (workaround for Amazon S3 behavior)
-  ([\#131](https://github.com/smira/aptly/pull/131)),
+  ([\#131](https://github.com/aptly-dev/aptly/pull/131)),
   thanks to [Rohan Garg](https://github.com/shadeslayer)
 - fix to support different types of `control` member in Debian archive
-  ([\#128](https://github.com/smira/aptly/pull/128)),
+  ([\#128](https://github.com/aptly-dev/aptly/pull/128)),
   thanks to [Russ Allbery](https://github.com/rra)
 - new flag `-batch` for publish commands in no-tty mode (e.g. when running from cron)
-  ([\#121](https://github.com/smira/aptly/issues/121))
-  ([\#122](https://github.com/smira/aptly/pull/122)),
+  ([\#121](https://github.com/aptly-dev/aptly/issues/121))
+  ([\#122](https://github.com/aptly-dev/aptly/pull/122)),
   thanks to [Dmitrii Kashin](https://github.com/freehck)
 - new flag `-force-components` for [aptly mirror create](/doc/aptly/mirror/create) to
   workaround repos which list actually missing components in `Release` files
-  ([\#147](https://github.com/smira/aptly/issues/147))
+  ([\#147](https://github.com/aptly-dev/aptly/issues/147))
 - new expiremental command [aptly task run](/doc/aptly/task/run)
-  ([\#96](https://github.com/smira/aptly/pull/96)),
+  ([\#96](https://github.com/aptly-dev/aptly/pull/96)),
   thanks to [Simon Aquino](https://github.com/simonaquino)
 - new command [aptly config show](/doc/aptly/config/show)
-  ([\#123](https://github.com/smira/aptly/pull/123)),
+  ([\#123](https://github.com/aptly-dev/aptly/pull/123)),
   thanks to [Simon Aquino](https://github.com/simonaquino)
 - security issue: advise to use https:// when dowloading repo keys,
-  ([\#179](https://github.com/smira/aptly/issues/179))
+  ([\#179](https://github.com/aptly-dev/aptly/issues/179))
 - goleveldb updated to new version with panic fixed
-  ([\#150](https://github.com/smira/aptly/issues/150))
+  ([\#150](https://github.com/aptly-dev/aptly/issues/150))
 - workaround for different `MD5Sum` field name
-  ([\#151](https://github.com/smira/aptly/issues/151))
+  ([\#151](https://github.com/aptly-dev/aptly/issues/151))
 - workaround for repositories with conflicting packages in the index
-  ([\#183](https://github.com/smira/aptly/issues/183))
+  ([\#183](https://github.com/aptly-dev/aptly/issues/183))
 - bug fix: aptly shouldn't include empty `Source:` fields
   into package stanza when publishing
-  ([\#195](https://github.com/smira/aptly/issues/195))
+  ([\#195](https://github.com/aptly-dev/aptly/issues/195))
 - bug fix: when doing [aptly repo add](/doc/aptly/repo/add) with
   `-force-replace` too many packages have been removed
-  ([\#185](https://github.com/smira/aptly/issues/185))
-  ([\#186](https://github.com/smira/aptly/pull/186))
+  ([\#185](https://github.com/aptly-dev/aptly/issues/185))
+  ([\#186](https://github.com/aptly-dev/aptly/pull/186))
   thanks to [Andrea Bernardo Ciddio](https://github.com/bcandrea)
 - bug fix: adding packages to repository from published location
   truncates the file in the pool
-  ([\#127](https://github.com/smira/aptly/pull/127)),
+  ([\#127](https://github.com/aptly-dev/aptly/pull/127)),
   thanks to [Simon Aquino](https://github.com/simonaquino)
 - bug fix: start writing to stdout only when database is closed,
   avoids problems with pipes
-  ([\#117](https://github.com/smira/aptly/issues/117))
+  ([\#117](https://github.com/aptly-dev/aptly/issues/117))
 - bug fix: report correct errors when falling back between
   package index versions
-  ([\#125](https://github.com/smira/aptly/issues/125))
-  ([\#129](https://github.com/smira/aptly/issues/129))
+  ([\#125](https://github.com/aptly-dev/aptly/issues/125))
+  ([\#129](https://github.com/aptly-dev/aptly/issues/129))
 - bug fix: workaround `+` encoding when downloading from Amazon S3
-  ([\#130](https://github.com/smira/aptly/issues/130))
+  ([\#130](https://github.com/aptly-dev/aptly/issues/130))
 - bug fix: handling mirrors with `/` in component names
-  ([\#140](https://github.com/smira/aptly/issues/140))
-  ([\#141](https://github.com/smira/aptly/issues/141))
+  ([\#140](https://github.com/aptly-dev/aptly/issues/140))
+  ([\#141](https://github.com/aptly-dev/aptly/issues/141))
 - bug fix: [aptly db cleanup](/doc/aptly/db/cleanup) might remove
   packages still being published when publishing local repos
-  ([\#146](https://github.com/smira/aptly/issues/146))
+  ([\#146](https://github.com/aptly-dev/aptly/issues/146))
 - bug fix: [aptly snapshot merge](/doc/aptly/snapshot/merge)
   might have created unusable snapshots with conflicting packages
-  ([\#154](https://github.com/smira/aptly/issues/154))
+  ([\#154](https://github.com/aptly-dev/aptly/issues/154))
 - bug fix: gpg with `--passphrase-file` on Ubuntu requires
   `--no-use-agent`
-  ([\#162](https://github.com/smira/aptly/issues/162))
+  ([\#162](https://github.com/aptly-dev/aptly/issues/162))
 - bug fix: some Debian tools expect `Packages` index
   file to be sorted and fields to be in canonical order
-  ([\#172](https://github.com/smira/aptly/issues/172))
+  ([\#172](https://github.com/aptly-dev/aptly/issues/172))
 - bug fix: publishing repository with `.udeb` and sources
   might produce empty `Sources` index
-  ([\#180](https://github.com/smira/aptly/issues/180))
+  ([\#180](https://github.com/aptly-dev/aptly/issues/180))
 - bug fix: when proxying, don't apply fix for Amazon S3
   and `+` in URLs
-  ([\#189](https://github.com/smira/aptly/issues/189))
+  ([\#189](https://github.com/aptly-dev/aptly/issues/189))
 - bug fix: command [aptly publish switch](/doc/aptly/publish/switch) might have corrupted
   published repository due to missing checks on component names
-  ([\#192](https://github.com/smira/aptly/issues/192))
+  ([\#192](https://github.com/aptly-dev/aptly/issues/192))
 - bug fix: debian installer doesn't like Release files without `Suite` field
-  ([\#201](https://github.com/smira/aptly/pull/201))
+  ([\#201](https://github.com/aptly-dev/aptly/pull/201))
   thanks to [Alexander Guy](https://github.com/alexanderguy)
 
 ### Version 0.8
 
  - aptly supports **concurrent operations while mirror is updated**, new flag
    `-force` for [aptly mirror update](/doc/aptly/mirror/update/)
-   ([\#45](https://github.com/smira/aptly/issues/45)) ([\#114](https://github.com/smira/aptly/issues/114))
+   ([\#45](https://github.com/aptly-dev/aptly/issues/45)) ([\#114](https://github.com/aptly-dev/aptly/issues/114))
  - support for **`.udeb` packages (Debian installer)** in mirrors, local repos and
    published repositories
-   ([\#108](https://github.com/smira/aptly/issues/108))
+   ([\#108](https://github.com/aptly-dev/aptly/issues/108))
  - new command [aptly snapshot filter](/doc/aptly/snapshot/filter):
    **filtering snapshots** using package query, complementary
    to [snapshot pulling](/doc/aptly/snapshot/pull/)
-   ([\#82](https://github.com/smira/aptly/issues/82))
+   ([\#82](https://github.com/aptly-dev/aptly/issues/82))
  - **searching for packages matching query** in
    [mirrors](/doc/aptly/mirror/search),
    [local repos](/doc/aptly/repo/search),
    [snapshots](/doc/aptly/snapshot/search) and
    [whole package database](/doc/aptly/package/search)
-   ([\#81](https://github.com/smira/aptly/issues/81))
-   ([\#80](https://github.com/smira/aptly/issues/80))
+   ([\#81](https://github.com/aptly-dev/aptly/issues/81))
+   ([\#80](https://github.com/aptly-dev/aptly/issues/80))
  - new command [aptly package show](/doc/aptly/package/show/):
    displaying **details about package**, its inclusion into snapshots,
    mirrors, local repos
-   ([\#80](https://github.com/smira/aptly/issues/80))
+   ([\#80](https://github.com/aptly-dev/aptly/issues/80))
  - [aptly mirror edit](/doc/aptly/mirror/edit/) now supports changing list of architectures
    and download source setting
-   ([\#109](https://github.com/smira/aptly/issues/109))
-   ([\#99](https://github.com/smira/aptly/issues/99))
+   ([\#109](https://github.com/aptly-dev/aptly/issues/109))
+   ([\#99](https://github.com/aptly-dev/aptly/issues/99))
  - workaround S3/apt issue with `+` in package filenames
    (S3 config option `plusWorkaround`)
-   ([\#105](https://github.com/smira/aptly/issues/105))
+   ([\#105](https://github.com/aptly-dev/aptly/issues/105))
  - when publishing to S3 it's possible to choose reduced redundancy storage and
    server-side encryption (S3 config options `storageClass` and `encryptionMethod`)
-   ([\#105](https://github.com/smira/aptly/issues/105))
+   ([\#105](https://github.com/aptly-dev/aptly/issues/105))
  - when signing published repository, it's possible to pass passphrase
    for GPG key with flags `-passphrase` or `-passphrase-file`
-   ([\#94](https://github.com/smira/aptly/issues/194))
+   ([\#94](https://github.com/aptly-dev/aptly/issues/194))
  - new flag `-force-replace` in [aptly repo add](/doc/aptly/repo/add/) command
    to replace conflicting packages automatically
-   ([\#83](https://github.com/smira/aptly/issues/83))
+   ([\#83](https://github.com/aptly-dev/aptly/issues/83))
  - dependency resolution algorithm has been improved
-   ([\#100](https://github.com/smira/aptly/issues/100))
+   ([\#100](https://github.com/aptly-dev/aptly/issues/100))
  - aptly now supports mirroring over FTP
-   ([\#48](https://github.com/smira/aptly/issues/48))
+   ([\#48](https://github.com/aptly-dev/aptly/issues/48))
  - bug fix: for boolean options, settings
    from configuration file were overriding settings on command line
-   ([\#104](https://github.com/smira/aptly/issues/104))
+   ([\#104](https://github.com/aptly-dev/aptly/issues/104))
  - bug fix: [aptly publish list](/doc/aptly/publish/list/) with `-raw` flag
    hasn't been displaying storage prefix for repositories published to S3
-   ([\#113](https://github.com/smira/aptly/issues/113))
+   ([\#113](https://github.com/aptly-dev/aptly/issues/113))
  - bug fix: dropping repositories published to S3 might result in "bad signature" error
  - bug fix: publishing repositories with `/` in distribution name isn't allowed anymore,
    when guessing distribution `/` is replaced with `-`
-   ([\#110](https://github.com/smira/aptly/issues/110))
+   ([\#110](https://github.com/aptly-dev/aptly/issues/110))
  - bug fix: download errors while mirroring now include original
    URL
-   ([\#26](https://github.com/smira/aptly/issues/26))
+   ([\#26](https://github.com/aptly-dev/aptly/issues/26))
 
 ### Version 0.7.1
 
 -   bug fix: publish update fails on package conflicts, new flag
     `-force-overwrite` added to publish commands
-    ([\#90](https://github.com/smira/aptly/issues/90))
+    ([\#90](https://github.com/aptly-dev/aptly/issues/90))
 -   bug fix: aptly built with go1.2+ fails to read DB of aptly built
     with go1.1 or go1.0
-    ([\#89](https://github.com/smira/aptly/issues/89))
+    ([\#89](https://github.com/aptly-dev/aptly/issues/89))
 -   aptly supports go compilers version 1.2 and up (go 1.1 is not
     supported anymore)
 
 ### Version 0.7
 
 -   direct [publishing to Amazon S3](/doc/feature/s3/)
-    ([\#15](https://github.com/smira/aptly/issues/15))
+    ([\#15](https://github.com/aptly-dev/aptly/issues/15))
 -   support for new, powerful [query language](/doc/feature/query/) in many
     commands: [aptly snapshot pull](/doc/aptly/snapshot/pull/), [aptly repo
     move](/doc/aptly/repo/move/), [aptly repo copy](/doc/aptly/repo/copy/), [aptly
     repo import](/doc/aptly/repo/import/) and [aptly repo
     remove](/doc/aptly/repo/remove/)
 -   bug fix: files from conflicting packages might override each other
-    while publishing ([\#65](https://github.com/smira/aptly/issues/65))
+    while publishing ([\#65](https://github.com/aptly-dev/aptly/issues/65))
 -   partial mirrors: filter package lists when mirroring
-    ([\#64](https://github.com/smira/aptly/issues/64))
+    ([\#64](https://github.com/aptly-dev/aptly/issues/64))
 -   new commands: [mirrors](/doc/aptly/mirror/rename/), [local
     repositories](/doc/aptly/repo/rename/) and
     [snapshots](/doc/aptly/snapshot/rename/) can be renamed
-    ([\#63](https://github.com/smira/aptly/issues/63))
+    ([\#63](https://github.com/aptly-dev/aptly/issues/63))
 -   new command: [aptly mirror edit](/doc/aptly/mirror/edit/) allows to
     change mirror filtering
-    ([\#63](https://github.com/smira/aptly/issues/63))
+    ([\#63](https://github.com/aptly-dev/aptly/issues/63))
 -   download transfer rate could be limited either via
     [configuration](/doc/configuration) file parameter `downloadSpeedLimit`
     or with flag `-download-limit` for command [aptly mirror
     update](/doc/aptly/mirror/update/)
-    ([\#62](https://github.com/smira/aptly/issues/62))
+    ([\#62](https://github.com/aptly-dev/aptly/issues/62))
 -   new flag: `-all-matches` for [aptly snapshot
     pull](/doc/aptly/snapshot/pull/) enables pulling of all matching packages
-    ([\#70](https://github.com/smira/aptly/pull/70)), thanks to [Simon
+    ([\#70](https://github.com/aptly-dev/aptly/pull/70)), thanks to [Simon
     Aquino](https://github.com/simonaquino)
 -   when matching single package in [aptly snapshot
     pull](/doc/aptly/snapshot/pull/) latest version would be pulled
-    ([\#67](https://github.com/smira/aptly/pull/67)), thanks to [Simon
+    ([\#67](https://github.com/aptly-dev/aptly/pull/67)), thanks to [Simon
     Aquino](https://github.com/simonaquino)
 -   new flag: `-sort` for [aptly snapshot list](/doc/aptly/snapshot/list/)
     allows to change order of snapshots in the list
-    ([\#73](https://github.com/smira/aptly/pull/73)), thanks to [Simon
+    ([\#73](https://github.com/aptly-dev/aptly/pull/73)), thanks to [Simon
     Aquino](https://github.com/simonaquino)
 -   bug fix: publish update fails on empty multi-component repo
-    ([\#66](https://github.com/smira/aptly/issues/66))
+    ([\#66](https://github.com/aptly-dev/aptly/issues/66))
 -   bug fix: [aptly snapshot pull](/doc/aptly/snapshot/pull/) might remove
     already pulled packages
-    ([\#78](https://github.com/smira/aptly/issues/78))
+    ([\#78](https://github.com/aptly-dev/aptly/issues/78))
 -   bug fix: aptly package was missing `bzip2` dependency
-    ([\#84](https://github.com/smira/aptly/issues/84))
+    ([\#84](https://github.com/aptly-dev/aptly/issues/84))
 -   aptly binary packages are built with go1.3
 
 ### Version 0.6
 
 -   support for multi-component published repositories
-    ([\#36](https://github.com/smira/aptly/issues/36))
+    ([\#36](https://github.com/aptly-dev/aptly/issues/36))
 -   handling duplicate packages with different content gracefully
-    ([\#60](https://github.com/smira/aptly/issues/60))
+    ([\#60](https://github.com/aptly-dev/aptly/issues/60))
 -   repositories published by aptly now can be consumed by
-    debian-installer ([\#61](https://github.com/smira/aptly/issues/61))
+    debian-installer ([\#61](https://github.com/aptly-dev/aptly/issues/61))
 -   new flag: `-no-remove` for [aptly snapshot
     merge](/doc/aptly/snapshot/merge/) to merge snapshots with all package
     versions preserved
-    ([\#57](https://github.com/smira/aptly/issues/57))
+    ([\#57](https://github.com/aptly-dev/aptly/issues/57))
 -   publishing of empty snapshots/repositories is possible
-    ([\#55](https://github.com/smira/aptly/issues/55))
+    ([\#55](https://github.com/aptly-dev/aptly/issues/55))
 -   [aptly repo add](/doc/aptly/repo/add/) now exits with 1 if any of files
-    failed to add ([\#53](https://github.com/smira/aptly/issues/53))
+    failed to add ([\#53](https://github.com/aptly-dev/aptly/issues/53))
 -   bug fix: `Package:` line comes first in package metadata
-    ([\#49](https://github.com/smira/aptly/issues/49))
+    ([\#49](https://github.com/aptly-dev/aptly/issues/49))
 -   bug fix: when command parsing fails, aptly returns exit code 2
-    ([\#52](https://github.com/smira/aptly/issues/52))
+    ([\#52](https://github.com/aptly-dev/aptly/issues/52))
 -   bug fix: pulling more than 128 packates at once
-    ([\#53](https://github.com/smira/aptly/issues/53))
+    ([\#53](https://github.com/aptly-dev/aptly/issues/53))
 -   bug fix: [aptly graph](/doc/aptly/graph/) may get confused with package
-    pull requests ([\#58](https://github.com/smira/aptly/issues/58))
+    pull requests ([\#58](https://github.com/aptly-dev/aptly/issues/58))
 
 ### Version 0.5.1
 
 -   bug fix: `HTTP_PROXY` environment variable has been ignored
-    ([\#46](https://github.com/smira/aptly/issues/46))
+    ([\#46](https://github.com/aptly-dev/aptly/issues/46))
 -   bug fix: support for flat repositories in subdirectory
-    ([\#47](https://github.com/smira/aptly/issues/47))
+    ([\#47](https://github.com/aptly-dev/aptly/issues/47))
 -   bug fix: wrong pool directory name when `Source:` contains version
-    ([\#44](https://github.com/smira/aptly/issues/44))
+    ([\#44](https://github.com/aptly-dev/aptly/issues/44))
 
 ### Version 0.5
 
 -   Debian packages for aptly are [available](/download/)
 -   internal DB is compacted when calling [aptly db
     cleanup](/doc/aptly/db/cleanup/)
-    ([\#19](https://github.com/smira/aptly/issues/19))
+    ([\#19](https://github.com/aptly-dev/aptly/issues/19))
 -   size is shown in human-readable format
-    ([\#18](https://github.com/smira/aptly/issues/18))
+    ([\#18](https://github.com/aptly-dev/aptly/issues/18))
 -   fixed wrong location of man page in Debian package
-    ([\#22](https://github.com/smira/aptly/issues/22))
+    ([\#22](https://github.com/aptly-dev/aptly/issues/22))
 -   new flags: `-distribution` and `-component` to specify default
     publishing options in [aptly repo create](/doc/aptly/repo/create/)
-    ([\#12](https://github.com/smira/aptly/issues/12))
+    ([\#12](https://github.com/aptly-dev/aptly/issues/12))
 -   aptly would try harder to figure out distribution & component
     automatically when publishing going through the tree of snapshots,
     mirrors and local repositories
 -   aptly supports publishing local repositories, without intermediate
-    snapshot step ([\#10](https://github.com/smira/aptly/issues/10))
+    snapshot step ([\#10](https://github.com/aptly-dev/aptly/issues/10))
 -   new command: [aptly publish repo](/doc/aptly/publish/repo/) to publish
     local repository directly
-    ([\#10](https://github.com/smira/aptly/issues/10))
+    ([\#10](https://github.com/aptly-dev/aptly/issues/10))
 -   new command: [aptly publish edit](/doc/aptly/repo/edit/) to change
     defaults for the local repository
-    ([\#12](https://github.com/smira/aptly/issues/12))
+    ([\#12](https://github.com/aptly-dev/aptly/issues/12))
 -   aptly supports global & command flags placement in any position in
     command line (before command name, after command name)
-    ([\#17](https://github.com/smira/aptly/issues/17))
+    ([\#17](https://github.com/aptly-dev/aptly/issues/17))
 -   new command: [aptly db recover](/doc/aptly/db/recover/) to recover
     internal DB after crash
-    ([\#25](https://github.com/smira/aptly/issues/25))
+    ([\#25](https://github.com/aptly-dev/aptly/issues/25))
 -   new flag: `-raw` to display list in machine-readable format for
     commands [aptly mirror list](/doc/aptly/mirror/list/), [aptly repo
     list](/doc/aptly/repo/list/), [aptly snapshot list](/doc/aptly/snapshot/list/)
     and [aptly publish list](/doc/aptly/publish/list/)
-    ([\#27](https://github.com/smira/aptly/issues/27),
-    [\#31](https://github.com/smira/aptly/issues/31))
+    ([\#27](https://github.com/aptly-dev/aptly/issues/27),
+    [\#31](https://github.com/aptly-dev/aptly/issues/31))
 -   new flags: `-origin` and `-label` to customize fields `Origin:` and
     `Label:` in `Release` files during publishing in commands [aptly
     publish snapshot](/doc/aptly/publish/snapshot/) and [aptly publish
     repo](/doc/aptly/publish/repo/)
-    ([\#29](https://github.com/smira/aptly/issues/29))
+    ([\#29](https://github.com/aptly-dev/aptly/issues/29))
 -   bug fix: with some HTTP servers aptly might have given "size
     mismatch" errors due to unnecessary decompression
-    ([\#33](https://github.com/smira/aptly/issues/33))
+    ([\#33](https://github.com/aptly-dev/aptly/issues/33))
 -   new command: [aptly publish update](/doc/aptly/publish/update/) updates
     published repo in-place
-    ([\#8](https://github.com/smira/aptly/issues/8))
+    ([\#8](https://github.com/aptly-dev/aptly/issues/8))
 -   new command: [aptly publish switch](/doc/aptly/publish/switch/) switches
     published snapshot in-place
-    ([\#8](https://github.com/smira/aptly/issues/8))
+    ([\#8](https://github.com/aptly-dev/aptly/issues/8))
 -   new flag: `-latest` for command [aptly snapshot
     merge](/doc/aptly/snapshot/merge/) changes merge strategy to "latest
-    version wins" ([\#42](https://github.com/smira/aptly/pull/42)),
+    version wins" ([\#42](https://github.com/aptly-dev/aptly/pull/42)),
     thanks to [@ryanuber](https://github.com/ryanuber) and
     [@keithchambers](https://github.com/keithchambers)
 
 ### Version 0.4.1
 
--   fixed [bug](https://github.com/smira/aptly/issues/5) with slashes in
+-   fixed [bug](https://github.com/aptly-dev/aptly/issues/5) with slashes in
     component names
 
 ### Version 0.4

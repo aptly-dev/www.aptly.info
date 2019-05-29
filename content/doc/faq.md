@@ -99,7 +99,7 @@ When mirroring, snapshotting and publishing, aptly signs the resulting published
 with GPG key. As you don't own official Debian GPG key, you can't sign with it. While publishing
 repository, aptly re-generates metadata files, so original signature won't work.
 
-aptly doesn't yet support [direct mirroring](https://github.com/smira/aptly/issues/37)
+aptly doesn't yet support [direct mirroring](https://github.com/aptly-dev/aptly/issues/37)
 (publishing original metadata files), so currently there's no way to preserve Debian signing key.
 
 **Q: I've created snapshot `-foo` and now I can't even drop it!**
