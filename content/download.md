@@ -1,11 +1,11 @@
 ---
-date: 2018-05-15T12:02:05Z
+date: 2019-07-08T12:02:05Z
 title: Download
 type: download
-version: 1.3.0
+version: 1.4.0
 ---
 
 Roadmap:
 
-* __1.4.0:__ (May 2018)
-* __1.5.0:__ (Sep 2018)
+* __1.5.0:__ (Dec 2019)
+* __1.6.0:__ (Jun 2020)
