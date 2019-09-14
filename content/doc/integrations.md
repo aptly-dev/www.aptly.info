@@ -11,7 +11,7 @@ Integrations
 
 Complete solutions:
 
-- [Moliar](https://github.com/molior-dbs/molior) Debian Build System by
+- [Molior](https://github.com/molior-dbs/molior) Debian Build System by
 André Roth
 
 Vagrant:
