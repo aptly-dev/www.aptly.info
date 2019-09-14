@@ -1,7 +1,7 @@
 aptly website
 =============
 
-[![Build Status](https://travis-ci.org/aptly-dev/aptly-dev.github.io.svg?branch=master)](https://travis-ci.org/aptly-dev/aptly-dev.github.io)
+[![Build Status](https://travis-ci.org/aptly-dev/www.aptly.info.svg?branch=master)](https://travis-ci.org/aptly-dev/www.aptly.info)
 
 Sources for http://www.aptly.info/.
 
