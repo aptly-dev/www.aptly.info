@@ -7,3 +7,8 @@ title = "Debian repository management tool"
 
 [author]
     name = "Andrey Smirnov"
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
