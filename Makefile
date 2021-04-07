@@ -18,7 +18,7 @@ env:
 
 prepare: env
 
-	go get -u -v github.com/spf13/hugo
+	go get -u -v github.com/gohugoio/hugo
 
 links:
 	linkchecker http://localhost:1313/
