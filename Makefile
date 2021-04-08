@@ -18,7 +18,7 @@ env:
 
 prepare: env
 
-	go get -u -v github.com/spf13/hugo
+	go install github.com/gohugoio/hugo@latest
 
 links:
 	linkchecker http://localhost:1313/
