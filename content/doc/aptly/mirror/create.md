@@ -76,7 +76,7 @@ dependency following is enabled, dependencies would be expanded in
 filtered list to build resulting package list. Filters could be used to
 limit mirror to only one package and its dependencies
 (`-filter='nginx' -filter-follow-deps`), download only high-priority
-packages (`-filter='Prirority (required)'`) and so on.
+packages (`-filter='Priority (required)'`) and so on.
 
 aptly would try to verify signature of Release files using GnuPG. By
 default, keyring `~/.gnupg/trustedkeys.gpg` would be used. If you would
