@@ -6,9 +6,9 @@
     <title>aptly - {{ .Title }}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" href="/favicon.ico">
-    <link type="text/css" rel="stylesheet" href="/css/styles.css">
+    <link type="text/css" rel="stylesheet" href="{{ "/css/styles.css" | relURL }}">
     <link rel="canonical" href="{{ .Permalink }}">
-    <link href="/post/index.xml" rel="alternate" type="application/rss+xml" title="{{ .Site.Title }}" />
+    <link href="{{ "/post/index.xml" | relURL }}" rel="alternate" type="application/rss+xml" title="{{ .Site.Title }}" />
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -20,13 +20,13 @@
         {{ template "partials/nav.html" . }}
         <div class="row">
           <div class="col-md-6 col-md-offset-3 text-center">
-            <a class="brand" href="/">
+            <a class="brand" href="{{ "/" | relURL }}">
               <i class="brand-logo"></i>
               <span class="brand-name">aptly</span>
             </a>
           </div>
         </div>
-      {{ if eq .URL "/"}}
+      {{ if eq .URL ("/" | relURL) }}
         <div class="row">
           <div class="col-md-6 col-md-offset-3 text-center">
             <p>aptly is a swiss army knife for Debian repository management: it allows you to mirror remote repositories, manage local package repositories, take snapshots, pull new versions of packages along with dependencies, publish as Debian repository. You can try it right now for free.</p>
@@ -34,7 +34,7 @@
           </div>
         </div>
         <div class="source-buttons">
-          <a href="/download/" class="btn btn-primary">download</a>
+          <a href="{{ "/download/" | relURL }}" class="btn btn-primary">download</a>
           <a href="https://github.com/aptly-dev/aptly" class="btn btn-default">github</a>
         </div>
         {{ end }}

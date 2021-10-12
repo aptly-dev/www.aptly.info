@@ -1,10 +1,10 @@
         <nav class="navbar navbar-default navbar-static-top" role="navigation">
           <ul class="nav navbar-nav nav-justified">
-            <li {{ if or (eq .URL "/tutorial/") (eq .Section "tutorial") }}class="active"{{end}}><a href="/tutorial/">tutorials</a></li>
-            <li {{ if eq .URL "/download/" }}{{ if eq .Type "download" }}class="active"{{end}}{{end}}><a href="/download/">download</a></li>
-            <li {{ if eq .URL "/support/" }}{{ if eq .Type "support" }}class="active"{{end}}{{end}}><a href="/support/">support</a></li>
-            <li {{ if or (eq .URL "/doc/") (eq .Section "doc") }}class="active"{{end}}><a href="/doc/overview/">documentation</a></li>
-            <li {{ if eq .URL "/about/" }}{{ if eq .Type "about" }}class="active"{{end}}{{end}}><a href="/about/">about</a></li>
-            <li {{ if or (eq .URL "/post/") (eq .Section "post") }}class="active"{{end}}><a href="/post/">blog</a></li>
+            <li {{ if or (eq .URL ("/tutorial/" | relURL)) (eq .Section "tutorial") }}class="active"{{end}}><a href="{{ "/tutorial/" | relURL }}">tutorials</a></li>
+            <li {{ if eq .URL ("/download/" | relURL) }}{{ if eq .Type "download" }}class="active"{{end}}{{end}}><a href="{{ "/download/" | relURL }}">download</a></li>
+            <li {{ if eq .URL ("/support/" | relURL) }}{{ if eq .Type "support" }}class="active"{{end}}{{end}}><a href="{{ "/support/" | relURL }}">support</a></li>
+            <li {{ if or (eq .URL ("/doc/" | relURL)) (eq .Section "doc") }}class="active"{{end}}><a href="{{ "/doc/" | relURL }}">documentation</a></li>
+            <li {{ if eq .URL ("/about/" | relURL) }}{{ if eq .Type "about" }}class="active"{{end}}{{end}}><a href="{{ "/about/" | relURL }}">about</a></li>
+            <li {{ if or (eq .URL ("/post/" | relURL)) (eq .Section "post") }}class="active"{{end}}><a href="{{ "/post/" | relURL }}">blog</a></li>
           </ul>
         </nav>
