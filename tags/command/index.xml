@@ -1,4 +1,4 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>command on aptly - Debian repository management tool</title><generator uri="https://hugo.spf13.com">Hugo</generator><link>https://www.aptly.info/tags/command/</link><language>en-us</language><author>Andrey Smirnov</author><updated>Thu, 12 Jan 2017 13:33:38 UTC</updated><item><title>aptly publish show</title><link>https://www.aptly.info/doc/aptly/publish/show/</link><pubDate>Thu, 12 Jan 2017 13:33:38 UTC</pubDate><author>Andrey Smirnov</author><guid>https://www.aptly.info/doc/aptly/publish/show/</guid><description>&lt;h2 id="aptly-publish-show">aptly publish show&lt;/h2>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>command on aptly - Debian repository management tool</title><generator uri="https://hugo.spf13.com">Hugo</generator><link>http://aptly-dev.github.io/www.aptly.info/tags/command/</link><language>en-us</language><author>Andrey Smirnov</author><updated>Thu, 12 Jan 2017 13:33:38 UTC</updated><item><title>aptly publish show</title><link>http://aptly-dev.github.io/www.aptly.info/doc/aptly/publish/show/</link><pubDate>Thu, 12 Jan 2017 13:33:38 UTC</pubDate><author>Andrey Smirnov</author><guid>http://aptly-dev.github.io/www.aptly.info/doc/aptly/publish/show/</guid><description>&lt;h2 id="aptly-publish-show">aptly publish show&lt;/h2>
 &lt;p>Shows detailed information of published repository.&lt;/p>
 &lt;p>Usage:&lt;/p>
 &lt;pre>&lt;code>$ aptly publish show &amp;lt;distribution&amp;gt; [[&amp;lt;endpoint&amp;gt;:]&amp;lt;prefix&amp;gt;]
@@ -20,7 +20,7 @@ Architectures: amd64 i386
 Sources:
 main: back3 [snapshot]
 &lt;/code>&lt;/pre>
-&lt;p> &lt;/p></description></item><item><title>aptly repo include</title><link>https://www.aptly.info/doc/aptly/repo/include/</link><pubDate>Mon, 16 Mar 2015 11:17:38 UTC</pubDate><author>Andrey Smirnov</author><guid>https://www.aptly.info/doc/aptly/repo/include/</guid><description>&lt;h2 id="aptly-repo-include">aptly repo include&lt;/h2>
+&lt;p> &lt;/p></description></item><item><title>aptly repo include</title><link>http://aptly-dev.github.io/www.aptly.info/doc/aptly/repo/include/</link><pubDate>Mon, 16 Mar 2015 11:17:38 UTC</pubDate><author>Andrey Smirnov</author><guid>http://aptly-dev.github.io/www.aptly.info/doc/aptly/repo/include/</guid><description>&lt;h2 id="aptly-repo-include">aptly repo include&lt;/h2>
 &lt;p>Command allows automatic processing of &lt;code>.changes&lt;/code> file controlling
 package upload to local repositories.&lt;/p>
 &lt;p>Usage:&lt;/p>
@@ -69,7 +69,7 @@ it is assumed that anyone can upload any package&lt;/li>
 &lt;p>aptly won&amp;rsquo;t complain if package is added to the repo which is complete
 duplicate. However it is forbidden to have two packages in one repo with identical
 triples (architecture, name, version) that have different metadata or
-files (see &lt;a href="https://www.aptly.info/doc/feature/duplicate">Duplicate packages&lt;/a> for details).
+files (see &lt;a href="http://aptly-dev.github.io/www.aptly.info/doc/feature/duplicate">Duplicate packages&lt;/a> for details).
 If you need to replace package that conflicts with existing, use flag
 &lt;code>-force-replace&lt;/code>.
 All files added to package pool would be deduplicated, as it
@@ -138,12 +138,12 @@ but short keys would match against them. It is recommended long key IDs due to r
 Special value &lt;code>*&lt;/code> matches against any key.&lt;/p>
 &lt;p>Rules are evaluated like firewall from first item to last. If no rules match &lt;code>.changes&lt;/code> file, upload
 is denied. Each rule consists of three parts: condition, allow/deny (or both) lists. Condition is using
-&lt;a href="https://www.aptly.info/doc/feature/query">package query&lt;/a> syntax, but it matches agains &lt;code>.changes&lt;/code> file fields. If condition
+&lt;a href="http://aptly-dev.github.io/www.aptly.info/doc/feature/query">package query&lt;/a> syntax, but it matches agains &lt;code>.changes&lt;/code> file fields. If condition
 part of the rule matches &lt;code>.changes&lt;/code> file, search stops and rule is processed:&lt;/p>
 &lt;ul>
 &lt;li>if any of keys which have been used to sign &lt;code>.changes&lt;/code> file match &lt;code>deny&lt;/code> list, upload would be rejected&lt;/li>
 &lt;li>if any of keys which have been used to sign &lt;code>.changes&lt;/code> file match &lt;code>allow&lt;/code> list, upload would be accepted&lt;/li>
-&lt;/ul></description></item><item><title>aptly config show</title><link>https://www.aptly.info/doc/aptly/config/show/</link><pubDate>Sun, 12 Oct 2014 11:17:38 UTC</pubDate><author>Andrey Smirnov</author><guid>https://www.aptly.info/doc/aptly/config/show/</guid><description>&lt;h2 id="aptly-config-show">aptly config show&lt;/h2>
+&lt;/ul></description></item><item><title>aptly config show</title><link>http://aptly-dev.github.io/www.aptly.info/doc/aptly/config/show/</link><pubDate>Sun, 12 Oct 2014 11:17:38 UTC</pubDate><author>Andrey Smirnov</author><guid>http://aptly-dev.github.io/www.aptly.info/doc/aptly/config/show/</guid><description>&lt;h2 id="aptly-config-show">aptly config show&lt;/h2>
 &lt;p>Commands displays current aptly configuration as
 indented JSON. This command could be useful when
 upgrading from older versions of aptly to view
@@ -169,7 +169,7 @@ updated configuration.&lt;/p>
 &amp;quot;ppaCodename&amp;quot;: &amp;quot;&amp;quot;,
 &amp;quot;S3PublishEndpoints&amp;quot;: {}
 }
-&lt;/code>&lt;/pre></description></item><item><title>aptly mirror edit</title><link>https://www.aptly.info/doc/aptly/mirror/edit/</link><pubDate>Fri, 29 Aug 2014 11:17:38 UTC</pubDate><author>Andrey Smirnov</author><guid>https://www.aptly.info/doc/aptly/mirror/edit/</guid><description>&lt;h2 id="aptly-mirror-edit">aptly mirror edit&lt;/h2>
+&lt;/code>&lt;/pre></description></item><item><title>aptly mirror edit</title><link>http://aptly-dev.github.io/www.aptly.info/doc/aptly/mirror/edit/</link><pubDate>Fri, 29 Aug 2014 11:17:38 UTC</pubDate><author>Andrey Smirnov</author><guid>http://aptly-dev.github.io/www.aptly.info/doc/aptly/mirror/edit/</guid><description>&lt;h2 id="aptly-mirror-edit">aptly mirror edit&lt;/h2>
 &lt;p>Command edit allows to change mirror settings: filter query, whether
 to include dependencies while filtering, list of architectures to process.&lt;/p>
 &lt;p>Usage:&lt;/p>
@@ -183,9 +183,9 @@ to include dependencies while filtering, list of architectures to process.&lt;/p
 &lt;ul>
 &lt;li>&lt;code>-archive-url=&lt;/code>: flag to change archive url &lt;span class="label label-primary">1.2.0&lt;/span>
 &lt;/li>
-&lt;li>&lt;code>-filter=&lt;/code>: &lt;a href="https://www.aptly.info/doc/feature/query/">package query&lt;/a> which is applied to
+&lt;li>&lt;code>-filter=&lt;/code>: &lt;a href="http://aptly-dev.github.io/www.aptly.info/doc/feature/query/">package query&lt;/a> which is applied to
 packages in the mirror, set to empty to disable filtering&lt;/li>
-&lt;li>&lt;code>-filter-with-deps&lt;/code>: when filtering, include &lt;a href="https://www.aptly.info/doc/feature/dependencies">dependencies&lt;/a> of
+&lt;li>&lt;code>-filter-with-deps&lt;/code>: when filtering, include &lt;a href="http://aptly-dev.github.io/www.aptly.info/doc/feature/dependencies">dependencies&lt;/a> of
 matching packages as well&lt;/li>
 &lt;li>&lt;code>-architectures=&lt;/code>: global flag to change architectures list.&lt;/li>
 &lt;li>&lt;code>-ignore-signatures&lt;/code>: disable verification of &lt;code>Release&lt;/code> file
@@ -202,7 +202,7 @@ binary packages&lt;/li>
 &lt;li>&lt;code>-with-udebs&lt;/code>: download .udeb packages (Debian installer
 support)&lt;/li>
 &lt;/ul>
-&lt;p>In order to apply new filtering settings, &lt;a href="https://www.aptly.info/doc/aptly/mirror/update/">update&lt;/a>
+&lt;p>In order to apply new filtering settings, &lt;a href="http://aptly-dev.github.io/www.aptly.info/doc/aptly/mirror/update/">update&lt;/a>
 mirror.&lt;/p>
 &lt;p>Examples:&lt;/p>
 &lt;pre>&lt;code>$ aptly mirror edit -filter=nginx -filter-with-deps wheezy-main
@@ -210,7 +210,7 @@ Mirror [wheezy-main]: http://mirror.yandex.ru/debian/ wheezy successfully update
 $ aptly mirror edit -architectures=i386,amd64 sensu
 Downloading http://repos.sensuapp.org/apt/dists/sensu/Release...
 Mirror [sensu]: http://repos.sensuapp.org/apt/ sensu successfully updated.
-&lt;/code>&lt;/pre></description></item><item><title>aptly mirror search</title><link>https://www.aptly.info/doc/aptly/mirror/search/</link><pubDate>Fri, 29 Aug 2014 11:17:38 UTC</pubDate><author>Andrey Smirnov</author><guid>https://www.aptly.info/doc/aptly/mirror/search/</guid><description>&lt;h2 id="aptly-mirror-search">aptly mirror search&lt;/h2>
+&lt;/code>&lt;/pre></description></item><item><title>aptly mirror search</title><link>http://aptly-dev.github.io/www.aptly.info/doc/aptly/mirror/search/</link><pubDate>Fri, 29 Aug 2014 11:17:38 UTC</pubDate><author>Andrey Smirnov</author><guid>http://aptly-dev.github.io/www.aptly.info/doc/aptly/mirror/search/</guid><description>&lt;h2 id="aptly-mirror-search">aptly mirror search&lt;/h2>
 &lt;p>Search mirror for packages matching query.&lt;/p>
 &lt;p>Usage:&lt;/p>
 &lt;pre>&lt;code>$ aptly mirror search &amp;lt;name&amp;gt; [&amp;lt;package-query&amp;gt;]
@@ -218,15 +218,15 @@ Mirror [sensu]: http://repos.sensuapp.org/apt/ sensu successfully updated.
 &lt;p>Params are:&lt;/p>
 &lt;ul>
 &lt;li>&lt;code>name&lt;/code> is a mirror name (given when mirror was created)&lt;/li>
-&lt;li>&lt;code>package-query&lt;/code> is a &lt;a href="https://www.aptly.info/doc/feature/query/">package query&lt;/a> to
+&lt;li>&lt;code>package-query&lt;/code> is a &lt;a href="http://aptly-dev.github.io/www.aptly.info/doc/feature/query/">package query&lt;/a> to
 search for packages&lt;/li>
 &lt;/ul>
 &lt;p>If package query is omitted, all the packages are displayed.&lt;/p>
 &lt;p>Flags:&lt;/p>
 &lt;ul>
 &lt;li>&lt;code>-format=&amp;quot;&amp;quot;&lt;/code>:
-&lt;a href="https://www.aptly.info/doc/feature/package-display/">custom format&lt;/a> for result printing&lt;/li>
-&lt;li>&lt;code>-with-deps&lt;/code>: include &lt;a href="https://www.aptly.info/doc/feature/dependencies">dependencies&lt;/a> of matching packages
+&lt;a href="http://aptly-dev.github.io/www.aptly.info/doc/feature/package-display/">custom format&lt;/a> for result printing&lt;/li>
+&lt;li>&lt;code>-with-deps&lt;/code>: include &lt;a href="http://aptly-dev.github.io/www.aptly.info/doc/feature/dependencies">dependencies&lt;/a> of matching packages
 into search results&lt;/li>
 &lt;/ul>
 &lt;p>Example:&lt;/p>
@@ -239,25 +239,25 @@ nginx-doc_1.2.1-2.2+wheezy2_all
 nginx-naxsi-ui_1.2.1-2.2+wheezy2_all
 nginx_1.2.1-2.2+wheezy2_all
 nginx-naxsi_1.2.1-2.2+wheezy2_i386
-&lt;/code>&lt;/pre></description></item><item><title>aptly package search</title><link>https://www.aptly.info/doc/aptly/package/search/</link><pubDate>Fri, 29 Aug 2014 11:17:38 UTC</pubDate><author>Andrey Smirnov</author><guid>https://www.aptly.info/doc/aptly/package/search/</guid><description>&lt;h2 id="aptly-package-search">aptly package search&lt;/h2>
+&lt;/code>&lt;/pre></description></item><item><title>aptly package search</title><link>http://aptly-dev.github.io/www.aptly.info/doc/aptly/package/search/</link><pubDate>Fri, 29 Aug 2014 11:17:38 UTC</pubDate><author>Andrey Smirnov</author><guid>http://aptly-dev.github.io/www.aptly.info/doc/aptly/package/search/</guid><description>&lt;h2 id="aptly-package-search">aptly package search&lt;/h2>
 &lt;p>Search whole package database for packages matching query.
 Whole database of packages includes all packages (deduplicated)
 from all the mirrors, local repos and snapshots.&lt;/p>
 &lt;p>In order to get more detailed information about the package,
-use &lt;a href="https://www.aptly.info/doc/aptly/package/show/">&lt;code>aptly package show&lt;/code>&lt;/a> command.&lt;/p>
+use &lt;a href="http://aptly-dev.github.io/www.aptly.info/doc/aptly/package/show/">&lt;code>aptly package show&lt;/code>&lt;/a> command.&lt;/p>
 &lt;p>Usage:&lt;/p>
 &lt;pre>&lt;code>$ aptly package search [&amp;lt;package-query&amp;gt;]
 &lt;/code>&lt;/pre>
 &lt;p>Params are:&lt;/p>
 &lt;ul>
-&lt;li>&lt;code>package-query&lt;/code> is a &lt;a href="https://www.aptly.info/doc/feature/query/">package query&lt;/a> to
+&lt;li>&lt;code>package-query&lt;/code> is a &lt;a href="http://aptly-dev.github.io/www.aptly.info/doc/feature/query/">package query&lt;/a> to
 search for packages&lt;/li>
 &lt;/ul>
 &lt;p>If package query is omitted, all the packages are displayed.&lt;/p>
 &lt;p>Flags:&lt;/p>
 &lt;ul>
 &lt;li>&lt;code>-format=&amp;quot;&amp;quot;&lt;/code>:
-&lt;a href="https://www.aptly.info/doc/feature/package-display/">custom format&lt;/a> for result printing&lt;/li>
+&lt;a href="http://aptly-dev.github.io/www.aptly.info/doc/feature/package-display/">custom format&lt;/a> for result printing&lt;/li>
 &lt;/ul>
 &lt;p>If no package are found, aptly exits with code 1 (failure).&lt;/p>
 &lt;p>Example:&lt;/p>
@@ -304,9 +304,9 @@ bwbar_1.2.3-2_source
 python-mysqldb-dbg_1.2.3-2_amd64
 libibmad1_1.2.3-20090314-1.1_amd64
 shush_1.2.3-2_amd64
-&lt;/code>&lt;/pre></description></item><item><title>aptly package show</title><link>https://www.aptly.info/doc/aptly/package/show/</link><pubDate>Fri, 29 Aug 2014 11:17:38 UTC</pubDate><author>Andrey Smirnov</author><guid>https://www.aptly.info/doc/aptly/package/show/</guid><description>&lt;h2 id="aptly-package-show">aptly package show&lt;/h2>
+&lt;/code>&lt;/pre></description></item><item><title>aptly package show</title><link>http://aptly-dev.github.io/www.aptly.info/doc/aptly/package/show/</link><pubDate>Fri, 29 Aug 2014 11:17:38 UTC</pubDate><author>Andrey Smirnov</author><guid>http://aptly-dev.github.io/www.aptly.info/doc/aptly/package/show/</guid><description>&lt;h2 id="aptly-package-show">aptly package show&lt;/h2>
 &lt;p>Display details about packages from whole package database. Command
-show does searching much like &lt;a href="https://www.aptly.info/doc/aptly/package/search/">&lt;code>aptly package search&lt;/code>&lt;/a>
+show does searching much like &lt;a href="http://aptly-dev.github.io/www.aptly.info/doc/aptly/package/search/">&lt;code>aptly package search&lt;/code>&lt;/a>
 command does, but displays complete information about the package:&lt;/p>
 &lt;ul>
 &lt;li>contents of control file&lt;/li>
@@ -320,7 +320,7 @@ to have queries resulting in single package.&lt;/p>
 &lt;/code>&lt;/pre>
 &lt;p>Params are:&lt;/p>
 &lt;ul>
-&lt;li>&lt;code>package-query&lt;/code> is a &lt;a href="https://www.aptly.info/doc/feature/query/">package query&lt;/a> to
+&lt;li>&lt;code>package-query&lt;/code> is a &lt;a href="http://aptly-dev.github.io/www.aptly.info/doc/feature/query/">package query&lt;/a> to
 search for packages (most usually in the format of package
 reference, e.g. &lt;code>bwbar_1.2.3-2_amd64&lt;/code>)&lt;/li>
 &lt;/ul>
@@ -358,7 +358,7 @@ Files in the pool:
 /Users/smira/.aptly/pool/76/62/bwbar_1.2.3.orig.tar.gz
 References to package:
 mirror [wheezy-main-src]: http://mirror.yandex.ru/debian/ wheezy [src]
-&lt;/code>&lt;/pre></description></item><item><title>aptly repo search</title><link>https://www.aptly.info/doc/aptly/repo/search/</link><pubDate>Fri, 29 Aug 2014 11:17:38 UTC</pubDate><author>Andrey Smirnov</author><guid>https://www.aptly.info/doc/aptly/repo/search/</guid><description>&lt;h2 id="aptly-repo-search">aptly repo search&lt;/h2>
+&lt;/code>&lt;/pre></description></item><item><title>aptly repo search</title><link>http://aptly-dev.github.io/www.aptly.info/doc/aptly/repo/search/</link><pubDate>Fri, 29 Aug 2014 11:17:38 UTC</pubDate><author>Andrey Smirnov</author><guid>http://aptly-dev.github.io/www.aptly.info/doc/aptly/repo/search/</guid><description>&lt;h2 id="aptly-repo-search">aptly repo search&lt;/h2>
 &lt;p>Search local repositories for packages matching query.&lt;/p>
 &lt;p>Usage:&lt;/p>
 &lt;pre>&lt;code>$ aptly repo search &amp;lt;name&amp;gt; [&amp;lt;package-query&amp;gt;]
@@ -366,15 +366,15 @@ mirror [wheezy-main-src]: http://mirror.yandex.ru/debian/ wheezy [src]
 &lt;p>Params are:&lt;/p>
 &lt;ul>
 &lt;li>&lt;code>name&lt;/code> is a repo name (given when repo was created)&lt;/li>
-&lt;li>&lt;code>package-query&lt;/code> is a &lt;a href="https://www.aptly.info/doc/feature/query/">package query&lt;/a> to
+&lt;li>&lt;code>package-query&lt;/code> is a &lt;a href="http://aptly-dev.github.io/www.aptly.info/doc/feature/query/">package query&lt;/a> to
 search for packages&lt;/li>
 &lt;/ul>
 &lt;p>If package query is omitted, all the packages are displayed.&lt;/p>
 &lt;p>Flags:&lt;/p>
 &lt;ul>
 &lt;li>&lt;code>-format=&amp;quot;&amp;quot;&lt;/code>:
-&lt;a href="https://www.aptly.info/doc/feature/package-display/">custom format&lt;/a> for result printing&lt;/li>
-&lt;li>&lt;code>-with-deps&lt;/code>: include &lt;a href="https://www.aptly.info/doc/feature/dependencies">dependencies&lt;/a> of matching packages
+&lt;a href="http://aptly-dev.github.io/www.aptly.info/doc/feature/package-display/">custom format&lt;/a> for result printing&lt;/li>
+&lt;li>&lt;code>-with-deps&lt;/code>: include &lt;a href="http://aptly-dev.github.io/www.aptly.info/doc/feature/dependencies">dependencies&lt;/a> of matching packages
 into search results&lt;/li>
 &lt;/ul>
 &lt;p>Example:&lt;/p>
@@ -398,7 +398,7 @@ perl-base_5.14.2-21+deb7u1_i386
 base-files_7.1wheezy5_amd64
 ncurses-bin_5.9-10_amd64
 gcc-4.7-base_4.7.2-5_i386
-&lt;/code>&lt;/pre></description></item><item><title>aptly snapshot search</title><link>https://www.aptly.info/doc/aptly/snapshot/search/</link><pubDate>Fri, 29 Aug 2014 11:17:38 UTC</pubDate><author>Andrey Smirnov</author><guid>https://www.aptly.info/doc/aptly/snapshot/search/</guid><description>&lt;h2 id="aptly-snapshot-search">aptly snapshot search&lt;/h2>
+&lt;/code>&lt;/pre></description></item><item><title>aptly snapshot search</title><link>http://aptly-dev.github.io/www.aptly.info/doc/aptly/snapshot/search/</link><pubDate>Fri, 29 Aug 2014 11:17:38 UTC</pubDate><author>Andrey Smirnov</author><guid>http://aptly-dev.github.io/www.aptly.info/doc/aptly/snapshot/search/</guid><description>&lt;h2 id="aptly-snapshot-search">aptly snapshot search&lt;/h2>
 &lt;p>Search snapshot for packages matching query.&lt;/p>
 &lt;p>Usage:&lt;/p>
 &lt;pre>&lt;code>$ aptly snapshot search &amp;lt;name&amp;gt; [&amp;lt;package-query&amp;gt;]
@@ -407,15 +407,15 @@ gcc-4.7-base_4.7.2-5_i386
 &lt;ul>
 &lt;li>&lt;code>name&lt;/code> is snapshot name which has been given during snapshot
 creation&lt;/li>
-&lt;li>&lt;code>package-query&lt;/code> is a &lt;a href="https://www.aptly.info/doc/feature/query/">package query&lt;/a> to
+&lt;li>&lt;code>package-query&lt;/code> is a &lt;a href="http://aptly-dev.github.io/www.aptly.info/doc/feature/query/">package query&lt;/a> to
 search for packages&lt;/li>
 &lt;/ul>
 &lt;p>If package query is omitted, all the packages are displayed.&lt;/p>
 &lt;p>Flags:&lt;/p>
 &lt;ul>
 &lt;li>&lt;code>-format=&amp;quot;&amp;quot;&lt;/code>:
-&lt;a href="https://www.aptly.info/doc/feature/package-display/">custom format&lt;/a> for result printing&lt;/li>
-&lt;li>&lt;code>-with-deps&lt;/code>: include &lt;a href="https://www.aptly.info/doc/feature/dependencies">dependencies&lt;/a> of matching packages
+&lt;a href="http://aptly-dev.github.io/www.aptly.info/doc/feature/package-display/">custom format&lt;/a> for result printing&lt;/li>
+&lt;li>&lt;code>-with-deps&lt;/code>: include &lt;a href="http://aptly-dev.github.io/www.aptly.info/doc/feature/dependencies">dependencies&lt;/a> of matching packages
 into search results&lt;/li>
 &lt;/ul>
 &lt;p>Example:&lt;/p>
@@ -427,7 +427,7 @@ nginx-extras_1.6.0-1~bpo70+1_amd64
 nginx-full_1.6.0-1~bpo70+1_i386
 nginx-naxsi_1.6.0-1~bpo70+1_amd64
 nginx-naxsi_1.6.0-1~bpo70+1_i386
-&lt;/code>&lt;/pre></description></item><item><title>aptly db cleanup</title><link>https://www.aptly.info/doc/aptly/db/cleanup/</link><pubDate>Fri, 08 Aug 2014 11:17:38 UTC</pubDate><author>Andrey Smirnov</author><guid>https://www.aptly.info/doc/aptly/db/cleanup/</guid><description>&lt;h2 id="aptly-db-cleanup">aptly db cleanup&lt;/h2>
+&lt;/code>&lt;/pre></description></item><item><title>aptly db cleanup</title><link>http://aptly-dev.github.io/www.aptly.info/doc/aptly/db/cleanup/</link><pubDate>Fri, 08 Aug 2014 11:17:38 UTC</pubDate><author>Andrey Smirnov</author><guid>http://aptly-dev.github.io/www.aptly.info/doc/aptly/db/cleanup/</guid><description>&lt;h2 id="aptly-db-cleanup">aptly db cleanup&lt;/h2>
 &lt;p>Database cleanup removes information about unreferenced packages and
 deletes files in the package pool that aren&amp;rsquo;t used by packages anymore.
 It is a good idea to run this command after massive deletion of
@@ -453,7 +453,7 @@ Building list of files in package pool...
 Deleting unreferenced files (325)...
 Disk space freed: 0.27 GiB...
 &lt;/code>&lt;/pre>
-&lt;p> &lt;/p></description></item><item><title>aptly db recover</title><link>https://www.aptly.info/doc/aptly/db/recover/</link><pubDate>Fri, 08 Aug 2014 11:17:38 UTC</pubDate><author>Andrey Smirnov</author><guid>https://www.aptly.info/doc/aptly/db/recover/</guid><description>&lt;h2 id="aptly-db-recover">aptly db recover&lt;/h2>
+&lt;p> &lt;/p></description></item><item><title>aptly db recover</title><link>http://aptly-dev.github.io/www.aptly.info/doc/aptly/db/recover/</link><pubDate>Fri, 08 Aug 2014 11:17:38 UTC</pubDate><author>Andrey Smirnov</author><guid>http://aptly-dev.github.io/www.aptly.info/doc/aptly/db/recover/</guid><description>&lt;h2 id="aptly-db-recover">aptly db recover&lt;/h2>
 &lt;p>Database recover does its best to recover database after crash. It is
 recommended to backup DB before running recover. Recover procedures
 ignores all index files and tries to reconstruct them from &lt;code>.sst&lt;/code> files.&lt;/p>
@@ -464,7 +464,7 @@ ignores all index files and tries to reconstruct them from &lt;code>.sst&lt;/cod
 &lt;pre>&lt;code>$ aptly db recover
 Recovering DB...
 &lt;/code>&lt;/pre>
-&lt;p> &lt;/p></description></item><item><title>aptly mirror create</title><link>https://www.aptly.info/doc/aptly/mirror/create/</link><pubDate>Fri, 08 Aug 2014 11:17:38 UTC</pubDate><author>Andrey Smirnov</author><guid>https://www.aptly.info/doc/aptly/mirror/create/</guid><description>&lt;h2 id="aptly-mirror-create">aptly mirror create&lt;/h2>
+&lt;p> &lt;/p></description></item><item><title>aptly mirror create</title><link>http://aptly-dev.github.io/www.aptly.info/doc/aptly/mirror/create/</link><pubDate>Fri, 08 Aug 2014 11:17:38 UTC</pubDate><author>Andrey Smirnov</author><guid>http://aptly-dev.github.io/www.aptly.info/doc/aptly/mirror/create/</guid><description>&lt;h2 id="aptly-mirror-create">aptly mirror create&lt;/h2>
 &lt;p>Creates mirror of remote repository, aptly supports both regular and
 flat Debian repositories exported via HTTP(S) or FTP. aptly would try download
 Release file from remote repository and verify its signature.&lt;/p>
@@ -487,9 +487,9 @@ specified aptly would fetch all components.&lt;/li>
 &lt;/ul>
 &lt;p>Flags:&lt;/p>
 &lt;ul>
-&lt;li>&lt;code>-filter=&lt;/code>: &lt;a href="https://www.aptly.info/doc/feature/query/">package query&lt;/a> that is applied to
+&lt;li>&lt;code>-filter=&lt;/code>: &lt;a href="http://aptly-dev.github.io/www.aptly.info/doc/feature/query/">package query&lt;/a> that is applied to
 packages in the mirror&lt;/li>
-&lt;li>&lt;code>-filter-with-deps&lt;/code>: when filtering, include &lt;a href="https://www.aptly.info/doc/feature/dependencies">dependencies&lt;/a> of
+&lt;li>&lt;code>-filter-with-deps&lt;/code>: when filtering, include &lt;a href="http://aptly-dev.github.io/www.aptly.info/doc/feature/dependencies">dependencies&lt;/a> of
 matching packages as well&lt;/li>
 &lt;li>&lt;code>-force-components&lt;/code>: (only with component list on command line)
 skip check that requested components are listed in &lt;code>Release&lt;/code> file&lt;/li>
@@ -512,7 +512,7 @@ or option &lt;code>-architectures&lt;/code>), only packages for those architectu
 downloaded.&lt;/p>
 &lt;p>If components are not specified, aptly will download packages from all
 components and merge them into one. If components should
-be left separate, please create &lt;a href="https://www.aptly.info/doc/feature/multi-component/">separate mirror for each component&lt;/a>.&lt;/p>
+be left separate, please create &lt;a href="http://aptly-dev.github.io/www.aptly.info/doc/feature/multi-component/">separate mirror for each component&lt;/a>.&lt;/p>
 &lt;p>If PPA url is specified, aptly would expand it to HTTP url using
 configuration options &lt;code>ppaDistributorID&lt;/code> &amp;amp; &lt;code>ppaCodename&lt;/code>. If you&amp;rsquo;re
 running aptly on Ubuntu, defaults should work (aptly would figure out
@@ -562,8 +562,8 @@ source packages (not twice the space required to store binary packages).&lt;/p>
 Mirror [debian-main]: http://ftp.ru.debian.org/debian/ squeeze successfully added.
 You can run 'aptly mirror update debian-main' to download repository contents.
 &lt;/code>&lt;/pre>
-&lt;p>For newly created mirror, &lt;a href="https://www.aptly.info/doc/aptly/mirror/update/">&lt;code>aptly mirror update&lt;/code>&lt;/a> should be run
-to download mirror contents for the first time.&lt;/p></description></item><item><title>aptly mirror drop</title><link>https://www.aptly.info/doc/aptly/mirror/drop/</link><pubDate>Fri, 08 Aug 2014 11:17:38 UTC</pubDate><author>Andrey Smirnov</author><guid>https://www.aptly.info/doc/aptly/mirror/drop/</guid><description>&lt;h2 id="aptly-mirror-drop">aptly mirror drop&lt;/h2>
+&lt;p>For newly created mirror, &lt;a href="http://aptly-dev.github.io/www.aptly.info/doc/aptly/mirror/update/">&lt;code>aptly mirror update&lt;/code>&lt;/a> should be run
+to download mirror contents for the first time.&lt;/p></description></item><item><title>aptly mirror drop</title><link>http://aptly-dev.github.io/www.aptly.info/doc/aptly/mirror/drop/</link><pubDate>Fri, 08 Aug 2014 11:17:38 UTC</pubDate><author>Andrey Smirnov</author><guid>http://aptly-dev.github.io/www.aptly.info/doc/aptly/mirror/drop/</guid><description>&lt;h2 id="aptly-mirror-drop">aptly mirror drop&lt;/h2>
 &lt;p>Drop deletes information about remote repository mirror. Package data is
 not deleted (it could be still used by other mirrors or snapshots). If
 mirror is used as source to create a snapshot, aptly would refuse to
@@ -582,11 +582,11 @@ snapshot&lt;/li>
 &lt;/ul>
 &lt;p>Dropping mirror only removes metadata about the mirror, in order to
 cleanup the disk space occupied by package files you might need to run
-&lt;a href="https://www.aptly.info/doc/aptly/db/cleanup/">&lt;code>aptly db cleanup&lt;/code>&lt;/a> command.&lt;/p>
+&lt;a href="http://aptly-dev.github.io/www.aptly.info/doc/aptly/db/cleanup/">&lt;code>aptly db cleanup&lt;/code>&lt;/a> command.&lt;/p>
 &lt;p>Example:&lt;/p>
 &lt;pre>&lt;code>$ aptly mirror drop -force wheezy-main
 Mirror `wheezy-main` has been removed.
-&lt;/code>&lt;/pre></description></item><item><title>aptly mirror list</title><link>https://www.aptly.info/doc/aptly/mirror/list/</link><pubDate>Fri, 08 Aug 2014 11:17:38 UTC</pubDate><author>Andrey Smirnov</author><guid>https://www.aptly.info/doc/aptly/mirror/list/</guid><description>&lt;h2 id="aptly-mirror-list">aptly mirror list&lt;/h2>
+&lt;/code>&lt;/pre></description></item><item><title>aptly mirror list</title><link>http://aptly-dev.github.io/www.aptly.info/doc/aptly/mirror/list/</link><pubDate>Fri, 08 Aug 2014 11:17:38 UTC</pubDate><author>Andrey Smirnov</author><guid>http://aptly-dev.github.io/www.aptly.info/doc/aptly/mirror/list/</guid><description>&lt;h2 id="aptly-mirror-list">aptly mirror list&lt;/h2>
 &lt;p>Shows list of created remote repository mirrors.&lt;/p>
 &lt;p>Usage:&lt;/p>
 &lt;pre>&lt;code>$ aptly mirror list
@@ -605,7 +605,7 @@ List of mirrors:
 &lt;pre>&lt;code>$ aptly mirror list -raw
 backports
 debian-main
-&lt;/code>&lt;/pre></description></item><item><title>aptly mirror rename</title><link>https://www.aptly.info/doc/aptly/mirror/rename/</link><pubDate>Fri, 08 Aug 2014 11:17:38 UTC</pubDate><author>Andrey Smirnov</author><guid>https://www.aptly.info/doc/aptly/mirror/rename/</guid><description>&lt;h2 id="aptly-mirror-rename">aptly mirror rename&lt;/h2>
+&lt;/code>&lt;/pre></description></item><item><title>aptly mirror rename</title><link>http://aptly-dev.github.io/www.aptly.info/doc/aptly/mirror/rename/</link><pubDate>Fri, 08 Aug 2014 11:17:38 UTC</pubDate><author>Andrey Smirnov</author><guid>http://aptly-dev.github.io/www.aptly.info/doc/aptly/mirror/rename/</guid><description>&lt;h2 id="aptly-mirror-rename">aptly mirror rename&lt;/h2>
 &lt;p>Command changes name of the mirror. Mirror name should be unique.&lt;/p>
 &lt;p>Usage:&lt;/p>
 &lt;pre>&lt;code>$ aptly mirror rename &amp;lt;old-name&amp;gt; &amp;lt;new-name&amp;gt;
