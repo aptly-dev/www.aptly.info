@@ -1,0 +1,729 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Docs on aptly - Debian repository management tool</title><generator uri="https://hugo.spf13.com">Hugo</generator><link>https://www.aptly.info/doc/</link><language>en-us</language><author>Andrey Smirnov</author><updated>Mon, 09 Sep 2019 11:17:38 UTC</updated><item><title>Integrations</title><link>https://www.aptly.info/doc/integrations/</link><pubDate>Mon, 09 Sep 2019 11:17:38 UTC</pubDate><author>Andrey Smirnov</author><guid>https://www.aptly.info/doc/integrations/</guid><description>&lt;h2 id="integrations">Integrations&lt;/h2>
+&lt;p>Complete solutions:&lt;/p>
+&lt;ul>
+&lt;li>&lt;a href="https://github.com/molior-dbs/molior">Molior&lt;/a> Debian Build System by
+André Roth&lt;/li>
+&lt;li>&lt;a href="https://github.com/allocloud/openapt">OpenAPT&lt;/a> by Raphael Medaer and Hubert Lobit (ALLOcloud),
+is a description format for APT repositories and its implementation using aptly.&lt;/li>
+&lt;/ul>
+&lt;p>Vagrant:&lt;/p>
+&lt;ul>
+&lt;li>&lt;a href="https://github.com/sepulworld/aptly-vagrant">Vagrant configuration&lt;/a> by
+Zane Williamson, allowing to bring two virtual servers, one with aptly installed
+and another one set up to install packages from repository published by aptly&lt;/li>
+&lt;/ul>
+&lt;p>Docker:&lt;/p>
+&lt;ul>
+&lt;li>&lt;a href="https://github.com/mikepurvis/aptly-docker">Docker container&lt;/a> with aptly inside by Mike Purvis&lt;/li>
+&lt;/ul>
+&lt;p>With configuration management systems:&lt;/p>
+&lt;ul>
+&lt;li>&lt;a href="https://github.com/aioue/ansible-role-aptly">Ansible role&lt;/a> by Tom Paine&lt;/li>
+&lt;li>&lt;a href="https://github.com/hw-cookbooks/aptly">Chef cookbook&lt;/a> by Aaron Baer
+(Heavy Water Operations, LLC)&lt;/li>
+&lt;li>&lt;a href="https://github.com/alphagov/puppet-aptly">Puppet module&lt;/a> by
+Government Digital Services&lt;/li>
+&lt;li>&lt;a href="https://github.com/saltstack-formulas/aptly-formula">SaltStack Formula&lt;/a> by
+Forrest Alvarez and Brian Jackson&lt;/li>
+&lt;/ul>
+&lt;p>aptly API:&lt;/p>
+&lt;ul>
+&lt;li>&lt;a href="https://github.com/sepulworld/aptly_cli">aptly_cli Ruby library&lt;/a> by Zane Williamson.
+This includes an aptly API command-line client.&lt;/li>
+&lt;li>&lt;a href="https://github.com/gopythongo/aptly-api-client">aptly-api-client Python library&lt;/a> by Jonas Maurus.&lt;/li>
+&lt;li>&lt;a href="https://github.com/chnyda/python-aptly-gui">Python aptly GUI (via pyqt5)&lt;/a> by Cedric Hnyda.&lt;/li>
+&lt;/ul></description></item><item><title>PGP Providers</title><link>https://www.aptly.info/doc/feature/pgp-providers/</link><pubDate>Wed, 09 Aug 2017 11:17:38 UTC</pubDate><author>Andrey Smirnov</author><guid>https://www.aptly.info/doc/feature/pgp-providers/</guid><description>&lt;h2 id="pgp-providers--hahahugoshortcode-s0-hbhb">PGP Providers &lt;span class="label label-primary">1.1.0&lt;/span>
+&lt;/h2>
+&lt;p>Aptly at this time only supports GNUPG 1.x for server-side use.
+On newer Debian systems you&amp;rsquo;ll want to make sure that the &lt;code>gnupg1&lt;/code> and &lt;code>gpgv1&lt;/code> packages are installed.
+Please note that GNUPG 1 and 2 maintain different keyrings, in order for keys to
+be available to Aptly they need to be in the GNUPG 1 keyring.&lt;/p>
+&lt;p>Since version &lt;span class="label label-primary">1.1.0&lt;/span>
+, Aptly supports pluggable validation/signing providers.
+The original &lt;code>gpg&lt;/code> provider calls the actual gpg binary as a subprocess.
+The newer &lt;code>internal&lt;/code> provider relies on a &lt;a href="https://github.com/golang/crypto/tree/master/openpgp">Go native OpenPGP implementation&lt;/a>.
+With any PGP provider, aptly is using same keyrings both for signing and signature validation,
+so providers can be easily switched. Signing/validation options apply the same way for both provider
+implementations.&lt;/p>
+&lt;p>Comparing external &lt;code>gpg&lt;/code> provider and &lt;code>internal&lt;/code> OpenPGP implementation:&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>internal&lt;/code> implementation doesn&amp;rsquo;t require &lt;code>gpg&lt;/code> to be installed (but &lt;code>gpg&lt;/code> is still required to manage
+keyrings)&lt;/li>
+&lt;li>&lt;code>internal&lt;/code> implementation has better handling for batch operations (passing passphrase using command-line arguments)&lt;/li>
+&lt;li>&lt;code>gpg&lt;/code> provides additional measures to lock sensitive information in memory&lt;/li>
+&lt;li>&lt;code>gpg&lt;/code> has more features, support for external authentication methods and so on&lt;/li>
+&lt;li>&lt;code>internal&lt;/code> implementation opens keyring only once, so it asks for passphrase once per aptly
+run, not every time file is signed (which is the case for &lt;code>gpg&lt;/code> provider)&lt;/li>
+&lt;li>&lt;code>gpg&lt;/code> implementation might have issue with GnuPG 2.1 (it works fine with 1.x version)&lt;/li>
+&lt;li>&lt;code>internal&lt;/code> implementation only supports &amp;ldquo;classic&amp;rdquo; format of keyrings&lt;/li>
+&lt;/ul>
+&lt;p>PGP provider could be configured via &lt;a href="https://www.aptly.info/doc/aptly/flags">flags&lt;/a> (&lt;code>-gpg-provider=[gpg|internal]&lt;/code>) or via &lt;code>gpgProvider&lt;/code> &lt;a href="https://www.aptly.info/doc/configuration">configuration setting&lt;/a>.&lt;/p></description></item><item><title>Filesystem Publishing</title><link>https://www.aptly.info/doc/feature/filesystem/</link><pubDate>Thu, 06 Jul 2017 11:17:38 UTC</pubDate><author>Andrey Smirnov</author><guid>https://www.aptly.info/doc/feature/filesystem/</guid><description>&lt;h2 id="custom-filesystem-publishing--hahahugoshortcode-s0-hbhb">Custom Filesystem Publishing &lt;span class="label label-primary">1.1.0&lt;/span>
+&lt;/h2>
+&lt;p>aptly defaults to publish to a single publish directory under &lt;code>~/.aptly/public&lt;/code>. For
+a more advanced publishing strategy, you can define one or more filesystem endpoints in the
+&lt;code>FileSystemPublishEndpoints&lt;/code> list of the aptly &lt;a href="https://www.aptly.info/doc/configuration">configuration&lt;/a> file.&lt;/p>
+&lt;p>Example:&lt;/p>
+&lt;pre>&lt;code>...
+&amp;quot;FileSystemPublishEndpoints&amp;quot;: {
+&amp;quot;test1&amp;quot;: {
+&amp;quot;rootDir&amp;quot;: &amp;quot;/opt/srv1/aptly_public&amp;quot;,
+&amp;quot;linkMethod&amp;quot;: &amp;quot;symlink&amp;quot;
+},
+&amp;quot;test2&amp;quot;: {
+&amp;quot;rootDir&amp;quot;: &amp;quot;/opt/srv2/aptly_public&amp;quot;,
+&amp;quot;linkMethod&amp;quot;: &amp;quot;copy&amp;quot;,
+&amp;quot;verifyMethod&amp;quot;: &amp;quot;md5&amp;quot;
+},
+&amp;quot;test3&amp;quot;: {
+&amp;quot;rootDir&amp;quot;: &amp;quot;/opt/srv3/aptly_public&amp;quot;,
+&amp;quot;linkMethod&amp;quot;: &amp;quot;hardlink&amp;quot;
+}
+},
+...
+&lt;/code>&lt;/pre>
+&lt;p>Each endpoint has a name and the following associated settings:&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>rootDir&lt;/code>:
+The publish directory, e.g., &lt;code>/opt/srv/aptly_public&lt;/code>.&lt;/li>
+&lt;li>&lt;code>linkMethod&lt;/code>:
+This is one of &lt;code>hardlink&lt;/code>, &lt;code>symlink&lt;/code> or &lt;code>copy&lt;/code>. It specifies how aptly links the
+files from the internal pool to the published directory.
+If not specified, empty or wrong, this defaults to &lt;code>hardlink&lt;/code>.&lt;/li>
+&lt;li>&lt;code>verifyMethod&lt;/code>:
+This is used only when setting the &lt;code>linkMethod&lt;/code> to &lt;code>copy&lt;/code>. Possible values are
+&lt;code>md5&lt;/code> and &lt;code>size&lt;/code>. It specifies how aptly compares existing links from the
+internal pool to the published directory. The &lt;code>size&lt;/code> method compares only the
+file sizes, whereas the &lt;code>md5&lt;/code> method calculates the md5 checksum of the found
+file and compares it to the desired one.
+If not specified, empty or wrong, this defaults to &lt;code>md5&lt;/code>.&lt;/li>
+&lt;/ul>
+&lt;p>In order to publish to such an endpoint, specify the endpoint as &lt;code>filesystem:endpoint-name&lt;/code>
+with &lt;code>endpoint-name&lt;/code> as the name given in the aptly configuration file. For example:&lt;/p>
+&lt;pre>&lt;code>$ aptly publish snapshot wheezy-main filesystem:test1:wheezy/daily
+&lt;/code>&lt;/pre></description></item><item><title>Dependency Resolving</title><link>https://www.aptly.info/doc/feature/dependencies/</link><pubDate>Fri, 31 Mar 2017 11:17:38 UTC</pubDate><author>Andrey Smirnov</author><guid>https://www.aptly.info/doc/feature/dependencies/</guid><description>&lt;h2 id="dependency-resolving">Dependency Resolving&lt;/h2>
+&lt;p>aptly supports automatic recursive resolving of package dependencies. For example, given set
+of packages &lt;code>pkg-a&lt;/code> and &lt;code>pkg-b&lt;/code> aptly can figure out all the package dependencies and pull them
+with the packages. This allows to pull &lt;code>Depends:&lt;/code> (including &lt;code>Pre-Depends:&lt;/code>), &lt;code>Recommends:&lt;/code>, source
+packages and so on.&lt;/p>
+&lt;p>Command &lt;a href="https://www.aptly.info/doc/aptly/snapshot/pull">aptly snapshot pull&lt;/a> was the first one to support dependency resolving
+(it is enabled by default in this command). The best example is
+&lt;a href="https://www.aptly.info/tutorial/pull">pulling selected packages from backports repos with dependencies, overriding packages in base distribution&lt;/a>.&lt;/p>
+&lt;p>All the commands which accept &lt;a href="https://www.aptly.info/doc/feature/query">package query&lt;/a> as parameter (this includes family of
+&lt;code>aptly * search&lt;/code> commands, various &lt;code>copy&lt;/code>, &lt;code>move&lt;/code> commands), apply filter to the source matching only specified
+packages. But if &lt;code>-with-deps&lt;/code> flag is set, aptly resolves dependencies of packages matching the filter expanding
+matching packages with all the available dependencies. This allows for example to search for package with all its
+dependencies.&lt;/p>
+&lt;p>Command &lt;a href="https://www.aptly.info/doc/aptly/mirror/update">aptly mirror update&lt;/a> also supports package filters set either when mirror is
+&lt;a href="https://www.aptly.info/doc/aptly/mirror/create">created&lt;/a> or &lt;a href="https://www.aptly.info/doc/aptly/mirror/edit">modified&lt;/a>. This allows to cut down download size
+dramatically by selecting only subset of the available packages.&lt;/p>
+&lt;p>Overall, aptly dependency resolution is not that robust as &lt;code>apt-get&lt;/code> one, but it should work fine in the most cases.
+When filtering complete Debian distributions, it&amp;rsquo;s advised to always pick up &lt;code>Priority (Required)&lt;/code> or
+&lt;code>Priority (Important)&lt;/code> packages
+(&lt;a href="https://www.debian.org/doc/manuals/debian-faq/ch-pkg_basics.en.html#s-priority">what is that?&lt;/a>) as a basis to resolve
+dependencies against.&lt;/p>
+&lt;h3 id="options">Options&lt;/h3>
+&lt;p>Several options affect dependency resolving process. They might be set either in the &lt;a href="https://www.aptly.info/doc/configuration">configuration file&lt;/a> or
+passed via &lt;a href="https://www.aptly.info/doc/aptly/flags">command-line flags&lt;/a>. If passed via flags, they should be passed to the command which executes
+dependency resolution algorithm each time command is run (e.g. mirror filter is set with &lt;a href="https://www.aptly.info/doc/aptly/mirror/create">aptly mirror create&lt;/a>,
+but filter is applied in &lt;a href="https://www.aptly.info/doc/aptly/mirror/update">aptly mirror update&lt;/a>, so dependency flags should be passed to
+&lt;code>aptly mirror update&lt;/code> command).&lt;/p>
+&lt;p>By default, aptly only follows dependencies in &lt;code>Depends:&lt;/code> and &lt;code>Pre-Depends:&lt;/code> fields, flags &lt;code>-dep-follow-recommends&lt;/code> and
+&lt;code>-dep-follow-suggests&lt;/code> expand that to &lt;code>Recommens:&lt;/code> and &lt;code>Suggests&lt;/code> fields. When &lt;code>-dep-follow-source&lt;/code> flag is set, aptly
+pulls source packages for each binary package selected.&lt;/p>
+&lt;p>When &lt;code>-dep-follow-all-variants&lt;/code> is enabled, aptly follows all the paths for dependencies to grab all the available
+dependent packages. For example, if &lt;code>pkg-a&lt;/code> depends on either &lt;code>pkg-b&lt;/code> or &lt;code>pkg-c&lt;/code>, by default aptly will pick one of
+&lt;code>pkg-b&lt;/code> or &lt;code>pkg-c&lt;/code>, but with &lt;code>-dep-follow-all-variants&lt;/code> aptly would pick up both packages. Same applies to virtual packages,
+all the package which provide the feature would be selected.&lt;/p>
+&lt;h3 id="verbose-logging">Verbose Logging&lt;/h3>
+&lt;p>New in &lt;span class="label label-primary">1.1.0&lt;/span>
+.&lt;/p>
+&lt;p>When global flag &lt;code>-dep-verbose-resolve&lt;/code> is set (or respective configuration option is enabled), aptly prints
+detailed log while resolving dependencies:&lt;/p>
+&lt;pre>&lt;code>Missing dependencies: file-rc (&amp;gt;= 0.8.16) [amd64], python:any (&amp;gt;= 2.7.1-0ubuntu2) [amd64], python3:any (&amp;gt;= 3.3.2-2~) [amd64], file-rc [amd64], perl (&amp;lt;&amp;lt; 5.17) [amd64], iptables-router (&amp;gt;= 1.2.3) [amd64], systemd [amd64], sgml-base (&amp;gt;= 1.26+nmu2) [amd64], sed (&amp;gt;= 4.1.2-8) [amd64]
+Unsatisfied dependency: file-rc (&amp;gt;= 0.8.16) [amd64]
+Unsatisfied dependency: python:any (&amp;gt;= 2.7.1-0ubuntu2) [amd64]
+Unsatisfied dependency: python3:any (&amp;gt;= 3.3.2-2~) [amd64]
+Unsatisfied dependency: file-rc [amd64]
+Unsatisfied dependency: perl (&amp;lt;&amp;lt; 5.17) [amd64]
+Unsatisfied dependency: iptables-router (&amp;gt;= 1.2.3) [amd64]
+Unsatisfied dependency: systemd [amd64]
+Injecting package: sgml-base_1.26+nmu4ubuntu1_all
+Injecting package: sed_4.2.2-4ubuntu1_amd64
+&lt;/code>&lt;/pre>
+&lt;p>Dependency resolving process goes through several steps in a loop, exiting the loop once it&amp;rsquo;s not possible to inject any
+new dependency:&lt;/p>
+&lt;ol>
+&lt;li>Scan all the packages in the list, collect all the dependencies (&lt;code>Missing dependencies&lt;/code>)&lt;/li>
+&lt;li>For each dependency, find package (or packages) which might satisfy dependency. If such package
+is not available, &lt;code>Unsatisfied dependency:&lt;/code> message is printed.&lt;/li>
+&lt;li>Add packages to the set which satisfy some of the dependencies (&lt;code>Injecting package:&lt;/code>)&lt;/li>
+&lt;li>If any packages were added on step 3, repeat from step 1, otherwise finish dependency resolving.&lt;/li>
+&lt;/ol></description></item><item><title>aptly publish show</title><link>https://www.aptly.info/doc/aptly/publish/show/</link><pubDate>Thu, 12 Jan 2017 13:33:38 UTC</pubDate><author>Andrey Smirnov</author><guid>https://www.aptly.info/doc/aptly/publish/show/</guid><description>&lt;h2 id="aptly-publish-show">aptly publish show&lt;/h2>
+&lt;p>Shows detailed information of published repository.&lt;/p>
+&lt;p>Usage:&lt;/p>
+&lt;pre>&lt;code>$ aptly publish show &amp;lt;distribution&amp;gt; [[&amp;lt;endpoint&amp;gt;:]&amp;lt;prefix&amp;gt;]
+&lt;/code>&lt;/pre>
+&lt;p>Params:&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>distribution&lt;/code> is a distribution name for published repository (as
+displayed by &lt;code>aptly publish list&lt;/code>).&lt;/li>
+&lt;li>&lt;code>endpoint&lt;/code> is publishing endpoint, if not specified, it would
+default to empty endpoint (local file system).&lt;/li>
+&lt;li>&lt;code>prefix&lt;/code> is an optional prefix for publishing, if not specified,
+prefix is considered to be &lt;code>.&lt;/code>.&lt;/li>
+&lt;/ul>
+&lt;p>Example:&lt;/p>
+&lt;pre>&lt;code>$ aptly publish show squeeze-backports
+Prefix: .
+Distribution: squeeze
+Architectures: amd64 i386
+Sources:
+main: back3 [snapshot]
+&lt;/code>&lt;/pre>
+&lt;p> &lt;/p></description></item><item><title>Package Display Format</title><link>https://www.aptly.info/doc/feature/package-display/</link><pubDate>Tue, 07 Jul 2015 11:17:38 UTC</pubDate><author>Andrey Smirnov</author><guid>https://www.aptly.info/doc/feature/package-display/</guid><description>&lt;h2 id="package-display-format">Package Display Format&lt;/h2>
+&lt;p>Some aptly commands (&lt;a href="https://www.aptly.info/doc/aptly/mirror/search">aptly mirror search&lt;/a>,
+&lt;a href="https://www.aptly.info/doc/aptly/package/search">aptly package search&lt;/a>, &lt;a href="https://www.aptly.info/doc/aptly/repo/search">aptly repo search&lt;/a>,
+&lt;a href="https://www.aptly.info/doc/aptly/snapshot/search">aptly snapshot search&lt;/a>) support &lt;code>-format&lt;/code> flag
+which allows to modify how search results are printed. Golang templates are used to specify
+display format, with all package stanza fields available to template. In addition to package stanza
+fields aptly provides additional:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>&lt;code>Key&lt;/code>:
+internal aptly package ID, unique for all packages in aptly
+(combination of &lt;code>ShortKey&lt;/code> and &lt;code>FilesHash&lt;/code>).&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;code>FilesHash&lt;/code>:
+hash that includes MD5 of all packages files.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;code>ShortKey&lt;/code>:
+package ID, which is unique in single list (mirror, repo, snapshot, &amp;hellip;), but not unique
+in whole aptly package collection.&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;p>To access any field, use &lt;code>{{.Field}}&lt;/code>, every other character would be passed to output as is.&lt;/p>
+&lt;p>For example, default aptly display format could be implemented with the following template:&lt;/p>
+&lt;pre>&lt;code>{{.Package}}_{{.Version}}_{{.Architecture}}
+&lt;/code>&lt;/pre>
+&lt;p>To display package name with dependencies:&lt;/p>
+&lt;pre>&lt;code>{{.Package}} || {{.Depends}}
+&lt;/code>&lt;/pre>
+&lt;p>This might produce following output:&lt;/p>
+&lt;pre>&lt;code>libyaml-libyaml-perl || perl (&amp;gt;= 5.14.2-21+deb7u1), perlapi-5.14.2, libc6 (&amp;gt;= 2.3.4)
+liberubis-ruby1.9.1 || ruby-erubis
+...
+&lt;/code>&lt;/pre>
+&lt;p>For example:&lt;/p>
+&lt;pre>&lt;code>$ aptly package search -format=&amp;quot;{{.Package}} (version {{.Version}})&amp;quot; 'Name (~ ^lib.*)'
+libbluray-doc (version 1:0.2.2-1)
+libglobus-gsi-callback-doc (version 4.2-1)
+libtimedate-perl (version 1.2000-1)
+libwebauth6 (version 4.1.1-2)
+...
+&lt;/code>&lt;/pre>
+&lt;p>More information on Golang template syntax: &lt;a href="http://godoc.org/text/template">http://godoc.org/text/template&lt;/a>&lt;/p></description></item><item><title>aptly repo include</title><link>https://www.aptly.info/doc/aptly/repo/include/</link><pubDate>Mon, 16 Mar 2015 11:17:38 UTC</pubDate><author>Andrey Smirnov</author><guid>https://www.aptly.info/doc/aptly/repo/include/</guid><description>&lt;h2 id="aptly-repo-include">aptly repo include&lt;/h2>
+&lt;p>Command allows automatic processing of &lt;code>.changes&lt;/code> file controlling
+package upload to local repositories.&lt;/p>
+&lt;p>Usage:&lt;/p>
+&lt;pre>&lt;code>$ aptly repo include &amp;lt;file.changes&amp;gt;|&amp;lt;directory&amp;gt; ...
+&lt;/code>&lt;/pre>
+&lt;p>Flags:&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>-accept-unsigned&lt;/code>: accept unsigned .changes files&lt;/li>
+&lt;li>&lt;code>-force-replace&lt;/code>: when adding package that conflicts with existing package,
+remove existing package&lt;/li>
+&lt;li>&lt;code>-ignore-signatures&lt;/code>: disable verification of .changes file signature&lt;/li>
+&lt;li>&lt;code>-keyring=&lt;/code>: gpg keyring to use when verifying .changes file (could be specified multiple times)&lt;/li>
+&lt;li>&lt;code>-no-remove-files&lt;/code>: don&amp;rsquo;t remove files that have been imported successfully into repository&lt;/li>
+&lt;li>&lt;code>-repo=&amp;quot;{{.Distribution}}&amp;quot;&lt;/code>: which repo should files go to, defaults to Distribution field of .changes file&lt;/li>
+&lt;li>&lt;code>-uploaders-file=&amp;quot;&amp;quot;&lt;/code>: path to uploaders.json file&lt;/li>
+&lt;/ul>
+&lt;p>This command allows to implement package upload workflow using Debian tools:
+&lt;code>dpkg-genchanges&lt;/code>, &lt;code>dput&lt;/code>, etc. Set of Debian package files is uploaded together
+with &lt;code>.changes&lt;/code> file signed by developer and describing changeset.
+aptly would verify signature, package integrity and using optional
+rules supplied would add package to local repositories.&lt;/p>
+&lt;p>List of steps:&lt;/p>
+&lt;ol>
+&lt;li>aptly does recursive search for &lt;code>.changes&lt;/code> files in paths given as program
+arguments&lt;/li>
+&lt;li>for every &lt;code>.changes&lt;/code> file discovered:&lt;/li>
+&lt;li>&lt;code>.changes&lt;/code> file is copied to temporary directory&lt;/li>
+&lt;li>signature presence is checked, if signature is missing &lt;code>.changes&lt;/code> file is
+rejected (unless &lt;code>-accept-unsigned&lt;/code> flag is used)&lt;/li>
+&lt;li>signature is verified, GPG key IDs used to sign file are remembered, if
+file fails signature verification step, it is rejected (unless
+&lt;code>-ignore-signatures&lt;/code> flag is given)&lt;/li>
+&lt;li>package files referenced in &lt;code>.changes&lt;/code> file are copied to temporary directory
+and checksums are verified, if checksums don&amp;rsquo;t match &lt;code>.changes&lt;/code> file is rejected&lt;/li>
+&lt;li>aptly figures out local repository name based on &lt;code>-repo&lt;/code> flag and &lt;code>.changes&lt;/code> file
+fields (see below for details)&lt;/li>
+&lt;li>every package file is checked so that it matches fields &lt;code>Architecture&lt;/code>, &lt;code>Source&lt;/code>
+and &lt;code>Binary&lt;/code>&lt;/li>
+&lt;li>if local repository has &lt;code>-uploaders-file&lt;/code> attached, it would be used, otherwise
+value of &lt;code>-uploaders-file&lt;/code> flag would be used; if no &lt;code>-uploaders-file&lt;/code> has been given,
+it is assumed that anyone can upload any package&lt;/li>
+&lt;li>&lt;code>.changes&lt;/code> file fields and GPG key IDs are matched agains rules in &lt;code>-uploaders-file&lt;/code>&lt;/li>
+&lt;li>package files are added to local repository&lt;/li>
+&lt;li>continue to next &lt;code>.changes&lt;/code> file&lt;/li>
+&lt;/ol>
+&lt;p>aptly won&amp;rsquo;t complain if package is added to the repo which is complete
+duplicate. However it is forbidden to have two packages in one repo with identical
+triples (architecture, name, version) that have different metadata or
+files (see &lt;a href="https://www.aptly.info/doc/feature/duplicate">Duplicate packages&lt;/a> for details).
+If you need to replace package that conflicts with existing, use flag
+&lt;code>-force-replace&lt;/code>.
+All files added to package pool would be deduplicated, as it
+happens with files coming from mirrors, so exactly one copy of each file
+would be stored in aptly pool.&lt;/p>
+&lt;p>Flag &lt;code>-no-remove-files&lt;/code> reverts default behaviour to remove all package files sucessfully
+imported.&lt;/p>
+&lt;p>Example:&lt;/p>
+&lt;pre>&lt;code>$ aptly repo include incoming/
+gpgv: Signature made Sun Mar 15 20:36:44 2015 MSK using DSA key ID 16DB3E6D
+gpgv: Good signature from &amp;quot;Aptly Tester (don't use it) &amp;lt;test@aptly.info&amp;gt;&amp;quot;
+Loading repository unstable for changes file hardlink_0.2.1_amd64.changes...
+[+] hardlink_0.2.1_source added
+[+] hardlink_0.2.1_amd64 added
+&lt;/code>&lt;/pre>
+&lt;h3 id="repo-name">Repo name&lt;/h3>
+&lt;p>For each &lt;code>.changes&lt;/code> file local repository name is calculated based on value of &lt;code>-repo&lt;/code> flag
+and &lt;code>.changes&lt;/code> file fields. aptly is using &lt;a href="http://godoc.org/text/template">Go template syntax&lt;/a>
+for value of &lt;code>-repo&lt;/code> flag.&lt;/p>
+&lt;p>By default &lt;code>-repo&lt;/code> flag has value &lt;code>{{.Distribution}}&lt;/code> which means that packages would be
+uploaded to local repository matching value of &lt;code>Distribution&lt;/code> field in &lt;code>.changes&lt;/code> file.
+If raw value (e.g. &lt;code>-repo=mysoft&lt;/code>) is given, it would be used for any &lt;code>.changes&lt;/code> file.&lt;/p>
+&lt;p>Values of all &lt;code>.changes&lt;/code> file fields are exposed to the template as &lt;code>{{.Field}}&lt;/code> replacements.
+Templates are powerful, e.g. &lt;code>local-{{.Distribution}}&lt;/code> would be expanded to &lt;code>local-&lt;/code> concatenated
+with &lt;code>Distribution:&lt;/code> field value. &lt;code>{{if eq .Source foo}}mysoftware{{else}}foreignsoftware{{end}}&lt;/code>
+would choose repo name based on test &lt;code>Source: == &amp;quot;foo&amp;quot;&lt;/code>.&lt;/p>
+&lt;h3 id="uploadersjson">Uploaders.json&lt;/h3>
+&lt;p>Uploaders configuration allows to restrict who can upload packages (based on GPG key IDs). Uploaders
+file is JSON-based (it allows inline comments and relaxed comma placement):&lt;/p>
+&lt;pre>&lt;code>{
+&amp;quot;groups&amp;quot;: {
+&amp;quot;admins&amp;quot;: [&amp;quot;1B2AFA1C&amp;quot;],
+// admins can do whatever developers can do
+&amp;quot;developers&amp;quot;: [&amp;quot;21DBB89C16DB3E6D&amp;quot;, &amp;quot;37E1C17570096AD1&amp;quot;, &amp;quot;admins&amp;quot;]
+},
+&amp;quot;rules&amp;quot;: [
+// don't let anyone upload these packages
+{ &amp;quot;condition&amp;quot;: &amp;quot;Source (dangerous) | Source (kernel)&amp;quot;,
+&amp;quot;deny&amp;quot;: [&amp;quot;*&amp;quot;]
+},
+// admins and our CTO can upload to stable
+{ &amp;quot;condition&amp;quot;: &amp;quot;Distribution (stable)&amp;quot;,
+&amp;quot;allow&amp;quot;: [&amp;quot;admins&amp;quot;, &amp;quot;CEA4B22E&amp;quot;]
+},
+// everybody else is denied upload
+{ &amp;quot;condition&amp;quot;: &amp;quot;Distribution (stable)&amp;quot;,
+&amp;quot;deny&amp;quot;: [&amp;quot;*&amp;quot;]
+},
+// hardlink is our favourite package!
+{ &amp;quot;condition&amp;quot;: &amp;quot;Source (hardlink)&amp;quot;,
+&amp;quot;allow&amp;quot;: [&amp;quot;developers&amp;quot;, &amp;quot;admins&amp;quot;]
+},
+// arm64 is open to anyone
+{
+&amp;quot;condition&amp;quot;: &amp;quot;Architecture (% *arm64*)&amp;quot;,
+&amp;quot;allow&amp;quot;: [&amp;quot;*&amp;quot;]
+}
+]
+}
+&lt;/code>&lt;/pre>
+&lt;p>Uploaders file consists of two parts: groups definition and rules. Groups are optional, but they could
+be used to place list of GPG key IDs to be used in rules. Groups may reference other groups, group name
+would be expanded to list of GPG key IDs when found in rules.&lt;/p>
+&lt;p>GPG keys could be given in short or long format. GPG signature verification produces always long key IDs,
+but short keys would match against them. It is recommended long key IDs due to risk of collisions.
+Special value &lt;code>*&lt;/code> matches against any key.&lt;/p>
+&lt;p>Rules are evaluated like firewall from first item to last. If no rules match &lt;code>.changes&lt;/code> file, upload
+is denied. Each rule consists of three parts: condition, allow/deny (or both) lists. Condition is using
+&lt;a href="https://www.aptly.info/doc/feature/query">package query&lt;/a> syntax, but it matches agains &lt;code>.changes&lt;/code> file fields. If condition
+part of the rule matches &lt;code>.changes&lt;/code> file, search stops and rule is processed:&lt;/p>
+&lt;ul>
+&lt;li>if any of keys which have been used to sign &lt;code>.changes&lt;/code> file match &lt;code>deny&lt;/code> list, upload would be rejected&lt;/li>
+&lt;li>if any of keys which have been used to sign &lt;code>.changes&lt;/code> file match &lt;code>allow&lt;/code> list, upload would be accepted&lt;/li>
+&lt;/ul></description></item><item><title>API</title><link>https://www.aptly.info/doc/api/</link><pubDate>Tue, 03 Feb 2015 11:17:38 UTC</pubDate><author>Andrey Smirnov</author><guid>https://www.aptly.info/doc/api/</guid><description>&lt;h2 id="api">API&lt;/h2>
+&lt;div class="alert alert-warning alert-note">&lt;strong>Note:&lt;/strong>
+HTTP REST API is not complete yet (mirroring support not implemented).
+API service and CLI tool could
+be used from the same aptly root (to enable concurrent CLI and API usage,
+add &lt;code>-no-lock&lt;/code> flag to &lt;code>aptly api serve&lt;/code> command).&lt;/div>
+&lt;h4 id="why">Why?&lt;/h4>
+&lt;p>Using aptly via REST API allows to achieve two goals:&lt;/p>
+&lt;ol>
+&lt;li>Remote access to aptly service: e.g. uploading packages and publishing them from CI server.&lt;/li>
+&lt;li>Concurrent access to aptly by multiple users.&lt;/li>
+&lt;/ol>
+&lt;h4 id="quickstart">Quickstart&lt;/h4>
+&lt;p>Run &lt;code>aptly api serve&lt;/code> to start HTTP service:&lt;/p>
+&lt;pre>&lt;code>$ aptly api serve
+Starting web server at: :8080 (press Ctrl+C to quit)...
+[GIN-debug] GET /api/version --&amp;gt; github.com/aptly-dev/aptly/api.apiVersion (4 handlers)
+...
+&lt;/code>&lt;/pre>
+&lt;p>By default aptly would listen on &lt;code>:8080&lt;/code>, but it could be changed with &lt;code>-listen&lt;/code> flag.&lt;/p>
+&lt;p>Usage:&lt;/p>
+&lt;pre>&lt;code>$ aptly api serve -listen=:8080
+&lt;/code>&lt;/pre>
+&lt;p>Flags:&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>-listen=&amp;quot;:8080&amp;quot;&lt;/code>: host:port for HTTP listening&lt;/li>
+&lt;li>&lt;code>-no-lock&lt;/code>: don&amp;rsquo;t lock the database&lt;/li>
+&lt;/ul>
+&lt;p>When &lt;code>-no-lock&lt;/code> option is enabled, API server acquires and drops the lock
+around all the operations, so that API and CLI could be used concurrently.&lt;/p>
+&lt;p>Try some APIs:&lt;/p>
+&lt;pre>&lt;code>$ curl http://localhost:8080/api/version
+{&amp;quot;Version&amp;quot;:&amp;quot;0.9~dev&amp;quot;}
+$ curl -F file=@aptly_0.8_i386.deb http://localhost:8080/api/files/aptly_0.8
+[&amp;quot;aptly_0.8/aptly_0.8_i386.deb&amp;quot;]
+$ curl -X POST -H 'Content-Type: application/json' --data '{&amp;quot;Name&amp;quot;: &amp;quot;aptly-repo&amp;quot;}' http://localhost:8080/api/repos
+{&amp;quot;Name&amp;quot;:&amp;quot;aptly-repo&amp;quot;,&amp;quot;Comment&amp;quot;:&amp;quot;&amp;quot;,&amp;quot;DefaultDistribution&amp;quot;:&amp;quot;&amp;quot;,&amp;quot;DefaultComponent&amp;quot;:&amp;quot;&amp;quot;}
+$ curl -X POST http://localhost:8080/api/repos/aptly-repo/file/aptly_0.8
+{&amp;quot;failedFiles&amp;quot;:[],&amp;quot;report&amp;quot;:{&amp;quot;warnings&amp;quot;:[],&amp;quot;added&amp;quot;:[&amp;quot;aptly_0.8_i386 added&amp;quot;],&amp;quot;removed&amp;quot;:[]}}
+$ curl http://localhost:8080/api/repos/aptly-repo/packages
+[&amp;quot;Pi386 aptly 0.8 966561016b44ed80&amp;quot;]
+$ curl -X POST -H 'Content-Type: application/json' --data '{&amp;quot;Distribution&amp;quot;: &amp;quot;wheezy&amp;quot;, &amp;quot;Sources&amp;quot;: [{&amp;quot;Name&amp;quot;: &amp;quot;aptly-repo&amp;quot;}]}' http://localhost:8080/api/publish//repos
+{&amp;quot;Architectures&amp;quot;:[&amp;quot;i386&amp;quot;],&amp;quot;Distribution&amp;quot;:&amp;quot;wheezy&amp;quot;,&amp;quot;Label&amp;quot;:&amp;quot;&amp;quot;,&amp;quot;Origin&amp;quot;:&amp;quot;&amp;quot;,&amp;quot;Prefix&amp;quot;:&amp;quot;.&amp;quot;,&amp;quot;SourceKind&amp;quot;:&amp;quot;local&amp;quot;,&amp;quot;Sources&amp;quot;:[{&amp;quot;Component&amp;quot;:&amp;quot;main&amp;quot;,&amp;quot;Name&amp;quot;:&amp;quot;aptly-repo&amp;quot;}],&amp;quot;Storage&amp;quot;:&amp;quot;&amp;quot;}
+&lt;/code>&lt;/pre>
+&lt;h4 id="security">Security&lt;/h4>
+&lt;p>For security reasons it is advised to let Aptly listen on a Unix domain socket
+rather than a port. Sockets are subject to file permissions and thus allow for
+user-level access control while binding to a port only gives host-level access
+control. To use a socket simply run Aptly with a suitable listen flag such as
+&lt;code>aptly api serve -listen=unix:///var/run/aptly.sock&lt;/code>.&lt;/p>
+&lt;p>Aptly&amp;rsquo;s HTTP API shouldn&amp;rsquo;t be directly exposed to the Internet: there&amp;rsquo;s no
+authentication/protection of APIs. To publish the API it could be proxied
+through a HTTP proxy or server (e.g. nginx) to add an authentication mechanism
+or disallow all non-GET requests. &lt;a href="https://github.com/sepich/nginx-ldap">Reference example&lt;/a> for LDAP based per-repo access with nginx.&lt;/p>
+&lt;h4 id="notes">Notes&lt;/h4>
+&lt;ol>
+&lt;li>Some things (for example, S3 publishing endpoints) could be set up only using configuration file, so it requires
+restart of aptly HTTP server in order for changes to take effect.&lt;/li>
+&lt;li>GPG key passphrase can&amp;rsquo;t be input on console, so either passwordless GPG keys are required or passphrase should be specified in
+API parameters.&lt;/li>
+&lt;li>Some script might be required to start/stop aptly HTTP service.&lt;/li>
+&lt;li>Some parameters are given as part of URLs, which requires proper url encoding. Unfortunately, at the moment it&amp;rsquo;s not possible
+to pass URL arguments with &lt;code>/&lt;/code> in them.&lt;/li>
+&lt;/ol>
+&lt;h3 id="how-to-implement-equivalent-of-aptly-commands-using-api">How to implement equivalent of aptly commands using API&lt;/h3>
+&lt;ul>
+&lt;li>&lt;code>aptly mirror&lt;/code> - not available via API yet&lt;/li>
+&lt;li>&lt;code>aptly repo&lt;/code>: &lt;a href="https://www.aptly.info/doc/api/repos">local repos API&lt;/a>
+&lt;ul>
+&lt;li>&lt;code>add&lt;/code>: &lt;a href="https://www.aptly.info/doc/api/files">file upload API&lt;/a> + add packages from uploaded file&lt;/li>
+&lt;li>&lt;code>copy&lt;/code>: show packages/search + add packages by key&lt;/li>
+&lt;li>&lt;code>create&lt;/code>: create&lt;/li>
+&lt;li>&lt;code>drop&lt;/code>: delete&lt;/li>
+&lt;li>&lt;code>edit&lt;/code>: edit&lt;/li>
+&lt;li>&lt;code>import&lt;/code>: not available, as mirror API is not implemented yet&lt;/li>
+&lt;li>&lt;code>list&lt;/code>: list&lt;/li>
+&lt;li>&lt;code>move&lt;/code>: show packages/search + add packages by key + delete packages by key&lt;/li>
+&lt;li>&lt;code>remove&lt;/code>: show packages/search + delete packages by key&lt;/li>
+&lt;li>&lt;code>rename&lt;/code>: not available yet, should be part of edit API&lt;/li>
+&lt;li>&lt;code>search&lt;/code>: show packages/search&lt;/li>
+&lt;li>&lt;code>show&lt;/code>: show&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>&lt;code>aptly snapshot&lt;/code>: &lt;a href="https://www.aptly.info/doc/api/snapshots">snapshots API&lt;/a>
+&lt;ul>
+&lt;li>&lt;code>create&lt;/code>:
+&lt;ul>
+&lt;li>empty: create snapshot with empty package references&lt;/li>
+&lt;li>from mirror: not available yet&lt;/li>
+&lt;li>from local repo: create snapshot from local repo&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>&lt;code>diff&lt;/code>: snapshot difference API&lt;/li>
+&lt;li>&lt;code>drop&lt;/code>: delete&lt;/li>
+&lt;li>&lt;code>filter&lt;/code>: show packages/search + create snapshot from package references&lt;/li>
+&lt;li>&lt;code>list&lt;/code>: list&lt;/li>
+&lt;li>&lt;code>merge&lt;/code>: show packages/search + processing + create snapshot from package references&lt;/li>
+&lt;li>&lt;code>pull&lt;/code>: show packages/search + processing + create snapshot from package references (might be implemented as API in future versions)&lt;/li>
+&lt;li>&lt;code>rename&lt;/code>: edit&lt;/li>
+&lt;li>&lt;code>search&lt;/code>: show packages/search&lt;/li>
+&lt;li>&lt;code>show&lt;/code>: show&lt;/li>
+&lt;li>&lt;code>verify&lt;/code>: not available yet&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>&lt;code>aptly publish&lt;/code>: &lt;a href="https://www.aptly.info/doc/api/publish">publish API&lt;/a>
+&lt;ul>
+&lt;li>&lt;code>drop&lt;/code>: delete&lt;/li>
+&lt;li>&lt;code>list&lt;/code>: list&lt;/li>
+&lt;li>&lt;code>repo&lt;/code>: publish repo&lt;/li>
+&lt;li>&lt;code>snapshot&lt;/code>: publish snapshot&lt;/li>
+&lt;li>&lt;code>switch&lt;/code>: switch/update&lt;/li>
+&lt;li>&lt;code>update&lt;/code>: switch/update&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>&lt;code>aptly package&lt;/code>: &lt;a href="https://www.aptly.info/doc/api/packages">packages API&lt;/a>
+&lt;ul>
+&lt;li>&lt;code>search&lt;/code>: not available yet&lt;/li>
+&lt;li>&lt;code>show&lt;/code>: only one format, with package key as input&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>&lt;code>aptly graph&lt;/code>: &lt;a href="https://www.aptly.info/doc/api/misc">graph API&lt;/a>&lt;/li>
+&lt;li>&lt;code>aptly version&lt;/code>: &lt;a href="https://www.aptly.info/doc/api/misc">version API&lt;/a>&lt;/li>
+&lt;li>&lt;code>aptly db&lt;/code>: not available yet&lt;/li>
+&lt;/ul></description></item><item><title>aptly config show</title><link>https://www.aptly.info/doc/aptly/config/show/</link><pubDate>Sun, 12 Oct 2014 11:17:38 UTC</pubDate><author>Andrey Smirnov</author><guid>https://www.aptly.info/doc/aptly/config/show/</guid><description>&lt;h2 id="aptly-config-show">aptly config show&lt;/h2>
+&lt;p>Commands displays current aptly configuration as
+indented JSON. This command could be useful when
+upgrading from older versions of aptly to view
+updated configuration.&lt;/p>
+&lt;p>Usage:&lt;/p>
+&lt;pre>&lt;code>$ aptly config show
+&lt;/code>&lt;/pre>
+&lt;p>Examples:&lt;/p>
+&lt;pre>&lt;code>$ aptly config show
+{
+&amp;quot;rootDir&amp;quot;: &amp;quot;/Users/smira/.aptly&amp;quot;,
+&amp;quot;downloadConcurrency&amp;quot;: 4,
+&amp;quot;downloadSpeedLimit&amp;quot;: 0,
+&amp;quot;architectures&amp;quot;: [],
+&amp;quot;dependencyFollowSuggests&amp;quot;: false,
+&amp;quot;dependencyFollowRecommends&amp;quot;: false,
+&amp;quot;dependencyFollowAllVariants&amp;quot;: false,
+&amp;quot;dependencyFollowSource&amp;quot;: false,
+&amp;quot;gpgDisableSign&amp;quot;: false,
+&amp;quot;gpgDisableVerify&amp;quot;: false,
+&amp;quot;downloadSourcePackages&amp;quot;: false,
+&amp;quot;ppaDistributorID&amp;quot;: &amp;quot;ubuntu&amp;quot;,
+&amp;quot;ppaCodename&amp;quot;: &amp;quot;&amp;quot;,
+&amp;quot;S3PublishEndpoints&amp;quot;: {}
+}
+&lt;/code>&lt;/pre></description></item><item><title>aptly mirror edit</title><link>https://www.aptly.info/doc/aptly/mirror/edit/</link><pubDate>Fri, 29 Aug 2014 11:17:38 UTC</pubDate><author>Andrey Smirnov</author><guid>https://www.aptly.info/doc/aptly/mirror/edit/</guid><description>&lt;h2 id="aptly-mirror-edit">aptly mirror edit&lt;/h2>
+&lt;p>Command edit allows to change mirror settings: filter query, whether
+to include dependencies while filtering, list of architectures to process.&lt;/p>
+&lt;p>Usage:&lt;/p>
+&lt;pre>&lt;code>$ aptly mirror edit &amp;lt;name&amp;gt;
+&lt;/code>&lt;/pre>
+&lt;p>Params are:&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>name&lt;/code> is a mirror name (given when mirror was created)&lt;/li>
+&lt;/ul>
+&lt;p>Flags:&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>-archive-url=&lt;/code>: flag to change archive url &lt;span class="label label-primary">1.2.0&lt;/span>
+&lt;/li>
+&lt;li>&lt;code>-filter=&lt;/code>: &lt;a href="https://www.aptly.info/doc/feature/query/">package query&lt;/a> which is applied to
+packages in the mirror, set to empty to disable filtering&lt;/li>
+&lt;li>&lt;code>-filter-with-deps&lt;/code>: when filtering, include &lt;a href="https://www.aptly.info/doc/feature/dependencies">dependencies&lt;/a> of
+matching packages as well&lt;/li>
+&lt;li>&lt;code>-architectures=&lt;/code>: global flag to change architectures list.&lt;/li>
+&lt;li>&lt;code>-ignore-signatures&lt;/code>: disable verification of &lt;code>Release&lt;/code> file
+signatures &lt;span class="label label-primary">1.2.0&lt;/span>
+&lt;/li>
+&lt;li>&lt;code>-keyring=trustedkeys.gpg&lt;/code>: gpg keyring to use when verifying
+Release file (could be specified multiple times) &lt;span class="label label-primary">1.2.0&lt;/span>
+&lt;/li>
+&lt;li>&lt;code>-with-installer&lt;/code>: download additional not packaged installer
+files &lt;span class="label label-primary">1.4.0&lt;/span>
+&lt;/li>
+&lt;li>&lt;code>-with-sources&lt;/code>: download source packages in addition to
+binary packages&lt;/li>
+&lt;li>&lt;code>-with-udebs&lt;/code>: download .udeb packages (Debian installer
+support)&lt;/li>
+&lt;/ul>
+&lt;p>In order to apply new filtering settings, &lt;a href="https://www.aptly.info/doc/aptly/mirror/update/">update&lt;/a>
+mirror.&lt;/p>
+&lt;p>Examples:&lt;/p>
+&lt;pre>&lt;code>$ aptly mirror edit -filter=nginx -filter-with-deps wheezy-main
+Mirror [wheezy-main]: http://mirror.yandex.ru/debian/ wheezy successfully updated.
+$ aptly mirror edit -architectures=i386,amd64 sensu
+Downloading http://repos.sensuapp.org/apt/dists/sensu/Release...
+Mirror [sensu]: http://repos.sensuapp.org/apt/ sensu successfully updated.
+&lt;/code>&lt;/pre></description></item><item><title>aptly mirror search</title><link>https://www.aptly.info/doc/aptly/mirror/search/</link><pubDate>Fri, 29 Aug 2014 11:17:38 UTC</pubDate><author>Andrey Smirnov</author><guid>https://www.aptly.info/doc/aptly/mirror/search/</guid><description>&lt;h2 id="aptly-mirror-search">aptly mirror search&lt;/h2>
+&lt;p>Search mirror for packages matching query.&lt;/p>
+&lt;p>Usage:&lt;/p>
+&lt;pre>&lt;code>$ aptly mirror search &amp;lt;name&amp;gt; [&amp;lt;package-query&amp;gt;]
+&lt;/code>&lt;/pre>
+&lt;p>Params are:&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>name&lt;/code> is a mirror name (given when mirror was created)&lt;/li>
+&lt;li>&lt;code>package-query&lt;/code> is a &lt;a href="https://www.aptly.info/doc/feature/query/">package query&lt;/a> to
+search for packages&lt;/li>
+&lt;/ul>
+&lt;p>If package query is omitted, all the packages are displayed.&lt;/p>
+&lt;p>Flags:&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>-format=&amp;quot;&amp;quot;&lt;/code>:
+&lt;a href="https://www.aptly.info/doc/feature/package-display/">custom format&lt;/a> for result printing&lt;/li>
+&lt;li>&lt;code>-with-deps&lt;/code>: include &lt;a href="https://www.aptly.info/doc/feature/dependencies">dependencies&lt;/a> of matching packages
+into search results&lt;/li>
+&lt;/ul>
+&lt;p>Example:&lt;/p>
+&lt;pre>&lt;code>$ aptly mirror search wheezy 'Name (% nginx*), $Architecture (i386), !Name (% *-dbg)'
+nginx-full_1.2.1-2.2+wheezy2_i386
+nginx-extras_1.2.1-2.2+wheezy2_i386
+nginx-light_1.2.1-2.2+wheezy2_i386
+nginx-common_1.2.1-2.2+wheezy2_all
+nginx-doc_1.2.1-2.2+wheezy2_all
+nginx-naxsi-ui_1.2.1-2.2+wheezy2_all
+nginx_1.2.1-2.2+wheezy2_all
+nginx-naxsi_1.2.1-2.2+wheezy2_i386
+&lt;/code>&lt;/pre></description></item><item><title>aptly package</title><link>https://www.aptly.info/doc/aptly/package/</link><pubDate>Fri, 29 Aug 2014 11:17:38 UTC</pubDate><author>Andrey Smirnov</author><guid>https://www.aptly.info/doc/aptly/package/</guid><description>&lt;h2 id="aptly-package">aptly package&lt;/h2>
+&lt;p>&lt;code>aptly package&lt;/code> family of command perform operation on the whole
+collection of packages in apty database.&lt;/p></description></item><item><title>aptly package search</title><link>https://www.aptly.info/doc/aptly/package/search/</link><pubDate>Fri, 29 Aug 2014 11:17:38 UTC</pubDate><author>Andrey Smirnov</author><guid>https://www.aptly.info/doc/aptly/package/search/</guid><description>&lt;h2 id="aptly-package-search">aptly package search&lt;/h2>
+&lt;p>Search whole package database for packages matching query.
+Whole database of packages includes all packages (deduplicated)
+from all the mirrors, local repos and snapshots.&lt;/p>
+&lt;p>In order to get more detailed information about the package,
+use &lt;a href="https://www.aptly.info/doc/aptly/package/show/">&lt;code>aptly package show&lt;/code>&lt;/a> command.&lt;/p>
+&lt;p>Usage:&lt;/p>
+&lt;pre>&lt;code>$ aptly package search [&amp;lt;package-query&amp;gt;]
+&lt;/code>&lt;/pre>
+&lt;p>Params are:&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>package-query&lt;/code> is a &lt;a href="https://www.aptly.info/doc/feature/query/">package query&lt;/a> to
+search for packages&lt;/li>
+&lt;/ul>
+&lt;p>If package query is omitted, all the packages are displayed.&lt;/p>
+&lt;p>Flags:&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>-format=&amp;quot;&amp;quot;&lt;/code>:
+&lt;a href="https://www.aptly.info/doc/feature/package-display/">custom format&lt;/a> for result printing&lt;/li>
+&lt;/ul>
+&lt;p>If no package are found, aptly exits with code 1 (failure).&lt;/p>
+&lt;p>Example:&lt;/p>
+&lt;pre>&lt;code>$ aptly package search 'Version (&amp;gt;=1.2.3-2), Version (&amp;lt;1.2.3-3)'
+libibmad-dev_1.2.3-20090314-1.1_amd64
+libibumad-dev_1.2.3-20090314-1.1_i386
+libibumad1_1.2.3-20090314-1.1_amd64
+libibumad1_1.2.3-20090314-1.1_i386
+libghc-uuid-dev_1.2.3-2+b3_amd64
+python-mysqldb_1.2.3-2_i386
+libibumad-dev_1.2.3-20090314-1.1_amd64
+libibmad_1.2.3-20090314-1.1_source
+python-mysqldb_1.2.3-2_amd64
+jpegoptim_1.2.3-2+b2_i386
+libghc-uuid-doc_1.2.3-2_all
+libjibx1.2-java-doc_1.2.3-2_all
+bwbar_1.2.3-2_amd64
+libghc-certificate-doc_1.2.3-2_all
+haskell-certificate_1.2.3-2_source
+bwbar_1.2.3-2_i386
+jpegoptim_1.2.3-2_source
+libghc-certificate-dev_1.2.3-2_amd64
+libibmad1_1.2.3-20090314-1.1_i386
+libibmad-dev_1.2.3-20090314-1.1_i386
+libjibx1.2-java_1.2.3-2_source
+python-mysqldb-dbg_1.2.3-2_i386
+shush_1.2.3-2_i386
+moksha.common_1.2.3-2~bpo70+1_source
+libghc-certificate-prof_1.2.3-2_i386
+libghc-uuid-prof_1.2.3-2+b3_amd64
+libghc-uuid-prof_1.2.3-2+b4_i386
+shush_1.2.3-2_source
+libghc-certificate-prof_1.2.3-2_amd64
+libjibx1.2-java_1.2.3-2_all
+libjibx-java_1.2.3-2_all
+libghc-uuid-dev_1.2.3-2+b4_i386
+python-mysqldb_1.2.3-2_source
+haskell-uuid_1.2.3-2_source
+libibumad_1.2.3-20090314-1.1_source
+libghc-certificate-dev_1.2.3-2_i386
+jpegoptim_1.2.3-2+b2_amd64
+python-moksha.common_1.2.3-2~bpo70+1_all
+bwbar_1.2.3-2_source
+python-mysqldb-dbg_1.2.3-2_amd64
+libibmad1_1.2.3-20090314-1.1_amd64
+shush_1.2.3-2_amd64
+&lt;/code>&lt;/pre></description></item><item><title>aptly package show</title><link>https://www.aptly.info/doc/aptly/package/show/</link><pubDate>Fri, 29 Aug 2014 11:17:38 UTC</pubDate><author>Andrey Smirnov</author><guid>https://www.aptly.info/doc/aptly/package/show/</guid><description>&lt;h2 id="aptly-package-show">aptly package show&lt;/h2>
+&lt;p>Display details about packages from whole package database. Command
+show does searching much like &lt;a href="https://www.aptly.info/doc/aptly/package/search/">&lt;code>aptly package search&lt;/code>&lt;/a>
+command does, but displays complete information about the package:&lt;/p>
+&lt;ul>
+&lt;li>contents of control file&lt;/li>
+&lt;li>(optionally) information about package files in the pool&lt;/li>
+&lt;li>(optionally) list of mirrors, local repos and snapshots that reference (include) this package&lt;/li>
+&lt;/ul>
+&lt;p>It is possible to submit any search query to this command, but it is much more common
+to have queries resulting in single package.&lt;/p>
+&lt;p>Usage:&lt;/p>
+&lt;pre>&lt;code>$ aptly package show &amp;lt;package-query&amp;gt;
+&lt;/code>&lt;/pre>
+&lt;p>Params are:&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>package-query&lt;/code> is a &lt;a href="https://www.aptly.info/doc/feature/query/">package query&lt;/a> to
+search for packages (most usually in the format of package
+reference, e.g. &lt;code>bwbar_1.2.3-2_amd64&lt;/code>)&lt;/li>
+&lt;/ul>
+&lt;p>Flags:&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>-with-files&lt;/code>: display list of package files in the package pool&lt;/li>
+&lt;li>&lt;code>-with-references&lt;/code>: display list of mirrors, snapshots and local repos
+which reference this package.&lt;/li>
+&lt;/ul>
+&lt;p>Example:&lt;/p>
+&lt;pre>&lt;code>$ aptly package show -with-files -with-references bwbar_1.2.3-2_source
+Package: bwbar
+Version: 1.2.3-2
+Priority: source
+Section: net
+Maintainer: Julien Danjou &amp;lt;acid@debian.org&amp;gt;
+Architecture: any
+Format: 1.0
+Build-Depends: debhelper (&amp;gt;&amp;gt; 7.0.0), libpng12-dev, cdbs
+Files: 138ba54405656adc16c882839482795e 54582 bwbar_1.2.3-2.diff.gz
+cd4f216514cf38f42be9d7b35d429adc 1586 bwbar_1.2.3-2.dsc
+766265ddf0615b552ff19d12f78be719 34142 bwbar_1.2.3.orig.tar.gz
+Checksums-Sha1: c5259d7fc3ac750d9d9b8d458d702a1bc49a708e 54582 bwbar_1.2.3-2.diff.gz
+674a6f5db91e83f9ad4f30d1563d3249aa21bb39 1586 bwbar_1.2.3-2.dsc
+13f5a17658a5c5adbb0db5b0fdd88805d6b3158b 34142 bwbar_1.2.3.orig.tar.gz
+Directory: pool/main/b/bwbar
+Binary: bwbar
+Standards-Version: 3.9.2
+Checksums-Sha256: 1ae625e6a29b745d24bab9185692ecc5b17cb4624d2019ae9a94e08a89f15edb 54582 bwbar_1.2.3-2.diff.gz
+b2d022dd912bc1129b0d0e216b7f8e587649582578484c776bcbe81afe993879 1586 bwbar_1.2.3-2.dsc
+bd8f5079f17b1dec6eae81ddc43c58c49b777b336fd902ffbb8e631885fbb45c 34142 bwbar_1.2.3.orig.tar.gz
+Files in the pool:
+/Users/smira/.aptly/pool/13/8b/bwbar_1.2.3-2.diff.gz
+/Users/smira/.aptly/pool/cd/4f/bwbar_1.2.3-2.dsc
+/Users/smira/.aptly/pool/76/62/bwbar_1.2.3.orig.tar.gz
+References to package:
+mirror [wheezy-main-src]: http://mirror.yandex.ru/debian/ wheezy [src]
+&lt;/code>&lt;/pre></description></item><item><title>aptly repo search</title><link>https://www.aptly.info/doc/aptly/repo/search/</link><pubDate>Fri, 29 Aug 2014 11:17:38 UTC</pubDate><author>Andrey Smirnov</author><guid>https://www.aptly.info/doc/aptly/repo/search/</guid><description>&lt;h2 id="aptly-repo-search">aptly repo search&lt;/h2>
+&lt;p>Search local repositories for packages matching query.&lt;/p>
+&lt;p>Usage:&lt;/p>
+&lt;pre>&lt;code>$ aptly repo search &amp;lt;name&amp;gt; [&amp;lt;package-query&amp;gt;]
+&lt;/code>&lt;/pre>
+&lt;p>Params are:&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>name&lt;/code> is a repo name (given when repo was created)&lt;/li>
+&lt;li>&lt;code>package-query&lt;/code> is a &lt;a href="https://www.aptly.info/doc/feature/query/">package query&lt;/a> to
+search for packages&lt;/li>
+&lt;/ul>
+&lt;p>If package query is omitted, all the packages are displayed.&lt;/p>
+&lt;p>Flags:&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>-format=&amp;quot;&amp;quot;&lt;/code>:
+&lt;a href="https://www.aptly.info/doc/feature/package-display/">custom format&lt;/a> for result printing&lt;/li>
+&lt;li>&lt;code>-with-deps&lt;/code>: include &lt;a href="https://www.aptly.info/doc/feature/dependencies">dependencies&lt;/a> of matching packages
+into search results&lt;/li>
+&lt;/ul>
+&lt;p>Example:&lt;/p>
+&lt;pre>&lt;code>$ aptly repo search internal-pkg 'Version (&amp;gt;= 4.5)'
+libtinfo5_5.9-10_i386
+perl-base_5.14.2-21+deb7u1_amd64
+ncurses-base_5.9-10_all
+xz-utils_5.1.1alpha+20120614-2_i386
+gcc-4.7-base_4.7.2-5_amd64
+libtinfo5_5.9-10_amd64
+base-files_7.1wheezy5_i386
+ncurses-bin_5.9-10_i386
+xz-utils_5.1.1alpha+20120614-2_amd64
+liblzma5_5.1.1alpha+20120614-2_i386
+coreutils_8.13-3.5_amd64
+liblzma5_5.1.1alpha+20120614-2_amd64
+libncurses5_5.9-10_amd64
+coreutils_8.13-3.5_i386
+libncurses5_5.9-10_i386
+perl-base_5.14.2-21+deb7u1_i386
+base-files_7.1wheezy5_amd64
+ncurses-bin_5.9-10_amd64
+gcc-4.7-base_4.7.2-5_i386
+&lt;/code>&lt;/pre></description></item></channel></rss>

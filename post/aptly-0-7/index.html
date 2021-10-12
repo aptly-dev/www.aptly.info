@@ -1,0 +1,202 @@
+<!doctype html><html lang=en>
+<head>
+<meta charset=utf-8>
+<meta http-equiv=x-ua-compatible content="IE=edge">
+<title>aptly - aptly 0.7 - S3 publishing, complex queries</title>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<link rel="shortcut icon" href=/favicon.ico>
+<link type=text/css rel=stylesheet href=/css/styles.css>
+<link rel=canonical href=https://www.aptly.info/post/aptly-0-7/>
+<link href=/post/index.xml rel=alternate type=application/rss+xml title="Debian repository management tool">
+</head>
+<body>
+<header id=page-header>
+<div class=container>
+<nav class="navbar navbar-default navbar-static-top" role=navigation>
+<ul class="nav navbar-nav nav-justified">
+<li><a href=/tutorial/>tutorials</a></li>
+<li><a href=/download/>download</a></li>
+<li><a href=/support/>support</a></li>
+<li><a href=/doc/overview/>documentation</a></li>
+<li><a href=/about/>about</a></li>
+<li class=active><a href=/post/>blog</a></li>
+</ul>
+</nav>
+<div class=row>
+<div class="col-md-6 col-md-offset-3 text-center">
+<a class=brand href=/>
+<i class=brand-logo></i>
+<span class=brand-name>aptly</span>
+</a>
+</div>
+</div>
+</div>
+</header>
+<section class=primary-content>
+<div class=container>
+<h1>aptly 0.7 - S3 publishing, complex queries</h1>
+<p><a href=http://www.aptly.info>aptly</a> 0.7 has been released today. aptly is a
+Debian repository management tool, it allows to mirror remote
+repositories, create local package repositories, manage repositories
+snapshots and publish them back as Debian repository. aptly main idea is
+&ldquo;owning your own repository&rdquo;: you can mix and match official repos,
+3rd-party repositories, your own packages, creating your own
+stable/testing/whatever repositories, allowing reproducible package
+installations along with controlled upgrades. It is available for
+download as <a href=http://www.aptly.info#download>binary executables</a> or from
+Debian repository:</p>
+<pre><code>deb http://repo.aptly.info/ squeeze main
+</code></pre>
+<p>When installing from repository, don&rsquo;t forget to import key used to sign
+the release:</p>
+<pre><code>$ gpg --keyserver keys.gnupg.net --recv-keys 2A194991
+$ gpg -a --export 2A194991 | sudo apt-key add -
+</code></pre>
+<p>Aptly has new logo, soon I&rsquo;m going to launch new website:</p>
+<p><img src=/img/aptly_logo.png alt="aptly logo"></p>
+<p>Most important new features are:</p>
+<h1 id=publishing-to-amazon-s3>Publishing to Amazon S3</h1>
+<p>aptly can publish repositories directly to Amazon S3.</p>
+<p>First, create new S3 bucket using AWS console. Let it be <code>aptly-repo</code>.
+Remember Amazon region you have used to create, I&rsquo;ll be using
+<code>us-west-1</code> in this example. If you&rsquo;re going to have public repository,
+enable website hosting for that bucket.</p>
+<p>Go to IAM page, create new user, save access key ID and secret access
+key and create bash script `aws.creds.sh`:</p>
+<pre><code># Access Key ID:
+# AKIAISHG7G3H8AWBCFG
+# Secret Access Key:
+# E7aujXChaMZwp3ghfk45+Zabd55
+
+export AWS_ACCESS_KEY_ID=&quot;AKIAISHG7G3H8AWBCFG&quot; AWS_SECRET_ACCESS_KEY=&quot;E7aujXChaMZwp3ghfk45+Zabd55&quot;
+</code></pre>
+<p>In IAM console, attach new custom policy for that user:</p>
+<pre><code>{
+  &quot;Version&quot;: &quot;2012-10-17&quot;,
+  &quot;Statement&quot;: [
+    {
+      &quot;Sid&quot;: &quot;Stmt1405592139000&quot;,
+      &quot;Effect&quot;: &quot;Allow&quot;,
+      &quot;Action&quot;: [
+        &quot;s3:DeleteObject&quot;,
+        &quot;s3:GetObject&quot;,
+        &quot;s3:ListBucket&quot;,
+        &quot;s3:PutObject&quot;,
+        &quot;s3:PutObjectAcl&quot;
+      ],
+      &quot;Resource&quot;: [
+        &quot;arn:aws:s3:::aptly-repo/*&quot;, &quot;arn:aws:s3:::aptly-repo&quot;
+      ]
+    }
+  ]
+}
+</code></pre>
+<p>This user would have limited access only to the bucket you&rsquo;ve created.</p>
+<p>Now, configure aptly, edit configuration file <code>~/.aptly.conf</code> and add
+key <code>S3PublishEndpoints</code>:</p>
+<pre><code>&quot;S3PublishEndpoints&quot;: {
+  &quot;aptly-repo&quot;: {
+    &quot;region&quot;: &quot;us-west-1&quot;,
+    &quot;bucket&quot;: &quot;aptly-repo&quot;,
+    &quot;acl&quot;: &quot;public-read&quot;
+  }
+}
+</code></pre>
+<p>If you&rsquo;re going to have public repository, set <code>acl</code> to <code>public-read</code>,
+otherwise set <code>acl</code> to <code>private</code>. Now you&rsquo;re ready to do your first
+publish. For example, to publish snapshot <code>my-snapshot</code> to the mentioned
+bucket, run:</p>
+<pre><code>aptly publish snapshot my-snapshot s3:aptly-repo:
+</code></pre>
+<p>As with publishes to local filesystem, you can publish under prefix:</p>
+<pre><code>aptly publish snapshot my-snapshot s3:aptly-repo:debian/
+</code></pre>
+<p>All regular publish commands are supported: you can switch between
+snapshots (atomically), update published local repositories, drop
+published repos, etc. aptly would do its best to upload package files
+only once to package pool in S3.</p>
+<p>In order to use published repository, for public repositories use
+regular HTTP protocol in <code>/etc/apt/sources.list</code>:</p>
+<pre><code>deb http://s3-us-west-1.amazonaws.com/aptly-repo wheezy main
+</code></pre>
+<p>For private repositories you would need special <a href=https://github.com/kyleshank/apt-s3>apt s3
+transport</a>, after installing
+transport you can use it like that:</p>
+<pre><code>deb s3://AWS_ACCESS_ID:[AWS_SECRET_KEY_IN_BRACKETS]@s3-us-west-1.amazonaws.com/aptly-repo wheezy main
+</code></pre>
+<h1 id=package-queries>Package Queries</h1>
+<p>Before 0.7, aptly supported only Debian dependency-like package queries.
+In version 0.7, complex queries were introduced. Query syntax matches
+reprepro query language, reference could be found in the
+<a href=http://www.aptly.info/#package-query>docs</a>. I&rsquo;ll give some examples.</p>
+<p>Now you can filter mirrors to include only packages with limited
+priorities:</p>
+<pre><code>aptly mirror create -filter=&quot;Priority (required)&quot; wheezy-required http://mirror.yandex.ru/debian/ wheezy main
+</code></pre>
+<p>Or download single packages and all its dependencies:</p>
+<pre><code>aptly mirror create -filter=&quot;nginx&quot; -filter-with-deps wheezy-required http://mirror.yandex.ru/debian/ wheezy main
+</code></pre>
+<p>Pull packages with complex conditions:</p>
+<pre><code>aptly snapshot pull snapshot1 source snapshot2 '!Name (% *-dev), $Version (&gt;= 3.5)'
+</code></pre>
+<p>Or remove packages based on query:</p>
+<pre><code>aptly repo remove local-repo 'Name (% http-*) | $Source (webserver)'
+</code></pre>
+<p>In the next version, package queries would be used to filter snapshots,
+search for packages in repos/snapshots and local repos, and do whole
+&ldquo;world&rdquo; package searching.</p>
+<h1 id=other-features>Other Features</h1>
+<p>aptly can now pull all matching packages with <code>aptly snapshot pull</code>
+command using flag <code>-all-matches</code>, e.g. one can pull subset of versions
+from 0.7 to 0.9:</p>
+<pre><code>aptly snapshot pull stable1 foo-snapsot stable2 'foo (&gt;= 0.7), foo (&lt;= 0.9)'
+</code></pre>
+<p>Download speed could be limited while mirroring using config option
+downloadSpeedLimit, so that aptly won&rsquo;t consume all bandwidth.</p>
+<h1 id=all-changes>All Changes</h1>
+<p>Full ist of changes since 0.7:</p>
+<ul>
+<li>direct <a href=http://www.aptly.info/#s3-publishing>publishing to Amazon S3</a> (<a href=https://github.com/aptly-dev/aptly/issues/15>#15</a>)</li>
+<li>support for new, powerful <a href=http://www.aptly.info/#package-query>query language</a> in many commands:
+<a href=http://www.aptly.info/#aptly-snapshot-pull>aptly snapshot pull</a>, <a href=http://www.aptly.info/#aptly-repo-move>aptly repo move</a>,
+<a href=http://www.aptly.info/#aptly-repo-copy>aptly repo copy</a>, <a href=http://www.aptly.info/#aptly-repo-import>aptly repo import</a> and
+<a href=http://www.aptly.info/#aptly-repo-remove>aptly repo remove</a></li>
+<li>bug fix: files from conflicting packages might override each other while publishing (<a href=https://github.com/aptly-dev/aptly/issues/65>#65</a>)</li>
+<li>partial mirrors: filter package lists when mirroring (<a href=https://github.com/aptly-dev/aptly/issues/64>#64</a>)</li>
+<li>new commands: <a href=http://www.aptly.info/#aptly-mirror-rename>mirrors</a>, <a href=http://www.aptly.info/#aptly-repo-rename>local repositories</a> and <a href=http://www.aptly.info/#aptly-snapshot-rename>snapshots</a> can be renamed (<a href=https://github.com/aptly-dev/aptly/issues/63>#63</a>)</li>
+<li>new command: <a href=http://www.aptly.info/#aptly-mirror-edit>aptly mirror edit</a> allows to change mirror filtering (<a href=https://github.com/aptly-dev/aptly/issues/63>#63</a>)</li>
+<li>download transfer rate could be limited either via <a href=http://www.aptly.info/#configuration>configuration</a> file parameter <code>downloadSpeedLimit</code> or with flag <code>-download-limit</code> for command <a href=http://www.aptly.info/#aptly-mirror-update>aptly mirror update</a> (<a href=https://github.com/aptly-dev/aptly/issues/62>#62</a>)</li>
+<li>new flag: <code>-all-matches</code> for <a href=http://www.aptly.info/#aptly-snapshot-pull>aptly snapshot pull</a> enables pulling of all matching
+packages (<a href=https://github.com/aptly-dev/aptly/pull/70>#70</a>), thanks to <a href=https://github.com/simonaquino>Simon Aquino</a></li>
+<li>when matching single package in <a href=http://www.aptly.info/#aptly-snapshot-pull>aptly snapshot pull</a> latest version would be pulled (<a href=https://github.com/aptly-dev/aptly/pull/67>#67</a>), thanks to <a href=https://github.com/simonaquino>Simon Aquino</a></li>
+<li>new flag: <code>-sort</code> for <a href=http://www.aptly.info/#aptly-snapshot-list>aptly snapshot list</a> allows to change order of snapshots in the list (<a href=https://github.com/aptly-dev/aptly/pull/73>#73</a>), thanks to <a href=https://github.com/simonaquino>Simon Aquino</a></li>
+<li>bug fix: publish update fails on empty multi-component repo (<a href=https://github.com/aptly-dev/aptly/issues/66>#66</a>)</li>
+<li>bug fix: <a href=http://www.aptly.info/#aptly-snapshot-pull>aptly snapshot pull</a> might remove already pulled packages (<a href=https://github.com/aptly-dev/aptly/issues/78>#78</a>)</li>
+<li>bug fix: aptly package was missing <code>bzip2</code> dependency (<a href=https://github.com/aptly-dev/aptly/issues/84>#84</a>)</li>
+<li>aptly binary packages are built with go1.3</li>
+</ul>
+</div>
+</section>
+<footer id=page-footer>
+<div class=container>
+<nav class="navbar navbar-default navbar-static-top" role=navigation>
+<ul class="nav navbar-nav nav-justified">
+<li><a href=/tutorial/>tutorials</a></li>
+<li><a href=/download/>download</a></li>
+<li><a href=/support/>support</a></li>
+<li><a href=/doc/overview/>documentation</a></li>
+<li><a href=/about/>about</a></li>
+<li class=active><a href=/post/>blog</a></li>
+</ul>
+</nav>
+<div class=copy>
+Sponsored by <a href=http://express42.com/>express42</a> &copy;&nbsp;2013-2018 aptly contributors
+</div>
+</div>
+</footer>
+<script src=https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js></script>
+<script src=/js/bootstrap.min.js></script>
+<script src=/js/aptly.js></script>
+<script>(function(a,e,f,g,b,c,d){a.GoogleAnalyticsObject=b,a[b]=a[b]||function(){(a[b].q=a[b].q||[]).push(arguments)},a[b].l=1*new Date,c=e.createElement(f),d=e.getElementsByTagName(f)[0],c.async=1,c.src=g,d.parentNode.insertBefore(c,d)})(window,document,'script','//www.google-analytics.com/analytics.js','ga'),ga('create','UA-6065617-2','aptly.info'),ga('send','pageview')</script>
+</body>
+</html>

@@ -1,0 +1,621 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>command on aptly - Debian repository management tool</title><generator uri="https://hugo.spf13.com">Hugo</generator><link>https://www.aptly.info/tags/command/</link><language>en-us</language><author>Andrey Smirnov</author><updated>Thu, 12 Jan 2017 13:33:38 UTC</updated><item><title>aptly publish show</title><link>https://www.aptly.info/doc/aptly/publish/show/</link><pubDate>Thu, 12 Jan 2017 13:33:38 UTC</pubDate><author>Andrey Smirnov</author><guid>https://www.aptly.info/doc/aptly/publish/show/</guid><description>&lt;h2 id="aptly-publish-show">aptly publish show&lt;/h2>
+&lt;p>Shows detailed information of published repository.&lt;/p>
+&lt;p>Usage:&lt;/p>
+&lt;pre>&lt;code>$ aptly publish show &amp;lt;distribution&amp;gt; [[&amp;lt;endpoint&amp;gt;:]&amp;lt;prefix&amp;gt;]
+&lt;/code>&lt;/pre>
+&lt;p>Params:&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>distribution&lt;/code> is a distribution name for published repository (as
+displayed by &lt;code>aptly publish list&lt;/code>).&lt;/li>
+&lt;li>&lt;code>endpoint&lt;/code> is publishing endpoint, if not specified, it would
+default to empty endpoint (local file system).&lt;/li>
+&lt;li>&lt;code>prefix&lt;/code> is an optional prefix for publishing, if not specified,
+prefix is considered to be &lt;code>.&lt;/code>.&lt;/li>
+&lt;/ul>
+&lt;p>Example:&lt;/p>
+&lt;pre>&lt;code>$ aptly publish show squeeze-backports
+Prefix: .
+Distribution: squeeze
+Architectures: amd64 i386
+Sources:
+main: back3 [snapshot]
+&lt;/code>&lt;/pre>
+&lt;p> &lt;/p></description></item><item><title>aptly repo include</title><link>https://www.aptly.info/doc/aptly/repo/include/</link><pubDate>Mon, 16 Mar 2015 11:17:38 UTC</pubDate><author>Andrey Smirnov</author><guid>https://www.aptly.info/doc/aptly/repo/include/</guid><description>&lt;h2 id="aptly-repo-include">aptly repo include&lt;/h2>
+&lt;p>Command allows automatic processing of &lt;code>.changes&lt;/code> file controlling
+package upload to local repositories.&lt;/p>
+&lt;p>Usage:&lt;/p>
+&lt;pre>&lt;code>$ aptly repo include &amp;lt;file.changes&amp;gt;|&amp;lt;directory&amp;gt; ...
+&lt;/code>&lt;/pre>
+&lt;p>Flags:&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>-accept-unsigned&lt;/code>: accept unsigned .changes files&lt;/li>
+&lt;li>&lt;code>-force-replace&lt;/code>: when adding package that conflicts with existing package,
+remove existing package&lt;/li>
+&lt;li>&lt;code>-ignore-signatures&lt;/code>: disable verification of .changes file signature&lt;/li>
+&lt;li>&lt;code>-keyring=&lt;/code>: gpg keyring to use when verifying .changes file (could be specified multiple times)&lt;/li>
+&lt;li>&lt;code>-no-remove-files&lt;/code>: don&amp;rsquo;t remove files that have been imported successfully into repository&lt;/li>
+&lt;li>&lt;code>-repo=&amp;quot;{{.Distribution}}&amp;quot;&lt;/code>: which repo should files go to, defaults to Distribution field of .changes file&lt;/li>
+&lt;li>&lt;code>-uploaders-file=&amp;quot;&amp;quot;&lt;/code>: path to uploaders.json file&lt;/li>
+&lt;/ul>
+&lt;p>This command allows to implement package upload workflow using Debian tools:
+&lt;code>dpkg-genchanges&lt;/code>, &lt;code>dput&lt;/code>, etc. Set of Debian package files is uploaded together
+with &lt;code>.changes&lt;/code> file signed by developer and describing changeset.
+aptly would verify signature, package integrity and using optional
+rules supplied would add package to local repositories.&lt;/p>
+&lt;p>List of steps:&lt;/p>
+&lt;ol>
+&lt;li>aptly does recursive search for &lt;code>.changes&lt;/code> files in paths given as program
+arguments&lt;/li>
+&lt;li>for every &lt;code>.changes&lt;/code> file discovered:&lt;/li>
+&lt;li>&lt;code>.changes&lt;/code> file is copied to temporary directory&lt;/li>
+&lt;li>signature presence is checked, if signature is missing &lt;code>.changes&lt;/code> file is
+rejected (unless &lt;code>-accept-unsigned&lt;/code> flag is used)&lt;/li>
+&lt;li>signature is verified, GPG key IDs used to sign file are remembered, if
+file fails signature verification step, it is rejected (unless
+&lt;code>-ignore-signatures&lt;/code> flag is given)&lt;/li>
+&lt;li>package files referenced in &lt;code>.changes&lt;/code> file are copied to temporary directory
+and checksums are verified, if checksums don&amp;rsquo;t match &lt;code>.changes&lt;/code> file is rejected&lt;/li>
+&lt;li>aptly figures out local repository name based on &lt;code>-repo&lt;/code> flag and &lt;code>.changes&lt;/code> file
+fields (see below for details)&lt;/li>
+&lt;li>every package file is checked so that it matches fields &lt;code>Architecture&lt;/code>, &lt;code>Source&lt;/code>
+and &lt;code>Binary&lt;/code>&lt;/li>
+&lt;li>if local repository has &lt;code>-uploaders-file&lt;/code> attached, it would be used, otherwise
+value of &lt;code>-uploaders-file&lt;/code> flag would be used; if no &lt;code>-uploaders-file&lt;/code> has been given,
+it is assumed that anyone can upload any package&lt;/li>
+&lt;li>&lt;code>.changes&lt;/code> file fields and GPG key IDs are matched agains rules in &lt;code>-uploaders-file&lt;/code>&lt;/li>
+&lt;li>package files are added to local repository&lt;/li>
+&lt;li>continue to next &lt;code>.changes&lt;/code> file&lt;/li>
+&lt;/ol>
+&lt;p>aptly won&amp;rsquo;t complain if package is added to the repo which is complete
+duplicate. However it is forbidden to have two packages in one repo with identical
+triples (architecture, name, version) that have different metadata or
+files (see &lt;a href="https://www.aptly.info/doc/feature/duplicate">Duplicate packages&lt;/a> for details).
+If you need to replace package that conflicts with existing, use flag
+&lt;code>-force-replace&lt;/code>.
+All files added to package pool would be deduplicated, as it
+happens with files coming from mirrors, so exactly one copy of each file
+would be stored in aptly pool.&lt;/p>
+&lt;p>Flag &lt;code>-no-remove-files&lt;/code> reverts default behaviour to remove all package files sucessfully
+imported.&lt;/p>
+&lt;p>Example:&lt;/p>
+&lt;pre>&lt;code>$ aptly repo include incoming/
+gpgv: Signature made Sun Mar 15 20:36:44 2015 MSK using DSA key ID 16DB3E6D
+gpgv: Good signature from &amp;quot;Aptly Tester (don't use it) &amp;lt;test@aptly.info&amp;gt;&amp;quot;
+Loading repository unstable for changes file hardlink_0.2.1_amd64.changes...
+[+] hardlink_0.2.1_source added
+[+] hardlink_0.2.1_amd64 added
+&lt;/code>&lt;/pre>
+&lt;h3 id="repo-name">Repo name&lt;/h3>
+&lt;p>For each &lt;code>.changes&lt;/code> file local repository name is calculated based on value of &lt;code>-repo&lt;/code> flag
+and &lt;code>.changes&lt;/code> file fields. aptly is using &lt;a href="http://godoc.org/text/template">Go template syntax&lt;/a>
+for value of &lt;code>-repo&lt;/code> flag.&lt;/p>
+&lt;p>By default &lt;code>-repo&lt;/code> flag has value &lt;code>{{.Distribution}}&lt;/code> which means that packages would be
+uploaded to local repository matching value of &lt;code>Distribution&lt;/code> field in &lt;code>.changes&lt;/code> file.
+If raw value (e.g. &lt;code>-repo=mysoft&lt;/code>) is given, it would be used for any &lt;code>.changes&lt;/code> file.&lt;/p>
+&lt;p>Values of all &lt;code>.changes&lt;/code> file fields are exposed to the template as &lt;code>{{.Field}}&lt;/code> replacements.
+Templates are powerful, e.g. &lt;code>local-{{.Distribution}}&lt;/code> would be expanded to &lt;code>local-&lt;/code> concatenated
+with &lt;code>Distribution:&lt;/code> field value. &lt;code>{{if eq .Source foo}}mysoftware{{else}}foreignsoftware{{end}}&lt;/code>
+would choose repo name based on test &lt;code>Source: == &amp;quot;foo&amp;quot;&lt;/code>.&lt;/p>
+&lt;h3 id="uploadersjson">Uploaders.json&lt;/h3>
+&lt;p>Uploaders configuration allows to restrict who can upload packages (based on GPG key IDs). Uploaders
+file is JSON-based (it allows inline comments and relaxed comma placement):&lt;/p>
+&lt;pre>&lt;code>{
+&amp;quot;groups&amp;quot;: {
+&amp;quot;admins&amp;quot;: [&amp;quot;1B2AFA1C&amp;quot;],
+// admins can do whatever developers can do
+&amp;quot;developers&amp;quot;: [&amp;quot;21DBB89C16DB3E6D&amp;quot;, &amp;quot;37E1C17570096AD1&amp;quot;, &amp;quot;admins&amp;quot;]
+},
+&amp;quot;rules&amp;quot;: [
+// don't let anyone upload these packages
+{ &amp;quot;condition&amp;quot;: &amp;quot;Source (dangerous) | Source (kernel)&amp;quot;,
+&amp;quot;deny&amp;quot;: [&amp;quot;*&amp;quot;]
+},
+// admins and our CTO can upload to stable
+{ &amp;quot;condition&amp;quot;: &amp;quot;Distribution (stable)&amp;quot;,
+&amp;quot;allow&amp;quot;: [&amp;quot;admins&amp;quot;, &amp;quot;CEA4B22E&amp;quot;]
+},
+// everybody else is denied upload
+{ &amp;quot;condition&amp;quot;: &amp;quot;Distribution (stable)&amp;quot;,
+&amp;quot;deny&amp;quot;: [&amp;quot;*&amp;quot;]
+},
+// hardlink is our favourite package!
+{ &amp;quot;condition&amp;quot;: &amp;quot;Source (hardlink)&amp;quot;,
+&amp;quot;allow&amp;quot;: [&amp;quot;developers&amp;quot;, &amp;quot;admins&amp;quot;]
+},
+// arm64 is open to anyone
+{
+&amp;quot;condition&amp;quot;: &amp;quot;Architecture (% *arm64*)&amp;quot;,
+&amp;quot;allow&amp;quot;: [&amp;quot;*&amp;quot;]
+}
+]
+}
+&lt;/code>&lt;/pre>
+&lt;p>Uploaders file consists of two parts: groups definition and rules. Groups are optional, but they could
+be used to place list of GPG key IDs to be used in rules. Groups may reference other groups, group name
+would be expanded to list of GPG key IDs when found in rules.&lt;/p>
+&lt;p>GPG keys could be given in short or long format. GPG signature verification produces always long key IDs,
+but short keys would match against them. It is recommended long key IDs due to risk of collisions.
+Special value &lt;code>*&lt;/code> matches against any key.&lt;/p>
+&lt;p>Rules are evaluated like firewall from first item to last. If no rules match &lt;code>.changes&lt;/code> file, upload
+is denied. Each rule consists of three parts: condition, allow/deny (or both) lists. Condition is using
+&lt;a href="https://www.aptly.info/doc/feature/query">package query&lt;/a> syntax, but it matches agains &lt;code>.changes&lt;/code> file fields. If condition
+part of the rule matches &lt;code>.changes&lt;/code> file, search stops and rule is processed:&lt;/p>
+&lt;ul>
+&lt;li>if any of keys which have been used to sign &lt;code>.changes&lt;/code> file match &lt;code>deny&lt;/code> list, upload would be rejected&lt;/li>
+&lt;li>if any of keys which have been used to sign &lt;code>.changes&lt;/code> file match &lt;code>allow&lt;/code> list, upload would be accepted&lt;/li>
+&lt;/ul></description></item><item><title>aptly config show</title><link>https://www.aptly.info/doc/aptly/config/show/</link><pubDate>Sun, 12 Oct 2014 11:17:38 UTC</pubDate><author>Andrey Smirnov</author><guid>https://www.aptly.info/doc/aptly/config/show/</guid><description>&lt;h2 id="aptly-config-show">aptly config show&lt;/h2>
+&lt;p>Commands displays current aptly configuration as
+indented JSON. This command could be useful when
+upgrading from older versions of aptly to view
+updated configuration.&lt;/p>
+&lt;p>Usage:&lt;/p>
+&lt;pre>&lt;code>$ aptly config show
+&lt;/code>&lt;/pre>
+&lt;p>Examples:&lt;/p>
+&lt;pre>&lt;code>$ aptly config show
+{
+&amp;quot;rootDir&amp;quot;: &amp;quot;/Users/smira/.aptly&amp;quot;,
+&amp;quot;downloadConcurrency&amp;quot;: 4,
+&amp;quot;downloadSpeedLimit&amp;quot;: 0,
+&amp;quot;architectures&amp;quot;: [],
+&amp;quot;dependencyFollowSuggests&amp;quot;: false,
+&amp;quot;dependencyFollowRecommends&amp;quot;: false,
+&amp;quot;dependencyFollowAllVariants&amp;quot;: false,
+&amp;quot;dependencyFollowSource&amp;quot;: false,
+&amp;quot;gpgDisableSign&amp;quot;: false,
+&amp;quot;gpgDisableVerify&amp;quot;: false,
+&amp;quot;downloadSourcePackages&amp;quot;: false,
+&amp;quot;ppaDistributorID&amp;quot;: &amp;quot;ubuntu&amp;quot;,
+&amp;quot;ppaCodename&amp;quot;: &amp;quot;&amp;quot;,
+&amp;quot;S3PublishEndpoints&amp;quot;: {}
+}
+&lt;/code>&lt;/pre></description></item><item><title>aptly mirror edit</title><link>https://www.aptly.info/doc/aptly/mirror/edit/</link><pubDate>Fri, 29 Aug 2014 11:17:38 UTC</pubDate><author>Andrey Smirnov</author><guid>https://www.aptly.info/doc/aptly/mirror/edit/</guid><description>&lt;h2 id="aptly-mirror-edit">aptly mirror edit&lt;/h2>
+&lt;p>Command edit allows to change mirror settings: filter query, whether
+to include dependencies while filtering, list of architectures to process.&lt;/p>
+&lt;p>Usage:&lt;/p>
+&lt;pre>&lt;code>$ aptly mirror edit &amp;lt;name&amp;gt;
+&lt;/code>&lt;/pre>
+&lt;p>Params are:&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>name&lt;/code> is a mirror name (given when mirror was created)&lt;/li>
+&lt;/ul>
+&lt;p>Flags:&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>-archive-url=&lt;/code>: flag to change archive url &lt;span class="label label-primary">1.2.0&lt;/span>
+&lt;/li>
+&lt;li>&lt;code>-filter=&lt;/code>: &lt;a href="https://www.aptly.info/doc/feature/query/">package query&lt;/a> which is applied to
+packages in the mirror, set to empty to disable filtering&lt;/li>
+&lt;li>&lt;code>-filter-with-deps&lt;/code>: when filtering, include &lt;a href="https://www.aptly.info/doc/feature/dependencies">dependencies&lt;/a> of
+matching packages as well&lt;/li>
+&lt;li>&lt;code>-architectures=&lt;/code>: global flag to change architectures list.&lt;/li>
+&lt;li>&lt;code>-ignore-signatures&lt;/code>: disable verification of &lt;code>Release&lt;/code> file
+signatures &lt;span class="label label-primary">1.2.0&lt;/span>
+&lt;/li>
+&lt;li>&lt;code>-keyring=trustedkeys.gpg&lt;/code>: gpg keyring to use when verifying
+Release file (could be specified multiple times) &lt;span class="label label-primary">1.2.0&lt;/span>
+&lt;/li>
+&lt;li>&lt;code>-with-installer&lt;/code>: download additional not packaged installer
+files &lt;span class="label label-primary">1.4.0&lt;/span>
+&lt;/li>
+&lt;li>&lt;code>-with-sources&lt;/code>: download source packages in addition to
+binary packages&lt;/li>
+&lt;li>&lt;code>-with-udebs&lt;/code>: download .udeb packages (Debian installer
+support)&lt;/li>
+&lt;/ul>
+&lt;p>In order to apply new filtering settings, &lt;a href="https://www.aptly.info/doc/aptly/mirror/update/">update&lt;/a>
+mirror.&lt;/p>
+&lt;p>Examples:&lt;/p>
+&lt;pre>&lt;code>$ aptly mirror edit -filter=nginx -filter-with-deps wheezy-main
+Mirror [wheezy-main]: http://mirror.yandex.ru/debian/ wheezy successfully updated.
+$ aptly mirror edit -architectures=i386,amd64 sensu
+Downloading http://repos.sensuapp.org/apt/dists/sensu/Release...
+Mirror [sensu]: http://repos.sensuapp.org/apt/ sensu successfully updated.
+&lt;/code>&lt;/pre></description></item><item><title>aptly mirror search</title><link>https://www.aptly.info/doc/aptly/mirror/search/</link><pubDate>Fri, 29 Aug 2014 11:17:38 UTC</pubDate><author>Andrey Smirnov</author><guid>https://www.aptly.info/doc/aptly/mirror/search/</guid><description>&lt;h2 id="aptly-mirror-search">aptly mirror search&lt;/h2>
+&lt;p>Search mirror for packages matching query.&lt;/p>
+&lt;p>Usage:&lt;/p>
+&lt;pre>&lt;code>$ aptly mirror search &amp;lt;name&amp;gt; [&amp;lt;package-query&amp;gt;]
+&lt;/code>&lt;/pre>
+&lt;p>Params are:&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>name&lt;/code> is a mirror name (given when mirror was created)&lt;/li>
+&lt;li>&lt;code>package-query&lt;/code> is a &lt;a href="https://www.aptly.info/doc/feature/query/">package query&lt;/a> to
+search for packages&lt;/li>
+&lt;/ul>
+&lt;p>If package query is omitted, all the packages are displayed.&lt;/p>
+&lt;p>Flags:&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>-format=&amp;quot;&amp;quot;&lt;/code>:
+&lt;a href="https://www.aptly.info/doc/feature/package-display/">custom format&lt;/a> for result printing&lt;/li>
+&lt;li>&lt;code>-with-deps&lt;/code>: include &lt;a href="https://www.aptly.info/doc/feature/dependencies">dependencies&lt;/a> of matching packages
+into search results&lt;/li>
+&lt;/ul>
+&lt;p>Example:&lt;/p>
+&lt;pre>&lt;code>$ aptly mirror search wheezy 'Name (% nginx*), $Architecture (i386), !Name (% *-dbg)'
+nginx-full_1.2.1-2.2+wheezy2_i386
+nginx-extras_1.2.1-2.2+wheezy2_i386
+nginx-light_1.2.1-2.2+wheezy2_i386
+nginx-common_1.2.1-2.2+wheezy2_all
+nginx-doc_1.2.1-2.2+wheezy2_all
+nginx-naxsi-ui_1.2.1-2.2+wheezy2_all
+nginx_1.2.1-2.2+wheezy2_all
+nginx-naxsi_1.2.1-2.2+wheezy2_i386
+&lt;/code>&lt;/pre></description></item><item><title>aptly package search</title><link>https://www.aptly.info/doc/aptly/package/search/</link><pubDate>Fri, 29 Aug 2014 11:17:38 UTC</pubDate><author>Andrey Smirnov</author><guid>https://www.aptly.info/doc/aptly/package/search/</guid><description>&lt;h2 id="aptly-package-search">aptly package search&lt;/h2>
+&lt;p>Search whole package database for packages matching query.
+Whole database of packages includes all packages (deduplicated)
+from all the mirrors, local repos and snapshots.&lt;/p>
+&lt;p>In order to get more detailed information about the package,
+use &lt;a href="https://www.aptly.info/doc/aptly/package/show/">&lt;code>aptly package show&lt;/code>&lt;/a> command.&lt;/p>
+&lt;p>Usage:&lt;/p>
+&lt;pre>&lt;code>$ aptly package search [&amp;lt;package-query&amp;gt;]
+&lt;/code>&lt;/pre>
+&lt;p>Params are:&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>package-query&lt;/code> is a &lt;a href="https://www.aptly.info/doc/feature/query/">package query&lt;/a> to
+search for packages&lt;/li>
+&lt;/ul>
+&lt;p>If package query is omitted, all the packages are displayed.&lt;/p>
+&lt;p>Flags:&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>-format=&amp;quot;&amp;quot;&lt;/code>:
+&lt;a href="https://www.aptly.info/doc/feature/package-display/">custom format&lt;/a> for result printing&lt;/li>
+&lt;/ul>
+&lt;p>If no package are found, aptly exits with code 1 (failure).&lt;/p>
+&lt;p>Example:&lt;/p>
+&lt;pre>&lt;code>$ aptly package search 'Version (&amp;gt;=1.2.3-2), Version (&amp;lt;1.2.3-3)'
+libibmad-dev_1.2.3-20090314-1.1_amd64
+libibumad-dev_1.2.3-20090314-1.1_i386
+libibumad1_1.2.3-20090314-1.1_amd64
+libibumad1_1.2.3-20090314-1.1_i386
+libghc-uuid-dev_1.2.3-2+b3_amd64
+python-mysqldb_1.2.3-2_i386
+libibumad-dev_1.2.3-20090314-1.1_amd64
+libibmad_1.2.3-20090314-1.1_source
+python-mysqldb_1.2.3-2_amd64
+jpegoptim_1.2.3-2+b2_i386
+libghc-uuid-doc_1.2.3-2_all
+libjibx1.2-java-doc_1.2.3-2_all
+bwbar_1.2.3-2_amd64
+libghc-certificate-doc_1.2.3-2_all
+haskell-certificate_1.2.3-2_source
+bwbar_1.2.3-2_i386
+jpegoptim_1.2.3-2_source
+libghc-certificate-dev_1.2.3-2_amd64
+libibmad1_1.2.3-20090314-1.1_i386
+libibmad-dev_1.2.3-20090314-1.1_i386
+libjibx1.2-java_1.2.3-2_source
+python-mysqldb-dbg_1.2.3-2_i386
+shush_1.2.3-2_i386
+moksha.common_1.2.3-2~bpo70+1_source
+libghc-certificate-prof_1.2.3-2_i386
+libghc-uuid-prof_1.2.3-2+b3_amd64
+libghc-uuid-prof_1.2.3-2+b4_i386
+shush_1.2.3-2_source
+libghc-certificate-prof_1.2.3-2_amd64
+libjibx1.2-java_1.2.3-2_all
+libjibx-java_1.2.3-2_all
+libghc-uuid-dev_1.2.3-2+b4_i386
+python-mysqldb_1.2.3-2_source
+haskell-uuid_1.2.3-2_source
+libibumad_1.2.3-20090314-1.1_source
+libghc-certificate-dev_1.2.3-2_i386
+jpegoptim_1.2.3-2+b2_amd64
+python-moksha.common_1.2.3-2~bpo70+1_all
+bwbar_1.2.3-2_source
+python-mysqldb-dbg_1.2.3-2_amd64
+libibmad1_1.2.3-20090314-1.1_amd64
+shush_1.2.3-2_amd64
+&lt;/code>&lt;/pre></description></item><item><title>aptly package show</title><link>https://www.aptly.info/doc/aptly/package/show/</link><pubDate>Fri, 29 Aug 2014 11:17:38 UTC</pubDate><author>Andrey Smirnov</author><guid>https://www.aptly.info/doc/aptly/package/show/</guid><description>&lt;h2 id="aptly-package-show">aptly package show&lt;/h2>
+&lt;p>Display details about packages from whole package database. Command
+show does searching much like &lt;a href="https://www.aptly.info/doc/aptly/package/search/">&lt;code>aptly package search&lt;/code>&lt;/a>
+command does, but displays complete information about the package:&lt;/p>
+&lt;ul>
+&lt;li>contents of control file&lt;/li>
+&lt;li>(optionally) information about package files in the pool&lt;/li>
+&lt;li>(optionally) list of mirrors, local repos and snapshots that reference (include) this package&lt;/li>
+&lt;/ul>
+&lt;p>It is possible to submit any search query to this command, but it is much more common
+to have queries resulting in single package.&lt;/p>
+&lt;p>Usage:&lt;/p>
+&lt;pre>&lt;code>$ aptly package show &amp;lt;package-query&amp;gt;
+&lt;/code>&lt;/pre>
+&lt;p>Params are:&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>package-query&lt;/code> is a &lt;a href="https://www.aptly.info/doc/feature/query/">package query&lt;/a> to
+search for packages (most usually in the format of package
+reference, e.g. &lt;code>bwbar_1.2.3-2_amd64&lt;/code>)&lt;/li>
+&lt;/ul>
+&lt;p>Flags:&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>-with-files&lt;/code>: display list of package files in the package pool&lt;/li>
+&lt;li>&lt;code>-with-references&lt;/code>: display list of mirrors, snapshots and local repos
+which reference this package.&lt;/li>
+&lt;/ul>
+&lt;p>Example:&lt;/p>
+&lt;pre>&lt;code>$ aptly package show -with-files -with-references bwbar_1.2.3-2_source
+Package: bwbar
+Version: 1.2.3-2
+Priority: source
+Section: net
+Maintainer: Julien Danjou &amp;lt;acid@debian.org&amp;gt;
+Architecture: any
+Format: 1.0
+Build-Depends: debhelper (&amp;gt;&amp;gt; 7.0.0), libpng12-dev, cdbs
+Files: 138ba54405656adc16c882839482795e 54582 bwbar_1.2.3-2.diff.gz
+cd4f216514cf38f42be9d7b35d429adc 1586 bwbar_1.2.3-2.dsc
+766265ddf0615b552ff19d12f78be719 34142 bwbar_1.2.3.orig.tar.gz
+Checksums-Sha1: c5259d7fc3ac750d9d9b8d458d702a1bc49a708e 54582 bwbar_1.2.3-2.diff.gz
+674a6f5db91e83f9ad4f30d1563d3249aa21bb39 1586 bwbar_1.2.3-2.dsc
+13f5a17658a5c5adbb0db5b0fdd88805d6b3158b 34142 bwbar_1.2.3.orig.tar.gz
+Directory: pool/main/b/bwbar
+Binary: bwbar
+Standards-Version: 3.9.2
+Checksums-Sha256: 1ae625e6a29b745d24bab9185692ecc5b17cb4624d2019ae9a94e08a89f15edb 54582 bwbar_1.2.3-2.diff.gz
+b2d022dd912bc1129b0d0e216b7f8e587649582578484c776bcbe81afe993879 1586 bwbar_1.2.3-2.dsc
+bd8f5079f17b1dec6eae81ddc43c58c49b777b336fd902ffbb8e631885fbb45c 34142 bwbar_1.2.3.orig.tar.gz
+Files in the pool:
+/Users/smira/.aptly/pool/13/8b/bwbar_1.2.3-2.diff.gz
+/Users/smira/.aptly/pool/cd/4f/bwbar_1.2.3-2.dsc
+/Users/smira/.aptly/pool/76/62/bwbar_1.2.3.orig.tar.gz
+References to package:
+mirror [wheezy-main-src]: http://mirror.yandex.ru/debian/ wheezy [src]
+&lt;/code>&lt;/pre></description></item><item><title>aptly repo search</title><link>https://www.aptly.info/doc/aptly/repo/search/</link><pubDate>Fri, 29 Aug 2014 11:17:38 UTC</pubDate><author>Andrey Smirnov</author><guid>https://www.aptly.info/doc/aptly/repo/search/</guid><description>&lt;h2 id="aptly-repo-search">aptly repo search&lt;/h2>
+&lt;p>Search local repositories for packages matching query.&lt;/p>
+&lt;p>Usage:&lt;/p>
+&lt;pre>&lt;code>$ aptly repo search &amp;lt;name&amp;gt; [&amp;lt;package-query&amp;gt;]
+&lt;/code>&lt;/pre>
+&lt;p>Params are:&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>name&lt;/code> is a repo name (given when repo was created)&lt;/li>
+&lt;li>&lt;code>package-query&lt;/code> is a &lt;a href="https://www.aptly.info/doc/feature/query/">package query&lt;/a> to
+search for packages&lt;/li>
+&lt;/ul>
+&lt;p>If package query is omitted, all the packages are displayed.&lt;/p>
+&lt;p>Flags:&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>-format=&amp;quot;&amp;quot;&lt;/code>:
+&lt;a href="https://www.aptly.info/doc/feature/package-display/">custom format&lt;/a> for result printing&lt;/li>
+&lt;li>&lt;code>-with-deps&lt;/code>: include &lt;a href="https://www.aptly.info/doc/feature/dependencies">dependencies&lt;/a> of matching packages
+into search results&lt;/li>
+&lt;/ul>
+&lt;p>Example:&lt;/p>
+&lt;pre>&lt;code>$ aptly repo search internal-pkg 'Version (&amp;gt;= 4.5)'
+libtinfo5_5.9-10_i386
+perl-base_5.14.2-21+deb7u1_amd64
+ncurses-base_5.9-10_all
+xz-utils_5.1.1alpha+20120614-2_i386
+gcc-4.7-base_4.7.2-5_amd64
+libtinfo5_5.9-10_amd64
+base-files_7.1wheezy5_i386
+ncurses-bin_5.9-10_i386
+xz-utils_5.1.1alpha+20120614-2_amd64
+liblzma5_5.1.1alpha+20120614-2_i386
+coreutils_8.13-3.5_amd64
+liblzma5_5.1.1alpha+20120614-2_amd64
+libncurses5_5.9-10_amd64
+coreutils_8.13-3.5_i386
+libncurses5_5.9-10_i386
+perl-base_5.14.2-21+deb7u1_i386
+base-files_7.1wheezy5_amd64
+ncurses-bin_5.9-10_amd64
+gcc-4.7-base_4.7.2-5_i386
+&lt;/code>&lt;/pre></description></item><item><title>aptly snapshot search</title><link>https://www.aptly.info/doc/aptly/snapshot/search/</link><pubDate>Fri, 29 Aug 2014 11:17:38 UTC</pubDate><author>Andrey Smirnov</author><guid>https://www.aptly.info/doc/aptly/snapshot/search/</guid><description>&lt;h2 id="aptly-snapshot-search">aptly snapshot search&lt;/h2>
+&lt;p>Search snapshot for packages matching query.&lt;/p>
+&lt;p>Usage:&lt;/p>
+&lt;pre>&lt;code>$ aptly snapshot search &amp;lt;name&amp;gt; [&amp;lt;package-query&amp;gt;]
+&lt;/code>&lt;/pre>
+&lt;p>Params are:&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>name&lt;/code> is snapshot name which has been given during snapshot
+creation&lt;/li>
+&lt;li>&lt;code>package-query&lt;/code> is a &lt;a href="https://www.aptly.info/doc/feature/query/">package query&lt;/a> to
+search for packages&lt;/li>
+&lt;/ul>
+&lt;p>If package query is omitted, all the packages are displayed.&lt;/p>
+&lt;p>Flags:&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>-format=&amp;quot;&amp;quot;&lt;/code>:
+&lt;a href="https://www.aptly.info/doc/feature/package-display/">custom format&lt;/a> for result printing&lt;/li>
+&lt;li>&lt;code>-with-deps&lt;/code>: include &lt;a href="https://www.aptly.info/doc/feature/dependencies">dependencies&lt;/a> of matching packages
+into search results&lt;/li>
+&lt;/ul>
+&lt;p>Example:&lt;/p>
+&lt;pre>&lt;code>$ aptly snapshot search backports 'nginx, !Name (% *-light)'
+nginx_1.6.0-1~bpo70+1_all
+nginx-full_1.6.0-1~bpo70+1_amd64
+nginx-extras_1.6.0-1~bpo70+1_i386
+nginx-extras_1.6.0-1~bpo70+1_amd64
+nginx-full_1.6.0-1~bpo70+1_i386
+nginx-naxsi_1.6.0-1~bpo70+1_amd64
+nginx-naxsi_1.6.0-1~bpo70+1_i386
+&lt;/code>&lt;/pre></description></item><item><title>aptly db cleanup</title><link>https://www.aptly.info/doc/aptly/db/cleanup/</link><pubDate>Fri, 08 Aug 2014 11:17:38 UTC</pubDate><author>Andrey Smirnov</author><guid>https://www.aptly.info/doc/aptly/db/cleanup/</guid><description>&lt;h2 id="aptly-db-cleanup">aptly db cleanup&lt;/h2>
+&lt;p>Database cleanup removes information about unreferenced packages and
+deletes files in the package pool that aren&amp;rsquo;t used by packages anymore.
+It is a good idea to run this command after massive deletion of
+mirrors, snapshots or local repos.&lt;/p>
+&lt;p>Usage:&lt;/p>
+&lt;pre>&lt;code>$ aptly db cleanup
+&lt;/code>&lt;/pre>
+&lt;p>Flags:&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>-dry-run&lt;/code>: don&amp;rsquo;t remove anything, but report what would have been
+removed&lt;/li>
+&lt;li>&lt;code>-verbose&lt;/code>: be verbose when listing objects being processed&lt;/li>
+&lt;/ul>
+&lt;p>If &lt;code>aptly db cleanup&lt;/code> is run with both flags &lt;code>-dry-run -verbose&lt;/code>, it collects information
+about all unresolved package references and reports them with details.&lt;/p>
+&lt;p>Example:&lt;/p>
+&lt;pre>&lt;code>$ aptly db cleanup
+Loading mirrors and snapshots...
+Loading list of all packages...
+Deleting unreferenced packages (325)...
+Building list of files referenced by packages...
+Building list of files in package pool...
+Deleting unreferenced files (325)...
+Disk space freed: 0.27 GiB...
+&lt;/code>&lt;/pre>
+&lt;p> &lt;/p></description></item><item><title>aptly db recover</title><link>https://www.aptly.info/doc/aptly/db/recover/</link><pubDate>Fri, 08 Aug 2014 11:17:38 UTC</pubDate><author>Andrey Smirnov</author><guid>https://www.aptly.info/doc/aptly/db/recover/</guid><description>&lt;h2 id="aptly-db-recover">aptly db recover&lt;/h2>
+&lt;p>Database recover does its best to recover database after crash. It is
+recommended to backup DB before running recover. Recover procedures
+ignores all index files and tries to reconstruct them from &lt;code>.sst&lt;/code> files.&lt;/p>
+&lt;p>Usage:&lt;/p>
+&lt;pre>&lt;code>$ aptly db recover
+&lt;/code>&lt;/pre>
+&lt;p>Example:&lt;/p>
+&lt;pre>&lt;code>$ aptly db recover
+Recovering DB...
+&lt;/code>&lt;/pre>
+&lt;p> &lt;/p></description></item><item><title>aptly mirror create</title><link>https://www.aptly.info/doc/aptly/mirror/create/</link><pubDate>Fri, 08 Aug 2014 11:17:38 UTC</pubDate><author>Andrey Smirnov</author><guid>https://www.aptly.info/doc/aptly/mirror/create/</guid><description>&lt;h2 id="aptly-mirror-create">aptly mirror create&lt;/h2>
+&lt;p>Creates mirror of remote repository, aptly supports both regular and
+flat Debian repositories exported via HTTP(S) or FTP. aptly would try download
+Release file from remote repository and verify its signature.&lt;/p>
+&lt;p>Usage:&lt;/p>
+&lt;pre>&lt;code>$ aptly mirror create &amp;lt;name&amp;gt; &amp;lt;archive url&amp;gt; &amp;lt;distribution&amp;gt; [&amp;lt;component1&amp;gt; ...]
+&lt;/code>&lt;/pre>
+&lt;p>For Launchpad PPAs:&lt;/p>
+&lt;pre>&lt;code>$ aptly mirror create &amp;lt;name&amp;gt; &amp;lt;ppa:user/project&amp;gt;
+&lt;/code>&lt;/pre>
+&lt;p>Params are:&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>name&lt;/code> is a name that would be used in aptly to reference this
+mirror&lt;/li>
+&lt;li>&lt;code>archive url&lt;/code> is a root of archive, e.g.
+&lt;a href="http://ftp.ru.debian.org/debian/">http://ftp.ru.debian.org/debian/&lt;/a>&lt;/li>
+&lt;li>&lt;code>distribution&lt;/code> is a distribution name, e.g. &lt;code>squeeze&lt;/code>, for flat
+repositories use &lt;code>./&lt;/code> instead of distribution name&lt;/li>
+&lt;li>&lt;code>component1&lt;/code> is an optional list of components to download, if not
+specified aptly would fetch all components.&lt;/li>
+&lt;/ul>
+&lt;p>Flags:&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>-filter=&lt;/code>: &lt;a href="https://www.aptly.info/doc/feature/query/">package query&lt;/a> that is applied to
+packages in the mirror&lt;/li>
+&lt;li>&lt;code>-filter-with-deps&lt;/code>: when filtering, include &lt;a href="https://www.aptly.info/doc/feature/dependencies">dependencies&lt;/a> of
+matching packages as well&lt;/li>
+&lt;li>&lt;code>-force-components&lt;/code>: (only with component list on command line)
+skip check that requested components are listed in &lt;code>Release&lt;/code> file&lt;/li>
+&lt;li>&lt;code>-ignore-signatures&lt;/code>: disable verification of &lt;code>Release&lt;/code> file
+signatures&lt;/li>
+&lt;li>&lt;code>-keyring=trustedkeys.gpg&lt;/code>: gpg keyring to use when verifying
+Release file (could be specified multiple times)&lt;/li>
+&lt;li>&lt;code>-with-installer&lt;/code>: download additional not packaged installer
+files &lt;span class="label label-primary">1.4.0&lt;/span>
+&lt;/li>
+&lt;li>&lt;code>-with-sources&lt;/code>: download source packages in addition to
+binary packages (could be enabled by default with config option
+&lt;code>downloadSourcePackages&lt;/code>)&lt;/li>
+&lt;li>&lt;code>-with-udebs&lt;/code>: download .udeb packages (Debian installer
+support)&lt;/li>
+&lt;/ul>
+&lt;p>By default aptly would download packages for all available
+architectures. If architectures are limited (with config &lt;code>architectures&lt;/code>
+or option &lt;code>-architectures&lt;/code>), only packages for those architectures are
+downloaded.&lt;/p>
+&lt;p>If components are not specified, aptly will download packages from all
+components and merge them into one. If components should
+be left separate, please create &lt;a href="https://www.aptly.info/doc/feature/multi-component/">separate mirror for each component&lt;/a>.&lt;/p>
+&lt;p>If PPA url is specified, aptly would expand it to HTTP url using
+configuration options &lt;code>ppaDistributorID&lt;/code> &amp;amp; &lt;code>ppaCodename&lt;/code>. If you&amp;rsquo;re
+running aptly on Ubuntu, defaults should work (aptly would figure out
+codename using &lt;code>lsb_release&lt;/code> command).&lt;/p>
+&lt;p>If filtering is enabled, all package lists are downloaded and filters
+are applied to those lists. Only packages that match filter query would
+be downloaded and filtered list would be stored as contents of the mirror. If
+dependency following is enabled, dependencies would be expanded in
+filtered list to build resulting package list. Filters could be used to
+limit mirror to only one package and its dependencies
+(&lt;code>-filter='nginx' -filter-follow-deps&lt;/code>), download only high-priority
+packages (&lt;code>-filter='Priority (required)'&lt;/code>) and so on.&lt;/p>
+&lt;p>aptly would try to verify signature of Release files using GnuPG. By
+default, keyring &lt;code>~/.gnupg/trustedkeys.gpg&lt;/code> would be used. If you would
+like to use different keyring(s), specify them using &lt;code>-keyring&lt;/code> flag.
+aptly would advise &lt;code>gpg&lt;/code> commands to import keys into trusted keys
+keyring in order to successfully verify repository signature.&lt;/p>
+&lt;p>If aptly is running on Debian/Ubuntu machine, it would be good idea to import
+archive signing keys shipped with the operating system:&lt;/p>
+&lt;pre>&lt;code>$ gpg --no-default-keyring --keyring /usr/share/keyrings/debian-archive-keyring.gpg --export | gpg --no-default-keyring --keyring trustedkeys.gpg --import
+&lt;/code>&lt;/pre>
+&lt;p>If you&amp;rsquo;re running Ubuntu, use
+&lt;code>/usr/share/keyrings/ubuntu-archive-keyring.gpg&lt;/code>&lt;/p>
+&lt;p>If GnuPG is complaining that required key to verify signature is
+missing, it would report key ID, e.g. &lt;code>46925553&lt;/code>. Keys could be
+downloaded from public keyserver and imported into trusted keyring using
+command:&lt;/p>
+&lt;pre>&lt;code>$ gpg --no-default-keyring --keyring trustedkeys.gpg --keyserver keys.gnupg.net --recv-keys 46925553
+&lt;/code>&lt;/pre>
+&lt;p>Replace &lt;code>46925553&lt;/code> with the key ID GnuPG is complaining about.&lt;/p>
+&lt;p>If you&amp;rsquo;re mirroring flat repository, sometimes repository key is located
+near release files, so you can download it and import into your trusted
+keychain:&lt;/p>
+&lt;pre>&lt;code>$ wget -O - https://some.repo/repository/Release.key | gpg --no-default-keyring --keyring trustedkeys.gpg --import
+&lt;/code>&lt;/pre>
+&lt;p>You can learn about signed Debian repositories in &lt;a href="https://wiki.debian.org/SecureApt">Debian wiki&lt;/a>.
+If you would like to disable signature checks, you can use flag &lt;code>-ignore-signatures&lt;/code> or configuration
+setting &lt;code>gpgDisableVerify&lt;/code>.&lt;/p>
+&lt;p>aptly deduplicates all downloaded files, so if two mirrors are created
+one with source packages enabled and another with source packages
+disabled, they would consume only space required to store all binary and
+source packages (not twice the space required to store binary packages).&lt;/p>
+&lt;p>Example:&lt;/p>
+&lt;pre>&lt;code>$ aptly -architectures=&amp;quot;amd64&amp;quot; mirror create debian-main http://ftp.ru.debian.org/debian/ squeeze main
+2013/12/28 19:44:45 Downloading http://ftp.ru.debian.org/debian/dists/squeeze/Release...
+...
+Mirror [debian-main]: http://ftp.ru.debian.org/debian/ squeeze successfully added.
+You can run 'aptly mirror update debian-main' to download repository contents.
+&lt;/code>&lt;/pre>
+&lt;p>For newly created mirror, &lt;a href="https://www.aptly.info/doc/aptly/mirror/update/">&lt;code>aptly mirror update&lt;/code>&lt;/a> should be run
+to download mirror contents for the first time.&lt;/p></description></item><item><title>aptly mirror drop</title><link>https://www.aptly.info/doc/aptly/mirror/drop/</link><pubDate>Fri, 08 Aug 2014 11:17:38 UTC</pubDate><author>Andrey Smirnov</author><guid>https://www.aptly.info/doc/aptly/mirror/drop/</guid><description>&lt;h2 id="aptly-mirror-drop">aptly mirror drop&lt;/h2>
+&lt;p>Drop deletes information about remote repository mirror. Package data is
+not deleted (it could be still used by other mirrors or snapshots). If
+mirror is used as source to create a snapshot, aptly would refuse to
+delete such mirror, use flag &lt;code>-force&lt;/code> to override.&lt;/p>
+&lt;p>Usage:&lt;/p>
+&lt;pre>&lt;code>$ aptly mirror drop &amp;lt;name&amp;gt;
+&lt;/code>&lt;/pre>
+&lt;p>Params:&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>name&lt;/code> is mirror name which has been given during mirror creation&lt;/li>
+&lt;/ul>
+&lt;p>Flags:&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>-force&lt;/code>: drop mirror even if it used as source of some
+snapshot&lt;/li>
+&lt;/ul>
+&lt;p>Dropping mirror only removes metadata about the mirror, in order to
+cleanup the disk space occupied by package files you might need to run
+&lt;a href="https://www.aptly.info/doc/aptly/db/cleanup/">&lt;code>aptly db cleanup&lt;/code>&lt;/a> command.&lt;/p>
+&lt;p>Example:&lt;/p>
+&lt;pre>&lt;code>$ aptly mirror drop -force wheezy-main
+Mirror `wheezy-main` has been removed.
+&lt;/code>&lt;/pre></description></item><item><title>aptly mirror list</title><link>https://www.aptly.info/doc/aptly/mirror/list/</link><pubDate>Fri, 08 Aug 2014 11:17:38 UTC</pubDate><author>Andrey Smirnov</author><guid>https://www.aptly.info/doc/aptly/mirror/list/</guid><description>&lt;h2 id="aptly-mirror-list">aptly mirror list&lt;/h2>
+&lt;p>Shows list of created remote repository mirrors.&lt;/p>
+&lt;p>Usage:&lt;/p>
+&lt;pre>&lt;code>$ aptly mirror list
+&lt;/code>&lt;/pre>
+&lt;p>Flags:&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>-raw&lt;/code>: display list in machine-readable format&lt;/li>
+&lt;/ul>
+&lt;p>Examples:&lt;/p>
+&lt;pre>&lt;code>$ aptly mirror list
+List of mirrors:
+* [backports]: http://mirror.yandex.ru/backports.org/ squeeze-backports
+* [debian-main]: http://ftp.ru.debian.org/debian/ squeeze
+&lt;/code>&lt;/pre>
+&lt;p>To get more information about repository, run &lt;code>aptly mirror show &amp;lt;name&amp;gt;&lt;/code>.&lt;/p>
+&lt;pre>&lt;code>$ aptly mirror list -raw
+backports
+debian-main
+&lt;/code>&lt;/pre></description></item><item><title>aptly mirror rename</title><link>https://www.aptly.info/doc/aptly/mirror/rename/</link><pubDate>Fri, 08 Aug 2014 11:17:38 UTC</pubDate><author>Andrey Smirnov</author><guid>https://www.aptly.info/doc/aptly/mirror/rename/</guid><description>&lt;h2 id="aptly-mirror-rename">aptly mirror rename&lt;/h2>
+&lt;p>Command changes name of the mirror. Mirror name should be unique.&lt;/p>
+&lt;p>Usage:&lt;/p>
+&lt;pre>&lt;code>$ aptly mirror rename &amp;lt;old-name&amp;gt; &amp;lt;new-name&amp;gt;
+&lt;/code>&lt;/pre>
+&lt;p>Params:&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>old-name&lt;/code> is current mirror name&lt;/li>
+&lt;li>&lt;code>new-name&lt;/code> is new mirror name&lt;/li>
+&lt;/ul>
+&lt;p>Example:&lt;/p>
+&lt;pre>&lt;code>$ aptly mirror rename whezy-main wheezy-main
+Mirror whezy-main -&amp;gt; wheezy-main has been successfully renamed.
+&lt;/code>&lt;/pre></description></item></channel></rss>
