@@ -363,7 +363,7 @@ Rendered to PNG file: /tmp/aptly-graph128726742.png
 
 This would result in picture like this one:
 
-<img class="img-responsive" src="/img/aptly-graph.png">
+<img class="img-responsive" src="../../img/aptly-graph.png">
 
 ### Using repository
 
@@ -473,7 +473,7 @@ Publish for snapshot ./wheezy [amd64] publishes {main: [wheezy-final-20141019]: 
 
 If run `aptly graph` again, the picture would be more interesting:
 
-<img class="img-responsive" src="/img/aptly-graph2.png">
+<img class="img-responsive" src="../../img/aptly-graph2.png">
 
 ### Maintenance
 

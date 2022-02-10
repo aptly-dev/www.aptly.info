@@ -226,4 +226,4 @@ to the new snapshot `wheezy-main-nginx-aptly-20141009` and update my target mach
 
 If I generate the graph, it would look like that:
 
-<img class="img-responsive" src="/img/aptly-graph3.png">
+<img class="img-responsive" src="../../img/aptly-graph3.png">

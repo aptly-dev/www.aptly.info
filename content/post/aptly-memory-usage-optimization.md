@@ -64,9 +64,9 @@ was easy thanks to [CloudFlare blog
 post](http://blog.cloudflare.com/recycling-memory-buffers-in-go). What I
 discovered first was:
 
-<img src="/img/mem-verify0.png" alt="mem stats for aptly snapshot verify" class="img-responsive">
+<img src="../../img/mem-verify0.png" alt="mem stats for aptly snapshot verify" class="img-responsive">
 
-<img src="/img/mem-mirror-update1.png" alt="mem stats for aptly mirror update" class="img-responsive">
+<img src="../../img/mem-mirror-update1.png" alt="mem stats for aptly mirror update" class="img-responsive">
 
 First graph is for `aptly snapshot verify` command verifying
 dependencies in whole Debian wheezy distribution, second graph is
@@ -89,9 +89,9 @@ DB on demand and removed when not used.
 
 What I got in the end was:
 
-<img src="/img/mem-verify4.png" alt="mem stats for aptly snapshot verify" class="img-responsive">
+<img src="../../img/mem-verify4.png" alt="mem stats for aptly snapshot verify" class="img-responsive">
 
-<img src="/img/mem-mirror-update4.png" alt="mem stats for aptly mirror update" class="img-responsive">
+<img src="../../img/mem-mirror-update4.png" alt="mem stats for aptly mirror update" class="img-responsive">
 
 As it could be seen easily from these graphs, GC is freeing much more
 memory all the time keeping memory usage more linear. There are some

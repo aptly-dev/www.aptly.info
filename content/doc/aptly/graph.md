@@ -35,5 +35,5 @@ Flags:
 
 Example:
 
-<a href="/img/graphfull.png"><img src="/img/graph.png" alt="Example graph from aptly graph (horizontal)" class="img-responsive"></a>
+<a href="../../../img/graphfull.png"><img src="../../../img/graph.png" alt="Example graph from aptly graph (horizontal)" class="img-responsive"></a>
 

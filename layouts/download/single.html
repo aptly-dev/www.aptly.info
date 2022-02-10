@@ -9,7 +9,7 @@
 </section>
 <section class="note">
   <div class="container">
-    <img src="/img/os_icons/debian.png" alt="Debian/Ubuntu" class="pull-right">
+    <img src="{{ "/img/os_icons/debian.png" | relURL }}" alt="Debian/Ubuntu" class="pull-right">
     <h2>aptly installation</h2>
     <p><b>Debian/Ubuntu</b>: aptly package is available in <a
         href="https://packages.debian.org/search?searchon=names&keywords=aptly">Debian </a> as well as <a
@@ -47,7 +47,7 @@
       FreeBSD are available.</p>
     <div class="row text-center">
       <div class="col-md-4">
-        <img src="/img/os_icons/debian.png" alt="Debian/Ubuntu" class="download-os-icon">
+        <img src="{{ "/img/os_icons/debian.png" | relURL }}" alt="Debian/Ubuntu" class="download-os-icon">
         Linux (Debian, Ubuntu, RedHat, Centos, ...) <br />
         <a href="https://github.com/aptly-dev/aptly/releases/download/v{{ .Params.version }}/aptly_{{ .Params.version }}_linux_386.tar.gz"
           class="btn btn-default">32-bit</a>
@@ -55,7 +55,7 @@
           class="btn btn-default">64-bit</a>
       </div>
       <div class="col-md-4">
-        <img src="/img/os_icons/freebsd.png" alt="FreeBSD" class="download-os-icon">
+        <img src="{{ "/img/os_icons/freebsd.png" | relURL }}" alt="FreeBSD" class="download-os-icon">
         FreeBSD <span class="small">9.2+</span><br />
         <a href="https://github.com/aptly-dev/aptly/releases/download/v{{ .Params.version }}/aptly_{{ .Params.version }}_freebsd_386.zip"
           class="btn btn-default">32-bit</a>
@@ -63,7 +63,7 @@
           class="btn btn-default">64-bit</a>
       </div>
       <div class="col-md-4">
-        <img src="/img/os_icons/osx.png" alt="Mac OS X" class="download-os-icon">
+        <img src="{{ "/img/os_icons/osx.png" | relURL }}" alt="Mac OS X" class="download-os-icon">
         Mac OS X <span class="small">10.9</span><br />
         <a href="https://github.com/aptly-dev/aptly/releases/download/v{{ .Params.version }}/aptly_{{ .Params.version }}_darwin_amd64.zip"
           class="btn btn-default">64-bit</a>
