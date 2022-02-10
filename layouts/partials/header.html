@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>aptly - {{ .Title }}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="shortcut icon" href="{{ "/favicon.ico" | relURL }}">
     <link type="text/css" rel="stylesheet" href="{{ "/css/styles.css" | relURL }}">
     <link rel="canonical" href="{{ .Permalink }}">
     <link href="{{ "/post/index.xml" | relURL }}" rel="alternate" type="application/rss+xml" title="{{ .Site.Title }}" />
