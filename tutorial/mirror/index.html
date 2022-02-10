@@ -4,7 +4,7 @@
 <meta http-equiv=x-ua-compatible content="IE=edge">
 <title>aptly - Mirroring with snapshots</title>
 <meta name=viewport content="width=device-width,initial-scale=1">
-<link rel="shortcut icon" href=/favicon.ico>
+<link rel="shortcut icon" href=/www.aptly.info/favicon.ico>
 <link type=text/css rel=stylesheet href=/www.aptly.info/css/styles.css>
 <link rel=canonical href=http://aptly-dev.github.io/www.aptly.info/tutorial/mirror/>
 <link href=/www.aptly.info/post/index.xml rel=alternate type=application/rss+xml title="Debian repository management tool">
@@ -345,7 +345,7 @@ Generating graph...
 Rendered to PNG file: /tmp/aptly-graph128726742.png
 </pre>
 <p>This would result in picture like this one:</p>
-<img class=img-responsive src=/img/aptly-graph.png>
+<img class=img-responsive src=../../img/aptly-graph.png>
 <h3 id=using-repository>Using repository</h3>
 <p>First I need to import public part of the key that was used to sign the repository
 into trusted apt keyring on target machine.</p>
@@ -433,7 +433,7 @@ Publish for snapshot ./wheezy [amd64] publishes {main: [wheezy-final-20141019]: 
 </pre>
 <p><code>apt-get</code> would notice new packages on next update, and I can upgrade my target machine.</p>
 <p>If run <code>aptly graph</code> again, the picture would be more interesting:</p>
-<img class=img-responsive src=/img/aptly-graph2.png>
+<img class=img-responsive src=../../img/aptly-graph2.png>
 <h3 id=maintenance>Maintenance</h3>
 <p>You can drop old snapshots as they&rsquo;re not used anymore. This would allow to cleanup some files
 with <code>aptly db cleanup</code>:</p>

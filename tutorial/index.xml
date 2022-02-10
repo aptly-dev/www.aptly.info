@@ -304,7 +304,7 @@ deb http://debian:8080/testing/ wheezy main
 &lt;p>After successful round of testing, I can use &lt;code>aptly publish switch&lt;/code> to switch by stable published repository
 to the new snapshot &lt;code>wheezy-main-nginx-aptly-20141009&lt;/code> and update my target machines.&lt;/p>
 &lt;p>If I generate the graph, it would look like that:&lt;/p>
-&lt;img class="img-responsive" src="http://aptly-dev.github.io/www.aptly.info/img/aptly-graph3.png"></description></item><item><title>Mirroring with snapshots</title><link>http://aptly-dev.github.io/www.aptly.info/tutorial/mirror/</link><pubDate>Thu, 09 Oct 2014 23:20:00 UTC</pubDate><author>Andrey Smirnov</author><guid>http://aptly-dev.github.io/www.aptly.info/tutorial/mirror/</guid><description>&lt;h2 id="mirroring-with-snapshots">Mirroring with snapshots&lt;/h2>
+&lt;img class="img-responsive" src="../../img/aptly-graph3.png"></description></item><item><title>Mirroring with snapshots</title><link>http://aptly-dev.github.io/www.aptly.info/tutorial/mirror/</link><pubDate>Thu, 09 Oct 2014 23:20:00 UTC</pubDate><author>Andrey Smirnov</author><guid>http://aptly-dev.github.io/www.aptly.info/tutorial/mirror/</guid><description>&lt;h2 id="mirroring-with-snapshots">Mirroring with snapshots&lt;/h2>
 &lt;p class="lead">Goal: build mirror of Debian wheezy, with security updates incorporated,
 done using snapshots to make package installation consistent on all the hosts.&lt;/p>
 &lt;h3 id="preparation">Preparation&lt;/h3>
@@ -580,7 +580,7 @@ Generating graph...
 Rendered to PNG file: /tmp/aptly-graph128726742.png
 &lt;/pre>
 &lt;p>This would result in picture like this one:&lt;/p>
-&lt;img class="img-responsive" src="http://aptly-dev.github.io/www.aptly.info/img/aptly-graph.png">
+&lt;img class="img-responsive" src="../../img/aptly-graph.png">
 &lt;h3 id="using-repository">Using repository&lt;/h3>
 &lt;p>First I need to import public part of the key that was used to sign the repository
 into trusted apt keyring on target machine.&lt;/p>
@@ -661,7 +661,7 @@ Publish for snapshot ./wheezy [amd64] publishes {main: [wheezy-final-20141019]: 
 &lt;/pre>
 &lt;p>&lt;code>apt-get&lt;/code> would notice new packages on next update, and I can upgrade my target machine.&lt;/p>
 &lt;p>If run &lt;code>aptly graph&lt;/code> again, the picture would be more interesting:&lt;/p>
-&lt;img class="img-responsive" src="http://aptly-dev.github.io/www.aptly.info/img/aptly-graph2.png">
+&lt;img class="img-responsive" src="../../img/aptly-graph2.png">
 &lt;h3 id="maintenance">Maintenance&lt;/h3>
 &lt;p>You can drop old snapshots as they&amp;rsquo;re not used anymore. This would allow to cleanup some files
 with &lt;code>aptly db cleanup&lt;/code>:&lt;/p>

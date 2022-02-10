@@ -5,7 +5,7 @@ For installation instructions, please proceed to &lt;a href="http://www.aptly.in
 &lt;p>aptly has powerful &lt;a href="http://www.aptly.info/doc/feature/query">query language&lt;/a>
 which allows to select subset of packages. Query language is used
 in many commands: pulling packages between snapshots, copying, moving packages
-between local repositories, filtering mirror contents, etc.&lt;br>
+between local repositories, filtering mirror contents, etc. &lt;br>
 aptly 0.8 allows to use queries to search mirrors, snapshots and local repos
 for packages matching condition. E.g. all packages that have been built
 from source package &lt;code>apt&lt;/code>:&lt;/p>
@@ -530,7 +530,7 @@ e.g. &lt;code>pkg_1.3-3_amd64&lt;/code> instead of &lt;code>pkg-1.3-3-amd64&lt;/
 &lt;/ul>
 &lt;p>With addition of local package repositories, schema of aptly entities
 and transitions looks like that:&lt;/p>
-&lt;img src="http://aptly-dev.github.io/www.aptly.info/img/schema04.png" class="img-responsive" alt="aptly schema"></description></item><item><title>aptly Memory Usage Optimization</title><link>http://aptly-dev.github.io/www.aptly.info/post/aptly-memory-usage-optimization/</link><pubDate>Wed, 05 Mar 2014 17:15:00 UTC</pubDate><author>Andrey Smirnov</author><guid>http://aptly-dev.github.io/www.aptly.info/post/aptly-memory-usage-optimization/</guid><description>&lt;p>Next &lt;a href="http://www.aptly.info">aptly&lt;/a> version (0.4) would contain some
+&lt;img src="../../img/schema04.png" class="img-responsive" alt="aptly schema"></description></item><item><title>aptly Memory Usage Optimization</title><link>http://aptly-dev.github.io/www.aptly.info/post/aptly-memory-usage-optimization/</link><pubDate>Wed, 05 Mar 2014 17:15:00 UTC</pubDate><author>Andrey Smirnov</author><guid>http://aptly-dev.github.io/www.aptly.info/post/aptly-memory-usage-optimization/</guid><description>&lt;p>Next &lt;a href="http://www.aptly.info">aptly&lt;/a> version (0.4) would contain some
 changes to lower memory requirements while doing general operations:
 memory usage will be decreased by factor of 3. aptly is written in Go
 language, so this is a short story of optimizing Go program memory
@@ -575,8 +575,8 @@ return encodeBuf.Bytes()
 was easy thanks to &lt;a href="http://blog.cloudflare.com/recycling-memory-buffers-in-go">CloudFlare blog
 post&lt;/a>. What I
 discovered first was:&lt;/p>
-&lt;img src="http://aptly-dev.github.io/www.aptly.info/img/mem-verify0.png" alt="mem stats for aptly snapshot verify" class="img-responsive">
-&lt;img src="http://aptly-dev.github.io/www.aptly.info/img/mem-mirror-update1.png" alt="mem stats for aptly mirror update" class="img-responsive">
+&lt;img src="../../img/mem-verify0.png" alt="mem stats for aptly snapshot verify" class="img-responsive">
+&lt;img src="../../img/mem-mirror-update1.png" alt="mem stats for aptly mirror update" class="img-responsive">
 &lt;p>First graph is for &lt;code>aptly snapshot verify&lt;/code> command verifying
 dependencies in whole Debian wheezy distribution, second graph is
 &lt;code>aptly mirror update&lt;/code> command parsing package metadata and building
@@ -595,8 +595,8 @@ required for all operations, some are required only when publishing or
 mirroring. So I had to split &lt;code>Package&lt;/code> into parts that are loaded from
 DB on demand and removed when not used.&lt;/p>
 &lt;p>What I got in the end was:&lt;/p>
-&lt;img src="http://aptly-dev.github.io/www.aptly.info/img/mem-verify4.png" alt="mem stats for aptly snapshot verify" class="img-responsive">
-&lt;img src="http://aptly-dev.github.io/www.aptly.info/img/mem-mirror-update4.png" alt="mem stats for aptly mirror update" class="img-responsive">
+&lt;img src="../../img/mem-verify4.png" alt="mem stats for aptly snapshot verify" class="img-responsive">
+&lt;img src="../../img/mem-mirror-update4.png" alt="mem stats for aptly mirror update" class="img-responsive">
 &lt;p>As it could be seen easily from these graphs, GC is freeing much more
 memory all the time keeping memory usage more linear. There are some
 more things that could be optimized to improve memory usage, but they
@@ -671,7 +671,7 @@ useful if you&amp;rsquo;d like to extract part of repository by
 &lt;/ul>
 &lt;p>Nice picture (actually it&amp;rsquo;s output of &lt;a href="http://www.aptly.info/#aptly-graph">aptly
 graph&lt;/a> command):&lt;/p>
-&lt;img src="http://aptly-dev.github.io/www.aptly.info/img/aptlygraph.png" class="img-responsive" alt="aptly graph output"></description></item><item><title>aptly 0.2, Moscow DevOps Meetup</title><link>http://aptly-dev.github.io/www.aptly.info/post/aptly-02-moscow-devops-meetup/</link><pubDate>Wed, 29 Jan 2014 12:24:00 UTC</pubDate><author>Andrey Smirnov</author><guid>http://aptly-dev.github.io/www.aptly.info/post/aptly-02-moscow-devops-meetup/</guid><description>&lt;p>Two great things have happened recently:&lt;/p>
+&lt;img src="../../img/aptlygraph.png" class="img-responsive" alt="aptly graph output"></description></item><item><title>aptly 0.2, Moscow DevOps Meetup</title><link>http://aptly-dev.github.io/www.aptly.info/post/aptly-02-moscow-devops-meetup/</link><pubDate>Wed, 29 Jan 2014 12:24:00 UTC</pubDate><author>Andrey Smirnov</author><guid>http://aptly-dev.github.io/www.aptly.info/post/aptly-02-moscow-devops-meetup/</guid><description>&lt;p>Two great things have happened recently:&lt;/p>
 &lt;ul>
 &lt;li>I&amp;rsquo;ve released &lt;a href="http://www.aptly.info">aptly&lt;/a> version 0.2, which is
 alpha-quality.&lt;/li>

@@ -4,7 +4,7 @@
 <meta http-equiv=x-ua-compatible content="IE=edge">
 <title>aptly - aptly Memory Usage Optimization</title>
 <meta name=viewport content="width=device-width,initial-scale=1">
-<link rel="shortcut icon" href=/favicon.ico>
+<link rel="shortcut icon" href=/www.aptly.info/favicon.ico>
 <link type=text/css rel=stylesheet href=/www.aptly.info/css/styles.css>
 <link rel=canonical href=http://aptly-dev.github.io/www.aptly.info/post/aptly-memory-usage-optimization/>
 <link href=/www.aptly.info/post/index.xml rel=alternate type=application/rss+xml title="Debian repository management tool">
@@ -85,8 +85,8 @@ func (p *Package) Encode() []byte {
 was easy thanks to <a href=http://blog.cloudflare.com/recycling-memory-buffers-in-go>CloudFlare blog
 post</a>. What I
 discovered first was:</p>
-<img src=/img/mem-verify0.png alt="mem stats for aptly snapshot verify" class=img-responsive>
-<img src=/img/mem-mirror-update1.png alt="mem stats for aptly mirror update" class=img-responsive>
+<img src=../../img/mem-verify0.png alt="mem stats for aptly snapshot verify" class=img-responsive>
+<img src=../../img/mem-mirror-update1.png alt="mem stats for aptly mirror update" class=img-responsive>
 <p>First graph is for <code>aptly snapshot verify</code> command verifying
 dependencies in whole Debian wheezy distribution, second graph is
 <code>aptly mirror update</code> command parsing package metadata and building
@@ -105,8 +105,8 @@ required for all operations, some are required only when publishing or
 mirroring. So I had to split <code>Package</code> into parts that are loaded from
 DB on demand and removed when not used.</p>
 <p>What I got in the end was:</p>
-<img src=/img/mem-verify4.png alt="mem stats for aptly snapshot verify" class=img-responsive>
-<img src=/img/mem-mirror-update4.png alt="mem stats for aptly mirror update" class=img-responsive>
+<img src=../../img/mem-verify4.png alt="mem stats for aptly snapshot verify" class=img-responsive>
+<img src=../../img/mem-mirror-update4.png alt="mem stats for aptly mirror update" class=img-responsive>
 <p>As it could be seen easily from these graphs, GC is freeing much more
 memory all the time keeping memory usage more linear. There are some
 more things that could be optimized to improve memory usage, but they
