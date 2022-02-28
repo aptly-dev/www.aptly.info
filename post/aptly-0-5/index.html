@@ -2,160 +2,80 @@
 <head>
 <meta charset=utf-8>
 <meta http-equiv=x-ua-compatible content="IE=edge">
-<title>aptly - aptly 0.5</title>
-<meta name=viewport content="width=device-width,initial-scale=1">
+<title>aptly - aptly 0.5</title><meta name=viewport content="width=device-width,initial-scale=1">
 <link rel="shortcut icon" href=/www.aptly.info/favicon.ico>
 <link type=text/css rel=stylesheet href=/www.aptly.info/css/styles.css>
 <link rel=canonical href=http://aptly-dev.github.io/www.aptly.info/post/aptly-0-5/>
 <link href=/www.aptly.info/post/index.xml rel=alternate type=application/rss+xml title="Debian repository management tool">
-</head>
-<body>
+</head><body>
 <header id=page-header>
 <div class=container>
 <nav class="navbar navbar-default navbar-static-top" role=navigation>
 <ul class="nav navbar-nav nav-justified">
-<li><a href=/www.aptly.info/tutorial/>tutorials</a></li>
-<li><a href=/www.aptly.info/download/>download</a></li>
-<li><a href=/www.aptly.info/support/>support</a></li>
-<li><a href=/www.aptly.info/doc/overview/>documentation</a></li>
-<li><a href=/www.aptly.info/about/>about</a></li>
-<li class=active><a href=/www.aptly.info/post/>blog</a></li>
-</ul>
-</nav>
-<div class=row>
+<li><a href=/www.aptly.info/tutorial/>tutorials</a></li><li><a href=/www.aptly.info/download/>download</a></li><li><a href=/www.aptly.info/support/>support</a></li><li><a href=/www.aptly.info/doc/overview/>documentation</a></li><li><a href=/www.aptly.info/about/>about</a></li><li class=active><a href=/www.aptly.info/post/>blog</a></li></ul></nav><div class=row>
 <div class="col-md-6 col-md-offset-3 text-center">
 <a class=brand href=/www.aptly.info/>
 <i class=brand-logo></i>
 <span class=brand-name>aptly</span>
 </a>
-</div>
-</div>
-</div>
-</header>
-<section class=primary-content>
+</div></div></div></header><section class=primary-content>
 <div class=container>
-<h1>aptly 0.5</h1>
-<p><a href=http://www.aptly.info>aptly</a> 0.5 has been released today. It is
+<h1>aptly 0.5</h1><p><a href=http://www.aptly.info>aptly</a> 0.5 has been released today. It is
 available for download as <a href=http://www.aptly.info#download>binary
-executables</a> or from Debian repository:</p>
-<pre><code>deb http://repo.aptly.info/ squeeze main
-</code></pre>
-<p>When installing from repository, don&rsquo;t forget to import key used to sign
-the release:</p>
-<pre><code>$ gpg --keyserver keys.gnupg.net --recv-keys 2A194991
+executables</a> or from Debian repository:</p><pre><code>deb http://repo.aptly.info/ squeeze main
+</code></pre><p>When installing from repository, don&rsquo;t forget to import key used to sign
+the release:</p><pre><code>$ gpg --keyserver keys.gnupg.net --recv-keys 2A194991
 $ gpg -a --export 2A194991 | sudo apt-key add -
-</code></pre>
-<p>Most important new features are:</p>
-<h1 id=local-repository-publishing>Local Repository Publishing</h1>
-<p>Local repositories could be used in two ways:</p>
-<ul>
-<li>test new versions of software</li>
-<li>provide stable distribution of new versions</li>
-</ul>
-<p>For the second case, it is best to create snapshots of local
+</code></pre><p>Most important new features are:</p><h1 id=local-repository-publishing>Local Repository Publishing</h1><p>Local repositories could be used in two ways:</p><ul>
+<li>test new versions of software</li><li>provide stable distribution of new versions</li></ul><p>For the second case, it is best to create snapshots of local
 repositories and publish them. However, when testing out new versions,
 there isn&rsquo;t much sense in creating snapshot each time repository is
 updated. So aptly since version 0.5 supports <a href=http://www.aptly.info/#aptly-publish-repo>direct publishing of
 repositories</a>. Moreover, when
 local repository is updated, published repository could be updated as
-well in <a href=http://www.aptly.info/#aptly-publish-update>one step</a>.</p>
-<p>When local repository is created, default publishing options
+well in <a href=http://www.aptly.info/#aptly-publish-update>one step</a>.</p><p>When local repository is created, default publishing options
 (distribution and component) could be specified, so that these options
-don&rsquo;t need to be specified when publishing:</p>
-<pre><code>aptly repo create -distribution=wheezy testing-wheezy
+don&rsquo;t need to be specified when publishing:</p><pre><code>aptly repo create -distribution=wheezy testing-wheezy
 aptly repo add -remove-files testing-wheezy incoming/*.deb
 aptly publish repo testing-wheezy
 ...
 aptly repo add -remove-files testing-wheezy incoming/*.deb
 aptly publish update wheezy
-</code></pre>
-<h1 id=published-snapshot-switching>Published Snapshot Switching</h1>
-<p>Snapshot is a way to make package environment stable and repeatable, but
+</code></pre><h1 id=published-snapshot-switching>Published Snapshot Switching</h1><p>Snapshot is a way to make package environment stable and repeatable, but
 from time to time new snapshots are created that contain new versions of
 software. To publish new version of snapshot, aptly before 0.5 required
 old snapshot to be unpublished and new snapshot to be published again.
-During this process, repository would be unusable.</p>
-<p>New feature allows to <a href=http://www.aptly.info/#aptly-publish-switch>&ldquo;switch&rdquo; snapshots in published
+During this process, repository would be unusable.</p><p>New feature allows to <a href=http://www.aptly.info/#aptly-publish-switch>&ldquo;switch&rdquo; snapshots in published
 repository</a>. aptly would do
-its best to minimize repository downtime:</p>
-<ul>
-<li>first, new packages files are linked to published root</li>
-<li>new metadata files (<code>Packages</code>, <code>Release</code>, &mldr;) are created in
-temporary locations</li>
-<li>new versions of metadata files are moved to final locations</li>
-<li>old package files are cleaned up from the pool (if required).</li>
-</ul>
-<p>For example:</p>
-<pre><code>aptly snapshot create wheezy-7.3 from mirror wheezy-main
+its best to minimize repository downtime:</p><ul>
+<li>first, new packages files are linked to published root</li><li>new metadata files (<code>Packages</code>, <code>Release</code>, &mldr;) are created in
+temporary locations</li><li>new versions of metadata files are moved to final locations</li><li>old package files are cleaned up from the pool (if required).</li></ul><p>For example:</p><pre><code>aptly snapshot create wheezy-7.3 from mirror wheezy-main
 aptly publish snapshot wheezy-7.3
 ....
 aptly mirror update wheezy-main
 aptly snapshot create wheezy-7.4 from mirror wheezy-main
 aptly publish switch wheezy wheezy-7.4
-</code></pre>
-<h1 id=merge-strategy>Merge Strategy</h1>
-<p>When <a href=http://www.aptly.info/#aptly-snapshot-merge>merging snapshots</a>
+</code></pre><h1 id=merge-strategy>Merge Strategy</h1><p>When <a href=http://www.aptly.info/#aptly-snapshot-merge>merging snapshots</a>
 aptly would override packages with the version from the latest argument
 on the command line. This works ok if you merge, for example regular
 repository and backports. But sometimes this is not enough, e.g. when
 merging regular repository, updates and security repository. aptly now
 supports flag <code>-latest</code> to change merge strategy to &ldquo;latest version
-wins&rdquo;:</p>
-<pre><code>aptly snapshot merge -latest wheezy-latest wheezy-backports wheezy-main wheezy-security
-</code></pre>
-<p>Thanks to <a href=https://github.com/ryanuber>Ryan Uber</a> and <a href=https://github.com/keithchambers>Keith
+wins&rdquo;:</p><pre><code>aptly snapshot merge -latest wheezy-latest wheezy-backports wheezy-main wheezy-security
+</code></pre><p>Thanks to <a href=https://github.com/ryanuber>Ryan Uber</a> and <a href=https://github.com/keithchambers>Keith
 Chambers</a> for the idea and pull
-request.</p>
-<h1 id=scripting>Scripting</h1>
-<p>Sometimes you need to perform bunch of actions with mirrors, snapshots
+request.</p><h1 id=scripting>Scripting</h1><p>Sometimes you need to perform bunch of actions with mirrors, snapshots
 or repositories. aptly 0.5 supports special &ldquo;raw&rdquo; listing which is
-easily parseable. E.g. update all Debian mirrors:</p>
-<pre><code>aptly mirror list -raw | grep -E '^debian-.*' | xargs -n 1 aptly mirror update
-</code></pre>
-<p>Thanks to <a href=https://github.com/erickeller>Eric Keller</a> for the idea.</p>
-<h1 id=all-changes>All Changes</h1>
-<p>Full list of changes in 0.5:</p>
-<ul>
-<li>Debian packages for aptly are <a href=http://www.aptly.info#download>available</a></li>
-<li>internal DB is compacted when calling <a href=http://www.aptly.info#aptly-db-cleanup>aptly db cleanup</a> (<a href=https://github.com/aptly-dev/aptly/issues/19>#19</a>)</li>
-<li>size is shown in human-readable format (<a href=https://github.com/aptly-dev/aptly/issues/18>#18</a>)</li>
-<li>fixed wrong location of man page in Debian package (<a href=https://github.com/aptly-dev/aptly/issues/22>#22</a>)</li>
-<li>new flags: <code>-distribution</code> and <code>-component</code> to specify default publishing options in <a href=http://www.aptly.info#aptly-repo-create>aptly repo create</a> (<a href=https://github.com/aptly-dev/aptly/issues/12>#12</a>)</li>
-<li>aptly would try harder to figure out distribution & component automatically when publishing going through the tree of snapshots, mirrors and local repositories</li>
-<li>aptly supports publishing local repositories, without intermediate snapshot step (<a href=https://github.com/aptly-dev/aptly/issues/10>#10</a>)</li>
-<li>new command: <a href=http://www.aptly.info#aptly-publish-repo>aptly publish repo</a> to publish local repository directly (<a href=https://github.com/aptly-dev/aptly/issues/10>#10</a>)</li>
-<li>new command: <a href=http://www.aptly.info#aptly-repo-edit>aptly publish edit</a> to change defaults for the local repository (<a href=https://github.com/aptly-dev/aptly/issues/12>#12</a>)</li>
-<li>aptly supports global & command flags placement in any position in command line (before command name, after command name) (<a href=https://github.com/aptly-dev/aptly/issues/17>#17</a>)</li>
-<li>new command: <a href=http://www.aptly.info#aptly-db-recover>aptly db recover</a> to recover internal DB after crash (<a href=https://github.com/aptly-dev/aptly/issues/25>#25</a>)</li>
-<li>new flag: <code>-raw</code> to display list in machine-readable format for commands <a href=http://www.aptly.info#aptly-mirror-list>aptly mirror list</a>, <a href=http://www.aptly.info#aptly-repo-list>aptly repo list</a>, <a href=http://www.aptly.info#aptly-snapshot-list>aptly snapshot list</a> and <a href=http://www.aptly.info#aptly-publish-list>aptly publish list</a> (<a href=https://github.com/aptly-dev/aptly/issues/27>#27</a>, <a href=https://github.com/aptly-dev/aptly/issues/31>#31</a>)</li>
-<li>new flags: <code>-origin</code> and <code>-label</code> to customize fields <code>Origin:</code> and <code>Label:</code> in <code>Release</code> files during publishing in commands <a href=http://www.aptly.info#aptly-publish-snapshot>aptly publish snapshot</a> and <a href=http://www.aptly.info#aptly-publish-repo>aptly publish repo</a> (<a href=https://github.com/aptly-dev/aptly/issues/29>#29</a>)</li>
-<li>bug fix: with some HTTP servers aptly might have given "size mismatch" errors due to unnecessary decompression (<a href=https://github.com/aptly-dev/aptly/issues/33>#33</a>)</li>
-<li>new command: <a href=http://www.aptly.info#aptly-publish-update>aptly publish update</a> updates published repo in-place (<a href=https://github.com/aptly-dev/aptly/issues/8>#8</a>)</li>
-<li>new command: <a href=http://www.aptly.info#aptly-publish-switch>aptly publish switch</a> switches published snapshot in-place (<a href=https://github.com/aptly-dev/aptly/issues/8>#8</a>)</li>
-<li>new flag: <code>-latest</code> for command <a href=http://www.aptly.info#aptly-snapshot-merge>aptly snapshot merge</a> changes merge strategy to "latest version wins" (<a href=https://github.com/aptly-dev/aptly/pull/42>#42</a>), thanks to <a href=https://github.com/ryanuber>@ryanuber</a> and <a href=https://github.com/keithchambers>@keithchambers</a></li>
-</ul>
-</div>
-</section>
-<footer id=page-footer>
+easily parseable. E.g. update all Debian mirrors:</p><pre><code>aptly mirror list -raw | grep -E '^debian-.*' | xargs -n 1 aptly mirror update
+</code></pre><p>Thanks to <a href=https://github.com/erickeller>Eric Keller</a> for the idea.</p><h1 id=all-changes>All Changes</h1><p>Full list of changes in 0.5:</p><ul>
+<li>Debian packages for aptly are <a href=http://www.aptly.info#download>available</a></li><li>internal DB is compacted when calling <a href=http://www.aptly.info#aptly-db-cleanup>aptly db cleanup</a> (<a href=https://github.com/aptly-dev/aptly/issues/19>#19</a>)</li><li>size is shown in human-readable format (<a href=https://github.com/aptly-dev/aptly/issues/18>#18</a>)</li><li>fixed wrong location of man page in Debian package (<a href=https://github.com/aptly-dev/aptly/issues/22>#22</a>)</li><li>new flags: <code>-distribution</code> and <code>-component</code> to specify default publishing options in <a href=http://www.aptly.info#aptly-repo-create>aptly repo create</a> (<a href=https://github.com/aptly-dev/aptly/issues/12>#12</a>)</li><li>aptly would try harder to figure out distribution & component automatically when publishing going through the tree of snapshots, mirrors and local repositories</li><li>aptly supports publishing local repositories, without intermediate snapshot step (<a href=https://github.com/aptly-dev/aptly/issues/10>#10</a>)</li><li>new command: <a href=http://www.aptly.info#aptly-publish-repo>aptly publish repo</a> to publish local repository directly (<a href=https://github.com/aptly-dev/aptly/issues/10>#10</a>)</li><li>new command: <a href=http://www.aptly.info#aptly-repo-edit>aptly publish edit</a> to change defaults for the local repository (<a href=https://github.com/aptly-dev/aptly/issues/12>#12</a>)</li><li>aptly supports global & command flags placement in any position in command line (before command name, after command name) (<a href=https://github.com/aptly-dev/aptly/issues/17>#17</a>)</li><li>new command: <a href=http://www.aptly.info#aptly-db-recover>aptly db recover</a> to recover internal DB after crash (<a href=https://github.com/aptly-dev/aptly/issues/25>#25</a>)</li><li>new flag: <code>-raw</code> to display list in machine-readable format for commands <a href=http://www.aptly.info#aptly-mirror-list>aptly mirror list</a>, <a href=http://www.aptly.info#aptly-repo-list>aptly repo list</a>, <a href=http://www.aptly.info#aptly-snapshot-list>aptly snapshot list</a> and <a href=http://www.aptly.info#aptly-publish-list>aptly publish list</a> (<a href=https://github.com/aptly-dev/aptly/issues/27>#27</a>, <a href=https://github.com/aptly-dev/aptly/issues/31>#31</a>)</li><li>new flags: <code>-origin</code> and <code>-label</code> to customize fields <code>Origin:</code> and <code>Label:</code> in <code>Release</code> files during publishing in commands <a href=http://www.aptly.info#aptly-publish-snapshot>aptly publish snapshot</a> and <a href=http://www.aptly.info#aptly-publish-repo>aptly publish repo</a> (<a href=https://github.com/aptly-dev/aptly/issues/29>#29</a>)</li><li>bug fix: with some HTTP servers aptly might have given "size mismatch" errors due to unnecessary decompression (<a href=https://github.com/aptly-dev/aptly/issues/33>#33</a>)</li><li>new command: <a href=http://www.aptly.info#aptly-publish-update>aptly publish update</a> updates published repo in-place (<a href=https://github.com/aptly-dev/aptly/issues/8>#8</a>)</li><li>new command: <a href=http://www.aptly.info#aptly-publish-switch>aptly publish switch</a> switches published snapshot in-place (<a href=https://github.com/aptly-dev/aptly/issues/8>#8</a>)</li><li>new flag: <code>-latest</code> for command <a href=http://www.aptly.info#aptly-snapshot-merge>aptly snapshot merge</a> changes merge strategy to "latest version wins" (<a href=https://github.com/aptly-dev/aptly/pull/42>#42</a>), thanks to <a href=https://github.com/ryanuber>@ryanuber</a> and <a href=https://github.com/keithchambers>@keithchambers</a></li></ul></div></section><footer id=page-footer>
 <div class=container>
 <nav class="navbar navbar-default navbar-static-top" role=navigation>
 <ul class="nav navbar-nav nav-justified">
-<li><a href=/www.aptly.info/tutorial/>tutorials</a></li>
-<li><a href=/www.aptly.info/download/>download</a></li>
-<li><a href=/www.aptly.info/support/>support</a></li>
-<li><a href=/www.aptly.info/doc/overview/>documentation</a></li>
-<li><a href=/www.aptly.info/about/>about</a></li>
-<li class=active><a href=/www.aptly.info/post/>blog</a></li>
-</ul>
-</nav>
-<div class=copy>
+<li><a href=/www.aptly.info/tutorial/>tutorials</a></li><li><a href=/www.aptly.info/download/>download</a></li><li><a href=/www.aptly.info/support/>support</a></li><li><a href=/www.aptly.info/doc/overview/>documentation</a></li><li><a href=/www.aptly.info/about/>about</a></li><li class=active><a href=/www.aptly.info/post/>blog</a></li></ul></nav><div class=copy>
 Sponsored by <a href=http://express42.com/>express42</a> &copy;&nbsp;2013-2018 aptly contributors
-</div>
-</div>
-</footer>
-<script src=https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js></script>
+</div></div></footer><script src=https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js></script>
 <script src=/www.aptly.info/js/bootstrap.min.js></script>
 <script src=/www.aptly.info/js/aptly.js></script>
-<script>(function(a,e,f,g,b,c,d){a.GoogleAnalyticsObject=b,a[b]=a[b]||function(){(a[b].q=a[b].q||[]).push(arguments)},a[b].l=1*new Date,c=e.createElement(f),d=e.getElementsByTagName(f)[0],c.async=1,c.src=g,d.parentNode.insertBefore(c,d)})(window,document,'script','//www.google-analytics.com/analytics.js','ga'),ga('create','UA-6065617-2','aptly.info'),ga('send','pageview')</script>
-</body>
-</html>
+<script>(function(e,o,i,a,t,n,s){e.GoogleAnalyticsObject=t,e[t]=e[t]||function(){(e[t].q=e[t].q||[]).push(arguments)},e[t].l=1*new Date,n=o.createElement(i),s=o.getElementsByTagName(i)[0],n.async=1,n.src=a,s.parentNode.insertBefore(n,s)})(window,document,"script","//www.google-analytics.com/analytics.js","ga"),ga("create","UA-6065617-2","aptly.info"),ga("send","pageview")</script>
+</body></html>

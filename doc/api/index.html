@@ -2,342 +2,214 @@
 <head>
 <meta charset=utf-8>
 <meta http-equiv=x-ua-compatible content="IE=edge">
-<title>aptly - API</title>
-<meta name=viewport content="width=device-width,initial-scale=1">
+<title>aptly - API</title><meta name=viewport content="width=device-width,initial-scale=1">
 <link rel="shortcut icon" href=/www.aptly.info/favicon.ico>
 <link type=text/css rel=stylesheet href=/www.aptly.info/css/styles.css>
 <link rel=canonical href=http://aptly-dev.github.io/www.aptly.info/doc/api/>
 <link href=/www.aptly.info/post/index.xml rel=alternate type=application/rss+xml title="Debian repository management tool">
-</head>
-<body>
+</head><body>
 <header id=page-header>
 <div class=container>
 <nav class="navbar navbar-default navbar-static-top" role=navigation>
 <ul class="nav navbar-nav nav-justified">
-<li><a href=/www.aptly.info/tutorial/>tutorials</a></li>
-<li><a href=/www.aptly.info/download/>download</a></li>
-<li><a href=/www.aptly.info/support/>support</a></li>
-<li class=active><a href=/www.aptly.info/doc/overview/>documentation</a></li>
-<li><a href=/www.aptly.info/about/>about</a></li>
-<li><a href=/www.aptly.info/post/>blog</a></li>
-</ul>
-</nav>
-<div class=row>
+<li><a href=/www.aptly.info/tutorial/>tutorials</a></li><li><a href=/www.aptly.info/download/>download</a></li><li><a href=/www.aptly.info/support/>support</a></li><li class=active><a href=/www.aptly.info/doc/overview/>documentation</a></li><li><a href=/www.aptly.info/about/>about</a></li><li><a href=/www.aptly.info/post/>blog</a></li></ul></nav><div class=row>
 <div class="col-md-6 col-md-offset-3 text-center">
 <a class=brand href=/www.aptly.info/>
 <i class=brand-logo></i>
 <span class=brand-name>aptly</span>
 </a>
-</div>
-</div>
-</div>
-</header>
-<section class=documentation>
+</div></div></div></header><section class=documentation>
 <div class=container>
-<div class=sidebar-overlay></div>
-<div class=row>
+<div class=sidebar-overlay></div><div class=row>
 <div class="col-md-3 col-sm-3 col-xs-3">
 <div class=sidebar>
 <ul class="nav nav-sidebar">
 <li>
 <a href=/www.aptly.info/doc/overview/>Overview</a>
-</li>
-<li>
+</li><li>
 <a href=/www.aptly.info/doc/why/>Why aptly?</a>
-</li>
-<li>
+</li><li>
 <a href=/www.aptly.info/doc/faq/>FAQ</a>
-</li>
-<li>
+</li><li>
 <a href=/www.aptly.info/doc/features/>Features</a>
 <ul class=nav>
 <li>
 <a href=/www.aptly.info/doc/feature/query/>Package Queries</a>
-</li>
-<li>
+</li><li>
 <a href=/www.aptly.info/doc/feature/duplicate/>Duplicate Packages</a>
-</li>
-<li>
+</li><li>
 <a href=/www.aptly.info/doc/feature/s3/>Publishing to S3</a>
-</li>
-<li>
+</li><li>
 <a href=/www.aptly.info/doc/feature/swift/>Publishing to Swift</a>
-</li>
-<li>
+</li><li>
 <a href=/www.aptly.info/doc/feature/filesystem/>Filesystem Publishing</a>
-</li>
-<li>
+</li><li>
 <a href=/www.aptly.info/doc/feature/multi-component/>Multi-Component Publishing</a>
-</li>
-<li>
+</li><li>
 <a href=/www.aptly.info/doc/feature/pgp-providers/>PGP Providers</a>
-</li>
-<li>
+</li><li>
 <a href=/www.aptly.info/doc/feature/package-display/>Package Display Format</a>
-</li>
-<li>
+</li><li>
 <a href=/www.aptly.info/doc/feature/dependencies/>Dependency Resolving</a>
-</li>
-</ul>
-</li>
-<li>
+</li></ul></li><li>
 <a href=/www.aptly.info/doc/configuration/>Configuration</a>
-</li>
-<li>
+</li><li>
 <a href=/www.aptly.info/doc/commands/>Commands</a>
 <ul class=nav>
 <li>
 <a href=/www.aptly.info/doc/aptly/flags/>Global Flags</a>
-</li>
-<li>
+</li><li>
 <a href=/www.aptly.info/doc/aptly/mirror/>aptly mirror</a>
 <ul class=nav>
 <li>
 <a href=/www.aptly.info/doc/aptly/mirror/create/>aptly mirror create</a>
-</li>
-<li>
+</li><li>
 <a href=/www.aptly.info/doc/aptly/mirror/update/>aptly mirror update</a>
-</li>
-<li>
+</li><li>
 <a href=/www.aptly.info/doc/aptly/mirror/list/>aptly mirror list</a>
-</li>
-<li>
+</li><li>
 <a href=/www.aptly.info/doc/aptly/mirror/show/>aptly mirror show</a>
-</li>
-<li>
+</li><li>
 <a href=/www.aptly.info/doc/aptly/mirror/edit/>aptly mirror edit</a>
-</li>
-<li>
+</li><li>
 <a href=/www.aptly.info/doc/aptly/mirror/search/>aptly mirror search</a>
-</li>
-<li>
+</li><li>
 <a href=/www.aptly.info/doc/aptly/mirror/rename/>aptly mirror rename</a>
-</li>
-<li>
+</li><li>
 <a href=/www.aptly.info/doc/aptly/mirror/drop/>aptly mirror drop</a>
-</li>
-</ul>
-</li>
-<li>
+</li></ul></li><li>
 <a href=/www.aptly.info/doc/aptly/repo/>aptly repo</a>
 <ul class=nav>
 <li>
 <a href=/www.aptly.info/doc/aptly/repo/create/>aptly repo create</a>
-</li>
-<li>
+</li><li>
 <a href=/www.aptly.info/doc/aptly/repo/add/>aptly repo add</a>
-</li>
-<li>
+</li><li>
 <a href=/www.aptly.info/doc/aptly/repo/include/>aptly repo include</a>
-</li>
-<li>
+</li><li>
 <a href=/www.aptly.info/doc/aptly/repo/import/>aptly repo import</a>
-</li>
-<li>
+</li><li>
 <a href=/www.aptly.info/doc/aptly/repo/show/>aptly repo show</a>
-</li>
-<li>
+</li><li>
 <a href=/www.aptly.info/doc/aptly/repo/list/>aptly repo list</a>
-</li>
-<li>
+</li><li>
 <a href=/www.aptly.info/doc/aptly/repo/copy/>aptly repo copy</a>
-</li>
-<li>
+</li><li>
 <a href=/www.aptly.info/doc/aptly/repo/move/>aptly repo move</a>
-</li>
-<li>
+</li><li>
 <a href=/www.aptly.info/doc/aptly/repo/remove/>aptly repo remove</a>
-</li>
-<li>
+</li><li>
 <a href=/www.aptly.info/doc/aptly/repo/search/>aptly repo search</a>
-</li>
-<li>
+</li><li>
 <a href=/www.aptly.info/doc/aptly/repo/edit/>aptly repo edit</a>
-</li>
-<li>
+</li><li>
 <a href=/www.aptly.info/doc/aptly/repo/rename/>aptly repo rename</a>
-</li>
-<li>
+</li><li>
 <a href=/www.aptly.info/doc/aptly/repo/drop/>aptly repo drop</a>
-</li>
-</ul>
-</li>
-<li>
+</li></ul></li><li>
 <a href=/www.aptly.info/doc/aptly/snapshot/>aptly snapshot</a>
 <ul class=nav>
 <li>
 <a href=/www.aptly.info/doc/aptly/snapshot/create/>aptly snapshot create</a>
-</li>
-<li>
+</li><li>
 <a href=/www.aptly.info/doc/aptly/snapshot/list/>aptly snapshot list</a>
-</li>
-<li>
+</li><li>
 <a href=/www.aptly.info/doc/aptly/snapshot/show/>aptly snapshot show</a>
-</li>
-<li>
+</li><li>
 <a href=/www.aptly.info/doc/aptly/snapshot/verify/>aptly snapshot verify</a>
-</li>
-<li>
+</li><li>
 <a href=/www.aptly.info/doc/aptly/snapshot/pull/>aptly snapshot pull</a>
-</li>
-<li>
+</li><li>
 <a href=/www.aptly.info/doc/aptly/snapshot/filter/>aptly snapshot filter</a>
-</li>
-<li>
+</li><li>
 <a href=/www.aptly.info/doc/aptly/snapshot/diff/>aptly snapshot diff</a>
-</li>
-<li>
+</li><li>
 <a href=/www.aptly.info/doc/aptly/snapshot/merge/>aptly snapshot merge</a>
-</li>
-<li>
+</li><li>
 <a href=/www.aptly.info/doc/aptly/snapshot/search/>aptly snapshot search</a>
-</li>
-<li>
+</li><li>
 <a href=/www.aptly.info/doc/aptly/snapshot/rename/>aptly snapshot rename</a>
-</li>
-<li>
+</li><li>
 <a href=/www.aptly.info/doc/aptly/snapshot/drop/>aptly snapshot drop</a>
-</li>
-</ul>
-</li>
-<li>
+</li></ul></li><li>
 <a href=/www.aptly.info/doc/aptly/package/>aptly package</a>
 <ul class=nav>
 <li>
 <a href=/www.aptly.info/doc/aptly/package/search/>aptly package search</a>
-</li>
-<li>
+</li><li>
 <a href=/www.aptly.info/doc/aptly/package/show/>aptly package show</a>
-</li>
-</ul>
-</li>
-<li>
+</li></ul></li><li>
 <a href=/www.aptly.info/doc/aptly/publish/>aptly publish</a>
 <ul class=nav>
 <li>
 <a href=/www.aptly.info/doc/aptly/publish/snapshot/>aptly publish snapshot</a>
-</li>
-<li>
+</li><li>
 <a href=/www.aptly.info/doc/aptly/publish/repo/>aptly publish repo</a>
-</li>
-<li>
+</li><li>
 <a href=/www.aptly.info/doc/aptly/publish/update/>aptly publish update</a>
-</li>
-<li>
+</li><li>
 <a href=/www.aptly.info/doc/aptly/publish/switch/>aptly publish switch</a>
-</li>
-<li>
+</li><li>
 <a href=/www.aptly.info/doc/aptly/publish/list/>aptly publish list</a>
-</li>
-<li>
+</li><li>
 <a href=/www.aptly.info/doc/aptly/publish/show/>aptly publish show</a>
-</li>
-<li>
+</li><li>
 <a href=/www.aptly.info/doc/aptly/publish/drop/>aptly publish drop</a>
-</li>
-</ul>
-</li>
-<li>
+</li></ul></li><li>
 <a href=/www.aptly.info/doc/aptly/db/>aptly db</a>
 <ul class=nav>
 <li>
 <a href=/www.aptly.info/doc/aptly/db/cleanup/>aptly db cleanup</a>
-</li>
-<li>
+</li><li>
 <a href=/www.aptly.info/doc/aptly/db/recover/>aptly db recover</a>
-</li>
-</ul>
-</li>
-<li>
+</li></ul></li><li>
 <a href=/www.aptly.info/doc/aptly/task/>aptly task</a>
 <ul class=nav>
 <li>
 <a href=/www.aptly.info/doc/aptly/task/run/>aptly task run</a>
-</li>
-</ul>
-</li>
-<li>
+</li></ul></li><li>
 <a href=/www.aptly.info/doc/aptly/serve/>aptly serve</a>
-</li>
-<li>
+</li><li>
 <a href=/www.aptly.info/doc/aptly/config/>aptly config</a>
 <ul class=nav>
 <li>
 <a href=/www.aptly.info/doc/aptly/config/show/>aptly config show</a>
-</li>
-</ul>
-</li>
-<li>
+</li></ul></li><li>
 <a href=/www.aptly.info/doc/aptly/graph/>aptly graph</a>
-</li>
-</ul>
-</li>
-<li class=active>
+</li></ul></li><li class=active>
 <a href=/www.aptly.info/doc/api/>API</a>
 <ul class=nav>
 <li>
 <a href=/www.aptly.info/doc/api/repos/>Local Repos API</a>
-</li>
-<li>
+</li><li>
 <a href=/www.aptly.info/doc/api/files/>File Upload API</a>
-</li>
-<li>
+</li><li>
 <a href=/www.aptly.info/doc/api/snapshots/>Snapshot API</a>
-</li>
-<li>
+</li><li>
 <a href=/www.aptly.info/doc/api/publish/>Publish API</a>
-</li>
-<li>
+</li><li>
 <a href=/www.aptly.info/doc/api/packages/>Package API</a>
-</li>
-<li>
+</li><li>
 <a href=/www.aptly.info/doc/api/misc/>Misc API</a>
-</li>
-</ul>
-</li>
-<li>
+</li></ul></li><li>
 <a href=/www.aptly.info/doc/integrations/>Integrations</a>
-</li>
-</ul>
-<div class=source-buttons>
+</li></ul><div class=source-buttons>
 <a href=/www.aptly.info/download/ class="btn btn-danger">Download</a>
 <a href=https://github.com/aptly-dev/aptly class="btn btn-default">Github</a>
-</div>
-</div>
-</div>
-<div class="col-md-9 col-sm-9 col-xs-9">
-<h2 id=api>API</h2>
-<div class="alert alert-warning alert-note"><strong>Note:</strong>
+</div></div></div><div class="col-md-9 col-sm-9 col-xs-9">
+<h2 id=api>API</h2><div class="alert alert-warning alert-note"><strong>Note:</strong>
 HTTP REST API is not complete yet (mirroring support not implemented).
 API service and CLI tool could
 be used from the same aptly root (to enable concurrent CLI and API usage,
-add <code>-no-lock</code> flag to <code>aptly api serve</code> command).</div>
-<h4 id=why>Why?</h4>
-<p>Using aptly via REST API allows to achieve two goals:</p>
-<ol>
-<li>Remote access to aptly service: e.g. uploading packages and publishing them from CI server.</li>
-<li>Concurrent access to aptly by multiple users.</li>
-</ol>
-<h4 id=quickstart>Quickstart</h4>
-<p>Run <code>aptly api serve</code> to start HTTP service:</p>
-<pre><code>$ aptly api serve
+add <code>-no-lock</code> flag to <code>aptly api serve</code> command).</div><h4 id=why>Why?</h4><p>Using aptly via REST API allows to achieve two goals:</p><ol>
+<li>Remote access to aptly service: e.g. uploading packages and publishing them from CI server.</li><li>Concurrent access to aptly by multiple users.</li></ol><h4 id=quickstart>Quickstart</h4><p>Run <code>aptly api serve</code> to start HTTP service:</p><pre><code>$ aptly api serve
 Starting web server at: :8080 (press Ctrl+C to quit)...
 [GIN-debug] GET   /api/version              --&gt; github.com/aptly-dev/aptly/api.apiVersion (4 handlers)
 ...
-</code></pre>
-<p>By default aptly would listen on <code>:8080</code>, but it could be changed with <code>-listen</code> flag.</p>
-<p>Usage:</p>
-<pre><code>$ aptly api serve -listen=:8080
-</code></pre>
-<p>Flags:</p>
-<ul>
-<li><code>-listen=":8080"</code>: host:port for HTTP listening</li>
-<li><code>-no-lock</code>: don&rsquo;t lock the database</li>
-</ul>
-<p>When <code>-no-lock</code> option is enabled, API server acquires and drops the lock
-around all the operations, so that API and CLI could be used concurrently.</p>
-<p>Try some APIs:</p>
-<pre><code>$ curl http://localhost:8080/api/version
+</code></pre><p>By default aptly would listen on <code>:8080</code>, but it could be changed with <code>-listen</code> flag.</p><p>Usage:</p><pre><code>$ aptly api serve -listen=:8080
+</code></pre><p>Flags:</p><ul>
+<li><code>-listen=":8080"</code>: host:port for HTTP listening</li><li><code>-no-lock</code>: don&rsquo;t lock the database</li></ul><p>When <code>-no-lock</code> option is enabled, API server acquires and drops the lock
+around all the operations, so that API and CLI could be used concurrently.</p><p>Try some APIs:</p><pre><code>$ curl http://localhost:8080/api/version
 {&quot;Version&quot;:&quot;0.9~dev&quot;}
 
 $ curl -F file=@aptly_0.8_i386.deb http://localhost:8080/api/files/aptly_0.8
@@ -354,114 +226,37 @@ $ curl http://localhost:8080/api/repos/aptly-repo/packages
 
 $ curl -X POST -H 'Content-Type: application/json' --data '{&quot;Distribution&quot;: &quot;wheezy&quot;, &quot;Sources&quot;: [{&quot;Name&quot;: &quot;aptly-repo&quot;}]}' http://localhost:8080/api/publish//repos
 {&quot;Architectures&quot;:[&quot;i386&quot;],&quot;Distribution&quot;:&quot;wheezy&quot;,&quot;Label&quot;:&quot;&quot;,&quot;Origin&quot;:&quot;&quot;,&quot;Prefix&quot;:&quot;.&quot;,&quot;SourceKind&quot;:&quot;local&quot;,&quot;Sources&quot;:[{&quot;Component&quot;:&quot;main&quot;,&quot;Name&quot;:&quot;aptly-repo&quot;}],&quot;Storage&quot;:&quot;&quot;}
-</code></pre>
-<h4 id=security>Security</h4>
-<p>For security reasons it is advised to let Aptly listen on a Unix domain socket
+</code></pre><h4 id=security>Security</h4><p>For security reasons it is advised to let Aptly listen on a Unix domain socket
 rather than a port. Sockets are subject to file permissions and thus allow for
 user-level access control while binding to a port only gives host-level access
 control. To use a socket simply run Aptly with a suitable listen flag such as
-<code>aptly api serve -listen=unix:///var/run/aptly.sock</code>.</p>
-<p>Aptly&rsquo;s HTTP API shouldn&rsquo;t be directly exposed to the Internet: there&rsquo;s no
+<code>aptly api serve -listen=unix:///var/run/aptly.sock</code>.</p><p>Aptly&rsquo;s HTTP API shouldn&rsquo;t be directly exposed to the Internet: there&rsquo;s no
 authentication/protection of APIs. To publish the API it could be proxied
 through a HTTP proxy or server (e.g. nginx) to add an authentication mechanism
-or disallow all non-GET requests. <a href=https://github.com/sepich/nginx-ldap>Reference example</a> for LDAP based per-repo access with nginx.</p>
-<h4 id=notes>Notes</h4>
-<ol>
+or disallow all non-GET requests. <a href=https://github.com/sepich/nginx-ldap>Reference example</a> for LDAP based per-repo access with nginx.</p><h4 id=notes>Notes</h4><ol>
 <li>Some things (for example, S3 publishing endpoints) could be set up only using configuration file, so it requires
-restart of aptly HTTP server in order for changes to take effect.</li>
-<li>GPG key passphrase can&rsquo;t be input on console, so either passwordless GPG keys are required or passphrase should be specified in
-API parameters.</li>
-<li>Some script might be required to start/stop aptly HTTP service.</li>
-<li>Some parameters are given as part of URLs, which requires proper url encoding. Unfortunately, at the moment it&rsquo;s not possible
-to pass URL arguments with <code>/</code> in them.</li>
-</ol>
-<h3 id=how-to-implement-equivalent-of-aptly-commands-using-api>How to implement equivalent of aptly commands using API</h3>
+restart of aptly HTTP server in order for changes to take effect.</li><li>GPG key passphrase can&rsquo;t be input on console, so either passwordless GPG keys are required or passphrase should be specified in
+API parameters.</li><li>Some script might be required to start/stop aptly HTTP service.</li><li>Some parameters are given as part of URLs, which requires proper url encoding. Unfortunately, at the moment it&rsquo;s not possible
+to pass URL arguments with <code>/</code> in them.</li></ol><h3 id=how-to-implement-equivalent-of-aptly-commands-using-api>How to implement equivalent of aptly commands using API</h3><ul>
+<li><code>aptly mirror</code> - not available via API yet</li><li><code>aptly repo</code>: <a href=/doc/api/repos>local repos API</a>
 <ul>
-<li><code>aptly mirror</code> - not available via API yet</li>
-<li><code>aptly repo</code>: <a href=/doc/api/repos>local repos API</a>
-<ul>
-<li><code>add</code>: <a href=/doc/api/files>file upload API</a> + add packages from uploaded file</li>
-<li><code>copy</code>: show packages/search + add packages by key</li>
-<li><code>create</code>: create</li>
-<li><code>drop</code>: delete</li>
-<li><code>edit</code>: edit</li>
-<li><code>import</code>: not available, as mirror API is not implemented yet</li>
-<li><code>list</code>: list</li>
-<li><code>move</code>: show packages/search + add packages by key + delete packages by key</li>
-<li><code>remove</code>: show packages/search + delete packages by key</li>
-<li><code>rename</code>: not available yet, should be part of edit API</li>
-<li><code>search</code>: show packages/search</li>
-<li><code>show</code>: show</li>
-</ul>
-</li>
-<li><code>aptly snapshot</code>: <a href=/doc/api/snapshots>snapshots API</a>
+<li><code>add</code>: <a href=/doc/api/files>file upload API</a> + add packages from uploaded file</li><li><code>copy</code>: show packages/search + add packages by key</li><li><code>create</code>: create</li><li><code>drop</code>: delete</li><li><code>edit</code>: edit</li><li><code>import</code>: not available, as mirror API is not implemented yet</li><li><code>list</code>: list</li><li><code>move</code>: show packages/search + add packages by key + delete packages by key</li><li><code>remove</code>: show packages/search + delete packages by key</li><li><code>rename</code>: not available yet, should be part of edit API</li><li><code>search</code>: show packages/search</li><li><code>show</code>: show</li></ul></li><li><code>aptly snapshot</code>: <a href=/doc/api/snapshots>snapshots API</a>
 <ul>
 <li><code>create</code>:
 <ul>
-<li>empty: create snapshot with empty package references</li>
-<li>from mirror: not available yet</li>
-<li>from local repo: create snapshot from local repo</li>
-</ul>
-</li>
-<li><code>diff</code>: snapshot difference API</li>
-<li><code>drop</code>: delete</li>
-<li><code>filter</code>: show packages/search + create snapshot from package references</li>
-<li><code>list</code>: list</li>
-<li><code>merge</code>: show packages/search + processing + create snapshot from package references</li>
-<li><code>pull</code>: show packages/search + processing + create snapshot from package references (might be implemented as API in future versions)</li>
-<li><code>rename</code>: edit</li>
-<li><code>search</code>: show packages/search</li>
-<li><code>show</code>: show</li>
-<li><code>verify</code>: not available yet</li>
-</ul>
-</li>
-<li><code>aptly publish</code>: <a href=/doc/api/publish>publish API</a>
+<li>empty: create snapshot with empty package references</li><li>from mirror: not available yet</li><li>from local repo: create snapshot from local repo</li></ul></li><li><code>diff</code>: snapshot difference API</li><li><code>drop</code>: delete</li><li><code>filter</code>: show packages/search + create snapshot from package references</li><li><code>list</code>: list</li><li><code>merge</code>: show packages/search + processing + create snapshot from package references</li><li><code>pull</code>: show packages/search + processing + create snapshot from package references (might be implemented as API in future versions)</li><li><code>rename</code>: edit</li><li><code>search</code>: show packages/search</li><li><code>show</code>: show</li><li><code>verify</code>: not available yet</li></ul></li><li><code>aptly publish</code>: <a href=/doc/api/publish>publish API</a>
 <ul>
-<li><code>drop</code>: delete</li>
-<li><code>list</code>: list</li>
-<li><code>repo</code>: publish repo</li>
-<li><code>snapshot</code>: publish snapshot</li>
-<li><code>switch</code>: switch/update</li>
-<li><code>update</code>: switch/update</li>
-</ul>
-</li>
-<li><code>aptly package</code>: <a href=/doc/api/packages>packages API</a>
+<li><code>drop</code>: delete</li><li><code>list</code>: list</li><li><code>repo</code>: publish repo</li><li><code>snapshot</code>: publish snapshot</li><li><code>switch</code>: switch/update</li><li><code>update</code>: switch/update</li></ul></li><li><code>aptly package</code>: <a href=/doc/api/packages>packages API</a>
 <ul>
-<li><code>search</code>: not available yet</li>
-<li><code>show</code>: only one format, with package key as input</li>
-</ul>
-</li>
-<li><code>aptly graph</code>: <a href=/doc/api/misc>graph API</a></li>
-<li><code>aptly version</code>: <a href=/doc/api/misc>version API</a></li>
-<li><code>aptly db</code>: not available yet</li>
-</ul>
-<div id=disqus_thread></div>
-<script type=text/javascript>(function(){var a,b,c,d;if(window.location.hostname=="localhost")return;a=document.createElement('script'),a.type='text/javascript',a.async=!0,b='aptly',c='API',d='/www.aptly.info/doc/api/'.replace(/\/$/,""),a.src='//'+b+'.disqus.com/embed.js',(document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(a)})()</script>
-<noscript>Please enable JavaScript to view the <a href=http://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript>
-</div>
-</div>
-</div>
-</section>
-<footer id=page-footer>
+<li><code>search</code>: not available yet</li><li><code>show</code>: only one format, with package key as input</li></ul></li><li><code>aptly graph</code>: <a href=/doc/api/misc>graph API</a></li><li><code>aptly version</code>: <a href=/doc/api/misc>version API</a></li><li><code>aptly db</code>: not available yet</li></ul><div id=disqus_thread></div><script type=text/javascript>(function(){if(window.location.hostname=="localhost")return;var e=document.createElement("script"),t,n,s;e.type="text/javascript",e.async=!0,t="aptly",n="API",s="/www.aptly.info/doc/api/".replace(/\/$/,""),e.src="//"+t+".disqus.com/embed.js",(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(e)})()</script>
+<noscript>Please enable JavaScript to view the <a href=http://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript></div></div></div></section><footer id=page-footer>
 <div class=container>
 <nav class="navbar navbar-default navbar-static-top" role=navigation>
 <ul class="nav navbar-nav nav-justified">
-<li><a href=/www.aptly.info/tutorial/>tutorials</a></li>
-<li><a href=/www.aptly.info/download/>download</a></li>
-<li><a href=/www.aptly.info/support/>support</a></li>
-<li class=active><a href=/www.aptly.info/doc/overview/>documentation</a></li>
-<li><a href=/www.aptly.info/about/>about</a></li>
-<li><a href=/www.aptly.info/post/>blog</a></li>
-</ul>
-</nav>
-<div class=copy>
+<li><a href=/www.aptly.info/tutorial/>tutorials</a></li><li><a href=/www.aptly.info/download/>download</a></li><li><a href=/www.aptly.info/support/>support</a></li><li class=active><a href=/www.aptly.info/doc/overview/>documentation</a></li><li><a href=/www.aptly.info/about/>about</a></li><li><a href=/www.aptly.info/post/>blog</a></li></ul></nav><div class=copy>
 Sponsored by <a href=http://express42.com/>express42</a> &copy;&nbsp;2013-2018 aptly contributors
-</div>
-</div>
-</footer>
-<script src=https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js></script>
+</div></div></footer><script src=https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js></script>
 <script src=/www.aptly.info/js/bootstrap.min.js></script>
 <script src=/www.aptly.info/js/aptly.js></script>
-<script>(function(a,e,f,g,b,c,d){a.GoogleAnalyticsObject=b,a[b]=a[b]||function(){(a[b].q=a[b].q||[]).push(arguments)},a[b].l=1*new Date,c=e.createElement(f),d=e.getElementsByTagName(f)[0],c.async=1,c.src=g,d.parentNode.insertBefore(c,d)})(window,document,'script','//www.google-analytics.com/analytics.js','ga'),ga('create','UA-6065617-2','aptly.info'),ga('send','pageview')</script>
-</body>
-</html>
+<script>(function(e,o,i,a,t,n,s){e.GoogleAnalyticsObject=t,e[t]=e[t]||function(){(e[t].q=e[t].q||[]).push(arguments)},e[t].l=1*new Date,n=o.createElement(i),s=o.getElementsByTagName(i)[0],n.async=1,n.src=a,s.parentNode.insertBefore(n,s)})(window,document,"script","//www.google-analytics.com/analytics.js","ga"),ga("create","UA-6065617-2","aptly.info"),ga("send","pageview")</script>
+</body></html>

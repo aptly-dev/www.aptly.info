@@ -2,49 +2,30 @@
 <head>
 <meta charset=utf-8>
 <meta http-equiv=x-ua-compatible content="IE=edge">
-<title>aptly - Mirroring with snapshots</title>
-<meta name=viewport content="width=device-width,initial-scale=1">
+<title>aptly - Mirroring with snapshots</title><meta name=viewport content="width=device-width,initial-scale=1">
 <link rel="shortcut icon" href=/www.aptly.info/favicon.ico>
 <link type=text/css rel=stylesheet href=/www.aptly.info/css/styles.css>
 <link rel=canonical href=http://aptly-dev.github.io/www.aptly.info/tutorial/mirror/>
 <link href=/www.aptly.info/post/index.xml rel=alternate type=application/rss+xml title="Debian repository management tool">
-</head>
-<body>
+</head><body>
 <header id=page-header>
 <div class=container>
 <nav class="navbar navbar-default navbar-static-top" role=navigation>
 <ul class="nav navbar-nav nav-justified">
-<li class=active><a href=/www.aptly.info/tutorial/>tutorials</a></li>
-<li><a href=/www.aptly.info/download/>download</a></li>
-<li><a href=/www.aptly.info/support/>support</a></li>
-<li><a href=/www.aptly.info/doc/overview/>documentation</a></li>
-<li><a href=/www.aptly.info/about/>about</a></li>
-<li><a href=/www.aptly.info/post/>blog</a></li>
-</ul>
-</nav>
-<div class=row>
+<li class=active><a href=/www.aptly.info/tutorial/>tutorials</a></li><li><a href=/www.aptly.info/download/>download</a></li><li><a href=/www.aptly.info/support/>support</a></li><li><a href=/www.aptly.info/doc/overview/>documentation</a></li><li><a href=/www.aptly.info/about/>about</a></li><li><a href=/www.aptly.info/post/>blog</a></li></ul></nav><div class=row>
 <div class="col-md-6 col-md-offset-3 text-center">
 <a class=brand href=/www.aptly.info/>
 <i class=brand-logo></i>
 <span class=brand-name>aptly</span>
 </a>
-</div>
-</div>
-</div>
-</header>
-<section class=primary-content>
+</div></div></div></header><section class=primary-content>
 <div class=container>
-<h2 id=mirroring-with-snapshots>Mirroring with snapshots</h2>
-<p class=lead>Goal: build mirror of Debian wheezy, with security updates incorporated,
-done using snapshots to make package installation consistent on all the hosts.</p>
-<h3 id=preparation>Preparation</h3>
-<p>First, <a href=/download/>install</a> aptly. Please verify that you have aptly
+<h2 id=mirroring-with-snapshots>Mirroring with snapshots</h2><p class=lead>Goal: build mirror of Debian wheezy, with security updates incorporated,
+done using snapshots to make package installation consistent on all the hosts.</p><h3 id=preparation>Preparation</h3><p>First, <a href=/download/>install</a> aptly. Please verify that you have aptly
 dependencies installed: packages <code>bzip2</code>, <code>gnupg</code> and <code>gpgv</code>.
 Second, choose some user that would
-be running all aptly commands (it shouldn&rsquo;t be root user).</p>
-<p>We would be signing published repositories with our GPG key, so if you don&rsquo;t
-have GPG key yet, it&rsquo;s time to create one:</p>
-<pre class=code>
+be running all aptly commands (it shouldn&rsquo;t be root user).</p><p>We would be signing published repositories with our GPG key, so if you don&rsquo;t
+have GPG key yet, it&rsquo;s time to create one:</p><pre class=code>
 $ gpg --gen-key
 gpg (GnuPG) 1.4.12; Copyright (C) 2012 Free Software Foundation, Inc.
 This is free software: you are free to change and redistribute it.
@@ -89,17 +70,11 @@ pub   2048R/6430156A 2014-10-09
       Key fingerprint = 52EC DF0E EE8B 5DDF CC8F  7038 B9C8 F8B4 6430 156A
 uid                  Andrey Smirnov (Signing repos) &lt;me@smira.ru&gt;
 sub   2048R/E0C10001 2014-10-09
-</pre>
-<p>Default options should be fine, you need to backup your key and prepare revocation
-certificate, for example like described <a href=http://fedoraproject.org/wiki/Creating_GPG_Keys>here</a>.</p>
-<p>Now we&rsquo;re ready to start!</p>
-<h3 id=creating-mirrors>Creating Mirrors</h3>
-<p>Let&rsquo;s assume that we need to mirror <code>wheezy</code> (current stable) Debian distribution for architecture <code>amd64</code>,
+</pre><p>Default options should be fine, you need to backup your key and prepare revocation
+certificate, for example like described <a href=http://fedoraproject.org/wiki/Creating_GPG_Keys>here</a>.</p><p>Now we&rsquo;re ready to start!</p><h3 id=creating-mirrors>Creating Mirrors</h3><p>Let&rsquo;s assume that we need to mirror <code>wheezy</code> (current stable) Debian distribution for architecture <code>amd64</code>,
 Only <code>main</code> component is required and this repository is targeted for servers, not desktops.
 Choose one of the Debian servers to download packages from the
-<a href=https://www.debian.org/mirror/list>official list</a>. Let it be <code>ftp.ru.debian.org</code> in this tutorial.</p>
-<p>Create first mirror for <code>main</code> component:</p>
-<pre class=code>
+<a href=https://www.debian.org/mirror/list>official list</a>. Let it be <code>ftp.ru.debian.org</code> in this tutorial.</p><p>Create first mirror for <code>main</code> component:</p><pre class=code>
 $ aptly mirror create -architectures=amd64 -filter='Priority (required) | Priority (important) | Priority (standard)' wheezy-main http://ftp.ru.debian.org/debian/ wheezy main
 
 Looks like your keyring with trusted keys is empty. You might consider importing some keys.
@@ -126,10 +101,8 @@ Sometimes keys are stored in repository root in file named Release.key, to impor
 wget -O - https://some.repo/repository/Release.key | gpg --no-default-keyring --keyring trustedkeys.gpg --import
 
 ERROR: unable to fetch mirror: verification of detached signature failed: exit status 2
-</pre>
-<p>aptly is complaining about missing keys in our trusted keyring, as it&rsquo;s not possible to verify authencity
-of files being downloaded. Let&rsquo;s follow the advice and import default Debian keyring:</p>
-<pre class=code>
+</pre><p>aptly is complaining about missing keys in our trusted keyring, as it&rsquo;s not possible to verify authencity
+of files being downloaded. Let&rsquo;s follow the advice and import default Debian keyring:</p><pre class=code>
 $ gpg --no-default-keyring --keyring /usr/share/keyrings/debian-archive-keyring.gpg --export | gpg --no-default-keyring --keyring trustedkeys.gpg --import
 gpg: key 6430156A: public key "Andrey Smirnov (Signing repos) &lt;me@smira.ru&gt;" imported
 gpg: key 2A194991: public key "Andrey Smirnov &lt;me@smira.ru&gt;" imported
@@ -141,9 +114,7 @@ gpg: Total number processed: 6
 gpg:               imported: 6  (RSA: 6)
 gpg: 3 marginal(s) needed, 1 complete(s) needed, PGP trust model
 gpg: depth: 0  valid:   1  signed:   0  trust: 0-, 0q, 0n, 0m, 0f, 1u
-</pre>
-<p>Now, let&rsquo;s retry the mirror creation procedure:</p>
-<pre class=code>
+</pre><p>Now, let&rsquo;s retry the mirror creation procedure:</p><pre class=code>
 $ aptly mirror create -architectures=amd64 -filter='Priority (required) | Priority (important) | Priority (standard) | nginx | postgresql | redis-server | memcached | ruby | golang' -filter-with-deps wheezy-main http://ftp.ru.debian.org/debian/ wheezy main
 Downloading http://ftp.ru.debian.org/debian/dists/wheezy/InRelease...
 Downloading http://ftp.ru.debian.org/debian/dists/wheezy/Release...
@@ -155,24 +126,17 @@ gpgv: Good signature from "Wheezy Stable Release Key &lt;debian-release@lists.de
 
 Mirror [wheezy-main]: http://ftp.ru.debian.org/debian/ wheezy successfully added.
 You can run 'aptly mirror update wheezy-main' to download repository contents.
-</pre>
-<p>Now the signature has been verified: files in the mirror are signed with Debian key
-(<a href=https://ftp-master.debian.org/keys.html>list of active keys</a>).</p>
-<p>The flag <code>-filter=</code> allows us to cut down number of packages to download. First part, <code>Priority (required) | Priority (important) | Priority (standard)</code> is essential &ldquo;base&rdquo; Debian system, then several (virtual) packages are added that I
+</pre><p>Now the signature has been verified: files in the mirror are signed with Debian key
+(<a href=https://ftp-master.debian.org/keys.html>list of active keys</a>).</p><p>The flag <code>-filter=</code> allows us to cut down number of packages to download. First part, <code>Priority (required) | Priority (important) | Priority (standard)</code> is essential &ldquo;base&rdquo; Debian system, then several (virtual) packages are added that I
 need: <code>nginx</code>, <code>postgresql</code>, etc. Flag <code>-filter-with-deps</code> instructs aptly to include dependencies of
 matching packages as well. If filter is not specified, all packages would be included in the mirror and that would
-require more space and download size would be bigger.</p>
-<p>Create also <code>wheezy-updates</code> and <code>wheezy-security</code> mirrors to get important updates:</p>
-<pre class=code>
+require more space and download size would be bigger.</p><p>Create also <code>wheezy-updates</code> and <code>wheezy-security</code> mirrors to get important updates:</p><pre class=code>
 $ aptly mirror create -architectures=amd64 -filter='Priority (required) | Priority (important) | Priority (standard) | nginx | postgresql | redis-server | memcached | ruby | golang' -filter-with-deps wheezy-updates http://ftp.ru.debian.org/debian/ wheezy-updates main
 ...
 
 $ aptly mirror create -architectures=amd64 -filter='Priority (required) | Priority (important) | Priority (standard) | nginx | postgresql | redis-server | memcached | ruby | golang' -filter-with-deps wheezy-security http://security.debian.org/ wheezy/updates main
 ...
-</pre>
-<h3 id=updating-mirrors>Updating mirrors</h3>
-<p>Update <code>wheezy-main</code> mirror for the first time:</p>
-<pre class=code>
+</pre><h3 id=updating-mirrors>Updating mirrors</h3><p>Update <code>wheezy-main</code> mirror for the first time:</p><pre class=code>
 $ aptly mirror update wheezy-main
 Downloading http://ftp.ru.debian.org/debian/dists/wheezy/InRelease...
 Downloading http://ftp.ru.debian.org/debian/dists/wheezy/Release...
@@ -195,22 +159,16 @@ Downloading http://ftp.ru.debian.org/debian/pool/main/libt/libtext-iconv-perl/li
 ....
 
 Mirror `wheezy-main` has been successfully updated.
-</pre>
-<p>Packages files have been downloaded to <code>~/.aptly/pool/</code>, current mirror contents stored in the package database.
-You can update mirror at any moment as required.</p>
-<p>And, for two other mirrors:</p>
-<pre class=code>
+</pre><p>Packages files have been downloaded to <code>~/.aptly/pool/</code>, current mirror contents stored in the package database.
+You can update mirror at any moment as required.</p><p>And, for two other mirrors:</p><pre class=code>
 $ aptly mirror update wheezy-security
 ...
 
 $ aptly mirror update wheezy-updates
 ...
-</pre>
-<h3 id=taking-snapshots>Taking snapshots</h3>
-<p>It&rsquo;s time take snapshots of the mirrors to preserve <em>exact</em> current mirror state. I will label snapshots
+</pre><h3 id=taking-snapshots>Taking snapshots</h3><p>It&rsquo;s time take snapshots of the mirrors to preserve <em>exact</em> current mirror state. I will label snapshots
 after mirror name, applying version for the main <code>wheezy</code> mirror and current date for frequently updated
-<code>security</code> and <code>updates</code> mirrors:</p>
-<pre class=code>
+<code>security</code> and <code>updates</code> mirrors:</p><pre class=code>
 $ aptly snapshot create wheezy-main-7.6 from mirror wheezy-main
 
 Snapshot wheezy-main-7.6 successfully created.
@@ -225,20 +183,13 @@ $ aptly snapshot create wheezy-security-20141009 from mirror wheezy-security
 
 Snapshot wheezy-security-20141009 successfully created.
 You can run 'aptly publish snapshot wheezy-security-20141009' to publish snapshot as Debian repository.
-</pre>
-<p>Snapshots are created instantly and they don&rsquo;t occupy any extra space: only list of packages
-is stored inside the snapshot.</p>
-<h3 id=merging-snapshots>Merging snapshots</h3>
-<p>Now we can merge snapshots into one, producing &ldquo;wheezy with security updates applied&rdquo;:</p>
-<pre class=code>
+</pre><p>Snapshots are created instantly and they don&rsquo;t occupy any extra space: only list of packages
+is stored inside the snapshot.</p><h3 id=merging-snapshots>Merging snapshots</h3><p>Now we can merge snapshots into one, producing &ldquo;wheezy with security updates applied&rdquo;:</p><pre class=code>
 $ aptly snapshot merge -latest wheezy-final-20141009 wheezy-main-7.6 wheezy-updates-20141009 wheezy-security-20141009
 
 Snapshot wheezy-final-20141009 successfully created.
 You can run 'aptly publish snapshot wheezy-final-20141009' to publish snapshot as Debian repository.
-</pre>
-<p>Flag <code>-latest</code> chooses merge strategy: package with latest version &ldquo;wins&rdquo;.</p>
-<p>Let&rsquo;s verify that merge was correct:</p>
-<pre class=code>
+</pre><p>Flag <code>-latest</code> chooses merge strategy: package with latest version &ldquo;wins&rdquo;.</p><p>Let&rsquo;s verify that merge was correct:</p><pre class=code>
 $ aptly package show -with-references 'Name (nginx)'
 Package: nginx
 Version: 1.2.1-2.2+wheezy2
@@ -285,19 +236,13 @@ References to package:
   mirror [wheezy-security]: http://security.debian.org/ wheezy/updates
   snapshot [wheezy-final-20141009]: Merged from sources: 'wheezy-main-7.6', 'wheezy-updates-20141009', 'wheezy-security-20141009'
   snapshot [wheezy-security-20141009]: Snapshot from mirror [wheezy-security]: http://security.debian.org/ wheezy/updates
-</pre>
-<p>New version of <code>nginx</code> package which came from <code>wheezy-security</code> mirror is now part of our final snapshot
-<code>wheezy-final-20141009</code>.</p>
-<h3 id=publishing-repository>PUBLISHING REPOSITORY</h3>
-<p>Final step: publishing our snapshot as Debian repository, ready to be consumed by <code>apt-get</code>:</p>
-<pre class=code>
+</pre><p>New version of <code>nginx</code> package which came from <code>wheezy-security</code> mirror is now part of our final snapshot
+<code>wheezy-final-20141009</code>.</p><h3 id=publishing-repository>PUBLISHING REPOSITORY</h3><p>Final step: publishing our snapshot as Debian repository, ready to be consumed by <code>apt-get</code>:</p><pre class=code>
 $ aptly publish snapshot wheezy-final-20141009
 ERROR: unable to publish: unable to guess distribution name, please specify explicitly
-</pre>
-<p>aptly complains that it can&rsquo;t guess distribution name, as the source mirrors we had (main, security and
+</pre><p>aptly complains that it can&rsquo;t guess distribution name, as the source mirrors we had (main, security and
 updates) all have different distribution names. So we need to help aptly a bit by supplying
-distribution name:</p>
-<pre class=code>
+distribution name:</p><pre class=code>
 $ aptly publish snapshot -distribution=wheezy wheezy-final-20141009
 Loading packages...
 Generating metadata files and linking package files...
@@ -322,10 +267,8 @@ Now you can add following line to apt sources:
 Don't forget to add your GPG key to apt with apt-key.
 
 You can also use `aptly serve` to publish your repositories over HTTP quickly.
-</pre>
-<p>The repository is published to <code>~/.aptly/public/</code> directory. You can start any HTTP server
-to serve this directory as static files, or use aptly built-in webserver for testing:</p>
-<pre class=code>
+</pre><p>The repository is published to <code>~/.aptly/public/</code> directory. You can start any HTTP server
+to serve this directory as static files, or use aptly built-in webserver for testing:</p><pre class=code>
 $ aptly serve
 Serving published repositories, recommended apt sources list:
 
@@ -333,9 +276,7 @@ Serving published repositories, recommended apt sources list:
 deb http://debian:8080/ wheezy main
 
 Starting web server at: :8080 (press Ctrl+C to quit)...
-</pre>
-<p>I can also visalize the objects I&rsquo;ve created and dependencies:</p>
-<pre class=code>
+</pre><p>I can also visalize the objects I&rsquo;ve created and dependencies:</p><pre class=code>
 $ aptly graph
 Loading mirrors...
 Loading local repos...
@@ -343,30 +284,19 @@ Loading snapshots...
 Loading published repos...
 Generating graph...
 Rendered to PNG file: /tmp/aptly-graph128726742.png
-</pre>
-<p>This would result in picture like this one:</p>
-<img class=img-responsive src=../../img/aptly-graph.png>
-<h3 id=using-repository>Using repository</h3>
-<p>First I need to import public part of the key that was used to sign the repository
-into trusted apt keyring on target machine.</p>
-<p>Export the key on machine with aptly:</p>
-<pre class=code>
+</pre><p>This would result in picture like this one:</p><img class=img-responsive src=../../img/aptly-graph.png>
+<h3 id=using-repository>Using repository</h3><p>First I need to import public part of the key that was used to sign the repository
+into trusted apt keyring on target machine.</p><p>Export the key on machine with aptly:</p><pre class=code>
 $ gpg --export --armor > my_key.pub
-</pre>
-<p>Copy <code>my_key.pub</code> to target machine and import it into apt keyring:</p>
-<pre class=code>
+</pre><p>Copy <code>my_key.pub</code> to target machine and import it into apt keyring:</p><pre class=code>
 $ sudo apt-key add my_key.pub
 OK
-</pre>
-<p>It&rsquo;s time to edit <code>/etc/apt/sources.list</code>. I comment out default sources and add address of my
-first machine running <code>aptly serve</code> currently:</p>
-<pre><code>#deb http://ftp.ru.debian.org/debian/ wheezy main
+</pre><p>It&rsquo;s time to edit <code>/etc/apt/sources.list</code>. I comment out default sources and add address of my
+first machine running <code>aptly serve</code> currently:</p><pre><code>#deb http://ftp.ru.debian.org/debian/ wheezy main
 #deb-src http://ftp.ru.debian.org/debian/ wheezy main
 
 deb http://10.0.2.14:8080/ wheezy main
-</code></pre>
-<p>Repository is ready to be used:</p>
-<pre class=code>
+</code></pre><p>Repository is ready to be used:</p><pre class=code>
 $ sudo apt-get update
 Get:1 http://10.0.2.14 wheezy Release.gpg [490 B]
 Hit http://10.0.2.14 wheezy Release
@@ -392,34 +322,24 @@ Do you want to continue [Y/n]? y
 Get:1 http://10.0.2.14/ wheezy/main base-files amd64 7.1wheezy6 [78.7 kB]
 Get:2 http://10.0.2.14/ wheezy/main bash amd64 4.2+dfsg-0.1+deb7u3 [1,501 kB]
 ...
-</pre>
-<p>As this repository has been published from snapshot, it would never change until it is update to new snapshot.
+</pre><p>As this repository has been published from snapshot, it would never change until it is update to new snapshot.
 Good thing is that I can setup all my machine to use this repo and get identical set of packages
 installed.
 Bad thing is that I need to maintain and update my repo as updates are coming,
-but if I have many machines, the advantage of predictable upgrades outweighs the maintenance costs.</p>
-<h3 id=upgrading-repository>Upgrading repository</h3>
-<p>Several days after, when I update my mirrors I discover new security updates:</p>
-<pre class=code>
+but if I have many machines, the advantage of predictable upgrades outweighs the maintenance costs.</p><h3 id=upgrading-repository>Upgrading repository</h3><p>Several days after, when I update my mirrors I discover new security updates:</p><pre class=code>
 $ aptly mirror update wheezy-security
 ....
-</pre>
-<p>So it&rsquo;s time to create new snapshot:</p>
-<pre class=code>
+</pre><p>So it&rsquo;s time to create new snapshot:</p><pre class=code>
 $ aptly snapshot create wheezy-security-20141019 from mirror wheezy-security
 
 Snapshot wheezy-security-20141019 successfully created.
 You can run 'aptly publish snapshot wheezy-security-20141019' to publish snapshot as Debian repository.
-</pre>
-<p>And do merge once again:</p>
-<pre class=code>
+</pre><p>And do merge once again:</p><pre class=code>
 $ aptly snapshot merge -latest wheezy-final-20141019 wheezy-main-7.6 wheezy-updates-20141009 wheezy-security-20141019
 
 Snapshot wheezy-final-20141019 successfully created.
 You can run 'aptly publish snapshot wheezy-final-20141019' to publish snapshot as Debian repository.
-</pre>
-<p>Now I can update my published repository by switching it to new snapshot:</p>
-<pre>
+</pre><p>Now I can update my published repository by switching it to new snapshot:</p><pre>
 $ aptly publish switch wheezy wheezy-final-20141019
 Loading packages...
 Generating metadata files and linking package files...
@@ -430,14 +350,9 @@ Finalizing metadata files...
 Cleaning up prefix "." components main...
 
 Publish for snapshot ./wheezy [amd64] publishes {main: [wheezy-final-20141019]: Merged from sources: 'wheezy-main-7.6', 'wheezy-updates-20141009', 'wheezy-security-20141019'} has been successfully switched to new snapshot.
-</pre>
-<p><code>apt-get</code> would notice new packages on next update, and I can upgrade my target machine.</p>
-<p>If run <code>aptly graph</code> again, the picture would be more interesting:</p>
-<img class=img-responsive src=../../img/aptly-graph2.png>
-<h3 id=maintenance>Maintenance</h3>
-<p>You can drop old snapshots as they&rsquo;re not used anymore. This would allow to cleanup some files
-with <code>aptly db cleanup</code>:</p>
-<pre class=code>
+</pre><p><code>apt-get</code> would notice new packages on next update, and I can upgrade my target machine.</p><p>If run <code>aptly graph</code> again, the picture would be more interesting:</p><img class=img-responsive src=../../img/aptly-graph2.png>
+<h3 id=maintenance>Maintenance</h3><p>You can drop old snapshots as they&rsquo;re not used anymore. This would allow to cleanup some files
+with <code>aptly db cleanup</code>:</p><pre class=code>
 $ aptly db cleanup
 Loading mirrors, local repos and snapshots...
 Loading list of all packages...
@@ -446,31 +361,14 @@ Building list of files referenced by packages...
 Building list of files in package pool...
 Deleting unreferenced files (10)...
 Compacting database...
-</pre>
-<p>Package files are only deleted if no objects (snapshots, mirrors, local repositories) reference them.</p>
-<p>Next tutorial is about <a href=/tutorial/pull/>pulling new version of packages from backports or 3rd party repos</a>.</p>
-</div>
-</section>
-<footer id=page-footer>
+</pre><p>Package files are only deleted if no objects (snapshots, mirrors, local repositories) reference them.</p><p>Next tutorial is about <a href=/tutorial/pull/>pulling new version of packages from backports or 3rd party repos</a>.</p></div></section><footer id=page-footer>
 <div class=container>
 <nav class="navbar navbar-default navbar-static-top" role=navigation>
 <ul class="nav navbar-nav nav-justified">
-<li class=active><a href=/www.aptly.info/tutorial/>tutorials</a></li>
-<li><a href=/www.aptly.info/download/>download</a></li>
-<li><a href=/www.aptly.info/support/>support</a></li>
-<li><a href=/www.aptly.info/doc/overview/>documentation</a></li>
-<li><a href=/www.aptly.info/about/>about</a></li>
-<li><a href=/www.aptly.info/post/>blog</a></li>
-</ul>
-</nav>
-<div class=copy>
+<li class=active><a href=/www.aptly.info/tutorial/>tutorials</a></li><li><a href=/www.aptly.info/download/>download</a></li><li><a href=/www.aptly.info/support/>support</a></li><li><a href=/www.aptly.info/doc/overview/>documentation</a></li><li><a href=/www.aptly.info/about/>about</a></li><li><a href=/www.aptly.info/post/>blog</a></li></ul></nav><div class=copy>
 Sponsored by <a href=http://express42.com/>express42</a> &copy;&nbsp;2013-2018 aptly contributors
-</div>
-</div>
-</footer>
-<script src=https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js></script>
+</div></div></footer><script src=https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js></script>
 <script src=/www.aptly.info/js/bootstrap.min.js></script>
 <script src=/www.aptly.info/js/aptly.js></script>
-<script>(function(a,e,f,g,b,c,d){a.GoogleAnalyticsObject=b,a[b]=a[b]||function(){(a[b].q=a[b].q||[]).push(arguments)},a[b].l=1*new Date,c=e.createElement(f),d=e.getElementsByTagName(f)[0],c.async=1,c.src=g,d.parentNode.insertBefore(c,d)})(window,document,'script','//www.google-analytics.com/analytics.js','ga'),ga('create','UA-6065617-2','aptly.info'),ga('send','pageview')</script>
-</body>
-</html>
+<script>(function(e,o,i,a,t,n,s){e.GoogleAnalyticsObject=t,e[t]=e[t]||function(){(e[t].q=e[t].q||[]).push(arguments)},e[t].l=1*new Date,n=o.createElement(i),s=o.getElementsByTagName(i)[0],n.async=1,n.src=a,s.parentNode.insertBefore(n,s)})(window,document,"script","//www.google-analytics.com/analytics.js","ga"),ga("create","UA-6065617-2","aptly.info"),ga("send","pageview")</script>
+</body></html>

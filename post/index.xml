@@ -603,21 +603,21 @@ more things that could be optimized to improve memory usage, but they
 are left for future aptly development.&lt;/p>
 &lt;p>In order to produce these graphs, aptly was extended with following code
 that dumps &lt;code>runtime.MemStats&lt;/code> every 100ms:&lt;/p>
-&lt;pre tabindex="0">&lt;code class="language-{.sourceCode" data-lang="{.sourceCode">memstats := cmd.Flag.Lookup(&amp;quot;memstats&amp;quot;).Value.String()
-if memstats != &amp;quot;&amp;quot; {
-interval := cmd.Flag.Lookup(&amp;quot;meminterval&amp;quot;).Value.Get().(time.Duration)
+&lt;pre tabindex="0">&lt;code class="language-{.sourceCode" data-lang="{.sourceCode">memstats := cmd.Flag.Lookup(&amp;#34;memstats&amp;#34;).Value.String()
+if memstats != &amp;#34;&amp;#34; {
+interval := cmd.Flag.Lookup(&amp;#34;meminterval&amp;#34;).Value.Get().(time.Duration)
 context.fileMemStats, err = os.Create(memstats)
 if err != nil {
 return err
 }
-context.fileMemStats.WriteString(&amp;quot;# Time\tHeapSys\tHeapAlloc\tHeapIdle\tHeapReleased\n&amp;quot;)
+context.fileMemStats.WriteString(&amp;#34;# Time\tHeapSys\tHeapAlloc\tHeapIdle\tHeapReleased\n&amp;#34;)
 go func() {
 var stats runtime.MemStats
 start := time.Now().UnixNano()
 for {
 runtime.ReadMemStats(&amp;amp;stats)
 if context.fileMemStats != nil {
-context.fileMemStats.WriteString(fmt.Sprintf(&amp;quot;%d\t%d\t%d\t%d\t%d\n&amp;quot;,
+context.fileMemStats.WriteString(fmt.Sprintf(&amp;#34;%d\t%d\t%d\t%d\t%d\n&amp;#34;,
 (time.Now().UnixNano()-start)/1000000, stats.HeapSys, stats.HeapAlloc, stats.HeapIdle, stats.HeapReleased))
 time.Sleep(interval)
 } else {

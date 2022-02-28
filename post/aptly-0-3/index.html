@@ -2,40 +2,25 @@
 <head>
 <meta charset=utf-8>
 <meta http-equiv=x-ua-compatible content="IE=edge">
-<title>aptly - aptly 0.3</title>
-<meta name=viewport content="width=device-width,initial-scale=1">
+<title>aptly - aptly 0.3</title><meta name=viewport content="width=device-width,initial-scale=1">
 <link rel="shortcut icon" href=/www.aptly.info/favicon.ico>
 <link type=text/css rel=stylesheet href=/www.aptly.info/css/styles.css>
 <link rel=canonical href=http://aptly-dev.github.io/www.aptly.info/post/aptly-0-3/>
 <link href=/www.aptly.info/post/index.xml rel=alternate type=application/rss+xml title="Debian repository management tool">
-</head>
-<body>
+</head><body>
 <header id=page-header>
 <div class=container>
 <nav class="navbar navbar-default navbar-static-top" role=navigation>
 <ul class="nav navbar-nav nav-justified">
-<li><a href=/www.aptly.info/tutorial/>tutorials</a></li>
-<li><a href=/www.aptly.info/download/>download</a></li>
-<li><a href=/www.aptly.info/support/>support</a></li>
-<li><a href=/www.aptly.info/doc/overview/>documentation</a></li>
-<li><a href=/www.aptly.info/about/>about</a></li>
-<li class=active><a href=/www.aptly.info/post/>blog</a></li>
-</ul>
-</nav>
-<div class=row>
+<li><a href=/www.aptly.info/tutorial/>tutorials</a></li><li><a href=/www.aptly.info/download/>download</a></li><li><a href=/www.aptly.info/support/>support</a></li><li><a href=/www.aptly.info/doc/overview/>documentation</a></li><li><a href=/www.aptly.info/about/>about</a></li><li class=active><a href=/www.aptly.info/post/>blog</a></li></ul></nav><div class=row>
 <div class="col-md-6 col-md-offset-3 text-center">
 <a class=brand href=/www.aptly.info/>
 <i class=brand-logo></i>
 <span class=brand-name>aptly</span>
 </a>
-</div>
-</div>
-</div>
-</header>
-<section class=primary-content>
+</div></div></div></header><section class=primary-content>
 <div class=container>
-<h1>aptly 0.3</h1>
-<p>Today I&rsquo;ve released <a href=http://www.aptly.info/>aptly</a> version 0.3. It&rsquo;s
+<h1>aptly 0.3</h1><p>Today I&rsquo;ve released <a href=http://www.aptly.info/>aptly</a> version 0.3. It&rsquo;s
 the first version I would recommend for production usage. Please
 <a href=http://www.aptly.info/#download>download it</a> or install from
 <a href=https://github.com/aptly-dev/aptly>source</a>, <a href=https://github.com/smira/aplty/issues>raise
@@ -43,59 +28,33 @@ issues</a>, disscuss in
 <a href=https://groups.google.com/forum/#!forum/aptly-discuss>aptly-discuss
 group</a>, follow
 <a href=https://twitter.com/smira/>me (@smira)</a> to get information about
-updates.</p>
-<p>New features:</p>
-<ul>
+updates.</p><p>New features:</p><ul>
 <li>using <a href=http://www.aptly.info/#aptly-serve>aptly serve</a> command you
 can quickly serve your published repositories over HTTP, aptly would
-even advise right settings for apt sources;</li>
-<li>aptly checks signatures and verifies checksums for downloaded files
+even advise right settings for apt sources;</li><li>aptly checks signatures and verifies checksums for downloaded files
 while mirroring remote repositories, if you don&rsquo;t have key that was
 used to sign the mirror in your trusted GnuPG keychain, aptly would
 give some hints, <a href=http://www.aptly.info/#aptly-mirror-create>some
-hints</a>;</li>
-<li>flat format of Debian repositories is now supported (e.g.
+hints</a>;</li><li>flat format of Debian repositories is now supported (e.g.
 <a href=https://build.opensuse.org>OBS</a> creates repositories in such
-format);</li>
-<li>now you can drop <a href=http://www.aptly.info/#aptly-mirror-drop>mirrors</a>
-and <a href=http://www.aptly.info/#aptly-snapshot-drop>snapshots</a>;</li>
-<li>aptly can <a href=http://www.aptly.info/#aptly-graph>draw graph of
+format);</li><li>now you can drop <a href=http://www.aptly.info/#aptly-mirror-drop>mirrors</a>
+and <a href=http://www.aptly.info/#aptly-snapshot-drop>snapshots</a>;</li><li>aptly can <a href=http://www.aptly.info/#aptly-graph>draw graph of
 relationships</a> between your
-mirros, snapshots and published repositories;</li>
-<li><a href=https://github.com/aptly-dev/aptly-bash-completion>bash
+mirros, snapshots and published repositories;</li><li><a href=https://github.com/aptly-dev/aptly-bash-completion>bash
 completion</a> is
-available for aptly, try it out, it&rsquo;s amazing!</li>
-<li>aptly gained ability to <a href=http://www.aptly.info/#aptly-snapshot-create>create empty
+available for aptly, try it out, it&rsquo;s amazing!</li><li>aptly gained ability to <a href=http://www.aptly.info/#aptly-snapshot-create>create empty
 snapshot</a>, it could be
 useful if you&rsquo;d like to extract part of repository by
-<a href=http://www.aptly.info/#aptly-snapshot-pull>pulling</a> packages;</li>
-<li>custom config location could be given with flag <code>-config</code>.</li>
-</ul>
-<p>Nice picture (actually it&rsquo;s output of <a href=http://www.aptly.info/#aptly-graph>aptly
-graph</a> command):</p>
-<img src=../../img/aptlygraph.png class=img-responsive alt="aptly graph output">
-</div>
-</section>
-<footer id=page-footer>
+<a href=http://www.aptly.info/#aptly-snapshot-pull>pulling</a> packages;</li><li>custom config location could be given with flag <code>-config</code>.</li></ul><p>Nice picture (actually it&rsquo;s output of <a href=http://www.aptly.info/#aptly-graph>aptly
+graph</a> command):</p><img src=../../img/aptlygraph.png class=img-responsive alt="aptly graph output">
+</div></section><footer id=page-footer>
 <div class=container>
 <nav class="navbar navbar-default navbar-static-top" role=navigation>
 <ul class="nav navbar-nav nav-justified">
-<li><a href=/www.aptly.info/tutorial/>tutorials</a></li>
-<li><a href=/www.aptly.info/download/>download</a></li>
-<li><a href=/www.aptly.info/support/>support</a></li>
-<li><a href=/www.aptly.info/doc/overview/>documentation</a></li>
-<li><a href=/www.aptly.info/about/>about</a></li>
-<li class=active><a href=/www.aptly.info/post/>blog</a></li>
-</ul>
-</nav>
-<div class=copy>
+<li><a href=/www.aptly.info/tutorial/>tutorials</a></li><li><a href=/www.aptly.info/download/>download</a></li><li><a href=/www.aptly.info/support/>support</a></li><li><a href=/www.aptly.info/doc/overview/>documentation</a></li><li><a href=/www.aptly.info/about/>about</a></li><li class=active><a href=/www.aptly.info/post/>blog</a></li></ul></nav><div class=copy>
 Sponsored by <a href=http://express42.com/>express42</a> &copy;&nbsp;2013-2018 aptly contributors
-</div>
-</div>
-</footer>
-<script src=https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js></script>
+</div></div></footer><script src=https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js></script>
 <script src=/www.aptly.info/js/bootstrap.min.js></script>
 <script src=/www.aptly.info/js/aptly.js></script>
-<script>(function(a,e,f,g,b,c,d){a.GoogleAnalyticsObject=b,a[b]=a[b]||function(){(a[b].q=a[b].q||[]).push(arguments)},a[b].l=1*new Date,c=e.createElement(f),d=e.getElementsByTagName(f)[0],c.async=1,c.src=g,d.parentNode.insertBefore(c,d)})(window,document,'script','//www.google-analytics.com/analytics.js','ga'),ga('create','UA-6065617-2','aptly.info'),ga('send','pageview')</script>
-</body>
-</html>
+<script>(function(e,o,i,a,t,n,s){e.GoogleAnalyticsObject=t,e[t]=e[t]||function(){(e[t].q=e[t].q||[]).push(arguments)},e[t].l=1*new Date,n=o.createElement(i),s=o.getElementsByTagName(i)[0],n.async=1,n.src=a,s.parentNode.insertBefore(n,s)})(window,document,"script","//www.google-analytics.com/analytics.js","ga"),ga("create","UA-6065617-2","aptly.info"),ga("send","pageview")</script>
+</body></html>
