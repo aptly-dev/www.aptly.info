@@ -1,4 +1,5 @@
 baseurl = "https://www.aptly.info/"
+# baseurl = "http://aptly-dev.github.io/www.aptly.info/"
 languageCode = "en-us"
 title = "Debian repository management tool"
 

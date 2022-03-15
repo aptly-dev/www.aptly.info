@@ -43,4 +43,4 @@ New features:
 Nice picture (actually it's output of [aptly
 graph](http://www.aptly.info/#aptly-graph) command):
 
-<img src="/img/aptlygraph.png" class="img-responsive" alt="aptly graph output">
+<img src="../../img/aptlygraph.png" class="img-responsive" alt="aptly graph output">

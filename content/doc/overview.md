@@ -38,7 +38,7 @@ aptly has several core entities:
 
 The schema of aptly's commands and transitions between entities:
 
-<img src="/img/schema.png" alt="aptly core schema" class="img-responsive">
+<img src="../../img/schema.png" alt="aptly core schema" class="img-responsive">
 
 We can start with creating [mirrors of remote
 repositories](/doc/aptly/mirror/create). Also we can create [local package

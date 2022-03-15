@@ -51,4 +51,4 @@ Full list of changes in this version:
 With addition of local package repositories, schema of aptly entities
 and transitions looks like that:
 
-<img src="/img/schema04.png" class="img-responsive" alt="aptly schema">
+<img src="../../img/schema04.png" class="img-responsive" alt="aptly schema">

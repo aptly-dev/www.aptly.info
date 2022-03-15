@@ -14,12 +14,12 @@ aptly publish repo
 
 Publishes local repository directly, bypassing snapshot creation step.
 Published repositories appear under `rootDir/public` directory. Valid
-[GPG key](/doc/aptly/publish) is required for publishing.
+[GPG key](../../publish) is required for publishing.
 
 <div class="alert alert-warning alert-note">It is not advised to publish local repositories directly unless
 repository is used to host testing versions of packages that change
-frequently. For production usage please <a href="/doc/aptly/snapshot/create/">create snapshot</a> from repository and
-<a href="/doc/aptly/publish/snapshot/">publish it</a>.</div>
+frequently. For production usage please <a href="../../snapshot/create/">create snapshot</a> from repository and
+<a href="../../publish/snapshot/">publish it</a>.</div>
 
 Usage:
 
