@@ -1,54 +1,16 @@
-<!doctype html><html lang=en>
-<head>
-<meta charset=utf-8>
-<meta http-equiv=x-ua-compatible content="IE=edge">
-<title>aptly - Download</title><meta name=viewport content="width=device-width,initial-scale=1">
-<link rel="shortcut icon" href=/favicon.ico>
-<link type=text/css rel=stylesheet href=/css/styles.css>
-<link rel=canonical href=https://www.aptly.info/download/>
-<link href=/post/index.xml rel=alternate type=application/rss+xml title="Debian repository management tool">
-</head><body>
-<header id=page-header>
-<div class=container>
-<nav class="navbar navbar-default navbar-static-top" role=navigation>
-<ul class="nav navbar-nav nav-justified">
-<li><a href=/tutorial/>tutorials</a></li><li class=active><a href=/download/>download</a></li><li><a href=/support/>support</a></li><li><a href=/doc/overview/>documentation</a></li><li><a href=/about/>about</a></li><li><a href=/post/>blog</a></li></ul></nav><div class=row>
-<div class="col-md-6 col-md-offset-3 text-center">
-<a class=brand href=/>
-<i class=brand-logo></i>
-<span class=brand-name>aptly</span>
-</a>
-</div></div></div></header><section class=primary-content>
-<div class=container>
-<h2>Currently released aptly version is <span class=text-danger>1.4.0</span> (<a href=https://github.com/aptly-dev/aptly/releases/tag/v1.4.0>what's new?</a>)</h2><p>Roadmap:</p><ul>
-<li><strong>1.5.0:</strong> (Dec 2021)</li><li><strong>1.6.0:</strong> (Jun 2022)</li></ul></div></section><section class=note>
-<div class=container>
-<img src=/img/os_icons/debian.png alt=Debian/Ubuntu class=pull-right>
-<h2>aptly installation</h2><p><b>Debian/Ubuntu</b>: aptly package is available in <a href="https://packages.debian.org/search?searchon=names&keywords=aptly">Debian </a> as well as <a href="http://packages.ubuntu.com/search?suite=all&searchon=names&keywords=aptly">Ubuntu</a>. If you would like
+<!doctype html><html lang=en><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><title>aptly - Download</title><meta name=viewport content="width=device-width,initial-scale=1"><link rel="shortcut icon" href=/favicon.ico><link type=text/css rel=stylesheet href=/css/styles.css><link rel=canonical href=https://www.aptly.info/download/><link href=/post/index.xml rel=alternate type=application/rss+xml title="Debian repository management tool"></head><body><header id=page-header><div class=container><nav class="navbar navbar-default navbar-static-top" role=navigation><ul class="nav navbar-nav nav-justified"><li><a href=/tutorial/>tutorials</a></li><li class=active><a href=/download/>download</a></li><li><a href=/support/>support</a></li><li><a href=/doc/overview/>documentation</a></li><li><a href=/about/>about</a></li><li><a href=/post/>blog</a></li></ul></nav><div class=row><div class="col-md-6 col-md-offset-3 text-center"><a class=brand href=/><i class=brand-logo></i>
+<span class=brand-name>aptly</span></a></div></div></div></header><section class=primary-content><div class=container><h2>Currently released aptly version is <span class=text-danger>1.4.0</span> (<a href=https://github.com/aptly-dev/aptly/releases/tag/v1.4.0>what's new?</a>)</h2><p>Roadmap:</p><ul><li><strong>1.5.0:</strong> (Dec 2021)</li><li><strong>1.6.0:</strong> (Jun 2022)</li></ul></div></section><section class=note><div class=container><img src=/img/os_icons/debian.png alt=Debian/Ubuntu class=pull-right><h2>aptly installation</h2><p><b>Debian/Ubuntu</b>: aptly package is available in <a href="https://packages.debian.org/search?searchon=names&keywords=aptly">Debian</a> as well as <a href="http://packages.ubuntu.com/search?suite=all&searchon=names&keywords=aptly">Ubuntu</a>. If you would like
 to install aptly on older versions of Debian / Ubuntu or to stay on the bleeding edge, aptly could be installed
-by adding new repository to <code>/etc/apt/sources.list</code>:</p><pre>deb http://repo.aptly.info/ squeeze main</pre><p>And importing key that is used to sign the release either from keys.openpgp.org:</p><pre class=code># sudo apt-key adv --keyserver keys.openpgp.org --recv-keys ED75B5A4483DA07C</pre><p>or by downloading it (<a href=https://www.aptly.info/pubkey.txt>GPG key</a>):</p><pre class=code>$ wget -qO - https://www.aptly.info/pubkey.txt | sudo apt-key add -</pre><p>After that you can install aptly as any other software package:</p><pre class=code># apt-get update
+by adding new repository to <code>/etc/apt/sources.list</code>:</p><pre>deb http://repo.aptly.info/ squeeze main</pre><p>And importing key that is used to sign the release either from keyserver.ubuntu.com:</p><pre class=code># sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys A0546A43624A8331</pre><p>or by downloading it (<a href=https://www.aptly.info/pubkey.txt>GPG key</a>):</p><pre class=code>$ wget -qO - https://www.aptly.info/pubkey.txt | sudo apt-key add -</pre><p>After that you can install aptly as any other software package:</p><pre class=code># apt-get update
 # apt-get install aptly</pre><p>Please don't worry about <code>squeeze</code> part in repo name: aptly package should work on Debian squeeze+,
 Ubuntu 10.0+. Package contains aptly binary, man page and bash completion.</p><p>If you would like to use nightly (unstable) builds of aptly, add following line
-to <code>/etc/apt/sources.list</code>:</p><pre>deb http://repo.aptly.info/ nightly main</pre><p><b>Mac OS X</b>: Installation using Homebrew:</p><pre class=code>$ brew install aptly</pre></div></section><section class=primary-content>
-<div class=container>
-<p><strong>Binary</strong> distributions (depend almost only on <code>libc</code>) for Debian, CentOS, MacOS X &
-FreeBSD are available.</p><div class="row text-center">
-<div class=col-md-4>
-<img src=/img/os_icons/debian.png alt=Debian/Ubuntu class=download-os-icon>
-Linux (Debian, Ubuntu, RedHat, Centos, ...) <br>
-<a href=https://github.com/aptly-dev/aptly/releases/download/v1.4.0/aptly_1.4.0_linux_386.tar.gz class="btn btn-default">32-bit</a>
-<a href=https://github.com/aptly-dev/aptly/releases/download/v1.4.0/aptly_1.4.0_linux_amd64.tar.gz class="btn btn-default">64-bit</a>
-</div><div class=col-md-4>
-<img src=/img/os_icons/freebsd.png alt=FreeBSD class=download-os-icon>
-FreeBSD <span class=small>9.2+</span><br>
-<a href=https://github.com/aptly-dev/aptly/releases/download/v1.4.0/aptly_1.4.0_freebsd_386.zip class="btn btn-default">32-bit</a>
-<a href=https://github.com/aptly-dev/aptly/releases/download/v1.4.0/aptly_1.4.0_freebsd_amd64.zip class="btn btn-default">64-bit</a>
-</div><div class=col-md-4>
-<img src=/img/os_icons/osx.png alt="Mac OS X" class=download-os-icon>
-Mac OS X <span class=small>10.9</span><br>
-<a href=https://github.com/aptly-dev/aptly/releases/download/v1.4.0/aptly_1.4.0_darwin_amd64.zip class="btn btn-default">64-bit</a>
-</div></div><p>Download archive, it contains binary executable:
-<pre class=code>$ tar xzf aptly_1.4.0_linux_amd64.tar.gz
+to <code>/etc/apt/sources.list</code>:</p><pre>deb http://repo.aptly.info/ nightly main</pre><p><b>Mac OS X</b>: Installation using Homebrew:</p><pre class=code>$ brew install aptly</pre></div></section><section class=primary-content><div class=container><p><strong>Binary</strong> distributions (depend almost only on <code>libc</code>) for Debian, CentOS, MacOS X &
+FreeBSD are available.</p><div class="row text-center"><div class=col-md-4><img src=/img/os_icons/debian.png alt=Debian/Ubuntu class=download-os-icon>
+Linux (Debian, Ubuntu, RedHat, Centos, ...)<br><a href=https://github.com/aptly-dev/aptly/releases/download/v1.4.0/aptly_1.4.0_linux_386.tar.gz class="btn btn-default">32-bit</a>
+<a href=https://github.com/aptly-dev/aptly/releases/download/v1.4.0/aptly_1.4.0_linux_amd64.tar.gz class="btn btn-default">64-bit</a></div><div class=col-md-4><img src=/img/os_icons/freebsd.png alt=FreeBSD class=download-os-icon>
+FreeBSD <span class=small>9.2+</span><br><a href=https://github.com/aptly-dev/aptly/releases/download/v1.4.0/aptly_1.4.0_freebsd_386.zip class="btn btn-default">32-bit</a>
+<a href=https://github.com/aptly-dev/aptly/releases/download/v1.4.0/aptly_1.4.0_freebsd_amd64.zip class="btn btn-default">64-bit</a></div><div class=col-md-4><img src=/img/os_icons/osx.png alt="Mac OS X" class=download-os-icon>
+Mac OS X <span class=small>10.9</span><br><a href=https://github.com/aptly-dev/aptly/releases/download/v1.4.0/aptly_1.4.0_darwin_amd64.zip class="btn btn-default">64-bit</a></div></div><p>Download archive, it contains binary executable:<pre class=code>$ tar xzf aptly_1.4.0_linux_amd64.tar.gz
 $ aptly_1.4.0_linux_amd64/aptly version
 aptly version: 1.4.0</pre><p>Bash completion & manual page would be part of the archive as well.</p><p>If you have Go environment set up (go 1.10+ required), you can build aptly from <strong>source</strong> by
 cloning it and building:</p><pre class=code>$ mkdir -p $GOPATH/src/github.com/aptly-dev/aptly
@@ -57,14 +19,7 @@ $ cd $GOPATH/src/github.com/aptly-dev/aptly
 $ make install
 # aptly binary would be built in $GOPATH/bin/
 $ aptly
-</pre></div></section><footer id=page-footer>
-<div class=container>
-<nav class="navbar navbar-default navbar-static-top" role=navigation>
-<ul class="nav navbar-nav nav-justified">
-<li><a href=/tutorial/>tutorials</a></li><li class=active><a href=/download/>download</a></li><li><a href=/support/>support</a></li><li><a href=/doc/overview/>documentation</a></li><li><a href=/about/>about</a></li><li><a href=/post/>blog</a></li></ul></nav><div class=copy>
-Sponsored by <a href=http://express42.com/>express42</a> &copy;&nbsp;2013-2018 aptly contributors
-</div></div></footer><script src=https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js></script>
+</pre></div></section><footer id=page-footer><div class=container><nav class="navbar navbar-default navbar-static-top" role=navigation><ul class="nav navbar-nav nav-justified"><li><a href=/tutorial/>tutorials</a></li><li class=active><a href=/download/>download</a></li><li><a href=/support/>support</a></li><li><a href=/doc/overview/>documentation</a></li><li><a href=/about/>about</a></li><li><a href=/post/>blog</a></li></ul></nav><div class=copy>Sponsored by <a href=http://express42.com/>express42</a> &copy;&nbsp;2013-2018 aptly contributors</div></div></footer><script src=https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js></script>
 <script src=/js/bootstrap.min.js></script>
 <script src=/js/aptly.js></script>
-<script>(function(e,o,i,a,t,n,s){e.GoogleAnalyticsObject=t,e[t]=e[t]||function(){(e[t].q=e[t].q||[]).push(arguments)},e[t].l=1*new Date,n=o.createElement(i),s=o.getElementsByTagName(i)[0],n.async=1,n.src=a,s.parentNode.insertBefore(n,s)})(window,document,"script","//www.google-analytics.com/analytics.js","ga"),ga("create","UA-6065617-2","aptly.info"),ga("send","pageview")</script>
-</body></html>
+<script>(function(e,o,i,a,t,n,s){e.GoogleAnalyticsObject=t,e[t]=e[t]||function(){(e[t].q=e[t].q||[]).push(arguments)},e[t].l=1*new Date,n=o.createElement(i),s=o.getElementsByTagName(i)[0],n.async=1,n.src=a,s.parentNode.insertBefore(n,s)})(window,document,"script","//www.google-analytics.com/analytics.js","ga"),ga("create","UA-6065617-2","aptly.info"),ga("send","pageview")</script></body></html>

@@ -1,204 +1,6 @@
-<!doctype html><html lang=en>
-<head>
-<meta charset=utf-8>
-<meta http-equiv=x-ua-compatible content="IE=edge">
-<title>aptly - History</title><meta name=viewport content="width=device-width,initial-scale=1">
-<link rel="shortcut icon" href=/favicon.ico>
-<link type=text/css rel=stylesheet href=/css/styles.css>
-<link rel=canonical href=https://www.aptly.info/doc/history/>
-<link href=/post/index.xml rel=alternate type=application/rss+xml title="Debian repository management tool">
-</head><body>
-<header id=page-header>
-<div class=container>
-<nav class="navbar navbar-default navbar-static-top" role=navigation>
-<ul class="nav navbar-nav nav-justified">
-<li><a href=/tutorial/>tutorials</a></li><li><a href=/download/>download</a></li><li><a href=/support/>support</a></li><li class=active><a href=/doc/overview/>documentation</a></li><li><a href=/about/>about</a></li><li><a href=/post/>blog</a></li></ul></nav><div class=row>
-<div class="col-md-6 col-md-offset-3 text-center">
-<a class=brand href=/>
-<i class=brand-logo></i>
-<span class=brand-name>aptly</span>
-</a>
-</div></div></div></header><section class=documentation>
-<div class=container>
-<div class=sidebar-overlay></div><div class=row>
-<div class="col-md-3 col-sm-3 col-xs-3">
-<div class=sidebar>
-<ul class="nav nav-sidebar">
-<li>
-<a href=/doc/overview/>Overview</a>
-</li><li>
-<a href=/doc/why/>Why aptly?</a>
-</li><li>
-<a href=/doc/faq/>FAQ</a>
-</li><li>
-<a href=/doc/features/>Features</a>
-<ul class=nav>
-<li>
-<a href=/doc/feature/query/>Package Queries</a>
-</li><li>
-<a href=/doc/feature/duplicate/>Duplicate Packages</a>
-</li><li>
-<a href=/doc/feature/s3/>Publishing to S3</a>
-</li><li>
-<a href=/doc/feature/swift/>Publishing to Swift</a>
-</li><li>
-<a href=/doc/feature/filesystem/>Filesystem Publishing</a>
-</li><li>
-<a href=/doc/feature/multi-component/>Multi-Component Publishing</a>
-</li><li>
-<a href=/doc/feature/pgp-providers/>PGP Providers</a>
-</li><li>
-<a href=/doc/feature/package-display/>Package Display Format</a>
-</li><li>
-<a href=/doc/feature/dependencies/>Dependency Resolving</a>
-</li></ul></li><li>
-<a href=/doc/configuration/>Configuration</a>
-</li><li>
-<a href=/doc/commands/>Commands</a>
-<ul class=nav>
-<li>
-<a href=/doc/aptly/flags/>Global Flags</a>
-</li><li>
-<a href=/doc/aptly/mirror/>aptly mirror</a>
-<ul class=nav>
-<li>
-<a href=/doc/aptly/mirror/create/>aptly mirror create</a>
-</li><li>
-<a href=/doc/aptly/mirror/update/>aptly mirror update</a>
-</li><li>
-<a href=/doc/aptly/mirror/list/>aptly mirror list</a>
-</li><li>
-<a href=/doc/aptly/mirror/show/>aptly mirror show</a>
-</li><li>
-<a href=/doc/aptly/mirror/edit/>aptly mirror edit</a>
-</li><li>
-<a href=/doc/aptly/mirror/search/>aptly mirror search</a>
-</li><li>
-<a href=/doc/aptly/mirror/rename/>aptly mirror rename</a>
-</li><li>
-<a href=/doc/aptly/mirror/drop/>aptly mirror drop</a>
-</li></ul></li><li>
-<a href=/doc/aptly/repo/>aptly repo</a>
-<ul class=nav>
-<li>
-<a href=/doc/aptly/repo/create/>aptly repo create</a>
-</li><li>
-<a href=/doc/aptly/repo/add/>aptly repo add</a>
-</li><li>
-<a href=/doc/aptly/repo/include/>aptly repo include</a>
-</li><li>
-<a href=/doc/aptly/repo/import/>aptly repo import</a>
-</li><li>
-<a href=/doc/aptly/repo/show/>aptly repo show</a>
-</li><li>
-<a href=/doc/aptly/repo/list/>aptly repo list</a>
-</li><li>
-<a href=/doc/aptly/repo/copy/>aptly repo copy</a>
-</li><li>
-<a href=/doc/aptly/repo/move/>aptly repo move</a>
-</li><li>
-<a href=/doc/aptly/repo/remove/>aptly repo remove</a>
-</li><li>
-<a href=/doc/aptly/repo/search/>aptly repo search</a>
-</li><li>
-<a href=/doc/aptly/repo/edit/>aptly repo edit</a>
-</li><li>
-<a href=/doc/aptly/repo/rename/>aptly repo rename</a>
-</li><li>
-<a href=/doc/aptly/repo/drop/>aptly repo drop</a>
-</li></ul></li><li>
-<a href=/doc/aptly/snapshot/>aptly snapshot</a>
-<ul class=nav>
-<li>
-<a href=/doc/aptly/snapshot/create/>aptly snapshot create</a>
-</li><li>
-<a href=/doc/aptly/snapshot/list/>aptly snapshot list</a>
-</li><li>
-<a href=/doc/aptly/snapshot/show/>aptly snapshot show</a>
-</li><li>
-<a href=/doc/aptly/snapshot/verify/>aptly snapshot verify</a>
-</li><li>
-<a href=/doc/aptly/snapshot/pull/>aptly snapshot pull</a>
-</li><li>
-<a href=/doc/aptly/snapshot/filter/>aptly snapshot filter</a>
-</li><li>
-<a href=/doc/aptly/snapshot/diff/>aptly snapshot diff</a>
-</li><li>
-<a href=/doc/aptly/snapshot/merge/>aptly snapshot merge</a>
-</li><li>
-<a href=/doc/aptly/snapshot/search/>aptly snapshot search</a>
-</li><li>
-<a href=/doc/aptly/snapshot/rename/>aptly snapshot rename</a>
-</li><li>
-<a href=/doc/aptly/snapshot/drop/>aptly snapshot drop</a>
-</li></ul></li><li>
-<a href=/doc/aptly/package/>aptly package</a>
-<ul class=nav>
-<li>
-<a href=/doc/aptly/package/search/>aptly package search</a>
-</li><li>
-<a href=/doc/aptly/package/show/>aptly package show</a>
-</li></ul></li><li>
-<a href=/doc/aptly/publish/>aptly publish</a>
-<ul class=nav>
-<li>
-<a href=/doc/aptly/publish/snapshot/>aptly publish snapshot</a>
-</li><li>
-<a href=/doc/aptly/publish/repo/>aptly publish repo</a>
-</li><li>
-<a href=/doc/aptly/publish/update/>aptly publish update</a>
-</li><li>
-<a href=/doc/aptly/publish/switch/>aptly publish switch</a>
-</li><li>
-<a href=/doc/aptly/publish/list/>aptly publish list</a>
-</li><li>
-<a href=/doc/aptly/publish/show/>aptly publish show</a>
-</li><li>
-<a href=/doc/aptly/publish/drop/>aptly publish drop</a>
-</li></ul></li><li>
-<a href=/doc/aptly/db/>aptly db</a>
-<ul class=nav>
-<li>
-<a href=/doc/aptly/db/cleanup/>aptly db cleanup</a>
-</li><li>
-<a href=/doc/aptly/db/recover/>aptly db recover</a>
-</li></ul></li><li>
-<a href=/doc/aptly/task/>aptly task</a>
-<ul class=nav>
-<li>
-<a href=/doc/aptly/task/run/>aptly task run</a>
-</li></ul></li><li>
-<a href=/doc/aptly/serve/>aptly serve</a>
-</li><li>
-<a href=/doc/aptly/config/>aptly config</a>
-<ul class=nav>
-<li>
-<a href=/doc/aptly/config/show/>aptly config show</a>
-</li></ul></li><li>
-<a href=/doc/aptly/graph/>aptly graph</a>
-</li></ul></li><li>
-<a href=/doc/api/>API</a>
-<ul class=nav>
-<li>
-<a href=/doc/api/repos/>Local Repos API</a>
-</li><li>
-<a href=/doc/api/files/>File Upload API</a>
-</li><li>
-<a href=/doc/api/snapshots/>Snapshot API</a>
-</li><li>
-<a href=/doc/api/publish/>Publish API</a>
-</li><li>
-<a href=/doc/api/packages/>Package API</a>
-</li><li>
-<a href=/doc/api/misc/>Misc API</a>
-</li></ul></li><li>
-<a href=/doc/integrations/>Integrations</a>
-</li></ul><div class=source-buttons>
-<a href=/download/ class="btn btn-danger">Download</a>
-<a href=https://github.com/aptly-dev/aptly class="btn btn-default">Github</a>
-</div></div></div><div class="col-md-9 col-sm-9 col-xs-9">
-<h2 id=history>History</h2><h3 id=version-097>Version 0.9.7</h3><ul>
-<li>official Go S3 SDK is used for S3 publishing, fixes numerous
+<!doctype html><html lang=en><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><title>aptly - History</title><meta name=viewport content="width=device-width,initial-scale=1"><link rel="shortcut icon" href=/favicon.ico><link type=text/css rel=stylesheet href=/css/styles.css><link rel=canonical href=https://www.aptly.info/doc/history/><link href=/post/index.xml rel=alternate type=application/rss+xml title="Debian repository management tool"></head><body><header id=page-header><div class=container><nav class="navbar navbar-default navbar-static-top" role=navigation><ul class="nav navbar-nav nav-justified"><li><a href=/tutorial/>tutorials</a></li><li><a href=/download/>download</a></li><li><a href=/support/>support</a></li><li class=active><a href=/doc/overview/>documentation</a></li><li><a href=/about/>about</a></li><li><a href=/post/>blog</a></li></ul></nav><div class=row><div class="col-md-6 col-md-offset-3 text-center"><a class=brand href=/><i class=brand-logo></i>
+<span class=brand-name>aptly</span></a></div></div></div></header><section class=documentation><div class=container><div class=sidebar-overlay></div><div class=row><div class="col-md-3 col-sm-3 col-xs-3"><div class=sidebar><ul class="nav nav-sidebar"><li><a href=/doc/overview/>Overview</a></li><li><a href=/doc/why/>Why aptly?</a></li><li><a href=/doc/faq/>FAQ</a></li><li><a href=/doc/features/>Features</a><ul class=nav><li><a href=/doc/feature/query/>Package Queries</a></li><li><a href=/doc/feature/duplicate/>Duplicate Packages</a></li><li><a href=/doc/feature/s3/>Publishing to S3</a></li><li><a href=/doc/feature/swift/>Publishing to Swift</a></li><li><a href=/doc/feature/filesystem/>Filesystem Publishing</a></li><li><a href=/doc/feature/multi-component/>Multi-Component Publishing</a></li><li><a href=/doc/feature/pgp-providers/>PGP Providers</a></li><li><a href=/doc/feature/package-display/>Package Display Format</a></li><li><a href=/doc/feature/dependencies/>Dependency Resolving</a></li></ul></li><li><a href=/doc/configuration/>Configuration</a></li><li><a href=/doc/commands/>Commands</a><ul class=nav><li><a href=/doc/aptly/flags/>Global Flags</a></li><li><a href=/doc/aptly/mirror/>aptly mirror</a><ul class=nav><li><a href=/doc/aptly/mirror/create/>aptly mirror create</a></li><li><a href=/doc/aptly/mirror/update/>aptly mirror update</a></li><li><a href=/doc/aptly/mirror/list/>aptly mirror list</a></li><li><a href=/doc/aptly/mirror/show/>aptly mirror show</a></li><li><a href=/doc/aptly/mirror/edit/>aptly mirror edit</a></li><li><a href=/doc/aptly/mirror/search/>aptly mirror search</a></li><li><a href=/doc/aptly/mirror/rename/>aptly mirror rename</a></li><li><a href=/doc/aptly/mirror/drop/>aptly mirror drop</a></li></ul></li><li><a href=/doc/aptly/repo/>aptly repo</a><ul class=nav><li><a href=/doc/aptly/repo/create/>aptly repo create</a></li><li><a href=/doc/aptly/repo/add/>aptly repo add</a></li><li><a href=/doc/aptly/repo/include/>aptly repo include</a></li><li><a href=/doc/aptly/repo/import/>aptly repo import</a></li><li><a href=/doc/aptly/repo/show/>aptly repo show</a></li><li><a href=/doc/aptly/repo/list/>aptly repo list</a></li><li><a href=/doc/aptly/repo/copy/>aptly repo copy</a></li><li><a href=/doc/aptly/repo/move/>aptly repo move</a></li><li><a href=/doc/aptly/repo/remove/>aptly repo remove</a></li><li><a href=/doc/aptly/repo/search/>aptly repo search</a></li><li><a href=/doc/aptly/repo/edit/>aptly repo edit</a></li><li><a href=/doc/aptly/repo/rename/>aptly repo rename</a></li><li><a href=/doc/aptly/repo/drop/>aptly repo drop</a></li></ul></li><li><a href=/doc/aptly/snapshot/>aptly snapshot</a><ul class=nav><li><a href=/doc/aptly/snapshot/create/>aptly snapshot create</a></li><li><a href=/doc/aptly/snapshot/list/>aptly snapshot list</a></li><li><a href=/doc/aptly/snapshot/show/>aptly snapshot show</a></li><li><a href=/doc/aptly/snapshot/verify/>aptly snapshot verify</a></li><li><a href=/doc/aptly/snapshot/pull/>aptly snapshot pull</a></li><li><a href=/doc/aptly/snapshot/filter/>aptly snapshot filter</a></li><li><a href=/doc/aptly/snapshot/diff/>aptly snapshot diff</a></li><li><a href=/doc/aptly/snapshot/merge/>aptly snapshot merge</a></li><li><a href=/doc/aptly/snapshot/search/>aptly snapshot search</a></li><li><a href=/doc/aptly/snapshot/rename/>aptly snapshot rename</a></li><li><a href=/doc/aptly/snapshot/drop/>aptly snapshot drop</a></li></ul></li><li><a href=/doc/aptly/package/>aptly package</a><ul class=nav><li><a href=/doc/aptly/package/search/>aptly package search</a></li><li><a href=/doc/aptly/package/show/>aptly package show</a></li></ul></li><li><a href=/doc/aptly/publish/>aptly publish</a><ul class=nav><li><a href=/doc/aptly/publish/snapshot/>aptly publish snapshot</a></li><li><a href=/doc/aptly/publish/repo/>aptly publish repo</a></li><li><a href=/doc/aptly/publish/update/>aptly publish update</a></li><li><a href=/doc/aptly/publish/switch/>aptly publish switch</a></li><li><a href=/doc/aptly/publish/list/>aptly publish list</a></li><li><a href=/doc/aptly/publish/show/>aptly publish show</a></li><li><a href=/doc/aptly/publish/drop/>aptly publish drop</a></li></ul></li><li><a href=/doc/aptly/db/>aptly db</a><ul class=nav><li><a href=/doc/aptly/db/cleanup/>aptly db cleanup</a></li><li><a href=/doc/aptly/db/recover/>aptly db recover</a></li></ul></li><li><a href=/doc/aptly/task/>aptly task</a><ul class=nav><li><a href=/doc/aptly/task/run/>aptly task run</a></li></ul></li><li><a href=/doc/aptly/serve/>aptly serve</a></li><li><a href=/doc/aptly/config/>aptly config</a><ul class=nav><li><a href=/doc/aptly/config/show/>aptly config show</a></li></ul></li><li><a href=/doc/aptly/graph/>aptly graph</a></li></ul></li><li><a href=/doc/api/>API</a><ul class=nav><li><a href=/doc/api/repos/>Local Repos API</a></li><li><a href=/doc/api/files/>File Upload API</a></li><li><a href=/doc/api/snapshots/>Snapshot API</a></li><li><a href=/doc/api/publish/>Publish API</a></li><li><a href=/doc/api/packages/>Package API</a></li><li><a href=/doc/api/misc/>Misc API</a></li></ul></li><li><a href=/doc/integrations/>Integrations</a></li></ul><div class=source-buttons><a href=/download/ class="btn btn-danger">Download</a>
+<a href=https://github.com/aptly-dev/aptly class="btn btn-default">Github</a></div></div></div><div class="col-md-9 col-sm-9 col-xs-9"><h2 id=history>History</h2><h3 id=version-097>Version 0.9.7</h3><ul><li>official Go S3 SDK is used for S3 publishing, fixes numerous
 issues with S3
 (<a href=https://github.com/aptly-dev/aptly/pull/344>#344</a>
 thanks to <a href=https://github.com/bitglue>Phil Frost</a>)
@@ -230,8 +32,7 @@ requests
 (<a href=https://github.com/aptly-dev/aptly/pull/346>#346</a></li><li>bug fix: fix default <code>mkdir</code> perms to be <code>0777</code> to
 allow <code>umask</code> control
 (<a href=https://github.com/aptly-dev/aptly/pull/367>#367</a>
-thanks to <a href=https://github.com/bitglue>Phil Frost</a>)</li></ul><h3 id=version-096>Version 0.9.6</h3><ul>
-<li>support for <code>.changes</code> file processing, including
+thanks to <a href=https://github.com/bitglue>Phil Frost</a>)</li></ul><h3 id=version-096>Version 0.9.6</h3><ul><li>support for <code>.changes</code> file processing, including
 uploaders restriction: new command
 <a href=/doc/aptly/repo/include>aptly repo include</a>, new flag
 <code>-uploaders-file</code> for commands <a href=/doc/aptly/repo/create>aptly repo create</a>
@@ -271,18 +72,15 @@ thanks to <a href=https://github.com/vincentbernat>Vincent Bernat</a>)</li><li>b
 (<a href=https://github.com/aptly-dev/aptly/pull/320>#320</a>,
 thanks to <a href=https://github.com/paul-krohn>Paul Krohn</a>)</li><li>security bug fix: don&rsquo;t download files without checksums
 (<a href=https://github.com/aptly-dev/aptly/pull/324>#324</a>,
-thanks to <a href=https://github.com/x539>x539</a>)</li></ul><h3 id=version-095>Version 0.9.5</h3><ul>
-<li>all <code>search</code> commands now exit with code 1 if no results had been found
+thanks to <a href=https://github.com/x539>x539</a>)</li></ul><h3 id=version-095>Version 0.9.5</h3><ul><li>all <code>search</code> commands now exit with code 1 if no results had been found
 (<a href=https://github.com/aptly-dev/aptly/issues/213>#213</a>)</li><li>command <a href=/doc/aptly/db/cleanup>aptly db cleanup</a> supports two new flags
 <code>-verbose</code> and <code>-dry-run</code>
 (<a href=https://github.com/aptly-dev/aptly/issues/217>#217</a>)</li><li>command <a href=/doc/aptly/publish/drop>aptly publish drop</a> gets new flag
 <code>-force-drop</code> to drop published repository even if component cleanup
 errors
 (<a href=https://github.com/aptly-dev/aptly/issues/153>#153</a>)</li><li>bug fix: aptly reads fields from control files in case-insensitive manner
-(<a href=https://github.com/aptly-dev/aptly/issues/193>#193</a>)</li></ul><h3 id=version-091>Version 0.9.1</h3><p><em>Critical bugfix release</em></p><ul>
-<li>bug fix: <code>aptly db cleanup</code> was cleaning up duplicate packages
-(<a href=https://github.com/aptly-dev/aptly/issues/217>#217</a>)</li></ul><h3 id=version-09>Version 0.9</h3><ul>
-<li><strong>REST API</strong> for snapshots, local repos, file upload, publishing, graphs and version
+(<a href=https://github.com/aptly-dev/aptly/issues/193>#193</a>)</li></ul><h3 id=version-091>Version 0.9.1</h3><p><em>Critical bugfix release</em></p><ul><li>bug fix: <code>aptly db cleanup</code> was cleaning up duplicate packages
+(<a href=https://github.com/aptly-dev/aptly/issues/217>#217</a>)</li></ul><h3 id=version-09>Version 0.9</h3><ul><li><strong>REST API</strong> for snapshots, local repos, file upload, publishing, graphs and version
 (<a href=https://github.com/aptly-dev/aptly/issues/16>#16</a>)
 (<a href=https://github.com/aptly-dev/aptly/issues/116>#116</a>)
 (<a href=https://github.com/aptly-dev/aptly/pull/167>#167</a>)
@@ -347,8 +145,7 @@ and <code>+</code> in URLs
 published repository due to missing checks on component names
 (<a href=https://github.com/aptly-dev/aptly/issues/192>#192</a>)</li><li>bug fix: debian installer doesn&rsquo;t like Release files without <code>Suite</code> field
 (<a href=https://github.com/aptly-dev/aptly/pull/201>#201</a>)
-thanks to <a href=https://github.com/alexanderguy>Alexander Guy</a></li></ul><h3 id=version-08>Version 0.8</h3><ul>
-<li>aptly supports <strong>concurrent operations while mirror is updated</strong>, new flag
+thanks to <a href=https://github.com/alexanderguy>Alexander Guy</a></li></ul><h3 id=version-08>Version 0.8</h3><ul><li>aptly supports <strong>concurrent operations while mirror is updated</strong>, new flag
 <code>-force</code> for <a href=/doc/aptly/mirror/update/>aptly mirror update</a>
 (<a href=https://github.com/aptly-dev/aptly/issues/45>#45</a>) (<a href=https://github.com/aptly-dev/aptly/issues/114>#114</a>)</li><li>support for <strong><code>.udeb</code> packages (Debian installer)</strong> in mirrors, local repos and
 published repositories
@@ -385,14 +182,12 @@ hasn&rsquo;t been displaying storage prefix for repositories published to S3
 when guessing distribution <code>/</code> is replaced with <code>-</code>
 (<a href=https://github.com/aptly-dev/aptly/issues/110>#110</a>)</li><li>bug fix: download errors while mirroring now include original
 URL
-(<a href=https://github.com/aptly-dev/aptly/issues/26>#26</a>)</li></ul><h3 id=version-071>Version 0.7.1</h3><ul>
-<li>bug fix: publish update fails on package conflicts, new flag
+(<a href=https://github.com/aptly-dev/aptly/issues/26>#26</a>)</li></ul><h3 id=version-071>Version 0.7.1</h3><ul><li>bug fix: publish update fails on package conflicts, new flag
 <code>-force-overwrite</code> added to publish commands
 (<a href=https://github.com/aptly-dev/aptly/issues/90>#90</a>)</li><li>bug fix: aptly built with go1.2+ fails to read DB of aptly built
 with go1.1 or go1.0
 (<a href=https://github.com/aptly-dev/aptly/issues/89>#89</a>)</li><li>aptly supports go compilers version 1.2 and up (go 1.1 is not
-supported anymore)</li></ul><h3 id=version-07>Version 0.7</h3><ul>
-<li>direct <a href=/doc/feature/s3/>publishing to Amazon S3</a>
+supported anymore)</li></ul><h3 id=version-07>Version 0.7</h3><ul><li>direct <a href=/doc/feature/s3/>publishing to Amazon S3</a>
 (<a href=https://github.com/aptly-dev/aptly/issues/15>#15</a>)</li><li>support for new, powerful <a href=/doc/feature/query/>query language</a> in many
 commands: <a href=/doc/aptly/snapshot/pull/>aptly snapshot pull</a>, <a href=/doc/aptly/repo/move/>aptly repo
 move</a>, <a href=/doc/aptly/repo/copy/>aptly repo copy</a>, <a href=/doc/aptly/repo/import/>aptly
@@ -421,8 +216,7 @@ Aquino</a></li><li>bug fix: publish update fails on empty multi-component repo
 (<a href=https://github.com/aptly-dev/aptly/issues/66>#66</a>)</li><li>bug fix: <a href=/doc/aptly/snapshot/pull/>aptly snapshot pull</a> might remove
 already pulled packages
 (<a href=https://github.com/aptly-dev/aptly/issues/78>#78</a>)</li><li>bug fix: aptly package was missing <code>bzip2</code> dependency
-(<a href=https://github.com/aptly-dev/aptly/issues/84>#84</a>)</li><li>aptly binary packages are built with go1.3</li></ul><h3 id=version-06>Version 0.6</h3><ul>
-<li>support for multi-component published repositories
+(<a href=https://github.com/aptly-dev/aptly/issues/84>#84</a>)</li><li>aptly binary packages are built with go1.3</li></ul><h3 id=version-06>Version 0.6</h3><ul><li>support for multi-component published repositories
 (<a href=https://github.com/aptly-dev/aptly/issues/36>#36</a>)</li><li>handling duplicate packages with different content gracefully
 (<a href=https://github.com/aptly-dev/aptly/issues/60>#60</a>)</li><li>repositories published by aptly now can be consumed by
 debian-installer (<a href=https://github.com/aptly-dev/aptly/issues/61>#61</a>)</li><li>new flag: <code>-no-remove</code> for <a href=/doc/aptly/snapshot/merge/>aptly snapshot
@@ -434,12 +228,10 @@ failed to add (<a href=https://github.com/aptly-dev/aptly/issues/53>#53</a>)</li
 (<a href=https://github.com/aptly-dev/aptly/issues/49>#49</a>)</li><li>bug fix: when command parsing fails, aptly returns exit code 2
 (<a href=https://github.com/aptly-dev/aptly/issues/52>#52</a>)</li><li>bug fix: pulling more than 128 packates at once
 (<a href=https://github.com/aptly-dev/aptly/issues/53>#53</a>)</li><li>bug fix: <a href=/doc/aptly/graph/>aptly graph</a> may get confused with package
-pull requests (<a href=https://github.com/aptly-dev/aptly/issues/58>#58</a>)</li></ul><h3 id=version-051>Version 0.5.1</h3><ul>
-<li>bug fix: <code>HTTP_PROXY</code> environment variable has been ignored
+pull requests (<a href=https://github.com/aptly-dev/aptly/issues/58>#58</a>)</li></ul><h3 id=version-051>Version 0.5.1</h3><ul><li>bug fix: <code>HTTP_PROXY</code> environment variable has been ignored
 (<a href=https://github.com/aptly-dev/aptly/issues/46>#46</a>)</li><li>bug fix: support for flat repositories in subdirectory
 (<a href=https://github.com/aptly-dev/aptly/issues/47>#47</a>)</li><li>bug fix: wrong pool directory name when <code>Source:</code> contains version
-(<a href=https://github.com/aptly-dev/aptly/issues/44>#44</a>)</li></ul><h3 id=version-05>Version 0.5</h3><ul>
-<li>Debian packages for aptly are <a href=/download/>available</a></li><li>internal DB is compacted when calling <a href=/doc/aptly/db/cleanup/>aptly db
+(<a href=https://github.com/aptly-dev/aptly/issues/44>#44</a>)</li></ul><h3 id=version-05>Version 0.5</h3><ul><li>Debian packages for aptly are <a href=/download/>available</a></li><li>internal DB is compacted when calling <a href=/doc/aptly/db/cleanup/>aptly db
 cleanup</a>
 (<a href=https://github.com/aptly-dev/aptly/issues/19>#19</a>)</li><li>size is shown in human-readable format
 (<a href=https://github.com/aptly-dev/aptly/issues/18>#18</a>)</li><li>fixed wrong location of man page in Debian package
@@ -475,10 +267,8 @@ published snapshot in-place
 merge</a> changes merge strategy to &ldquo;latest
 version wins&rdquo; (<a href=https://github.com/aptly-dev/aptly/pull/42>#42</a>),
 thanks to <a href=https://github.com/ryanuber>@ryanuber</a> and
-<a href=https://github.com/keithchambers>@keithchambers</a></li></ul><h3 id=version-041>Version 0.4.1</h3><ul>
-<li>fixed <a href=https://github.com/aptly-dev/aptly/issues/5>bug</a> with slashes in
-component names</li></ul><h3 id=version-04>Version 0.4</h3><ul>
-<li>new command: <a href=/doc/aptly/db/cleanup/>aptly db cleanup</a> to remove
+<a href=https://github.com/keithchambers>@keithchambers</a></li></ul><h3 id=version-041>Version 0.4.1</h3><ul><li>fixed <a href=https://github.com/aptly-dev/aptly/issues/5>bug</a> with slashes in
+component names</li></ul><h3 id=version-04>Version 0.4</h3><ul><li>new command: <a href=/doc/aptly/db/cleanup/>aptly db cleanup</a> to remove
 unreferenced DB entries and files</li><li>new flags: <code>-keyring</code> & <code>-secret-keyring</code> for <a href=/doc/aptly/publish/snapshot/>aptly snapshot
 publish</a> command</li><li>aptly supports mirroring remote repos with source packages and
 publishing repositories with sources</li><li>new config: <code>downloadSourcePackages</code> to enable source package
@@ -494,21 +284,12 @@ creation of snapshots from local repos</li><li>aptly peak memory usage has been 
 pull</a>: don&rsquo;t remove other version of packages
 when pulling (e.g. keep old versions)</li><li>command <a href=/doc/aptly/mirror/create/>aptly mirror create</a> supports
 shorthand PPA url: <code>ppa:user/project</code></li><li>new config: <code>ppaDistributorID</code> & <code>ppaCodename</code> to specify PPA url
-expansion rules</li></ul><h3 id=version-03>Version 0.3</h3><ul>
-<li><code>aptly snapshot show</code> doesn&rsquo;t show list of packages by default</li><li>option <code>-with-packages</code> to show list of packages stored in mirror
+expansion rules</li></ul><h3 id=version-03>Version 0.3</h3><ul><li><code>aptly snapshot show</code> doesn&rsquo;t show list of packages by default</li><li>option <code>-with-packages</code> to show list of packages stored in mirror
 and snapshot</li><li><a href=https://github.com/aptly-dev/aptly-bash-completion>bash
 completion</a> is
 now available for aptly</li><li>dropping <a href=/doc/aptly/snapshot/drop/>snapshots</a> and
 <a href=/doc/aptly/mirror/drop/>mirrors</a> is supported</li><li><a href=/doc/aptly/serve/>serving</a> published repositories</li><li>aptly does checksum validation when downloading from remote mirrors</li><li>aptly verifies crypto signature on Release files</li><li>aptly can create empty snapshots</li><li>new global flag <code>-config</code> to override default config location</li><li>Debian flat repositories are now supported</li><li>command <a href=/doc/aptly/graph>aptly graph</a> can generate graph of
-dependencies</li></ul><div id=disqus_thread></div><script type=text/javascript>(function(){if(window.location.hostname=="localhost")return;var e=document.createElement("script"),t,n,s;e.type="text/javascript",e.async=!0,t="aptly",n="History",s="/doc/history/".replace(/\/$/,""),e.src="//"+t+".disqus.com/embed.js",(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(e)})()</script>
-<noscript>Please enable JavaScript to view the <a href=http://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript></div></div></div></section><footer id=page-footer>
-<div class=container>
-<nav class="navbar navbar-default navbar-static-top" role=navigation>
-<ul class="nav navbar-nav nav-justified">
-<li><a href=/tutorial/>tutorials</a></li><li><a href=/download/>download</a></li><li><a href=/support/>support</a></li><li class=active><a href=/doc/overview/>documentation</a></li><li><a href=/about/>about</a></li><li><a href=/post/>blog</a></li></ul></nav><div class=copy>
-Sponsored by <a href=http://express42.com/>express42</a> &copy;&nbsp;2013-2018 aptly contributors
-</div></div></footer><script src=https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js></script>
+dependencies</li></ul><div id=disqus_thread></div><script type=text/javascript>(function(){if(window.location.hostname=="localhost")return;var e=document.createElement("script"),t,n,s;e.type="text/javascript",e.async=!0,t="aptly",n="History",s="/doc/history/".replace(/\/$/,""),e.src="//"+t+".disqus.com/embed.js",(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(e)})()</script><noscript>Please enable JavaScript to view the <a href=http://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript></div></div></div></section><footer id=page-footer><div class=container><nav class="navbar navbar-default navbar-static-top" role=navigation><ul class="nav navbar-nav nav-justified"><li><a href=/tutorial/>tutorials</a></li><li><a href=/download/>download</a></li><li><a href=/support/>support</a></li><li class=active><a href=/doc/overview/>documentation</a></li><li><a href=/about/>about</a></li><li><a href=/post/>blog</a></li></ul></nav><div class=copy>Sponsored by <a href=http://express42.com/>express42</a> &copy;&nbsp;2013-2018 aptly contributors</div></div></footer><script src=https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js></script>
 <script src=/js/bootstrap.min.js></script>
 <script src=/js/aptly.js></script>
-<script>(function(e,o,i,a,t,n,s){e.GoogleAnalyticsObject=t,e[t]=e[t]||function(){(e[t].q=e[t].q||[]).push(arguments)},e[t].l=1*new Date,n=o.createElement(i),s=o.getElementsByTagName(i)[0],n.async=1,n.src=a,s.parentNode.insertBefore(n,s)})(window,document,"script","//www.google-analytics.com/analytics.js","ga"),ga("create","UA-6065617-2","aptly.info"),ga("send","pageview")</script>
-</body></html>
+<script>(function(e,o,i,a,t,n,s){e.GoogleAnalyticsObject=t,e[t]=e[t]||function(){(e[t].q=e[t].q||[]).push(arguments)},e[t].l=1*new Date,n=o.createElement(i),s=o.getElementsByTagName(i)[0],n.async=1,n.src=a,s.parentNode.insertBefore(n,s)})(window,document,"script","//www.google-analytics.com/analytics.js","ga"),ga("create","UA-6065617-2","aptly.info"),ga("send","pageview")</script></body></html>

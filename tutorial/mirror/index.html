@@ -1,26 +1,5 @@
-<!doctype html><html lang=en>
-<head>
-<meta charset=utf-8>
-<meta http-equiv=x-ua-compatible content="IE=edge">
-<title>aptly - Mirroring with snapshots</title><meta name=viewport content="width=device-width,initial-scale=1">
-<link rel="shortcut icon" href=/favicon.ico>
-<link type=text/css rel=stylesheet href=/css/styles.css>
-<link rel=canonical href=https://www.aptly.info/tutorial/mirror/>
-<link href=/post/index.xml rel=alternate type=application/rss+xml title="Debian repository management tool">
-</head><body>
-<header id=page-header>
-<div class=container>
-<nav class="navbar navbar-default navbar-static-top" role=navigation>
-<ul class="nav navbar-nav nav-justified">
-<li class=active><a href=/tutorial/>tutorials</a></li><li><a href=/download/>download</a></li><li><a href=/support/>support</a></li><li><a href=/doc/overview/>documentation</a></li><li><a href=/about/>about</a></li><li><a href=/post/>blog</a></li></ul></nav><div class=row>
-<div class="col-md-6 col-md-offset-3 text-center">
-<a class=brand href=/>
-<i class=brand-logo></i>
-<span class=brand-name>aptly</span>
-</a>
-</div></div></div></header><section class=primary-content>
-<div class=container>
-<h2 id=mirroring-with-snapshots>Mirroring with snapshots</h2><p class=lead>Goal: build mirror of Debian wheezy, with security updates incorporated,
+<!doctype html><html lang=en><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><title>aptly - Mirroring with snapshots</title><meta name=viewport content="width=device-width,initial-scale=1"><link rel="shortcut icon" href=/favicon.ico><link type=text/css rel=stylesheet href=/css/styles.css><link rel=canonical href=https://www.aptly.info/tutorial/mirror/><link href=/post/index.xml rel=alternate type=application/rss+xml title="Debian repository management tool"></head><body><header id=page-header><div class=container><nav class="navbar navbar-default navbar-static-top" role=navigation><ul class="nav navbar-nav nav-justified"><li class=active><a href=/tutorial/>tutorials</a></li><li><a href=/download/>download</a></li><li><a href=/support/>support</a></li><li><a href=/doc/overview/>documentation</a></li><li><a href=/about/>about</a></li><li><a href=/post/>blog</a></li></ul></nav><div class=row><div class="col-md-6 col-md-offset-3 text-center"><a class=brand href=/><i class=brand-logo></i>
+<span class=brand-name>aptly</span></a></div></div></div></header><section class=primary-content><div class=container><h2 id=mirroring-with-snapshots>Mirroring with snapshots</h2><p class=lead>Goal: build mirror of Debian wheezy, with security updates incorporated,
 done using snapshots to make package installation consistent on all the hosts.</p><h3 id=preparation>Preparation</h3><p>First, <a href=/download/>install</a> aptly. Please verify that you have aptly
 dependencies installed: packages <code>bzip2</code>, <code>gnupg</code> and <code>gpgv</code>.
 Second, choose some user that would
@@ -284,8 +263,7 @@ Loading snapshots...
 Loading published repos...
 Generating graph...
 Rendered to PNG file: /tmp/aptly-graph128726742.png
-</pre><p>This would result in picture like this one:</p><img class=img-responsive src=../../img/aptly-graph.png>
-<h3 id=using-repository>Using repository</h3><p>First I need to import public part of the key that was used to sign the repository
+</pre><p>This would result in picture like this one:</p><img class=img-responsive src=../../img/aptly-graph.png><h3 id=using-repository>Using repository</h3><p>First I need to import public part of the key that was used to sign the repository
 into trusted apt keyring on target machine.</p><p>Export the key on machine with aptly:</p><pre class=code>
 $ gpg --export --armor > my_key.pub
 </pre><p>Copy <code>my_key.pub</code> to target machine and import it into apt keyring:</p><pre class=code>
@@ -350,8 +328,7 @@ Finalizing metadata files...
 Cleaning up prefix "." components main...
 
 Publish for snapshot ./wheezy [amd64] publishes {main: [wheezy-final-20141019]: Merged from sources: 'wheezy-main-7.6', 'wheezy-updates-20141009', 'wheezy-security-20141019'} has been successfully switched to new snapshot.
-</pre><p><code>apt-get</code> would notice new packages on next update, and I can upgrade my target machine.</p><p>If run <code>aptly graph</code> again, the picture would be more interesting:</p><img class=img-responsive src=../../img/aptly-graph2.png>
-<h3 id=maintenance>Maintenance</h3><p>You can drop old snapshots as they&rsquo;re not used anymore. This would allow to cleanup some files
+</pre><p><code>apt-get</code> would notice new packages on next update, and I can upgrade my target machine.</p><p>If run <code>aptly graph</code> again, the picture would be more interesting:</p><img class=img-responsive src=../../img/aptly-graph2.png><h3 id=maintenance>Maintenance</h3><p>You can drop old snapshots as they&rsquo;re not used anymore. This would allow to cleanup some files
 with <code>aptly db cleanup</code>:</p><pre class=code>
 $ aptly db cleanup
 Loading mirrors, local repos and snapshots...
@@ -361,14 +338,7 @@ Building list of files referenced by packages...
 Building list of files in package pool...
 Deleting unreferenced files (10)...
 Compacting database...
-</pre><p>Package files are only deleted if no objects (snapshots, mirrors, local repositories) reference them.</p><p>Next tutorial is about <a href=/tutorial/pull/>pulling new version of packages from backports or 3rd party repos</a>.</p></div></section><footer id=page-footer>
-<div class=container>
-<nav class="navbar navbar-default navbar-static-top" role=navigation>
-<ul class="nav navbar-nav nav-justified">
-<li class=active><a href=/tutorial/>tutorials</a></li><li><a href=/download/>download</a></li><li><a href=/support/>support</a></li><li><a href=/doc/overview/>documentation</a></li><li><a href=/about/>about</a></li><li><a href=/post/>blog</a></li></ul></nav><div class=copy>
-Sponsored by <a href=http://express42.com/>express42</a> &copy;&nbsp;2013-2018 aptly contributors
-</div></div></footer><script src=https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js></script>
+</pre><p>Package files are only deleted if no objects (snapshots, mirrors, local repositories) reference them.</p><p>Next tutorial is about <a href=/tutorial/pull/>pulling new version of packages from backports or 3rd party repos</a>.</p></div></section><footer id=page-footer><div class=container><nav class="navbar navbar-default navbar-static-top" role=navigation><ul class="nav navbar-nav nav-justified"><li class=active><a href=/tutorial/>tutorials</a></li><li><a href=/download/>download</a></li><li><a href=/support/>support</a></li><li><a href=/doc/overview/>documentation</a></li><li><a href=/about/>about</a></li><li><a href=/post/>blog</a></li></ul></nav><div class=copy>Sponsored by <a href=http://express42.com/>express42</a> &copy;&nbsp;2013-2018 aptly contributors</div></div></footer><script src=https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js></script>
 <script src=/js/bootstrap.min.js></script>
 <script src=/js/aptly.js></script>
-<script>(function(e,o,i,a,t,n,s){e.GoogleAnalyticsObject=t,e[t]=e[t]||function(){(e[t].q=e[t].q||[]).push(arguments)},e[t].l=1*new Date,n=o.createElement(i),s=o.getElementsByTagName(i)[0],n.async=1,n.src=a,s.parentNode.insertBefore(n,s)})(window,document,"script","//www.google-analytics.com/analytics.js","ga"),ga("create","UA-6065617-2","aptly.info"),ga("send","pageview")</script>
-</body></html>
+<script>(function(e,o,i,a,t,n,s){e.GoogleAnalyticsObject=t,e[t]=e[t]||function(){(e[t].q=e[t].q||[]).push(arguments)},e[t].l=1*new Date,n=o.createElement(i),s=o.getElementsByTagName(i)[0],n.async=1,n.src=a,s.parentNode.insertBefore(n,s)})(window,document,"script","//www.google-analytics.com/analytics.js","ga"),ga("create","UA-6065617-2","aptly.info"),ga("send","pageview")</script></body></html>

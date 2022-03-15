@@ -1,31 +1,9 @@
-<!doctype html><html lang=en>
-<head>
-<meta charset=utf-8>
-<meta http-equiv=x-ua-compatible content="IE=edge">
-<title>aptly - aptly 0.8 - .udeb support, search and filtering</title><meta name=viewport content="width=device-width,initial-scale=1">
-<link rel="shortcut icon" href=/favicon.ico>
-<link type=text/css rel=stylesheet href=/css/styles.css>
-<link rel=canonical href=https://www.aptly.info/post/aptly-0-8/>
-<link href=/post/index.xml rel=alternate type=application/rss+xml title="Debian repository management tool">
-</head><body>
-<header id=page-header>
-<div class=container>
-<nav class="navbar navbar-default navbar-static-top" role=navigation>
-<ul class="nav navbar-nav nav-justified">
-<li><a href=/tutorial/>tutorials</a></li><li><a href=/download/>download</a></li><li><a href=/support/>support</a></li><li><a href=/doc/overview/>documentation</a></li><li><a href=/about/>about</a></li><li class=active><a href=/post/>blog</a></li></ul></nav><div class=row>
-<div class="col-md-6 col-md-offset-3 text-center">
-<a class=brand href=/>
-<i class=brand-logo></i>
-<span class=brand-name>aptly</span>
-</a>
-</div></div></div></header><section class=primary-content>
-<div class=container>
-<h1>aptly 0.8 - .udeb support, search and filtering</h1><p><a href=http://www.aptly.info>aptly</a> 0.8 has been released today.
+<!doctype html><html lang=en><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><title>aptly - aptly 0.8 - .udeb support, search and filtering</title><meta name=viewport content="width=device-width,initial-scale=1"><link rel="shortcut icon" href=/favicon.ico><link type=text/css rel=stylesheet href=/css/styles.css><link rel=canonical href=https://www.aptly.info/post/aptly-0-8/><link href=/post/index.xml rel=alternate type=application/rss+xml title="Debian repository management tool"></head><body><header id=page-header><div class=container><nav class="navbar navbar-default navbar-static-top" role=navigation><ul class="nav navbar-nav nav-justified"><li><a href=/tutorial/>tutorials</a></li><li><a href=/download/>download</a></li><li><a href=/support/>support</a></li><li><a href=/doc/overview/>documentation</a></li><li><a href=/about/>about</a></li><li class=active><a href=/post/>blog</a></li></ul></nav><div class=row><div class="col-md-6 col-md-offset-3 text-center"><a class=brand href=/><i class=brand-logo></i>
+<span class=brand-name>aptly</span></a></div></div></div></header><section class=primary-content><div class=container><h1>aptly 0.8 - .udeb support, search and filtering</h1><p><a href=http://www.aptly.info>aptly</a> 0.8 has been released today.
 For installation instructions, please proceed to <a href=http://www.aptly.info#download>Download</a> page.</p><p>Most important new features are:</p><h2 id=searching-for-packages>Searching for Packages</h2><p>aptly has powerful <a href=http://www.aptly.info/doc/feature/query>query language</a>
 which allows to select subset of packages. Query language is used
 in many commands: pulling packages between snapshots, copying, moving packages
-between local repositories, filtering mirror contents, etc. <br>
-aptly 0.8 allows to use queries to search mirrors, snapshots and local repos
+between local repositories, filtering mirror contents, etc.<br>aptly 0.8 allows to use queries to search mirrors, snapshots and local repos
 for packages matching condition. E.g. all packages that have been built
 from source package <code>apt</code>:</p><pre><code>$ aptly mirror search wheezy-main '$Source (apt)'
 apt-doc_0.9.7.9+deb7u1_all
@@ -90,8 +68,7 @@ download of package files that might take hours. aptly 0.8 would unlock the data
 after package index download (right before package files download), so during download phase
 other commands could be run, e.g. create another mirror, take snapshots, publish other repositories
 and so on. aptly locks repository being updated during package download to prevent modifications
-to the repository.</p><h2 id=all-changes>All Changes</h2><p>Full list of changes since 0.7.1:</p><ul>
-<li>aptly supports <strong>concurrent operations while mirror is updated</strong>, new flag
+to the repository.</p><h2 id=all-changes>All Changes</h2><p>Full list of changes since 0.7.1:</p><ul><li>aptly supports <strong>concurrent operations while mirror is updated</strong>, new flag
 <code>-force</code> for <a href=http://www.aptly.info/doc/aptly/mirror/update/>aptly mirror update</a>
 (<a href=https://github.com/aptly-dev/aptly/issues/45>#45</a>) (<a href=https://github.com/aptly-dev/aptly/issues/114>#114</a>)</li><li>support for <strong><code>.udeb</code> packages (Debian installer)</strong> in mirrors, local repos and
 published repositories
@@ -128,14 +105,7 @@ hasn&rsquo;t been displaying storage prefix for repositories published to S3
 when guessing distribution <code>/</code> is replaced with <code>-</code>
 (<a href=https://github.com/aptly-dev/aptly/issues/110>#110</a>)</li><li>bug fix: download errors while mirroring now include original
 URL
-(<a href=https://github.com/aptly-dev/aptly/issues/26>#26</a>)</li></ul></div></section><footer id=page-footer>
-<div class=container>
-<nav class="navbar navbar-default navbar-static-top" role=navigation>
-<ul class="nav navbar-nav nav-justified">
-<li><a href=/tutorial/>tutorials</a></li><li><a href=/download/>download</a></li><li><a href=/support/>support</a></li><li><a href=/doc/overview/>documentation</a></li><li><a href=/about/>about</a></li><li class=active><a href=/post/>blog</a></li></ul></nav><div class=copy>
-Sponsored by <a href=http://express42.com/>express42</a> &copy;&nbsp;2013-2018 aptly contributors
-</div></div></footer><script src=https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js></script>
+(<a href=https://github.com/aptly-dev/aptly/issues/26>#26</a>)</li></ul></div></section><footer id=page-footer><div class=container><nav class="navbar navbar-default navbar-static-top" role=navigation><ul class="nav navbar-nav nav-justified"><li><a href=/tutorial/>tutorials</a></li><li><a href=/download/>download</a></li><li><a href=/support/>support</a></li><li><a href=/doc/overview/>documentation</a></li><li><a href=/about/>about</a></li><li class=active><a href=/post/>blog</a></li></ul></nav><div class=copy>Sponsored by <a href=http://express42.com/>express42</a> &copy;&nbsp;2013-2018 aptly contributors</div></div></footer><script src=https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js></script>
 <script src=/js/bootstrap.min.js></script>
 <script src=/js/aptly.js></script>
-<script>(function(e,o,i,a,t,n,s){e.GoogleAnalyticsObject=t,e[t]=e[t]||function(){(e[t].q=e[t].q||[]).push(arguments)},e[t].l=1*new Date,n=o.createElement(i),s=o.getElementsByTagName(i)[0],n.async=1,n.src=a,s.parentNode.insertBefore(n,s)})(window,document,"script","//www.google-analytics.com/analytics.js","ga"),ga("create","UA-6065617-2","aptly.info"),ga("send","pageview")</script>
-</body></html>
+<script>(function(e,o,i,a,t,n,s){e.GoogleAnalyticsObject=t,e[t]=e[t]||function(){(e[t].q=e[t].q||[]).push(arguments)},e[t].l=1*new Date,n=o.createElement(i),s=o.getElementsByTagName(i)[0],n.async=1,n.src=a,s.parentNode.insertBefore(n,s)})(window,document,"script","//www.google-analytics.com/analytics.js","ga"),ga("create","UA-6065617-2","aptly.info"),ga("send","pageview")</script></body></html>

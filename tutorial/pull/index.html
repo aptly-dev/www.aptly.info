@@ -1,26 +1,5 @@
-<!doctype html><html lang=en>
-<head>
-<meta charset=utf-8>
-<meta http-equiv=x-ua-compatible content="IE=edge">
-<title>aptly - Pulling new versions of packages</title><meta name=viewport content="width=device-width,initial-scale=1">
-<link rel="shortcut icon" href=/favicon.ico>
-<link type=text/css rel=stylesheet href=/css/styles.css>
-<link rel=canonical href=https://www.aptly.info/tutorial/pull/>
-<link href=/post/index.xml rel=alternate type=application/rss+xml title="Debian repository management tool">
-</head><body>
-<header id=page-header>
-<div class=container>
-<nav class="navbar navbar-default navbar-static-top" role=navigation>
-<ul class="nav navbar-nav nav-justified">
-<li class=active><a href=/tutorial/>tutorials</a></li><li><a href=/download/>download</a></li><li><a href=/support/>support</a></li><li><a href=/doc/overview/>documentation</a></li><li><a href=/about/>about</a></li><li><a href=/post/>blog</a></li></ul></nav><div class=row>
-<div class="col-md-6 col-md-offset-3 text-center">
-<a class=brand href=/>
-<i class=brand-logo></i>
-<span class=brand-name>aptly</span>
-</a>
-</div></div></div></header><section class=primary-content>
-<div class=container>
-<h2 id=pulling-new-versions-of-packages>Pulling new versions of packages</h2><p class=lead>Goal: pull new version of nginx package from backports, add aptly
+<!doctype html><html lang=en><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><title>aptly - Pulling new versions of packages</title><meta name=viewport content="width=device-width,initial-scale=1"><link rel="shortcut icon" href=/favicon.ico><link type=text/css rel=stylesheet href=/css/styles.css><link rel=canonical href=https://www.aptly.info/tutorial/pull/><link href=/post/index.xml rel=alternate type=application/rss+xml title="Debian repository management tool"></head><body><header id=page-header><div class=container><nav class="navbar navbar-default navbar-static-top" role=navigation><ul class="nav navbar-nav nav-justified"><li class=active><a href=/tutorial/>tutorials</a></li><li><a href=/download/>download</a></li><li><a href=/support/>support</a></li><li><a href=/doc/overview/>documentation</a></li><li><a href=/about/>about</a></li><li><a href=/post/>blog</a></li></ul></nav><div class=row><div class="col-md-6 col-md-offset-3 text-center"><a class=brand href=/><i class=brand-logo></i>
+<span class=brand-name>aptly</span></a></div></div></div></header><section class=primary-content><div class=container><h2 id=pulling-new-versions-of-packages>Pulling new versions of packages</h2><p class=lead>Goal: pull new version of nginx package from backports, add aptly
 package from 3rd party repository.</p><p>Let&rsquo;s start with mirrors created in <a href=/tutorial/mirror/>first tutorial</a>: <code>wheezy-main</code>,
 <code>wheezy-updates</code> and <code>wheezy-security</code>.</p><h3 id=backporting-nginx>Backporting nginx</h3><p>Create new mirror <code>wheezy-backports</code>:</p><pre class=code>
 $ aptly mirror create -architectures=amd64 -filter=nginx -filter-with-deps wheezy-backports http://ftp.ru.debian.org/debian/ wheezy-backports main
@@ -176,15 +155,7 @@ deb http://debian:8080/stable/ wheezy main
 # testing/wheezy [amd64] publishes {main: [wheezy-main-nginx-aptly-20141009]: Pulled into 'wheezy-main-nginx-20141009' with 'aptly-0.8' as source, pull request was: 'aptly'}
 deb http://debian:8080/testing/ wheezy main
 </pre><p>After successful round of testing, I can use <code>aptly publish switch</code> to switch by stable published repository
-to the new snapshot <code>wheezy-main-nginx-aptly-20141009</code> and update my target machines.</p><p>If I generate the graph, it would look like that:</p><img class=img-responsive src=../../img/aptly-graph3.png>
-</div></section><footer id=page-footer>
-<div class=container>
-<nav class="navbar navbar-default navbar-static-top" role=navigation>
-<ul class="nav navbar-nav nav-justified">
-<li class=active><a href=/tutorial/>tutorials</a></li><li><a href=/download/>download</a></li><li><a href=/support/>support</a></li><li><a href=/doc/overview/>documentation</a></li><li><a href=/about/>about</a></li><li><a href=/post/>blog</a></li></ul></nav><div class=copy>
-Sponsored by <a href=http://express42.com/>express42</a> &copy;&nbsp;2013-2018 aptly contributors
-</div></div></footer><script src=https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js></script>
+to the new snapshot <code>wheezy-main-nginx-aptly-20141009</code> and update my target machines.</p><p>If I generate the graph, it would look like that:</p><img class=img-responsive src=../../img/aptly-graph3.png></div></section><footer id=page-footer><div class=container><nav class="navbar navbar-default navbar-static-top" role=navigation><ul class="nav navbar-nav nav-justified"><li class=active><a href=/tutorial/>tutorials</a></li><li><a href=/download/>download</a></li><li><a href=/support/>support</a></li><li><a href=/doc/overview/>documentation</a></li><li><a href=/about/>about</a></li><li><a href=/post/>blog</a></li></ul></nav><div class=copy>Sponsored by <a href=http://express42.com/>express42</a> &copy;&nbsp;2013-2018 aptly contributors</div></div></footer><script src=https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js></script>
 <script src=/js/bootstrap.min.js></script>
 <script src=/js/aptly.js></script>
-<script>(function(e,o,i,a,t,n,s){e.GoogleAnalyticsObject=t,e[t]=e[t]||function(){(e[t].q=e[t].q||[]).push(arguments)},e[t].l=1*new Date,n=o.createElement(i),s=o.getElementsByTagName(i)[0],n.async=1,n.src=a,s.parentNode.insertBefore(n,s)})(window,document,"script","//www.google-analytics.com/analytics.js","ga"),ga("create","UA-6065617-2","aptly.info"),ga("send","pageview")</script>
-</body></html>
+<script>(function(e,o,i,a,t,n,s){e.GoogleAnalyticsObject=t,e[t]=e[t]||function(){(e[t].q=e[t].q||[]).push(arguments)},e[t].l=1*new Date,n=o.createElement(i),s=o.getElementsByTagName(i)[0],n.async=1,n.src=a,s.parentNode.insertBefore(n,s)})(window,document,"script","//www.google-analytics.com/analytics.js","ga"),ga("create","UA-6065617-2","aptly.info"),ga("send","pageview")</script></body></html>

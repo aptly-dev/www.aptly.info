@@ -1,324 +1,33 @@
-<!doctype html><html lang=en>
-<head>
-<meta charset=utf-8>
-<meta http-equiv=x-ua-compatible content="IE=edge">
-<title>aptly - Snapshot API</title><meta name=viewport content="width=device-width,initial-scale=1">
-<link rel="shortcut icon" href=/favicon.ico>
-<link type=text/css rel=stylesheet href=/css/styles.css>
-<link rel=canonical href=https://www.aptly.info/doc/api/snapshots/>
-<link href=/post/index.xml rel=alternate type=application/rss+xml title="Debian repository management tool">
-</head><body>
-<header id=page-header>
-<div class=container>
-<nav class="navbar navbar-default navbar-static-top" role=navigation>
-<ul class="nav navbar-nav nav-justified">
-<li><a href=/tutorial/>tutorials</a></li><li><a href=/download/>download</a></li><li><a href=/support/>support</a></li><li class=active><a href=/doc/overview/>documentation</a></li><li><a href=/about/>about</a></li><li><a href=/post/>blog</a></li></ul></nav><div class=row>
-<div class="col-md-6 col-md-offset-3 text-center">
-<a class=brand href=/>
-<i class=brand-logo></i>
-<span class=brand-name>aptly</span>
-</a>
-</div></div></div></header><section class=documentation>
-<div class=container>
-<div class=sidebar-overlay></div><div class=row>
-<div class="col-md-3 col-sm-3 col-xs-3">
-<div class=sidebar>
-<ul class="nav nav-sidebar">
-<li>
-<a href=/doc/overview/>Overview</a>
-</li><li>
-<a href=/doc/why/>Why aptly?</a>
-</li><li>
-<a href=/doc/faq/>FAQ</a>
-</li><li>
-<a href=/doc/features/>Features</a>
-<ul class=nav>
-<li>
-<a href=/doc/feature/query/>Package Queries</a>
-</li><li>
-<a href=/doc/feature/duplicate/>Duplicate Packages</a>
-</li><li>
-<a href=/doc/feature/s3/>Publishing to S3</a>
-</li><li>
-<a href=/doc/feature/swift/>Publishing to Swift</a>
-</li><li>
-<a href=/doc/feature/filesystem/>Filesystem Publishing</a>
-</li><li>
-<a href=/doc/feature/multi-component/>Multi-Component Publishing</a>
-</li><li>
-<a href=/doc/feature/pgp-providers/>PGP Providers</a>
-</li><li>
-<a href=/doc/feature/package-display/>Package Display Format</a>
-</li><li>
-<a href=/doc/feature/dependencies/>Dependency Resolving</a>
-</li></ul></li><li>
-<a href=/doc/configuration/>Configuration</a>
-</li><li>
-<a href=/doc/commands/>Commands</a>
-<ul class=nav>
-<li>
-<a href=/doc/aptly/flags/>Global Flags</a>
-</li><li>
-<a href=/doc/aptly/mirror/>aptly mirror</a>
-<ul class=nav>
-<li>
-<a href=/doc/aptly/mirror/create/>aptly mirror create</a>
-</li><li>
-<a href=/doc/aptly/mirror/update/>aptly mirror update</a>
-</li><li>
-<a href=/doc/aptly/mirror/list/>aptly mirror list</a>
-</li><li>
-<a href=/doc/aptly/mirror/show/>aptly mirror show</a>
-</li><li>
-<a href=/doc/aptly/mirror/edit/>aptly mirror edit</a>
-</li><li>
-<a href=/doc/aptly/mirror/search/>aptly mirror search</a>
-</li><li>
-<a href=/doc/aptly/mirror/rename/>aptly mirror rename</a>
-</li><li>
-<a href=/doc/aptly/mirror/drop/>aptly mirror drop</a>
-</li></ul></li><li>
-<a href=/doc/aptly/repo/>aptly repo</a>
-<ul class=nav>
-<li>
-<a href=/doc/aptly/repo/create/>aptly repo create</a>
-</li><li>
-<a href=/doc/aptly/repo/add/>aptly repo add</a>
-</li><li>
-<a href=/doc/aptly/repo/include/>aptly repo include</a>
-</li><li>
-<a href=/doc/aptly/repo/import/>aptly repo import</a>
-</li><li>
-<a href=/doc/aptly/repo/show/>aptly repo show</a>
-</li><li>
-<a href=/doc/aptly/repo/list/>aptly repo list</a>
-</li><li>
-<a href=/doc/aptly/repo/copy/>aptly repo copy</a>
-</li><li>
-<a href=/doc/aptly/repo/move/>aptly repo move</a>
-</li><li>
-<a href=/doc/aptly/repo/remove/>aptly repo remove</a>
-</li><li>
-<a href=/doc/aptly/repo/search/>aptly repo search</a>
-</li><li>
-<a href=/doc/aptly/repo/edit/>aptly repo edit</a>
-</li><li>
-<a href=/doc/aptly/repo/rename/>aptly repo rename</a>
-</li><li>
-<a href=/doc/aptly/repo/drop/>aptly repo drop</a>
-</li></ul></li><li>
-<a href=/doc/aptly/snapshot/>aptly snapshot</a>
-<ul class=nav>
-<li>
-<a href=/doc/aptly/snapshot/create/>aptly snapshot create</a>
-</li><li>
-<a href=/doc/aptly/snapshot/list/>aptly snapshot list</a>
-</li><li>
-<a href=/doc/aptly/snapshot/show/>aptly snapshot show</a>
-</li><li>
-<a href=/doc/aptly/snapshot/verify/>aptly snapshot verify</a>
-</li><li>
-<a href=/doc/aptly/snapshot/pull/>aptly snapshot pull</a>
-</li><li>
-<a href=/doc/aptly/snapshot/filter/>aptly snapshot filter</a>
-</li><li>
-<a href=/doc/aptly/snapshot/diff/>aptly snapshot diff</a>
-</li><li>
-<a href=/doc/aptly/snapshot/merge/>aptly snapshot merge</a>
-</li><li>
-<a href=/doc/aptly/snapshot/search/>aptly snapshot search</a>
-</li><li>
-<a href=/doc/aptly/snapshot/rename/>aptly snapshot rename</a>
-</li><li>
-<a href=/doc/aptly/snapshot/drop/>aptly snapshot drop</a>
-</li></ul></li><li>
-<a href=/doc/aptly/package/>aptly package</a>
-<ul class=nav>
-<li>
-<a href=/doc/aptly/package/search/>aptly package search</a>
-</li><li>
-<a href=/doc/aptly/package/show/>aptly package show</a>
-</li></ul></li><li>
-<a href=/doc/aptly/publish/>aptly publish</a>
-<ul class=nav>
-<li>
-<a href=/doc/aptly/publish/snapshot/>aptly publish snapshot</a>
-</li><li>
-<a href=/doc/aptly/publish/repo/>aptly publish repo</a>
-</li><li>
-<a href=/doc/aptly/publish/update/>aptly publish update</a>
-</li><li>
-<a href=/doc/aptly/publish/switch/>aptly publish switch</a>
-</li><li>
-<a href=/doc/aptly/publish/list/>aptly publish list</a>
-</li><li>
-<a href=/doc/aptly/publish/show/>aptly publish show</a>
-</li><li>
-<a href=/doc/aptly/publish/drop/>aptly publish drop</a>
-</li></ul></li><li>
-<a href=/doc/aptly/db/>aptly db</a>
-<ul class=nav>
-<li>
-<a href=/doc/aptly/db/cleanup/>aptly db cleanup</a>
-</li><li>
-<a href=/doc/aptly/db/recover/>aptly db recover</a>
-</li></ul></li><li>
-<a href=/doc/aptly/task/>aptly task</a>
-<ul class=nav>
-<li>
-<a href=/doc/aptly/task/run/>aptly task run</a>
-</li></ul></li><li>
-<a href=/doc/aptly/serve/>aptly serve</a>
-</li><li>
-<a href=/doc/aptly/config/>aptly config</a>
-<ul class=nav>
-<li>
-<a href=/doc/aptly/config/show/>aptly config show</a>
-</li></ul></li><li>
-<a href=/doc/aptly/graph/>aptly graph</a>
-</li></ul></li><li class=active>
-<a href=/doc/api/>API</a>
-<ul class=nav>
-<li>
-<a href=/doc/api/repos/>Local Repos API</a>
-</li><li>
-<a href=/doc/api/files/>File Upload API</a>
-</li><li class=active>
-<a href=/doc/api/snapshots/>Snapshot API</a>
-</li><li>
-<a href=/doc/api/publish/>Publish API</a>
-</li><li>
-<a href=/doc/api/packages/>Package API</a>
-</li><li>
-<a href=/doc/api/misc/>Misc API</a>
-</li></ul></li><li>
-<a href=/doc/integrations/>Integrations</a>
-</li></ul><div class=source-buttons>
-<a href=/download/ class="btn btn-danger">Download</a>
-<a href=https://github.com/aptly-dev/aptly class="btn btn-default">Github</a>
-</div></div></div><div class="col-md-9 col-sm-9 col-xs-9">
-<h2 id=snapshot-api>Snapshot API</h2><p><a href=/doc/aptly/snapshot>Snapshot</a> management APIs.</p><p>Snapshot is a immutable package reference list taken from local repository, mirror or
-result of other snapshot processing.</p><p>Snapshot properties:</p><table>
-<thead>
-<tr>
-<th>Name</th><th>Type</th><th>Description</th></tr></thead><tbody>
-<tr>
-<td><code>Name</code></td><td><em>required</em>, string</td><td>snapshot name</td></tr><tr>
-<td><code>Description</code></td><td>string</td><td>free-format description how snapshot has been created</td></tr><tr>
-<td><code>CreatedAt</code></td><td>timestamp</td><td>creation timestamp</td></tr></tbody></table><h3 id=list>List</h3><p><code>GET /api/snapshots</code></p><p>Return list of all snapshots created in the system.</p><p>Query params:</p><table>
-<thead>
-<tr>
-<th>Name</th><th>Description</th></tr></thead><tbody>
-<tr>
-<td><code>sort</code></td><td>snapshot order, defaults to <code>name</code>, set to <code>time</code> to display in creation order</td></tr></tbody></table><p>Example:</p><pre><code>$ curl -v http://localhost:8080/api/snapshots
+<!doctype html><html lang=en><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><title>aptly - Snapshot API</title><meta name=viewport content="width=device-width,initial-scale=1"><link rel="shortcut icon" href=/favicon.ico><link type=text/css rel=stylesheet href=/css/styles.css><link rel=canonical href=https://www.aptly.info/doc/api/snapshots/><link href=/post/index.xml rel=alternate type=application/rss+xml title="Debian repository management tool"></head><body><header id=page-header><div class=container><nav class="navbar navbar-default navbar-static-top" role=navigation><ul class="nav navbar-nav nav-justified"><li><a href=/tutorial/>tutorials</a></li><li><a href=/download/>download</a></li><li><a href=/support/>support</a></li><li class=active><a href=/doc/overview/>documentation</a></li><li><a href=/about/>about</a></li><li><a href=/post/>blog</a></li></ul></nav><div class=row><div class="col-md-6 col-md-offset-3 text-center"><a class=brand href=/><i class=brand-logo></i>
+<span class=brand-name>aptly</span></a></div></div></div></header><section class=documentation><div class=container><div class=sidebar-overlay></div><div class=row><div class="col-md-3 col-sm-3 col-xs-3"><div class=sidebar><ul class="nav nav-sidebar"><li><a href=/doc/overview/>Overview</a></li><li><a href=/doc/why/>Why aptly?</a></li><li><a href=/doc/faq/>FAQ</a></li><li><a href=/doc/features/>Features</a><ul class=nav><li><a href=/doc/feature/query/>Package Queries</a></li><li><a href=/doc/feature/duplicate/>Duplicate Packages</a></li><li><a href=/doc/feature/s3/>Publishing to S3</a></li><li><a href=/doc/feature/swift/>Publishing to Swift</a></li><li><a href=/doc/feature/filesystem/>Filesystem Publishing</a></li><li><a href=/doc/feature/multi-component/>Multi-Component Publishing</a></li><li><a href=/doc/feature/pgp-providers/>PGP Providers</a></li><li><a href=/doc/feature/package-display/>Package Display Format</a></li><li><a href=/doc/feature/dependencies/>Dependency Resolving</a></li></ul></li><li><a href=/doc/configuration/>Configuration</a></li><li><a href=/doc/commands/>Commands</a><ul class=nav><li><a href=/doc/aptly/flags/>Global Flags</a></li><li><a href=/doc/aptly/mirror/>aptly mirror</a><ul class=nav><li><a href=/doc/aptly/mirror/create/>aptly mirror create</a></li><li><a href=/doc/aptly/mirror/update/>aptly mirror update</a></li><li><a href=/doc/aptly/mirror/list/>aptly mirror list</a></li><li><a href=/doc/aptly/mirror/show/>aptly mirror show</a></li><li><a href=/doc/aptly/mirror/edit/>aptly mirror edit</a></li><li><a href=/doc/aptly/mirror/search/>aptly mirror search</a></li><li><a href=/doc/aptly/mirror/rename/>aptly mirror rename</a></li><li><a href=/doc/aptly/mirror/drop/>aptly mirror drop</a></li></ul></li><li><a href=/doc/aptly/repo/>aptly repo</a><ul class=nav><li><a href=/doc/aptly/repo/create/>aptly repo create</a></li><li><a href=/doc/aptly/repo/add/>aptly repo add</a></li><li><a href=/doc/aptly/repo/include/>aptly repo include</a></li><li><a href=/doc/aptly/repo/import/>aptly repo import</a></li><li><a href=/doc/aptly/repo/show/>aptly repo show</a></li><li><a href=/doc/aptly/repo/list/>aptly repo list</a></li><li><a href=/doc/aptly/repo/copy/>aptly repo copy</a></li><li><a href=/doc/aptly/repo/move/>aptly repo move</a></li><li><a href=/doc/aptly/repo/remove/>aptly repo remove</a></li><li><a href=/doc/aptly/repo/search/>aptly repo search</a></li><li><a href=/doc/aptly/repo/edit/>aptly repo edit</a></li><li><a href=/doc/aptly/repo/rename/>aptly repo rename</a></li><li><a href=/doc/aptly/repo/drop/>aptly repo drop</a></li></ul></li><li><a href=/doc/aptly/snapshot/>aptly snapshot</a><ul class=nav><li><a href=/doc/aptly/snapshot/create/>aptly snapshot create</a></li><li><a href=/doc/aptly/snapshot/list/>aptly snapshot list</a></li><li><a href=/doc/aptly/snapshot/show/>aptly snapshot show</a></li><li><a href=/doc/aptly/snapshot/verify/>aptly snapshot verify</a></li><li><a href=/doc/aptly/snapshot/pull/>aptly snapshot pull</a></li><li><a href=/doc/aptly/snapshot/filter/>aptly snapshot filter</a></li><li><a href=/doc/aptly/snapshot/diff/>aptly snapshot diff</a></li><li><a href=/doc/aptly/snapshot/merge/>aptly snapshot merge</a></li><li><a href=/doc/aptly/snapshot/search/>aptly snapshot search</a></li><li><a href=/doc/aptly/snapshot/rename/>aptly snapshot rename</a></li><li><a href=/doc/aptly/snapshot/drop/>aptly snapshot drop</a></li></ul></li><li><a href=/doc/aptly/package/>aptly package</a><ul class=nav><li><a href=/doc/aptly/package/search/>aptly package search</a></li><li><a href=/doc/aptly/package/show/>aptly package show</a></li></ul></li><li><a href=/doc/aptly/publish/>aptly publish</a><ul class=nav><li><a href=/doc/aptly/publish/snapshot/>aptly publish snapshot</a></li><li><a href=/doc/aptly/publish/repo/>aptly publish repo</a></li><li><a href=/doc/aptly/publish/update/>aptly publish update</a></li><li><a href=/doc/aptly/publish/switch/>aptly publish switch</a></li><li><a href=/doc/aptly/publish/list/>aptly publish list</a></li><li><a href=/doc/aptly/publish/show/>aptly publish show</a></li><li><a href=/doc/aptly/publish/drop/>aptly publish drop</a></li></ul></li><li><a href=/doc/aptly/db/>aptly db</a><ul class=nav><li><a href=/doc/aptly/db/cleanup/>aptly db cleanup</a></li><li><a href=/doc/aptly/db/recover/>aptly db recover</a></li></ul></li><li><a href=/doc/aptly/task/>aptly task</a><ul class=nav><li><a href=/doc/aptly/task/run/>aptly task run</a></li></ul></li><li><a href=/doc/aptly/serve/>aptly serve</a></li><li><a href=/doc/aptly/config/>aptly config</a><ul class=nav><li><a href=/doc/aptly/config/show/>aptly config show</a></li></ul></li><li><a href=/doc/aptly/graph/>aptly graph</a></li></ul></li><li class=active><a href=/doc/api/>API</a><ul class=nav><li><a href=/doc/api/repos/>Local Repos API</a></li><li><a href=/doc/api/files/>File Upload API</a></li><li class=active><a href=/doc/api/snapshots/>Snapshot API</a></li><li><a href=/doc/api/publish/>Publish API</a></li><li><a href=/doc/api/packages/>Package API</a></li><li><a href=/doc/api/misc/>Misc API</a></li></ul></li><li><a href=/doc/integrations/>Integrations</a></li></ul><div class=source-buttons><a href=/download/ class="btn btn-danger">Download</a>
+<a href=https://github.com/aptly-dev/aptly class="btn btn-default">Github</a></div></div></div><div class="col-md-9 col-sm-9 col-xs-9"><h2 id=snapshot-api>Snapshot API</h2><p><a href=/doc/aptly/snapshot>Snapshot</a> management APIs.</p><p>Snapshot is a immutable package reference list taken from local repository, mirror or
+result of other snapshot processing.</p><p>Snapshot properties:</p><table><thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead><tbody><tr><td><code>Name</code></td><td><em>required</em>, string</td><td>snapshot name</td></tr><tr><td><code>Description</code></td><td>string</td><td>free-format description how snapshot has been created</td></tr><tr><td><code>CreatedAt</code></td><td>timestamp</td><td>creation timestamp</td></tr></tbody></table><h3 id=list>List</h3><p><code>GET /api/snapshots</code></p><p>Return list of all snapshots created in the system.</p><p>Query params:</p><table><thead><tr><th>Name</th><th>Description</th></tr></thead><tbody><tr><td><code>sort</code></td><td>snapshot order, defaults to <code>name</code>, set to <code>time</code> to display in creation order</td></tr></tbody></table><p>Example:</p><pre><code>$ curl -v http://localhost:8080/api/snapshots
 [{&quot;Name&quot;:&quot;snap1&quot;,&quot;CreatedAt&quot;:&quot;2015-02-27T21:36:08.337443295+03:00&quot;,&quot;Description&quot;:&quot;Snapshot from mirror [wheezy-main]: http://mirror.yandex.ru/debian/ wheezy&quot;},{&quot;Name&quot;:&quot;snap2&quot;,&quot;CreatedAt&quot;:&quot;2015-02-27T21:36:08.462492037+03:00&quot;,&quot;Description&quot;:&quot;Snapshot from mirror [wheezy-contrib]: http://mirror.yandex.ru/debian/ wheezy&quot;},{&quot;Name&quot;:&quot;snap3&quot;,&quot;CreatedAt&quot;:&quot;2015-02-27T21:36:08.562465797+03:00&quot;,&quot;Description&quot;:&quot;Merged from sources: 'snap1', 'snap2'&quot;},{&quot;Name&quot;:&quot;snap4&quot;,&quot;CreatedAt&quot;:&quot;2015-02-27T21:36:11.274963+03:00&quot;,&quot;Description&quot;:&quot;Pulled into 'snap1' with 'snap2' as source, pull request was: 'mame unrar'&quot;},{&quot;Name&quot;:&quot;snap5&quot;,&quot;CreatedAt&quot;:&quot;2015-02-27T21:36:11.462710195+03:00&quot;,&quot;Description&quot;:&quot;Snapshot from local repo [local-repo]&quot;}]
-</code></pre><h3 id=create-snapshot-from-local-repo>Create Snapshot from Local Repo</h3><p><code>POST /api/repos/:name/snapshots</code></p><p>Create snapshot of current local repository <code>:name</code> contents as new snapshot with name <code>:snapname</code>.</p><p>JSON body params:</p><table>
-<thead>
-<tr>
-<th>Name</th><th>Type</th><th>Description</th></tr></thead><tbody>
-<tr>
-<td><code>Name</code></td><td>string, <em>required</em></td><td>snapshot name</td></tr><tr>
-<td><code>Description</code></td><td>string</td><td>free-format description how snapshot has been created</td></tr></tbody></table><p>HTTP Errors:</p><table>
-<thead>
-<tr>
-<th>Code</th><th>Description</th></tr></thead><tbody>
-<tr>
-<td>400</td><td>snapshot with name <code>Name</code> already exists</td></tr><tr>
-<td>404</td><td>local repo with name <code>:name</code> doesn&rsquo;t exist</td></tr></tbody></table><p>Example:</p><pre><code>$ curl -X POST -H 'Content-Type: application/json' --data '{&quot;Name&quot;:&quot;snap9&quot;}' http://localhost:8080/api/repos/local-repo/snapshots
+</code></pre><h3 id=create-snapshot-from-local-repo>Create Snapshot from Local Repo</h3><p><code>POST /api/repos/:name/snapshots</code></p><p>Create snapshot of current local repository <code>:name</code> contents as new snapshot with name <code>:snapname</code>.</p><p>JSON body params:</p><table><thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead><tbody><tr><td><code>Name</code></td><td>string, <em>required</em></td><td>snapshot name</td></tr><tr><td><code>Description</code></td><td>string</td><td>free-format description how snapshot has been created</td></tr></tbody></table><p>HTTP Errors:</p><table><thead><tr><th>Code</th><th>Description</th></tr></thead><tbody><tr><td>400</td><td>snapshot with name <code>Name</code> already exists</td></tr><tr><td>404</td><td>local repo with name <code>:name</code> doesn&rsquo;t exist</td></tr></tbody></table><p>Example:</p><pre><code>$ curl -X POST -H 'Content-Type: application/json' --data '{&quot;Name&quot;:&quot;snap9&quot;}' http://localhost:8080/api/repos/local-repo/snapshots
 {&quot;Name&quot;:&quot;snap9&quot;,&quot;CreatedAt&quot;:&quot;2015-02-28T19:56:59.137192613+03:00&quot;,&quot;Description&quot;:&quot;Snapshot from local repo [local-repo]: fun repo&quot;}
 </code></pre><h3 id=create-snapshot-from-package-refs>Create Snapshot from Package Refs</h3><p><code>POST /api/snapshots</code></p><p>Create snapshot from list of package references.</p><p>This API creates snapshot out of any list of package references. Package references could be obtained from other snapshots,
-local repos or mirrors.</p><table>
-<thead>
-<tr>
-<th>Name</th><th>Type</th><th>Description</th></tr></thead><tbody>
-<tr>
-<td><code>Name</code></td><td>string, <em>required</em></td><td>snapshot name</td></tr><tr>
-<td><code>Description</code></td><td>string</td><td>free-format description how snapshot has been created</td></tr><tr>
-<td><code>SourceSnapshots</code></td><td>[]string</td><td>list of source snapshot names (only for tracking purposes)</td></tr><tr>
-<td><code>PackageRefs</code></td><td>[]string</td><td>list of package keys which would be contents of the repository</td></tr></tbody></table><p>Sending request without <code>SourceSnapshots</code> and <code>PackageRefs</code> would create empty snapshot.</p><p>HTTP Errors:</p><table>
-<thead>
-<tr>
-<th>Code</th><th>Description</th></tr></thead><tbody>
-<tr>
-<td>400</td><td>snapshot with name <code>Name</code> already exists, package conflict</td></tr><tr>
-<td>404</td><td>source snapshot doesn&rsquo;t exist, package doesn&rsquo;t exist</td></tr></tbody></table><p>Example:</p><pre><code>$ curl -X POST -H 'Content-Type: application/json' --data '{&quot;Name&quot;:&quot;empty&quot;}' http://localhost:8080/api/snapshots
+local repos or mirrors.</p><table><thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead><tbody><tr><td><code>Name</code></td><td>string, <em>required</em></td><td>snapshot name</td></tr><tr><td><code>Description</code></td><td>string</td><td>free-format description how snapshot has been created</td></tr><tr><td><code>SourceSnapshots</code></td><td>[]string</td><td>list of source snapshot names (only for tracking purposes)</td></tr><tr><td><code>PackageRefs</code></td><td>[]string</td><td>list of package keys which would be contents of the repository</td></tr></tbody></table><p>Sending request without <code>SourceSnapshots</code> and <code>PackageRefs</code> would create empty snapshot.</p><p>HTTP Errors:</p><table><thead><tr><th>Code</th><th>Description</th></tr></thead><tbody><tr><td>400</td><td>snapshot with name <code>Name</code> already exists, package conflict</td></tr><tr><td>404</td><td>source snapshot doesn&rsquo;t exist, package doesn&rsquo;t exist</td></tr></tbody></table><p>Example:</p><pre><code>$ curl -X POST -H 'Content-Type: application/json' --data '{&quot;Name&quot;:&quot;empty&quot;}' http://localhost:8080/api/snapshots
 {&quot;Name&quot;:&quot;empty&quot;,&quot;CreatedAt&quot;:&quot;2015-02-28T20:20:54.19791237+03:00&quot;,&quot;Description&quot;:&quot;Created as empty&quot;}
 
 $ curl -X POST -H 'Content-Type: application/json' --data '{&quot;Name&quot;:&quot;snap10&quot;, &quot;SourceSnapshots&quot;: [&quot;snap9&quot;], &quot;Description&quot;: &quot;Custom&quot;, &quot;PackageRefs&quot;: [&quot;Psource pyspi 0.6.1-1.3 3a8b37cbd9a3559e&quot;]}'  http://localhost:8080/api/snapshots
 {&quot;Name&quot;:&quot;snap10&quot;,&quot;CreatedAt&quot;:&quot;2015-02-28T20:22:13.312866396+03:00&quot;,&quot;Description&quot;:&quot;Custom&quot;}
-</code></pre><h3 id=update>Update</h3><p><code>PUT /api/snapshots/:name</code></p><p>Update snapshot&rsquo;s description or name.</p><p>JSON body params:</p><table>
-<thead>
-<tr>
-<th>Name</th><th>Type</th><th>Description</th></tr></thead><tbody>
-<tr>
-<td><code>Name</code></td><td>string</td><td>new snapshot name</td></tr><tr>
-<td><code>Description</code></td><td>string</td><td>free-format description how snapshot has been created</td></tr></tbody></table><p>HTTP Errors:</p><table>
-<thead>
-<tr>
-<th>Code</th><th>Description</th></tr></thead><tbody>
-<tr>
-<td>404</td><td>snapshot with such name doesn&rsquo;t exist</td></tr><tr>
-<td>409</td><td>rename is not possible: name already used by another snapshot</td></tr></tbody></table><p>Example:</p><pre><code>$ curl -X PUT -H 'Content-Type: application/json' --data '{&quot;Name&quot;: &quot;snap-wheezy&quot;}' http://localhost:8080/api/snapshots/snap1
+</code></pre><h3 id=update>Update</h3><p><code>PUT /api/snapshots/:name</code></p><p>Update snapshot&rsquo;s description or name.</p><p>JSON body params:</p><table><thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead><tbody><tr><td><code>Name</code></td><td>string</td><td>new snapshot name</td></tr><tr><td><code>Description</code></td><td>string</td><td>free-format description how snapshot has been created</td></tr></tbody></table><p>HTTP Errors:</p><table><thead><tr><th>Code</th><th>Description</th></tr></thead><tbody><tr><td>404</td><td>snapshot with such name doesn&rsquo;t exist</td></tr><tr><td>409</td><td>rename is not possible: name already used by another snapshot</td></tr></tbody></table><p>Example:</p><pre><code>$ curl -X PUT -H 'Content-Type: application/json' --data '{&quot;Name&quot;: &quot;snap-wheezy&quot;}' http://localhost:8080/api/snapshots/snap1
 {&quot;Name&quot;:&quot;snap-wheezy&quot;,&quot;CreatedAt&quot;:&quot;2015-02-27T21:36:08.337443295+03:00&quot;,&quot;Description&quot;:&quot;Snapshot from mirror [wheezy-main]: http://mirror.yandex.ru/debian/ wheezy&quot;}
-</code></pre><h3 id=show>Show</h3><p><code>GET /api/snapshots/:name</code></p><p>Get information about snapshot by name.</p><p>HTTP Errors:</p><table>
-<thead>
-<tr>
-<th>Code</th><th>Description</th></tr></thead><tbody>
-<tr>
-<td>404</td><td>snapshot with such name doesn&rsquo;t exist</td></tr></tbody></table><p>Example:</p><pre><code>$ curl http://localhost:8080/api/snapshots/snap1
+</code></pre><h3 id=show>Show</h3><p><code>GET /api/snapshots/:name</code></p><p>Get information about snapshot by name.</p><p>HTTP Errors:</p><table><thead><tr><th>Code</th><th>Description</th></tr></thead><tbody><tr><td>404</td><td>snapshot with such name doesn&rsquo;t exist</td></tr></tbody></table><p>Example:</p><pre><code>$ curl http://localhost:8080/api/snapshots/snap1
 {&quot;Name&quot;:&quot;snap1&quot;,&quot;CreatedAt&quot;:&quot;2015-02-27T21:36:08.337443295+03:00&quot;,&quot;Description&quot;:&quot;Snapshot from mirror [wheezy-main]: http://mirror.yandex.ru/debian/ wheezy&quot;}
 </code></pre><h3 id=delete>Delete</h3><p><code>DELETE /api/snapshots/:name</code></p><p>Delete snapshot. Snapshot can&rsquo;t be deleted if it is published. aptly would refuse to delete snapshot if it has been
-used as source to create other snapshots, but that could be overridden with <code>force</code> parameter.</p><p>Query params:</p><table>
-<thead>
-<tr>
-<th>Name</th><th>Description</th></tr></thead><tbody>
-<tr>
-<td><code>force</code></td><td>when value is set to <code>1</code>, delete snapshot even if it has been used as source snapshot</td></tr></tbody></table><p>HTTP Errors:</p><table>
-<thead>
-<tr>
-<th>Code</th><th>Description</th></tr></thead><tbody>
-<tr>
-<td>404</td><td>snapshot with such name doesn&rsquo;t exist</td></tr><tr>
-<td>409</td><td>snapshot can&rsquo;t be dropped (reason in the message)</td></tr></tbody></table><p>Example:</p><pre><code>$ curl -X DELETE http://localhost:8080/api/snapshots/snap-wheezy
+used as source to create other snapshots, but that could be overridden with <code>force</code> parameter.</p><p>Query params:</p><table><thead><tr><th>Name</th><th>Description</th></tr></thead><tbody><tr><td><code>force</code></td><td>when value is set to <code>1</code>, delete snapshot even if it has been used as source snapshot</td></tr></tbody></table><p>HTTP Errors:</p><table><thead><tr><th>Code</th><th>Description</th></tr></thead><tbody><tr><td>404</td><td>snapshot with such name doesn&rsquo;t exist</td></tr><tr><td>409</td><td>snapshot can&rsquo;t be dropped (reason in the message)</td></tr></tbody></table><p>Example:</p><pre><code>$ curl -X DELETE http://localhost:8080/api/snapshots/snap-wheezy
 [{&quot;error&quot;:&quot;won't delete snapshot that was used as source for other snapshots, use ?force=1 to override&quot;,&quot;meta&quot;:&quot;Operation aborted&quot;}]
 
 $ curl -X DELETE 'http://localhost:8080/api/snapshots/snap-wheezy?force=1'
 {}
-</code></pre><h3 id=show-packagessearch>Show Packages/Search</h3><p><code>GET /api/snapshots/:name/packages</code></p><p>List all packages in snapshot or perform search on snapshot contents and return result.</p><p>Query params:</p><table>
-<thead>
-<tr>
-<th>Name</th><th>Description</th></tr></thead><tbody>
-<tr>
-<td><code>q</code></td><td><a href=/doc/feature/query>package query</a>, if missing - return all packages</td></tr><tr>
-<td><code>withDeps</code></td><td>set to <code>1</code> to include dependencies when evaluating package query</td></tr><tr>
-<td><code>format</code></td><td>result format, compact by default (only package keys), <code>details</code> to return full information about each package (might be slow on large snapshots)</td></tr></tbody></table><p>Example:</p><pre><code>$ curl http://localhost:8080/api/snapshots/snap2/packages
+</code></pre><h3 id=show-packagessearch>Show Packages/Search</h3><p><code>GET /api/snapshots/:name/packages</code></p><p>List all packages in snapshot or perform search on snapshot contents and return result.</p><p>Query params:</p><table><thead><tr><th>Name</th><th>Description</th></tr></thead><tbody><tr><td><code>q</code></td><td><a href=/doc/feature/query>package query</a>, if missing - return all packages</td></tr><tr><td><code>withDeps</code></td><td>set to <code>1</code> to include dependencies when evaluating package query</td></tr><tr><td><code>format</code></td><td>result format, compact by default (only package keys), <code>details</code> to return full information about each package (might be slow on large snapshots)</td></tr></tbody></table><p>Example:</p><pre><code>$ curl http://localhost:8080/api/snapshots/snap2/packages
 [&quot;Pi386 basilisk2 0.9.20120331-2 86c3e67a4743361f&quot;,&quot;Pi386 gtktrain 0.9b-13 8770e2e7bfb66bad&quot;,&quot;Pi386 microcode.ctl 1.18~0+nmu2 5974bce6bd6dbc9e&quot;, ...]
 
 $ curl  http://localhost:8080/api/snapshots/snap2/packages?q='Name%20(~%20matlab)'
 [&quot;Pall matlab-support 0.0.18 c19e7719c5f39ba0&quot;,&quot;Pall dynare-matlab 4.3.0-2 e0672404f552bd85&quot;,&quot;Pall matlab-gdf 0.1.2-2 e5d967263b9047e7&quot;]
-</code></pre><h3 id=difference-between-snapshots>Difference between Snapshots</h3><p><code>GET /api/snapshots/:name/diff/:withSnapshot</code></p><p>Calculate difference between two snapshots <code>:name</code> (left) and <code>:withSnapshot</code> (right).</p><p>Response is a list of elements:</p><table>
-<thead>
-<tr>
-<th>Name</th><th>Description</th></tr></thead><tbody>
-<tr>
-<td><code>Left</code></td><td>package reference present only in left snapshot</td></tr><tr>
-<td><code>Right</code></td><td>package reference present only in right snapshot</td></tr></tbody></table><p>If two snapshots are identical, response would be empty list.</p><table>
-<thead>
-<tr>
-<th><code>Left</code></th><th><code>Right</code></th><th>Description</th></tr></thead><tbody>
-<tr>
-<td>null</td><td>package reference</td><td>right snapshot has package missing in left</td></tr><tr>
-<td>package reference</td><td>null</td><td>left snapshot has package missing in right</td></tr><tr>
-<td>package reference</td><td>package reference</td><td>snapshots have different packages</td></tr></tbody></table><p>Example:</p><pre><code>$ curl http://localhost:8080/api/snapshots/snap2/diff/snap3
-[{&quot;Left&quot;:null,&quot;Right&quot;:&quot;Pi386 zziplib-bin 0.13.56-1.1 4eb4563dc85bc3b6&quot;},{&quot;Left&quot;:null,&quot;Right&quot;:&quot;Pi386 zzuf 0.13.svn20100215-4 2abcc80de15e25f8&quot;}, ... ]</code></pre><div id=disqus_thread></div><script type=text/javascript>(function(){if(window.location.hostname=="localhost")return;var e=document.createElement("script"),t,n,s;e.type="text/javascript",e.async=!0,t="aptly",n="Snapshot API",s="/doc/api/snapshots/".replace(/\/$/,""),e.src="//"+t+".disqus.com/embed.js",(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(e)})()</script>
-<noscript>Please enable JavaScript to view the <a href=http://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript></div></div></div></section><footer id=page-footer>
-<div class=container>
-<nav class="navbar navbar-default navbar-static-top" role=navigation>
-<ul class="nav navbar-nav nav-justified">
-<li><a href=/tutorial/>tutorials</a></li><li><a href=/download/>download</a></li><li><a href=/support/>support</a></li><li class=active><a href=/doc/overview/>documentation</a></li><li><a href=/about/>about</a></li><li><a href=/post/>blog</a></li></ul></nav><div class=copy>
-Sponsored by <a href=http://express42.com/>express42</a> &copy;&nbsp;2013-2018 aptly contributors
-</div></div></footer><script src=https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js></script>
+</code></pre><h3 id=difference-between-snapshots>Difference between Snapshots</h3><p><code>GET /api/snapshots/:name/diff/:withSnapshot</code></p><p>Calculate difference between two snapshots <code>:name</code> (left) and <code>:withSnapshot</code> (right).</p><p>Response is a list of elements:</p><table><thead><tr><th>Name</th><th>Description</th></tr></thead><tbody><tr><td><code>Left</code></td><td>package reference present only in left snapshot</td></tr><tr><td><code>Right</code></td><td>package reference present only in right snapshot</td></tr></tbody></table><p>If two snapshots are identical, response would be empty list.</p><table><thead><tr><th><code>Left</code></th><th><code>Right</code></th><th>Description</th></tr></thead><tbody><tr><td>null</td><td>package reference</td><td>right snapshot has package missing in left</td></tr><tr><td>package reference</td><td>null</td><td>left snapshot has package missing in right</td></tr><tr><td>package reference</td><td>package reference</td><td>snapshots have different packages</td></tr></tbody></table><p>Example:</p><pre><code>$ curl http://localhost:8080/api/snapshots/snap2/diff/snap3
+[{&quot;Left&quot;:null,&quot;Right&quot;:&quot;Pi386 zziplib-bin 0.13.56-1.1 4eb4563dc85bc3b6&quot;},{&quot;Left&quot;:null,&quot;Right&quot;:&quot;Pi386 zzuf 0.13.svn20100215-4 2abcc80de15e25f8&quot;}, ... ]</code></pre><div id=disqus_thread></div><script type=text/javascript>(function(){if(window.location.hostname=="localhost")return;var e=document.createElement("script"),t,n,s;e.type="text/javascript",e.async=!0,t="aptly",n="Snapshot API",s="/doc/api/snapshots/".replace(/\/$/,""),e.src="//"+t+".disqus.com/embed.js",(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(e)})()</script><noscript>Please enable JavaScript to view the <a href=http://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript></div></div></div></section><footer id=page-footer><div class=container><nav class="navbar navbar-default navbar-static-top" role=navigation><ul class="nav navbar-nav nav-justified"><li><a href=/tutorial/>tutorials</a></li><li><a href=/download/>download</a></li><li><a href=/support/>support</a></li><li class=active><a href=/doc/overview/>documentation</a></li><li><a href=/about/>about</a></li><li><a href=/post/>blog</a></li></ul></nav><div class=copy>Sponsored by <a href=http://express42.com/>express42</a> &copy;&nbsp;2013-2018 aptly contributors</div></div></footer><script src=https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js></script>
 <script src=/js/bootstrap.min.js></script>
 <script src=/js/aptly.js></script>
-<script>(function(e,o,i,a,t,n,s){e.GoogleAnalyticsObject=t,e[t]=e[t]||function(){(e[t].q=e[t].q||[]).push(arguments)},e[t].l=1*new Date,n=o.createElement(i),s=o.getElementsByTagName(i)[0],n.async=1,n.src=a,s.parentNode.insertBefore(n,s)})(window,document,"script","//www.google-analytics.com/analytics.js","ga"),ga("create","UA-6065617-2","aptly.info"),ga("send","pageview")</script>
-</body></html>
+<script>(function(e,o,i,a,t,n,s){e.GoogleAnalyticsObject=t,e[t]=e[t]||function(){(e[t].q=e[t].q||[]).push(arguments)},e[t].l=1*new Date,n=o.createElement(i),s=o.getElementsByTagName(i)[0],n.async=1,n.src=a,s.parentNode.insertBefore(n,s)})(window,document,"script","//www.google-analytics.com/analytics.js","ga"),ga("create","UA-6065617-2","aptly.info"),ga("send","pageview")</script></body></html>

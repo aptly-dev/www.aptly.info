@@ -1,26 +1,5 @@
-<!doctype html><html lang=en>
-<head>
-<meta charset=utf-8>
-<meta http-equiv=x-ua-compatible content="IE=edge">
-<title>aptly - aptly 0.6</title><meta name=viewport content="width=device-width,initial-scale=1">
-<link rel="shortcut icon" href=/favicon.ico>
-<link type=text/css rel=stylesheet href=/css/styles.css>
-<link rel=canonical href=https://www.aptly.info/post/aptly-0-6/>
-<link href=/post/index.xml rel=alternate type=application/rss+xml title="Debian repository management tool">
-</head><body>
-<header id=page-header>
-<div class=container>
-<nav class="navbar navbar-default navbar-static-top" role=navigation>
-<ul class="nav navbar-nav nav-justified">
-<li><a href=/tutorial/>tutorials</a></li><li><a href=/download/>download</a></li><li><a href=/support/>support</a></li><li><a href=/doc/overview/>documentation</a></li><li><a href=/about/>about</a></li><li class=active><a href=/post/>blog</a></li></ul></nav><div class=row>
-<div class="col-md-6 col-md-offset-3 text-center">
-<a class=brand href=/>
-<i class=brand-logo></i>
-<span class=brand-name>aptly</span>
-</a>
-</div></div></div></header><section class=primary-content>
-<div class=container>
-<h1>aptly 0.6</h1><p><a href=http://www.aptly.info>aptly</a> 0.6 has been released on June, 7th. It is
+<!doctype html><html lang=en><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><title>aptly - aptly 0.6</title><meta name=viewport content="width=device-width,initial-scale=1"><link rel="shortcut icon" href=/favicon.ico><link type=text/css rel=stylesheet href=/css/styles.css><link rel=canonical href=https://www.aptly.info/post/aptly-0-6/><link href=/post/index.xml rel=alternate type=application/rss+xml title="Debian repository management tool"></head><body><header id=page-header><div class=container><nav class="navbar navbar-default navbar-static-top" role=navigation><ul class="nav navbar-nav nav-justified"><li><a href=/tutorial/>tutorials</a></li><li><a href=/download/>download</a></li><li><a href=/support/>support</a></li><li><a href=/doc/overview/>documentation</a></li><li><a href=/about/>about</a></li><li class=active><a href=/post/>blog</a></li></ul></nav><div class=row><div class="col-md-6 col-md-offset-3 text-center"><a class=brand href=/><i class=brand-logo></i>
+<span class=brand-name>aptly</span></a></div></div></div></header><section class=primary-content><div class=container><h1>aptly 0.6</h1><p><a href=http://www.aptly.info>aptly</a> 0.6 has been released on June, 7th. It is
 available for download as <a href=http://www.aptly.info#download>binary
 executables</a> or from Debian repository:</p><pre><code>deb http://repo.aptly.info/ squeeze main
 </code></pre><p>When installing from repository, don&rsquo;t forget to import key used to sign
@@ -86,18 +65,9 @@ published repository is updated, you would have drop published
 repository and create new one if required.</p><h1 id=merging-snapshots-3rd-strategy>Merging Snapshots: 3rd Strategy</h1><p>There&rsquo;s a feature in aptly that allows to merge two snapshots: this is
 useful to combine for example main repository and security updates or
 main repository and 3rd-party repository. With 0.6, three merge
-strategies are available:</p><ul>
-<li>for packages with same (architecture, name) package which comes from
+strategies are available:</p><ul><li>for packages with same (architecture, name) package which comes from
 latest snapshot on the command line wins (default);</li><li>for packages with same (architecture, name) package with latest
-version wins (<code>-latest</code>);</li><li>all versions of packages are preserved (<code>-no-remove</code>, new in 0.6).</li></ul><h1 id=all-changes>All Changes</h1><p>Full list of changes in 0.6:</p><ul>
-<li>support for multi-component published repositories (<a href=https://github.com/aptly-dev/aptly/issues/36>#36</a>)</li><li>handling duplicate packages with different content gracefully (<a href=https://github.com/aptly-dev/aptly/issues/60>#60</a>)</li><li>repositories published by aptly now can be consumed by debian-installer (<a href=https://github.com/aptly-dev/aptly/issues/61>#61</a>)</li><li>new flag: <code>-no-remove</code> for <a href=http://www.aptly.info/#aptly-snapshot-merge>aptly snapshot merge</a> to merge snapshots with all package versions preserved (<a href=https://github.com/aptly-dev/aptly/issues/57>#57</a>)</li><li>publishing of empty snapshots/repositories is possible (<a href=https://github.com/aptly-dev/aptly/issues/55>#55</a>)</li><li><a href=http://www.aptly.info/#aptly-repo-add>aptly repo add</a> now exists with 1 if any of files failed to add (<a href=https://github.com/aptly-dev/aptly/issues/53>#53</a>)</li><li>bug fix: <code>Package:</code> line comes first in package metadata (<a href=https://github.com/aptly-dev/aptly/issues/49>#49</a>)</li><li>bug fix: when command parsing fails, aptly returns exit code 2 (<a href=https://github.com/aptly-dev/aptly/issues/52>#52</a>)</li><li>bug fix: pulling more than 128 packates at once (<a href=https://github.com/aptly-dev/aptly/issues/53>#53</a>)</li><li>bug fix: <a href=http://www.aptly.info/#aptly-graph>aptly graph</a> may get confused with package pull requests (<a href=https://github.com/aptly-dev/aptly/issues/58>#58</a>)</li></ul></div></section><footer id=page-footer>
-<div class=container>
-<nav class="navbar navbar-default navbar-static-top" role=navigation>
-<ul class="nav navbar-nav nav-justified">
-<li><a href=/tutorial/>tutorials</a></li><li><a href=/download/>download</a></li><li><a href=/support/>support</a></li><li><a href=/doc/overview/>documentation</a></li><li><a href=/about/>about</a></li><li class=active><a href=/post/>blog</a></li></ul></nav><div class=copy>
-Sponsored by <a href=http://express42.com/>express42</a> &copy;&nbsp;2013-2018 aptly contributors
-</div></div></footer><script src=https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js></script>
+version wins (<code>-latest</code>);</li><li>all versions of packages are preserved (<code>-no-remove</code>, new in 0.6).</li></ul><h1 id=all-changes>All Changes</h1><p>Full list of changes in 0.6:</p><ul><li>support for multi-component published repositories (<a href=https://github.com/aptly-dev/aptly/issues/36>#36</a>)</li><li>handling duplicate packages with different content gracefully (<a href=https://github.com/aptly-dev/aptly/issues/60>#60</a>)</li><li>repositories published by aptly now can be consumed by debian-installer (<a href=https://github.com/aptly-dev/aptly/issues/61>#61</a>)</li><li>new flag: <code>-no-remove</code> for <a href=http://www.aptly.info/#aptly-snapshot-merge>aptly snapshot merge</a> to merge snapshots with all package versions preserved (<a href=https://github.com/aptly-dev/aptly/issues/57>#57</a>)</li><li>publishing of empty snapshots/repositories is possible (<a href=https://github.com/aptly-dev/aptly/issues/55>#55</a>)</li><li><a href=http://www.aptly.info/#aptly-repo-add>aptly repo add</a> now exists with 1 if any of files failed to add (<a href=https://github.com/aptly-dev/aptly/issues/53>#53</a>)</li><li>bug fix: <code>Package:</code> line comes first in package metadata (<a href=https://github.com/aptly-dev/aptly/issues/49>#49</a>)</li><li>bug fix: when command parsing fails, aptly returns exit code 2 (<a href=https://github.com/aptly-dev/aptly/issues/52>#52</a>)</li><li>bug fix: pulling more than 128 packates at once (<a href=https://github.com/aptly-dev/aptly/issues/53>#53</a>)</li><li>bug fix: <a href=http://www.aptly.info/#aptly-graph>aptly graph</a> may get confused with package pull requests (<a href=https://github.com/aptly-dev/aptly/issues/58>#58</a>)</li></ul></div></section><footer id=page-footer><div class=container><nav class="navbar navbar-default navbar-static-top" role=navigation><ul class="nav navbar-nav nav-justified"><li><a href=/tutorial/>tutorials</a></li><li><a href=/download/>download</a></li><li><a href=/support/>support</a></li><li><a href=/doc/overview/>documentation</a></li><li><a href=/about/>about</a></li><li class=active><a href=/post/>blog</a></li></ul></nav><div class=copy>Sponsored by <a href=http://express42.com/>express42</a> &copy;&nbsp;2013-2018 aptly contributors</div></div></footer><script src=https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js></script>
 <script src=/js/bootstrap.min.js></script>
 <script src=/js/aptly.js></script>
-<script>(function(e,o,i,a,t,n,s){e.GoogleAnalyticsObject=t,e[t]=e[t]||function(){(e[t].q=e[t].q||[]).push(arguments)},e[t].l=1*new Date,n=o.createElement(i),s=o.getElementsByTagName(i)[0],n.async=1,n.src=a,s.parentNode.insertBefore(n,s)})(window,document,"script","//www.google-analytics.com/analytics.js","ga"),ga("create","UA-6065617-2","aptly.info"),ga("send","pageview")</script>
-</body></html>
+<script>(function(e,o,i,a,t,n,s){e.GoogleAnalyticsObject=t,e[t]=e[t]||function(){(e[t].q=e[t].q||[]).push(arguments)},e[t].l=1*new Date,n=o.createElement(i),s=o.getElementsByTagName(i)[0],n.async=1,n.src=a,s.parentNode.insertBefore(n,s)})(window,document,"script","//www.google-analytics.com/analytics.js","ga"),ga("create","UA-6065617-2","aptly.info"),ga("send","pageview")</script></body></html>
