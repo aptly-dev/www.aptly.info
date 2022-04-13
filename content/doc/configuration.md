@@ -77,7 +77,8 @@ below):
           "tenantdomain": "",
           "tenantdomainid": ""
         }
-      }
+      },
+      "enableMetricsEndpoint": false
     }
 
 Options:
@@ -128,6 +129,8 @@ Options:
     endpoints (see [publishing to S3](/doc/feature/s3/))
 -   `SwiftPublishEndpoints` describes OpenStack Swift publishing
     parameters (see [publishing to Swift](/doc/feature/swift))
+-   `enableMetricsEndpoint` specifies whether the metrics endpoint should be enabled or disabled
+    when running api serve (see [misc API](/doc/api/misc))
 
 <div class="alert alert-warning alert-note"><strong>Warning:</strong> <code>rootDir</code> contains all the downloaded packages from remote
 mirrors, so it should have enough space. For example. mirror of Debian
