@@ -62,7 +62,8 @@ below):</p><pre><code>{
       &quot;tenantdomain&quot;: &quot;&quot;,
       &quot;tenantdomainid&quot;: &quot;&quot;
     }
-  }
+  },
+  &quot;enableMetricsEndpoint&quot;: false
 }
 </code></pre><p>Options:</p><ul><li><code>rootDir</code> is root of directory storage to store database
 (<code>rootDir/db</code>), downloaded packages (<code>rootDir/pool</code>) and published
@@ -92,7 +93,8 @@ PPA url expansion, if left blank they default to output of
 <code>lsb_release</code> command</li><li><code>FileSystemPublishEndpoints</code> is configuration of local filesystem
 publishing endpoints (see <a href=/doc/feature/filesystem>custom filesystem publishing</a>) <span class="label label-primary">1.1.0</span></li><li><code>S3PublishEndpoints</code> is a configuration of Amazon S3 publishing
 endpoints (see <a href=/doc/feature/s3/>publishing to S3</a>)</li><li><code>SwiftPublishEndpoints</code> describes OpenStack Swift publishing
-parameters (see <a href=/doc/feature/swift>publishing to Swift</a>)</li></ul><div class="alert alert-warning alert-note"><strong>Warning:</strong> <code>rootDir</code> contains all the downloaded packages from remote
+parameters (see <a href=/doc/feature/swift>publishing to Swift</a>)</li><li><code>enableMetricsEndpoint</code> specifies whether the metrics endpoint should be enabled or disabled
+when running api serve (see <a href=/doc/api/misc>misc API</a>)</li></ul><div class="alert alert-warning alert-note"><strong>Warning:</strong> <code>rootDir</code> contains all the downloaded packages from remote
 mirrors, so it should have enough space. For example. mirror of Debian
 wheezy (amd64 and i386) requires 70 GiB of disk space.</div><p>aptly would use HTTP proxy configured in <code>HTTP_PROXY</code> environment
 variable.</p><div id=disqus_thread></div><script type=text/javascript>(function(){if(window.location.hostname=="localhost")return;var e=document.createElement("script"),t,n,s;e.type="text/javascript",e.async=!0,t="aptly",n="Configuration",s="/doc/configuration/".replace(/\/$/,""),e.src="//"+t+".disqus.com/embed.js",(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(e)})()</script><noscript>Please enable JavaScript to view the <a href=http://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript></div></div></div></section><footer id=page-footer><div class=container><nav class="navbar navbar-default navbar-static-top" role=navigation><ul class="nav navbar-nav nav-justified"><li><a href=/tutorial/>tutorials</a></li><li><a href=/download/>download</a></li><li><a href=/support/>support</a></li><li class=active><a href=/doc/overview/>documentation</a></li><li><a href=/about/>about</a></li><li><a href=/post/>blog</a></li></ul></nav><div class=copy>Sponsored by <a href=http://express42.com/>express42</a> &copy;&nbsp;2013-2018 aptly contributors</div></div></footer><script src=https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js></script>
