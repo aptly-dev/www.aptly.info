@@ -32,7 +32,7 @@ Params:
     default to empty endpoint (local file system).
 -   `prefix` is publishing prefix, if not specified, it would default to
     empty prefix (`.`).
--   `new-snapshot` is a snapshot name that snould be re-published
+-   `new-snapshot` is a snapshot name that should be re-published
 
 Flags:
 
