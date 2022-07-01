@@ -8,8 +8,8 @@ associated settings:</p><ul><li><code>region</code>: Amazon region for S3 bucket
 region is ignored if endpoint is set (set <code>region</code> to some human-readable name)
 (should be left blank for real Amazon S3)</li><li><code>prefix</code>: (optional) do publishing under specified prefix in the
 bucket, defaults to no prefix (bucket root)</li><li><code>acl</code>: (optional) assign ACL to published files (one of the canned
-ACLs in Amazon terminology). Useful values: <code>private</code> (default) or
-<code>public-read</code> (public repository). Public repositories could be
+ACLs in Amazon terminology). Useful values: <code>private</code> (default),
+<code>public-read</code> (public repository) or <code>none</code> (don&rsquo;t set ACL). Public repositories could be
 consumed by <code>apt</code> using HTTP endpoint (Amazon bucket should be
 configured for &ldquo;website hosting&rdquo;), for private repositories special
 apt S3 transport is required.</li><li><code>awsAccessKeyID</code>, <code>awsSecretAccessKey</code>: (optional) Amazon
