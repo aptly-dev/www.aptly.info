@@ -49,8 +49,8 @@ Each endpoint has a name and the following associated settings:
    * `rootDir`:
      The publish directory, e.g., `/opt/srv/aptly_public`.
    * `linkMethod`:
-     This is one of `hardlink`, `symlink`, `absoluteSymlink`, `relativeSymlink` or `copy`. It specifies how aptly links the
-     files from the internal pool to the published directory.
+     This is one of `hardlink`, `symlink`, `absoluteSymlink`, `relativeSymlink` or `copy`. 
+     It specifies how aptly links the files from the internal pool to the published directory.
      The option `symlink` will be treated as `absoluteSymlink`
      If not specified, empty or wrong, this defaults to `hardlink`.
    * `verifyMethod`:
