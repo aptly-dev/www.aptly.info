@@ -6278,7 +6278,6 @@ section.documentation .command {
 .overlay-dark,
 .promo-example:before,
 .promo-trusted:before,
-.sidebar-overlay:before,
 .about:before {
   background-color: rgba(5, 9, 37, 0.8);
 }
@@ -6527,8 +6526,7 @@ fieldset[disabled] #page-header .source-buttons .btn-default.active {
   color: #ffffff;
   padding: 25px 0;
 }
-.promo-example,
-.sidebar-overlay {
+.promo-example {
   background: url("../img/promo-example_bg.png") repeat;
 }
 .promo-features {
@@ -6610,7 +6608,6 @@ fieldset[disabled] #page-header .source-buttons .btn-default.active {
   margin: 25px 0;
 }
 .sidebar .nav-sidebar a {
-  color: #ffffff;
   border-bottom: 2px solid transparent;
   padding: 10px 15px 5px 0;
   margin-bottom: 15px;
