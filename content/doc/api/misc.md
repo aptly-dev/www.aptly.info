@@ -39,6 +39,29 @@ Example:
     $ curl http://localhost:8080/api/version
     {"Version":"0.9~dev"}
 
+Ready API
+-----------
+
+`GET /api/ready`
+
+Return current readiness status of Aptly.
+
+Example:
+
+    $ curl http://localhost:8080/api/ready
+    {"Status": "Aptly is ready"}
+
+Healthy API
+-----------
+
+`GET /api/healthy`
+
+Return current healthiness status of Aptly.
+
+Example:
+
+    $ curl http://localhost:8080/api/healthy
+    {"Status": "Aptly is healthy"}
 
 Metrics
 -------
@@ -116,6 +139,10 @@ Example (standard go metrics omitted):
     aptly_api_http_response_size_bytes_count{code="200",method="POST",path="/api/files"} 1
     aptly_api_http_response_size_bytes_sum{code="400",method="POST",path="/api/files"} 0
     aptly_api_http_response_size_bytes_count{code="400",method="POST",path="/api/files"} 1
+
+    # HELP aptly_build_info Metric with a constant '1' value labeled by version and goversion from which aptly was built.
+    # TYPE aptly_build_info gauge
+    aptly_build_info{goversion="go1.19.3",version="0.0.0"} 1
 
     # HELP promhttp_metric_handler_requests_in_flight Current number of scrapes being served.
     # TYPE promhttp_metric_handler_requests_in_flight gauge
