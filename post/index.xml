@@ -553,7 +553,7 @@ concurrent operations and resulting byte slice is copied
 immediately).&lt;/li>
 &lt;/ul>
 &lt;p>Instead of creating buffer every time&amp;hellip;&lt;/p>
-&lt;pre tabindex="0">&lt;code class="language-{.sourceCode" data-lang="{.sourceCode">// Encode does msgpack encoding of Package
+&lt;pre tabindex="0">&lt;code>// Encode does msgpack encoding of Package
 func (p *Package) Encode() []byte {
 var buf bytes.Buffer
 encoder := codec.NewEncoder(&amp;amp;buf, &amp;amp;codec.MsgpackHandle{})
@@ -561,7 +561,7 @@ encoder.Encode(p)
 return buf.Bytes()
 }
 &lt;/code>&lt;/pre>&lt;p>&amp;hellip; re-use buffer:&lt;/p>
-&lt;pre tabindex="0">&lt;code class="language-{.sourceCode" data-lang="{.sourceCode">// Internal buffer reused by all Package.Encode operations
+&lt;pre tabindex="0">&lt;code>// Internal buffer reused by all Package.Encode operations
 var encodeBuf bytes.Buffer
 // Encode does msgpack encoding of Package, []byte should be copied, as buffer would
 // be used for the next call to Encode
@@ -603,7 +603,7 @@ more things that could be optimized to improve memory usage, but they
 are left for future aptly development.&lt;/p>
 &lt;p>In order to produce these graphs, aptly was extended with following code
 that dumps &lt;code>runtime.MemStats&lt;/code> every 100ms:&lt;/p>
-&lt;pre tabindex="0">&lt;code class="language-{.sourceCode" data-lang="{.sourceCode">memstats := cmd.Flag.Lookup(&amp;#34;memstats&amp;#34;).Value.String()
+&lt;pre tabindex="0">&lt;code>memstats := cmd.Flag.Lookup(&amp;#34;memstats&amp;#34;).Value.String()
 if memstats != &amp;#34;&amp;#34; {
 interval := cmd.Flag.Lookup(&amp;#34;meminterval&amp;#34;).Value.Get().(time.Duration)
 context.fileMemStats, err = os.Create(memstats)

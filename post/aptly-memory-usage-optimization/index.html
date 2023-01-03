@@ -14,7 +14,7 @@ function and some big data structures weren&rsquo;t required full time
 during function execution. So assigning <code>nil</code> to them allowed Go&rsquo;s
 garbage collector to reclaim unused memory faster.</li><li>reusing buffers for structure encoding (this is safe, as there&rsquo;re no
 concurrent operations and resulting byte slice is copied
-immediately).</li></ul><p>Instead of creating buffer every time&mldr;</p><pre tabindex=0><code class=language-{.sourceCode data-lang={.sourceCode>// Encode does msgpack encoding of Package
+immediately).</li></ul><p>Instead of creating buffer every time&mldr;</p><pre tabindex=0><code>// Encode does msgpack encoding of Package
 func (p *Package) Encode() []byte {
     var buf bytes.Buffer
 
@@ -23,7 +23,7 @@ func (p *Package) Encode() []byte {
 
     return buf.Bytes()
 }
-</code></pre><p>&mldr; re-use buffer:</p><pre tabindex=0><code class=language-{.sourceCode data-lang={.sourceCode>// Internal buffer reused by all Package.Encode operations
+</code></pre><p>&mldr; re-use buffer:</p><pre tabindex=0><code>// Internal buffer reused by all Package.Encode operations
 var encodeBuf bytes.Buffer
 
 // Encode does msgpack encoding of Package, []byte should be copied, as buffer would
@@ -55,7 +55,7 @@ DB on demand and removed when not used.</p><p>What I got in the end was:</p><img
 memory all the time keeping memory usage more linear. There are some
 more things that could be optimized to improve memory usage, but they
 are left for future aptly development.</p><p>In order to produce these graphs, aptly was extended with following code
-that dumps <code>runtime.MemStats</code> every 100ms:</p><pre tabindex=0><code class=language-{.sourceCode data-lang={.sourceCode>memstats := cmd.Flag.Lookup(&#34;memstats&#34;).Value.String()
+that dumps <code>runtime.MemStats</code> every 100ms:</p><pre tabindex=0><code>memstats := cmd.Flag.Lookup(&#34;memstats&#34;).Value.String()
 if memstats != &#34;&#34; {
     interval := cmd.Flag.Lookup(&#34;meminterval&#34;).Value.Get().(time.Duration)
 
