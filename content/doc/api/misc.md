@@ -81,6 +81,7 @@ Provides the following metrics alongside the standard go metrics already provide
  `aptly_api_http_requests_in_flight`       | Number of concurrent HTTP api requests currently handled
  `aptly_api_http_requests_total`           | Total number of api requests
  `aptly_api_http_response_size_bytes`      | Api HTTP response size in bytes
+ `aptly_build_info`                        | Versions of aptly and go
 
 Example (standard go metrics omitted):
 
