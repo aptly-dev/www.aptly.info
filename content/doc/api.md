@@ -90,7 +90,13 @@ or disallow all non-GET requests. [Reference example](https://github.com/sepich/
 
 ### How to implement equivalent of aptly commands using API
 
-* `aptly mirror` - not available via API yet
+* `aptly mirror`: [mirror API](/doc/api/mirror)
+    * `list`: list
+    * `create`: create
+    * `drop`: delete
+    * `show`: show
+    * `search`: show packages/search
+    * `update`: update mirror
 * `aptly repo`: [local repos API](/doc/api/repos)
     * `add`: [file upload API](/doc/api/files) + add packages from uploaded file
     * `copy`: show packages/search + add packages by key
