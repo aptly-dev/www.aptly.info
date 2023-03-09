@@ -1,4 +1,318 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Docs on aptly - Debian repository management tool</title><generator uri="https://hugo.spf13.com">Hugo</generator><link>https://www.aptly.info/doc/</link><language>en-us</language><author>Andrey Smirnov</author><updated>Mon, 09 Sep 2019 11:17:38 UTC</updated><item><title>Integrations</title><link>https://www.aptly.info/doc/integrations/</link><pubDate>Mon, 09 Sep 2019 11:17:38 UTC</pubDate><author>Andrey Smirnov</author><guid>https://www.aptly.info/doc/integrations/</guid><description>&lt;h2 id="integrations">Integrations&lt;/h2>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Docs on aptly - Debian repository management tool</title><generator uri="https://hugo.spf13.com">Hugo</generator><link>https://www.aptly.info/doc/</link><language>en-us</language><author>Andrey Smirnov</author><updated>Thu, 09 Mar 2023 11:17:38 UTC</updated><item><title>Mirrors API</title><link>https://www.aptly.info/doc/api/mirror/</link><pubDate>Thu, 09 Mar 2023 11:17:38 UTC</pubDate><author>Andrey Smirnov</author><guid>https://www.aptly.info/doc/api/mirror/</guid><description>&lt;h2 id="mirrors-api">Mirrors API&lt;/h2>
+&lt;p>&lt;a href="https://www.aptly.info/doc/aptly/mirror">Mirror management&lt;/a> via REST API.&lt;/p>
+&lt;h3 id="create">Create&lt;/h3>
+&lt;p>&lt;code>POST /api/mirrors&lt;/code>&lt;/p>
+&lt;p>Create empty mirror with specified parameters (see also &lt;a href="https://www.aptly.info/doc/aptly/mirror/create">aptly repo create&lt;/a>).&lt;/p>
+&lt;p>JSON body params:&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Name&lt;/th>
+&lt;th>Type&lt;/th>
+&lt;th>Description&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>&lt;code>Name&lt;/code>&lt;/td>
+&lt;td>&lt;em>required&lt;/em>, string&lt;/td>
+&lt;td>mirror name&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>ArchiveURL&lt;/code>&lt;/td>
+&lt;td>&lt;em>required&lt;/em>, string&lt;/td>
+&lt;td>url of the archive to mirror e.g. &lt;a href="http://deb.debian.org/debian/">http://deb.debian.org/debian/&lt;/a>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>Distribution&lt;/code>&lt;/td>
+&lt;td>string&lt;/td>
+&lt;td>distribution name to mirror e.g. &lt;code>buster&lt;/code>, for flat repositories use &lt;code>./&lt;/code> instead of distribution name&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>Filter&lt;/code>&lt;/td>
+&lt;td>string&lt;/td>
+&lt;td>&lt;a href="https://www.aptly.info/doc/feature/query/">package query&lt;/a> that is applied to packages in the mirror&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>Components&lt;/code>&lt;/td>
+&lt;td>[]string&lt;/td>
+&lt;td>components to mirror, if not specified aptly would fetch all components&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>Architectures&lt;/code>&lt;/td>
+&lt;td>[]string&lt;/td>
+&lt;td>limit mirror to those architectures, if not specified aptly would fetch all architectures&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>Keyrings&lt;/code>&lt;/td>
+&lt;td>[]string&lt;/td>
+&lt;td>gpg keyring(s) to use when verifying Release file&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>DownloadSources&lt;/code>&lt;/td>
+&lt;td>bool&lt;/td>
+&lt;td>whether to mirror sources&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>DownloadUdebs&lt;/code>&lt;/td>
+&lt;td>bool&lt;/td>
+&lt;td>whether to mirror .udeb packages (Debian installer support)&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>DownloadInstaller&lt;/code>&lt;/td>
+&lt;td>bool&lt;/td>
+&lt;td>whether to download additional not packaged installer files&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>FilterWithDeps&lt;/code>&lt;/td>
+&lt;td>bool&lt;/td>
+&lt;td>when filtering, include &lt;a href="https://www.aptly.info/doc/feature/dependencies">dependencies&lt;/a> of matching packages as well&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>SkipComponentCheck&lt;/code>&lt;/td>
+&lt;td>bool&lt;/td>
+&lt;td>whether to skip if the given components are in the &lt;code>Release&lt;/code> file&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>IgnoreSignatures&lt;/code>&lt;/td>
+&lt;td>bool&lt;/td>
+&lt;td>whether to skip the verification of &lt;code>Release&lt;/code> file signatures&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;p>HTTP Errors:&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Code&lt;/th>
+&lt;th>Description&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>400&lt;/td>
+&lt;td>mirror creation failed&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;p>Example:&lt;/p>
+&lt;pre>&lt;code>$ curl -X POST -H 'Content-Type: application/json' --data '{&amp;quot;Name&amp;quot;: &amp;quot;aptly-mirror&amp;quot;, &amp;quot;ArchiveURL&amp;quot;: &amp;quot;http://security.debian.org/debian-security/&amp;quot;, &amp;quot;Distribution&amp;quot;: &amp;quot;buster/updates&amp;quot;, &amp;quot;Components&amp;quot;: [&amp;quot;main&amp;quot;]}' http://localhost:8080/api/mirrors
+{&amp;quot;UUID&amp;quot;:&amp;quot;2dcc40c2-68e2-402c-a73b-af242b648452&amp;quot;,&amp;quot;Name&amp;quot;:&amp;quot;aptly-mirror&amp;quot;,&amp;quot;ArchiveRoot&amp;quot;:&amp;quot;http://security.debian.org/debian-security/&amp;quot;,&amp;quot;Distribution&amp;quot;:&amp;quot;buster/updates&amp;quot;,&amp;quot;Components&amp;quot;:[&amp;quot;main&amp;quot;],&amp;quot;Architectures&amp;quot;:[&amp;quot;amd64&amp;quot;,&amp;quot;arm64&amp;quot;,&amp;quot;armhf&amp;quot;,&amp;quot;i386&amp;quot;],&amp;quot;Meta&amp;quot;:{&amp;quot;Acquire-By-Hash&amp;quot;:&amp;quot;yes&amp;quot;,&amp;quot;Architectures&amp;quot;:&amp;quot;amd64 arm64 armhf i386&amp;quot;,&amp;quot;Codename&amp;quot;:&amp;quot;buster&amp;quot;,&amp;quot;Components&amp;quot;:&amp;quot;updates/main updates/contrib updates/non-free&amp;quot;,&amp;quot;Date&amp;quot;:&amp;quot;Wed, 08 Mar 2023 23:32:32 UTC&amp;quot;,&amp;quot;Description&amp;quot;:&amp;quot; Debian 10 - Security Updates\n&amp;quot;,&amp;quot;Label&amp;quot;:&amp;quot;Debian-Security&amp;quot;,&amp;quot;Origin&amp;quot;:&amp;quot;Debian&amp;quot;,&amp;quot;Suite&amp;quot;:&amp;quot;oldstable&amp;quot;,&amp;quot;Valid-Until&amp;quot;:&amp;quot;Wed, 15 Mar 2023 23:32:32 UTC&amp;quot;,&amp;quot;Version&amp;quot;:&amp;quot;10&amp;quot;},&amp;quot;LastDownloadDate&amp;quot;:&amp;quot;0001-01-01T00:00:00Z&amp;quot;,&amp;quot;Filter&amp;quot;:&amp;quot;&amp;quot;,&amp;quot;Status&amp;quot;:0,&amp;quot;WorkerPID&amp;quot;:0,&amp;quot;FilterWithDeps&amp;quot;:false,&amp;quot;SkipComponentCheck&amp;quot;:false,&amp;quot;SkipArchitectureCheck&amp;quot;:false,&amp;quot;DownloadSources&amp;quot;:false,&amp;quot;DownloadUdebs&amp;quot;:false,&amp;quot;DownloadInstaller&amp;quot;:false}
+&lt;/code>&lt;/pre>
+&lt;h3 id="show">Show&lt;/h3>
+&lt;p>&lt;code>GET /api/mirrors/:name&lt;/code>&lt;/p>
+&lt;p>Returns basic information about a mirror.&lt;/p>
+&lt;p>HTTP Errors:&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Code&lt;/th>
+&lt;th>Description&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>404&lt;/td>
+&lt;td>mirror with such name doesn&amp;rsquo;t exist&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;p>Example:&lt;/p>
+&lt;pre>&lt;code>curl http://localhost:8080/api/mirrors/aptly-mirror
+{&amp;quot;UUID&amp;quot;:&amp;quot;2dcc40c2-68e2-402c-a73b-af242b648452&amp;quot;,&amp;quot;Name&amp;quot;:&amp;quot;aptly-mirror&amp;quot;,&amp;quot;ArchiveRoot&amp;quot;:&amp;quot;http://security.debian.org/debian-security/&amp;quot;,&amp;quot;Distribution&amp;quot;:&amp;quot;buster/updates&amp;quot;,&amp;quot;Components&amp;quot;:[&amp;quot;main&amp;quot;],&amp;quot;Architectures&amp;quot;:[&amp;quot;amd64&amp;quot;,&amp;quot;arm64&amp;quot;,&amp;quot;armhf&amp;quot;,&amp;quot;i386&amp;quot;],&amp;quot;Meta&amp;quot;:{&amp;quot;Acquire-By-Hash&amp;quot;:&amp;quot;yes&amp;quot;,&amp;quot;Architectures&amp;quot;:&amp;quot;amd64 arm64 armhf i386&amp;quot;,&amp;quot;Codename&amp;quot;:&amp;quot;buster&amp;quot;,&amp;quot;Components&amp;quot;:&amp;quot;updates/main updates/contrib updates/non-free&amp;quot;,&amp;quot;Date&amp;quot;:&amp;quot;Wed, 08 Mar 2023 23:32:32 UTC&amp;quot;,&amp;quot;Description&amp;quot;:&amp;quot; Debian 10 - Security Updates\n&amp;quot;,&amp;quot;Label&amp;quot;:&amp;quot;Debian-Security&amp;quot;,&amp;quot;Origin&amp;quot;:&amp;quot;Debian&amp;quot;,&amp;quot;Suite&amp;quot;:&amp;quot;oldstable&amp;quot;,&amp;quot;Valid-Until&amp;quot;:&amp;quot;Wed, 15 Mar 2023 23:32:32 UTC&amp;quot;,&amp;quot;Version&amp;quot;:&amp;quot;10&amp;quot;},&amp;quot;LastDownloadDate&amp;quot;:&amp;quot;0001-01-01T00:00:00Z&amp;quot;,&amp;quot;Filter&amp;quot;:&amp;quot;&amp;quot;,&amp;quot;Status&amp;quot;:0,&amp;quot;WorkerPID&amp;quot;:0,&amp;quot;FilterWithDeps&amp;quot;:false,&amp;quot;SkipComponentCheck&amp;quot;:false,&amp;quot;SkipArchitectureCheck&amp;quot;:false,&amp;quot;DownloadSources&amp;quot;:false,&amp;quot;DownloadUdebs&amp;quot;:false,&amp;quot;DownloadInstaller&amp;quot;:false}
+&lt;/code>&lt;/pre>
+&lt;h3 id="show-packagessearch">Show packages/search&lt;/h3>
+&lt;p>&lt;code>GET /api/mirrors/:name/packages&lt;/code>&lt;/p>
+&lt;p>List all packages in a mirror or perform search on repository contents and return result.&lt;/p>
+&lt;p>Query params:&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Name&lt;/th>
+&lt;th>Description&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>&lt;code>q&lt;/code>&lt;/td>
+&lt;td>&lt;a href="https://www.aptly.info/doc/feature/query">package query&lt;/a>, if missing - return all packages&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>withDeps&lt;/code>&lt;/td>
+&lt;td>set to &lt;code>1&lt;/code> to include dependencies when evaluating package query&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>format&lt;/code>&lt;/td>
+&lt;td>result format, compact by default (only package keys), &lt;code>details&lt;/code> to return full information about each package (might be slow on large repos)&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;p>Example:&lt;/p>
+&lt;pre>&lt;code>$ curl http://localhost:8080/api/mirrors/aptly-mirror/packages
+[&amp;quot;Pi386 aptly 0.8 966561016b44ed80&amp;quot;]
+$ curl http://localhost:8080/api/mirrors/aptly-mirror/packages?q=aptly
+[&amp;quot;Pi386 aptly 0.8 966561016b44ed80&amp;quot;]
+$ curl http://localhost:8080/api/mirrors/aptly-mirror/packages?format=details
+[{&amp;quot;Architecture&amp;quot;:&amp;quot;i386&amp;quot;,&amp;quot;Description&amp;quot;:&amp;quot; Debian repository management tool\n&amp;quot;,&amp;quot;Filename&amp;quot;:&amp;quot;aptly_0.8_i386.deb&amp;quot;,&amp;quot;FilesHash&amp;quot;:&amp;quot;966561016b44ed80&amp;quot;,&amp;quot;Homepage&amp;quot;:&amp;quot;http://www.aptly.info/&amp;quot;,&amp;quot;Installed-Size&amp;quot;:&amp;quot;11084&amp;quot;,&amp;quot;Key&amp;quot;:&amp;quot;Pi386 aptly 0.8 966561016b44ed80&amp;quot;,&amp;quot;License&amp;quot;:&amp;quot;MIT&amp;quot;,&amp;quot;MD5sum&amp;quot;:&amp;quot;b9be9ed873f1a05da103406cc0a6b9d1&amp;quot;,&amp;quot;Maintainer&amp;quot;:&amp;quot;Andrey Smirnov \u003cme@smira.ru\u003e&amp;quot;,&amp;quot;Package&amp;quot;:&amp;quot;aptly&amp;quot;,&amp;quot;Priority&amp;quot;:&amp;quot;extra&amp;quot;,&amp;quot;Recommends&amp;quot;:&amp;quot;bzip2&amp;quot;,&amp;quot;SHA1&amp;quot;:&amp;quot; 257ab261adcf5dd5bda800976ae606fedb882679&amp;quot;,&amp;quot;SHA256&amp;quot;:&amp;quot; 6342804c7f6bd8cb004ca9d19a7e27f492b7e07843b935a4f96a07a254ae6312&amp;quot;,&amp;quot;Section&amp;quot;:&amp;quot;default&amp;quot;,&amp;quot;ShortKey&amp;quot;:&amp;quot;Pi386 aptly 0.8&amp;quot;,&amp;quot;Size&amp;quot;:&amp;quot;3510032&amp;quot;,&amp;quot;Vendor&amp;quot;:&amp;quot;Andrey Smirnov \u003cme@smira.ru\u003e&amp;quot;,&amp;quot;Version&amp;quot;:&amp;quot;0.8&amp;quot;}]
+&lt;/code>&lt;/pre>
+&lt;h3 id="edit">Edit&lt;/h3>
+&lt;p>&lt;code>PUT /api/mirrors/:name&lt;/code>&lt;/p>
+&lt;p>This api has two functionalities:&lt;/p>
+&lt;ol>
+&lt;li>Update mirror meta information.&lt;/li>
+&lt;li>Download packages from the archive to mirror&lt;/li>
+&lt;/ol>
+&lt;p>When updating a mirror, the packages will always be downloaded.&lt;/p>
+&lt;p>JSON body params:&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Name&lt;/th>
+&lt;th>Type&lt;/th>
+&lt;th>Description&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>&lt;code>Name&lt;/code>&lt;/td>
+&lt;td>string&lt;/td>
+&lt;td>mirror name&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>ArchiveURL&lt;/code>&lt;/td>
+&lt;td>string&lt;/td>
+&lt;td>url of the archive to mirror e.g. &lt;a href="http://deb.debian.org/debian/">http://deb.debian.org/debian/&lt;/a>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>Filter&lt;/code>&lt;/td>
+&lt;td>string&lt;/td>
+&lt;td>&lt;a href="https://www.aptly.info/doc/feature/query/">package query&lt;/a> that is applied to packages in the mirror&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>Components&lt;/code>&lt;/td>
+&lt;td>[]string&lt;/td>
+&lt;td>components to mirror, if not specified aptly would fetch all components&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>Architectures&lt;/code>&lt;/td>
+&lt;td>[]string&lt;/td>
+&lt;td>limit mirror to those architectures, if not specified aptly would fetch all architectures&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>Keyrings&lt;/code>&lt;/td>
+&lt;td>[]string&lt;/td>
+&lt;td>gpg keyring(s) to use when verifying Release file&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>DownloadSources&lt;/code>&lt;/td>
+&lt;td>bool&lt;/td>
+&lt;td>whether to mirror sources&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>DownloadUdebs&lt;/code>&lt;/td>
+&lt;td>bool&lt;/td>
+&lt;td>whether to mirror .udeb packages (Debian installer support)&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>DownloadInstaller&lt;/code>&lt;/td>
+&lt;td>bool&lt;/td>
+&lt;td>whether to download additional not packaged installer files&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>FilterWithDeps&lt;/code>&lt;/td>
+&lt;td>bool&lt;/td>
+&lt;td>when filtering, include &lt;a href="https://www.aptly.info/doc/feature/dependencies">dependencies&lt;/a> of matching packages as well&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>SkipComponentCheck&lt;/code>&lt;/td>
+&lt;td>bool&lt;/td>
+&lt;td>whether to skip if the given components are in the &lt;code>Release&lt;/code> file&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>IgnoreSignatures&lt;/code>&lt;/td>
+&lt;td>bool&lt;/td>
+&lt;td>whether to skip the verification of &lt;code>Release&lt;/code> file signatures&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>ForceUpdate&lt;/code>&lt;/td>
+&lt;td>bool&lt;/td>
+&lt;td>whether to force a mirror update even if another process is already updating the mirror (use with caution!)&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>SkipExistingPackages&lt;/code>&lt;/td>
+&lt;td>bool&lt;/td>
+&lt;td>whether to not download already downloaded packages&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;p>HTTP Errors:&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Code&lt;/th>
+&lt;th>Description&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>404&lt;/td>
+&lt;td>mirror with such name doesn&amp;rsquo;t exist&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;p>Response is the same as for &lt;code>GET /api/mirror/:name&lt;/code> API.&lt;/p>
+&lt;p>Example:&lt;/p>
+&lt;pre>&lt;code>$ curl -X PUT http://localhost:8080/api/mirrors/aptly-mirror
+&lt;/code>&lt;/pre>
+&lt;h3 id="list">List&lt;/h3>
+&lt;p>&lt;code>GET /api/mirrors&lt;/code>&lt;/p>
+&lt;p>Show list of currently available mirrors. Each mirror is returned as in &amp;ldquo;show&amp;rdquo; API.&lt;/p>
+&lt;p>Example:&lt;/p>
+&lt;pre>&lt;code>$ curl http://localhost:8080/api/mirrors
+[{&amp;quot;UUID&amp;quot;:&amp;quot;2dcc40c2-68e2-402c-a73b-af242b648452&amp;quot;,&amp;quot;Name&amp;quot;:&amp;quot;aptly-mirror&amp;quot;,&amp;quot;ArchiveRoot&amp;quot;:&amp;quot;http://security.debian.org/debian-security/&amp;quot;,&amp;quot;Distribution&amp;quot;:&amp;quot;buster/updates&amp;quot;,&amp;quot;Components&amp;quot;:[&amp;quot;main&amp;quot;],&amp;quot;Architectures&amp;quot;:[&amp;quot;amd64&amp;quot;,&amp;quot;arm64&amp;quot;,&amp;quot;armhf&amp;quot;,&amp;quot;i386&amp;quot;],&amp;quot;Meta&amp;quot;:{&amp;quot;Acquire-By-Hash&amp;quot;:&amp;quot;yes&amp;quot;,&amp;quot;Architectures&amp;quot;:&amp;quot;amd64 arm64 armhf i386&amp;quot;,&amp;quot;Codename&amp;quot;:&amp;quot;buster&amp;quot;,&amp;quot;Components&amp;quot;:&amp;quot;updates/main updates/contrib updates/non-free&amp;quot;,&amp;quot;Date&amp;quot;:&amp;quot;Wed, 08 Mar 2023 23:32:32 UTC&amp;quot;,&amp;quot;Description&amp;quot;:&amp;quot; Debian 10 - Security Updates\n&amp;quot;,&amp;quot;Label&amp;quot;:&amp;quot;Debian-Security&amp;quot;,&amp;quot;Origin&amp;quot;:&amp;quot;Debian&amp;quot;,&amp;quot;Suite&amp;quot;:&amp;quot;oldstable&amp;quot;,&amp;quot;Valid-Until&amp;quot;:&amp;quot;Wed, 15 Mar 2023 23:32:32 UTC&amp;quot;,&amp;quot;Version&amp;quot;:&amp;quot;10&amp;quot;},&amp;quot;LastDownloadDate&amp;quot;:&amp;quot;0001-01-01T00:00:00Z&amp;quot;,&amp;quot;Filter&amp;quot;:&amp;quot;&amp;quot;,&amp;quot;Status&amp;quot;:0,&amp;quot;WorkerPID&amp;quot;:0,&amp;quot;FilterWithDeps&amp;quot;:false,&amp;quot;SkipComponentCheck&amp;quot;:false,&amp;quot;SkipArchitectureCheck&amp;quot;:false,&amp;quot;DownloadSources&amp;quot;:false,&amp;quot;DownloadUdebs&amp;quot;:false,&amp;quot;DownloadInstaller&amp;quot;:false}]
+&lt;/code>&lt;/pre>
+&lt;h3 id="delete">Delete&lt;/h3>
+&lt;p>&lt;code>DELETE /api/mirrors/:name&lt;/code>&lt;/p>
+&lt;p>Delete a mirror.&lt;/p>
+&lt;p>If the mirror is used as a source to createsnapshots, aptly would refuse
+to delete it by default, but that can be overridden with &lt;code>force&lt;/code> flag.&lt;/p>
+&lt;p>Query params:&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Name&lt;/th>
+&lt;th>Description&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>&lt;code>force&lt;/code>&lt;/td>
+&lt;td>when value is set to &lt;code>1&lt;/code>, delete the mirror even if it has snapshots&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;p>HTTP Errors:&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Code&lt;/th>
+&lt;th>Description&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>404&lt;/td>
+&lt;td>mirror with such name doesn&amp;rsquo;t exist&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>409&lt;/td>
+&lt;td>mirror can&amp;rsquo;t be dropped (reason in the message)&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;p>Example:&lt;/p>
+&lt;pre>&lt;code>$ curl -X DELETE http://localhost:8080/api/mirrors/aptly-mirror
+&lt;/code>&lt;/pre></description></item><item><title>Integrations</title><link>https://www.aptly.info/doc/integrations/</link><pubDate>Mon, 09 Sep 2019 11:17:38 UTC</pubDate><author>Andrey Smirnov</author><guid>https://www.aptly.info/doc/integrations/</guid><description>&lt;h2 id="integrations">Integrations&lt;/h2>
 &lt;p>Complete solutions:&lt;/p>
 &lt;ul>
 &lt;li>&lt;a href="https://github.com/molior-dbs/molior">Molior&lt;/a> Debian Build System by
@@ -412,7 +726,16 @@ to pass URL arguments with &lt;code>/&lt;/code> in them.&lt;/li>
 &lt;/ol>
 &lt;h3 id="how-to-implement-equivalent-of-aptly-commands-using-api">How to implement equivalent of aptly commands using API&lt;/h3>
 &lt;ul>
-&lt;li>&lt;code>aptly mirror&lt;/code> - not available via API yet&lt;/li>
+&lt;li>&lt;code>aptly mirror&lt;/code>: &lt;a href="https://www.aptly.info/doc/api/mirror">mirror API&lt;/a>
+&lt;ul>
+&lt;li>&lt;code>list&lt;/code>: list&lt;/li>
+&lt;li>&lt;code>create&lt;/code>: create&lt;/li>
+&lt;li>&lt;code>drop&lt;/code>: delete&lt;/li>
+&lt;li>&lt;code>show&lt;/code>: show&lt;/li>
+&lt;li>&lt;code>search&lt;/code>: show packages/search&lt;/li>
+&lt;li>&lt;code>update&lt;/code>: update mirror&lt;/li>
+&lt;/ul>
+&lt;/li>
 &lt;li>&lt;code>aptly repo&lt;/code>: &lt;a href="https://www.aptly.info/doc/api/repos">local repos API&lt;/a>
 &lt;ul>
 &lt;li>&lt;code>add&lt;/code>: &lt;a href="https://www.aptly.info/doc/api/files">file upload API&lt;/a> + add packages from uploaded file&lt;/li>
@@ -686,44 +1009,4 @@ Files in the pool:
 /Users/smira/.aptly/pool/76/62/bwbar_1.2.3.orig.tar.gz
 References to package:
 mirror [wheezy-main-src]: http://mirror.yandex.ru/debian/ wheezy [src]
-&lt;/code>&lt;/pre></description></item><item><title>aptly repo search</title><link>https://www.aptly.info/doc/aptly/repo/search/</link><pubDate>Fri, 29 Aug 2014 11:17:38 UTC</pubDate><author>Andrey Smirnov</author><guid>https://www.aptly.info/doc/aptly/repo/search/</guid><description>&lt;h2 id="aptly-repo-search">aptly repo search&lt;/h2>
-&lt;p>Search local repositories for packages matching query.&lt;/p>
-&lt;p>Usage:&lt;/p>
-&lt;pre>&lt;code>$ aptly repo search &amp;lt;name&amp;gt; [&amp;lt;package-query&amp;gt;]
-&lt;/code>&lt;/pre>
-&lt;p>Params are:&lt;/p>
-&lt;ul>
-&lt;li>&lt;code>name&lt;/code> is a repo name (given when repo was created)&lt;/li>
-&lt;li>&lt;code>package-query&lt;/code> is a &lt;a href="https://www.aptly.info/doc/feature/query/">package query&lt;/a> to
-search for packages&lt;/li>
-&lt;/ul>
-&lt;p>If package query is omitted, all the packages are displayed.&lt;/p>
-&lt;p>Flags:&lt;/p>
-&lt;ul>
-&lt;li>&lt;code>-format=&amp;quot;&amp;quot;&lt;/code>:
-&lt;a href="https://www.aptly.info/doc/feature/package-display/">custom format&lt;/a> for result printing&lt;/li>
-&lt;li>&lt;code>-with-deps&lt;/code>: include &lt;a href="https://www.aptly.info/doc/feature/dependencies">dependencies&lt;/a> of matching packages
-into search results&lt;/li>
-&lt;/ul>
-&lt;p>Example:&lt;/p>
-&lt;pre>&lt;code>$ aptly repo search internal-pkg 'Version (&amp;gt;= 4.5)'
-libtinfo5_5.9-10_i386
-perl-base_5.14.2-21+deb7u1_amd64
-ncurses-base_5.9-10_all
-xz-utils_5.1.1alpha+20120614-2_i386
-gcc-4.7-base_4.7.2-5_amd64
-libtinfo5_5.9-10_amd64
-base-files_7.1wheezy5_i386
-ncurses-bin_5.9-10_i386
-xz-utils_5.1.1alpha+20120614-2_amd64
-liblzma5_5.1.1alpha+20120614-2_i386
-coreutils_8.13-3.5_amd64
-liblzma5_5.1.1alpha+20120614-2_amd64
-libncurses5_5.9-10_amd64
-coreutils_8.13-3.5_i386
-libncurses5_5.9-10_i386
-perl-base_5.14.2-21+deb7u1_i386
-base-files_7.1wheezy5_amd64
-ncurses-bin_5.9-10_amd64
-gcc-4.7-base_4.7.2-5_i386
 &lt;/code>&lt;/pre></description></item></channel></rss>
