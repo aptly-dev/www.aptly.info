@@ -211,7 +211,7 @@ Example (file upload, add package to repo):
 
 New in {{< version "1.4.0" >}}
 
-Allows automatic processing of `.changes` file controlling package upload (uploaded using [File Upload API](/doc/api/files)) to the local repository. Exposes [repo include](/doc/repo/include) command in api.
+Allows automatic processing of `.changes` file controlling package upload (uploaded using [File Upload API](/doc/api/files)) to the local repository. Exposes [repo include](/doc/aptly/repo/include) command in api.
 
 Query params:
 
