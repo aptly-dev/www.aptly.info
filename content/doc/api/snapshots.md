@@ -217,3 +217,38 @@ Example:
 
     $ curl http://localhost:8080/api/snapshots/snap2/diff/snap3
     [{"Left":null,"Right":"Pi386 zziplib-bin 0.13.56-1.1 4eb4563dc85bc3b6"},{"Left":null,"Right":"Pi386 zzuf 0.13.svn20100215-4 2abcc80de15e25f8"}, ... ]
+
+### Merge Snapshots
+
+`POST /api/snapshots/merge`
+
+Merge multiple snapshots into one new snapshot.
+
+
+JSON body params:
+
+ Name                      | Type                | Description
+---------------------------|---------------------|-------------------------------
+ `Destination`             | string              | Name for the new snapshot
+ `Sources`                 | []string            | Names of the source snapshots 
+
+Query params:
+
+ Name                      | Description
+---------------------------|-------------------------------
+ `latest`                  | set to `1` to only use the latest version of each package
+ `no-remove`               | set to `1` to make sure duplicate arch/name packages aren't removed
+
+HTTP Errors:
+
+ Code     | Description
+----------|-------------------------
+ 201      | Snapshot has been created.
+ 400      | No `Sources` specified or both `latest` and `no-remove` set.
+ 404      | A snapshot specified in `Sources` could not be found.
+ 500      | Another failure occured, check the response message for more detail.
+
+Example:
+
+    $ curl -X POST -H 'Content-Type: application/json' --data '{"Destination": "Merged-Snapshot", "Sources": ["snap-wheezy"]}' http://localhost:8080/api/snapshots/merge
+    {"Name":"Merged-Snapshot","CreatedAt":"2023-03-10T15:05:10.618008737+01:00","SourceKind":"snapshot","Description":"Merged from sources: 'snap-wheezy'","Origin":"","NotAutomatic":"","ButAutomaticUpgrades":""}
