@@ -65,7 +65,8 @@ below):</p><pre><code>{
   },
   &quot;enableMetricsEndpoint&quot;: false,
   &quot;logLevel&quot;: &quot;debug&quot;,
-  &quot;logFormat&quot;: &quot;default&quot;
+  &quot;logFormat&quot;: &quot;default&quot;,
+  &quot;serveInAPIMode&quot;: false
 }
 </code></pre><p>Options:</p><ul><li><code>rootDir</code> is root of directory storage to store database
 (<code>rootDir/db</code>), downloaded packages (<code>rootDir/pool</code>) and published
@@ -99,7 +100,17 @@ parameters (see <a href=/doc/feature/swift>publishing to Swift</a>)</li><li><cod
 when running api serve (see <a href=/doc/api/misc>misc API</a>)</li><li><code>logLevel</code> specifies the log level, valid values are <code>debug</code>, <code>info</code>, <code>warn</code> and
 <code>error</code>, only has full effect with log format set to <code>json</code>, it&rsquo;s recommended to leave at
 default value when log level is <code>default</code></li><li><code>logFormat</code> specifies the log format to use, can be <code>default</code> or <code>json</code>, when format is <code>json</code>
-all logs have a <code>time</code> key with timestamps in RFC3339 format and a <code>level</code> key with the log level</li></ul><div class="alert alert-warning alert-note"><strong>Warning:</strong> <code>rootDir</code> contains all the downloaded packages from remote
+all logs have a <code>time</code> key with timestamps in RFC3339 format and a <code>level</code> key with the log level</li><li><code>serveInAPIMode</code> enables serving published repos according to configured <code>FileSystemPublishEndpoints</code> while running aptly in the api mode. If there are no <code>FileSystemPublishEndpoints</code>, it serves <code>public/</code> subdirectory of aptly’s root. For example, if you have FileSystemPublishEndpoints configured as follows then the contents of <code>/srv/publishes</code> are accessible via <code>http://aptlyhost/repos/bootstrap/</code> and the contents of <code>/opt/another</code> via <code>http://aptlyhost/repos/some_other/</code> accordingly. If FileSystemPublishEndpoints are not configured, the default publish location is accessible via <code>http://aptlyhost/repos/-/</code>.</li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-json data-lang=json><span style=display:flex><span><span style=color:#e6db74>&#34;FileSystemPublishEndpoints&#34;</span><span style=color:#960050;background-color:#1e0010>:</span> {
+</span></span><span style=display:flex><span>    <span style=color:#f92672>&#34;bootstrap&#34;</span>: {
+</span></span><span style=display:flex><span>      <span style=color:#f92672>&#34;rootDir&#34;</span>: <span style=color:#e6db74>&#34;/srv/publishes&#34;</span>,
+</span></span><span style=display:flex><span>     <span style=color:#960050;background-color:#1e0010>...</span> <span style=color:#960050;background-color:#1e0010>other</span> <span style=color:#960050;background-color:#1e0010>params</span>
+</span></span><span style=display:flex><span>    },
+</span></span><span style=display:flex><span>    <span style=color:#f92672>&#34;some_other&#34;</span>: {
+</span></span><span style=display:flex><span>      <span style=color:#f92672>&#34;rootDir&#34;</span>: <span style=color:#e6db74>&#34;/opt/another&#34;</span>,
+</span></span><span style=display:flex><span>     <span style=color:#960050;background-color:#1e0010>...</span> <span style=color:#960050;background-color:#1e0010>other</span> <span style=color:#960050;background-color:#1e0010>params</span>
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><div class="alert alert-warning alert-note"><strong>Warning:</strong> <code>rootDir</code> contains all the downloaded packages from remote
 mirrors, so it should have enough space. For example. mirror of Debian
 wheezy (amd64 and i386) requires 70 GiB of disk space.</div><p>aptly would use HTTP proxy configured in <code>HTTP_PROXY</code> environment
 variable.</p><div id=disqus_thread></div><script type=text/javascript>(function(){if(window.location.hostname=="localhost")return;var t,n,s,e=document.createElement("script");e.type="text/javascript",e.async=!0,t="aptly",n="Configuration",s="/doc/configuration/".replace(/\/$/,""),e.src="//"+t+".disqus.com/embed.js",(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(e)})()</script><noscript>Please enable JavaScript to view the <a href=http://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript></div></div></div></section><footer id=page-footer><div class=container><nav class="navbar navbar-default navbar-static-top" role=navigation><ul class="nav navbar-nav nav-justified"><li><a href=/tutorial/>tutorials</a></li><li><a href=/download/>download</a></li><li><a href=/support/>support</a></li><li class=active><a href=/doc/overview/>documentation</a></li><li><a href=/about/>about</a></li><li><a href=/post/>blog</a></li></ul></nav><div class=copy>Sponsored by <a href=http://express42.com/>express42</a> &copy;&nbsp;2013-2018 aptly contributors</div></div></footer><script src=https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js></script>

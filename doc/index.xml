@@ -346,7 +346,7 @@ Forrest Alvarez and Brian Jackson&lt;/li>
 This includes an aptly API command-line client.&lt;/li>
 &lt;li>&lt;a href="https://github.com/gopythongo/aptly-api-client">aptly-api-client Python library&lt;/a> by Jonas Maurus.&lt;/li>
 &lt;li>&lt;a href="https://github.com/chnyda/python-aptly-gui">Python aptly GUI (via pyqt5)&lt;/a> by Cedric Hnyda.&lt;/li>
-&lt;/ul></description></item><item><title>PGP Providers</title><link>https://www.aptly.info/doc/feature/pgp-providers/</link><pubDate>Wed, 09 Aug 2017 11:17:38 UTC</pubDate><author>Andrey Smirnov</author><guid>https://www.aptly.info/doc/feature/pgp-providers/</guid><description>&lt;h2 id="pgp-providers--hahahugoshortcode-s0-hbhb">PGP Providers &lt;span class="label label-primary">1.1.0&lt;/span>
+&lt;/ul></description></item><item><title>PGP Providers</title><link>https://www.aptly.info/doc/feature/pgp-providers/</link><pubDate>Wed, 09 Aug 2017 11:17:38 UTC</pubDate><author>Andrey Smirnov</author><guid>https://www.aptly.info/doc/feature/pgp-providers/</guid><description>&lt;h2 id="pgp-providers--hahahugoshortcodes0hbhb">PGP Providers &lt;span class="label label-primary">1.1.0&lt;/span>
 &lt;/h2>
 &lt;p>Aptly at this time only supports GNUPG 1.x for server-side use.
 On newer Debian systems you&amp;rsquo;ll want to make sure that the &lt;code>gnupg1&lt;/code> and &lt;code>gpgv1&lt;/code> packages are installed.
@@ -371,7 +371,7 @@ run, not every time file is signed (which is the case for &lt;code>gpg&lt;/code>
 &lt;li>&lt;code>gpg&lt;/code> implementation might have issue with GnuPG 2.1 (it works fine with 1.x version)&lt;/li>
 &lt;li>&lt;code>internal&lt;/code> implementation only supports &amp;ldquo;classic&amp;rdquo; format of keyrings&lt;/li>
 &lt;/ul>
-&lt;p>PGP provider could be configured via &lt;a href="https://www.aptly.info/doc/aptly/flags">flags&lt;/a> (&lt;code>-gpg-provider=[gpg|internal]&lt;/code>) or via &lt;code>gpgProvider&lt;/code> &lt;a href="https://www.aptly.info/doc/configuration">configuration setting&lt;/a>.&lt;/p></description></item><item><title>Filesystem Publishing</title><link>https://www.aptly.info/doc/feature/filesystem/</link><pubDate>Thu, 06 Jul 2017 11:17:38 UTC</pubDate><author>Andrey Smirnov</author><guid>https://www.aptly.info/doc/feature/filesystem/</guid><description>&lt;h2 id="custom-filesystem-publishing--hahahugoshortcode-s0-hbhb">Custom Filesystem Publishing &lt;span class="label label-primary">1.1.0&lt;/span>
+&lt;p>PGP provider could be configured via &lt;a href="https://www.aptly.info/doc/aptly/flags">flags&lt;/a> (&lt;code>-gpg-provider=[gpg|internal]&lt;/code>) or via &lt;code>gpgProvider&lt;/code> &lt;a href="https://www.aptly.info/doc/configuration">configuration setting&lt;/a>.&lt;/p></description></item><item><title>Filesystem Publishing</title><link>https://www.aptly.info/doc/feature/filesystem/</link><pubDate>Thu, 06 Jul 2017 11:17:38 UTC</pubDate><author>Andrey Smirnov</author><guid>https://www.aptly.info/doc/feature/filesystem/</guid><description>&lt;h2 id="custom-filesystem-publishing--hahahugoshortcodes0hbhb">Custom Filesystem Publishing &lt;span class="label label-primary">1.1.0&lt;/span>
 &lt;/h2>
 &lt;p>aptly defaults to publish to a single publish directory under &lt;code>~/.aptly/public&lt;/code>. For
 a more advanced publishing strategy, you can define one or more filesystem endpoints in the

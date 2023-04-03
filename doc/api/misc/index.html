@@ -7,6 +7,10 @@
 </code></pre><h2 id=healthy-api>Healthy API</h2><p><code>GET /api/healthy</code></p><p>Return current healthiness status of Aptly.</p><p>Example:</p><pre><code>$ curl http://localhost:8080/api/healthy
 {&quot;Status&quot;: &quot;Aptly is healthy&quot;}
 </code></pre><h2 id=metrics>Metrics</h2><p><code>GET /api/metrics</code></p><p>Disabled by default. Can be switched on by setting <code>"enableMetricsEndpoint": true</code> in the config file.</p><p>Returns aptly metrics in Prometheus format.</p><p>Provides the following metrics alongside the standard go metrics already provided by the <a href=https://pkg.go.dev/github.com/prometheus/client_golang/prometheus/promhttp>Prometheus go client library</a>:</p><table><thead><tr><th>Name</th><th>Description</th></tr></thead><tbody><tr><td><code>aptly_api_http_request_duration_seconds</code></td><td>Duration of api requests in seconds</td></tr><tr><td><code>aptly_api_http_request_size_bytes</code></td><td>Api HTTP request size in bytes</td></tr><tr><td><code>aptly_api_http_requests_in_flight</code></td><td>Number of concurrent HTTP api requests currently handled</td></tr><tr><td><code>aptly_api_http_requests_total</code></td><td>Total number of api requests</td></tr><tr><td><code>aptly_api_http_response_size_bytes</code></td><td>Api HTTP response size in bytes</td></tr><tr><td><code>aptly_build_info</code></td><td>Versions of aptly and go</td></tr></tbody></table><p>Example (standard go metrics omitted):</p><pre><code>$ curl http://localhost:8080/api/metrics
+# HELP aptly_api_files_uploaded_total Total number of uploaded files labeled by upload directory.
+# TYPE aptly_api_files_uploaded_total counter
+aptly_api_files_uploaded_total{directory=&quot;hello-world-0.0.1&quot;} 1
+
 # HELP aptly_api_http_request_duration_seconds Duration of api requests in seconds.
 # TYPE aptly_api_http_request_duration_seconds summary
 aptly_api_http_request_duration_seconds_sum{code=&quot;200&quot;,method=&quot;GET&quot;,path=&quot;/api/files&quot;} 0.0011117079999999999
@@ -65,6 +69,10 @@ aptly_api_http_response_size_bytes_count{code=&quot;400&quot;,method=&quot;POST&
 # HELP aptly_build_info Metric with a constant '1' value labeled by version and goversion from which aptly was built.
 # TYPE aptly_build_info gauge
 aptly_build_info{goversion=&quot;go1.19.3&quot;,version=&quot;0.0.0&quot;} 1
+
+# HELP aptly_repos_package_count Current number of published packages labeled by source, distribution and component.
+# TYPE aptly_repos_package_count gauge
+aptly_repos_package_count{component=&quot;main&quot;,distribution=&quot;stable&quot;,source=&quot;[foo:main]&quot;} 1
 
 # HELP promhttp_metric_handler_requests_in_flight Current number of scrapes being served.
 # TYPE promhttp_metric_handler_requests_in_flight gauge
