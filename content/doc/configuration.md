@@ -80,7 +80,8 @@ below):
       },
       "enableMetricsEndpoint": false,
       "logLevel": "debug",
-      "logFormat": "default"
+      "logFormat": "default",
+      "serveInAPIMode": false
     }
 
 Options:
@@ -138,6 +139,20 @@ Options:
     default value when log level is `default`
 -   `logFormat` specifies the log format to use, can be `default` or `json`, when format is `json`
      all logs have a `time` key with timestamps in RFC3339 format and a `level` key with the log level
+-   `serveInAPIMode` enables serving published repos according to configured `FileSystemPublishEndpoints` while running aptly in the api mode. If there are no `FileSystemPublishEndpoints`, it serves `public/` subdirectory of aptly’s root. For example, if you have FileSystemPublishEndpoints configured as follows then the contents of `/srv/publishes` are accessible via `http://aptlyhost/repos/bootstrap/` and the contents of `/opt/another` via `http://aptlyhost/repos/some_other/` accordingly. If FileSystemPublishEndpoints are not configured, the default publish location is accessible via `http://aptlyhost/repos/-/`.
+```json
+"FileSystemPublishEndpoints": {
+    "bootstrap": {
+      "rootDir": "/srv/publishes",
+     ... other params
+    },
+    "some_other": {
+      "rootDir": "/opt/another",
+     ... other params
+    }
+}
+```
+
 
 <div class="alert alert-warning alert-note"><strong>Warning:</strong> <code>rootDir</code> contains all the downloaded packages from remote
 mirrors, so it should have enough space. For example. mirror of Debian

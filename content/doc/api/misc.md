@@ -86,6 +86,10 @@ Provides the following metrics alongside the standard go metrics already provide
 Example (standard go metrics omitted):
 
     $ curl http://localhost:8080/api/metrics
+    # HELP aptly_api_files_uploaded_total Total number of uploaded files labeled by upload directory.
+    # TYPE aptly_api_files_uploaded_total counter
+    aptly_api_files_uploaded_total{directory="hello-world-0.0.1"} 1
+
     # HELP aptly_api_http_request_duration_seconds Duration of api requests in seconds.
     # TYPE aptly_api_http_request_duration_seconds summary
     aptly_api_http_request_duration_seconds_sum{code="200",method="GET",path="/api/files"} 0.0011117079999999999
@@ -98,7 +102,7 @@ Example (standard go metrics omitted):
     aptly_api_http_request_duration_seconds_count{code="200",method="POST",path="/api/files"} 1
     aptly_api_http_request_duration_seconds_sum{code="400",method="POST",path="/api/files"} 0.000128833
     aptly_api_http_request_duration_seconds_count{code="400",method="POST",path="/api/files"} 1
-    
+
     # HELP aptly_api_http_request_size_bytes Api HTTP request size in bytes.
     # TYPE aptly_api_http_request_size_bytes summary
     aptly_api_http_request_size_bytes_sum{code="200",method="GET",path="/api/files"} 0
@@ -111,7 +115,7 @@ Example (standard go metrics omitted):
     aptly_api_http_request_size_bytes_count{code="200",method="POST",path="/api/files"} 1
     aptly_api_http_request_size_bytes_sum{code="400",method="POST",path="/api/files"} 0
     aptly_api_http_request_size_bytes_count{code="400",method="POST",path="/api/files"} 1
-    
+
     # HELP aptly_api_http_requests_in_flight Number of concurrent HTTP api requests currently handled.
     # TYPE aptly_api_http_requests_in_flight gauge
     aptly_api_http_requests_in_flight{method="GET",path="/api/files"} 0
@@ -119,7 +123,7 @@ Example (standard go metrics omitted):
     aptly_api_http_requests_in_flight{method="GET",path="/api/repos"} 0
     aptly_api_http_requests_in_flight{method="GET",path="/api/version"} 0
     aptly_api_http_requests_in_flight{method="POST",path="/api/files"} 0
-    
+
     # HELP aptly_api_http_requests_total Total number of api requests.
     # TYPE aptly_api_http_requests_total counter
     aptly_api_http_requests_total{code="200",method="GET",path="/api/files"} 2
@@ -127,7 +131,7 @@ Example (standard go metrics omitted):
     aptly_api_http_requests_total{code="200",method="GET",path="/api/version"} 1
     aptly_api_http_requests_total{code="200",method="POST",path="/api/files"} 1
     aptly_api_http_requests_total{code="400",method="POST",path="/api/files"} 1
-    
+
     # HELP aptly_api_http_response_size_bytes Api HTTP response size in bytes.
     # TYPE aptly_api_http_response_size_bytes summary
     aptly_api_http_response_size_bytes_sum{code="200",method="GET",path="/api/files"} 74
@@ -145,10 +149,14 @@ Example (standard go metrics omitted):
     # TYPE aptly_build_info gauge
     aptly_build_info{goversion="go1.19.3",version="0.0.0"} 1
 
+    # HELP aptly_repos_package_count Current number of published packages labeled by source, distribution and component.
+    # TYPE aptly_repos_package_count gauge
+    aptly_repos_package_count{component="main",distribution="stable",source="[foo:main]"} 1
+
     # HELP promhttp_metric_handler_requests_in_flight Current number of scrapes being served.
     # TYPE promhttp_metric_handler_requests_in_flight gauge
     promhttp_metric_handler_requests_in_flight 1
-    
+
     # HELP promhttp_metric_handler_requests_total Total number of scrapes by HTTP status code.
     # TYPE promhttp_metric_handler_requests_total counter
     promhttp_metric_handler_requests_total{code="200"} 0
