@@ -66,6 +66,32 @@ Example:
     $ curl -X POST -H 'Content-Type: application/json' --data '{"Name":"snap9"}' http://localhost:8080/api/repos/local-repo/snapshots
     {"Name":"snap9","CreatedAt":"2015-02-28T19:56:59.137192613+03:00","Description":"Snapshot from local repo [local-repo]: fun repo"}
 
+### Create Snapshot from Mirror
+
+`POST /api/mirrors/:name/snapshots`
+
+Create snapshot of mirror `:name` contents as new snapshot with name `:snapname`.
+
+JSON body params:
+
+ Name                      | Type                | Description
+---------------------------|---------------------|-------------------------------
+ `Name`                    | string, *required*  | snapshot name
+ `Description`             | string              | free-format description how snapshot has been created
+
+
+HTTP Errors:
+
+ Code     | Description
+----------|-------------------------
+ 400      | snapshot with name `Name` already exists
+ 404      | mirror with name `:name` doesn't exist
+
+Example:
+
+    $ curl -X POST -H 'Content-Type: application/json' --data '{"Name":"snap10"}' http://localhost:8080/api/mirrors/aptly-mirror/snapshots
+    {"Name":"snap10","CreatedAt":"2023-07-21T15:51:06.692330984+03:00","SourceKind":"repo","Description":"Snapshot from mirror [aptly-mirror]: http://security.debian.org/debian-security/ bullseye","Origin":"aptly-mirror","NotAutomatic":"","ButAutomaticUpgrades":""}
+
 ### Create Snapshot from Package Refs
 
 `POST /api/snapshots`
