@@ -125,6 +125,37 @@ Example:
     $ curl -X POST -H 'Content-Type: application/json' --data '{"Name":"snap10", "SourceSnapshots": ["snap9"], "Description": "Custom", "PackageRefs": ["Psource pyspi 0.6.1-1.3 3a8b37cbd9a3559e"]}'  http://localhost:8080/api/snapshots
     {"Name":"snap10","CreatedAt":"2015-02-28T20:22:13.312866396+03:00","Description":"Custom"}
 
+### Create Snapshot from other Snapshots
+
+`POST /api/snapshots/merge`
+
+Merges several `Sources` snapshots into new `Destination` snapshot. (see also [aptly repo create](/doc/aptly/snapshot/merge)).
+
+Merge happens from left to right.
+By default, packages with the same name-architecture pair are replaced during merge (package from latest snapshot on the list wins).
+
+JSON body params:
+
+ Name                      | Type                 | Description
+---------------------------|----------------------|-------------------------------
+ `Destination`             | string, *required*   | destination snapshot name
+ `Sources`                 | []string, *required* | list of source snapshot names
+ `latest`                  | int                  | when value is set to 1, use only the latest version of each package
+ `no-remove`               | int                  | when value is set to 1, don’t remove duplicate arch/name packages
+
+HTTP Errors:
+
+ Code     | Description
+----------|---------------------------------------------
+ 400      | At least one source snapshot is required
+ 400      | no-remove and latest are mutually exclusive
+ 404      | source snapshot doesn't exist
+
+Example:
+
+    $ curl -X POST -H 'Content-Type: application/json' --data '{"Destination": "snap-1-2", "Sources": ["snap1", "snap2"]}' http://localhost:8080/api/snapshots/merge
+    {"Name":"Merge snapshot snap-1-2","ID":1,"State":0}
+
 ### Update
 
 `PUT /api/snapshots/:name`
