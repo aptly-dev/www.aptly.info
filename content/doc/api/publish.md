@@ -39,7 +39,6 @@ Signing options (all are optional):
  Name                      | Type                | Description
 ---------------------------|---------------------|-------------------------------
  `Skip`                    | bool                | if `true`, don't sign published repository
- `Batch`                   | bool                | should be set if passing passphrase
  `GpgKey`                  | string              | gpg key name (local to aptly server/user)
  `Keyring`                 | string              | gpg keyring filename (local to aptly server/user)
  `SecretKeyring`           | string              | gpg secret keyring filename (local to aptly server/user)
