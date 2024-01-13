@@ -43,7 +43,7 @@ Supported fields:
 
 Operators:
 
--   `=`: strict match, default operator is no operator is given
+-   `=`: strict match, default operator if no operator is given
 -   `>=`, `<=`, `=`, `>>` (strictly greater), `<<` (strictly less):
     lexicographical comparison for all fields and special rules when
     comparing package versions
