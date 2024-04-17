@@ -34,8 +34,10 @@
       Ubuntu 10.0+. Package contains aptly binary, man page and bash completion.</p>
 
     <p>If you would like to use nightly (unstable) builds of aptly, add following line
-      to <code>/etc/apt/sources.list</code>:</p>
-    <pre>deb http://repo.aptly.info/ nightly main</pre>
+      to <code>/etc/apt/sources.list</code>:
+    <pre>deb http://repo.aptly.info/nightly-<i>bookworm</i> <i>bookworm</i> main</pre>
+    Where <i>bookworm</i> needs to be adapted to the distribution: <i>buster</i> / <i>bullseye</i> (Debian) or <i>focal</i> / <i>jammy</i> (Ubuntu).
+    </p>
 
     <p><b>Mac OS X</b>: Installation using Homebrew:</p>
     <pre class="code">$ brew install aptly</pre>
