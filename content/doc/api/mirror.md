@@ -36,6 +36,7 @@ JSON body params:
  `DownloadInstaller`       | bool                | whether to download additional not packaged installer files
  `FilterWithDeps`          | bool                | when filtering, include [dependencies](/doc/feature/dependencies) of matching packages as well
  `SkipComponentCheck`      | bool                | whether to skip if the given components are in the `Release` file
+ `SkipArchitectureCheck`   | bool                | whether to skip if the given architectures are in the `Release` file
  `IgnoreSignatures`        | bool                | whether to skip the verification of `Release` file signatures
 
 HTTP Errors:
@@ -102,6 +103,12 @@ This api has two functionalities:
 
 When updating a mirror, the packages will always be downloaded.
 
+Query params:
+
+ Name                      | Description
+---------------------------|-------------------------------
+ `_async`                  | when value is set to `1`, run task in background, and return a task ID which can be queried via the `tasks` api.
+
 JSON body params:
 
  Name                      | Type                | Description
@@ -117,6 +124,7 @@ JSON body params:
  `DownloadInstaller`       | bool                | whether to download additional not packaged installer files
  `FilterWithDeps`          | bool                | when filtering, include [dependencies](/doc/feature/dependencies) of matching packages as well
  `SkipComponentCheck`      | bool                | whether to skip if the given components are in the `Release` file
+ `SkipArchitectureCheck`   | bool                | whether to skip if the given architectures are in the `Release` file
  `IgnoreSignatures`        | bool                | whether to skip the verification of `Release` file signatures
  `ForceUpdate`             | bool                | whether to force a mirror update even if another process is already updating the mirror (use with caution!)
  `SkipExistingPackages`    | bool                | whether to not download already downloaded packages
@@ -158,6 +166,7 @@ Query params:
  Name                      | Description
 ---------------------------|-------------------------------
  `force`                   | when value is set to `1`, delete the mirror even if it has snapshots
+ `_async`                  | when value is set to `1`, run task in background, and return a task ID which can be queried via the `tasks` api.
 
 HTTP Errors:
 
