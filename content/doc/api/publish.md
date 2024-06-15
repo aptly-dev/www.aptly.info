@@ -31,7 +31,8 @@ Published repository properties:
  `Origin`                  | string              | value of `Origin:` field in published repository stanza
  `NotAutomatic`            | string              | setting to `yes` indicates to the package manager to not install or upgrade packages from the repository without user consent [🛈](https://wiki.debian.org/DebianRepository/Format#NotAutomatic_and_ButAutomaticUpgrades)
  `ButAutomaticUpgrades`    | string              | setting to `yes` excludes upgrades from the `NotAutomic` setting [🛈](https://wiki.debian.org/DebianRepository/Format#NotAutomatic_and_ButAutomaticUpgrades)
- `AcquireByHash`           | bool                 | provide index files by hash
+ `AcquireByHash`           | bool                | provide index files by hash
+  MultiDist                | bool                | enable multiple packages with the same filename in different distributions
 
 Signing options (all are optional):
 
@@ -80,6 +81,7 @@ JSON body params:
  `ButAutomaticUpgrades`    | string               | setting to `yes` excludes upgrades from the `NotAutomic` setting [🛈](https://wiki.debian.org/DebianRepository/Format#NotAutomatic_and_ButAutomaticUpgrades)
  `SkipCleanup`             | bool                 | don't remove unreferenced files in prefix/component
  `AcquireByHash`           | bool                 | provide index files by hash
+  MultiDist                | bool                 | enable multiple packages with the same filename in different distributions
 
 Notes on `Sources` field:
 
@@ -124,6 +126,7 @@ JSON body params:
  `ForceOverwrite`          | bool                 | when publishing, overwrite files in `pool/` directory without notice
  `Signing`                 | SigningOptions       | gpg options (see above)
  `AcquireByHash`           | bool                 | provide index files by hash
+  MultiDist                | bool                 | enable multiple packages with the same filename in different distributions
 
 
 Example:
