@@ -1,2 +1,4 @@
 public/
 env/
+
+.hugo_build.lock
