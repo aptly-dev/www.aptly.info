@@ -45,6 +45,7 @@ Signing options (all are optional):
  `SecretKeyring`           | string              | gpg secret keyring filename (local to aptly server/user)
  `Passphrase`              | string              | gpg key passphrase (if using over http, would be transmitted in clear text!)
  `PassphraseFile`          | string              | gpg passphrase file (local to aptly server/user)
+ `Batch`                   | string              | set to `true` to prevent gpg from trying to allocate a tty and asking for passphrase
 
 
 ### List
