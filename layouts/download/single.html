@@ -15,27 +15,26 @@
         href="https://packages.debian.org/search?searchon=names&keywords=aptly">Debian </a> as well as <a
         href="http://packages.ubuntu.com/search?suite=all&searchon=names&keywords=aptly">Ubuntu</a>. If you would like
       to install aptly on older versions of Debian / Ubuntu or to stay on the bleeding edge, aptly could be installed
-      by adding new repository to <code>/etc/apt/sources.list</code>:</p>
-    <pre>deb http://repo.aptly.info/ squeeze main</pre>
-    <p>And importing key that is used to sign the release either from keyserver.ubuntu.com:</p>
+      by adding a new repository to <code>/etc/apt/sources.list.d</code>:</p>
+    <pre class="code">$ echo "deb [signed-by=/etc/apt/keyrings/aptly.asc] http://repo.aptly.info/ squeeze main" | sudo tee /etc/apt/sources.list.d/aptly.list</pre>
+    <p><b>And importing key that is used to sign the release: </b></p>
 
-    <pre class="code"># sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys A0546A43624A8331</pre>
+    <p>For releases older than Debian 12 and Ubuntu 22.04, create the directory first:</p>
+    <pre class="code">$ sudo mkdir -p /etc/apt/keyrings; sudo chmod 755 /etc/apt/keyrings</pre>
 
-    <p>or by downloading it (<a href="https://www.aptly.info/pubkey.txt">GPG key</a>):</p>
-
-    <pre class="code">$ wget -qO - https://www.aptly.info/pubkey.txt | sudo apt-key add -</pre>
+    <p>Download and install key:</p>
+    <pre class="code">$ wget -O /etc/apt/keyrings/aptly.asc https://www.aptly.info/pubkey.txt</pre>
 
     <p>After that you can install aptly as any other software package:</p>
 
-    <pre class="code"># apt-get update
-# apt-get install aptly</pre>
+    <pre class="code"># apt-get update && apt-get install aptly</pre>
 
     <p>Please don't worry about <code>squeeze</code> part in repo name: aptly package should work on Debian squeeze+,
       Ubuntu 10.0+. Package contains aptly binary, man page and bash completion.</p>
 
     <p>If you would like to use nightly (unstable) builds of aptly, add following line
-      to <code>/etc/apt/sources.list</code>:
-    <pre>deb http://repo.aptly.info/nightly-<i>DIST</i> <i>DIST</i> main</pre>
+      to <code>/etc/apt/sources.list</code> instead:
+    <pre>deb [signed-by=/etc/apt/keyrings/aptly.gpg] http://repo.aptly.info/nightly-<i>DIST</i> <i>DIST</i> main</pre>
     Where <i>DIST</i> needs to be changed to the distribution: <i>buster</i> / <i>bullseye</i> / <i>bookworm</i> (Debian) or <i>focal</i> / <i>jammy</i> (Ubuntu).
     </p>
 
