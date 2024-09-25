@@ -36,18 +36,16 @@
     <h3>CI Builds for Debian</h3>
     <p>If you would like to use the CI Builds (formerly known as nightly) to test the latest development version of aptly, add following line
       to <code>/etc/apt/sources.list</code> instead:
-    <pre>deb [signed-by=/etc/apt/keyrings/aptly.gpg] http://repo.aptly.info/ci <i>DIST</i> main</pre>
+    <pre class="code">deb [signed-by=/etc/apt/keyrings/aptly.gpg] http://repo.aptly.info/ci <i>DIST</i> main</pre>
     Where <i>DIST</i> needs to be changed to the distribution: <i>buster</i> / <i>bullseye</i> / <i>bookworm</i> (Debian) or <i>focal</i> / <i>jammy</i> / <i>noble</i> (Ubuntu).
     </p>
 
     <h3>Mac OS X</h3>
     <p><b>Mac OS X</b>: Installation using Homebrew:</p>
     <pre class="code">$ brew install aptly</pre>
-  </div>
-</section>
-<section class="primary-content">
-  <div class="container">
-    <p><strong>Binary</strong> distributions (depend almost only on <code>libc</code>) for Debian, CentOS, MacOS X &amp;
+
+    <h3>Binary Releases</h3>
+    <p>Releases for binary distributions (depend almost only on <code>libc</code>) for Debian, CentOS, MacOS X &amp;
       FreeBSD are available.</p>
     <div class="row text-center">
       <div class="col-md-4">
