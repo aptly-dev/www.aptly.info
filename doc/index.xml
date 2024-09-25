@@ -7,81 +7,81 @@
 &lt;table>
 &lt;thead>
 &lt;tr>
-&lt;th>Name&lt;/th>
-&lt;th>Type&lt;/th>
-&lt;th>Description&lt;/th>
+&lt;th style="text-align: left">Name&lt;/th>
+&lt;th style="text-align: left">Type&lt;/th>
+&lt;th style="text-align: left">Description&lt;/th>
 &lt;/tr>
 &lt;/thead>
 &lt;tbody>
 &lt;tr>
-&lt;td>&lt;code>Name&lt;/code>&lt;/td>
-&lt;td>&lt;em>required&lt;/em>, string&lt;/td>
-&lt;td>mirror name&lt;/td>
+&lt;td style="text-align: left">&lt;code>Name&lt;/code>&lt;/td>
+&lt;td style="text-align: left">&lt;em>required&lt;/em>, string&lt;/td>
+&lt;td style="text-align: left">mirror name&lt;/td>
 &lt;/tr>
 &lt;tr>
-&lt;td>&lt;code>ArchiveURL&lt;/code>&lt;/td>
-&lt;td>&lt;em>required&lt;/em>, string&lt;/td>
-&lt;td>url of the archive to mirror e.g. &lt;a href="http://deb.debian.org/debian/">http://deb.debian.org/debian/&lt;/a>&lt;/td>
+&lt;td style="text-align: left">&lt;code>ArchiveURL&lt;/code>&lt;/td>
+&lt;td style="text-align: left">&lt;em>required&lt;/em>, string&lt;/td>
+&lt;td style="text-align: left">url of the archive to mirror e.g. &lt;a href="http://deb.debian.org/debian/">http://deb.debian.org/debian/&lt;/a>&lt;/td>
 &lt;/tr>
 &lt;tr>
-&lt;td>&lt;code>Distribution&lt;/code>&lt;/td>
-&lt;td>string&lt;/td>
-&lt;td>distribution name to mirror e.g. &lt;code>buster&lt;/code>, for flat repositories use &lt;code>./&lt;/code> instead of distribution name&lt;/td>
+&lt;td style="text-align: left">&lt;code>Distribution&lt;/code>&lt;/td>
+&lt;td style="text-align: left">string&lt;/td>
+&lt;td style="text-align: left">distribution name to mirror e.g. &lt;code>buster&lt;/code>, for flat repositories use &lt;code>./&lt;/code> instead of distribution name&lt;/td>
 &lt;/tr>
 &lt;tr>
-&lt;td>&lt;code>Filter&lt;/code>&lt;/td>
-&lt;td>string&lt;/td>
-&lt;td>&lt;a href="https://www.aptly.info/doc/feature/query/">package query&lt;/a> that is applied to packages in the mirror&lt;/td>
+&lt;td style="text-align: left">&lt;code>Filter&lt;/code>&lt;/td>
+&lt;td style="text-align: left">string&lt;/td>
+&lt;td style="text-align: left">&lt;a href="https://www.aptly.info/doc/feature/query/">package query&lt;/a> that is applied to packages in the mirror&lt;/td>
 &lt;/tr>
 &lt;tr>
-&lt;td>&lt;code>Components&lt;/code>&lt;/td>
-&lt;td>[]string&lt;/td>
-&lt;td>components to mirror, if not specified aptly would fetch all components&lt;/td>
+&lt;td style="text-align: left">&lt;code>Components&lt;/code>&lt;/td>
+&lt;td style="text-align: left">[]string&lt;/td>
+&lt;td style="text-align: left">components to mirror, if not specified aptly would fetch all components&lt;/td>
 &lt;/tr>
 &lt;tr>
-&lt;td>&lt;code>Architectures&lt;/code>&lt;/td>
-&lt;td>[]string&lt;/td>
-&lt;td>limit mirror to those architectures, if not specified aptly would fetch all architectures&lt;/td>
+&lt;td style="text-align: left">&lt;code>Architectures&lt;/code>&lt;/td>
+&lt;td style="text-align: left">[]string&lt;/td>
+&lt;td style="text-align: left">limit mirror to those architectures, if not specified aptly would fetch all architectures&lt;/td>
 &lt;/tr>
 &lt;tr>
-&lt;td>&lt;code>Keyrings&lt;/code>&lt;/td>
-&lt;td>[]string&lt;/td>
-&lt;td>gpg keyring(s) to use when verifying Release file&lt;/td>
+&lt;td style="text-align: left">&lt;code>Keyrings&lt;/code>&lt;/td>
+&lt;td style="text-align: left">[]string&lt;/td>
+&lt;td style="text-align: left">gpg keyring(s) to use when verifying Release file&lt;/td>
 &lt;/tr>
 &lt;tr>
-&lt;td>&lt;code>DownloadSources&lt;/code>&lt;/td>
-&lt;td>bool&lt;/td>
-&lt;td>whether to mirror sources&lt;/td>
+&lt;td style="text-align: left">&lt;code>DownloadSources&lt;/code>&lt;/td>
+&lt;td style="text-align: left">bool&lt;/td>
+&lt;td style="text-align: left">whether to mirror sources&lt;/td>
 &lt;/tr>
 &lt;tr>
-&lt;td>&lt;code>DownloadUdebs&lt;/code>&lt;/td>
-&lt;td>bool&lt;/td>
-&lt;td>whether to mirror .udeb packages (Debian installer support)&lt;/td>
+&lt;td style="text-align: left">&lt;code>DownloadUdebs&lt;/code>&lt;/td>
+&lt;td style="text-align: left">bool&lt;/td>
+&lt;td style="text-align: left">whether to mirror .udeb packages (Debian installer support)&lt;/td>
 &lt;/tr>
 &lt;tr>
-&lt;td>&lt;code>DownloadInstaller&lt;/code>&lt;/td>
-&lt;td>bool&lt;/td>
-&lt;td>whether to download additional not packaged installer files&lt;/td>
+&lt;td style="text-align: left">&lt;code>DownloadInstaller&lt;/code>&lt;/td>
+&lt;td style="text-align: left">bool&lt;/td>
+&lt;td style="text-align: left">whether to download additional not packaged installer files&lt;/td>
 &lt;/tr>
 &lt;tr>
-&lt;td>&lt;code>FilterWithDeps&lt;/code>&lt;/td>
-&lt;td>bool&lt;/td>
-&lt;td>when filtering, include &lt;a href="https://www.aptly.info/doc/feature/dependencies">dependencies&lt;/a> of matching packages as well&lt;/td>
+&lt;td style="text-align: left">&lt;code>FilterWithDeps&lt;/code>&lt;/td>
+&lt;td style="text-align: left">bool&lt;/td>
+&lt;td style="text-align: left">when filtering, include &lt;a href="https://www.aptly.info/doc/feature/dependencies">dependencies&lt;/a> of matching packages as well&lt;/td>
 &lt;/tr>
 &lt;tr>
-&lt;td>&lt;code>SkipComponentCheck&lt;/code>&lt;/td>
-&lt;td>bool&lt;/td>
-&lt;td>whether to skip if the given components are in the &lt;code>Release&lt;/code> file&lt;/td>
+&lt;td style="text-align: left">&lt;code>SkipComponentCheck&lt;/code>&lt;/td>
+&lt;td style="text-align: left">bool&lt;/td>
+&lt;td style="text-align: left">whether to skip if the given components are in the &lt;code>Release&lt;/code> file&lt;/td>
 &lt;/tr>
 &lt;tr>
-&lt;td>&lt;code>SkipArchitectureCheck&lt;/code>&lt;/td>
-&lt;td>bool&lt;/td>
-&lt;td>whether to skip if the given architectures are in the &lt;code>Release&lt;/code> file&lt;/td>
+&lt;td style="text-align: left">&lt;code>SkipArchitectureCheck&lt;/code>&lt;/td>
+&lt;td style="text-align: left">bool&lt;/td>
+&lt;td style="text-align: left">whether to skip if the given architectures are in the &lt;code>Release&lt;/code> file&lt;/td>
 &lt;/tr>
 &lt;tr>
-&lt;td>&lt;code>IgnoreSignatures&lt;/code>&lt;/td>
-&lt;td>bool&lt;/td>
-&lt;td>whether to skip the verification of &lt;code>Release&lt;/code> file signatures&lt;/td>
+&lt;td style="text-align: left">&lt;code>IgnoreSignatures&lt;/code>&lt;/td>
+&lt;td style="text-align: left">bool&lt;/td>
+&lt;td style="text-align: left">whether to skip the verification of &lt;code>Release&lt;/code> file signatures&lt;/td>
 &lt;/tr>
 &lt;/tbody>
 &lt;/table>
@@ -89,14 +89,14 @@
 &lt;table>
 &lt;thead>
 &lt;tr>
-&lt;th>Code&lt;/th>
-&lt;th>Description&lt;/th>
+&lt;th style="text-align: left">Code&lt;/th>
+&lt;th style="text-align: left">Description&lt;/th>
 &lt;/tr>
 &lt;/thead>
 &lt;tbody>
 &lt;tr>
-&lt;td>400&lt;/td>
-&lt;td>mirror creation failed&lt;/td>
+&lt;td style="text-align: left">400&lt;/td>
+&lt;td style="text-align: left">mirror creation failed&lt;/td>
 &lt;/tr>
 &lt;/tbody>
 &lt;/table>
@@ -111,14 +111,14 @@
 &lt;table>
 &lt;thead>
 &lt;tr>
-&lt;th>Code&lt;/th>
-&lt;th>Description&lt;/th>
+&lt;th style="text-align: left">Code&lt;/th>
+&lt;th style="text-align: left">Description&lt;/th>
 &lt;/tr>
 &lt;/thead>
 &lt;tbody>
 &lt;tr>
-&lt;td>404&lt;/td>
-&lt;td>mirror with such name doesn&amp;rsquo;t exist&lt;/td>
+&lt;td style="text-align: left">404&lt;/td>
+&lt;td style="text-align: left">mirror with such name doesn&amp;rsquo;t exist&lt;/td>
 &lt;/tr>
 &lt;/tbody>
 &lt;/table>
@@ -133,22 +133,22 @@
 &lt;table>
 &lt;thead>
 &lt;tr>
-&lt;th>Name&lt;/th>
-&lt;th>Description&lt;/th>
+&lt;th style="text-align: left">Name&lt;/th>
+&lt;th style="text-align: left">Description&lt;/th>
 &lt;/tr>
 &lt;/thead>
 &lt;tbody>
 &lt;tr>
-&lt;td>&lt;code>q&lt;/code>&lt;/td>
-&lt;td>&lt;a href="https://www.aptly.info/doc/feature/query">package query&lt;/a>, if missing - return all packages&lt;/td>
+&lt;td style="text-align: left">&lt;code>q&lt;/code>&lt;/td>
+&lt;td style="text-align: left">&lt;a href="https://www.aptly.info/doc/feature/query">package query&lt;/a>, if missing - return all packages&lt;/td>
 &lt;/tr>
 &lt;tr>
-&lt;td>&lt;code>withDeps&lt;/code>&lt;/td>
-&lt;td>set to &lt;code>1&lt;/code> to include dependencies when evaluating package query&lt;/td>
+&lt;td style="text-align: left">&lt;code>withDeps&lt;/code>&lt;/td>
+&lt;td style="text-align: left">set to &lt;code>1&lt;/code> to include dependencies when evaluating package query&lt;/td>
 &lt;/tr>
 &lt;tr>
-&lt;td>&lt;code>format&lt;/code>&lt;/td>
-&lt;td>result format, compact by default (only package keys), &lt;code>details&lt;/code> to return full information about each package (might be slow on large repos)&lt;/td>
+&lt;td style="text-align: left">&lt;code>format&lt;/code>&lt;/td>
+&lt;td style="text-align: left">result format, compact by default (only package keys), &lt;code>details&lt;/code> to return full information about each package (might be slow on large repos)&lt;/td>
 &lt;/tr>
 &lt;/tbody>
 &lt;/table>
@@ -172,14 +172,14 @@ $ curl http://localhost:8080/api/mirrors/aptly-mirror/packages?format=details
 &lt;table>
 &lt;thead>
 &lt;tr>
-&lt;th>Name&lt;/th>
-&lt;th>Description&lt;/th>
+&lt;th style="text-align: left">Name&lt;/th>
+&lt;th style="text-align: left">Description&lt;/th>
 &lt;/tr>
 &lt;/thead>
 &lt;tbody>
 &lt;tr>
-&lt;td>&lt;code>_async&lt;/code>&lt;/td>
-&lt;td>when value is set to &lt;code>1&lt;/code>, run task in background, and return a task ID which can be queried via the &lt;code>tasks&lt;/code> api.&lt;/td>
+&lt;td style="text-align: left">&lt;code>_async&lt;/code>&lt;/td>
+&lt;td style="text-align: left">when value is set to &lt;code>1&lt;/code>, run task in background, and return a task ID which can be queried via the &lt;code>tasks&lt;/code> api.&lt;/td>
 &lt;/tr>
 &lt;/tbody>
 &lt;/table>
@@ -187,86 +187,86 @@ $ curl http://localhost:8080/api/mirrors/aptly-mirror/packages?format=details
 &lt;table>
 &lt;thead>
 &lt;tr>
-&lt;th>Name&lt;/th>
-&lt;th>Type&lt;/th>
-&lt;th>Description&lt;/th>
+&lt;th style="text-align: left">Name&lt;/th>
+&lt;th style="text-align: left">Type&lt;/th>
+&lt;th style="text-align: left">Description&lt;/th>
 &lt;/tr>
 &lt;/thead>
 &lt;tbody>
 &lt;tr>
-&lt;td>&lt;code>Name&lt;/code>&lt;/td>
-&lt;td>string&lt;/td>
-&lt;td>mirror name&lt;/td>
+&lt;td style="text-align: left">&lt;code>Name&lt;/code>&lt;/td>
+&lt;td style="text-align: left">string&lt;/td>
+&lt;td style="text-align: left">mirror name&lt;/td>
 &lt;/tr>
 &lt;tr>
-&lt;td>&lt;code>ArchiveURL&lt;/code>&lt;/td>
-&lt;td>string&lt;/td>
-&lt;td>url of the archive to mirror e.g. &lt;a href="http://deb.debian.org/debian/">http://deb.debian.org/debian/&lt;/a>&lt;/td>
+&lt;td style="text-align: left">&lt;code>ArchiveURL&lt;/code>&lt;/td>
+&lt;td style="text-align: left">string&lt;/td>
+&lt;td style="text-align: left">url of the archive to mirror e.g. &lt;a href="http://deb.debian.org/debian/">http://deb.debian.org/debian/&lt;/a>&lt;/td>
 &lt;/tr>
 &lt;tr>
-&lt;td>&lt;code>Filter&lt;/code>&lt;/td>
-&lt;td>string&lt;/td>
-&lt;td>&lt;a href="https://www.aptly.info/doc/feature/query/">package query&lt;/a> that is applied to packages in the mirror&lt;/td>
+&lt;td style="text-align: left">&lt;code>Filter&lt;/code>&lt;/td>
+&lt;td style="text-align: left">string&lt;/td>
+&lt;td style="text-align: left">&lt;a href="https://www.aptly.info/doc/feature/query/">package query&lt;/a> that is applied to packages in the mirror&lt;/td>
 &lt;/tr>
 &lt;tr>
-&lt;td>&lt;code>Components&lt;/code>&lt;/td>
-&lt;td>[]string&lt;/td>
-&lt;td>components to mirror, if not specified aptly would fetch all components&lt;/td>
+&lt;td style="text-align: left">&lt;code>Components&lt;/code>&lt;/td>
+&lt;td style="text-align: left">[]string&lt;/td>
+&lt;td style="text-align: left">components to mirror, if not specified aptly would fetch all components&lt;/td>
 &lt;/tr>
 &lt;tr>
-&lt;td>&lt;code>Architectures&lt;/code>&lt;/td>
-&lt;td>[]string&lt;/td>
-&lt;td>limit mirror to those architectures, if not specified aptly would fetch all architectures&lt;/td>
+&lt;td style="text-align: left">&lt;code>Architectures&lt;/code>&lt;/td>
+&lt;td style="text-align: left">[]string&lt;/td>
+&lt;td style="text-align: left">limit mirror to those architectures, if not specified aptly would fetch all architectures&lt;/td>
 &lt;/tr>
 &lt;tr>
-&lt;td>&lt;code>Keyrings&lt;/code>&lt;/td>
-&lt;td>[]string&lt;/td>
-&lt;td>gpg keyring(s) to use when verifying Release file&lt;/td>
+&lt;td style="text-align: left">&lt;code>Keyrings&lt;/code>&lt;/td>
+&lt;td style="text-align: left">[]string&lt;/td>
+&lt;td style="text-align: left">gpg keyring(s) to use when verifying Release file&lt;/td>
 &lt;/tr>
 &lt;tr>
-&lt;td>&lt;code>DownloadSources&lt;/code>&lt;/td>
-&lt;td>bool&lt;/td>
-&lt;td>whether to mirror sources&lt;/td>
+&lt;td style="text-align: left">&lt;code>DownloadSources&lt;/code>&lt;/td>
+&lt;td style="text-align: left">bool&lt;/td>
+&lt;td style="text-align: left">whether to mirror sources&lt;/td>
 &lt;/tr>
 &lt;tr>
-&lt;td>&lt;code>DownloadUdebs&lt;/code>&lt;/td>
-&lt;td>bool&lt;/td>
-&lt;td>whether to mirror .udeb packages (Debian installer support)&lt;/td>
+&lt;td style="text-align: left">&lt;code>DownloadUdebs&lt;/code>&lt;/td>
+&lt;td style="text-align: left">bool&lt;/td>
+&lt;td style="text-align: left">whether to mirror .udeb packages (Debian installer support)&lt;/td>
 &lt;/tr>
 &lt;tr>
-&lt;td>&lt;code>DownloadInstaller&lt;/code>&lt;/td>
-&lt;td>bool&lt;/td>
-&lt;td>whether to download additional not packaged installer files&lt;/td>
+&lt;td style="text-align: left">&lt;code>DownloadInstaller&lt;/code>&lt;/td>
+&lt;td style="text-align: left">bool&lt;/td>
+&lt;td style="text-align: left">whether to download additional not packaged installer files&lt;/td>
 &lt;/tr>
 &lt;tr>
-&lt;td>&lt;code>FilterWithDeps&lt;/code>&lt;/td>
-&lt;td>bool&lt;/td>
-&lt;td>when filtering, include &lt;a href="https://www.aptly.info/doc/feature/dependencies">dependencies&lt;/a> of matching packages as well&lt;/td>
+&lt;td style="text-align: left">&lt;code>FilterWithDeps&lt;/code>&lt;/td>
+&lt;td style="text-align: left">bool&lt;/td>
+&lt;td style="text-align: left">when filtering, include &lt;a href="https://www.aptly.info/doc/feature/dependencies">dependencies&lt;/a> of matching packages as well&lt;/td>
 &lt;/tr>
 &lt;tr>
-&lt;td>&lt;code>SkipComponentCheck&lt;/code>&lt;/td>
-&lt;td>bool&lt;/td>
-&lt;td>whether to skip if the given components are in the &lt;code>Release&lt;/code> file&lt;/td>
+&lt;td style="text-align: left">&lt;code>SkipComponentCheck&lt;/code>&lt;/td>
+&lt;td style="text-align: left">bool&lt;/td>
+&lt;td style="text-align: left">whether to skip if the given components are in the &lt;code>Release&lt;/code> file&lt;/td>
 &lt;/tr>
 &lt;tr>
-&lt;td>&lt;code>SkipArchitectureCheck&lt;/code>&lt;/td>
-&lt;td>bool&lt;/td>
-&lt;td>whether to skip if the given architectures are in the &lt;code>Release&lt;/code> file&lt;/td>
+&lt;td style="text-align: left">&lt;code>SkipArchitectureCheck&lt;/code>&lt;/td>
+&lt;td style="text-align: left">bool&lt;/td>
+&lt;td style="text-align: left">whether to skip if the given architectures are in the &lt;code>Release&lt;/code> file&lt;/td>
 &lt;/tr>
 &lt;tr>
-&lt;td>&lt;code>IgnoreSignatures&lt;/code>&lt;/td>
-&lt;td>bool&lt;/td>
-&lt;td>whether to skip the verification of &lt;code>Release&lt;/code> file signatures&lt;/td>
+&lt;td style="text-align: left">&lt;code>IgnoreSignatures&lt;/code>&lt;/td>
+&lt;td style="text-align: left">bool&lt;/td>
+&lt;td style="text-align: left">whether to skip the verification of &lt;code>Release&lt;/code> file signatures&lt;/td>
 &lt;/tr>
 &lt;tr>
-&lt;td>&lt;code>ForceUpdate&lt;/code>&lt;/td>
-&lt;td>bool&lt;/td>
-&lt;td>whether to force a mirror update even if another process is already updating the mirror (use with caution!)&lt;/td>
+&lt;td style="text-align: left">&lt;code>ForceUpdate&lt;/code>&lt;/td>
+&lt;td style="text-align: left">bool&lt;/td>
+&lt;td style="text-align: left">whether to force a mirror update even if another process is already updating the mirror (use with caution!)&lt;/td>
 &lt;/tr>
 &lt;tr>
-&lt;td>&lt;code>SkipExistingPackages&lt;/code>&lt;/td>
-&lt;td>bool&lt;/td>
-&lt;td>whether to not download already downloaded packages&lt;/td>
+&lt;td style="text-align: left">&lt;code>SkipExistingPackages&lt;/code>&lt;/td>
+&lt;td style="text-align: left">bool&lt;/td>
+&lt;td style="text-align: left">whether to not download already downloaded packages&lt;/td>
 &lt;/tr>
 &lt;/tbody>
 &lt;/table>
@@ -274,14 +274,14 @@ $ curl http://localhost:8080/api/mirrors/aptly-mirror/packages?format=details
 &lt;table>
 &lt;thead>
 &lt;tr>
-&lt;th>Code&lt;/th>
-&lt;th>Description&lt;/th>
+&lt;th style="text-align: left">Code&lt;/th>
+&lt;th style="text-align: left">Description&lt;/th>
 &lt;/tr>
 &lt;/thead>
 &lt;tbody>
 &lt;tr>
-&lt;td>404&lt;/td>
-&lt;td>mirror with such name doesn&amp;rsquo;t exist&lt;/td>
+&lt;td style="text-align: left">404&lt;/td>
+&lt;td style="text-align: left">mirror with such name doesn&amp;rsquo;t exist&lt;/td>
 &lt;/tr>
 &lt;/tbody>
 &lt;/table>
@@ -305,18 +305,18 @@ to delete it by default, but that can be overridden with &lt;code>force&lt;/code
 &lt;table>
 &lt;thead>
 &lt;tr>
-&lt;th>Name&lt;/th>
-&lt;th>Description&lt;/th>
+&lt;th style="text-align: left">Name&lt;/th>
+&lt;th style="text-align: left">Description&lt;/th>
 &lt;/tr>
 &lt;/thead>
 &lt;tbody>
 &lt;tr>
-&lt;td>&lt;code>force&lt;/code>&lt;/td>
-&lt;td>when value is set to &lt;code>1&lt;/code>, delete the mirror even if it has snapshots&lt;/td>
+&lt;td style="text-align: left">&lt;code>force&lt;/code>&lt;/td>
+&lt;td style="text-align: left">when value is set to &lt;code>1&lt;/code>, delete the mirror even if it has snapshots&lt;/td>
 &lt;/tr>
 &lt;tr>
-&lt;td>&lt;code>_async&lt;/code>&lt;/td>
-&lt;td>when value is set to &lt;code>1&lt;/code>, run task in background, and return a task ID which can be queried via the &lt;code>tasks&lt;/code> api.&lt;/td>
+&lt;td style="text-align: left">&lt;code>_async&lt;/code>&lt;/td>
+&lt;td style="text-align: left">when value is set to &lt;code>1&lt;/code>, run task in background, and return a task ID which can be queried via the &lt;code>tasks&lt;/code> api.&lt;/td>
 &lt;/tr>
 &lt;/tbody>
 &lt;/table>
@@ -324,18 +324,18 @@ to delete it by default, but that can be overridden with &lt;code>force&lt;/code
 &lt;table>
 &lt;thead>
 &lt;tr>
-&lt;th>Code&lt;/th>
-&lt;th>Description&lt;/th>
+&lt;th style="text-align: left">Code&lt;/th>
+&lt;th style="text-align: left">Description&lt;/th>
 &lt;/tr>
 &lt;/thead>
 &lt;tbody>
 &lt;tr>
-&lt;td>404&lt;/td>
-&lt;td>mirror with such name doesn&amp;rsquo;t exist&lt;/td>
+&lt;td style="text-align: left">404&lt;/td>
+&lt;td style="text-align: left">mirror with such name doesn&amp;rsquo;t exist&lt;/td>
 &lt;/tr>
 &lt;tr>
-&lt;td>409&lt;/td>
-&lt;td>mirror can&amp;rsquo;t be dropped (reason in the message)&lt;/td>
+&lt;td style="text-align: left">409&lt;/td>
+&lt;td style="text-align: left">mirror can&amp;rsquo;t be dropped (reason in the message)&lt;/td>
 &lt;/tr>
 &lt;/tbody>
 &lt;/table>
@@ -400,7 +400,7 @@ run, not every time file is signed (which is the case for &lt;code>gpg&lt;/code>
 &lt;li>&lt;code>gpg&lt;/code> implementation might have issue with GnuPG 2.1 (it works fine with 1.x version)&lt;/li>
 &lt;li>&lt;code>internal&lt;/code> implementation only supports &amp;ldquo;classic&amp;rdquo; format of keyrings&lt;/li>
 &lt;/ul>
-&lt;p>PGP provider could be configured via &lt;a href="https://www.aptly.info/doc/aptly/flags">flags&lt;/a> (&lt;code>-gpg-provider=[gpg|internal]&lt;/code>) or via &lt;code>gpgProvider&lt;/code> &lt;a href="https://www.aptly.info/doc/configuration">configuration setting&lt;/a>.&lt;/p></description></item><item><title>Filesystem Publishing</title><link>https://www.aptly.info/doc/feature/filesystem/</link><pubDate>Thu, 06 Jul 2017 11:17:38 UTC</pubDate><author>Andrey Smirnov</author><guid>https://www.aptly.info/doc/feature/filesystem/</guid><description>&lt;h2 id="custom-filesystem-publishing--hahahugoshortcode76s0hbhb">Custom Filesystem Publishing &lt;span class="label label-primary">1.1.0&lt;/span>
+&lt;p>PGP provider could be configured via &lt;a href="https://www.aptly.info/doc/aptly/flags">flags&lt;/a> (&lt;code>-gpg-provider=[gpg|internal]&lt;/code>) or via &lt;code>gpgProvider&lt;/code> &lt;a href="https://www.aptly.info/doc/configuration">configuration setting&lt;/a>.&lt;/p></description></item><item><title>Filesystem Publishing</title><link>https://www.aptly.info/doc/feature/filesystem/</link><pubDate>Thu, 06 Jul 2017 11:17:38 UTC</pubDate><author>Andrey Smirnov</author><guid>https://www.aptly.info/doc/feature/filesystem/</guid><description>&lt;h2 id="custom-filesystem-publishing--hahahugoshortcode96s0hbhb">Custom Filesystem Publishing &lt;span class="label label-primary">1.1.0&lt;/span>
 &lt;/h2>
 &lt;p>aptly defaults to publish to a single publish directory under &lt;code>~/.aptly/public&lt;/code>. For
 a more advanced publishing strategy, you can define one or more filesystem endpoints in the
