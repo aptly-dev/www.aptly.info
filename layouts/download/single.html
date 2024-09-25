@@ -36,7 +36,7 @@
     <h3>CI Builds for Debian</h3>
     <p>If you would like to use the CI Builds (formerly known as nightly) to test the latest development version of aptly, add following line
       to <code>/etc/apt/sources.list</code> instead:
-    <pre class="code">deb [signed-by=/etc/apt/keyrings/aptly.gpg] http://repo.aptly.info/ci <i>DIST</i> main</pre>
+    <pre class="code">deb [signed-by=/etc/apt/keyrings/aptly.asc] http://repo.aptly.info/ci <i>DIST</i> main</pre>
     Where <i>DIST</i> needs to be changed to the distribution: <i>buster</i> / <i>bullseye</i> / <i>bookworm</i> (Debian) or <i>focal</i> / <i>jammy</i> / <i>noble</i> (Ubuntu).
     </p>
 
