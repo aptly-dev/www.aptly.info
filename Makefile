@@ -1,28 +1,16 @@
-BRANCH := $(shell git rev-parse --abbrev-ref HEAD)
 
-ifeq ($(BRANCH),master)
-DESTINATION = s3://www.aptly.info/
-else
-ifeq ($(TRAVIS_PULL_REQUEST),false)
-DESTINATION = s3://www.aptly.info/
-else
-DESTINATION = s3://beta.aptly.info/
-endif
-endif
+# Self-documenting Makefile
+# https://marmelab.com/blog/2016/02/29/auto-documented-makefile.html
+help:  ## Print this help
+	@grep -E '^[a-zA-Z][a-zA-Z0-9_-]*:.*?## .*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
 
-all: prepare deploy
+serve:   ## Run hugo server (live reload)
+	hugo serve --bind 0.0.0.0
 
-env:
-	virtualenv env
-	env/bin/pip install s3cmd
+docker-image:  ## Build aptly-www docker image
+	@docker build . -t aptly-www
 
-prepare: env
+docker-serve:  ## Run hugo server (live reload) in docker on http://localhost:1313
+	@docker run -it --rm -p 1313:1313 -v ${PWD}:/work aptly-www /work/docker-wrapper serve
 
-	go install github.com/gohugoio/hugo@latest
 
-links:
-	linkchecker http://localhost:1313/
-
-deploy:
-	hugo
-	[ -z "$$AWS_ACCESS_KEY_ID" ] || env/bin/s3cmd sync -c /dev/null --acl-public public/ $(DESTINATION)
