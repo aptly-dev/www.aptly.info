@@ -1,7 +1,5 @@
 ---
-date: "2014-02-08T11:17:38Z"
 title: "Swagger API"
-layout: doc/swagger
 menu:
     doc:
         parent: API
@@ -12,3 +10,19 @@ Swagger API
 ----------------
 
 <div id="swagger-ui"></div>
+<script>
+        window.onload = function() {
+        const ui = SwaggerUIBundle({
+            url: "/swagger.json",
+            dom_id: '#swagger-ui',
+            presets: [
+              SwaggerUIBundle.presets.apis,
+              SwaggerUIStandalonePreset.slice(1) // remote topbar
+            ],
+            layout: "StandaloneLayout",
+            supportedSubmitMethods: [],
+            onComplete: () => { }
+        });
+        window.ui = ui;
+    };
+</script>
