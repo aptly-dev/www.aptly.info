@@ -1,0 +1,11 @@
+#!/bin/sh -e
+
+usermod -u `stat -c %u /work` aptly >/dev/null
+
+if [ -z "$@" ]; then
+    echo Error: no make target specified
+    exit 1
+fi
+
+cd /work
+su aptly -c "make $@"
