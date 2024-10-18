@@ -28,6 +28,7 @@ JSON body params:
  `Comment`                 | string              | text describing local repository, for the user
  `DefaultDistribution`     | string              | default distribution when publishing from this local repo
  `DefaultComponent`        | string              | default component when publishing from this local repo
+ `FromSnapshot`            | string              | snapshot name to create repo from
 
 HTTP Errors:
 
