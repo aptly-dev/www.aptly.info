@@ -1,4 +1,4 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Tutorials on aptly - Debian repository management tool</title><generator uri="https://hugo.spf13.com">Hugo</generator><link>https://www.aptly.info/tutorial/</link><language>en-us</language><author>Andrey Smirnov</author><updated>Fri, 10 Oct 2014 23:30:00 UTC</updated><item><title>Managing repositories of your packages</title><link>https://www.aptly.info/tutorial/repo/</link><pubDate>Fri, 10 Oct 2014 23:30:00 UTC</pubDate><author>Andrey Smirnov</author><guid>https://www.aptly.info/tutorial/repo/</guid><description>&lt;h2 id="managing-repositories-of-your-packages">Managing repositories of your packages&lt;/h2>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Tutorials on aptly - Debian repository management tool</title><generator uri="https://hugo.spf13.com">Hugo</generator><link>https://www.aptly.info/tutorial/</link><language>en-us</language><updated>Fri, 10 Oct 2014 23:30:00 UTC</updated><item><title>Managing repositories of your packages</title><link>https://www.aptly.info/tutorial/repo/</link><pubDate>Fri, 10 Oct 2014 23:30:00 UTC</pubDate><guid>https://www.aptly.info/tutorial/repo/</guid><description>&lt;h2 id="managing-repositories-of-your-packages">Managing repositories of your packages&lt;/h2>
 &lt;p class="lead">Goal: create repository with your own software as .deb packages,
 publish it to Amazon S3, handle updates.&lt;/p>
 &lt;p>In this tutorial I would describe how do I manage &lt;em>aptly&lt;/em> releases in repo.aptly.info repository using &lt;em>aptly&lt;/em> itself.&lt;/p>
@@ -131,7 +131,7 @@ $ aptly publish switch squeeze s3:repo.aptly.info: aptly-0.9
 ...
 &lt;/pre>
 &lt;p>Published repositories are referenced by distribution name (&lt;code>squeeze&lt;/code> in our case, taken from local repo defaults) and
-prefix which includes storage engine (&lt;code>s3:repo.aptly.info:&lt;/code>).&lt;/p></description></item><item><title>Pulling new versions of packages</title><link>https://www.aptly.info/tutorial/pull/</link><pubDate>Fri, 10 Oct 2014 23:20:00 UTC</pubDate><author>Andrey Smirnov</author><guid>https://www.aptly.info/tutorial/pull/</guid><description>&lt;h2 id="pulling-new-versions-of-packages">Pulling new versions of packages&lt;/h2>
+prefix which includes storage engine (&lt;code>s3:repo.aptly.info:&lt;/code>).&lt;/p></description></item><item><title>Pulling new versions of packages</title><link>https://www.aptly.info/tutorial/pull/</link><pubDate>Fri, 10 Oct 2014 23:20:00 UTC</pubDate><guid>https://www.aptly.info/tutorial/pull/</guid><description>&lt;h2 id="pulling-new-versions-of-packages">Pulling new versions of packages&lt;/h2>
 &lt;p class="lead">Goal: pull new version of nginx package from backports, add aptly
 package from 3rd party repository.&lt;/p>
 &lt;p>Let&amp;rsquo;s start with mirrors created in &lt;a href="https://www.aptly.info/tutorial/mirror/">first tutorial&lt;/a>: &lt;code>wheezy-main&lt;/code>,
@@ -304,7 +304,7 @@ deb http://debian:8080/testing/ wheezy main
 &lt;p>After successful round of testing, I can use &lt;code>aptly publish switch&lt;/code> to switch by stable published repository
 to the new snapshot &lt;code>wheezy-main-nginx-aptly-20141009&lt;/code> and update my target machines.&lt;/p>
 &lt;p>If I generate the graph, it would look like that:&lt;/p>
-&lt;img class="img-responsive" src="../../img/aptly-graph3.png"></description></item><item><title>Mirroring with snapshots</title><link>https://www.aptly.info/tutorial/mirror/</link><pubDate>Thu, 09 Oct 2014 23:20:00 UTC</pubDate><author>Andrey Smirnov</author><guid>https://www.aptly.info/tutorial/mirror/</guid><description>&lt;h2 id="mirroring-with-snapshots">Mirroring with snapshots&lt;/h2>
+&lt;img class="img-responsive" src="../../img/aptly-graph3.png"></description></item><item><title>Mirroring with snapshots</title><link>https://www.aptly.info/tutorial/mirror/</link><pubDate>Thu, 09 Oct 2014 23:20:00 UTC</pubDate><guid>https://www.aptly.info/tutorial/mirror/</guid><description>&lt;h2 id="mirroring-with-snapshots">Mirroring with snapshots&lt;/h2>
 &lt;p class="lead">Goal: build mirror of Debian wheezy, with security updates incorporated,
 done using snapshots to make package installation consistent on all the hosts.&lt;/p>
 &lt;h3 id="preparation">Preparation&lt;/h3>
