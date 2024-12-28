@@ -2,20 +2,16 @@
 <!-- Download -->
 <section class="primary-content">
   <div class="container">
-    <h2>Currently released aptly version is <span class="text-danger">{{ .Params.version }}</span> (<a
-        href="https://github.com/aptly-dev/aptly/releases/tag/v{{ .Params.version }}">what's new?</a>)</h2>
-    {{ .Content }}
-  </div>
-</section>
-<section class="note">
-  <div class="container">
-    <h2>aptly installation</h2>
+    <h2>Install Aptly {{ .Params.version }}</h2>
     <h3>Debian / Ubuntu</h3>
     <p>aptly package is available in <a href="https://packages.debian.org/search?searchon=names&keywords=aptly" target="_blank">Debian </a> as well as <a href="http://packages.ubuntu.com/search?suite=all&searchon=names&keywords=aptly" target="_blank">Ubuntu</a>. </p>
-    <p>If you would like to install a upstream release of aptly with a different version than then Debian / Ubuntu package, aptly can be installed
-      by adding a new repository to <code>/etc/apt/sources.list.d</code>:</p>
-    <pre class="code">$ echo "deb [signed-by=/etc/apt/keyrings/aptly.asc] http://repo.aptly.info/ squeeze main" | sudo tee /etc/apt/sources.list.d/aptly.list</pre>
-    <p><b>And importing key that is used to sign the release: </b></p>
+    <p>If you would like to install a upstream release of aptly with a different version than then Debian / Ubuntu package, aptly can be installed by adding a new repository to <code>/etc/apt/sources.list.d/aptly.list</code>:</p>
+    <pre class="code">deb [signed-by=/etc/apt/keyrings/aptly.asc] http://repo.aptly.info/release <i>DIST</i> main</pre>
+    <p>
+    Where <i>DIST</i> needs to be changed to the distribution: <i>buster</i> / <i>bullseye</i> / <i>bookworm</i> (Debian) or <i>focal</i> / <i>jammy</i> / <i>noble</i> (Ubuntu).
+    </p>
+
+    <p>Then, import the GPG key as follows:</p>
 
     <p>For releases older than Debian 12 and Ubuntu 22.04, create the directory first:</p>
     <pre class="code">$ sudo mkdir -p /etc/apt/keyrings; sudo chmod 755 /etc/apt/keyrings</pre>
@@ -26,9 +22,6 @@
     <p>After that you can install aptly as any other software package:</p>
 
     <pre class="code"># apt-get update && apt-get install aptly</pre>
-
-    <p>Please don't worry about <code>squeeze</code> part in repo name: aptly package should work on Debian squeeze+,
-      Ubuntu 10.0+. Package contains aptly binary, man page and bash completion.</p>
 
     <h3>CI Builds for Debian</h3>
     <p>If you would like to use the CI Builds (formerly known as nightly) to test the latest development version of aptly (unstable!), use the following APT source:
@@ -45,46 +38,62 @@
       FreeBSD are available.</p>
     <div class="row text-center">
       <div class="col-md-4">
-        <img src="{{ "/img/os_icons/debian.png" | relURL }}" alt="Debian/Ubuntu" class="download-os-icon">
-        Linux (Debian, Ubuntu, RedHat, Centos, ...) <br />
-        <a href="https://github.com/aptly-dev/aptly/releases/download/v{{ .Params.version }}/aptly_{{ .Params.version }}_linux_386.tar.gz"
-          class="btn btn-default">32-bit</a>
-        <a href="https://github.com/aptly-dev/aptly/releases/download/v{{ .Params.version }}/aptly_{{ .Params.version }}_linux_amd64.tar.gz"
-          class="btn btn-default">64-bit</a>
+        <img src="{{ "/img/os_icons/1200px-Tux.svg.png" | relURL }}" alt="Linux" class="download-os-icon">
+        Generic Linux <br />
+        <a href="https://github.com/aptly-dev/aptly/releases/download/v{{ .Params.version }}/aptly_{{ .Params.version }}_linux_amd64.zip"
+          class="btn btn-default">AMD64</a>
+        <a href="https://github.com/aptly-dev/aptly/releases/download/v{{ .Params.version }}/aptly_{{ .Params.version }}_linux_arm64.zip"
+          class="btn btn-default">ARM64</a>
+        <br/>
+        <a href="https://github.com/aptly-dev/aptly/releases/download/v{{ .Params.version }}/aptly_{{ .Params.version }}_linux_386.zip"
+          class="btn btn-default">386</a>
+        <a href="https://github.com/aptly-dev/aptly/releases/download/v{{ .Params.version }}/aptly_{{ .Params.version }}_linux_arm.zip"
+          class="btn btn-default">ARM32</a>
       </div>
       <div class="col-md-4">
         <img src="{{ "/img/os_icons/freebsd.png" | relURL }}" alt="FreeBSD" class="download-os-icon">
         FreeBSD <span class="small">9.2+</span><br />
         <a href="https://github.com/aptly-dev/aptly/releases/download/v{{ .Params.version }}/aptly_{{ .Params.version }}_freebsd_386.zip"
-          class="btn btn-default">32-bit</a>
+          class="btn btn-default">AMD64</a>
         <a href="https://github.com/aptly-dev/aptly/releases/download/v{{ .Params.version }}/aptly_{{ .Params.version }}_freebsd_amd64.zip"
-          class="btn btn-default">64-bit</a>
+          class="btn btn-default">ARM64</a>
+        <br/>
+        <a href="https://github.com/aptly-dev/aptly/releases/download/v{{ .Params.version }}/aptly_{{ .Params.version }}_freebsd_386.zip"
+          class="btn btn-default">386</a>
+        <a href="https://github.com/aptly-dev/aptly/releases/download/v{{ .Params.version }}/aptly_{{ .Params.version }}_freebsd_arm.zip"
+          class="btn btn-default">ARM32</a>
       </div>
       <div class="col-md-4">
         <img src="{{ "/img/os_icons/osx.png" | relURL }}" alt="Mac OS X" class="download-os-icon">
         Mac OS X <span class="small">10.9</span><br />
+        <a href="https://github.com/aptly-dev/aptly/releases/download/v{{ .Params.version }}/aptly_{{ .Params.version }}_darwin_arm64.zip"
+          class="btn btn-default">ARM64</a>
         <a href="https://github.com/aptly-dev/aptly/releases/download/v{{ .Params.version }}/aptly_{{ .Params.version }}_darwin_amd64.zip"
-          class="btn btn-default">64-bit</a>
+          class="btn btn-default">AMD64</a>
       </div>
     </div>
-    <p>Download archive, it contains binary executable:
+    <br/>
+    <p>The archive contains the binary executable, man page and shell completion (bash, zsh):
 
-      <pre class="code">$ tar xzf aptly_{{ .Params.version }}_linux_amd64.tar.gz
+      <pre class="code">$ unzip aptly_{{ .Params.version }}_linux_amd64.zip
+Archive:  aptly_{{ .Params.version }}_linux_amd64.zip
+   creating: aptly_{{ .Params.version }}_linux_amd64/
+   creating: aptly_{{ .Params.version }}_linux_amd64/man/
+ extracting: aptly_{{ .Params.version }}_linux_amd64/man/aptly.1.gz
+  inflating: aptly_{{ .Params.version }}_linux_amd64/README.rst
+  inflating: aptly_{{ .Params.version }}_linux_amd64/LICENSE
+  inflating: aptly_{{ .Params.version }}_linux_amd64/AUTHORS
+   creating: aptly_{{ .Params.version }}_linux_amd64/completion/
+   creating: aptly_{{ .Params.version }}_linux_amd64/completion/bash_completion.d/
+  inflating: aptly_{{ .Params.version }}_linux_amd64/completion/bash_completion.d/aptly
+   creating: aptly_{{ .Params.version }}_linux_amd64/completion/zsh/
+   creating: aptly_{{ .Params.version }}_linux_amd64/completion/zsh/vendor-completions/
+  inflating: aptly_{{ .Params.version }}_linux_amd64/completion/zsh/vendor-completions/_aptly
+  inflating: aptly_{{ .Params.version }}_linux_amd64/aptly
+
 $ aptly_{{ .Params.version }}_linux_amd64/aptly version
-aptly version: {{.Params.version }}</pre>
-
-      <p>Bash completion &amp; manual page would be part of the archive as well.</p>
-
-      <p>If you have Go environment set up (go 1.10+ required), you can build aptly from <strong>source</strong> by
-        cloning it and building:</p>
-
-      <pre class="code">$ mkdir -p $GOPATH/src/github.com/aptly-dev/aptly
-$ git clone https://github.com/aptly-dev/aptly $GOPATH/src/github.com/aptly-dev/aptly
-$ cd $GOPATH/src/github.com/aptly-dev/aptly
-$ make install
-# aptly binary would be built in $GOPATH/bin/
-$ aptly
-</pre>
+aptly version: {{ .Params.version }}
+      </pre>
   </div>
 </section>
 {{ template "partials/footer.html" . }}
