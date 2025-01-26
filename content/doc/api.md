@@ -10,10 +10,8 @@ API
 ---
 
 <div class="alert alert-warning alert-note"><strong>Note:</strong>
-HTTP REST API is not complete yet (mirroring support not implemented).
-API service and CLI tool could
-be used from the same aptly root (to enable concurrent CLI and API usage,
-add <code>-no-lock</code> flag to <code>aptly api serve</code> command).</div>
+This API documentaiton is not maintained anymore, please consult the <a href="/doc/api/swagger/">swagger documentation</a>.
+</div>
 
 #### Why?
 
