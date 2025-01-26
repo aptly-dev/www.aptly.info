@@ -33,7 +33,7 @@ window.onload = function() {
           SwaggerUIStandalonePreset.slice(1) // remove topbar
         ],
         layout: "StandaloneLayout",
-        supportedSubmitMethods: [],
+        <!--supportedSubmitMethods: [],-->
         onComplete: () => { }
     });
     setTimeout(collapseAll, 50);
