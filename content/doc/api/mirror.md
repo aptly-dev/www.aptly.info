@@ -3,7 +3,7 @@ date: "2023-03-09T11:17:38Z"
 title: "Mirrors API"
 menu:
     doc:
-        parent: API
+        parent: Legacy API
         weight: 10
 ---
 

@@ -1,6 +1,6 @@
 ---
 date: "2015-02-03T11:17:38Z"
-title: API
+title: Legacy API
 menu:
     doc:
         weight: 105
