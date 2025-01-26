@@ -18,16 +18,18 @@
   </head>
   <body>
     <header id="page-header">
-      <div class="container">
-        {{ template "partials/nav.html" . }}
-        <div class="row">
-          <div class="col-md-6 col-md-offset-3 text-center">
-            <a class="brand" href="{{ "/" | relURL }}">
-              <i class="brand-logo"></i>
-              <span class="brand-name">aptly</span>
-            </a>
-          </div>
+      <div style="display: flex; align-items: end;">
+        <div class="text-center" style="font-size: 9px;">
+          <a class="brand" href="{{ "/" | relURL }}">
+            <i class="brand-logo"></i>
+            <span class="brand-name">aptly</span>
+          </a>
         </div>
+        <div style="flex-grow: 1">
+          {{ template "partials/nav.html" . }}
+        </div>
+      </div>
+      <div class="container">
       {{ if eq .RelPermalink ("/" | relURL) }}
         <div class="row">
           <div class="col-md-6 col-md-offset-3 text-center">

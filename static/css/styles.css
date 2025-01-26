@@ -6447,7 +6447,10 @@ fieldset[disabled] .source-buttons .btn-primary.active {
 }
 #page-header {
   position: relative;
-  padding: 0 0 65px;
+  /*padding: 0 0 65px;*/
+  padding-left: 20em;
+  padding-top: 1em;
+  padding-right: 20em;
 }
 #page-header .container {
   color: #333;
