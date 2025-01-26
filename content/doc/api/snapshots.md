@@ -3,7 +3,7 @@ date: "2014-02-08T11:17:38Z"
 title: "Snapshot API"
 menu:
     doc:
-        parent: API
+        parent: Legacy API
         weight: 30
 ---
 
@@ -256,7 +256,7 @@ JSON body params:
  Name                      | Type                | Description
 ---------------------------|---------------------|-------------------------------
  `Destination`             | string              | Name for the new snapshot
- `Sources`                 | []string            | Names of the source snapshots 
+ `Sources`                 | []string            | Names of the source snapshots
 
 Query params:
 
