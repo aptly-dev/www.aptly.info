@@ -18,6 +18,7 @@
   </head>
   <body>
     <header id="page-header">
+      <div class="container">
       <div style="display: flex; align-items: end;">
         <div class="text-center" style="font-size: 9px;">
           <a class="brand" href="{{ "/" | relURL }}">
@@ -28,6 +29,7 @@
         <div style="flex-grow: 1">
           {{ template "partials/nav.html" . }}
         </div>
+      </div>
       </div>
       <div class="container">
       {{ if eq .RelPermalink ("/" | relURL) }}
