@@ -28,13 +28,16 @@ window.onload = function() {
     swagger = SwaggerUIBundle({
         url: "/swagger/aptly_" + version.value + ".json",
         dom_id: '#swagger-ui',
+        servers: [{ url: '/api' }],
         presets: [
           SwaggerUIBundle.presets.apis,
           SwaggerUIStandalonePreset.slice(1) // remove topbar
         ],
         layout: "StandaloneLayout",
         <!--supportedSubmitMethods: [],-->
-        onComplete: () => { }
+        onComplete: () => {
+            swagger.setHost('www.google.com');
+        }
     });
     setTimeout(collapseAll, 50);
 };
