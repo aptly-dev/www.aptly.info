@@ -1,0 +1,90 @@
+/*html body section.documentation div.container div.row div.col-md-9.col-sm-9.col-xs-9 div#swagger-ui section.swagger-ui.swagger-container div.swagger-ui div div.information-container.wrapper section.block.col-12 div div.info hgroup.main {
+    display: none
+}*/
+html body section.documentation div.container div.row div.col-md-9.col-sm-9.col-xs-9 div#swagger-ui section.swagger-ui.swagger-container div.swagger-ui div div.wrapper section.block.col-12.block-desktop.col-12-desktop div span div.opblock-tag-section.is-open div.no-margin div.operation-tag-content span div#operations-Files-get_api_files.opblock.opblock-get div.opblock-summary.opblock-summary-get button.opblock-summary-control div.opblock-summary-path-description-wrapper div.opblock-summary-description {
+    margin-left: auto;
+    margin-right: 2em;
+    font-weight: bold;
+    font-size: 17pt;
+}
+
+/* no version */
+.swagger-ui .info .title span {
+    display: none;
+}
+
+.swagger-ui h2 {
+    text-transform: none;
+}
+
+.swagger-ui h3 {
+    text-transform: none;
+}
+
+/* no json link */
+.swagger-ui a.link {
+    display: none;
+}
+
+/* spacing */
+.swagger-ui .info {
+    margin: 0px !important;
+    padding-bottom: 2em;
+}
+
+/* API Summary */
+.swagger-ui .opblock-summary-description {
+    flex: 0 0 auto !important;
+    margin-left: auto !important;
+    margin-right: 2em;
+    font-weight: bold;
+    font-size: 16pt !important;
+}
+
+/* Group Spacing */
+.swagger-ui .opblock-tag-section {
+    padding-bottom: 40px !important;
+}
+
+/* Tag Group */
+.swagger-ui .opblock-tag-section > .opblock-tag > a {
+    color: grey !important;
+    align-self: flex-start;
+    font-size: 14pt;
+    width: 7em;
+}
+
+/* Group Heading */
+.swagger-ui .opblock-tag-section .opblock-tag .markdown > h1 {
+    font-size: 14pt;
+    margin-top: 0px;
+}
+
+/* Group Description */
+.swagger-ui .opblock-tag-section .opblock-tag .markdown > div {
+    font-size: 12pt;
+}
+
+/* Show Tag Group description only if opened */
+.swagger-ui .opblock-tag-section:not(.is-open) .opblock-tag .markdown > div {
+    display: none;
+}
+
+/* Keep open button on top */
+.swagger-ui .expand-operation {
+    align-self: flex-start;
+}
+
+#swagger-ui {
+    padding-bottom: 112px;
+}
+
+
+/* version dropdown */
+.version-select {
+  z-index: 10;
+  position: relative;
+  top: 2em;
+  right: 2em;
+  text-align: end;
+}
