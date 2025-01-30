@@ -29,6 +29,7 @@ Docker:
 With configuration management systems:
 
 - [Ansible role](https://github.com/aioue/ansible-role-aptly) by Tom Paine
+- [Ansible role](https://github.com/hetznercloud/ansible-role-aptly) by Hetzner Cloud
 - [Chef cookbook](https://github.com/hw-cookbooks/aptly) by Aaron Baer
 (Heavy Water Operations, LLC)
 - [Puppet module](https://github.com/alphagov/puppet-aptly) by
