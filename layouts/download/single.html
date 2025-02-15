@@ -19,9 +19,14 @@
     <p>Download and install key:</p>
     <pre class="code">$ wget -O /etc/apt/keyrings/aptly.asc https://www.aptly.info/pubkey.txt</pre>
 
-    <p>After that you can install aptly as any other software package:</p>
+    <p>Update apt database:</p>
+    <pre class="code"># apt-get update</pre>
 
-    <pre class="code"># apt-get update && apt-get install aptly</pre>
+    <p>Install aptly (command):</p>
+    <pre class="code"># apt-get install aptly</pre>
+
+    <p>Install aptly-api (optional: REST API server, systemd service):</p>
+    <pre class="code"># apt-get install aptly-api</pre>
 
     <h3>CI Builds for Debian</h3>
     <p>If you would like to use the CI Builds (formerly known as nightly) to test the latest development version of aptly (unstable!), use the following APT source:
