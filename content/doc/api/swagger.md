@@ -45,6 +45,7 @@ window.onload = function() {
 <div class="version-select">
     Version:
     <select id="aptly-version" onChange="changeVersion(event)">
+       <option>1.6.1</option>
        <option>1.6.0</option>
     </select>
 </div>
