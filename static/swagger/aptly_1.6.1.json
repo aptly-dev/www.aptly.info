@@ -7,7 +7,7 @@
             "name": "Aptly",
             "url": "http://github.com/aptly-dev/aptly"
         },
-        "version": "1.6.1+20250215190859.9f6bcf8d"
+        "version": "1.6.1"
     },
     "paths": {
         "/api/db/cleanup": {
@@ -348,6 +348,26 @@
                         "description": "OK",
                         "schema": {
                             "$ref": "#/definitions/api.aptlyStatus"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/metrics": {
+            "get": {
+                "description": "**Get Prometheus Metrics**",
+                "produces": [
+                    "text/plain"
+                ],
+                "tags": [
+                    "Status"
+                ],
+                "summary": "Get Metrics",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "string"
                         }
                     }
                 }
@@ -1645,6 +1665,13 @@
                 "summary": "Update Repository",
                 "parameters": [
                     {
+                        "type": "string",
+                        "description": "Repository name",
+                        "name": "name",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
                         "description": "Parameters",
                         "name": "request",
                         "in": "body",
@@ -1685,6 +1712,13 @@
                 ],
                 "summary": "Delete Repository",
                 "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Repository name",
+                        "name": "name",
+                        "in": "path",
+                        "required": true
+                    },
                     {
                         "type": "boolean",
                         "description": "Run in background and return task object",
@@ -1937,6 +1971,20 @@
                 "summary": "Include Directory",
                 "parameters": [
                     {
+                        "type": "string",
+                        "description": "Repository name",
+                        "name": "name",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "Directory name",
+                        "name": "dir",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
                         "type": "integer",
                         "description": "when value is set to 1, when adding package that conflicts with existing package, remove existing package",
                         "name": "forceReplace",
@@ -1994,6 +2042,27 @@
                 ],
                 "summary": "Include File from Directory",
                 "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Repository name",
+                        "name": "name",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "Directory name",
+                        "name": "dir",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "File name",
+                        "name": "file",
+                        "in": "path",
+                        "required": true
+                    },
                     {
                         "type": "integer",
                         "description": "when value is set to 1, when adding package that conflicts with existing package, remove existing package",
@@ -2054,7 +2123,7 @@
                 "parameters": [
                     {
                         "type": "string",
-                        "description": "Snapshot to search",
+                        "description": "Repository name",
                         "name": "name",
                         "in": "path",
                         "required": true
@@ -2114,6 +2183,13 @@
                 "summary": "Add Packages by Key",
                 "parameters": [
                     {
+                        "type": "string",
+                        "description": "Repository name",
+                        "name": "name",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
                         "description": "Parameters",
                         "name": "request",
                         "in": "body",
@@ -2160,6 +2236,13 @@
                 ],
                 "summary": "Delete Packages by Key",
                 "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Repository name",
+                        "name": "name",
+                        "in": "path",
+                        "required": true
+                    },
                     {
                         "description": "Parameters",
                         "name": "request",
@@ -3156,9 +3239,6 @@
         "/api/{storage}/{pkgPath}": {
             "get": {
                 "description": "If ServeInAPIMode is enabled in aptly config,\nthis api serves a specified package from storage",
-                "produces": [
-                    "application/json"
-                ],
                 "tags": [
                     "Repos"
                 ],
