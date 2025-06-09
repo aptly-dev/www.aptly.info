@@ -8,7 +8,7 @@
     <p>If you would like to install a upstream release of aptly with a different version than then Debian / Ubuntu package, aptly can be installed by adding a new repository to <code>/etc/apt/sources.list.d/aptly.list</code>:</p>
     <pre class="code">deb [signed-by=/etc/apt/keyrings/aptly.asc] http://repo.aptly.info/release <i>DIST</i> main</pre>
     <p>
-    Where <i>DIST</i> needs to be changed to the distribution: <i>buster</i> / <i>bullseye</i> / <i>bookworm</i> (Debian) or <i>focal</i> / <i>jammy</i> / <i>noble</i> (Ubuntu).
+    Where <i>DIST</i> needs to be changed to the distribution: <i>buster</i> / <i>bullseye</i> / <i>bookworm</i> / <i>trixie</i> (Debian) or <i>focal</i> / <i>jammy</i> / <i>noble</i> (Ubuntu).
     </p>
 
     <p>Then, import the GPG key as follows:</p>
@@ -31,7 +31,7 @@
     <h3>CI Builds for Debian</h3>
     <p>If you would like to use the CI Builds (formerly known as nightly) to test the latest development version of aptly (unstable!), use the following APT source:
     <pre class="code">deb [signed-by=/etc/apt/keyrings/aptly.asc] http://repo.aptly.info/ci <i>DIST</i> main</pre>
-    Where <i>DIST</i> needs to be changed to the distribution: <i>buster</i> / <i>bullseye</i> / <i>bookworm</i> (Debian) or <i>focal</i> / <i>jammy</i> / <i>noble</i> (Ubuntu).
+    Where <i>DIST</i> needs to be changed to the distribution: <i>buster</i> / <i>bullseye</i> / <i>bookworm</i> / <i>trixie</i>(Debian) or <i>focal</i> / <i>jammy</i> / <i>noble</i> (Ubuntu).
     </p>
 
     <h3>Mac OS X</h3>
