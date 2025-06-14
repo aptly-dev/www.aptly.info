@@ -6525,7 +6525,7 @@ fieldset[disabled] #page-header .source-buttons .btn-default.active {
 .about,
 .sidebar-overlay {
   position: relative;
-  color: #ffffff;
+/*  color: #ffffff; */
   padding: 25px 0;
 }
 .promo-example {
