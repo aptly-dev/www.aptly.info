@@ -39,9 +39,16 @@ fails, `-force-drop` could be used to drop published repository. This might leav
 some published repository files left under `public/` directory.
 
 Example:
+```bash
+# List all published:
+$ aptly publish list
+Published repositories:
+  * ubuntu-main-local/plucky (origin: Ubuntu) [amd64, i386] publishes {main: [ubuntu-main]: Snapshot from mirror [ubuntu-main]: http://archive.ubuntu.com/ubuntu/ plucky}
 
-    $ aptly publish drop squeeze-backports
-    Removing /var/aptly/public/dists/squeeze-backports...
-    Removing /var/aptly/public/pool/contrib...
+# Can be removed by running:
+$ aptly publish drop plucky ubuntu-main-local
+Removing /var/aptly/public/.../dists/...
+Removing /var/aptly/public/.../pool/...
+```
 
  
