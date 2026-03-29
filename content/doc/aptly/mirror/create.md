@@ -47,6 +47,8 @@ Flags:
     signatures
 -   `-keyring=trustedkeys.gpg`: gpg keyring to use when verifying
     Release file (could be specified multiple times)
+-   `-with-appstream`: download AppStream (DEP-11) metadata
+    (not supported for flat repositories)
 -   `-with-installer`: download additional not packaged installer
     files {{< version "1.4.0" >}}
 -   `-with-sources`: download source packages in addition to
