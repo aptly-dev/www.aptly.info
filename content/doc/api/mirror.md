@@ -34,6 +34,7 @@ JSON body params:
  `DownloadSources`         | bool                | whether to mirror sources
  `DownloadUdebs`           | bool                | whether to mirror .udeb packages (Debian installer support)
  `DownloadInstaller`       | bool                | whether to download additional not packaged installer files
+ `DownloadAppStream`       | bool                | whether to download AppStream (DEP-11) metadata (not supported for flat repositories)
  `FilterWithDeps`          | bool                | when filtering, include [dependencies](/doc/feature/dependencies) of matching packages as well
  `SkipComponentCheck`      | bool                | whether to skip if the given components are in the `Release` file
  `SkipArchitectureCheck`   | bool                | whether to skip if the given architectures are in the `Release` file
@@ -122,6 +123,7 @@ JSON body params:
  `DownloadSources`         | bool                | whether to mirror sources
  `DownloadUdebs`           | bool                | whether to mirror .udeb packages (Debian installer support)
  `DownloadInstaller`       | bool                | whether to download additional not packaged installer files
+ `DownloadAppStream`       | bool                | whether to download AppStream (DEP-11) metadata (not supported for flat repositories)
  `FilterWithDeps`          | bool                | when filtering, include [dependencies](/doc/feature/dependencies) of matching packages as well
  `SkipComponentCheck`      | bool                | whether to skip if the given components are in the `Release` file
  `SkipArchitectureCheck`   | bool                | whether to skip if the given architectures are in the `Release` file

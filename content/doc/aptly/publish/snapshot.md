@@ -149,6 +149,11 @@ Directory structure for published repositories:
                             -   `Packages.gz`
                             -   `Packages.bz2`
                             -   `Release`: used by debian-installer
+                    -   `dep11/`: AppStream (DEP-11) metadata
+                        (generated only if AppStream metadata is available)
+                        -   `Components-amd64.yml.gz`: AppStream catalog for
+                            architecture `amd64`
+                        -   `icons-64x64.tar.gz`: application icons
         -   `pool/`
             -   `main/`: component main
                 -   `m/`
