@@ -15,6 +15,7 @@ Complete solutions:
 André Roth
 - [OpenAPT](https://github.com/allocloud/openapt) by Raphael Medaer and Hubert Lobit (ALLOcloud),
 is a description format for APT repositories and its implementation using aptly.
+- [Jenny](https://github.com/groupe-edf/Jenny) by EDF Group
 
 Vagrant:
 
