@@ -15,7 +15,7 @@ Complete solutions:
 André Roth
 - [OpenAPT](https://github.com/allocloud/openapt) by Raphael Medaer and Hubert Lobit (ALLOcloud),
 is a description format for APT repositories and its implementation using aptly.
-- [Jenny](https://github.com/groupe-edf/Jenny) by EDF Group, 
+- [Jenny](https://github.com/groupe-edf/Jenny) by EDF Group,
 Jenny is a tool to manage Debian package repositories for a Debian-like distribution. It handles incoming packages either built locally or mirrored from external sources, follows them through phases of development (called "environments"), and publishes them as repositories usable by apt and related tools. This tool is actually only in French language.
 
 Vagrant:
