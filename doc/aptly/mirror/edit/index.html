@@ -6,7 +6,8 @@ to include dependencies while filtering, list of architectures to process.</p><p
 packages in the mirror, set to empty to disable filtering</li><li><code>-filter-with-deps</code>: when filtering, include <a href=/doc/feature/dependencies>dependencies</a> of
 matching packages as well</li><li><code>-architectures=</code>: global flag to change architectures list.</li><li><code>-ignore-signatures</code>: disable verification of <code>Release</code> file
 signatures <span class="label label-primary">1.2.0</span></li><li><code>-keyring=trustedkeys.gpg</code>: gpg keyring to use when verifying
-Release file (could be specified multiple times) <span class="label label-primary">1.2.0</span></li><li><code>-with-installer</code>: download additional not packaged installer
+Release file (could be specified multiple times) <span class="label label-primary">1.2.0</span></li><li><code>-with-appstream</code>: download AppStream (DEP-11) metadata
+(not supported for flat repositories)</li><li><code>-with-installer</code>: download additional not packaged installer
 files <span class="label label-primary">1.4.0</span></li><li><code>-with-sources</code>: download source packages in addition to
 binary packages</li><li><code>-with-udebs</code>: download .udeb packages (Debian installer
 support)</li></ul><p>In order to apply new filtering settings, <a href=/doc/aptly/mirror/update/>update</a>

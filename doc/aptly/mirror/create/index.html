@@ -13,7 +13,8 @@ packages in the mirror</li><li><code>-filter-with-deps</code>: when filtering, i
 matching packages as well</li><li><code>-force-components</code>: (only with component list on command line)
 skip check that requested components are listed in <code>Release</code> file</li><li><code>-ignore-signatures</code>: disable verification of <code>Release</code> file
 signatures</li><li><code>-keyring=trustedkeys.gpg</code>: gpg keyring to use when verifying
-Release file (could be specified multiple times)</li><li><code>-with-installer</code>: download additional not packaged installer
+Release file (could be specified multiple times)</li><li><code>-with-appstream</code>: download AppStream (DEP-11) metadata
+(not supported for flat repositories)</li><li><code>-with-installer</code>: download additional not packaged installer
 files <span class="label label-primary">1.4.0</span></li><li><code>-with-sources</code>: download source packages in addition to
 binary packages (could be enabled by default with config option
 <code>downloadSourcePackages</code>)</li><li><code>-with-udebs</code>: download .udeb packages (Debian installer

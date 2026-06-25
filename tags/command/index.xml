@@ -194,6 +194,8 @@ signatures &lt;span class="label label-primary">1.2.0&lt;/span>
 &lt;li>&lt;code>-keyring=trustedkeys.gpg&lt;/code>: gpg keyring to use when verifying
 Release file (could be specified multiple times) &lt;span class="label label-primary">1.2.0&lt;/span>
 &lt;/li>
+&lt;li>&lt;code>-with-appstream&lt;/code>: download AppStream (DEP-11) metadata
+(not supported for flat repositories)&lt;/li>
 &lt;li>&lt;code>-with-installer&lt;/code>: download additional not packaged installer
 files &lt;span class="label label-primary">1.4.0&lt;/span>
 &lt;/li>
@@ -497,6 +499,8 @@ skip check that requested components are listed in &lt;code>Release&lt;/code> fi
 signatures&lt;/li>
 &lt;li>&lt;code>-keyring=trustedkeys.gpg&lt;/code>: gpg keyring to use when verifying
 Release file (could be specified multiple times)&lt;/li>
+&lt;li>&lt;code>-with-appstream&lt;/code>: download AppStream (DEP-11) metadata
+(not supported for flat repositories)&lt;/li>
 &lt;li>&lt;code>-with-installer&lt;/code>: download additional not packaged installer
 files &lt;span class="label label-primary">1.4.0&lt;/span>
 &lt;/li>
