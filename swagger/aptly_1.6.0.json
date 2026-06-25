@@ -252,7 +252,7 @@
         },
         "/api/gpg": {
             "post": {
-                "description": "**Adds GPG keys to aptly keyring**\n\nAdd GPG public keys for veryfing remote repositories for mirroring.",
+                "description": "**Adds GPG keys to aptly keyring**\n\nAdd GPG public keys for verifying remote repositories for mirroring.",
                 "produces": [
                     "application/json"
                 ],
@@ -882,7 +882,7 @@
                 "parameters": [
                     {
                         "type": "string",
-                        "description": "publishing prefix, use `:.` instead of `.` because it is ambigious in URLs",
+                        "description": "publishing prefix, use `:.` instead of `.` because it is ambiguous in URLs",
                         "name": "prefix",
                         "in": "path",
                         "required": true
@@ -3377,7 +3377,7 @@
                     "type": "boolean"
                 },
                 "Keyrings": {
-                    "description": "Gpg keyring(s) for verifing Release file",
+                    "description": "Gpg keyring(s) for verifying Release file",
                     "type": "array",
                     "items": {
                         "type": "string"
@@ -3615,7 +3615,7 @@
                     "example": "stable"
                 },
                 "FromSnapshot": {
-                    "description": "Snapshot name to create repoitory from (optional)",
+                    "description": "Snapshot name to create repository from (optional)",
                     "type": "string",
                     "example": ""
                 },
@@ -3638,7 +3638,7 @@
                     "example": "example repo"
                 },
                 "DefaultComponent": {
-                    "description": "Change Devault Component for publishing",
+                    "description": "Change Default Component for publishing",
                     "type": "string",
                     "example": ""
                 },
@@ -4291,11 +4291,11 @@
     },
     "tags": [
         {
-            "description": "# Manage Local Repositories\n\u003cdiv\u003e\nA local repository is a collection of versionned packages (usually custom packages created internally).\n\nPackages can be added, removed, moved or copied between repos.\n\nLocal repositories can be published (either directly or via snapshot) to be used a APT source on a debian based system.\n\u003c/div\u003e\n\n",
+            "description": "# Manage Local Repositories\n\u003cdiv\u003e\nA local repository is a collection of versioned packages (usually custom packages created internally).\n\nPackages can be added, removed, moved or copied between repos.\n\nLocal repositories can be published (either directly or via snapshot) to be used a APT source on a debian based system.\n\u003c/div\u003e\n\n",
             "name": "Repos"
         },
         {
-            "description": "# Upload Package Files\n\u003cdiv\u003e\n\nIn order to add debian package files to a local repository, files are first uploaded to a temporary directory.\nThen the directory (or a specific file within) is added to a repository. After adding to a repositorty, the directory resp. files are removed bt default.\n\nAll uploaded files are stored under `\u003crootDir\u003e/upload/\u003ctempdir\u003e` directory.\n\nFor concurrent uploads from CI/CD pipelines, make sure the tempdir is unique.\n\n\n\u003c/div\u003e\n",
+            "description": "# Upload Package Files\n\u003cdiv\u003e\n\nIn order to add debian package files to a local repository, files are first uploaded to a temporary directory.\nThen the directory (or a specific file within) is added to a repository. After adding to a repository, the directory resp. files are removed by default.\n\nAll uploaded files are stored under `\u003crootDir\u003e/upload/\u003ctempdir\u003e` directory.\n\nFor concurrent uploads from CI/CD pipelines, make sure the tempdir is unique.\n\n\n\u003c/div\u003e\n",
             "name": "Files"
         },
         {
@@ -4307,11 +4307,11 @@
             "name": "Snapshots"
         },
         {
-            "description": "# Publish Repositories, Snapshots, Mirrors\n\u003cdiv\u003e\n\nPublish snapshot or local repo as Debian repository to be used as APT source on Debian based systems.\n\nThe published repository is signed with the user's GnuPG key.\n\nRepositories can be published to local directories, Amazon S3 buckets, Azure or Swift Storage.\n\n#### GPG Keys\n\nGPG key is required to sign any published repository. The key pari should be generated before publishing.\n\nPubliс part of the key should be exported from your keyring using `gpg --export --armor` and imported on the system which uses a published repository.\n\n#### Parameters\n\nPublish APIs use following convention to identify published repositories: `/api/publish/:prefix/:distribution`.  `:distribution` is distribution name, while `:prefix` is `[\u003cstorage\u003e:]\u003cprefix\u003e` (storage is optional, it defaults to empty string), if publishing prefix contains slashes `/`, they should be replaced with underscores (`_`) and underscores\nshould be replaced with double underscore (`__`). To specify root `:prefix`, use `:.`, as `.` is ambigious in URLs.\n\n\u003c/div\u003e\n",
+            "description": "# Publish Repositories, Snapshots, Mirrors\n\u003cdiv\u003e\n\nPublish snapshot or local repo as Debian repository to be used as APT source on Debian based systems.\n\nThe published repository is signed with the user's GnuPG key.\n\nRepositories can be published to local directories, Amazon S3 buckets, Azure or Swift Storage.\n\n#### GPG Keys\n\nGPG key is required to sign any published repository. The key pair should be generated before publishing.\n\nPubliс part of the key should be exported from your keyring using `gpg --export --armor` and imported on the system which uses a published repository.\n\n#### Parameters\n\nPublish APIs use following convention to identify published repositories: `/api/publish/:prefix/:distribution`.  `:distribution` is distribution name, while `:prefix` is `[\u003cstorage\u003e:]\u003cprefix\u003e` (storage is optional, it defaults to empty string), if publishing prefix contains slashes `/`, they should be replaced with underscores (`_`) and underscores\nshould be replaced with double underscore (`__`). To specify root `:prefix`, use `:.`, as `.` is ambiguous in URLs.\n\n\u003c/div\u003e\n",
             "name": "Publish"
         },
         {
-            "description": "# Search Package Collection\n\u003cdiv\u003e\nPerform operations on the whole collection of packages in apty database.\n\u003c/div\u003e\n\n",
+            "description": "# Search Package Collection\n\u003cdiv\u003e\nPerform operations on the whole collection of packages in aptly database.\n\u003c/div\u003e\n\n",
             "name": "Packages"
         },
         {
