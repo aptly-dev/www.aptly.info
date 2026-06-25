@@ -1,6 +1,6 @@
 ---
-date: 2024-12-25T19:48:07Z
+date: Wed, 24 Jun 2026 20:25:30 +0200
 title: Download
 type: download
-version: 1.6.2
+version: 1.6.3
 ---

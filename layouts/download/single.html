@@ -3,35 +3,34 @@
 <section class="primary-content">
   <div class="container">
     <h2>Install Aptly {{ .Params.version }}</h2>
-    <h3>Debian / Ubuntu</h3>
-    <p>aptly package is available in <a href="https://packages.debian.org/search?searchon=names&keywords=aptly" target="_blank">Debian </a> as well as <a href="http://packages.ubuntu.com/search?suite=all&searchon=names&keywords=aptly" target="_blank">Ubuntu</a>. </p>
-    <p>If you would like to install a upstream release of aptly with a different version than then Debian / Ubuntu package, aptly can be installed by adding a new repository to <code>/etc/apt/sources.list.d/aptly.list</code>:</p>
-    <pre class="code">deb [signed-by=/etc/apt/keyrings/aptly.asc] http://repo.aptly.info/release <i>DIST</i> main</pre>
-    <p>
-    Where <i>DIST</i> needs to be changed to the distribution: <i>buster</i> / <i>bullseye</i> / <i>bookworm</i> / <i>trixie</i> (Debian) or <i>focal</i> / <i>jammy</i> / <i>noble</i> (Ubuntu).
-    </p>
-
-    <p>Then, import the GPG key as follows:</p>
-
+    <h3>Packages for Debian / Ubuntu</h3>
+    <p> Aptly packages are built by the github pipeline for various Debian / Ubuntu distributions and architectures.  </p>
+    <h4>Importing GPG keys</h4>
+    <p>Download and install repo.aptly.ingo GPG keys:</p>
+    <pre class="code">$ sudo wget -O /etc/apt/keyrings/aptly.asc https://www.aptly.info/pubkey.txt</pre>
     <p>For releases older than Debian 12 and Ubuntu 22.04, create the directory first:</p>
     <pre class="code">$ sudo mkdir -p /etc/apt/keyrings; sudo chmod 755 /etc/apt/keyrings</pre>
 
-    <p>Download and install key:</p>
-    <pre class="code">$ wget -O /etc/apt/keyrings/aptly.asc https://www.aptly.info/pubkey.txt</pre>
+    <h4>Adding APT Source</h4>
+    <p>Create new file <code>/etc/apt/sources.list.d/aptly.list</code> with: </p>
+    <pre class="code">deb [signed-by=/etc/apt/keyrings/aptly.asc] http://repo.aptly.info/release <i>DIST</i> main</pre>
 
-    <p>Update apt database:</p>
-    <pre class="code"># apt-get update</pre>
+    <p>Where <i>DIST</i> is one of:</p>
+    <p><b>Debian:</b> <i>bullseye</i> / <i>bookworm</i> / <i><b>trixie</b></i> </p>
+    <p><b>Ubuntu:</b> <i>focal</i> / <i>jammy</i> / <i>noble</i> / <i><b>resolute</b></i></p>
 
-    <p>Install aptly (command):</p>
-    <pre class="code"># apt-get install aptly</pre>
+    <p>For testing CI Builds built from master branch, replace <i>release</i> with <i>ci</i> in the URL.</p>
 
-    <p>Install aptly-api (optional: REST API server, systemd service):</p>
-    <pre class="code"># apt-get install aptly-api</pre>
+    <h4>Install Aptly</h4>
+    <pre class="code">$ sudo apt-get update
+$ sudo apt-get install aptly  # aptly cli
+$ sudo apt-get install aptly-api  # API server, systemd service</pre>
 
-    <h3>CI Builds for Debian</h3>
-    <p>If you would like to use the CI Builds (formerly known as nightly) to test the latest development version of aptly (unstable!), use the following APT source:
-    <pre class="code">deb [signed-by=/etc/apt/keyrings/aptly.asc] http://repo.aptly.info/ci <i>DIST</i> main</pre>
-    Where <i>DIST</i> needs to be changed to the distribution: <i>buster</i> / <i>bullseye</i> / <i>bookworm</i> / <i>trixie</i> (Debian) or <i>focal</i> / <i>jammy</i> / <i>noble</i> (Ubuntu).
+    <h3>Official Debian / Ubuntu Packages</h3>
+    <p>Aptly packageis are available in <a href="https://packages.debian.org/search?searchon=names&keywords=aptly" target="_blank">Debian </a> as well as <a href="http://packages.ubuntu.com/search?suite=all&searchon=names&keywords=aptly" target="_blank">Ubuntu</a>. </p>
+    <p>
+
+    These packages come with bug fixes but do not offer all features, depending on the availability of go dependencies.
     </p>
 
     <h3>Mac OS X</h3>
