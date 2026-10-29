@@ -43,6 +43,8 @@ Flags:
 -   `-component=""`: component name to publish; guessed from original
     repository (if any), or defaults to `main` (for multi-component
     publishing, separate components with commas)
+-   `-codename=""`: value for the `Codename:` field in the Release file;
+    defaults to the distribution name
 -   `-distribution=""`: distribution name to publish; guessed from
     original repository distribution
 -   `-force-overwrite`: overwrite packages files in the pool even
