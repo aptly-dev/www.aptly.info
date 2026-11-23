@@ -47,7 +47,7 @@ Mirror `wheezy-backports` has been successfully updated.
 </pre>
 
 Once again, I've been using filters to reduce download size, but I could've create mirror without filter
-covering whole wheezy-backports repostiroy.
+covering whole wheezy-backports repository.
 
 Create snapshot of that mirror:
 
